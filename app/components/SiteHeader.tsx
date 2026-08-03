@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 
-const accountsEnabled = process.env.NEXT_PUBLIC_ACCOUNTS_ENABLED === "true";
+const accountsEnabled = true;
 
 export default function SiteHeader() {
   const [copied, setCopied] = useState(false);

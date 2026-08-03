@@ -10,7 +10,7 @@ type Account = {
   minecraft: { username: string | null; uuid: string | null; linked: boolean };
 };
 
-const accountsEnabled = process.env.NEXT_PUBLIC_ACCOUNTS_ENABLED === "true";
+const accountsEnabled = true;
 const messages: Record<string, string> = {
   INVALID_CREDENTIALS: "Adresse e-mail ou mot de passe incorrect.",
   EMAIL_ALREADY_USED: "Cette adresse e-mail possède déjà un compte.",
