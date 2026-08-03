@@ -60,7 +60,7 @@ jobs:
           java-version: 21
 
       - name: Construire le mod Fabric
-        run: ./gradlew clean build --no-daemon
+        run: bash gradlew clean build --no-daemon
 
       - name: Conserver le mod serveur
         uses: actions/upload-artifact@v4
