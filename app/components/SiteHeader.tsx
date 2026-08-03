@@ -66,7 +66,12 @@ export default function SiteHeader() {
           </Link>
           <nav aria-label="Navigation principale">
             <Link className={pathname === "/" ? "active" : undefined} href="/">Accueil</Link>
+            <Link className={pathname.startsWith("/vote") ? "active" : undefined} href="/vote/">Votes</Link>
           </nav>
+          <details className="mobile-menu">
+            <summary aria-label="Ouvrir le menu"><span /><span /><span /><small>Menu</small></summary>
+            <div><Link className={pathname === "/" ? "active" : undefined} href="/">Accueil</Link><Link className={pathname.startsWith("/vote") ? "active" : undefined} href="/vote/">Votes</Link></div>
+          </details>
           {accountsEnabled && <Link className={`nav-account${pathname.startsWith("/compte") ? " active" : ""}`} href="/compte/" aria-label={username ? `Compte de ${username}` : "Connexion au compte CobbleStar"}>
             <span className="nav-account-copy"><small>{username ? "MON COMPTE" : "ESPACE JOUEUR"}</small><strong>{username || "Se connecter"}</strong></span>
             <span className="nav-account-avatar">{username ? <img src={`https://mc-heads.net/avatar/${encodeURIComponent(username)}/64`} alt={`Tête Minecraft de ${username}`} /> : <b aria-hidden="true">♙</b>}</span>
