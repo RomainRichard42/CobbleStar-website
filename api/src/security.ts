@@ -9,8 +9,14 @@ export const normalizeEmail = (email: string) => email.trim().toLowerCase();
 
 export function linkCode() {
   const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-  const raw = randomBytes(6);
   let value = "";
-  for (let index = 0; index < 6; index += 1) value += alphabet[raw[index]! % alphabet.length];
-  return `CS-${value.slice(0, 3)}-${value.slice(3)}`;
+  while (value.length < 10) {
+    const byte = randomBytes(1)[0]!;
+    // 224 est le plus grand multiple de 32 inférieur à 256 : on évite ainsi
+    // le biais du modulo tout en conservant un code facile à recopier.
+    if (byte < 224) value += alphabet[byte % alphabet.length];
+  }
+  return `CS-${value.slice(0, 5)}-${value.slice(5)}`;
 }
+
+export const normalizeLinkCode = (value: string) => value.trim().toUpperCase();

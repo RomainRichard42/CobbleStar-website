@@ -11,7 +11,7 @@ import { join } from "node:path";
 import { config, isProduction } from "./config.js";
 import { pool, transaction } from "./db.js";
 import { applyMigrations } from "./migrations.js";
-import { digest, hashPassword, linkCode, normalizeEmail, randomToken, verifyPassword } from "./security.js";
+import { digest, hashPassword, linkCode, normalizeEmail, normalizeLinkCode, randomToken, verifyPassword } from "./security.js";
 
 type UserRow = RowDataPacket & {
   id: string; email: string; password_hash: string; minecraft_username: string | null;
@@ -31,7 +31,11 @@ await app.register(rateLimit, { max: 120, timeWindow: "1 minute" });
 const sessionCookie = isProduction ? "__Host-cobblestar_session" : "cobblestar_session";
 const registerBody = z.object({ email: z.string().email().max(254), password: z.string().min(8).max(128), minecraftUsername: z.string().regex(/^[A-Za-z0-9_]{3,16}$/) });
 const loginBody = z.object({ email: z.string().email(), password: z.string().min(1).max(128) });
-const confirmLinkBody = z.object({ code: z.string().regex(/^CS-[A-Z2-9]{3}-[A-Z2-9]{3}$/), uuid: z.string().regex(/^[a-fA-F0-9-]{32,36}$/), username: z.string().regex(/^[A-Za-z0-9_]{3,16}$/) });
+const confirmLinkBody = z.object({
+  code: z.string().transform(normalizeLinkCode).pipe(z.string().regex(/^CS-[A-HJ-NP-Z2-9]{5}-[A-HJ-NP-Z2-9]{5}$/)),
+  uuid: z.string().regex(/^(?:[a-fA-F0-9]{32}|[a-fA-F0-9]{8}-(?:[a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12})$/),
+  username: z.string().regex(/^[A-Za-z0-9_]{3,16}$/),
+});
 
 function publicUser(user: UserRow) {
   return { id: user.id, email: user.email, minecraft: { username: user.minecraft_username, uuid: user.minecraft_uuid, linked: Boolean(user.minecraft_linked_at) } };
@@ -61,6 +65,13 @@ function serverKeyMatches(candidate: string | undefined) {
   const expected = Buffer.from(config.MINECRAFT_SERVER_KEY);
   const actual = Buffer.from(candidate);
   return actual.length === expected.length && timingSafeEqual(actual, expected);
+}
+
+function serverKeyFrom(request: FastifyRequest) {
+  const dedicatedHeader = request.headers["x-cobblestar-server-key"];
+  if (typeof dedicatedHeader === "string") return dedicatedHeader;
+  const authorization = request.headers.authorization;
+  return authorization?.startsWith("Bearer ") ? authorization.slice(7) : undefined;
 }
 
 app.get("/api/health", async () => {
@@ -142,8 +153,8 @@ app.post("/api/link/code", { preHandler: requireAccount, config: { rateLimit: { 
 
 app.get("/api/link/status", { preHandler: requireAccount }, async (request) => ({ linked: Boolean(request.account!.minecraft_linked_at), minecraft: request.account!.minecraft_uuid ? { uuid: request.account!.minecraft_uuid, username: request.account!.minecraft_username } : null }));
 
-app.post("/api/internal/link/confirm", async (request, reply) => {
-  if (!serverKeyMatches(request.headers["x-cobblestar-server-key"] as string | undefined)) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+app.post("/api/internal/link/confirm", { config: { rateLimit: { max: 60, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
   const parsed = confirmLinkBody.safeParse(request.body);
   if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
   const uuid = parsed.data.uuid.replaceAll("-", "").toLowerCase();
@@ -158,7 +169,7 @@ app.post("/api/internal/link/confirm", async (request, reply) => {
       return true;
     });
     if (!linked) return reply.code(404).send({ error: "INVALID_OR_EXPIRED_CODE" });
-    return { linked: true };
+    return { linked: true, minecraft: { uuid, username: parsed.data.username } };
   } catch (error) {
     if ((error as { code?: string }).code === "ER_DUP_ENTRY") return reply.code(409).send({ error: "MINECRAFT_ACCOUNT_ALREADY_LINKED" });
     throw error;

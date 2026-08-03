@@ -46,6 +46,7 @@ app/          pages et composants du site
 public/       images et fichiers publics
 api/src/      API Fastify
 api/migrations/ migrations MySQL
+minecraft-mod/ mod serveur Fabric 1.21.1 et commande /link
 scripts/      création de l'artefact Kinetic
 .github/      intégration et déploiement continus
 ```
@@ -55,3 +56,10 @@ scripts/      création de l'artefact Kinetic
 Ne jamais versionner `.env`, un mot de passe MySQL, une clé Stripe, un token
 Kinetic ou `MINECRAFT_SERVER_KEY`. Les valeurs de production sont conservées
 dans les variables Kinetic et dans les secrets GitHub.
+
+## Liaison Minecraft
+
+L'espace compte peut rester fermé avec `NEXT_PUBLIC_ACCOUNTS_ENABLED=false`.
+Le flux API et le mod sont néanmoins prêts. Le mod serveur se construit dans
+GitHub Actions à chaque push sur `main`; son JAR est disponible dans l'artefact
+`cobblestar-link-fabric-1.21.1`. Voir [`minecraft-mod/README.md`](minecraft-mod/README.md).

@@ -1,6 +1,8 @@
 name: Vérifier le site
 
 on:
+  push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
 
@@ -40,3 +42,37 @@ jobs:
           path: deploy/
           if-no-files-found: error
           retention-days: 7
+
+  verify-mod:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: minecraft-mod
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Installer Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.12"
+
+      - name: Construire le mod Fabric
+        run: gradle clean build --no-daemon
+
+      - name: Conserver le mod serveur
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobblestar-link-fabric-1.21.1
+          path: |
+            minecraft-mod/build/libs/cobblestar-link-*.jar
+            !minecraft-mod/build/libs/*-sources.jar
+          if-no-files-found: error
+          retention-days: 14

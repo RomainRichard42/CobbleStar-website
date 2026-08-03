@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useState } from "react";
 
+const accountsEnabled = process.env.NEXT_PUBLIC_ACCOUNTS_ENABLED === "true";
+
 export default function SiteHeader() {
   const [copied, setCopied] = useState(false);
 
@@ -39,6 +41,7 @@ export default function SiteHeader() {
           </Link>
           <nav aria-label="Navigation principale">
             <Link className="active" href="/">Accueil</Link>
+            {accountsEnabled && <Link href="/compte/">Compte</Link>}
           </nav>
           <span className="nav-download nav-beta" aria-label="Bêta fermée"><span>Bêta fermée</span><b>✦</b></span>
         </header>
