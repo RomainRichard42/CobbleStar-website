@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "id": "cobblestar_link",
   "version": "${version}",
-  "name": "CobbleStar Link",
-  "description": "Relie de façon sécurisée un compte CobbleStar à l'UUID du joueur connecté.",
+  "name": "CobbleStar Core",
+  "description": "Relie les comptes CobbleStar, synchronise les Stars et livre les achats du site.",
   "authors": ["CobbleStar"],
   "environment": "server",
   "entrypoints": {

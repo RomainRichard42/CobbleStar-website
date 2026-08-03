@@ -12,6 +12,7 @@ import { config, isProduction } from "./config.js";
 import { pool, transaction } from "./db.js";
 import { applyMigrations } from "./migrations.js";
 import { digest, hashPassword, linkCode, normalizeEmail, normalizeLinkCode, randomToken, verifyPassword } from "./security.js";
+import { findShopProduct, shopCatalog } from "./shop.js";
 
 type UserRow = RowDataPacket & {
   id: string; email: string; password_hash: string; minecraft_username: string | null;
@@ -43,6 +44,17 @@ const confirmLinkBody = z.object({
   uuid: z.string().regex(/^(?:[a-fA-F0-9]{32}|[a-fA-F0-9]{8}-(?:[a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12})$/),
   username: z.string().regex(/^[A-Za-z0-9_]{3,16}$/),
 });
+const minecraftUuid = z.string().regex(/^(?:[a-fA-F0-9]{32}|[a-fA-F0-9]{8}-(?:[a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12})$/).transform((value) => value.replaceAll("-", "").toLowerCase());
+const giveStarsBody = z.object({
+  uuid: minecraftUuid,
+  amount: z.number().int().min(1).max(1_000_000),
+  requestId: z.string().uuid(),
+  reason: z.string().trim().min(1).max(120).default("Commande administrateur"),
+});
+const purchaseBody = z.object({ productId: z.string().regex(/^[a-z0-9_]{3,64}$/) });
+const rewardClaimBody = z.object({ uuid: minecraftUuid });
+const rewardResultBody = z.object({ uuid: minecraftUuid, leaseToken: z.string().min(32).max(200), error: z.string().trim().max(200).optional() });
+const rewardParams = z.object({ id: z.string().uuid() });
 
 function publicUser(user: UserRow) {
   return { id: user.id, email: user.email, minecraft: { username: user.minecraft_username, uuid: user.minecraft_uuid, linked: Boolean(user.minecraft_linked_at) } };
@@ -148,6 +160,31 @@ app.get("/api/wallet", { preHandler: requireAccount }, async (request) => {
   return { balance: rows[0]?.balance ?? 0, currency: "Stars" };
 });
 
+app.get("/api/shop/catalog", async () => ({ products: shopCatalog }));
+
+app.post("/api/shop/purchase", { preHandler: requireAccount, config: { rateLimit: { max: 10, timeWindow: "1 minute" } } }, async (request, reply) => {
+  const parsed = purchaseBody.safeParse(request.body);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  if (!request.account!.minecraft_linked_at || !request.account!.minecraft_uuid) return reply.code(409).send({ error: "MINECRAFT_LINK_REQUIRED" });
+  const product = findShopProduct(parsed.data.productId);
+  if (!product) return reply.code(404).send({ error: "PRODUCT_NOT_FOUND" });
+
+  const result = await transaction(async (connection) => {
+    const [wallets] = await connection.execute<(RowDataPacket & { balance: number })[]>(`SELECT balance FROM wallets WHERE user_id=? FOR UPDATE`, [request.account!.id]);
+    const balance = wallets[0]?.balance ?? 0;
+    if (balance < product.starsPrice) return null;
+    const purchaseId = randomUUID();
+    const deliveryId = randomUUID();
+    await connection.execute(`UPDATE wallets SET balance=balance-? WHERE user_id=?`, [product.starsPrice, request.account!.id]);
+    await connection.execute(`INSERT INTO shop_purchases(id,user_id,product_id,stars_spent) VALUES(?,?,?,?)`, [purchaseId, request.account!.id, product.id, product.starsPrice]);
+    await connection.execute(`INSERT INTO star_transactions(id,user_id,delta,kind,reference_id,metadata_json) VALUES(?,?,?,?,?,?)`, [randomUUID(), request.account!.id, -product.starsPrice, "shop_purchase", `shop:${purchaseId}`, JSON.stringify({ productId: product.id })]);
+    await connection.execute(`INSERT INTO reward_deliveries(id,purchase_id,user_id,product_id,item_id,item_count) VALUES(?,?,?,?,?,?)`, [deliveryId, purchaseId, request.account!.id, product.id, product.itemId, product.itemCount]);
+    return { purchaseId, deliveryId, balance: balance - product.starsPrice };
+  });
+  if (!result) return reply.code(409).send({ error: "INSUFFICIENT_STARS" });
+  return reply.code(201).send({ ok: true, ...result, product: { id: product.id, name: product.name }, delivery: "pending" });
+});
+
 app.post("/api/link/code", { preHandler: requireAccount, config: { rateLimit: { max: 6, timeWindow: "10 minutes" } } }, async (request, reply) => {
   if (request.account!.minecraft_linked_at) return reply.code(409).send({ error: "ALREADY_LINKED" });
   const code = linkCode();
@@ -181,6 +218,75 @@ app.post("/api/internal/link/confirm", { config: { rateLimit: { max: 60, timeWin
     if ((error as { code?: string }).code === "ER_DUP_ENTRY") return reply.code(409).send({ error: "MINECRAFT_ACCOUNT_ALREADY_LINKED" });
     throw error;
   }
+});
+
+app.post("/api/internal/stars/give", { config: { rateLimit: { max: 120, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const parsed = giveStarsBody.safeParse(request.body);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  const referenceId = `admin:${parsed.data.requestId}`;
+  const result = await transaction(async (connection) => {
+    const [users] = await connection.execute<(RowDataPacket & { id: string; minecraft_username: string | null; balance: number })[]>(`SELECT u.id,u.minecraft_username,w.balance FROM users u JOIN wallets w ON w.user_id=u.id WHERE u.minecraft_uuid=? FOR UPDATE`, [parsed.data.uuid]);
+    const user = users[0];
+    if (!user) return null;
+    const [existing] = await connection.execute<(RowDataPacket & { id: string })[]>(`SELECT id FROM star_transactions WHERE reference_id=? LIMIT 1`, [referenceId]);
+    if (existing[0]) return { balance: user.balance, username: user.minecraft_username, duplicate: true };
+    await connection.execute(`UPDATE wallets SET balance=balance+? WHERE user_id=?`, [parsed.data.amount, user.id]);
+    await connection.execute(`INSERT INTO star_transactions(id,user_id,delta,kind,reference_id,metadata_json) VALUES(?,?,?,?,?,?)`, [randomUUID(), user.id, parsed.data.amount, "admin_grant", referenceId, JSON.stringify({ reason: parsed.data.reason })]);
+    return { balance: user.balance + parsed.data.amount, username: user.minecraft_username, duplicate: false };
+  });
+  if (!result) return reply.code(404).send({ error: "MINECRAFT_ACCOUNT_NOT_LINKED" });
+  return { ok: true, ...result };
+});
+
+app.get("/api/internal/stars/balance", { config: { rateLimit: { max: 180, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const parsed = z.object({ uuid: minecraftUuid }).safeParse(request.query);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  const [rows] = await pool.execute<(RowDataPacket & { balance: number })[]>(`SELECT w.balance FROM users u JOIN wallets w ON w.user_id=u.id WHERE u.minecraft_uuid=? LIMIT 1`, [parsed.data.uuid]);
+  if (!rows[0]) return reply.code(404).send({ error: "MINECRAFT_ACCOUNT_NOT_LINKED" });
+  return { balance: rows[0].balance, currency: "Stars" };
+});
+
+app.post("/api/internal/rewards/claim", { config: { rateLimit: { max: 300, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const parsed = rewardClaimBody.safeParse(request.body);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  const leaseToken = randomToken();
+  const reward = await transaction(async (connection) => {
+    const [rows] = await connection.execute<(RowDataPacket & { id: string; product_id: string; item_id: string; item_count: number })[]>(`
+      SELECT d.id,d.product_id,d.item_id,d.item_count
+      FROM reward_deliveries d JOIN users u ON u.id=d.user_id
+      WHERE u.minecraft_uuid=? AND d.failure_count<5
+        AND (d.status='pending' OR (d.status='leased' AND d.lease_expires_at<UTC_TIMESTAMP()))
+      ORDER BY d.created_at ASC LIMIT 1 FOR UPDATE`, [parsed.data.uuid]);
+    const found = rows[0];
+    if (!found) return null;
+    await connection.execute(`UPDATE reward_deliveries SET status='leased',lease_token_hash=?,lease_expires_at=DATE_ADD(UTC_TIMESTAMP(), INTERVAL 2 MINUTE) WHERE id=?`, [digest(leaseToken), found.id]);
+    return found;
+  });
+  if (!reward) return reply.code(204).send();
+  return { reward: { id: reward.id, productId: reward.product_id, itemId: reward.item_id, itemCount: reward.item_count, leaseToken } };
+});
+
+app.post("/api/internal/rewards/:id/complete", { config: { rateLimit: { max: 300, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const params = rewardParams.safeParse(request.params);
+  const body = rewardResultBody.safeParse(request.body);
+  if (!params.success || !body.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  const [result] = await pool.execute<ResultSetHeader>(`UPDATE reward_deliveries d JOIN users u ON u.id=d.user_id SET d.status='delivered',d.delivered_at=UTC_TIMESTAMP(),d.lease_token_hash=NULL,d.lease_expires_at=NULL WHERE d.id=? AND u.minecraft_uuid=? AND d.status='leased' AND d.lease_token_hash=?`, [params.data.id, body.data.uuid, digest(body.data.leaseToken)]);
+  if (result.affectedRows !== 1) return reply.code(409).send({ error: "LEASE_INVALID_OR_EXPIRED" });
+  return { delivered: true };
+});
+
+app.post("/api/internal/rewards/:id/fail", { config: { rateLimit: { max: 300, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const params = rewardParams.safeParse(request.params);
+  const body = rewardResultBody.safeParse(request.body);
+  if (!params.success || !body.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  const [result] = await pool.execute<ResultSetHeader>(`UPDATE reward_deliveries d JOIN users u ON u.id=d.user_id SET d.failure_count=d.failure_count+1,d.status=IF(d.failure_count>=5,'failed','pending'),d.last_error=?,d.lease_token_hash=NULL,d.lease_expires_at=NULL WHERE d.id=? AND u.minecraft_uuid=? AND d.status='leased' AND d.lease_token_hash=?`, [body.data.error ?? "Erreur de livraison Minecraft", params.data.id, body.data.uuid, digest(body.data.leaseToken)]);
+  if (result.affectedRows !== 1) return reply.code(409).send({ error: "LEASE_INVALID_OR_EXPIRED" });
+  return { released: true };
 });
 
 await app.register(staticFiles, {

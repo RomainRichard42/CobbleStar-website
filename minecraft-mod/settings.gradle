@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "cobblestar-link"
+rootProject.name = "cobblestar-core"

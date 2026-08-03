@@ -14,6 +14,7 @@ final class LinkConfig {
     private static final String PLACEHOLDER = "CHANGE_ME_WITH_THE_SAME_SECRET_AS_MINECRAFT_SERVER_KEY";
 
     String apiUrl = "https://api.cobblestar-mc.fr/api/internal/link/confirm";
+    String apiBaseUrl = "https://api.cobblestar-mc.fr";
     String serverKey = PLACEHOLDER;
     int timeoutSeconds = 10;
 
@@ -35,6 +36,7 @@ final class LinkConfig {
 
     boolean isReady() {
         return apiUrl != null && apiUrl.startsWith("https://")
+            && apiBaseUrl != null && apiBaseUrl.startsWith("https://")
             && serverKey != null && serverKey.length() >= 32 && !serverKey.equals(PLACEHOLDER)
             && timeoutSeconds >= 3 && timeoutSeconds <= 30;
     }

@@ -3,4 +3,4 @@ import { applyMigrations } from "./migrations.js";
 
 const count = await applyMigrations();
 await pool.end();
-console.log(`Applied ${count} database statements.`);
+console.log(`Applied ${count} database migrations.`);
