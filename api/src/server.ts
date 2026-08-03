@@ -23,7 +23,9 @@ declare module "fastify" {
 }
 
 const app = Fastify({ logger: { redact: ["req.headers.authorization", "req.headers.cookie", "body.password"] }, trustProxy: true });
-await app.register(helmet);
+await app.register(helmet, {
+  contentSecurityPolicy: false,
+});
 await app.register(cookie, { secret: config.COOKIE_SECRET });
 await app.register(cors, { origin: config.SITE_ORIGIN, credentials: true, methods: ["GET", "POST", "DELETE"] });
 await app.register(rateLimit, { max: 120, timeWindow: "1 minute" });
