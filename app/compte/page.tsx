@@ -20,10 +20,14 @@ const messages: Record<string, string> = {
 };
 
 async function api<T>(path: string, init?: RequestInit): Promise<T> {
+  const headers = new Headers(init?.headers);
+  if (init?.body !== undefined && !headers.has("Content-Type")) {
+    headers.set("Content-Type", "application/json");
+  }
   const response = await fetch(path, {
     credentials: "include",
     ...init,
-    headers: { "Content-Type": "application/json", ...init?.headers },
+    headers,
   });
   const body = await response.json() as T & { error?: string };
   if (!response.ok) throw new Error(body.error || "INTERNAL_ERROR");
