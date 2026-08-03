@@ -18,15 +18,6 @@ type StarPack = {
   tone: string;
 };
 
-type ShopProduct = {
-  id: string;
-  name: string;
-  description: string;
-  starsPrice: number;
-  itemCount: number;
-  testOnly: boolean;
-};
-
 const starPacks: StarPack[] = [
   { stars: 500, price: "4,99 €", tone: "cyan" },
   { stars: 1100, price: "9,99 €", bonus: "+ 10 % de Stars", tone: "pink" },
@@ -46,9 +37,6 @@ export default function ShopPage() {
   const [loading, setLoading] = useState(true);
   const [linkOpen, setLinkOpen] = useState(false);
   const [selectedPack, setSelectedPack] = useState<StarPack | null>(null);
-  const [testProduct, setTestProduct] = useState<ShopProduct | null>(null);
-  const [purchaseBusy, setPurchaseBusy] = useState(false);
-  const [purchaseMessage, setPurchaseMessage] = useState("");
   const [testPurchasesEnabled, setTestPurchasesEnabled] = useState(false);
   const [rechargeBusy, setRechargeBusy] = useState(false);
   const [rechargeComplete, setRechargeComplete] = useState(false);
@@ -77,16 +65,13 @@ export default function ShopPage() {
   }, []);
 
   useEffect(() => {
-    void fetch("/api/shop/catalog")
+    void fetch("/api/shop/status")
       .then(async (response) => {
-        if (!response.ok) throw new Error("Catalog unavailable");
-        return response.json() as Promise<{ products: ShopProduct[]; testPurchasesEnabled: boolean }>;
+        if (!response.ok) throw new Error("Shop unavailable");
+        return response.json() as Promise<{ testPurchasesEnabled: boolean }>;
       })
-      .then((data) => {
-        setTestProduct(data.products.find((product) => product.id === "delivery_test") ?? null);
-        setTestPurchasesEnabled(data.testPurchasesEnabled);
-      })
-      .catch(() => { setTestProduct(null); setTestPurchasesEnabled(false); });
+      .then((data) => setTestPurchasesEnabled(data.testPurchasesEnabled))
+      .catch(() => setTestPurchasesEnabled(false));
   }, []);
 
   useEffect(() => {
@@ -117,35 +102,6 @@ export default function ShopPage() {
 
   const username = account?.minecraft.username || null;
   const linked = account?.minecraft.linked ?? false;
-
-  async function buyTestProduct() {
-    if (!testProduct || purchaseBusy) return;
-    setPurchaseBusy(true);
-    setPurchaseMessage("");
-    try {
-      const response = await fetch("/api/shop/purchase", {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ productId: testProduct.id }),
-      });
-      const data = await response.json() as { balance?: number; error?: string };
-      if (!response.ok) {
-        const messages: Record<string, string> = {
-          INSUFFICIENT_STARS: "Ton solde est insuffisant pour ce test.",
-          MINECRAFT_LINK_REQUIRED: "Lie d’abord ton compte Minecraft.",
-        };
-        throw new Error(messages[data.error || ""] || "L’achat test a été refusé.");
-      }
-      setBalance(data.balance ?? balance - testProduct.starsPrice);
-      window.dispatchEvent(new Event("cobblestar:wallet-changed"));
-      setPurchaseMessage("Achat validé ! Connecte-toi au serveur : l’objet sera livré automatiquement.");
-    } catch (error) {
-      setPurchaseMessage(error instanceof Error ? error.message : "L’achat test est indisponible.");
-    } finally {
-      setPurchaseBusy(false);
-    }
-  }
 
   async function simulateRecharge() {
     if (!selectedPack || rechargeBusy || rechargeComplete) return;
@@ -196,15 +152,6 @@ export default function ShopPage() {
         {!loading && !account && <Link className="shop-v2-account-action" href="/compte/">Créer ou ouvrir mon compte <span>→</span></Link>}
         {!loading && account && !linked && <button className="shop-v2-account-action" type="button" onClick={() => setLinkOpen(true)}>Lier mon compte Minecraft <span>→</span></button>}
         {!loading && linked && <span className="shop-v2-ready">✓ Portefeuille prêt pour les futures recharges</span>}
-      </section>
-
-      <section className="shop-v2-delivery-test" aria-labelledby="delivery-test-title">
-        <div className="shop-v2-test-icon" aria-hidden="true">✦</div>
-        <div><span className="kicker">TEST SITE → SERVEUR</span><h2 id="delivery-test-title">Achète ton premier objet<br /><em>sans interface en jeu.</em></h2><p>{testProduct?.description || "Le produit test sera disponible dès que l’API aura redémarré."} Il sert uniquement à valider la synchronisation avant de créer le vrai catalogue et ses textures.</p></div>
-        <div className="shop-v2-test-order"><small>OBJET DE TEST</small><strong>{testProduct?.name || "Chargement…"}</strong><span>{testProduct ? `${testProduct.itemCount} objet • ${testProduct.starsPrice} Star` : "Catalogue indisponible"}</span>
-          {!account ? <Link href="/compte/">Se connecter pour tester <b>→</b></Link> : !linked ? <button type="button" onClick={() => setLinkOpen(true)}>Lier Minecraft <b>→</b></button> : <button type="button" onClick={buyTestProduct} disabled={!testProduct || purchaseBusy || balance < (testProduct?.starsPrice ?? 1)}>{purchaseBusy ? "Validation…" : balance < (testProduct?.starsPrice ?? 1) ? "Solde insuffisant" : "Acheter et livrer"}<b>→</b></button>}
-        </div>
-        {purchaseMessage && <p className="shop-v2-test-message" role="status">{purchaseMessage}</p>}
       </section>
 
       <div className="shop-v2-heading">

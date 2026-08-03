@@ -12,7 +12,6 @@ import { config, isProduction } from "./config.js";
 import { pool, transaction } from "./db.js";
 import { applyMigrations } from "./migrations.js";
 import { digest, hashPassword, linkCode, normalizeEmail, normalizeLinkCode, randomToken, verifyPassword } from "./security.js";
-import { findShopProduct, shopCatalog } from "./shop.js";
 
 type UserRow = RowDataPacket & {
   id: string; email: string; password_hash: string; minecraft_username: string | null;
@@ -51,7 +50,6 @@ const giveStarsBody = z.object({
   requestId: z.string().uuid(),
   reason: z.string().trim().min(1).max(120).default("Commande administrateur"),
 });
-const purchaseBody = z.object({ productId: z.string().regex(/^[a-z0-9_]{3,64}$/) });
 const testRechargeBody = z.object({ starsAmount: z.number().int().refine((value) => [500, 1100, 2400, 6500].includes(value)) });
 const rewardClaimBody = z.object({ uuid: minecraftUuid });
 const rewardResultBody = z.object({ uuid: minecraftUuid, leaseToken: z.string().min(32).max(200), error: z.string().trim().max(200).optional() });
@@ -161,7 +159,7 @@ app.get("/api/wallet", { preHandler: requireAccount }, async (request) => {
   return { balance: rows[0]?.balance ?? 0, currency: "Stars" };
 });
 
-app.get("/api/shop/catalog", async () => ({ products: shopCatalog, testPurchasesEnabled: config.ENABLE_TEST_PURCHASES }));
+app.get("/api/shop/status", async () => ({ testPurchasesEnabled: config.ENABLE_TEST_PURCHASES }));
 
 app.post("/api/shop/test-recharge", { preHandler: requireAccount, config: { rateLimit: { max: 4, timeWindow: "15 minutes" } } }, async (request, reply) => {
   if (!config.ENABLE_TEST_PURCHASES) return reply.code(404).send({ error: "TEST_PURCHASES_DISABLED" });
@@ -182,29 +180,6 @@ app.post("/api/shop/test-recharge", { preHandler: requireAccount, config: { rate
   });
   if (!result) return reply.code(409).send({ error: "TEST_PURCHASE_ALREADY_USED" });
   return reply.code(201).send({ ok: true, simulated: true, starsAdded: parsed.data.starsAmount, ...result });
-});
-
-app.post("/api/shop/purchase", { preHandler: requireAccount, config: { rateLimit: { max: 10, timeWindow: "1 minute" } } }, async (request, reply) => {
-  const parsed = purchaseBody.safeParse(request.body);
-  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
-  if (!request.account!.minecraft_linked_at || !request.account!.minecraft_uuid) return reply.code(409).send({ error: "MINECRAFT_LINK_REQUIRED" });
-  const product = findShopProduct(parsed.data.productId);
-  if (!product) return reply.code(404).send({ error: "PRODUCT_NOT_FOUND" });
-
-  const result = await transaction(async (connection) => {
-    const [wallets] = await connection.execute<(RowDataPacket & { balance: number })[]>(`SELECT balance FROM wallets WHERE user_id=? FOR UPDATE`, [request.account!.id]);
-    const balance = wallets[0]?.balance ?? 0;
-    if (balance < product.starsPrice) return null;
-    const purchaseId = randomUUID();
-    const deliveryId = randomUUID();
-    await connection.execute(`UPDATE wallets SET balance=balance-? WHERE user_id=?`, [product.starsPrice, request.account!.id]);
-    await connection.execute(`INSERT INTO shop_purchases(id,user_id,product_id,stars_spent) VALUES(?,?,?,?)`, [purchaseId, request.account!.id, product.id, product.starsPrice]);
-    await connection.execute(`INSERT INTO star_transactions(id,user_id,delta,kind,reference_id,metadata_json) VALUES(?,?,?,?,?,?)`, [randomUUID(), request.account!.id, -product.starsPrice, "shop_purchase", `shop:${purchaseId}`, JSON.stringify({ productId: product.id })]);
-    await connection.execute(`INSERT INTO reward_deliveries(id,purchase_id,user_id,product_id,item_id,item_count) VALUES(?,?,?,?,?,?)`, [deliveryId, purchaseId, request.account!.id, product.id, product.itemId, product.itemCount]);
-    return { purchaseId, deliveryId, balance: balance - product.starsPrice };
-  });
-  if (!result) return reply.code(409).send({ error: "INSUFFICIENT_STARS" });
-  return reply.code(201).send({ ok: true, ...result, product: { id: product.id, name: product.name }, delivery: "pending" });
 });
 
 app.post("/api/link/code", { preHandler: requireAccount, config: { rateLimit: { max: 6, timeWindow: "10 minutes" } } }, async (request, reply) => {
