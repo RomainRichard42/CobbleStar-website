@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "CobbleStar — Serveur Minecraft Cobblemon",
-  description: "Rejoins CobbleStar, un serveur Minecraft 1.21.1 Fabric dédié à Cobblemon. Télécharge le launcher officiel et pars à l'aventure.",
+  title: "CobbleStar — Bêta Minecraft Cobblemon",
+  description: "CobbleStar prépare sa bêta privée sur Minecraft 1.21.1 Fabric. Suis l'ouverture progressive du serveur Cobblemon.",
   icons: {
     icon: "/cobblestar-logo.png",
     shortcut: "/cobblestar-logo.png",

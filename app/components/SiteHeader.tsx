@@ -1,18 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const navigation = [
-  ["Serveur", "/serveur"],
-  ["Actualités", "/actualites"],
-  ["Boutique", "/boutique"],
-  ["Vote", "/vote"],
-];
-
 export default function SiteHeader() {
-  const pathname = usePathname();
   const [copied, setCopied] = useState(false);
 
   async function copyServerAddress() {
@@ -38,24 +29,18 @@ export default function SiteHeader() {
     <div className="nav-frame">
       <div className="nav-stack">
         <div className="nav-utility">
-          <div><span className="status-dot" /><b>Serveur en ligne</b></div>
+          <div><span className="status-dot" /><b>Bêta privée en préparation</b></div>
           <button type="button" onClick={copyServerAddress}><small>IP DU SERVEUR</small><b>{copied ? "Adresse copiée" : "play.cobblestar-mc.fr"}</b><span>{copied ? "✓" : "⧉"}</span></button>
         </div>
         <header className="nav-wrap">
           <Link className="brand" href="/" aria-label="CobbleStar — Accueil">
             <span className="brand-mark"><img src="/cobblestar-logo.png" alt="" /></span>
-            <span>Cobble<span>Star</span><small>COBBLEMON SERVER</small></span>
+            <span>Cobble<span>Star</span><small>COBBLEMON • BÊTA</small></span>
           </Link>
           <nav aria-label="Navigation principale">
-            <Link className={pathname === "/" ? "active" : ""} href="/">Accueil</Link>
-            {navigation.map(([label, href]) => <Link className={pathname === href ? "active" : ""} href={href} key={href}>{label}</Link>)}
+            <Link className="active" href="/">Accueil</Link>
           </nav>
-          <details className="mobile-menu">
-            <summary><span /><span /><span /><small>Menu</small></summary>
-            <div><Link className={pathname === "/" ? "active" : ""} href="/">Accueil</Link>{navigation.map(([label, href]) => <Link className={pathname === href ? "active" : ""} href={href} key={href}>{label}</Link>)}<Link className={pathname === "/compte" ? "active" : ""} href="/compte">Mon compte</Link><Link href="/telecharger">Télécharger</Link></div>
-          </details>
-          <Link className={`nav-account ${pathname === "/compte" ? "active" : ""}`} href="/compte" aria-label="Mon compte CobbleStar"><span>Compte</span><b>♙</b></Link>
-          <Link className="nav-download" href="/telecharger"><span>Jouer</span><b>↘</b></Link>
+          <span className="nav-download nav-beta" aria-label="Bêta fermée"><span>Bêta fermée</span><b>✦</b></span>
         </header>
       </div>
     </div>

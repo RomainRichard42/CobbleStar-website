@@ -652,6 +652,13 @@ main { overflow: visible; background: radial-gradient(circle at 50% 8%, #201945 
 .showcase-mosaic figure:not(.showcase-main) figcaption small { display: none; }
 .showcase-source { position: absolute; right: 70px; bottom: 28px; color: #5f596c; font: 7px var(--font-geist-mono), monospace; letter-spacing: .1em; transition: color .2s ease; }
 .showcase-source:hover { color: var(--cyan); }
+.nav-beta { cursor: default; pointer-events: none; }
+.beta-locked { cursor: not-allowed; opacity: .72; }
+.beta-inline { display: inline-flex; gap: 12px; margin-top: 26px; padding-bottom: 8px; border-bottom: 1px solid rgba(125,227,232,.35); color: var(--cyan); font-size: 10px; font-weight: 900; }
+.beta-inline b { color: var(--pink); }
+.home-cta > div > p { max-width: 620px; margin: 14px 0 0; color: #918b9e; font-size: 12px; line-height: 1.7; }
+.launcher-window button:disabled { cursor: not-allowed; opacity: .68; }
+@media (max-width: 650px) { .nav-stack .nav-beta { display: grid; } }
 
 .server-scenery { margin-top: 100px; position: relative; }
 .server-scenery-head { display: flex; justify-content: space-between; align-items: end; gap: 55px; margin-bottom: 45px; }
