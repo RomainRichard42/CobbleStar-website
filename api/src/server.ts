@@ -27,6 +27,7 @@ await app.register(helmet, {
   contentSecurityPolicy: {
     directives: {
       scriptSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https://mc-heads.net"],
     },
   },
 });

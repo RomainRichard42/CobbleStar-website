@@ -1,12 +1,37 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const accountsEnabled = true;
+type HeaderAccount = { minecraft?: { username?: string | null } };
 
 export default function SiteHeader() {
   const [copied, setCopied] = useState(false);
+  const [account, setAccount] = useState<HeaderAccount | null>(null);
+  const pathname = usePathname();
+  const username = account?.minecraft?.username || null;
+
+  useEffect(() => {
+    let active = true;
+    async function loadAccount() {
+      try {
+        const response = await fetch("/api/me", { credentials: "include" });
+        if (!response.ok) throw new Error("Signed out");
+        const data = await response.json() as { user: HeaderAccount };
+        if (active) setAccount(data.user);
+      } catch {
+        if (active) setAccount(null);
+      }
+    }
+    void loadAccount();
+    window.addEventListener("cobblestar:account-changed", loadAccount);
+    return () => {
+      active = false;
+      window.removeEventListener("cobblestar:account-changed", loadAccount);
+    };
+  }, []);
 
   async function copyServerAddress() {
     const address = "play.cobblestar-mc.fr";
@@ -40,10 +65,12 @@ export default function SiteHeader() {
             <span>Cobble<span>Star</span><small>COBBLEMON • BÊTA</small></span>
           </Link>
           <nav aria-label="Navigation principale">
-            <Link className="active" href="/">Accueil</Link>
-            {accountsEnabled && <Link href="/compte/">Compte</Link>}
+            <Link className={pathname === "/" ? "active" : undefined} href="/">Accueil</Link>
           </nav>
-          <span className="nav-download nav-beta" aria-label="Bêta fermée"><span>Bêta fermée</span><b>✦</b></span>
+          {accountsEnabled && <Link className={`nav-account${pathname.startsWith("/compte") ? " active" : ""}`} href="/compte/" aria-label={username ? `Compte de ${username}` : "Connexion au compte CobbleStar"}>
+            <span className="nav-account-copy"><small>{username ? "MON COMPTE" : "ESPACE JOUEUR"}</small><strong>{username || "Se connecter"}</strong></span>
+            <span className="nav-account-avatar">{username ? <img src={`https://mc-heads.net/avatar/${encodeURIComponent(username)}/64`} alt={`Tête Minecraft de ${username}`} /> : <b aria-hidden="true">♙</b>}</span>
+          </Link>}
         </header>
       </div>
     </div>

@@ -62,6 +62,7 @@ function AccountPortal() {
   async function refreshAccount() {
     const data = await api<{ user: Account }>("/api/me");
     setAccount(data.user);
+    window.dispatchEvent(new Event("cobblestar:account-changed"));
     if (data.user.minecraft.linked) {
       setCommand("");
       setExpiresAt(null);
@@ -110,6 +111,7 @@ function AccountPortal() {
       const body = mode === "register" ? { email, password, minecraftUsername: username.trim() } : { email, password };
       const data = await api<{ user: Account }>(path, { method: "POST", body: JSON.stringify(body) });
       setAccount(data.user);
+      window.dispatchEvent(new Event("cobblestar:account-changed"));
       setPassword("");
       setBalance(mode === "login" ? (await api<{ balance: number }>("/api/wallet")).balance : 0);
     } catch (caught) {
@@ -144,6 +146,7 @@ function AccountPortal() {
     setAccount(null);
     setCommand("");
     setMode("login");
+    window.dispatchEvent(new Event("cobblestar:account-changed"));
   }
 
   const linked = account?.minecraft.linked ?? false;
