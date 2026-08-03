@@ -19,6 +19,7 @@ export const config = z.object({
   DB_SSL: bool,
   COOKIE_SECRET: generatedSecret,
   MINECRAFT_SERVER_KEY: generatedSecret,
+  ENABLE_TEST_PURCHASES: bool,
 }).parse(process.env);
 
 export const isProduction = config.NODE_ENV === "production";

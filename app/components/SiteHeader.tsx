@@ -10,26 +10,48 @@ type HeaderAccount = { minecraft?: { username?: string | null } };
 export default function SiteHeader() {
   const [copied, setCopied] = useState(false);
   const [account, setAccount] = useState<HeaderAccount | null>(null);
+  const [balance, setBalance] = useState(0);
   const pathname = usePathname();
   const username = account?.minecraft?.username || null;
 
   useEffect(() => {
     let active = true;
+    let signedIn = false;
+    async function loadWallet() {
+      if (!signedIn) return;
+      try {
+        const response = await fetch("/api/wallet", { credentials: "include" });
+        if (!response.ok) throw new Error("Wallet unavailable");
+        const data = await response.json() as { balance: number };
+        if (active) setBalance(data.balance);
+      } catch {
+        // Une indisponibilité temporaire du portefeuille ne déconnecte pas le joueur.
+      }
+    }
     async function loadAccount() {
       try {
         const response = await fetch("/api/me", { credentials: "include" });
         if (!response.ok) throw new Error("Signed out");
         const data = await response.json() as { user: HeaderAccount };
+        signedIn = true;
         if (active) setAccount(data.user);
+        await loadWallet();
       } catch {
-        if (active) setAccount(null);
+        signedIn = false;
+        if (active) { setAccount(null); setBalance(0); }
       }
     }
     void loadAccount();
+    const interval = window.setInterval(loadWallet, 5000);
     window.addEventListener("cobblestar:account-changed", loadAccount);
+    window.addEventListener("cobblestar:wallet-changed", loadWallet);
+    window.addEventListener("focus", loadWallet);
     return () => {
       active = false;
+      window.clearInterval(interval);
       window.removeEventListener("cobblestar:account-changed", loadAccount);
+      window.removeEventListener("cobblestar:wallet-changed", loadWallet);
+      window.removeEventListener("focus", loadWallet);
     };
   }, []);
 
@@ -77,6 +99,7 @@ export default function SiteHeader() {
               <Link className={pathname.startsWith("/vote") ? "active" : undefined} href="/vote/">Votes</Link>
             </div>
           </details>
+          {accountsEnabled && username && <Link className="nav-stars" href="/boutique/" aria-label={`Solde : ${balance.toLocaleString("fr-FR")} Stars`}><span aria-hidden="true">✦</span><b>{balance.toLocaleString("fr-FR")}</b><small>Stars</small></Link>}
           {accountsEnabled && <Link className={`nav-account${pathname.startsWith("/compte") ? " active" : ""}`} href="/compte/" aria-label={username ? `Compte de ${username}` : "Connexion au compte CobbleStar"}>
             <span className="nav-account-copy"><small>{username ? "MON COMPTE" : "ESPACE JOUEUR"}</small><strong>{username || "Se connecter"}</strong></span>
             <span className="nav-account-avatar">{username ? <img src={`https://mc-heads.net/avatar/${encodeURIComponent(username)}/64`} alt={`Tête Minecraft de ${username}`} /> : <b aria-hidden="true">♙</b>}</span>

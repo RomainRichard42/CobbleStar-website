@@ -52,6 +52,7 @@ const giveStarsBody = z.object({
   reason: z.string().trim().min(1).max(120).default("Commande administrateur"),
 });
 const purchaseBody = z.object({ productId: z.string().regex(/^[a-z0-9_]{3,64}$/) });
+const testRechargeBody = z.object({ starsAmount: z.number().int().refine((value) => [500, 1100, 2400, 6500].includes(value)) });
 const rewardClaimBody = z.object({ uuid: minecraftUuid });
 const rewardResultBody = z.object({ uuid: minecraftUuid, leaseToken: z.string().min(32).max(200), error: z.string().trim().max(200).optional() });
 const rewardParams = z.object({ id: z.string().uuid() });
@@ -160,7 +161,28 @@ app.get("/api/wallet", { preHandler: requireAccount }, async (request) => {
   return { balance: rows[0]?.balance ?? 0, currency: "Stars" };
 });
 
-app.get("/api/shop/catalog", async () => ({ products: shopCatalog }));
+app.get("/api/shop/catalog", async () => ({ products: shopCatalog, testPurchasesEnabled: config.ENABLE_TEST_PURCHASES }));
+
+app.post("/api/shop/test-recharge", { preHandler: requireAccount, config: { rateLimit: { max: 4, timeWindow: "15 minutes" } } }, async (request, reply) => {
+  if (!config.ENABLE_TEST_PURCHASES) return reply.code(404).send({ error: "TEST_PURCHASES_DISABLED" });
+  if (!request.account!.minecraft_linked_at || !request.account!.minecraft_uuid) return reply.code(409).send({ error: "MINECRAFT_LINK_REQUIRED" });
+  const parsed = testRechargeBody.safeParse(request.body);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  const providerReference = `test:${request.account!.id}`;
+  const result = await transaction(async (connection) => {
+    const [wallets] = await connection.execute<(RowDataPacket & { balance: number })[]>(`SELECT balance FROM wallets WHERE user_id=? FOR UPDATE`, [request.account!.id]);
+    const balance = wallets[0]?.balance ?? 0;
+    const [existing] = await connection.execute<(RowDataPacket & { id: string })[]>(`SELECT id FROM orders WHERE provider_reference=? LIMIT 1`, [providerReference]);
+    if (existing[0]) return null;
+    const orderId = randomUUID();
+    await connection.execute(`INSERT INTO orders(id,user_id,provider,provider_reference,amount_cents,stars_amount,status,paid_at) VALUES(?,?,?,?,0,?,'paid',UTC_TIMESTAMP())`, [orderId, request.account!.id, "test", providerReference, parsed.data.starsAmount]);
+    await connection.execute(`UPDATE wallets SET balance=balance+? WHERE user_id=?`, [parsed.data.starsAmount, request.account!.id]);
+    await connection.execute(`INSERT INTO star_transactions(id,user_id,delta,kind,reference_id,metadata_json) VALUES(?,?,?,?,?,?)`, [randomUUID(), request.account!.id, parsed.data.starsAmount, "test_purchase", `order:${orderId}`, JSON.stringify({ simulated: true })]);
+    return { orderId, balance: balance + parsed.data.starsAmount };
+  });
+  if (!result) return reply.code(409).send({ error: "TEST_PURCHASE_ALREADY_USED" });
+  return reply.code(201).send({ ok: true, simulated: true, starsAdded: parsed.data.starsAmount, ...result });
+});
 
 app.post("/api/shop/purchase", { preHandler: requireAccount, config: { rateLimit: { max: 10, timeWindow: "1 minute" } } }, async (request, reply) => {
   const parsed = purchaseBody.safeParse(request.body);

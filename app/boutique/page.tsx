@@ -49,6 +49,10 @@ export default function ShopPage() {
   const [testProduct, setTestProduct] = useState<ShopProduct | null>(null);
   const [purchaseBusy, setPurchaseBusy] = useState(false);
   const [purchaseMessage, setPurchaseMessage] = useState("");
+  const [testPurchasesEnabled, setTestPurchasesEnabled] = useState(false);
+  const [rechargeBusy, setRechargeBusy] = useState(false);
+  const [rechargeComplete, setRechargeComplete] = useState(false);
+  const [rechargeMessage, setRechargeMessage] = useState("");
 
   useEffect(() => {
     let active = true;
@@ -76,10 +80,13 @@ export default function ShopPage() {
     void fetch("/api/shop/catalog")
       .then(async (response) => {
         if (!response.ok) throw new Error("Catalog unavailable");
-        return response.json() as Promise<{ products: ShopProduct[] }>;
+        return response.json() as Promise<{ products: ShopProduct[]; testPurchasesEnabled: boolean }>;
       })
-      .then((data) => setTestProduct(data.products.find((product) => product.id === "delivery_test") ?? null))
-      .catch(() => setTestProduct(null));
+      .then((data) => {
+        setTestProduct(data.products.find((product) => product.id === "delivery_test") ?? null);
+        setTestPurchasesEnabled(data.testPurchasesEnabled);
+      })
+      .catch(() => { setTestProduct(null); setTestPurchasesEnabled(false); });
   }, []);
 
   useEffect(() => {
@@ -131,11 +138,43 @@ export default function ShopPage() {
         throw new Error(messages[data.error || ""] || "L’achat test a été refusé.");
       }
       setBalance(data.balance ?? balance - testProduct.starsPrice);
+      window.dispatchEvent(new Event("cobblestar:wallet-changed"));
       setPurchaseMessage("Achat validé ! Connecte-toi au serveur : l’objet sera livré automatiquement.");
     } catch (error) {
       setPurchaseMessage(error instanceof Error ? error.message : "L’achat test est indisponible.");
     } finally {
       setPurchaseBusy(false);
+    }
+  }
+
+  async function simulateRecharge() {
+    if (!selectedPack || rechargeBusy || rechargeComplete) return;
+    setRechargeBusy(true);
+    setRechargeMessage("");
+    try {
+      const response = await fetch("/api/shop/test-recharge", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ starsAmount: selectedPack.stars }),
+      });
+      const data = await response.json() as { balance?: number; starsAdded?: number; error?: string };
+      if (!response.ok) {
+        const messages: Record<string, string> = {
+          TEST_PURCHASE_ALREADY_USED: "Ton compte a déjà utilisé son achat simulé.",
+          TEST_PURCHASES_DISABLED: "Les achats simulés sont actuellement désactivés.",
+          MINECRAFT_LINK_REQUIRED: "Lie d’abord ton compte Minecraft.",
+        };
+        throw new Error(messages[data.error || ""] || "La simulation a été refusée.");
+      }
+      setBalance(data.balance ?? balance + selectedPack.stars);
+      setRechargeComplete(true);
+      setRechargeMessage(`Paiement simulé accepté : ${data.starsAdded ?? selectedPack.stars} Stars ont été créditées.`);
+      window.dispatchEvent(new Event("cobblestar:wallet-changed"));
+    } catch (error) {
+      setRechargeMessage(error instanceof Error ? error.message : "La simulation est indisponible.");
+    } finally {
+      setRechargeBusy(false);
     }
   }
 
@@ -182,7 +221,7 @@ export default function ShopPage() {
           <span className="shop-v2-unit">Stars créditées</span>
           <div className="shop-v2-price"><b>{pack.price}</b><small>Paiement unique</small></div>
           <p>{pack.bonus || "Le format idéal pour découvrir la boutique."}</p>
-          <button type="button" onClick={() => setSelectedPack(pack)}>Voir ce pack <span>→</span></button>
+          <button type="button" onClick={() => { setSelectedPack(pack); setRechargeMessage(""); }}>Voir ce pack <span>→</span></button>
         </article>)}
       </div>
 
@@ -208,8 +247,9 @@ export default function ShopPage() {
         <div className="shop-v2-dialog-price"><span>Montant unique</span><b>{selectedPack.price}</b></div>
         {selectedPack.bonus && <p className="shop-v2-dialog-bonus">✓ {selectedPack.bonus} incluses dans le total</p>}
         <div className="shop-v2-dialog-account"><small>DESTINATION</small><b>{username || "Aucun compte connecté"}</b><span>{linked ? "✓ Compte Minecraft lié" : "Compte à préparer avant l’achat"}</span></div>
-        {!account ? <Link className="shop-v2-dialog-action" href="/compte/">Se connecter pour continuer <span>→</span></Link> : !linked ? <button className="shop-v2-dialog-action" type="button" onClick={() => { setSelectedPack(null); setLinkOpen(true); }}>Lier mon compte Minecraft <span>→</span></button> : <button className="shop-v2-dialog-action is-disabled" type="button" disabled>Paiement bientôt disponible</button>}
-        <p className="shop-v2-dialog-note">Aucun débit ne peut être effectué pendant cette phase bêta.</p>
+        {!account ? <Link className="shop-v2-dialog-action" href="/compte/">Se connecter pour continuer <span>→</span></Link> : !linked ? <button className="shop-v2-dialog-action" type="button" onClick={() => { setSelectedPack(null); setLinkOpen(true); }}>Lier mon compte Minecraft <span>→</span></button> : testPurchasesEnabled ? <button className={`shop-v2-dialog-action${rechargeComplete ? " is-complete" : ""}`} type="button" onClick={simulateRecharge} disabled={rechargeBusy || rechargeComplete}>{rechargeBusy ? "Simulation du paiement…" : rechargeComplete ? "Stars créditées ✓" : "Simuler cet achat bêta"}<span>{rechargeComplete ? "" : "→"}</span></button> : <button className="shop-v2-dialog-action is-disabled" type="button" disabled>Paiement bientôt disponible</button>}
+        {rechargeMessage && <p className="shop-v2-dialog-message" role="status">{rechargeMessage}</p>}
+        <p className="shop-v2-dialog-note">{testPurchasesEnabled ? "Simulation gratuite, utilisable une seule fois par compte lié. Aucun débit bancaire." : "Aucun débit ne peut être effectué pendant cette phase bêta."}</p>
       </section>
     </div>}
 
