@@ -777,3 +777,73 @@ footer > small { font-size: 10px; }
 @media (max-width: 650px) {
   .nav-utility { height: 32px; padding-left: 12px; }.nav-utility > div:first-child b { font-size: 9px; }.nav-utility > button { min-width: 190px; }.nav-utility > button b { font-size: 8.5px; }.nav-utility > button span { width: 22px; height: 22px; }.nav-stack .nav-wrap { height: 60px; }.landing-hero { padding-top: 132px; }.season-label { font-size: 9px; }.landing-copy > p { font-size: 16px; }.hero-server-line b { font-size: 10px; }.hero-server-line i { min-width: 82px; }.world-ticket b { font-size: 17px; }.adventure-card > p { font-size: 13px; }.showcase-mosaic figcaption b { font-size: 10px; }.showcase-mosaic figcaption small { display: none; }.showcase-source { font-size: 8px; }
 }
+
+/* Global legibility pass */
+body { font-size: 16px; line-height: 1.5; }
+.nav-utility { height: 42px; padding-inline: 20px 11px; }
+.nav-utility > div:first-child b { font-size: 12px; }
+.nav-utility > button { min-width: 300px; height: 32px; }
+.nav-utility > button small { font-size: 10px; }
+.nav-utility > button b { font-size: 12px; }
+.nav-stack .nav-wrap { height: 76px; padding-inline: 17px 12px; }
+.nav-stack .nav-wrap nav a { min-width: 96px; font-size: 14px; }
+.brand { font-size: 23px; }.brand > span:last-child > small { margin-top: 3px; font-size: 10px; letter-spacing: .11em; }
+.nav-account { min-width: 190px; height: 54px; padding-left: 15px; }
+.nav-account-copy small { font-size: 9px; }.nav-account-copy strong { margin-top: 3px; font-size: 12px; }
+.nav-account-avatar { width: 44px; height: 44px; }
+
+.season-label { font-size: 12px; }
+.landing-copy > p { font-size: 18px; line-height: 1.75; }
+.hero-server-line { min-height: 56px; }
+.hero-server-line small { font-size: 10px; }.hero-server-line b { font-size: 13px; }.hero-server-line i { min-width: 102px; height: 42px; font-size: 11px; }
+.world-ticket { min-width: 230px; padding: 21px 23px; }.world-ticket small { font-size: 10px; }.world-ticket span { font-size: 11px; }
+.landing-marquee { height: 68px; }.landing-marquee-track { font-size: 12px; }
+.kicker, .eyebrow { font-size: 13px; }
+
+.adventure-intro { padding-top: 135px; }
+.adventure-card { min-height: 470px; padding: 30px; }
+.adventure-card > small { font-size: 11px; }.adventure-card > b { margin-top: 11px; font-size: 31px; }.adventure-card > p { font-size: 15px; }.adventure-card > em { font-size: 12px; }.adventure-photo i { font-size: 10px; }
+.showcase-copy p, .launcher-story-copy p, .section-head > p { font-size: 16px; line-height: 1.75; }
+.showcase-copy > a, .launcher-story-copy > a, .beta-inline { font-size: 13px; }
+.showcase-mosaic figcaption b { font-size: 15px; }.showcase-mosaic figcaption small { font-size: 11px; }.showcase-mosaic figcaption span { font-size: 11px; }.showcase-source { font-size: 11px; }
+.window-top small, .window-content small, .window-foot { font-size: 11px; }
+.portal-card p, .feature-card p, .news-card p, .server-scenery-head > p { font-size: 15px; }
+.portal-card i { font-size: 14px; }.portal-card small { font-size: 11px; }
+.info-banner small { font-size: 11px; }.info-banner strong { font-size: 16px; }
+footer { font-size: 14px; } footer > small { font-size: 11px; }
+
+.page-hero { min-height: 610px; }.page-hero p { font-size: 18px; }
+.page-orb > span { font-size: 11px; }
+.account-page { width: min(1240px, calc(100% - 48px)); padding-top: 90px; }
+.account-layout { grid-template-columns: .78fr 1.22fr; gap: 64px; }
+.account-promise > p { max-width: 520px; font-size: 15px; }
+.account-benefits { gap: 12px; }.account-benefits > span { padding: 18px; }.account-benefits strong { font-size: 13px; }.account-benefits small { font-size: 11px; line-height: 1.45; }
+.auth-card { min-height: 690px; }
+.auth-tabs { height: 70px; }.auth-tabs button { font-size: 12px; }
+.auth-form { padding: 44px 46px; }.auth-form > small, .account-created-preview > small { font-size: 10px; }.auth-form h3, .account-created-preview h3 { font-size: 32px; }
+.auth-form label { margin-bottom: 9px; font-size: 11px; }.auth-form > input, .auth-minecraft-field > input { height: 54px; margin-bottom: 21px; font-size: 14px; }.auth-form > button { min-height: 54px; font-size: 13px; }.auth-legal { font-size: 11px; }
+.account-created-preview { padding: 44px; }
+.account-profile-head small { font-size: 10px; }.account-profile-head h3 { font-size: 30px; }.account-profile-head p { font-size: 13px; }.account-link-badge { font-size: 11px; }
+.account-progress li { padding: 15px; }.account-progress b { font-size: 13px; }.account-progress small { font-size: 11px; }
+.created-status > span { padding: 16px; }.created-status b { font-size: 13px; }.created-status small { font-size: 11px; }
+.minecraft-link-action { margin-top: 22px; padding: 24px; }.link-action-heading small { font-size: 10px; }.link-action-heading h4 { font-size: 21px; }.link-action-heading p { font-size: 13px; }
+.link-primary-button { min-height: 55px; font-size: 13px; }
+.link-command-label span, .link-command-label small { font-size: 11px; }.link-command-row button { font-size: 12px; }.link-command-flow li p { font-size: 12px; }.link-regenerate { font-size: 11px; }
+.account-alert b { font-size: 12px; }.account-alert p, .account-alert button { font-size: 11px; }.account-linked-panel b { font-size: 13px; }.account-linked-panel small { font-size: 10px; }.account-logout { font-size: 11px; }
+
+@media (max-width: 1100px) {
+  .nav-account { min-width: 54px; width: 54px; height: 54px; }.nav-account-avatar { width: 44px; height: 44px; }
+  .account-layout { grid-template-columns: .85fr 1.15fr; gap: 38px; }
+}
+@media (max-width: 900px) {
+  .account-layout { grid-template-columns: 1fr; }.account-promise { max-width: 680px; }
+}
+@media (max-width: 650px) {
+  .nav-utility { height: 36px; padding-left: 13px; }.nav-utility > div:first-child b { font-size: 10px; }.nav-utility > button { min-width: 205px; }.nav-utility > button b { font-size: 10px; }
+  .nav-stack .nav-wrap { height: 64px; }.nav-account { min-width: 45px; width: 45px; height: 45px; }.nav-account-avatar { width: 37px; height: 37px; }
+  .landing-hero { padding-top: 145px; }.season-label { font-size: 10px; }.landing-copy > p { font-size: 17px; }
+  .hero-server-line b { font-size: 11px; }.hero-server-line i { min-width: 88px; font-size: 10px; }
+  .adventure-card { min-height: 430px; padding: 25px; }.adventure-card > p { font-size: 14px; }
+  .account-page { width: calc(100% - 28px); padding-top: 65px; }.auth-card { min-height: 620px; }.account-created-preview, .auth-form { padding: 30px 22px; }
+  .account-progress li, .created-status > span { padding: 14px; }.minecraft-link-action { padding: 19px; }
+}
