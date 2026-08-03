@@ -142,20 +142,41 @@ function AccountPortal() {
     setMode("login");
   }
 
+  const linked = account?.minecraft.linked ?? false;
+
   return <main>
     <PageHero eyebrow="ESPACE JOUEUR" title="Ton compte." accent="Toute ton aventure." description="Ton profil Minecraft, tes Stars et tes futures récompenses réunis au même endroit." badge="SÉCURISÉ" />
     <section className="account-page">
       <div className="account-layout">
         <div className="account-promise"><span className="kicker">COMPTE COBBLESTAR</span><h2>Un compte site.<br /><em>Ton vrai joueur.</em></h2><p>Tu t’inscris avec ton e-mail, puis la commande en jeu confirme ton UUID. Le mot de passe Microsoft n’est jamais demandé.</p><div className="account-benefits"><span><b>✦</b><i><strong>Code à usage unique</strong><small>Il expire automatiquement après 10 minutes</small></i></span><span><b>◈</b><i><strong>UUID officiel</strong><small>Récupéré directement depuis le serveur</small></i></span><span><b>✓</b><i><strong>Une seule liaison</strong><small>Valable ensuite pour la boutique et les votes</small></i></span></div></div>
         <div className="auth-card">
-          {loading && !account ? <div className="account-created-preview"><small>CHARGEMENT</small><h3>Vérification…</h3></div> : account ? <div className="account-created-preview">
-            <div className="created-check">{account.minecraft.linked ? "✓" : "2"}</div><small>COMPTE COBBLESTAR</small><h3>{account.minecraft.username || "Dresseur"}</h3>
-            <p>{account.minecraft.linked ? "Ton compte Minecraft est lié et prêt." : "Il reste une confirmation à effectuer depuis le serveur."}</p>
-            <div className="created-status"><span><i>✦</i><b>{balance.toLocaleString("fr-FR")} Stars</b><small>Solde</small></span><span><i>{account.minecraft.linked ? "✓" : "…"}</i><b>Minecraft</b><small>{account.minecraft.linked ? "UUID lié" : "En attente"}</small></span></div>
-            {!account.minecraft.linked && <div className="created-actions"><button type="button" onClick={createCode} disabled={loading}>{command ? "Générer un nouveau code" : "Obtenir ma commande /link"}</button>{command && <><code>{command}</code><button type="button" onClick={copyCommand}>Copier</button><small>Rejoins <b>play.cobblestar-mc.fr</b>, exécute cette commande et garde cette page ouverte.{expiresAt ? " Le code expire dans 10 minutes." : ""}</small></>}</div>}
-            {account.minecraft.linked && account.minecraft.uuid && <p className="linked-email">UUID : {account.minecraft.uuid}</p>}
-            {error && <p className="lookup-error" role="alert">{error}</p>}
-            <div className="created-actions"><button type="button" onClick={logout}>Se déconnecter</button></div>
+          {loading && !account ? <div className="account-created-preview account-loading"><span className="account-loader" /><small>ESPACE JOUEUR</small><h3>On récupère ton compte…</h3><p>Cette vérification ne prend normalement que quelques secondes.</p></div> : account ? <div className="account-created-preview">
+            <div className="account-profile-head">
+              <div className="account-player-mark" aria-hidden="true">{(account.minecraft.username || "C").slice(0, 1).toUpperCase()}</div>
+              <div><small>COMPTE COBBLESTAR</small><h3>{account.minecraft.username || "Dresseur"}</h3><p>{linked ? "Ton profil est prêt pour l’aventure." : "Ton compte est créé. Il reste à confirmer ton joueur en jeu."}</p></div>
+              <span className={`account-link-badge ${linked ? "is-linked" : "is-pending"}`}>{linked ? "✓ Minecraft lié" : "Dernière étape"}</span>
+            </div>
+
+            <ol className="account-progress" aria-label="Progression de la liaison du compte">
+              <li className="is-done"><span>✓</span><div><b>Compte créé</b><small>E-mail enregistré</small></div></li>
+              <li className={linked ? "is-done" : "is-current"}><span>{linked ? "✓" : "2"}</span><div><b>Lier Minecraft</b><small>{linked ? "Identité confirmée" : "Commande à effectuer en jeu"}</small></div></li>
+            </ol>
+
+            <div className="created-status"><span><i>✦</i><b>{balance.toLocaleString("fr-FR")} Stars</b><small>Ton solde</small></span><span><i>{linked ? "✓" : "↗"}</i><b>{linked ? "Compte lié" : "Liaison requise"}</b><small>{linked ? "Minecraft vérifié" : "Pour la boutique et les votes"}</small></span></div>
+
+            {!linked && <section className="minecraft-link-action" aria-labelledby="minecraft-link-title">
+              <div className="link-action-heading"><span>02</span><div><small>DERNIÈRE ÉTAPE</small><h4 id="minecraft-link-title">Confirme ton compte en jeu</h4><p>Génère une commande unique, puis colle-la dans le chat du serveur.</p></div></div>
+              {!command ? <button className="link-primary-button" type="button" onClick={createCode} disabled={loading}>{loading ? "Génération…" : "Générer ma commande /link"}<span>→</span></button> : <div className="link-command-flow">
+                <div className="link-command-label"><span>Commande personnelle</span><small>Expire dans 10 minutes</small></div>
+                <div className="link-command-row"><code>{command}</code><button type="button" onClick={copyCommand}>Copier</button></div>
+                <ol><li><span>1</span><p>Rejoins <b>play.cobblestar-mc.fr</b></p></li><li><span>2</span><p>Colle la commande dans le chat</p></li><li><span>3</span><p>Cette page se validera automatiquement</p></li></ol>
+                <button className="link-regenerate" type="button" onClick={createCode} disabled={loading}>Générer un autre code</button>
+              </div>}
+            </section>}
+
+            {linked && account.minecraft.uuid && <div className="account-linked-panel"><span>✓</span><div><b>Connexion terminée</b><small>UUID {account.minecraft.uuid}</small></div></div>}
+            {error && <div className="account-alert" role="alert" aria-live="polite"><span>!</span><div><b>La commande n’a pas pu être générée</b><p>{error}</p></div><button type="button" onClick={createCode} disabled={loading}>Réessayer</button></div>}
+            <button className="account-logout" type="button" onClick={logout}>Se déconnecter</button>
           </div> : <>
             <div className="auth-tabs"><button type="button" className={mode === "register" ? "active" : ""} onClick={() => { setMode("register"); setError(""); }}>Créer un compte</button><button type="button" className={mode === "login" ? "active" : ""} onClick={() => { setMode("login"); setError(""); }}>Se connecter</button></div>
             <form className="auth-form" onSubmit={submit}><small>{mode === "register" ? "NOUVEAU DRESSEUR" : "BON RETOUR"}</small><h3>{mode === "register" ? "Créer ton espace" : "Connexion"}</h3>
