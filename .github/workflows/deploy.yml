@@ -1,0 +1,99 @@
+name: Déployer sur Kinetic
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cobblestar-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: production
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            api/package-lock.json
+
+      - name: Installer les dépendances
+        run: |
+          npm ci
+          npm --prefix api ci
+
+      - name: Vérifier et construire
+        run: npm run ci
+
+      - name: Installer le client SFTP
+        run: sudo apt-get update && sudo apt-get install --yes lftp
+
+      - name: Envoyer les fichiers sur Kinetic
+        env:
+          SFTP_HOST: ${{ secrets.KINETIC_SFTP_HOST }}
+          SFTP_PORT: ${{ secrets.KINETIC_SFTP_PORT }}
+          SFTP_USERNAME: ${{ secrets.KINETIC_SFTP_USERNAME }}
+          SFTP_PASSWORD: ${{ secrets.KINETIC_SFTP_PASSWORD }}
+        run: |
+          test -n "$SFTP_HOST"
+          test -n "$SFTP_PORT"
+          test -n "$SFTP_USERNAME"
+          test -n "$SFTP_PASSWORD"
+          lftp -u "$SFTP_USERNAME","$SFTP_PASSWORD" "sftp://$SFTP_HOST:$SFTP_PORT" <<'LFTP'
+          set cmd:fail-exit yes
+          set net:max-retries 2
+          set net:timeout 20
+          set sftp:auto-confirm yes
+          mirror --reverse --delete --parallel=4 deploy/site/ /site/
+          mirror --reverse --delete --parallel=4 deploy/dist/ /dist/
+          mirror --reverse --delete --parallel=2 deploy/migrations/ /migrations/
+          put deploy/package.json -o /package.json
+          put deploy/package-lock.json -o /package-lock.json
+          put deploy/.env.example -o /.env.example
+          put deploy/README-KINETIC.md -o /README-KINETIC.md
+          bye
+          LFTP
+
+      - name: Redémarrer le serveur Node
+        env:
+          PANEL_URL: ${{ secrets.KINETIC_PANEL_URL }}
+          SERVER_ID: ${{ secrets.KINETIC_SERVER_ID }}
+          API_KEY: ${{ secrets.KINETIC_API_KEY }}
+        run: |
+          test -n "$PANEL_URL"
+          test -n "$SERVER_ID"
+          test -n "$API_KEY"
+          curl --fail-with-body --silent --show-error \
+            --request POST \
+            --header "Authorization: Bearer $API_KEY" \
+            --header "Accept: application/json" \
+            --header "Content-Type: application/json" \
+            --data '{"signal":"restart"}' \
+            "${PANEL_URL%/}/api/client/servers/${SERVER_ID}/power"
+
+      - name: Vérifier la production
+        run: |
+          for attempt in $(seq 1 24); do
+            if curl --fail --silent --show-error \
+              https://cobblestar-mc.fr/api/health | grep -q '"status":"ok"'; then
+              echo "CobbleStar est en ligne."
+              exit 0
+            fi
+            echo "Attente du redémarrage ($attempt/24)..."
+            sleep 5
+          done
+          echo "Le déploiement ne répond pas correctement." >&2
+          exit 1

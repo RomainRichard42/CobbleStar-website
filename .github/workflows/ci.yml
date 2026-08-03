@@ -1,0 +1,42 @@
+name: Vérifier le site
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            api/package-lock.json
+
+      - name: Installer les dépendances du site
+        run: npm ci
+
+      - name: Installer les dépendances de l'API
+        run: npm --prefix api ci
+
+      - name: Vérifier et construire
+        run: npm run ci
+
+      - name: Conserver l'artefact Kinetic
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobblestar-kinetic
+          path: deploy/
+          if-no-files-found: error
+          retention-days: 7
