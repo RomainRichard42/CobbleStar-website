@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { LAUNCHER_RELEASES_URL, useLatestRelease } from "./DownloadLauncher";
+import { useDownloadUrl } from "./DownloadLauncher";
 
 const accountsEnabled = true;
 type HeaderAccount = { minecraft?: { username?: string | null } };
@@ -14,7 +14,7 @@ export default function SiteHeader() {
   const [balance, setBalance] = useState(0);
   const pathname = usePathname();
   const username = account?.minecraft?.username || null;
-  const release = useLatestRelease();
+  const downloadUrl = useDownloadUrl();
 
   useEffect(() => {
     let active = true;
@@ -101,14 +101,7 @@ export default function SiteHeader() {
               <Link className={pathname.startsWith("/vote") ? "active" : undefined} href="/vote/">Votes</Link>
             </div>
           </details>
-          <a
-            className="nav-download"
-            href={release?.downloadUrl || LAUNCHER_RELEASES_URL}
-            download={release?.downloadUrl ? true : undefined}
-            target={release?.downloadUrl ? undefined : "_blank"}
-            rel={release?.downloadUrl ? undefined : "noreferrer"}
-            aria-label="Télécharger le launcher CobbleStar"
-          >
+          <a className="nav-download" href={downloadUrl} download aria-label="Télécharger le launcher CobbleStar">
             <span>Télécharger</span><b aria-hidden="true">⭳</b>
           </a>
           {accountsEnabled && username && <Link className="nav-stars" href="/boutique/" aria-label={`Solde : ${balance.toLocaleString("fr-FR")} Stars`}><span aria-hidden="true">✦</span><b>{balance.toLocaleString("fr-FR")}</b><small>Stars</small></Link>}

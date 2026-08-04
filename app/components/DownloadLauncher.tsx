@@ -4,7 +4,14 @@ import { useEffect, useState } from "react";
 
 const REPO = "RomainRichard42/CobbleStar-launcher";
 
+// Voir toutes les versions (page d'information, pas un lien de téléchargement).
 export const LAUNCHER_RELEASES_URL = `https://github.com/${REPO}/releases/latest`;
+
+// Repli figé sur le dernier .exe connu : garantit que le bouton télécharge
+// toujours directement le fichier, même si l'API GitHub est indisponible.
+export const FALLBACK_VERSION = "0.5.1";
+export const FALLBACK_SIZE_MB = 100;
+const FALLBACK_DOWNLOAD_URL = `https://github.com/${REPO}/releases/download/v${FALLBACK_VERSION}/CobbleStar-Launcher-${FALLBACK_VERSION}-win-x64.exe`;
 
 export type LauncherRelease = { version: string; downloadUrl: string; sizeMb: number };
 
@@ -34,7 +41,8 @@ function fetchLatestRelease(): Promise<LauncherRelease | null> {
   return cached;
 }
 
-// undefined = chargement en cours, null = indisponible (repli vers la page GitHub)
+// undefined = requête en cours, null = API indisponible : dans les deux cas
+// useDownloadUrl() renvoie déjà un lien de fichier direct exploitable.
 export function useLatestRelease() {
   const [release, setRelease] = useState<LauncherRelease | null | undefined>(undefined);
   useEffect(() => {
@@ -43,4 +51,10 @@ export function useLatestRelease() {
     return () => { active = false; };
   }, []);
   return release;
+}
+
+// Toujours un lien direct vers le fichier .exe — jamais une page GitHub.
+export function useDownloadUrl() {
+  const release = useLatestRelease();
+  return release?.downloadUrl || FALLBACK_DOWNLOAD_URL;
 }
