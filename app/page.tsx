@@ -3,11 +3,15 @@
 import { useState } from "react";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
+import { LAUNCHER_RELEASES_URL, useLatestRelease } from "./components/DownloadLauncher";
 
 const SERVER_ADDRESS = "play.cobblestar-mc.fr";
 
 export default function Home() {
   const [copied, setCopied] = useState(false);
+  const release = useLatestRelease();
+  const downloadUrl = release?.downloadUrl || LAUNCHER_RELEASES_URL;
+  const downloadLabel = release === undefined ? "Chargement…" : release ? "Télécharger pour Windows" : "Télécharger sur GitHub";
   async function copyAddress() {
     setCopied(true);
     try {
@@ -69,11 +73,11 @@ export default function Home() {
     </section>
 
     <section className="launcher-story">
-      <div className="launcher-story-copy"><span className="kicker">OUTIL DES TESTEURS</span><h2>Un launcher.<br /><em>Zéro préparation.</em></h2><p>Le launcher CobbleStar installe Fabric, synchronise le modpack de bêta et prépare automatiquement la bonne version du jeu. Son accès public arrivera avec l’ouverture.</p><span className="beta-inline">Distribution fermée pendant la bêta <b>✦</b></span></div>
-      <div className="launcher-window"><div className="window-top"><i /><i /><i /><small>COBBLESTAR LAUNCHER • BÊTA</small></div><div className="window-content"><img src="/cobblestar-logo.png" alt="" /><div><small>ACCÈS TESTEUR REQUIS</small><strong>CobbleStar 1.21.1</strong><span><i /></span><button disabled>BÊTA FERMÉE</button></div></div><div className="window-foot"><span>Fabric</span><span>Modpack en test</span><span>Accès limité</span></div></div>
+      <div className="launcher-story-copy"><span className="kicker">TÉLÉCHARGEMENT</span><h2>Un launcher.<br /><em>Zéro préparation.</em></h2><p>Le launcher CobbleStar installe Fabric, synchronise le modpack et prépare automatiquement la bonne version du jeu. Connecte-toi ensuite avec l’adresse de la bêta pour rejoindre le serveur.</p><a className="beta-inline" href={LAUNCHER_RELEASES_URL} target="_blank" rel="noreferrer">Toutes les versions sur GitHub <b>↗</b></a></div>
+      <div className="launcher-window"><div className="window-top"><i /><i /><i /><small>COBBLESTAR LAUNCHER • WINDOWS</small></div><div className="window-content"><img src="/cobblestar-logo.png" alt="" /><div><small>DERNIÈRE VERSION</small><strong>{release ? `v${release.version}` : "CobbleStar Launcher"}</strong><span><i /></span><a className="window-cta" href={downloadUrl} download={release?.downloadUrl ? true : undefined} target={release?.downloadUrl ? undefined : "_blank"} rel={release?.downloadUrl ? undefined : "noreferrer"}>{downloadLabel}</a></div></div><div className="window-foot"><span>Windows 10/11 64 bits</span><span>{release?.sizeMb ? `${release.sizeMb} Mo` : "~100 Mo"}</span><span>Mises à jour auto</span></div></div>
     </section>
 
-    <section className="home-cta"><div><span className="kicker">BÊTA PRIVÉE</span><h2>Le monde se prépare.<br /><em>Rendez-vous bientôt.</em></h2><p>Les inscriptions, le launcher, la boutique et les votes resteront fermés jusqu’à leur validation.</p></div><button className="button button-primary" onClick={copyAddress} type="button">{copied ? "Adresse copiée" : SERVER_ADDRESS} <span>{copied ? "✓" : "⧉"}</span></button></section>
+    <section className="home-cta"><div><span className="kicker">BÊTA PRIVÉE</span><h2>Le monde se prépare.<br /><em>Rendez-vous bientôt.</em></h2><p>Les inscriptions, la boutique et les votes resteront fermés jusqu’à leur validation. Le launcher, lui, est déjà disponible.</p></div><button className="button button-primary" onClick={copyAddress} type="button">{copied ? "Adresse copiée" : SERVER_ADDRESS} <span>{copied ? "✓" : "⧉"}</span></button></section>
     <SiteFooter />
   </main>;
 }
