@@ -2,7 +2,6 @@ import { readFileSync, statSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { z } from "zod";
 
-<<<<<<< HEAD
 const color = z.string().regex(/^#[0-9A-Fa-f]{6}$/);
 const visualSchema = z.object({
   accent: color.default("#9B8CFF"),
@@ -39,46 +38,6 @@ const catalogSchema = z.object({
     ids.add(product.id);
   });
 });
-=======
-const products: ShopProduct[] = [
-  {
-    id: "key_nova",
-    name: "Clé Nova",
-    description: "Ouvre une caisse Nova au spawn CobbleStar.",
-    starsPrice: 350,
-    itemId: "cobblestar_planets:key_nova",
-    itemCount: 1,
-    testOnly: false,
-  },
-  {
-    id: "key_pulsar",
-    name: "Clé Pulsar",
-    description: "Ouvre une caisse Pulsar et son catalogue exclusif.",
-    starsPrice: 650,
-    itemId: "cobblestar_planets:key_pulsar",
-    itemCount: 1,
-    testOnly: false,
-  },
-  {
-    id: "key_quasar",
-    name: "Clé Quasar",
-    description: "La clé premium des récompenses Quasar.",
-    starsPrice: 950,
-    itemId: "cobblestar_planets:key_quasar",
-    itemCount: 1,
-    testOnly: false,
-  },
-  {
-    id: "delivery_test",
-    name: "Éclat Stellaire de test",
-    description: "Un éclat d’améthyste utilisé pour vérifier la livraison site → serveur.",
-    starsPrice: 1,
-    itemId: "minecraft:amethyst_shard",
-    itemCount: 1,
-    testOnly: true,
-  },
-];
->>>>>>> 847eed66aff04d92bcc6b161a1a14adc8736b24e
 
 export type ShopProduct = z.infer<typeof productSchema>;
 export type ShopTheme = z.infer<typeof themeSchema>;
@@ -105,8 +64,6 @@ export function getGameShopCatalog() {
 export function getShopTheme() {
   return { ...readShopCatalog().theme };
 }
-
-export const gameShopCatalog = products.map((product) => ({ ...product }));
 
 export function findShopProduct(id: string) {
   return readShopCatalog().products.find((product) => product.id === id) ?? null;

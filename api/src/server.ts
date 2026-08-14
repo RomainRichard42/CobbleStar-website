@@ -12,11 +12,7 @@ import { config, isProduction } from "./config.js";
 import { pool, transaction } from "./db.js";
 import { applyMigrations } from "./migrations.js";
 import { digest, hashPassword, linkCode, normalizeEmail, normalizeLinkCode, randomToken, verifyPassword } from "./security.js";
-<<<<<<< HEAD
 import { findShopProduct, getGameShopCatalog, getShopTheme } from "./shop.js";
-=======
-import { findShopProduct, gameShopCatalog } from "./shop.js";
->>>>>>> 847eed66aff04d92bcc6b161a1a14adc8736b24e
 
 type UserRow = RowDataPacket & {
   id: string; email: string; password_hash: string; minecraft_username: string | null;
@@ -257,15 +253,11 @@ app.get("/api/internal/stars/balance", { config: { rateLimit: { max: 180, timeWi
 
 app.get("/api/internal/shop/catalog", { config: { rateLimit: { max: 180, timeWindow: "1 minute" } } }, async (request, reply) => {
   if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
-<<<<<<< HEAD
   return {
     currency: "Stars",
     theme: getShopTheme(),
-    products: getGameShopCatalog().filter((product) => !product.testOnly),
+    products: getGameShopCatalog().filter((product) => !product.testOnly || config.ENABLE_TEST_PURCHASES),
   };
-=======
-  return { currency: "Stars", products: gameShopCatalog.filter((product) => !product.testOnly || config.ENABLE_TEST_PURCHASES) };
->>>>>>> 847eed66aff04d92bcc6b161a1a14adc8736b24e
 });
 
 app.post("/api/internal/shop/purchase", { config: { rateLimit: { max: 90, timeWindow: "1 minute" } } }, async (request, reply) => {
