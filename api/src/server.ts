@@ -12,6 +12,7 @@ import { config, isProduction } from "./config.js";
 import { pool, transaction } from "./db.js";
 import { applyMigrations } from "./migrations.js";
 import { digest, hashPassword, linkCode, normalizeEmail, normalizeLinkCode, randomToken, verifyPassword } from "./security.js";
+import { findShopProduct, getGameShopCatalog, getShopTheme } from "./shop.js";
 
 type UserRow = RowDataPacket & {
   id: string; email: string; password_hash: string; minecraft_username: string | null;
@@ -54,6 +55,11 @@ const testRechargeBody = z.object({ starsAmount: z.number().int().refine((value)
 const rewardClaimBody = z.object({ uuid: minecraftUuid });
 const rewardResultBody = z.object({ uuid: minecraftUuid, leaseToken: z.string().min(32).max(200), error: z.string().trim().max(200).optional() });
 const rewardParams = z.object({ id: z.string().uuid() });
+const gamePurchaseBody = z.object({
+  uuid: minecraftUuid,
+  productId: z.string().regex(/^[a-z0-9_-]{1,64}$/),
+  requestId: z.string().uuid(),
+});
 
 function publicUser(user: UserRow) {
   return { id: user.id, email: user.email, minecraft: { username: user.minecraft_username, uuid: user.minecraft_uuid, linked: Boolean(user.minecraft_linked_at) } };
@@ -243,6 +249,58 @@ app.get("/api/internal/stars/balance", { config: { rateLimit: { max: 180, timeWi
   const [rows] = await pool.execute<(RowDataPacket & { balance: number })[]>(`SELECT w.balance FROM users u JOIN wallets w ON w.user_id=u.id WHERE u.minecraft_uuid=? LIMIT 1`, [parsed.data.uuid]);
   if (!rows[0]) return reply.code(404).send({ error: "MINECRAFT_ACCOUNT_NOT_LINKED" });
   return { balance: rows[0].balance, currency: "Stars" };
+});
+
+app.get("/api/internal/shop/catalog", { config: { rateLimit: { max: 180, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  return {
+    currency: "Stars",
+    theme: getShopTheme(),
+    products: getGameShopCatalog().filter((product) => !product.testOnly),
+  };
+});
+
+app.post("/api/internal/shop/purchase", { config: { rateLimit: { max: 90, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const parsed = gamePurchaseBody.safeParse(request.body);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  const product = findShopProduct(parsed.data.productId);
+  if (!product || (product.testOnly && !config.ENABLE_TEST_PURCHASES)) return reply.code(404).send({ error: "PRODUCT_NOT_FOUND" });
+
+  const result = await transaction(async (connection) => {
+    const [users] = await connection.execute<(RowDataPacket & { id: string; balance: number })[]>(
+      `SELECT u.id,w.balance FROM users u JOIN wallets w ON w.user_id=u.id WHERE u.minecraft_uuid=? FOR UPDATE`,
+      [parsed.data.uuid],
+    );
+    const user = users[0];
+    if (!user) return { error: "MINECRAFT_ACCOUNT_NOT_LINKED" as const };
+
+    const [existing] = await connection.execute<(RowDataPacket & { id: string })[]>(
+      `SELECT id FROM shop_purchases WHERE id=? LIMIT 1`, [parsed.data.requestId],
+    );
+    if (existing[0]) return { balance: user.balance, purchaseId: parsed.data.requestId, duplicate: true };
+    if (user.balance < product.starsPrice) return { error: "INSUFFICIENT_STARS" as const, balance: user.balance };
+
+    await connection.execute(`UPDATE wallets SET balance=balance-? WHERE user_id=?`, [product.starsPrice, user.id]);
+    await connection.execute(
+      `INSERT INTO shop_purchases(id,user_id,product_id,stars_spent) VALUES(?,?,?,?)`,
+      [parsed.data.requestId, user.id, product.id, product.starsPrice],
+    );
+    await connection.execute(
+      `INSERT INTO star_transactions(id,user_id,delta,kind,reference_id,metadata_json) VALUES(?,?,?,?,?,?)`,
+      [randomUUID(), user.id, -product.starsPrice, "shop_purchase", `shop:${parsed.data.requestId}`, JSON.stringify({ productId: product.id })],
+    );
+    await connection.execute(
+      `INSERT INTO reward_deliveries(id,purchase_id,user_id,product_id,item_id,item_count) VALUES(?,?,?,?,?,?)`,
+      [randomUUID(), parsed.data.requestId, user.id, product.id, product.itemId, product.itemCount],
+    );
+    return { balance: user.balance - product.starsPrice, purchaseId: parsed.data.requestId, duplicate: false };
+  });
+
+  if ("error" in result) {
+    return reply.code(result.error === "MINECRAFT_ACCOUNT_NOT_LINKED" ? 404 : 409).send(result);
+  }
+  return { ok: true, product: { id: product.id, name: product.name }, ...result };
 });
 
 app.post("/api/internal/rewards/claim", { config: { rateLimit: { max: 300, timeWindow: "1 minute" } } }, async (request, reply) => {

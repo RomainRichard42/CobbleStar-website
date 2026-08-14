@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "theme": {
+    "window": "#0C0918", "header": "#1C1536", "panel": "#120E24",
+    "panelInner": "#0B0A16", "border": "#4D417D", "accent": "#9B8CFF",
+    "cyan": "#79DCE8", "pink": "#E38DBD", "title": "#F0ECFF",
+    "text": "#D8D2ED", "label": "#998EC2", "muted": "#6E648F"
+  },
+  "products": [
+    {
+      "id": "key_nova", "name": "Clé Nova",
+      "description": "Ouvre une caisse Nova au spawn CobbleStar.",
+      "starsPrice": 350, "itemId": "cobblestar_planets:key_nova", "itemCount": 1,
+      "testOnly": false, "category": "keys", "featured": true, "isNew": false,
+      "visual": { "accent": "#9B8CFF", "badge": "NOVA", "previewTexture": "cobblestar_planets:textures/gui/shop/key_nova.png" }
+    },
+    {
+      "id": "key_pulsar", "name": "Clé Pulsar",
+      "description": "Ouvre une caisse Pulsar et son catalogue exclusif.",
+      "starsPrice": 650, "itemId": "cobblestar_planets:key_pulsar", "itemCount": 1,
+      "testOnly": false, "category": "keys", "featured": true, "isNew": false,
+      "visual": { "accent": "#79DCE8", "badge": "PULSAR", "previewTexture": "cobblestar_planets:textures/gui/shop/key_pulsar.png" }
+    },
+    {
+      "id": "key_quasar", "name": "Clé Quasar",
+      "description": "La clé premium des récompenses Quasar.",
+      "starsPrice": 950, "itemId": "cobblestar_planets:key_quasar", "itemCount": 1,
+      "testOnly": false, "category": "keys", "featured": true, "isNew": true,
+      "visual": { "accent": "#E8C979", "badge": "QUASAR", "previewTexture": "cobblestar_planets:textures/gui/shop/key_quasar.png" }
+    },
+    {
+      "id": "pack_nova_4", "name": "Pack Nova ×4",
+      "description": "Quatre clés Nova avec 200 Stars économisées.",
+      "starsPrice": 1200, "itemId": "cobblestar_planets:key_nova", "itemCount": 4,
+      "testOnly": false, "category": "keys", "featured": false, "isNew": true,
+      "visual": { "accent": "#9B8CFF", "badge": "PACK ×4", "previewTexture": "cobblestar_planets:textures/gui/shop/key_nova.png" }
+    },
+    {
+      "id": "pack_pulsar_4", "name": "Pack Pulsar ×4",
+      "description": "Quatre clés Pulsar avec 400 Stars économisées.",
+      "starsPrice": 2200, "itemId": "cobblestar_planets:key_pulsar", "itemCount": 4,
+      "testOnly": false, "category": "keys", "featured": false, "isNew": true,
+      "visual": { "accent": "#79DCE8", "badge": "PACK ×4", "previewTexture": "cobblestar_planets:textures/gui/shop/key_pulsar.png" }
+    },
+    {
+      "id": "pack_quasar_4", "name": "Pack Quasar ×4",
+      "description": "Quatre clés Quasar avec 600 Stars économisées.",
+      "starsPrice": 3200, "itemId": "cobblestar_planets:key_quasar", "itemCount": 4,
+      "testOnly": false, "category": "keys", "featured": false, "isNew": true,
+      "visual": { "accent": "#E8C979", "badge": "PACK ×4", "previewTexture": "cobblestar_planets:textures/gui/shop/key_quasar.png" }
+    },
+    {
+      "id": "delivery_test", "name": "Éclat Stellaire de test",
+      "description": "Objet interne servant à vérifier la livraison API vers serveur.",
+      "starsPrice": 1, "itemId": "minecraft:amethyst_shard", "itemCount": 1,
+      "testOnly": true, "category": "collection", "featured": false, "isNew": false,
+      "visual": { "accent": "#9B8CFF", "badge": "TEST", "previewTexture": "" }
+    }
+  ]
+}

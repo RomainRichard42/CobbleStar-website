@@ -8,6 +8,7 @@ for required in \
   "${project_dir}/out/index.html" \
   "${project_dir}/api/dist/server.js" \
   "${project_dir}/api/migrations/001_initial.sql" \
+  "${project_dir}/api/shop.catalog.json" \
   "${project_dir}/api/package.json" \
   "${project_dir}/api/package-lock.json"; do
   if [[ ! -f "${required}" ]]; then
@@ -24,6 +25,7 @@ cp -a "${project_dir}/api/dist/." "${deploy_dir}/dist/"
 cp -a "${project_dir}/api/migrations/." "${deploy_dir}/migrations/"
 cp "${project_dir}/api/package.json" "${deploy_dir}/package.json"
 cp "${project_dir}/api/package-lock.json" "${deploy_dir}/package-lock.json"
+cp "${project_dir}/api/shop.catalog.json" "${deploy_dir}/shop.catalog.json"
 cp "${project_dir}/api/.env.example" "${deploy_dir}/.env.example"
 cp "${project_dir}/api/README-KINETIC.md" "${deploy_dir}/README-KINETIC.md"
 
