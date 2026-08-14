@@ -58,6 +58,7 @@ const rewardParams = z.object({ id: z.string().uuid() });
 const gamePurchaseBody = z.object({
   uuid: minecraftUuid,
   productId: z.string().regex(/^[a-z0-9_-]{1,64}$/),
+  quantity: z.number().int().min(1).max(64).default(1),
   requestId: z.string().uuid(),
 });
 
@@ -266,6 +267,12 @@ app.post("/api/internal/shop/purchase", { config: { rateLimit: { max: 90, timeWi
   if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
   const product = findShopProduct(parsed.data.productId);
   if (!product || (product.testOnly && !config.ENABLE_TEST_PURCHASES)) return reply.code(404).send({ error: "PRODUCT_NOT_FOUND" });
+  const quantity = parsed.data.quantity;
+  const totalPrice = product.starsPrice * quantity;
+  const totalItemCount = product.itemCount * quantity;
+  if (!Number.isSafeInteger(totalPrice) || totalItemCount > 64) {
+    return reply.code(400).send({ error: "INVALID_QUANTITY" });
+  }
 
   const result = await transaction(async (connection) => {
     const [users] = await connection.execute<(RowDataPacket & { id: string; balance: number })[]>(
@@ -279,28 +286,28 @@ app.post("/api/internal/shop/purchase", { config: { rateLimit: { max: 90, timeWi
       `SELECT id FROM shop_purchases WHERE id=? LIMIT 1`, [parsed.data.requestId],
     );
     if (existing[0]) return { balance: user.balance, purchaseId: parsed.data.requestId, duplicate: true };
-    if (user.balance < product.starsPrice) return { error: "INSUFFICIENT_STARS" as const, balance: user.balance };
+    if (user.balance < totalPrice) return { error: "INSUFFICIENT_STARS" as const, balance: user.balance };
 
-    await connection.execute(`UPDATE wallets SET balance=balance-? WHERE user_id=?`, [product.starsPrice, user.id]);
+    await connection.execute(`UPDATE wallets SET balance=balance-? WHERE user_id=?`, [totalPrice, user.id]);
     await connection.execute(
       `INSERT INTO shop_purchases(id,user_id,product_id,stars_spent) VALUES(?,?,?,?)`,
-      [parsed.data.requestId, user.id, product.id, product.starsPrice],
+      [parsed.data.requestId, user.id, product.id, totalPrice],
     );
     await connection.execute(
       `INSERT INTO star_transactions(id,user_id,delta,kind,reference_id,metadata_json) VALUES(?,?,?,?,?,?)`,
-      [randomUUID(), user.id, -product.starsPrice, "shop_purchase", `shop:${parsed.data.requestId}`, JSON.stringify({ productId: product.id })],
+      [randomUUID(), user.id, -totalPrice, "shop_purchase", `shop:${parsed.data.requestId}`, JSON.stringify({ productId: product.id, quantity })],
     );
     await connection.execute(
       `INSERT INTO reward_deliveries(id,purchase_id,user_id,product_id,item_id,item_count) VALUES(?,?,?,?,?,?)`,
-      [randomUUID(), parsed.data.requestId, user.id, product.id, product.itemId, product.itemCount],
+      [randomUUID(), parsed.data.requestId, user.id, product.id, product.itemId, totalItemCount],
     );
-    return { balance: user.balance - product.starsPrice, purchaseId: parsed.data.requestId, duplicate: false };
+    return { balance: user.balance - totalPrice, purchaseId: parsed.data.requestId, duplicate: false };
   });
 
   if ("error" in result) {
     return reply.code(result.error === "MINECRAFT_ACCOUNT_NOT_LINKED" ? 404 : 409).send(result);
   }
-  return { ok: true, product: { id: product.id, name: product.name }, ...result };
+  return { ok: true, product: { id: product.id, name: product.name }, quantity, ...result };
 });
 
 app.post("/api/internal/rewards/claim", { config: { rateLimit: { max: 300, timeWindow: "1 minute" } } }, async (request, reply) => {
