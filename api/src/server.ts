@@ -261,6 +261,20 @@ app.get("/api/internal/shop/catalog", { config: { rateLimit: { max: 180, timeWin
   };
 });
 
+app.get("/api/internal/shop/entitlements", { config: { rateLimit: { max: 180, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const parsed = z.object({ uuid: minecraftUuid }).safeParse(request.query);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  const [rows] = await pool.execute<(RowDataPacket & { product_id: string })[]>(`
+    SELECT DISTINCT p.product_id
+    FROM shop_purchases p JOIN users u ON u.id=p.user_id
+    WHERE u.minecraft_uuid=?`, [parsed.data.uuid]);
+  const entitlementProducts = new Set(
+    getGameShopCatalog().filter((product) => product.deliveryMode === "entitlement").map((product) => product.id),
+  );
+  return { entitlements: rows.map((row) => row.product_id).filter((id) => entitlementProducts.has(id)) };
+});
+
 app.post("/api/internal/shop/purchase", { config: { rateLimit: { max: 90, timeWindow: "1 minute" } } }, async (request, reply) => {
   if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
   const parsed = gamePurchaseBody.safeParse(request.body);
