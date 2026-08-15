@@ -8,6 +8,13 @@
   },
   "products": [
     {
+      "id": "battlepass_premium", "name": "Pass Dresseur Premium",
+      "description": "Débloque la voie Premium de la saison actuelle et toutes ses récompenses déjà atteintes.",
+      "starsPrice": 1200, "itemId": "minecraft:nether_star", "itemCount": 1, "deliveryMode": "entitlement",
+      "testOnly": false, "category": "collection", "featured": true, "isNew": true,
+      "visual": { "accent": "#E38DBD", "badge": "SAISON", "previewTexture": "" }
+    },
+    {
       "id": "key_nova", "name": "Clé Nova",
       "description": "Ouvre une caisse Nova au spawn CobbleStar.",
       "starsPrice": 350, "itemId": "cobblestar_planets:key_nova", "itemCount": 1,

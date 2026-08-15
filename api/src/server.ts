@@ -297,10 +297,12 @@ app.post("/api/internal/shop/purchase", { config: { rateLimit: { max: 90, timeWi
       `INSERT INTO star_transactions(id,user_id,delta,kind,reference_id,metadata_json) VALUES(?,?,?,?,?,?)`,
       [randomUUID(), user.id, -totalPrice, "shop_purchase", `shop:${parsed.data.requestId}`, JSON.stringify({ productId: product.id, quantity })],
     );
-    await connection.execute(
-      `INSERT INTO reward_deliveries(id,purchase_id,user_id,product_id,item_id,item_count) VALUES(?,?,?,?,?,?)`,
-      [randomUUID(), parsed.data.requestId, user.id, product.id, product.itemId, totalItemCount],
-    );
+    if (product.deliveryMode === "item") {
+      await connection.execute(
+        `INSERT INTO reward_deliveries(id,purchase_id,user_id,product_id,item_id,item_count) VALUES(?,?,?,?,?,?)`,
+        [randomUUID(), parsed.data.requestId, user.id, product.id, product.itemId, totalItemCount],
+      );
+    }
     return { balance: user.balance - totalPrice, purchaseId: parsed.data.requestId, duplicate: false };
   });
 

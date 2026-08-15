@@ -15,6 +15,7 @@ const productSchema = z.object({
   starsPrice: z.number().int().positive().max(10_000_000),
   itemId: z.string().regex(/^[a-z0-9_.-]+:[a-z0-9_./-]+$/),
   itemCount: z.number().int().min(1).max(64),
+  deliveryMode: z.enum(["item", "entitlement"]).default("item"),
   testOnly: z.boolean().default(false),
   category: z.enum(["keys", "cosmetics", "collection", "companions", "boosters", "ranks"]),
   featured: z.boolean().default(false),
