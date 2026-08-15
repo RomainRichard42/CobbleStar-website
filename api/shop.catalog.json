@@ -15,6 +15,27 @@
       "visual": { "accent": "#E38DBD", "badge": "SAISON", "previewTexture": "" }
     },
     {
+      "id": "club_custom_logo", "name": "Logo de club sur mesure",
+      "description": "Création et intégration manuelle de votre logo. Après l’achat, ouvrez un ticket Discord avec votre preuve et votre idée.",
+      "starsPrice": 900, "itemId": "minecraft:painting", "itemCount": 1, "deliveryMode": "entitlement",
+      "testOnly": false, "category": "cosmetics", "featured": true, "isNew": true,
+      "visual": { "accent": "#9B8CFF", "badge": "SUR MESURE", "previewTexture": "cobblestar_planets:textures/gui/menu/icons/progression.png" }
+    },
+    {
+      "id": "custom_chat_tag_3", "name": "Tag chat personnalisé · 3 joueurs",
+      "description": "Un tag texte ou illustré personnalisé pour trois comptes. Livraison manuelle après validation via ticket Discord.",
+      "starsPrice": 450, "itemId": "minecraft:name_tag", "itemCount": 1, "deliveryMode": "entitlement",
+      "testOnly": false, "category": "cosmetics", "featured": false, "isNew": true,
+      "visual": { "accent": "#79DCE8", "badge": "3 JOUEURS", "previewTexture": "cobblestar_planets:textures/gui/menu/icons/guides.png" }
+    },
+    {
+      "id": "custom_chat_tag_club", "name": "Tag chat personnalisé · club entier",
+      "description": "Le même tag personnalisé pour tous les membres actuels et futurs du club. Livraison manuelle via ticket Discord.",
+      "starsPrice": 1400, "itemId": "minecraft:name_tag", "itemCount": 1, "deliveryMode": "entitlement",
+      "testOnly": false, "category": "cosmetics", "featured": true, "isNew": true,
+      "visual": { "accent": "#E38DBD", "badge": "CLUB ENTIER", "previewTexture": "cobblestar_planets:textures/gui/menu/icons/guides.png" }
+    },
+    {
       "id": "key_nova", "name": "Clé Nova",
       "description": "Ouvre une caisse Nova au spawn CobbleStar.",
       "starsPrice": 350, "itemId": "cobblestar_planets:key_nova", "itemCount": 1,
