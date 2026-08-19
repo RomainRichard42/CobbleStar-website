@@ -63,3 +63,23 @@ L'espace compte peut rester fermé avec `NEXT_PUBLIC_ACCOUNTS_ENABLED=false`.
 Le flux API et le mod sont néanmoins prêts. Le mod serveur se construit dans
 GitHub Actions à chaque push sur `main`; son JAR est disponible dans l'artefact
 `cobblestar-link-fabric-1.21.1`. Voir [`minecraft-mod/README.md`](minecraft-mod/README.md).
+
+## Votes
+
+Les annuaires sont configurés dans `api/vote-sites.json`. Pour chacun, renseigner
+son vrai nom, son URL (le marqueur `{username}` est remplacé par le pseudo lié),
+son délai en minutes, puis passer `enabled` à `true`.
+
+La validation d'un annuaire ou de son adaptateur appelle
+`POST /api/internal/votes/record` avec la clé serveur et un corps de la forme :
+
+```json
+{
+  "siteId": "portail_1",
+  "username": "PseudoMinecraft",
+  "externalReference": "identifiant-unique-du-vote"
+}
+```
+
+L'API applique le délai, tire 1 ou 2 clés, alimente le classement du mois et
+conserve la livraison jusqu'à la prochaine connexion du joueur.

@@ -1,0 +1,31 @@
+{
+  "sites": [
+    {
+      "id": "portail_1",
+      "name": "Premier portail",
+      "url": "",
+      "intervalMinutes": 90,
+      "enabled": false,
+      "accent": "pink",
+      "icon": "✦"
+    },
+    {
+      "id": "portail_2",
+      "name": "Deuxième portail",
+      "url": "",
+      "intervalMinutes": 120,
+      "enabled": false,
+      "accent": "cyan",
+      "icon": "◉"
+    },
+    {
+      "id": "portail_3",
+      "name": "Troisième portail",
+      "url": "",
+      "intervalMinutes": 180,
+      "enabled": false,
+      "accent": "yellow",
+      "icon": "⌁"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { randomUUID, timingSafeEqual } from "node:crypto";
+import { randomInt, randomUUID, timingSafeEqual } from "node:crypto";
 import Fastify, { FastifyRequest } from "fastify";
 import cookie from "@fastify/cookie";
 import cors from "@fastify/cors";
@@ -13,6 +13,7 @@ import { pool, transaction } from "./db.js";
 import { applyMigrations } from "./migrations.js";
 import { digest, hashPassword, linkCode, normalizeEmail, normalizeLinkCode, randomToken, verifyPassword } from "./security.js";
 import { findShopProduct, getGameShopCatalog, getShopTheme } from "./shop.js";
+import { findVoteSite, getVoteSites, playerVoteUrl } from "./votes.js";
 
 type UserRow = RowDataPacket & {
   id: string; email: string; password_hash: string; minecraft_username: string | null;
@@ -61,6 +62,15 @@ const gamePurchaseBody = z.object({
   quantity: z.number().int().min(1).max(64).default(1),
   requestId: z.string().uuid(),
 });
+const voteRecordBody = z.object({
+  siteId: z.string().regex(/^[a-z0-9_-]{1,64}$/),
+  externalReference: z.string().trim().min(3).max(128),
+  uuid: minecraftUuid.optional(),
+  username: z.string().regex(/^[A-Za-z0-9_]{3,16}$/).optional(),
+}).refine((value) => value.uuid || value.username, "uuid or username is required");
+const voteRewardQuery = z.object({ uuid: minecraftUuid });
+const voteRewardCompleteBody = z.object({ uuid: minecraftUuid, leaseToken: z.string().min(32).max(200) });
+const voteRewardParams = z.object({ id: z.string().uuid() });
 
 function publicUser(user: UserRow) {
   return { id: user.id, email: user.email, minecraft: { username: user.minecraft_username, uuid: user.minecraft_uuid, linked: Boolean(user.minecraft_linked_at) } };
@@ -161,6 +171,62 @@ app.post("/api/auth/logout", async (request, reply) => {
 
 app.get("/api/me", { preHandler: requireAccount }, async (request) => ({ user: publicUser(request.account!) }));
 
+app.get("/api/votes", async (request) => {
+  const account = await loadSession(request);
+  const [rankingRows] = await pool.execute<(RowDataPacket & {
+    user_id: string; username: string | null; votes: number; keys_won: number;
+  })[]>(`
+    SELECT v.user_id,u.minecraft_username AS username,COUNT(*) AS votes,COALESCE(SUM(v.reward_keys),0) AS keys_won
+    FROM vote_claims v JOIN users u ON u.id=v.user_id
+    WHERE v.voted_at>=DATE_FORMAT(UTC_TIMESTAMP(),'%Y-%m-01')
+    GROUP BY v.user_id,u.minecraft_username
+    ORDER BY votes DESC,MAX(v.voted_at) ASC,u.minecraft_username ASC
+    LIMIT 1000`);
+
+  const latestBySite = new Map<string, Date>();
+  if (account) {
+    const [latest] = await pool.execute<(RowDataPacket & { vote_site: string; last_vote: Date })[]>(`
+      SELECT vote_site,MAX(voted_at) AS last_vote FROM vote_claims
+      WHERE user_id=? GROUP BY vote_site`, [account.id]);
+    for (const row of latest) latestBySite.set(row.vote_site, new Date(row.last_vote));
+  }
+
+  const now = Date.now();
+  const sites = getVoteSites().map((site) => {
+    const lastVote = latestBySite.get(site.id);
+    const availableAt = lastVote ? new Date(lastVote.getTime() + site.intervalMinutes * 60_000) : null;
+    return {
+      id: site.id, name: site.name, icon: site.icon, accent: site.accent,
+      intervalMinutes: site.intervalMinutes, rewardMin: 1, rewardMax: 2,
+      enabled: site.enabled && Boolean(site.url),
+      url: account?.minecraft_linked_at ? playerVoteUrl(site, account.minecraft_username) : null,
+      lastVoteAt: lastVote?.toISOString() ?? null,
+      availableAt: availableAt?.toISOString() ?? null,
+      available: Boolean(account?.minecraft_linked_at && site.enabled && site.url && (!availableAt || availableAt.getTime() <= now)),
+    };
+  });
+
+  const leaderboard = rankingRows.slice(0, 20).map((row, index) => ({
+    rank: index + 1, username: row.username ?? "Joueur", votes: Number(row.votes), keysWon: Number(row.keys_won),
+  }));
+  const playerIndex = account ? rankingRows.findIndex((row) => row.user_id === account.id) : -1;
+  const playerRow = playerIndex >= 0 ? rankingRows[playerIndex] : null;
+  const date = new Date();
+  const resetAt = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth() + 1, 1)).toISOString();
+  return {
+    resetAt,
+    sites,
+    leaderboard,
+    player: account ? {
+      username: account.minecraft_username,
+      linked: Boolean(account.minecraft_linked_at),
+      votes: playerRow ? Number(playerRow.votes) : 0,
+      keysWon: playerRow ? Number(playerRow.keys_won) : 0,
+      rank: playerIndex >= 0 ? playerIndex + 1 : null,
+    } : null,
+  };
+});
+
 app.get("/api/wallet", { preHandler: requireAccount }, async (request) => {
   const [rows] = await pool.execute<(RowDataPacket & { balance: number })[]>(`SELECT balance FROM wallets WHERE user_id=? LIMIT 1`, [request.account!.id]);
   return { balance: rows[0]?.balance ?? 0, currency: "Stars" };
@@ -259,6 +325,73 @@ app.get("/api/internal/shop/catalog", { config: { rateLimit: { max: 180, timeWin
     theme: getShopTheme(),
     products: getGameShopCatalog().filter((product) => !product.testOnly || config.ENABLE_TEST_PURCHASES),
   };
+});
+
+app.post("/api/internal/votes/record", { config: { rateLimit: { max: 180, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const parsed = voteRecordBody.safeParse(request.body);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  const site = findVoteSite(parsed.data.siteId);
+  if (!site || !site.enabled || !site.url) return reply.code(404).send({ error: "VOTE_SITE_DISABLED" });
+  const [users] = parsed.data.uuid
+    ? await pool.execute<UserRow[]>(`SELECT * FROM users WHERE minecraft_uuid=? LIMIT 1`, [parsed.data.uuid])
+    : await pool.execute<UserRow[]>(`SELECT * FROM users WHERE LOWER(minecraft_username)=LOWER(?) AND minecraft_linked_at IS NOT NULL LIMIT 1`, [parsed.data.username!]);
+  const user = users[0];
+  if (!user) return reply.code(404).send({ error: "MINECRAFT_ACCOUNT_NOT_LINKED" });
+  const rewardKeys = randomInt(1, 3);
+  try {
+    const claim = await transaction(async (connection) => {
+      await connection.execute(`SELECT id FROM users WHERE id=? FOR UPDATE`, [user.id]);
+      const [latest] = await connection.execute<(RowDataPacket & { voted_at: Date })[]>(`
+        SELECT voted_at FROM vote_claims WHERE user_id=? AND vote_site=?
+        ORDER BY voted_at DESC LIMIT 1 FOR UPDATE`, [user.id, site.id]);
+      if (latest[0] && Date.now() - new Date(latest[0].voted_at).getTime() < site.intervalMinutes * 60_000)
+        return null;
+      const id = randomUUID();
+      await connection.execute(`
+        INSERT INTO vote_claims(id,user_id,vote_site,external_reference,reward_keys,reward_status,voted_at)
+        VALUES(?,?,?,?,?,'pending',UTC_TIMESTAMP())`,
+      [id, user.id, site.id, parsed.data.externalReference, rewardKeys]);
+      return { id };
+    });
+    if (!claim) return reply.code(409).send({ error: "VOTE_COOLDOWN_ACTIVE" });
+    return reply.code(201).send({ ok: true, claimId: claim.id, rewardKeys, username: user.minecraft_username });
+  } catch (error) {
+    if ((error as { code?: string }).code === "ER_DUP_ENTRY") return reply.code(409).send({ error: "VOTE_ALREADY_RECORDED" });
+    throw error;
+  }
+});
+
+app.get("/api/internal/votes/pending", { config: { rateLimit: { max: 300, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const parsed = voteRewardQuery.safeParse(request.query);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  const leaseToken = randomToken();
+  const reward = await transaction(async (connection) => {
+    const [rows] = await connection.execute<(RowDataPacket & { id: string; vote_site: string; reward_keys: number; voted_at: Date })[]>(`
+      SELECT v.id,v.vote_site,v.reward_keys,v.voted_at
+      FROM vote_claims v JOIN users u ON u.id=v.user_id
+      WHERE u.minecraft_uuid=? AND (v.reward_status='pending' OR (v.reward_status='leased' AND v.lease_expires_at<UTC_TIMESTAMP()))
+      ORDER BY v.voted_at ASC LIMIT 1 FOR UPDATE`, [parsed.data.uuid]);
+    if (!rows[0]) return null;
+    await connection.execute(`UPDATE vote_claims SET reward_status='leased',lease_token_hash=?,lease_expires_at=DATE_ADD(UTC_TIMESTAMP(),INTERVAL 2 MINUTE) WHERE id=?`, [digest(leaseToken), rows[0].id]);
+    return rows[0];
+  });
+  if (!reward) return reply.code(204).send();
+  return { reward: { id: reward.id, siteId: reward.vote_site, keys: reward.reward_keys, votedAt: reward.voted_at, leaseToken } };
+});
+
+app.post("/api/internal/votes/:id/complete", { config: { rateLimit: { max: 300, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const params = voteRewardParams.safeParse(request.params);
+  const body = voteRewardCompleteBody.safeParse(request.body);
+  if (!params.success || !body.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  const [result] = await pool.execute<ResultSetHeader>(`
+    UPDATE vote_claims v JOIN users u ON u.id=v.user_id
+    SET v.reward_status='delivered',v.delivered_at=UTC_TIMESTAMP(),v.lease_token_hash=NULL,v.lease_expires_at=NULL
+    WHERE v.id=? AND u.minecraft_uuid=? AND v.reward_status='leased' AND v.lease_token_hash=?`, [params.data.id, body.data.uuid, digest(body.data.leaseToken)]);
+  if (result.affectedRows !== 1) return reply.code(409).send({ error: "VOTE_REWARD_NOT_PENDING" });
+  return { delivered: true };
 });
 
 app.get("/api/internal/shop/entitlements", { config: { rateLimit: { max: 180, timeWindow: "1 minute" } } }, async (request, reply) => {

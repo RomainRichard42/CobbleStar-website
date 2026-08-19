@@ -24,6 +24,12 @@ La clé Minecraft peut être générée sans l'afficher dans un service tiers av
 
 Ne jamais publier le fichier `.env`, les mots de passe ou les clés dans GitHub.
 
+## Annuaires de vote
+
+Éditer `vote-sites.json` avec les URL réelles et activer uniquement les portails
+dont le webhook est relié à `/api/internal/votes/record`. Le champ URL accepte
+`{username}` pour préremplir le pseudo du compte Minecraft lié.
+
 ## Vérification
 
 Une fois démarré, `GET /api/health` doit renvoyer un état `ok`. Le domaine public doit être envoyé par le reverse proxy Kinetic vers `23.109.138.130:25577`.
