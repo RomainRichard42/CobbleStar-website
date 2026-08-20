@@ -36,7 +36,13 @@ await app.register(helmet, {
 });
 await app.register(cookie, { secret: config.COOKIE_SECRET });
 await app.register(cors, { origin: config.SITE_ORIGIN, credentials: true, methods: ["GET", "POST", "PUT", "DELETE"] });
-await app.register(rateLimit, { max: 120, timeWindow: "1 minute" });
+await app.register(rateLimit, {
+  max: 120,
+  timeWindow: "1 minute",
+  // Un chargement de page récupère beaucoup d'images, CSS et scripts. Seules les
+  // routes API doivent consommer le quota associé à l'adresse du joueur.
+  allowList: (request) => !request.url.startsWith("/api/"),
+});
 
 const sessionCookie = isProduction ? "__Host-cobblestar_session" : "cobblestar_session";
 const registerBody = z.object({ email: z.string().email().max(254), password: z.string().min(8).max(128), minecraftUsername: z.string().regex(/^[A-Za-z0-9_]{3,16}$/) });
@@ -171,6 +177,12 @@ function serverKeyFrom(request: FastifyRequest) {
 app.get("/api/health", async () => {
   await pool.query("SELECT 1");
   return { status: "ok", service: "cobblestar-api" };
+});
+
+app.get("/favicon.ico", { config: { rateLimit: false } }, async (_request, reply) => {
+  return reply.header("Cache-Control", "public, max-age=86400")
+    .header("Cross-Origin-Resource-Policy", "cross-origin")
+    .redirect("/favicon.svg", 302);
 });
 
 app.get("/api/minecraft-profile", { config: { rateLimit: { max: 30, timeWindow: "1 minute" } } }, async (request, reply) => {
@@ -641,6 +653,11 @@ await app.register(staticFiles, {
   prefix: "/",
   index: ["index.html"],
   wildcard: true,
+  setHeaders(response) {
+    // Les icônes et images publiques peuvent être demandées par le lecteur JSON
+    // interne de Firefox, dont l'origine diffère de celle du site.
+    response.header("Cross-Origin-Resource-Policy", "cross-origin");
+  },
 });
 
 app.setNotFoundHandler((request, reply) => {
@@ -649,8 +666,14 @@ app.setNotFoundHandler((request, reply) => {
 });
 
 app.setErrorHandler((error, _request, reply) => {
-  app.log.error(error);
-  reply.code(500).send({ error: "INTERNAL_ERROR" });
+  const details = error as { statusCode?: number; code?: string; message?: string };
+  const status = details.statusCode && details.statusCode >= 400 && details.statusCode <= 599 ? details.statusCode : 500;
+  const message = details.message ?? "Unexpected error";
+  if (status >= 500) app.log.error(error);
+  else app.log.warn({ statusCode: status, message }, "request rejected");
+  if (status === 429) return reply.code(429).send({ error: "TOO_MANY_REQUESTS", message });
+  if (status < 500) return reply.code(status).send({ error: details.code ?? "REQUEST_REJECTED", message });
+  return reply.code(500).send({ error: "INTERNAL_ERROR" });
 });
 
 await applyMigrations();
