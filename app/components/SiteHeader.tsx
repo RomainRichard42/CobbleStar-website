@@ -90,6 +90,7 @@ export default function SiteHeader() {
           </Link>
           <nav aria-label="Navigation principale">
             <Link className={pathname === "/" ? "active" : undefined} href="/">Accueil</Link>
+            <Link className={pathname.startsWith("/actualites") ? "active" : undefined} href="/actualites/">Actualités</Link>
             <Link className={pathname.startsWith("/boutique") ? "active" : undefined} href="/boutique/">Boutique</Link>
             <Link className={pathname.startsWith("/vote") ? "active" : undefined} href="/vote/">Votes</Link>
             <Link className={pathname.startsWith("/wiki") ? "active" : undefined} href="/wiki/">Wiki</Link>
@@ -98,6 +99,7 @@ export default function SiteHeader() {
             <summary aria-label="Ouvrir le menu"><span /><span /><span /><small>Menu</small></summary>
             <div>
               <Link className={pathname === "/" ? "active" : undefined} href="/">Accueil</Link>
+              <Link className={pathname.startsWith("/actualites") ? "active" : undefined} href="/actualites/">Actualités</Link>
               <Link className={pathname.startsWith("/boutique") ? "active" : undefined} href="/boutique/">Boutique</Link>
               <Link className={pathname.startsWith("/vote") ? "active" : undefined} href="/vote/">Votes</Link>
               <Link className={pathname.startsWith("/wiki") ? "active" : undefined} href="/wiki/">Wiki</Link>

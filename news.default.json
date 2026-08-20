@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "title": "Actualités CobbleStar",
+  "subtitle": "Les mises à jour du serveur, du modpack et de la communauté.",
+  "articles": [
+    {
+      "id": "wiki-synchronise",
+      "slug": "wiki-synchronise",
+      "title": "Le wiki CobbleStar arrive en jeu",
+      "excerpt": "Le même contenu est désormais consultable sur le site et directement depuis Minecraft avec /wiki.",
+      "content": "Le wiki CobbleStar devient la source officielle pour comprendre le serveur. Les articles publiés depuis le site sont synchronisés avec Minecraft.\n\nTu peux parcourir les guides par branche, rechercher une information et retrouver les mêmes explications en jeu avec /wiki.\n\nLes premiers contenus couvrent notamment les quêtes, la pension Pokémon et les combats classés.",
+      "category": "NOUVEAUTÉ",
+      "accent": "cyan",
+      "image": "/cobblemon-team.webp",
+      "publishedAt": "2026-08-20T10:00:00.000Z",
+      "published": true,
+      "featured": true
+    },
+    {
+      "id": "pension-pokemon",
+      "slug": "pension-pokemon",
+      "title": "La pension Pokémon ouvre ses portes",
+      "excerpt": "Confie deux Pokémon compatibles, récupère leurs œufs et progresse dans le métier Éleveur.",
+      "content": "La pension Pokémon est maintenant accessible auprès de son PNJ dédié. Les parents quittent temporairement ton équipe ou ton PC, puis te sont rendus quand tu le souhaites.\n\nUn œuf est produit à la fin du cycle lorsque les deux Pokémon sont compatibles. Le métier Éleveur permet ensuite de réduire progressivement le temps nécessaire.\n\nToutes les règles de compatibilité, de transmission et d’éclosion sont détaillées dans le wiki.",
+      "category": "GAMEPLAY",
+      "accent": "pink",
+      "image": "/cobblemon-lakeside.webp",
+      "publishedAt": "2026-08-18T16:00:00.000Z",
+      "published": true,
+      "featured": false
+    },
+    {
+      "id": "launcher-modpack",
+      "slug": "launcher-modpack",
+      "title": "Le launcher gère maintenant le modpack",
+      "excerpt": "Java, Fabric et les nouvelles versions du pack sont installés automatiquement avant de jouer.",
+      "content": "Le launcher CobbleStar prépare désormais l’environnement de jeu sans manipulation manuelle. Il installe Java 21, Minecraft 1.21.1 et Fabric dans un dossier isolé.\n\nQuand une nouvelle version du modpack est publiée, elle est détectée au prochain lancement. Seuls les fichiers gérés par CobbleStar sont remplacés : tes mondes, captures et réglages personnels restent intacts.\n\nLa progression de chaque étape est visible directement dans le launcher.",
+      "category": "LAUNCHER",
+      "accent": "gold",
+      "image": "/cobblemon-desert.webp",
+      "publishedAt": "2026-08-15T09:00:00.000Z",
+      "published": true,
+      "featured": false
+    }
+  ]
+}

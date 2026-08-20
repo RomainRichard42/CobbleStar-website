@@ -10,7 +10,7 @@
     "build": "next build",
     "build:site": "next build",
     "build:api": "npm --prefix api run build",
-    "package:kinetic": "bash scripts/package-kinetic.sh",
+    "package:kinetic": "node scripts/package-kinetic.mjs",
     "ci": "npm run lint && npm run build:site && npm run build:api && npm run package:kinetic",
     "lint": "eslint app"
   },

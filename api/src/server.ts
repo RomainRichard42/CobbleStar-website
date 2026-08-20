@@ -103,6 +103,25 @@ const wikiDocumentBody = z.object({
     blocks: z.array(wikiBlock).max(120),
   })).max(500),
 });
+const newsArticle = z.object({
+  id: z.string().regex(/^[a-z0-9_-]{1,96}$/),
+  slug: z.string().regex(/^[a-z0-9_-]{1,96}$/),
+  title: z.string().trim().min(1).max(140),
+  excerpt: z.string().trim().min(1).max(360),
+  content: z.string().trim().min(1).max(20_000),
+  category: z.string().trim().min(1).max(32),
+  accent: z.enum(["cyan", "pink", "gold", "mint", "violet"]),
+  image: z.string().max(240),
+  publishedAt: z.string().datetime(),
+  published: z.boolean(),
+  featured: z.boolean(),
+});
+const newsDocumentBody = z.object({
+  schemaVersion: z.number().int().min(1).max(10),
+  title: z.string().trim().min(1).max(96),
+  subtitle: z.string().trim().max(240),
+  articles: z.array(newsArticle).max(200),
+});
 const wikiAdminBody = z.object({ email: z.string().email().max(254).transform(normalizeEmail) });
 
 function publicUser(user: UserRow) {
@@ -142,6 +161,23 @@ async function wikiSlot(slot: "draft" | "published") {
     `SELECT content_json,version,updated_at FROM wiki_documents WHERE slot=? LIMIT 1`, [slot]);
   const row = rows[0];
   if (!row) return { content: await defaultWiki(), version: 1, updatedAt: null };
+  const content = typeof row.content_json === "string" ? JSON.parse(row.content_json) : row.content_json;
+  return { content, version: row.version, updatedAt: row.updated_at };
+}
+
+async function defaultNews() {
+  try {
+    return JSON.parse(await readFile(join(process.cwd(), "news.default.json"), "utf8")) as z.infer<typeof newsDocumentBody>;
+  } catch {
+    return JSON.parse(await readFile(join(process.cwd(), "..", "news.default.json"), "utf8")) as z.infer<typeof newsDocumentBody>;
+  }
+}
+
+async function newsSlot(slot: "draft" | "published") {
+  const [rows] = await pool.execute<(RowDataPacket & { content_json: unknown; version: number; updated_at: Date })[]>(
+    `SELECT content_json,version,updated_at FROM news_documents WHERE slot=? LIMIT 1`, [slot]);
+  const row = rows[0];
+  if (!row) return { content: await defaultNews(), version: 1, updatedAt: null };
   const content = typeof row.content_json === "string" ? JSON.parse(row.content_json) : row.content_json;
   return { content, version: row.version, updatedAt: row.updated_at };
 }
@@ -187,7 +223,7 @@ app.get("/api/health", async () => {
 app.get("/favicon.ico", { config: { rateLimit: false } }, async (_request, reply) => {
   return reply.header("Cache-Control", "public, max-age=86400")
     .header("Cross-Origin-Resource-Policy", "cross-origin")
-    .redirect("/favicon.svg", 302);
+    .redirect("/cobblestar-logo.png", 302);
 });
 
 app.get("/api/minecraft-profile", { config: { rateLimit: { max: 30, timeWindow: "1 minute" } } }, async (request, reply) => {
@@ -322,6 +358,66 @@ app.get("/api/internal/wiki", { config: { rateLimit: { max: 300, timeWindow: "1 
   const wiki = await wikiSlot("published");
   reply.header("Cache-Control", "private, max-age=60");
   return wiki;
+});
+
+app.get("/api/news", { config: { rateLimit: { max: 240, timeWindow: "1 minute" } } }, async (_request, reply) => {
+  const news = await newsSlot("published");
+  const parsed = newsDocumentBody.parse(news.content);
+  const content = { ...parsed, articles: parsed.articles.filter((article) => article.published)
+    .sort((left, right) => Number(right.featured) - Number(left.featured) || right.publishedAt.localeCompare(left.publishedAt)) };
+  reply.header("Cache-Control", "public, max-age=60, stale-while-revalidate=300");
+  return { ...news, content };
+});
+
+app.get("/api/news/admin", async (request, reply) => {
+  const account = await loadSession(request);
+  if (!account) return reply.code(401).send({ error: "AUTH_REQUIRED" });
+  if (!(await isWikiAdmin(account))) return reply.code(403).send({ error: "ADMIN_REQUIRED" });
+  const [draft, published] = await Promise.all([newsSlot("draft"), newsSlot("published")]);
+  return { draft, publishedVersion: published.version };
+});
+
+app.put("/api/news/admin", { config: { rateLimit: { max: 30, timeWindow: "1 minute" } } }, async (request, reply) => {
+  const account = await loadSession(request);
+  if (!account) return reply.code(401).send({ error: "AUTH_REQUIRED" });
+  if (!(await isWikiAdmin(account))) return reply.code(403).send({ error: "ADMIN_REQUIRED" });
+  const parsed = newsDocumentBody.safeParse(request.body);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_NEWS", details: parsed.error.flatten() });
+  const current = await newsSlot("draft");
+  const version = current.version + 1;
+  await pool.execute(`INSERT INTO news_documents(slot,content_json,version,updated_by) VALUES('draft',?,?,?) ON DUPLICATE KEY UPDATE content_json=VALUES(content_json),version=VALUES(version),updated_by=VALUES(updated_by)`, [JSON.stringify(parsed.data), version, account.id]);
+  return { saved: true, version };
+});
+
+app.post("/api/news/admin/publish", { config: { rateLimit: { max: 10, timeWindow: "1 minute" } } }, async (request, reply) => {
+  const account = await loadSession(request);
+  if (!account) return reply.code(401).send({ error: "AUTH_REQUIRED" });
+  if (!(await isWikiAdmin(account))) return reply.code(403).send({ error: "ADMIN_REQUIRED" });
+  const draft = await newsSlot("draft");
+  const parsed = newsDocumentBody.safeParse(draft.content);
+  if (!parsed.success) return reply.code(409).send({ error: "INVALID_DRAFT" });
+  const published = await newsSlot("published");
+  const version = published.version + 1;
+  await pool.execute(`INSERT INTO news_documents(slot,content_json,version,updated_by) VALUES('published',?,?,?) ON DUPLICATE KEY UPDATE content_json=VALUES(content_json),version=VALUES(version),updated_by=VALUES(updated_by)`, [JSON.stringify(parsed.data), version, account.id]);
+  return { published: true, version };
+});
+
+app.get("/api/news/:slug", { config: { rateLimit: { max: 240, timeWindow: "1 minute" } } }, async (request, reply) => {
+  const parsedParams = z.object({ slug: z.string().regex(/^[a-z0-9_-]{1,96}$/) }).safeParse(request.params);
+  if (!parsedParams.success) return reply.code(400).send({ error: "INVALID_SLUG" });
+  const news = newsDocumentBody.parse((await newsSlot("published")).content);
+  const article = news.articles.find((candidate) => candidate.published && candidate.slug === parsedParams.data.slug);
+  if (!article) return reply.code(404).send({ error: "NEWS_NOT_FOUND" });
+  reply.header("Cache-Control", "public, max-age=60, stale-while-revalidate=300");
+  return { article };
+});
+
+app.get("/api/internal/news", { config: { rateLimit: { max: 300, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const news = await newsSlot("published");
+  const parsed = newsDocumentBody.parse(news.content);
+  return { ...news, content: { ...parsed, articles: parsed.articles.filter((article) => article.published)
+    .sort((left, right) => Number(right.featured) - Number(left.featured) || right.publishedAt.localeCompare(left.publishedAt)) } };
 });
 
 app.get("/api/votes", async (request) => {
