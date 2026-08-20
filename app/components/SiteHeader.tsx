@@ -92,6 +92,7 @@ export default function SiteHeader() {
             <Link className={pathname === "/" ? "active" : undefined} href="/">Accueil</Link>
             <Link className={pathname.startsWith("/boutique") ? "active" : undefined} href="/boutique/">Boutique</Link>
             <Link className={pathname.startsWith("/vote") ? "active" : undefined} href="/vote/">Votes</Link>
+            <Link className={pathname.startsWith("/wiki") ? "active" : undefined} href="/wiki/">Wiki</Link>
           </nav>
           <details className="mobile-menu">
             <summary aria-label="Ouvrir le menu"><span /><span /><span /><small>Menu</small></summary>
@@ -99,6 +100,7 @@ export default function SiteHeader() {
               <Link className={pathname === "/" ? "active" : undefined} href="/">Accueil</Link>
               <Link className={pathname.startsWith("/boutique") ? "active" : undefined} href="/boutique/">Boutique</Link>
               <Link className={pathname.startsWith("/vote") ? "active" : undefined} href="/vote/">Votes</Link>
+              <Link className={pathname.startsWith("/wiki") ? "active" : undefined} href="/wiki/">Wiki</Link>
             </div>
           </details>
           <a className="nav-download" href={downloadUrl} download aria-label="Télécharger le launcher CobbleStar">

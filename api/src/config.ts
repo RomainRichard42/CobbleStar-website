@@ -20,6 +20,7 @@ export const config = z.object({
   COOKIE_SECRET: generatedSecret,
   MINECRAFT_SERVER_KEY: generatedSecret,
   ENABLE_TEST_PURCHASES: bool,
+  WIKI_ADMIN_EMAILS: z.string().default("romain.richard42400@gmail.com"),
 }).parse(process.env);
 
 export const isProduction = config.NODE_ENV === "production";

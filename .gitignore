@@ -17,3 +17,5 @@ minecraft-mod/run/
 
 *.log
 .DS_Store
+.asset-extract/
+.chrome-*/
