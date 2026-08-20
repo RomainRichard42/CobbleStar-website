@@ -5,8 +5,8 @@ export const metadata: Metadata = {
   title: "CobbleStar — Bêta Minecraft Cobblemon",
   description: "CobbleStar prépare sa bêta privée sur Minecraft 1.21.1 Fabric. Suis l'ouverture progressive du serveur Cobblemon.",
   icons: {
-    icon: "/cobblestar-logo.png",
-    shortcut: "/cobblestar-logo.png",
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
   },
 };
 
