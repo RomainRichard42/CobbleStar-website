@@ -1,8 +1,11 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import { ACCOUNT_FAQ } from "../lib/faq";
 import PageHero from "../components/PageHero";
 import SiteFooter from "../components/SiteFooter";
+import FaqSection from "../components/FaqSection";
+import FaqStructuredData from "../components/FaqStructuredData";
 
 type Account = {
   id: string;
@@ -43,6 +46,8 @@ function ClosedAccountPage() {
   return <main>
     <PageHero eyebrow="ESPACE JOUEUR" title="Bientôt disponible." accent="La bêta d’abord." description="Les comptes CobbleStar ouvriront progressivement après les premiers tests du serveur." badge="FERMÉ" />
     <section className="account-page"><div className="opening-note"><span>BÊTA PRIVÉE</span><p>L’inscription et la liaison Minecraft sont prêtes, mais restent désactivées pour le public.</p></div></section>
+    <FaqSection title="Questions sur les comptes" id="faq-compte" items={ACCOUNT_FAQ} />
+    <FaqStructuredData faqItems={ACCOUNT_FAQ} pageUrl="/compte/" />
     <SiteFooter />
   </main>;
 }
@@ -196,6 +201,8 @@ function AccountPortal() {
         </div>
       </div>
     </section>
+    <FaqSection title="Questions sur les comptes" id="faq-compte" items={ACCOUNT_FAQ} />
+    <FaqStructuredData faqItems={ACCOUNT_FAQ} pageUrl="/compte/" />
     <SiteFooter />
   </main>;
 }

@@ -93,6 +93,8 @@ export default function SiteHeader() {
             <Link className={pathname.startsWith("/actualites") ? "active" : undefined} href="/actualites/">Actualités</Link>
             <Link className={pathname.startsWith("/boutique") ? "active" : undefined} href="/boutique/">Boutique</Link>
             <Link className={pathname.startsWith("/vote") ? "active" : undefined} href="/vote/">Votes</Link>
+            <Link className={pathname.startsWith("/compte") ? "active" : undefined} href="/compte/">Compte</Link>
+            <Link className={pathname.startsWith("/confidentialite") ? "active" : undefined} href="/confidentialite/">Confidentialité</Link>
             <Link className={pathname.startsWith("/wiki") ? "active" : undefined} href="/wiki/">Wiki</Link>
           </nav>
           <details className="mobile-menu">
@@ -102,6 +104,8 @@ export default function SiteHeader() {
               <Link className={pathname.startsWith("/actualites") ? "active" : undefined} href="/actualites/">Actualités</Link>
               <Link className={pathname.startsWith("/boutique") ? "active" : undefined} href="/boutique/">Boutique</Link>
               <Link className={pathname.startsWith("/vote") ? "active" : undefined} href="/vote/">Votes</Link>
+              <Link className={pathname.startsWith("/compte") ? "active" : undefined} href="/compte/">Compte</Link>
+              <Link className={pathname.startsWith("/confidentialite") ? "active" : undefined} href="/confidentialite/">Confidentialité</Link>
               <Link className={pathname.startsWith("/wiki") ? "active" : undefined} href="/wiki/">Wiki</Link>
             </div>
           </details>

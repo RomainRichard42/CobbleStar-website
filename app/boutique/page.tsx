@@ -2,9 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { SHOP_FAQ } from "../lib/faq";
 import MinecraftLinkGate from "../components/MinecraftLinkGate";
 import PageHero from "../components/PageHero";
 import SiteFooter from "../components/SiteFooter";
+import FaqSection from "../components/FaqSection";
+import FaqStructuredData from "../components/FaqStructuredData";
 
 type ShopAccount = {
   minecraft: { username: string | null; uuid: string | null; linked: boolean };
@@ -201,6 +204,8 @@ export default function ShopPage() {
     </div>}
 
     <MinecraftLinkGate open={linkOpen} onClose={() => setLinkOpen(false)} context="achat" />
+    <FaqSection title="Questions sur la boutique" id="faq-boutique" items={SHOP_FAQ} />
+    <FaqStructuredData faqItems={SHOP_FAQ} pageUrl="/boutique/" />
     <SiteFooter />
   </main>;
 }
