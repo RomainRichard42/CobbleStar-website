@@ -8,6 +8,7 @@ import staticFiles from "@fastify/static";
 import { ResultSetHeader, RowDataPacket } from "mysql2/promise";
 import { z } from "zod";
 import { join } from "node:path";
+import { readFile } from "node:fs/promises";
 import { config, isProduction } from "./config.js";
 import { pool, transaction } from "./db.js";
 import { applyMigrations } from "./migrations.js";
@@ -34,7 +35,7 @@ await app.register(helmet, {
   },
 });
 await app.register(cookie, { secret: config.COOKIE_SECRET });
-await app.register(cors, { origin: config.SITE_ORIGIN, credentials: true, methods: ["GET", "POST", "DELETE"] });
+await app.register(cors, { origin: config.SITE_ORIGIN, credentials: true, methods: ["GET", "POST", "PUT", "DELETE"] });
 await app.register(rateLimit, { max: 120, timeWindow: "1 minute" });
 
 const sessionCookie = isProduction ? "__Host-cobblestar_session" : "cobblestar_session";
@@ -71,9 +72,67 @@ const voteRecordBody = z.object({
 const voteRewardQuery = z.object({ uuid: minecraftUuid });
 const voteRewardCompleteBody = z.object({ uuid: minecraftUuid, leaseToken: z.string().min(32).max(200) });
 const voteRewardParams = z.object({ id: z.string().uuid() });
+const wikiBlock = z.object({ kind: z.string().trim().min(1).max(32) }).passthrough();
+const wikiDocumentBody = z.object({
+  schemaVersion: z.number().int().min(1).max(10),
+  title: z.string().trim().min(1).max(96),
+  subtitle: z.string().trim().max(240),
+  branches: z.array(z.object({
+    id: z.string().regex(/^[a-z0-9_-]{1,48}$/), label: z.string().trim().min(1).max(48),
+    description: z.string().trim().max(120), icon: z.string().max(8),
+    accent: z.enum(["cyan", "pink", "violet", "mint", "gold"]),
+    order: z.number().int().min(0).max(999), visible: z.boolean(),
+  })).min(1).max(32),
+  articles: z.array(z.object({
+    id: z.string().regex(/^[a-z0-9_-]{1,64}$/), branchId: z.string().regex(/^[a-z0-9_-]{1,48}$/),
+    title: z.string().trim().min(1).max(96), summary: z.string().trim().max(300),
+    tags: z.array(z.string().trim().min(1).max(48)).max(24), readingMinutes: z.number().int().min(1).max(120),
+    order: z.number().int().min(0).max(999), published: z.boolean(),
+    hero: z.object({ asset: z.string().max(240), alt: z.string().max(160) }),
+    blocks: z.array(wikiBlock).max(120),
+  })).max(500),
+});
+const wikiAdminBody = z.object({ email: z.string().email().max(254).transform(normalizeEmail) });
 
 function publicUser(user: UserRow) {
-  return { id: user.id, email: user.email, minecraft: { username: user.minecraft_username, uuid: user.minecraft_uuid, linked: Boolean(user.minecraft_linked_at) } };
+  return { id: user.id, email: user.email, admin: isBootstrapWikiAdmin(user), minecraft: { username: user.minecraft_username, uuid: user.minecraft_uuid, linked: Boolean(user.minecraft_linked_at) } };
+}
+
+function bootstrapWikiAdmins() {
+  return config.WIKI_ADMIN_EMAILS.split(",").map((email) => email.trim().toLowerCase()).filter(Boolean);
+}
+
+function isBootstrapWikiAdmin(user: UserRow) {
+  const allowed = bootstrapWikiAdmins();
+  return allowed.includes(user.email.toLowerCase()) || (!isProduction && allowed.length === 0);
+}
+
+async function isWikiAdmin(user: UserRow) {
+  if (isBootstrapWikiAdmin(user)) return true;
+  const [rows] = await pool.execute<RowDataPacket[]>(`SELECT email FROM wiki_admins WHERE email=? LIMIT 1`, [user.email.toLowerCase()]);
+  return rows.length > 0;
+}
+
+function isBootstrapEmail(email: string) {
+  const allowed = config.WIKI_ADMIN_EMAILS.split(",").map((email) => email.trim().toLowerCase()).filter(Boolean);
+  return allowed.includes(email.toLowerCase());
+}
+
+async function defaultWiki() {
+  try {
+    return JSON.parse(await readFile(join(process.cwd(), "wiki.default.json"), "utf8")) as z.infer<typeof wikiDocumentBody>;
+  } catch {
+    return JSON.parse(await readFile(join(process.cwd(), "..", "wiki.default.json"), "utf8")) as z.infer<typeof wikiDocumentBody>;
+  }
+}
+
+async function wikiSlot(slot: "draft" | "published") {
+  const [rows] = await pool.execute<(RowDataPacket & { content_json: unknown; version: number; updated_at: Date })[]>(
+    `SELECT content_json,version,updated_at FROM wiki_documents WHERE slot=? LIMIT 1`, [slot]);
+  const row = rows[0];
+  if (!row) return { content: await defaultWiki(), version: 1, updatedAt: null };
+  const content = typeof row.content_json === "string" ? JSON.parse(row.content_json) : row.content_json;
+  return { content, version: row.version, updatedAt: row.updated_at };
 }
 
 async function loadSession(request: FastifyRequest) {
@@ -170,6 +229,83 @@ app.post("/api/auth/logout", async (request, reply) => {
 });
 
 app.get("/api/me", { preHandler: requireAccount }, async (request) => ({ user: publicUser(request.account!) }));
+
+app.get("/api/wiki", { config: { rateLimit: { max: 240, timeWindow: "1 minute" } } }, async (_request, reply) => {
+  const wiki = await wikiSlot("published");
+  reply.header("Cache-Control", "public, max-age=60, stale-while-revalidate=300");
+  return wiki;
+});
+
+app.get("/api/wiki/admin", async (request, reply) => {
+  const account = await loadSession(request);
+  if (!account) return reply.code(401).send({ error: "AUTH_REQUIRED" });
+  if (!(await isWikiAdmin(account))) return reply.code(403).send({ error: "ADMIN_REQUIRED" });
+  const [draft, published] = await Promise.all([wikiSlot("draft"), wikiSlot("published")]);
+  return { draft, publishedVersion: published.version };
+});
+
+app.put("/api/wiki/admin", { config: { rateLimit: { max: 30, timeWindow: "1 minute" } } }, async (request, reply) => {
+  const account = await loadSession(request);
+  if (!account) return reply.code(401).send({ error: "AUTH_REQUIRED" });
+  if (!(await isWikiAdmin(account))) return reply.code(403).send({ error: "ADMIN_REQUIRED" });
+  const parsed = wikiDocumentBody.safeParse(request.body);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_WIKI", details: parsed.error.flatten() });
+  const current = await wikiSlot("draft");
+  const version = current.version + 1;
+  await pool.execute(`INSERT INTO wiki_documents(slot,content_json,version,updated_by) VALUES('draft',?,?,?) ON DUPLICATE KEY UPDATE content_json=VALUES(content_json),version=VALUES(version),updated_by=VALUES(updated_by)`, [JSON.stringify(parsed.data), version, account.id]);
+  return { saved: true, version };
+});
+
+app.post("/api/wiki/admin/publish", { config: { rateLimit: { max: 10, timeWindow: "1 minute" } } }, async (request, reply) => {
+  const account = await loadSession(request);
+  if (!account) return reply.code(401).send({ error: "AUTH_REQUIRED" });
+  if (!(await isWikiAdmin(account))) return reply.code(403).send({ error: "ADMIN_REQUIRED" });
+  const draft = await wikiSlot("draft");
+  const parsed = wikiDocumentBody.safeParse(draft.content);
+  if (!parsed.success) return reply.code(409).send({ error: "INVALID_DRAFT" });
+  const published = await wikiSlot("published");
+  const version = published.version + 1;
+  await pool.execute(`INSERT INTO wiki_documents(slot,content_json,version,updated_by) VALUES('published',?,?,?) ON DUPLICATE KEY UPDATE content_json=VALUES(content_json),version=VALUES(version),updated_by=VALUES(updated_by)`, [JSON.stringify(parsed.data), version, account.id]);
+  return { published: true, version };
+});
+
+app.get("/api/wiki/admins", async (request, reply) => {
+  const account = await loadSession(request);
+  if (!account) return reply.code(401).send({ error: "AUTH_REQUIRED" });
+  if (!(await isWikiAdmin(account))) return reply.code(403).send({ error: "ADMIN_REQUIRED" });
+  const [rows] = await pool.execute<(RowDataPacket & { email: string; created_at: Date })[]>(`SELECT email,created_at FROM wiki_admins ORDER BY created_at,email`);
+  const dynamic: Array<{ email: string; createdAt: Date | null; bootstrap: boolean }> = rows.map((row) => ({ email: row.email, createdAt: row.created_at, bootstrap: isBootstrapEmail(row.email) }));
+  for (const email of bootstrapWikiAdmins()) if (!dynamic.some((admin) => admin.email === email)) dynamic.unshift({ email, createdAt: null, bootstrap: true });
+  return { admins: dynamic, currentEmail: account.email };
+});
+
+app.post("/api/wiki/admins", { config: { rateLimit: { max: 20, timeWindow: "1 minute" } } }, async (request, reply) => {
+  const account = await loadSession(request);
+  if (!account) return reply.code(401).send({ error: "AUTH_REQUIRED" });
+  if (!(await isWikiAdmin(account))) return reply.code(403).send({ error: "ADMIN_REQUIRED" });
+  const parsed = wikiAdminBody.safeParse(request.body);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_EMAIL" });
+  await pool.execute(`INSERT INTO wiki_admins(email,added_by) VALUES(?,?) ON DUPLICATE KEY UPDATE email=VALUES(email)`, [parsed.data.email, account.id]);
+  return reply.code(201).send({ added: true, email: parsed.data.email });
+});
+
+app.delete("/api/wiki/admins/:email", { config: { rateLimit: { max: 20, timeWindow: "1 minute" } } }, async (request, reply) => {
+  const account = await loadSession(request);
+  if (!account) return reply.code(401).send({ error: "AUTH_REQUIRED" });
+  if (!(await isWikiAdmin(account))) return reply.code(403).send({ error: "ADMIN_REQUIRED" });
+  const parsed = wikiAdminBody.safeParse(request.params);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_EMAIL" });
+  if (isBootstrapEmail(parsed.data.email)) return reply.code(409).send({ error: "BOOTSTRAP_ADMIN_CANNOT_BE_REMOVED" });
+  await pool.execute(`DELETE FROM wiki_admins WHERE email=?`, [parsed.data.email]);
+  return { removed: true };
+});
+
+app.get("/api/internal/wiki", { config: { rateLimit: { max: 300, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const wiki = await wikiSlot("published");
+  reply.header("Cache-Control", "private, max-age=60");
+  return wiki;
+});
 
 app.get("/api/votes", async (request) => {
   const account = await loadSession(request);

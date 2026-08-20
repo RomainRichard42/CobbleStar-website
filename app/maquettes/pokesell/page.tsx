@@ -1,0 +1,34 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import styles from "./pokesell.module.css";
+
+type Variant = "a" | "b" | "c";
+type Mon = {name:string;species:string;level:number;price:number;rarity:string;tone:string;warning?:string};
+const mons:Mon[]=[
+  {name:"Pikachu",species:"Pikachu",level:18,price:340,rarity:"COMMUN",tone:"yellow"},
+  {name:"Roucool",species:"Roucool",level:7,price:70,rarity:"TRÈS COMMUN",tone:"cream"},
+  {name:"Magicarpe",species:"Magicarpe",level:12,price:50,rarity:"SATURÉ",tone:"blue"},
+  {name:"Évoli",species:"Évoli",level:24,price:620,rarity:"RECHERCHÉ",tone:"brown"},
+  {name:"Ralts",species:"Ralts",level:16,price:510,rarity:"STABLE",tone:"mint"},
+  {name:"Riolu",species:"Riolu",level:27,price:780,rarity:"RECHERCHÉ",tone:"violet"},
+  {name:"Nosferapti",species:"Nosferapti",level:9,price:60,rarity:"SATURÉ",tone:"blue"},
+  {name:"Ponyta",species:"Ponyta",level:31,price:470,rarity:"STABLE",tone:"pink"},
+  {name:"Dratini ✦",species:"Dratini",level:21,price:3900,rarity:"SHINY",tone:"gold",warning:"VENTE SENSIBLE"},
+  {name:"Tiplouf",species:"Tiplouf",level:15,price:680,rarity:"RECHERCHÉ",tone:"cyan"},
+];
+
+function Portrait({mon}:{mon:Mon}){return <i className={`${styles.portrait} ${styles[mon.tone]}`}>{mon.species.slice(0,1)}</i>}
+function Card({mon,selected,toggle}:{mon:Mon;selected:boolean;toggle:()=>void}){return <button onClick={toggle} className={`${styles.card} ${selected?styles.selected:""}`}><Portrait mon={mon}/><span><b>{mon.name}</b><small>Niv. {mon.level} · {mon.rarity}</small><em>{mon.price.toLocaleString("fr-FR")} ₽</em></span><strong>{selected?"✓":"+"}</strong></button>}
+function Header({title}:{title:string}){return <header className={styles.windowHeader}><div><span>₽</span><p><small>CENTRE DE REPRISE</small><b>{title}</b></p></div><p>SOLDE <b>42 680 ₽</b></p><button>×</button></header>}
+
+function Express({selected,setSelected}:{selected:number[];setSelected:(v:number[])=>void}){
+ const total=selected.reduce((n,i)=>n+mons[i].price,0);const toggle=(i:number)=>setSelected(selected.includes(i)?selected.filter(v=>v!==i):[...selected,i]);
+ return <div className={styles.screen}><Header title="VIDE TES BOÎTES"/><main className={styles.express}><section><div className={styles.toolbar}><div><b>BOÎTE 4</b><small>30 Pokémon · clique pour sélectionner</small></div><nav><button>‹</button><span>4 / 31</span><button>›</button></nav><input placeholder="Rechercher…"/></div><div className={styles.grid}>{mons.map((m,i)=><Card key={m.name} mon={m} selected={selected.includes(i)} toggle={()=>toggle(i)}/>)}</div></section><aside><span>TA SÉLECTION</span><h2>{selected.length} Pokémon</h2><div className={styles.cart}>{selected.length?selected.map(i=><article key={i}><Portrait mon={mons[i]}/><p><b>{mons[i].name}</b><small>{mons[i].price.toLocaleString("fr-FR")} ₽</small></p><button onClick={()=>toggle(i)}>×</button></article>):<p className={styles.empty}>Sélectionne les Pokémon dont tu veux te séparer.</p>}</div><dl><div><dt>Valeur estimée</dt><dd>{total.toLocaleString("fr-FR")} ₽</dd></div><div><dt>Prix de reprise</dt><dd>Faible et dynamique</dd></div></dl><button className={styles.sell} disabled={!selected.length}>VÉRIFIER LA VENTE</button><small className={styles.safe}>Aucune vente sans confirmation.</small></aside></main></div>
+}
+
+function Boxes({selected,setSelected}:{selected:number[];setSelected:(v:number[])=>void}){const toggle=(i:number)=>setSelected(selected.includes(i)?selected.filter(v=>v!==i):[...selected,i]);return <div className={styles.screen}><Header title="MES BOÎTES À TRIER"/><main className={styles.boxes}><aside><span>BOÎTES PC</span>{["À TRIER","CAPTURES","DOUBLONS","ÉLEVAGE","RARES"].map((b,i)=><button className={i===2?styles.activeBox:""} key={b}><i>{i===2?18:30}</i><b>{b}</b><small>Boîte {i+1}</small></button>)}<button className={styles.smart}>✦ SUGGESTION<br/><small>Afficher les doublons communs</small></button></aside><section><div className={styles.boxTitle}><div><small>BOÎTE 3</small><h2>DOUBLONS</h2></div><span>{selected.length} sélectionné(s)</span></div><div className={styles.pcGrid}>{mons.map((m,i)=><Card key={m.name} mon={m} selected={selected.includes(i)} toggle={()=>toggle(i)}/>)}</div><footer><span>ⓘ Les shiny, légendaires et Pokémon avec objet sont signalés.</span><button>CONTINUER · {selected.length}</button></footer></section></main></div>}
+
+function Review({selected,setSelected}:{selected:number[];setSelected:(v:number[])=>void}){const list=selected.length?selected:[0,1,2,6];const total=list.reduce((n,i)=>n+mons[i].price,0);const dangerous=list.some(i=>mons[i].warning);return <div className={styles.screen}><Header title="CONFIRMER LA REPRISE"/><main className={styles.review}><header><small>DERNIÈRE VÉRIFICATION</small><h1>{list.length} Pokémon vont quitter définitivement ton PC</h1><p>Le paiement est recalculé par le serveur au moment de la vente.</p></header><section>{list.map(i=><article key={i} className={mons[i].warning?styles.danger:""}><Portrait mon={mons[i]}/><p><b>{mons[i].name}</b><small>Niv. {mons[i].level} · {mons[i].rarity}</small></p><span>{mons[i].warning||"PRÊT À VENDRE"}</span><strong>{mons[i].price.toLocaleString("fr-FR")} ₽</strong></article>)}</section><aside><span>TOTAL DE REPRISE</span><strong>{total.toLocaleString("fr-FR")} ₽</strong><small>Versé immédiatement en PokéDollars</small>{dangerous&&<p>⚠ Cette sélection contient un Pokémon sensible. Une seconde confirmation sera demandée.</p>}<button onClick={()=>setSelected([])}>← MODIFIER</button><button className={styles.sell}>CONFIRMER LA VENTE</button></aside></main></div>}
+
+export default function Page(){const[variant,setVariant]=useState<Variant>("b");const[selected,setSelected]=useState<number[]>([1,2,6]);const label=useMemo(()=>variant==="a"?"REPRISE EXPRESS":variant==="b"?"TRI PAR BOÎTES":"CONFIRMATION SÛRE",[variant]);return <main className={styles.page}><header className={styles.prototype}><div><small>COBBLESTAR · MAQUETTES</small><b>POKÉSELL</b></div><nav>{(["a","b","c"] as Variant[]).map((v,i)=><button onClick={()=>setVariant(v)} className={variant===v?styles.active:""} key={v}><span>0{i+1}</span>{v==="a"?"EXPRESS + PANIER":v==="b"?"GESTION DES BOÎTES":"VENTE SÉCURISÉE"}</button>)}</nav></header><section className={styles.frame}>{variant==="a"?<Express selected={selected} setSelected={setSelected}/>:variant==="b"?<Boxes selected={selected} setSelected={setSelected}/>:<Review selected={selected} setSelected={setSelected}/>}</section><footer className={styles.notes}><b>PROPOSITION {variant.toUpperCase()} · {label}</b><p>{variant==="a"?"La plus rapide : grille Cobblemon, panier toujours visible et total immédiat.":variant==="b"?"Version retenue : navigation dans les vraies boîtes du PC et sélection conservée entre les boîtes.":"Le garde-fou avant suppression définitive, surtout pour les shiny, légendaires et objets tenus."}</p><span>GUI · 70 % DE L’ÉCRAN</span></footer></main>}

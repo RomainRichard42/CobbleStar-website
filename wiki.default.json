@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "title": "Wiki officiel CobbleStar",
+  "subtitle": "Tout comprendre, sans connaître les commandes techniques.",
+  "branches": [
+    { "id": "start", "label": "Bien débuter", "description": "Les bases du serveur", "icon": "✦", "accent": "cyan", "order": 0, "visible": true },
+    { "id": "pokemon", "label": "Pokémon", "description": "Capture, pension et élevage", "icon": "◉", "accent": "pink", "order": 1, "visible": true },
+    { "id": "exploration", "label": "Exploration", "description": "Mondes, raids et découvertes", "icon": "⌖", "accent": "violet", "order": 2, "visible": true },
+    { "id": "progression", "label": "Progression", "description": "Quêtes, métiers et talents", "icon": "◆", "accent": "mint", "order": 3, "visible": true },
+    { "id": "activities", "label": "Activités", "description": "Classé, caisses et économie", "icon": "⚔", "accent": "gold", "order": 4, "visible": true }
+  ],
+  "articles": [
+    {
+      "id": "welcome",
+      "branchId": "start",
+      "title": "Bienvenue sur CobbleStar",
+      "summary": "Le parcours conseillé pour commencer sans se perdre.",
+      "tags": ["débuter", "spawn", "menu", "nouveau"],
+      "readingMinutes": 3,
+      "order": 0,
+      "published": true,
+      "hero": { "asset": "/cobblemon-team.webp", "alt": "Une équipe Cobblemon" },
+      "blocks": [
+        { "kind": "heading", "text": "Tes trois premiers repères" },
+        { "kind": "checklist", "items": ["Ouvre /menu pour retrouver toutes les activités.", "Utilise J pour consulter ton journal de quêtes.", "Reviens dans ce wiki avec /wiki dès que tu as un doute."] },
+        { "kind": "callout", "tone": "cyan", "title": "À RETENIR", "text": "Le parcours conseille un ordre de lecture, mais aucun article n’est bloqué." }
+      ]
+    },
+    {
+      "id": "capture",
+      "branchId": "pokemon",
+      "title": "Capturer son premier Pokémon",
+      "summary": "Préparer ses Poké Balls, affaiblir la cible et réussir sa capture.",
+      "tags": ["capture", "poké ball", "équipe", "pc"],
+      "readingMinutes": 4,
+      "order": 0,
+      "published": true,
+      "hero": { "asset": "/cobblemon-lakeside.webp", "alt": "Pokémon au bord d’un lac" },
+      "blocks": [
+        { "kind": "heading", "text": "Avant le lancer" },
+        { "kind": "checklist", "items": ["Garde une Poké Ball adaptée dans ton inventaire.", "Affaiblis le Pokémon sans le mettre K.O.", "Les altérations de statut améliorent tes chances."] },
+        { "kind": "callout", "tone": "gold", "title": "CONSEIL", "text": "Une équipe complète part automatiquement dans ton PC." }
+      ]
+    },
+    {
+      "id": "daycare",
+      "branchId": "pokemon",
+      "title": "Pension et reproduction",
+      "summary": "Choisir deux parents compatibles, produire un œuf et le faire éclore.",
+      "tags": ["pension", "œuf", "oeuf", "breed", "hatch", "éleveur", "métamorph", "IV"],
+      "readingMinutes": 8,
+      "order": 1,
+      "published": true,
+      "hero": { "asset": "/mockups/daycare/pc_base.png", "alt": "Pension Pokémon" },
+      "blocks": [
+        { "kind": "heading", "text": "Avant de commencer" },
+        { "kind": "paragraph", "text": "La pension se trouve dans le bâtiment des Éleveurs. Parle au PNJ du comptoir : le bloc de pâturage sert uniquement à ressortir les Pokémon visibles." },
+        { "kind": "steps", "items": [
+          { "title": "Deux parents", "text": "Choisis-les depuis ton équipe ou ton PC." },
+          { "title": "Une paire compatible", "text": "Le second choix est filtré après le premier." },
+          { "title": "Une place libre", "text": "L’œuf attend à la pension, puis rejoint l’équipe ou le PC." }
+        ] },
+        { "kind": "callout", "tone": "gold", "title": "IMPORTANT", "text": "Les parents quittent temporairement ton équipe ou ton PC. Ils restent propres à ton compte et réapparaissent lorsque tu les reprends à la pension." },
+        { "kind": "heading", "text": "Quels Pokémon vont ensemble ?" },
+        { "kind": "paragraph", "text": "Le serveur vérifie les règles de reproduction de DayCare+. Une fois le premier parent choisi, l’interface ne propose que les partenaires valides." },
+        { "kind": "comparison", "leftTitle": "COMPATIBLES", "leftItems": ["Même groupe d’Œuf et sexes compatibles.", "Un Pokémon reproductible avec Métamorph.", "Deux formes capables de produire une descendance."], "rightTitle": "INCOMPATIBLES", "rightItems": ["Aucun groupe d’Œuf commun.", "Un œuf utilisé comme parent.", "Une espèce marquée non reproductible."] },
+        { "kind": "callout", "tone": "mint", "title": "1 ŒUF GARANTI APRÈS LE CYCLE", "text": "Le compteur démarre uniquement lorsque deux parents compatibles sont confiés. Changer la paire démarre un nouveau cycle." },
+        { "kind": "heading", "text": "Temps de production" },
+        { "kind": "progress", "from": "60 min", "fromLabel": "Temps de base", "to": "15 min", "toLabel": "Meilleure amélioration", "percent": 75 },
+        { "kind": "paragraph", "text": "Le métier Éleveur réduit progressivement la durée. Le dernier talent de la branche fixe le cycle à 15 minutes et débloque la reproduction à distance." },
+        { "kind": "command", "command": "/breed 1 2", "title": "Produire depuis l’équipe", "text": "Les nombres correspondent aux slots des parents. L’œuf va dans l’équipe, ou dans le PC si elle est pleine." },
+        { "kind": "heading", "text": "Transmettre les bonnes statistiques" },
+        { "kind": "paragraph", "text": "Donne l’objet au parent avant de le confier. L’objet reste affiché sur sa fiche dans la pension." },
+        { "kind": "itemGrid", "items": [
+          { "asset": "/mockups/daycare/destiny_knot.png", "title": "NŒUD DESTIN", "text": "Transmet 5 IV pris entre les deux parents au lieu de 3." },
+          { "asset": "/mockups/daycare/everstone.png", "title": "PIERRE STASE", "text": "Le parent transmet sa nature au Pokémon qui naîtra." },
+          { "asset": "/mockups/daycare/daycare_spark.png", "title": "OBJET POUVOIR", "text": "Force la transmission de l’IV lié : PV, Attaque, Défense, etc." }
+        ] },
+        { "kind": "callout", "tone": "pink", "title": "HERBE MIROIR", "text": "Elle permet au parent d’apprendre des capacités Œuf depuis son partenaire lorsque les conditions de DayCare+ sont réunies." },
+        { "kind": "heading", "text": "Récupérer et faire éclore l’œuf" },
+        { "kind": "steps", "items": [
+          { "title": "Œuf prêt", "text": "Récupère-le auprès du PNJ." },
+          { "title": "Dans l’équipe", "text": "Le compteur baisse lorsque tu marches." },
+          { "title": "Éclosion", "text": "Le vrai Pokémon remplace automatiquement l’œuf." }
+        ] },
+        { "kind": "checklist", "items": ["Un œuf stocké dans le PC ne progresse pas : place-le dans ton équipe.", "Le nombre de pas restant est affiché sous son sprite.", "Un œuf ne peut ni combattre, ni être envoyé avec R.", "Le bonus d’éclosion du métier Éleveur accélère chaque pas."] },
+        { "kind": "command", "command": "/hatch 4", "title": "Éclore le slot 4", "text": "Disponible uniquement avec l’amélioration correspondante du métier Éleveur." },
+        { "kind": "heading", "text": "Questions fréquentes" },
+        { "kind": "faq", "items": [
+          { "title": "Le temps avance sans parents ?", "text": "Non. Aucun cycle n’existe tant que deux parents compatibles ne sont pas enregistrés." },
+          { "title": "Peut-on perdre ses parents ?", "text": "Non. Ils sont liés à ta pension personnelle et retournent dans tes stockages lorsque tu les reprends." },
+          { "title": "Pourquoi aucun partenaire n’apparaît ?", "text": "Ton premier Pokémon n’a peut-être aucun partenaire compatible dans ton équipe ou ton PC." }
+        ] }
+      ]
+    },
+    {
+      "id": "quests",
+      "branchId": "progression",
+      "title": "Journal et suivi de quêtes",
+      "summary": "Distinguer l’histoire, les quêtes secondaires et les missions répétables.",
+      "tags": ["quête", "journal", "chapitre", "mission"],
+      "readingMinutes": 4,
+      "order": 0,
+      "published": true,
+      "hero": { "asset": "/cobblemon-shop.webp", "alt": "Aventure CobbleStar" },
+      "blocks": [{ "kind": "callout", "tone": "cyan", "title": "RACCOURCI", "text": "Appuie sur J pour ouvrir directement ton journal de quêtes." }]
+    },
+    {
+      "id": "ranked",
+      "branchId": "activities",
+      "title": "Combats classés",
+      "summary": "Solo OU, Double OU et Duo coop : règles, cote et récompenses de saison.",
+      "tags": ["ranked", "classement", "OU", "duo", "double"],
+      "readingMinutes": 6,
+      "order": 0,
+      "published": true,
+      "hero": { "asset": "/cobblemon-desert.webp", "alt": "Combat Pokémon" },
+      "blocks": [{ "kind": "paragraph", "text": "Consulte l’onglet Règles avant de lancer la recherche : chaque mode contrôle ton équipe automatiquement." }]
+    }
+  ]
+}
