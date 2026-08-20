@@ -19,7 +19,7 @@
       "readingMinutes": 3,
       "order": 0,
       "published": true,
-      "hero": { "asset": "/cobblemon-team.webp", "alt": "Une équipe Cobblemon" },
+      "hero": { "asset": "/cobblemon-team.webp", "alt": "Une équipe Cobblemon", "species": "eevee", "icon": "/mockups/daycare/poke_ball.png" },
       "blocks": [
         { "kind": "heading", "text": "Tes trois premiers repères" },
         { "kind": "checklist", "items": ["Ouvre /menu pour retrouver toutes les activités.", "Utilise J pour consulter ton journal de quêtes.", "Reviens dans ce wiki avec /wiki dès que tu as un doute."] },
@@ -35,7 +35,7 @@
       "readingMinutes": 4,
       "order": 0,
       "published": true,
-      "hero": { "asset": "/cobblemon-lakeside.webp", "alt": "Pokémon au bord d’un lac" },
+      "hero": { "asset": "/cobblemon-lakeside.webp", "alt": "Pokémon au bord d’un lac", "species": "pikachu", "icon": "/mockups/daycare/poke_ball.png" },
       "blocks": [
         { "kind": "heading", "text": "Avant le lancer" },
         { "kind": "checklist", "items": ["Garde une Poké Ball adaptée dans ton inventaire.", "Affaiblis le Pokémon sans le mettre K.O.", "Les altérations de statut améliorent tes chances."] },
@@ -51,7 +51,7 @@
       "readingMinutes": 8,
       "order": 1,
       "published": true,
-      "hero": { "asset": "/mockups/daycare/pc_base.png", "alt": "Pension Pokémon" },
+      "hero": { "asset": "/mockups/daycare/pc_base.png", "alt": "Pension Pokémon", "species": "ditto", "icon": "/mockups/daycare/pokemon_egg.png" },
       "blocks": [
         { "kind": "heading", "text": "Avant de commencer" },
         { "kind": "paragraph", "text": "La pension se trouve dans le bâtiment des Éleveurs. Parle au PNJ du comptoir : le bloc de pâturage sert uniquement à ressortir les Pokémon visibles." },
@@ -102,7 +102,7 @@
       "readingMinutes": 4,
       "order": 0,
       "published": true,
-      "hero": { "asset": "/cobblemon-shop.webp", "alt": "Aventure CobbleStar" },
+      "hero": { "asset": "/cobblemon-shop.webp", "alt": "Aventure CobbleStar", "species": "eevee", "icon": "/mockups/daycare/love_ball.png" },
       "blocks": [{ "kind": "callout", "tone": "cyan", "title": "RACCOURCI", "text": "Appuie sur J pour ouvrir directement ton journal de quêtes." }]
     },
     {
@@ -114,7 +114,7 @@
       "readingMinutes": 6,
       "order": 0,
       "published": true,
-      "hero": { "asset": "/cobblemon-desert.webp", "alt": "Combat Pokémon" },
+      "hero": { "asset": "/cobblemon-desert.webp", "alt": "Combat Pokémon", "species": "lucario", "icon": "/mockups/daycare/daycare_spark.png" },
       "blocks": [{ "kind": "paragraph", "text": "Consulte l’onglet Règles avant de lancer la recherche : chaque mode contrôle ton équipe automatiquement." }]
     }
   ]

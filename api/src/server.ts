@@ -94,7 +94,12 @@ const wikiDocumentBody = z.object({
     title: z.string().trim().min(1).max(96), summary: z.string().trim().max(300),
     tags: z.array(z.string().trim().min(1).max(48)).max(24), readingMinutes: z.number().int().min(1).max(120),
     order: z.number().int().min(0).max(999), published: z.boolean(),
-    hero: z.object({ asset: z.string().max(240), alt: z.string().max(160) }),
+    hero: z.object({
+      asset: z.string().max(240),
+      alt: z.string().max(160),
+      species: z.string().max(80).optional(),
+      icon: z.string().max(240).optional(),
+    }),
     blocks: z.array(wikiBlock).max(120),
   })).max(500),
 });

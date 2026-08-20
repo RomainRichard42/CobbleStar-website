@@ -5,3 +5,45 @@
 .article{overflow:auto;background:#0c081f}.articleHero{position:relative;isolation:isolate;min-height:255px;display:flex;align-items:end;overflow:hidden;border-bottom:1px solid #493a71}.articleHero>img{z-index:-2;object-fit:cover;image-rendering:auto}.articleHero>span{position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,#090619f5 0,#090619c4 54%,#0906196c),linear-gradient(0deg,#090619e8,transparent 60%)}.articleHero>div{padding:34px 6%}.articleHero small{color:var(--cyan);font-size:9px}.articleHero h2{margin:11px 0 8px;font-size:clamp(27px,3vw,45px)}.articleHero p{max-width:700px;margin:0;color:#c0b9ca;font:15px/1.55 Arial,sans-serif}.article>footer{display:flex;justify-content:space-between;margin:0 6%;padding:24px 0 35px;border-top:1px solid #342a54;color:#77708b;font-size:9px}.article>footer a{color:var(--cyan)}
 .blocks{padding:12px 6% 40px}.blocks>h2{margin:38px 0 13px;font-size:18px;text-transform:uppercase}.paragraph{color:#b9b2c5;font:14px/1.7 Arial,sans-serif}.callout{margin:18px 0;padding:17px 20px;border-left:4px solid currentColor;background:#211a31}.callout b{font-size:10px}.callout p{margin:8px 0 0;color:#cbc4d2;font:13px/1.55 Arial,sans-serif}.cyan{color:var(--cyan)!important}.pink{color:var(--pink)!important}.gold{color:var(--gold)!important}.mint{color:var(--mint)!important}.violet{color:#b99aff!important}.checklist{display:grid;gap:7px;padding:0;list-style:none}.checklist li{display:grid;grid-template-columns:27px 1fr;align-items:center;padding:11px 13px;background:#15102d;color:#c4bdcb;font:13px Arial,sans-serif}.checklist span{color:var(--mint)}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.steps article{display:grid;grid-template-columns:35px 1fr;gap:10px;padding:14px;border:1px solid #403364;background:#15102d}.steps article>span{color:var(--gold);font-size:11px}.steps b{font-size:10px}.steps p,.comparison p,.itemGrid p,.command p{margin:6px 0 0;color:var(--muted);font:12px/1.45 Arial,sans-serif}.comparison{display:grid;grid-template-columns:1fr 1fr;gap:8px}.comparison article{padding:17px;border:1px solid currentColor;background:#15102d}.comparison .good{color:var(--mint)}.comparison .bad{color:var(--pink)}.progress{display:grid;grid-template-columns:auto 1fr auto;gap:17px;align-items:center;padding:17px;border:1px solid #44366b;background:#15102d}.progress>div{display:flex;flex-direction:column;gap:4px}.progress>div:last-child{text-align:right}.progress b{color:var(--gold);font-size:18px}.progress small{color:var(--muted);font-size:8px;text-transform:uppercase}.progress i{height:7px;background:#32274f}.progress i span{height:100%;display:block;background:linear-gradient(90deg,var(--cyan),var(--pink))}.command{display:grid;grid-template-columns:160px 1fr;gap:17px;align-items:center;padding:15px;border:1px solid #4c3d78;background:#0b071e}.command code{padding:13px;text-align:center;color:#08051a;background:var(--cyan);font-weight:800}.command b,.itemGrid b{font-size:10px;text-transform:uppercase}.itemGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.itemGrid article{min-height:110px;display:grid;grid-template-columns:58px 1fr;gap:12px;align-items:center;padding:15px;border:1px solid #3c305e;background:#15102d}.itemGrid img{object-fit:contain;image-rendering:pixelated}.faq{display:grid;gap:7px}.faq details{padding:15px 17px;border:1px solid #3b305d;background:#15102d}.faq summary{cursor:pointer;font-size:11px}.faq details[open] summary{color:var(--cyan)}.faq p{margin:11px 0 0;color:var(--muted);font:13px/1.55 Arial,sans-serif}
 @media(max-width:1100px){.hero{grid-template-columns:1fr}.readerShell{grid-template-columns:210px 290px 1fr}.steps,.itemGrid{grid-template-columns:1fr}.articleHero{min-height:220px}}@media(max-width:760px){.hero{width:calc(100% - 24px);padding:35px 0;gap:25px}.hero label{min-width:0}.readerShell{width:100%;height:auto;min-height:0;display:block;border-left:0;border-right:0}.branches{display:flex;overflow-x:auto;border-right:0}.branches header,.branches footer{display:none}.branch{min-width:190px}.articleList{max-height:310px;border-right:0;border-bottom:1px solid var(--line)}.article{overflow:visible}.comparison{grid-template-columns:1fr}.command{grid-template-columns:1fr}}
+
+/* Le header principal est fixe. Le lecteur reste entièrement dans la fenêtre et
+   chaque colonne gère son propre défilement. Les display explicites ci-dessous
+   neutralisent notamment la règle globale appliquée à tous les éléments nav. */
+.page{padding-top:116px;overflow-x:hidden}
+.hero{width:min(1500px,calc(100% - 32px));min-height:0;height:142px;grid-template-columns:minmax(0,1fr) minmax(380px,540px);gap:48px;padding:20px 28px}
+.hero h1{margin:10px 0 7px;font-size:clamp(34px,3.2vw,52px);line-height:1}
+.hero p{margin:0;font-size:14px}
+.hero label{height:54px}
+.readerShell{width:min(1500px,calc(100% - 32px));height:calc(100vh - 282px);min-height:610px;grid-template-columns:228px 312px minmax(0,1fr);margin:0 auto 24px;overflow:hidden}
+.readerShell>*{min-width:0;min-height:0}
+.branches{display:flex;flex-direction:column;align-items:stretch;gap:0;overflow-x:hidden;overflow-y:auto;font-size:initial}
+.articleList{display:block;overflow-x:hidden;overflow-y:auto}
+.branches footer{flex:0 0 auto;margin-top:auto}
+.article{min-width:0;min-height:0;overflow-x:hidden;overflow-y:auto}
+.article>footer div{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:18px}.article>footer a{white-space:nowrap}
+.articleHero{min-height:190px}
+.articleHero>div{padding:25px 5.5%}
+.articleHero h2{margin:8px 0 6px;font-size:clamp(26px,2.5vw,40px)}
+.blocks{padding:6px 5.5% 34px}
+.blocks>h2{margin:28px 0 12px}
+
+@media(max-width:1100px){
+  .page{padding-top:108px}
+  .hero{height:auto;min-height:155px;grid-template-columns:1fr 390px;gap:24px;padding:20px}
+  .readerShell{height:calc(100vh - 280px);grid-template-columns:190px 260px minmax(0,1fr)}
+  .branches footer{display:none}
+}
+@media(max-width:760px){
+  .page{padding-top:96px}
+  .hero{width:calc(100% - 24px);height:auto;min-height:0;grid-template-columns:1fr;padding:24px 0;gap:18px}
+  .hero h1{font-size:36px}
+  .readerShell{width:100%;height:auto;min-height:0;display:block;margin-bottom:0;border-left:0;border-right:0;overflow:visible}
+  .branches{display:flex;flex-direction:row;overflow-x:auto;overflow-y:hidden;border-right:0}
+  .branches header,.branches footer{display:none}
+  .branch{min-width:190px}
+  .articleList{max-height:300px;border-right:0;border-bottom:1px solid var(--line)}
+  .article{overflow:visible}
+  .articleHero{min-height:210px}
+  .comparison{grid-template-columns:1fr}
+  .command{grid-template-columns:1fr}
+}

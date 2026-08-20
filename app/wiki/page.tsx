@@ -40,7 +40,7 @@ export default function WikiPage() {
   return <main className={styles.page}>
     <SiteHeader />
     <section className={styles.hero}>
-      <div><small>WIKI OFFICIEL · SYNCHRONISÉ AVEC LE JEU</small><h1>Une réponse.<br/><em>Un parcours clair.</em></h1><p>{wiki.subtitle}</p></div>
+      <div><small>WIKI OFFICIEL · SYNCHRONISÉ AVEC LE JEU</small><h1>Le wiki <em>CobbleStar</em></h1><p>{wiki.subtitle}</p></div>
       <label><span>⌕</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Pension, quête, ranked, objet…"/><kbd>/wiki</kbd></label>
     </section>
     <section className={styles.readerShell}>

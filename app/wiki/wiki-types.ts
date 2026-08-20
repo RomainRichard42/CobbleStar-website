@@ -17,7 +17,7 @@ export type WikiBlock = {
 export type WikiArticle = {
   id: string; branchId: string; title: string; summary: string; tags: string[];
   readingMinutes: number; order: number; published: boolean;
-  hero: { asset: string; alt: string }; blocks: WikiBlock[];
+  hero: { asset: string; alt: string; species?: string; icon?: string }; blocks: WikiBlock[];
 };
 
 export type WikiDocument = {
