@@ -4,6 +4,13 @@ import { useEffect, useMemo, useState } from "react";
 import styles from "./pokeball-fortune.module.css";
 
 type Phase = "ready" | "spinning" | "result";
+type Concept = "pcBox" | "pokedex" | "terrain";
+
+const concepts: { id: Concept; number: string; name: string; description: string }[] = [
+  { id: "pcBox", number: "01", name: "PC BOX", description: "Écrans crème, cadres turquoise et cases inspirées du PC Cobblemon." },
+  { id: "pokedex", number: "02", name: "POKÉDEX", description: "Rouge Pokéball, panneaux ivoire et lecture proche d’un Pokédex." },
+  { id: "terrain", number: "03", name: "TERRAIN", description: "Blocs verts, pierre sombre et accents orange façon interface Minecraft." },
+];
 
 const rewards = [
   { name: "5 000 CobbleCoins", rarity: "COMMUN", color: "common", symbol: "⬡" },
@@ -27,13 +34,14 @@ function Pokeball({ index }: { index: number }) {
   return (
     <div className={`${styles.ballSlot} ${styles[reward.color]}`} style={{ "--slot": index } as React.CSSProperties}>
       <div className={styles.pokeball}><i /><b>{reward.symbol}</b></div>
-      <span>{reward.rarity}</span>
+      <span><strong>{reward.name}</strong><small>{reward.rarity}</small></span>
     </div>
   );
 }
 
 export default function PokeballFortuneMockup() {
   const [phase, setPhase] = useState<Phase>("ready");
+  const [concept, setConcept] = useState<Concept>("pcBox");
   const [spin, setSpin] = useState(0);
   const winner = rewards[winnerIndex];
   const wheelStyle = useMemo(() => ({
@@ -43,7 +51,7 @@ export default function PokeballFortuneMockup() {
 
   useEffect(() => {
     if (phase !== "spinning") return;
-    const timer = window.setTimeout(() => setPhase("result"), 4700);
+    const timer = window.setTimeout(() => setPhase("result"), 9200);
     return () => window.clearTimeout(timer);
   }, [phase, spin]);
 
@@ -61,14 +69,24 @@ export default function PokeballFortuneMockup() {
         <div className={styles.safe}><i /> RÉSULTAT SÉCURISÉ CÔTÉ SERVEUR</div>
       </header>
 
-      <section className={styles.gameFrame}>
+      <nav className={styles.conceptSwitch} aria-label="Choisir une direction artistique">
+        <div><small>DIRECTION VISUELLE</small><b>3 MAQUETTES CUBIQUES</b></div>
+        {concepts.map(item => (
+          <button key={item.id} className={concept === item.id ? styles.selectedConcept : ""} onClick={() => setConcept(item.id)}>
+            <span>{item.number}</span><b>{item.name}</b><small>{item.description}</small>
+          </button>
+        ))}
+      </nav>
+
+      <section className={`${styles.gameFrame} ${styles[concept]}`}>
         <div className={styles.starfield} />
         <aside className={styles.leftPanel}>
-          <div className={styles.eyebrow}>SIGNAL PULSAR · SÉRIE 07</div>
-          <h1>La Pokéball<br /><em>de la fortune</em></h1>
-          <p>Les Pokéballs défilent autour du noyau. Celle qui s’arrête sous le curseur libère ton lot.</p>
+          <div className={styles.eyebrow}>CAISSE PULSAR · TERMINAL 07</div>
+          <h1>Pokéball<br /><em>Fortune</em></h1>
+          <p>Chaque case représente un lot réel de la caisse. La Pokéball sous le curseur est celle que tu récupères.</p>
           <div className={styles.keyCard}><span>TA MISE</span><div><div className={styles.miniKey}>✦</div><b>1 CLÉ PULSAR</b></div><small>1 clé sera consommée au lancement</small></div>
           <div className={styles.odds}>
+            <strong>CHANCES DE TIRAGE</strong>
             <span><i className={styles.common} />COMMUN <b>52 %</b></span>
             <span><i className={styles.uncommon} />PEU COMMUN <b>27 %</b></span>
             <span><i className={styles.rare} />RARE <b>14 %</b></span>
@@ -78,22 +96,22 @@ export default function PokeballFortuneMockup() {
         </aside>
 
         <section className={styles.wheelStage}>
-          <div className={styles.pointer}><span>LOT SÉLECTIONNÉ</span><i /></div>
+          <div className={styles.pointer}><span>CASE SÉLECTIONNÉE</span><i /></div>
           <div className={`${styles.wheelHalo} ${phase === "spinning" ? styles.haloActive : ""}`} />
           <div key={spin} className={`${styles.wheel} ${phase === "spinning" ? styles.spinning : ""} ${phase === "result" ? styles.settled : ""}`} style={wheelStyle}>
             <div className={styles.track} />
             {rewards.map((_, index) => <Pokeball key={index} index={index} />)}
           </div>
           <div className={styles.core}>
-            <small>{phase === "spinning" ? "ANALYSE" : phase === "result" ? "SIGNAL VERROUILLÉ" : "STARWATCH"}</small>
+            <small>{phase === "spinning" ? "LECTURE EN COURS" : phase === "result" ? "LOT VALIDÉ" : "COBBLESTAR"}</small>
             <b>{phase === "spinning" ? "•••" : phase === "result" ? "✦" : "CS"}</b>
-            <span>{phase === "spinning" ? "TIRAGE EN COURS" : phase === "result" ? winner.rarity : "FORTUNE"}</span>
+            <span>{phase === "spinning" ? "ROUE EN MOUVEMENT" : phase === "result" ? winner.rarity : "OUVRIR"}</span>
           </div>
           <div className={styles.wheelShadow} />
         </section>
 
         <aside className={styles.rightPanel}>
-          <div className={styles.rightHead}><span>RÉCOMPENSE</span><small>{phase === "result" ? "DÉVERROUILLÉE" : "EN ATTENTE"}</small></div>
+          <div className={styles.rightHead}><span>CONTENU DE LA CAISSE</span><small>12 LOTS AFFICHÉS</small></div>
           {phase === "result" ? (
             <div className={`${styles.result} ${styles[winner.color]}`}>
               <div className={styles.resultBall}><div className={styles.pokeball}><i /><b>{winner.symbol}</b></div></div>
@@ -102,9 +120,15 @@ export default function PokeballFortuneMockup() {
               <div className={styles.resultBurst}>✦</div>
             </div>
           ) : (
-            <div className={styles.mystery}><div className={styles.lockedBall}><i /><b>?</b></div><b>LE SIGNAL EST MASQUÉ</b><span>Le lot existe déjà côté serveur, l’animation ne change jamais les chances.</span></div>
+            <div className={styles.rewardCatalog}>
+              {rewards.slice(0, 8).map((item, index) => (
+                <div className={`${styles.catalogItem} ${styles[item.color]}`} key={`${item.name}-${index}`}>
+                  <i>{item.symbol}</i><span><b>{item.name}</b><small>{item.rarity}</small></span>
+                </div>
+              ))}
+            </div>
           )}
-          <div className={styles.history}><span>DERNIERS SIGNAUX</span><div><i className={styles.rare}>◆</i><b>Luma</b><small>Clé Nova</small></div><div><i className={styles.epic}>●</i><b>Nox</b><small>Master Ball</small></div><div><i className={styles.uncommon}>◇</i><b>Sana</b><small>8 Super Bonbons</small></div></div>
+          <div className={styles.serverNote}><b>✓ LOT SERVEUR</b><span>L’animation affiche uniquement la récompense déjà tirée.</span></div>
         </aside>
 
         <footer className={styles.actionBar}>
@@ -113,11 +137,11 @@ export default function PokeballFortuneMockup() {
             <span>{phase === "spinning" ? "LE CERCLE TOURNE…" : phase === "result" ? "TERMINER" : "LANCER LE TIRAGE"}</span>
             <kbd>{phase === "result" ? "↵" : "1 CLÉ"}</kbd>
           </button>
-          <p><b>ESPACE</b> maintenir pour accélérer <span>·</span> <b>ÉCHAP</b> fermer avant le tirage</p>
+          <p><b>10,5 S</b> de tirage doux <span>·</span> <b>ÉCHAP</b> fermer avant le tirage</p>
         </footer>
       </section>
 
-      <footer className={styles.note}><b>DIRECTION RETENUE</b><span>Une roulette circulaire constituée de vraies Pokéballs, lisible en groupe et cohérente avec la DA StarWatch. Le curseur reste fixe ; tout le cercle accélère puis ralentit naturellement.</span></footer>
+      <footer className={styles.note}><b>{concepts.find(item => item.id === concept)?.name}</b><span>{concepts.find(item => item.id === concept)?.description} Le cercle reste lisible, mais chaque récompense vit maintenant dans une vraie case cubique.</span></footer>
     </main>
   );
 }

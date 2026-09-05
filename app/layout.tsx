@@ -26,7 +26,7 @@ export const metadata: Metadata = {
         url: "/cobblestar-logo.png",
         width: 1024,
         height: 1024,
-        alt: "Logo CobbleStar",
+        alt: "Mascotte Dragonite de CobbleStar sur un nuage",
       },
     ],
   },
