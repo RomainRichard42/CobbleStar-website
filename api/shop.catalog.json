@@ -15,67 +15,102 @@
       "visual": { "accent": "#E38DBD", "badge": "SAISON", "previewTexture": "" }
     },
     {
+      "id": "cosmetic_pulsar_trail", "name": "Traînée Pulsar",
+      "description": "Des étincelles violettes et célestes suivent chacun de vos pas. Activable à volonté dans la garde-robe.",
+      "starsPrice": 450, "itemId": "minecraft:amethyst_shard", "itemCount": 1, "deliveryMode": "entitlement",
+      "testOnly": false, "category": "cosmetics", "featured": true, "isNew": true,
+      "visual": { "accent": "#9B8CFF", "badge": "EFFET", "previewTexture": "" }
+    },
+    {
+      "id": "morph_eevee", "name": "Incarnation Évoli",
+      "description": "Transforme visuellement votre personnage en Évoli. Activable ou désactivable dans la garde-robe.",
+      "starsPrice": 800, "itemId": "minecraft:player_head", "itemCount": 1, "deliveryMode": "entitlement",
+      "testOnly": false, "category": "cosmetics", "featured": true, "isNew": true,
+      "visual": { "accent": "#E8C979", "badge": "FORME", "previewTexture": "" }
+    },
+    {
+      "id": "morph_mimikyu", "name": "Incarnation Mimiqui",
+      "description": "Transforme visuellement votre personnage en Mimiqui. Une seule incarnation peut être active.",
+      "starsPrice": 950, "itemId": "minecraft:carved_pumpkin", "itemCount": 1, "deliveryMode": "entitlement",
+      "testOnly": false, "category": "cosmetics", "featured": false, "isNew": true,
+      "visual": { "accent": "#E38DBD", "badge": "FORME", "previewTexture": "" }
+    },
+    {
+      "id": "companion_jirachi", "name": "Compagnon Jirachi",
+      "description": "Invoque un Jirachi invulnérable qui vous accompagne dans le monde sans participer aux combats.",
+      "starsPrice": 1200, "itemId": "minecraft:nether_star", "itemCount": 1, "deliveryMode": "entitlement",
+      "testOnly": false, "category": "companions", "featured": true, "isNew": true,
+      "visual": { "accent": "#E8C979", "badge": "COMPAGNON", "previewTexture": "" }
+    },
+    {
+      "id": "companion_sylveon", "name": "Compagnon Nymphali",
+      "description": "Invoque un Nymphali invulnérable qui vous suit. Activable ou désactivable dans la garde-robe.",
+      "starsPrice": 900, "itemId": "minecraft:pink_dye", "itemCount": 1, "deliveryMode": "entitlement",
+      "testOnly": false, "category": "companions", "featured": false, "isNew": true,
+      "visual": { "accent": "#E38DBD", "badge": "COMPAGNON", "previewTexture": "" }
+    },
+    {
       "id": "club_custom_logo", "name": "Logo de club sur mesure",
       "description": "Création et intégration manuelle de votre logo. Après l’achat, ouvrez un ticket Discord avec votre preuve et votre idée.",
       "starsPrice": 900, "itemId": "minecraft:painting", "itemCount": 1, "deliveryMode": "entitlement",
       "testOnly": false, "category": "cosmetics", "featured": true, "isNew": true,
-      "visual": { "accent": "#9B8CFF", "badge": "SUR MESURE", "previewTexture": "cobblestar_planets:textures/gui/menu/icons/progression.png" }
+      "visual": { "accent": "#9B8CFF", "badge": "SUR MESURE", "previewTexture": "cobblestar_planets:textures/gui/shop/club_logo_market.png" }
     },
     {
       "id": "custom_chat_tag_3", "name": "Tag chat personnalisé · 3 joueurs",
       "description": "Un tag texte ou illustré personnalisé pour trois comptes. Livraison manuelle après validation via ticket Discord.",
       "starsPrice": 450, "itemId": "minecraft:name_tag", "itemCount": 1, "deliveryMode": "entitlement",
       "testOnly": false, "category": "cosmetics", "featured": false, "isNew": true,
-      "visual": { "accent": "#79DCE8", "badge": "3 JOUEURS", "previewTexture": "cobblestar_planets:textures/gui/menu/icons/guides.png" }
+      "visual": { "accent": "#79DCE8", "badge": "3 JOUEURS", "previewTexture": "cobblestar_planets:textures/gui/shop/chat_tag_market.png" }
     },
     {
       "id": "custom_chat_tag_club", "name": "Tag chat personnalisé · club entier",
       "description": "Le même tag personnalisé pour tous les membres actuels et futurs du club. Livraison manuelle via ticket Discord.",
       "starsPrice": 1400, "itemId": "minecraft:name_tag", "itemCount": 1, "deliveryMode": "entitlement",
       "testOnly": false, "category": "cosmetics", "featured": true, "isNew": true,
-      "visual": { "accent": "#E38DBD", "badge": "CLUB ENTIER", "previewTexture": "cobblestar_planets:textures/gui/menu/icons/guides.png" }
+      "visual": { "accent": "#E38DBD", "badge": "CLUB ENTIER", "previewTexture": "cobblestar_planets:textures/gui/shop/chat_tag_market.png" }
     },
     {
       "id": "key_nova", "name": "Clé Nova",
       "description": "Ouvre une caisse Nova au spawn CobbleStar.",
       "starsPrice": 350, "itemId": "cobblestar_planets:key_nova", "itemCount": 1,
       "testOnly": false, "category": "keys", "featured": true, "isNew": false,
-      "visual": { "accent": "#9B8CFF", "badge": "NOVA", "previewTexture": "cobblestar_planets:textures/gui/shop/key_nova.png" }
+      "visual": { "accent": "#9B8CFF", "badge": "NOVA", "previewTexture": "cobblestar_planets:textures/gui/shop/key_nova_market.png" }
     },
     {
       "id": "key_pulsar", "name": "Clé Pulsar",
       "description": "Ouvre une caisse Pulsar et son catalogue exclusif.",
       "starsPrice": 650, "itemId": "cobblestar_planets:key_pulsar", "itemCount": 1,
       "testOnly": false, "category": "keys", "featured": true, "isNew": false,
-      "visual": { "accent": "#79DCE8", "badge": "PULSAR", "previewTexture": "cobblestar_planets:textures/gui/shop/key_pulsar.png" }
+      "visual": { "accent": "#79DCE8", "badge": "PULSAR", "previewTexture": "cobblestar_planets:textures/gui/shop/key_pulsar_market.png" }
     },
     {
       "id": "key_quasar", "name": "Clé Quasar",
       "description": "La clé premium des récompenses Quasar.",
       "starsPrice": 950, "itemId": "cobblestar_planets:key_quasar", "itemCount": 1,
       "testOnly": false, "category": "keys", "featured": true, "isNew": true,
-      "visual": { "accent": "#E8C979", "badge": "QUASAR", "previewTexture": "cobblestar_planets:textures/gui/shop/key_quasar.png" }
+      "visual": { "accent": "#E8C979", "badge": "QUASAR", "previewTexture": "cobblestar_planets:textures/gui/shop/key_quasar_market.png" }
     },
     {
       "id": "pack_nova_4", "name": "Pack Nova ×4",
       "description": "Quatre clés Nova avec 200 Stars économisées.",
       "starsPrice": 1200, "itemId": "cobblestar_planets:key_nova", "itemCount": 4,
       "testOnly": false, "category": "keys", "featured": false, "isNew": true,
-      "visual": { "accent": "#9B8CFF", "badge": "PACK ×4", "previewTexture": "cobblestar_planets:textures/gui/shop/key_nova.png" }
+      "visual": { "accent": "#9B8CFF", "badge": "PACK ×4", "previewTexture": "cobblestar_planets:textures/gui/shop/key_nova_market.png" }
     },
     {
       "id": "pack_pulsar_4", "name": "Pack Pulsar ×4",
       "description": "Quatre clés Pulsar avec 400 Stars économisées.",
       "starsPrice": 2200, "itemId": "cobblestar_planets:key_pulsar", "itemCount": 4,
       "testOnly": false, "category": "keys", "featured": false, "isNew": true,
-      "visual": { "accent": "#79DCE8", "badge": "PACK ×4", "previewTexture": "cobblestar_planets:textures/gui/shop/key_pulsar.png" }
+      "visual": { "accent": "#79DCE8", "badge": "PACK ×4", "previewTexture": "cobblestar_planets:textures/gui/shop/key_pulsar_market.png" }
     },
     {
       "id": "pack_quasar_4", "name": "Pack Quasar ×4",
       "description": "Quatre clés Quasar avec 600 Stars économisées.",
       "starsPrice": 3200, "itemId": "cobblestar_planets:key_quasar", "itemCount": 4,
       "testOnly": false, "category": "keys", "featured": false, "isNew": true,
-      "visual": { "accent": "#E8C979", "badge": "PACK ×4", "previewTexture": "cobblestar_planets:textures/gui/shop/key_quasar.png" }
+      "visual": { "accent": "#E8C979", "badge": "PACK ×4", "previewTexture": "cobblestar_planets:textures/gui/shop/key_quasar_market.png" }
     },
     {
       "id": "delivery_test", "name": "Éclat Stellaire de test",
