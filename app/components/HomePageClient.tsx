@@ -47,7 +47,7 @@ export default function HomePageClient() {
           <button className="hero-server-line" onClick={copyAddress} type="button"><span className="status-dot" /><small>ADRESSE DE LA BÊTA</small><b>{copied ? "Adresse copiée" : SERVER_ADDRESS}</b><i>{copied ? "✓" : "Copier l’IP"}</i></button>
         </div>
         <div className="hero-art landing-art" aria-label="Mascotte CobbleStar">
-          <span className="hero-watermark">COBBLE<br />STAR</span><div className="hero-planet" /><div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="logo-glow" /><img src="/cobblestar-logo.png" alt="Mascotte CobbleStar" />
+          <span className="hero-watermark">COBBLE<br />STAR</span><div className="hero-planet" /><div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="logo-glow" /><img src="/cobblestar-logo.png" alt="Dragonite, mascotte de CobbleStar, posé sur un nuage" />
           <span className="scene-spark scene-spark-one">✦</span><span className="scene-spark scene-spark-two">✦</span><span className="scene-spark scene-spark-three">✦</span>
           <div className="world-ticket"><small>BÊTA COBBLESTAR</small><b>Ouverture progressive</b><span>Fabric • Cobblemon • 1.21.1</span></div>
         </div>
