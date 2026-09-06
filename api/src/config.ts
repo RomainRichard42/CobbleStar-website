@@ -18,7 +18,13 @@ export const config = z.object({
   DB_PASSWORD: configuredPassword,
   DB_SSL: bool,
   COOKIE_SECRET: generatedSecret,
+  DISCORD_CLIENT_ID: z.string().trim().default(""),
+  DISCORD_CLIENT_SECRET: z.string().trim().default(""),
+  DISCORD_BOT_TOKEN: z.string().trim().default(""),
+  DISCORD_GUILD_ID: z.string().regex(/^\d{15,24}$/).default("1540002066469101629"),
   MINECRAFT_SERVER_KEY: generatedSecret,
+  GAME_ADMIN_DISCORD_IDS: z.string().default(""),
+  GAME_ADMIN_READ_DISCORD_IDS: z.string().default(""),
   ENABLE_TEST_PURCHASES: bool,
   WIKI_ADMIN_EMAILS: z.string().default("romain.richard42400@gmail.com"),
 }).parse(process.env);

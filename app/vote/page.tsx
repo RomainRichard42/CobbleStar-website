@@ -4,8 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { VOTE_FAQ } from "../lib/faq";
 import MinecraftLinkGate from "../components/MinecraftLinkGate";
-import PageHero from "../components/PageHero";
 import SiteFooter from "../components/SiteFooter";
+import SiteHeader from "../components/SiteHeader";
 import FaqSection from "../components/FaqSection";
 import FaqStructuredData from "../components/FaqStructuredData";
 
@@ -14,10 +14,10 @@ type VoteAccount = {
 };
 
 const voteSites = [
-  { name: "Top-Serveurs", reward: "250 PokéDollars", interval: "Toutes les 1 h 30", icon: "✦", tone: "pink" },
-  { name: "Serveurs Minecraft", reward: "1 Clé de vote", interval: "Toutes les 2 heures", icon: "◉", tone: "cyan" },
-  { name: "Liste Minecraft", reward: "1 Jeton Stellaire", interval: "Toutes les 3 heures", icon: "⌁", tone: "yellow" },
-  { name: "Portail partenaire", reward: "Boîte surprise", interval: "Une fois par jour", icon: "◇", tone: "violet" },
+  { name: "Top-Serveurs", reward: "250 PokéDollars", interval: "Toutes les 1 h 30", tone: "pink" },
+  { name: "Serveurs Minecraft", reward: "1 Clé de vote", interval: "Toutes les 2 heures", tone: "cyan" },
+  { name: "Liste Minecraft", reward: "1 Jeton Stellaire", interval: "Toutes les 3 heures", tone: "yellow" },
+  { name: "Portail partenaire", reward: "Boîte surprise", interval: "Une fois par jour", tone: "violet" },
 ];
 
 export default function VotePage() {
@@ -41,33 +41,48 @@ export default function VotePage() {
   const username = account?.minecraft.username || null;
   const linked = account?.minecraft.linked ?? false;
 
-  return <main>
-    <PageHero eyebrow="SOUTENIR COBBLESTAR" title="Vote pour le serveur." accent="Reçois tes récompenses en jeu." description="Chaque vote aidera CobbleStar à se faire connaître. Une fois ton compte Minecraft lié, les récompenses seront attribuées automatiquement au bon joueur." badge="APERÇU BÊTA" />
-    <section className="content-section vote-content" aria-labelledby="vote-dashboard-title">
-      <div className="vote-launch-note" role="status"><span>EN PRÉPARATION</span><div><b>La page est ouverte, les votes arrivent prochainement.</b><p>Tu peux déjà vérifier ton compte et découvrir le fonctionnement. Aucun faux vote ne sera comptabilisé pendant cette phase.</p></div></div>
+  return <main className="vote-board-page">
+    <SiteHeader />
+    <section className="vote-board-hero" id="contenu">
+      <div className="vote-board-intro">
+        <span className="kicker">MISSION COMMUNAUTAIRE · SAISON 01</span>
+        <h1>Un vote.<br /><em>Un serveur plus visible.</em></h1>
+        <p>Quelques secondes pour soutenir CobbleStar. Ta récompense sera attribuée automatiquement au compte Minecraft lié.</p>
+      </div>
+      <div className="vote-board-art" aria-hidden="true"><img src="/cobblemon-team.webp" alt="" /><span>OBJECTIF COMMUN</span><b>04</b></div>
+    </section>
 
-      <div className="vote-profile-card">
+    <section className="vote-board-layout" aria-labelledby="vote-dashboard-title">
+      <aside className="vote-board-sidebar">
+        <div className="vote-launch-note" role="status"><span>RÉCOMPENSES AUTOMATIQUES</span><div><b>Lie ton compte une seule fois.</b><p>Chaque vote validé est associé à ton joueur et livré directement en jeu.</p></div></div>
+
+        <div className="vote-profile-card">
         <div className="vote-profile-main">
           <span className="vote-profile-avatar" aria-hidden={!username}>{username ? <img src={`https://mc-heads.net/avatar/${encodeURIComponent(username)}/96`} alt={`Tête Minecraft de ${username}`} /> : "?"}</span>
-          <div><span className="kicker">TON PROFIL DE VOTE</span><h2 id="vote-dashboard-title">{loading ? "Vérification du compte…" : username || "Connecte ton joueur"}</h2><p>{loading ? "Nous vérifions ta session CobbleStar." : linked ? "Ton UUID Minecraft est confirmé. Les récompenses pourront être livrées au bon compte." : account ? "Ton compte existe, mais ton identité Minecraft doit encore être confirmée en jeu." : "Connecte-toi pour préparer la réception automatique de tes futures récompenses."}</p></div>
+          <div><span className="kicker">TON PROFIL DE VOTE</span><h2 id="vote-dashboard-title">{loading ? "Vérification du compte…" : username || "Connecte ton joueur"}</h2><p>{loading ? "Nous vérifions ta session CobbleStar." : linked ? "Ton UUID Minecraft est confirmé. Les récompenses seront livrées au bon compte." : account ? "Ton compte existe, mais ton identité Minecraft doit encore être confirmée en jeu." : "Connecte-toi pour recevoir automatiquement tes récompenses."}</p></div>
         </div>
         <div className={`vote-profile-state ${linked ? "is-ready" : "is-required"}`}><small>ÉTAT DU COMPTE</small><b>{loading ? "Chargement" : linked ? "Prêt à voter" : "Action requise"}</b><span>{linked ? "✓ Minecraft lié" : "Liaison nécessaire"}</span></div>
-        {!loading && !account && <Link className="vote-profile-action" href="/compte/">Se connecter ou créer un compte <span>→</span></Link>}
+        {!loading && !account && <Link className="vote-profile-action" href="/compte/">Continuer avec Discord <span>→</span></Link>}
         {!loading && account && !linked && <button className="vote-profile-action" type="button" onClick={() => setLinkOpen(true)}>Lier mon compte Minecraft <span>→</span></button>}
         {!loading && linked && <span className="vote-profile-confirmed">✓ Aucune autre vérification ne sera demandée</span>}
-      </div>
+        </div>
 
-      <div className="vote-section-heading"><div><span className="kicker">PORTAILS DE VOTE</span><h2>Quatre votes.<br /><em>Quatre récompenses.</em></h2></div><p>Chaque portail possède son propre délai. Dès que l’intégration sera terminée, le bouton t’enverra voter puis le serveur validera automatiquement ta participation.</p></div>
+        <section className="vote-how" aria-labelledby="vote-how-title"><div><span className="kicker">MODE D’EMPLOI</span><h2 id="vote-how-title">Trois gestes.<br /><em>Zéro attente en jeu.</em></h2></div><ol><li><span>1</span><div><b>Lie ton compte</b><p>La commande <code>/link</code> confirme ton UUID.</p></div></li><li><span>2</span><div><b>Choisis un portail</b><p>Chaque partenaire possède son propre délai.</p></div></li><li><span>3</span><div><b>Récupère ta récompense</b><p>Le serveur la livre au bon joueur.</p></div></li></ol></section>
+      </aside>
 
-      <div className="vote-sites vote-sites-readable">
+      <div className="vote-board-main">
+        <div className="vote-section-heading"><div><span className="kicker">TABLEAU DES PORTAILS</span><h2>Ta tournée de vote.</h2></div><p>Chaque plateforme possède son propre délai et sa propre récompense. Tu peux les parcourir dans l’ordre que tu préfères.</p></div>
+
+        <div className="vote-board-status"><span>PORTAILS DE VOTE</span><b><i /> 4 plateformes</b><small>LIVRAISON EN JEU</small></div>
+
+        <div className="vote-sites vote-sites-readable">
         {voteSites.map((site, index) => <article className={`vote-site tone-${site.tone}`} key={site.name}>
-          <div className="vote-site-icon" aria-hidden="true">{site.icon}</div>
-          <div className="vote-site-copy"><small>PORTAIL {String(index + 1).padStart(2, "0")}</small><h3>{site.name}</h3><p><span>Récompense</span><b>{site.reward}</b></p><p><span>Délai</span><b>{site.interval}</b></p></div>
-          <div className="vote-action"><span>Intégration en cours</span><button type="button" disabled aria-label={`${site.name} bientôt disponible`}>Bientôt</button></div>
+          <header><span>PORTAIL {String(index + 1).padStart(2, "0")}</span><small>RÉCOMPENSE AUTO</small></header>
+          <div className="vote-site-copy"><h3>{site.name}</h3><p><span>Récompense</span><b>{site.reward}</b></p><p><span>Prochain vote</span><b>{site.interval}</b></p></div>
+          <div className="vote-action"><span>Vote comptabilisé automatiquement</span></div>
         </article>)}
+        </div>
       </div>
-
-      <section className="vote-how" aria-labelledby="vote-how-title"><div><span className="kicker">FONCTIONNEMENT</span><h2 id="vote-how-title">Simple pour toi.<br /><em>Automatique en jeu.</em></h2></div><ol><li><span>1</span><div><b>Connecte ton compte</b><p>Une seule commande <code>/link</code> confirme ton UUID.</p></div></li><li><span>2</span><div><b>Vote sur un portail</b><p>Le site de vote valide ta participation.</p></div></li><li><span>3</span><div><b>Reçois ta récompense</b><p>Le serveur la remet directement à ton joueur.</p></div></li></ol></section>
     </section>
     <FaqSection title="Questions sur le vote CobbleStar" id="faq-vote" items={VOTE_FAQ} />
     <FaqStructuredData faqItems={VOTE_FAQ} pageUrl="/vote/" />

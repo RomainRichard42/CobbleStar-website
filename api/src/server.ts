@@ -1,5 +1,5 @@
 import { randomInt, randomUUID, timingSafeEqual } from "node:crypto";
-import Fastify, { FastifyRequest } from "fastify";
+import Fastify, { FastifyReply, FastifyRequest } from "fastify";
 import cookie from "@fastify/cookie";
 import cors from "@fastify/cors";
 import helmet from "@fastify/helmet";
@@ -12,12 +12,16 @@ import { readFile } from "node:fs/promises";
 import { config, isProduction } from "./config.js";
 import { pool, transaction } from "./db.js";
 import { applyMigrations } from "./migrations.js";
-import { digest, hashPassword, linkCode, normalizeEmail, normalizeLinkCode, randomToken, verifyPassword } from "./security.js";
+import { digest, linkCode, normalizeEmail, normalizeLinkCode, randomToken } from "./security.js";
 import { findShopProduct, getGameShopCatalog, getShopTheme } from "./shop.js";
 import { findVoteSite, getVoteSites, playerVoteUrl } from "./votes.js";
+import { canReadGame, registerGameAdmin } from "./game-admin.js";
 
 type UserRow = RowDataPacket & {
-  id: string; email: string; password_hash: string; minecraft_username: string | null;
+  id: string; email: string | null; password_hash: string | null;
+  discord_id: string | null; discord_username: string | null; discord_global_name: string | null;
+  discord_avatar: string | null; discord_linked_at: Date | null; discord_guild_joined_at: Date | null;
+  minecraft_username: string | null;
   minecraft_uuid: string | null; minecraft_linked_at: Date | null;
 };
 
@@ -30,7 +34,7 @@ await app.register(helmet, {
   contentSecurityPolicy: {
     directives: {
       scriptSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "data:", "https://mc-heads.net"],
+      imgSrc: ["'self'", "data:", "https://mc-heads.net", "https://cdn.discordapp.com"],
     },
   },
 });
@@ -45,8 +49,21 @@ await app.register(rateLimit, {
 });
 
 const sessionCookie = isProduction ? "__Host-cobblestar_session" : "cobblestar_session";
-const registerBody = z.object({ email: z.string().email().max(254), password: z.string().min(8).max(128), minecraftUsername: z.string().regex(/^[A-Za-z0-9_]{3,16}$/) });
-const loginBody = z.object({ email: z.string().email(), password: z.string().min(1).max(128) });
+const discordStateCookie = isProduction ? "__Host-cobblestar_discord_state" : "cobblestar_discord_state";
+const discordCallbackQuery = z.object({
+  code: z.string().min(1).max(2048).optional(),
+  state: z.string().min(20).max(256).optional(),
+  error: z.string().max(128).optional(),
+});
+const discordToken = z.object({ access_token: z.string().min(1), token_type: z.string().min(1) });
+const discordIdentity = z.object({
+  id: z.string().regex(/^\d{15,24}$/),
+  username: z.string().min(1).max(64),
+  global_name: z.string().max(64).nullable().optional(),
+  avatar: z.string().max(128).nullable().optional(),
+  email: z.string().email().nullable().optional(),
+  verified: z.boolean().optional(),
+});
 const confirmLinkBody = z.object({
   code: z.string().transform(normalizeLinkCode).pipe(z.string().regex(/^CS-[A-HJ-NP-Z2-9]{5}-[A-HJ-NP-Z2-9]{5}$/)),
   uuid: z.string().regex(/^(?:[a-fA-F0-9]{32}|[a-fA-F0-9]{8}-(?:[a-fA-F0-9]{4}-){3}[a-fA-F0-9]{12})$/),
@@ -125,7 +142,16 @@ const newsDocumentBody = z.object({
 const wikiAdminBody = z.object({ email: z.string().email().max(254).transform(normalizeEmail) });
 
 function publicUser(user: UserRow) {
-  return { id: user.id, email: user.email, admin: isBootstrapWikiAdmin(user), minecraft: { username: user.minecraft_username, uuid: user.minecraft_uuid, linked: Boolean(user.minecraft_linked_at) } };
+  const avatarUrl = user.discord_id && user.discord_avatar
+    ? `https://cdn.discordapp.com/avatars/${user.discord_id}/${user.discord_avatar}.png?size=128`
+    : null;
+  return {
+    id: user.id,
+    email: user.email,
+    admin: isBootstrapWikiAdmin(user),
+    discord: user.discord_id ? { id: user.discord_id, username: user.discord_username, globalName: user.discord_global_name, avatarUrl } : null,
+    minecraft: { username: user.minecraft_username, uuid: user.minecraft_uuid, linked: Boolean(user.minecraft_linked_at) },
+  };
 }
 
 function bootstrapWikiAdmins() {
@@ -134,11 +160,12 @@ function bootstrapWikiAdmins() {
 
 function isBootstrapWikiAdmin(user: UserRow) {
   const allowed = bootstrapWikiAdmins();
-  return allowed.includes(user.email.toLowerCase()) || (!isProduction && allowed.length === 0);
+  return (user.email ? allowed.includes(user.email.toLowerCase()) : false) || (!isProduction && allowed.length === 0);
 }
 
 async function isWikiAdmin(user: UserRow) {
   if (isBootstrapWikiAdmin(user)) return true;
+  if (!user.email) return false;
   const [rows] = await pool.execute<RowDataPacket[]>(`SELECT email FROM wiki_admins WHERE email=? LIMIT 1`, [user.email.toLowerCase()]);
   return rows.length > 0;
 }
@@ -201,6 +228,24 @@ async function createSession(reply: { setCookie: (name: string, value: string, o
   reply.setCookie(sessionCookie, raw, { path: "/", httpOnly: true, secure: isProduction, sameSite: "lax", maxAge: 60 * 60 * 24 * 30 });
 }
 
+function discordCallbackUrl() {
+  return new URL("/api/auth/discord/callback", config.PUBLIC_API_URL).toString();
+}
+
+function discordConfigured() {
+  return Boolean(config.DISCORD_CLIENT_ID && config.DISCORD_CLIENT_SECRET && config.DISCORD_BOT_TOKEN && config.DISCORD_GUILD_ID);
+}
+
+function sameSecret(left: string, right: string) {
+  const leftBuffer = Buffer.from(left);
+  const rightBuffer = Buffer.from(right);
+  return leftBuffer.length === rightBuffer.length && timingSafeEqual(leftBuffer, rightBuffer);
+}
+
+function discordResult(reply: FastifyReply, result: "connected" | "denied" | "failed" | "guild-failed" | "unavailable") {
+  return reply.redirect(new URL(`/compte/?discord=${result}`, config.SITE_ORIGIN).toString(), 302);
+}
+
 function serverKeyMatches(candidate: string | undefined) {
   if (!candidate) return false;
   const expected = Buffer.from(config.MINECRAFT_SERVER_KEY);
@@ -217,7 +262,7 @@ function serverKeyFrom(request: FastifyRequest) {
 
 app.get("/api/health", async () => {
   await pool.query("SELECT 1");
-  return { status: "ok", service: "cobblestar-api" };
+  return { status: "ok", service: "cobblestar-api", version: "player-admin-v1" };
 });
 
 app.get("/favicon.ico", { config: { rateLimit: false } }, async (_request, reply) => {
@@ -242,36 +287,98 @@ app.get("/api/minecraft-profile", { config: { rateLimit: { max: 30, timeWindow: 
   }
 });
 
-app.post("/api/auth/register", { config: { rateLimit: { max: 5, timeWindow: "15 minutes" } } }, async (request, reply) => {
-  const parsed = registerBody.safeParse(request.body);
-  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT", details: parsed.error.flatten().fieldErrors });
-  const { password, minecraftUsername } = parsed.data;
-  const email = normalizeEmail(parsed.data.email);
-  const mojang = await fetch(`https://api.mojang.com/users/profiles/minecraft/${encodeURIComponent(minecraftUsername)}`);
-  if (!mojang.ok) return reply.code(400).send({ error: "MINECRAFT_ACCOUNT_NOT_FOUND" });
-  const profile = await mojang.json() as { id: string; name: string };
-  const userId = randomUUID();
-  try {
-    await transaction(async (connection) => {
-      await connection.execute(`INSERT INTO users(id,email,password_hash,minecraft_username) VALUES(?,?,?,?)`, [userId, email, await hashPassword(password), profile.name]);
-      await connection.execute(`INSERT INTO wallets(user_id,balance) VALUES(?,0)`, [userId]);
-    });
-  } catch (error) {
-    if ((error as { code?: string }).code === "ER_DUP_ENTRY") return reply.code(409).send({ error: "EMAIL_ALREADY_USED" });
-    throw error;
-  }
-  await createSession(reply, userId);
-  return reply.code(201).send({ user: { id: userId, email, minecraft: { username: profile.name, uuid: null, linked: false } } });
+app.get("/api/auth/discord", { config: { rateLimit: { max: 20, timeWindow: "10 minutes" } } }, async (_request, reply) => {
+  if (!discordConfigured()) return discordResult(reply, "unavailable");
+  const state = randomToken(32);
+  reply.setCookie(discordStateCookie, state, {
+    path: "/",
+    httpOnly: true,
+    secure: isProduction,
+    sameSite: "lax",
+    signed: true,
+    maxAge: 600,
+  });
+  const authorization = new URL("https://discord.com/oauth2/authorize");
+  authorization.searchParams.set("response_type", "code");
+  authorization.searchParams.set("client_id", config.DISCORD_CLIENT_ID);
+  authorization.searchParams.set("scope", "identify email guilds.join");
+  authorization.searchParams.set("state", state);
+  authorization.searchParams.set("redirect_uri", discordCallbackUrl());
+  return reply.redirect(authorization.toString(), 302);
 });
 
-app.post("/api/auth/login", { config: { rateLimit: { max: 8, timeWindow: "15 minutes" } } }, async (request, reply) => {
-  const parsed = loginBody.safeParse(request.body);
-  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
-  const [rows] = await pool.execute<UserRow[]>(`SELECT * FROM users WHERE email=? LIMIT 1`, [normalizeEmail(parsed.data.email)]);
-  const user = rows[0];
-  if (!user || !(await verifyPassword(user.password_hash, parsed.data.password))) return reply.code(401).send({ error: "INVALID_CREDENTIALS" });
-  await createSession(reply, user.id);
-  return { user: publicUser(user) };
+app.get("/api/auth/discord/callback", { config: { rateLimit: { max: 20, timeWindow: "10 minutes" } } }, async (request, reply) => {
+  if (!discordConfigured()) return discordResult(reply, "unavailable");
+  const query = discordCallbackQuery.safeParse(request.query);
+  const signedState = request.cookies[discordStateCookie];
+  const cookieState = signedState ? request.unsignCookie(signedState) : null;
+  reply.clearCookie(discordStateCookie, { path: "/" });
+  if (!query.success || query.data.error) return discordResult(reply, "denied");
+  if (!query.data.code || !query.data.state || !cookieState?.valid || !sameSecret(query.data.state, cookieState.value)) {
+    return discordResult(reply, "failed");
+  }
+
+  try {
+    const tokenResponse = await fetch("https://discord.com/api/v10/oauth2/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded", Accept: "application/json" },
+      body: new URLSearchParams({
+        client_id: config.DISCORD_CLIENT_ID,
+        client_secret: config.DISCORD_CLIENT_SECRET,
+        grant_type: "authorization_code",
+        code: query.data.code,
+        redirect_uri: discordCallbackUrl(),
+      }),
+    });
+    if (!tokenResponse.ok) throw new Error(`Discord token exchange returned ${tokenResponse.status}`);
+    const token = discordToken.parse(await tokenResponse.json());
+    const identityResponse = await fetch("https://discord.com/api/v10/users/@me", {
+      headers: { Authorization: `${token.token_type} ${token.access_token}`, Accept: "application/json", "User-Agent": "CobbleStar/1.0 (https://cobblestar-mc.fr)" },
+    });
+    if (!identityResponse.ok) throw new Error(`Discord identity returned ${identityResponse.status}`);
+    const identity = discordIdentity.parse(await identityResponse.json());
+    const verifiedEmail = identity.verified && identity.email ? normalizeEmail(identity.email) : null;
+
+    const guildResponse = await fetch(`https://discord.com/api/v10/guilds/${config.DISCORD_GUILD_ID}/members/${identity.id}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bot ${config.DISCORD_BOT_TOKEN}`,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        "User-Agent": "CobbleStar/1.0 (https://cobblestar-mc.fr)",
+      },
+      body: JSON.stringify({ access_token: token.access_token }),
+    });
+    if (guildResponse.status !== 201 && guildResponse.status !== 204) {
+      app.log.warn({ statusCode: guildResponse.status, discordUserId: identity.id }, "discord guild join failed");
+      return discordResult(reply, "guild-failed");
+    }
+
+    let user = await transaction(async (connection) => {
+      const [discordUsers] = await connection.execute<UserRow[]>(`SELECT * FROM users WHERE discord_id=? LIMIT 1 FOR UPDATE`, [identity.id]);
+      let current = discordUsers[0];
+      if (!current && verifiedEmail) {
+        const [legacyUsers] = await connection.execute<UserRow[]>(`SELECT * FROM users WHERE email=? AND discord_id IS NULL LIMIT 1 FOR UPDATE`, [verifiedEmail]);
+        current = legacyUsers[0];
+      }
+      const userId = current?.id ?? randomUUID();
+      if (current) {
+        await connection.execute(`UPDATE users SET email=COALESCE(email,?),discord_id=?,discord_username=?,discord_global_name=?,discord_avatar=?,discord_linked_at=UTC_TIMESTAMP(),discord_guild_joined_at=UTC_TIMESTAMP() WHERE id=?`, [verifiedEmail, identity.id, identity.username, identity.global_name ?? null, identity.avatar ?? null, userId]);
+      } else {
+        await connection.execute(`INSERT INTO users(id,email,password_hash,discord_id,discord_username,discord_global_name,discord_avatar,discord_linked_at,discord_guild_joined_at) VALUES(?,?,NULL,?,?,?,?,UTC_TIMESTAMP(),UTC_TIMESTAMP())`, [userId, verifiedEmail, identity.id, identity.username, identity.global_name ?? null, identity.avatar ?? null]);
+      }
+      await connection.execute(`INSERT IGNORE INTO wallets(user_id,balance) VALUES(?,0)`, [userId]);
+      const [updated] = await connection.execute<UserRow[]>(`SELECT * FROM users WHERE id=? LIMIT 1`, [userId]);
+      return updated[0];
+    });
+
+    if (!user) throw new Error("Discord account persistence failed");
+    await createSession(reply, user.id);
+    return discordResult(reply, "connected");
+  } catch (error) {
+    app.log.error(error, "discord oauth callback failed");
+    return discordResult(reply, "failed");
+  }
 });
 
 app.post("/api/auth/logout", async (request, reply) => {
@@ -281,7 +388,144 @@ app.post("/api/auth/logout", async (request, reply) => {
   return { ok: true };
 });
 
-app.get("/api/me", { preHandler: requireAccount }, async (request) => ({ user: publicUser(request.account!) }));
+app.get("/api/me", { preHandler: requireAccount }, async (request) => {
+  const account = request.account!;
+  return { user: { ...publicUser(account), admin: canReadGame(account) || await isWikiAdmin(account), gameAdmin: canReadGame(account) } };
+});
+
+registerGameAdmin(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
+
+app.get("/api/admin/stats", { config: { rateLimit: { max: 30, timeWindow: "1 minute" } } }, async (request, reply) => {
+  const account = await loadSession(request);
+  if (!account) return reply.code(401).send({ error: "AUTH_REQUIRED" });
+  if (!canReadGame(account) && !(await isWikiAdmin(account))) return reply.code(403).send({ error: "ADMIN_REQUIRED" });
+
+  type MetricRow = RowDataPacket & Record<string, number | string | null>;
+  type DailyRow = RowDataPacket & { day: string; value: number };
+  const [
+    usersResult, walletResult, ordersResult, transactionsResult, votesResult,
+    purchasesResult, deliveriesResult, sessionsResult, dailyUsersResult,
+    dailyLinksResult, dailyVotesResult, dailyPurchasesResult, playersResult,
+    voteSitesResult, productsResult,
+  ] = await Promise.all([
+    pool.execute<MetricRow[]>(`SELECT COUNT(*) total_users,
+      COALESCE(SUM(discord_id IS NOT NULL),0) discord_accounts,
+      COALESCE(SUM(discord_guild_joined_at IS NOT NULL),0) discord_members,
+      COALESCE(SUM(minecraft_uuid IS NOT NULL),0) minecraft_linked,
+      COALESCE(SUM(created_at>=UTC_DATE()-INTERVAL 7 DAY),0) new_users_7d,
+      COALESCE(SUM(created_at>=UTC_DATE()-INTERVAL 30 DAY),0) new_users_30d
+      FROM users`),
+    pool.execute<MetricRow[]>(`SELECT COUNT(*) wallets,COALESCE(SUM(balance),0) balance,
+      COALESCE(AVG(balance),0) average_balance,COALESCE(MAX(balance),0) largest_balance FROM wallets`),
+    pool.execute<MetricRow[]>(`SELECT COUNT(*) orders,
+      COALESCE(SUM(status='paid'),0) paid_orders,
+      COALESCE(SUM(CASE WHEN status='paid' THEN amount_cents ELSE 0 END),0) revenue_cents,
+      COALESCE(SUM(CASE WHEN status='paid' THEN stars_amount ELSE 0 END),0) stars_purchased FROM orders`),
+    pool.execute<MetricRow[]>(`SELECT COALESCE(SUM(CASE WHEN delta>0 THEN delta ELSE 0 END),0) stars_issued,
+      COALESCE(-SUM(CASE WHEN delta<0 THEN delta ELSE 0 END),0) stars_spent,
+      COUNT(*) transactions FROM star_transactions`),
+    pool.execute<MetricRow[]>(`SELECT COUNT(*) votes,COUNT(DISTINCT user_id) voters,
+      COALESCE(SUM(voted_at>=UTC_DATE()-INTERVAL 30 DAY),0) votes_30d,
+      COALESCE(SUM(voted_at>=UTC_DATE()-INTERVAL 7 DAY),0) votes_7d,
+      COALESCE(SUM(reward_status='pending'),0) pending_rewards FROM vote_claims`),
+    pool.execute<MetricRow[]>(`SELECT COUNT(*) purchases,COUNT(DISTINCT user_id) buyers,
+      COALESCE(SUM(stars_spent),0) stars_spent,
+      COALESCE(SUM(created_at>=UTC_DATE()-INTERVAL 30 DAY),0) purchases_30d FROM shop_purchases`),
+    pool.execute<MetricRow[]>(`SELECT COUNT(*) deliveries,
+      COALESCE(SUM(status='pending'),0) pending,
+      COALESCE(SUM(status='leased'),0) leased,
+      COALESCE(SUM(status='delivered'),0) delivered,
+      COALESCE(SUM(status='failed'),0) failed FROM reward_deliveries`),
+    pool.execute<MetricRow[]>(`SELECT COUNT(*) sessions,COUNT(DISTINCT user_id) users
+      FROM sessions WHERE expires_at>UTC_TIMESTAMP()`),
+    pool.execute<DailyRow[]>(`SELECT DATE_FORMAT(created_at,'%Y-%m-%d') day,COUNT(*) value FROM users
+      WHERE created_at>=UTC_DATE()-INTERVAL 29 DAY GROUP BY DATE(created_at) ORDER BY day`),
+    pool.execute<DailyRow[]>(`SELECT DATE_FORMAT(minecraft_linked_at,'%Y-%m-%d') day,COUNT(*) value FROM users
+      WHERE minecraft_linked_at>=UTC_DATE()-INTERVAL 29 DAY GROUP BY DATE(minecraft_linked_at) ORDER BY day`),
+    pool.execute<DailyRow[]>(`SELECT DATE_FORMAT(voted_at,'%Y-%m-%d') day,COUNT(*) value FROM vote_claims
+      WHERE voted_at>=UTC_DATE()-INTERVAL 29 DAY GROUP BY DATE(voted_at) ORDER BY day`),
+    pool.execute<DailyRow[]>(`SELECT DATE_FORMAT(created_at,'%Y-%m-%d') day,COUNT(*) value FROM shop_purchases
+      WHERE created_at>=UTC_DATE()-INTERVAL 29 DAY GROUP BY DATE(created_at) ORDER BY day`),
+    pool.execute<(RowDataPacket & {
+      id: string; discord_id: string | null; discord_username: string | null; discord_global_name: string | null;
+      discord_avatar: string | null; discord_guild_joined_at: Date | null; minecraft_username: string | null;
+      minecraft_uuid: string | null; minecraft_linked_at: Date | null; created_at: Date; balance: number;
+      votes: number; last_vote: Date | null; purchases: number; stars_spent: number; last_purchase: Date | null;
+    })[]>(`SELECT u.id,u.discord_id,u.discord_username,u.discord_global_name,u.discord_avatar,
+      u.discord_guild_joined_at,u.minecraft_username,u.minecraft_uuid,u.minecraft_linked_at,u.created_at,
+      COALESCE(w.balance,0) balance,COALESCE(v.votes,0) votes,v.last_vote,
+      COALESCE(p.purchases,0) purchases,COALESCE(p.stars_spent,0) stars_spent,p.last_purchase
+      FROM users u LEFT JOIN wallets w ON w.user_id=u.id
+      LEFT JOIN (SELECT user_id,COUNT(*) votes,MAX(voted_at) last_vote FROM vote_claims GROUP BY user_id) v ON v.user_id=u.id
+      LEFT JOIN (SELECT user_id,COUNT(*) purchases,SUM(stars_spent) stars_spent,MAX(created_at) last_purchase FROM shop_purchases GROUP BY user_id) p ON p.user_id=u.id
+      ORDER BY u.created_at DESC LIMIT 500`),
+    pool.execute<(RowDataPacket & { vote_site: string; votes: number; voters: number; last_vote: Date | null })[]>(
+      `SELECT vote_site,COUNT(*) votes,COUNT(DISTINCT user_id) voters,MAX(voted_at) last_vote
+       FROM vote_claims GROUP BY vote_site ORDER BY votes DESC`),
+    pool.execute<(RowDataPacket & { product_id: string; purchases: number; buyers: number; stars_spent: number; last_purchase: Date | null })[]>(
+      `SELECT product_id,COUNT(*) purchases,COUNT(DISTINCT user_id) buyers,SUM(stars_spent) stars_spent,MAX(created_at) last_purchase
+       FROM shop_purchases GROUP BY product_id ORDER BY purchases DESC`),
+  ]);
+
+  const metric = (row: MetricRow | undefined, key: string) => Number(row?.[key] ?? 0);
+  const users = usersResult[0][0];
+  const wallet = walletResult[0][0];
+  const orders = ordersResult[0][0];
+  const transactions = transactionsResult[0][0];
+  const votes = votesResult[0][0];
+  const purchases = purchasesResult[0][0];
+  const deliveries = deliveriesResult[0][0];
+  const sessions = sessionsResult[0][0];
+  const dailyMaps = [dailyUsersResult[0], dailyLinksResult[0], dailyVotesResult[0], dailyPurchasesResult[0]]
+    .map((rows) => new Map(rows.map((row) => [row.day, Number(row.value)])));
+  const daily = Array.from({ length: 30 }, (_, index) => {
+    const date = new Date();
+    date.setUTCHours(0, 0, 0, 0);
+    date.setUTCDate(date.getUTCDate() - (29 - index));
+    const day = date.toISOString().slice(0, 10);
+    return { day, accounts: dailyMaps[0]!.get(day) ?? 0, links: dailyMaps[1]!.get(day) ?? 0, votes: dailyMaps[2]!.get(day) ?? 0, purchases: dailyMaps[3]!.get(day) ?? 0 };
+  });
+
+  return {
+    generatedAt: new Date().toISOString(),
+    overview: {
+      users: metric(users, "total_users"), discordAccounts: metric(users, "discord_accounts"),
+      discordMembers: metric(users, "discord_members"), minecraftLinked: metric(users, "minecraft_linked"),
+      newUsers7d: metric(users, "new_users_7d"), newUsers30d: metric(users, "new_users_30d"),
+      activeSessions: metric(sessions, "sessions"), activeSessionUsers: metric(sessions, "users"),
+    },
+    economy: {
+      circulatingStars: metric(wallet, "balance"), averageBalance: metric(wallet, "average_balance"),
+      largestBalance: metric(wallet, "largest_balance"), starsIssued: metric(transactions, "stars_issued"),
+      starsSpent: metric(transactions, "stars_spent"), transactions: metric(transactions, "transactions"),
+      orders: metric(orders, "orders"), paidOrders: metric(orders, "paid_orders"),
+      revenueCents: metric(orders, "revenue_cents"), starsPurchased: metric(orders, "stars_purchased"),
+    },
+    engagement: {
+      votes: metric(votes, "votes"), voters: metric(votes, "voters"), votes7d: metric(votes, "votes_7d"),
+      votes30d: metric(votes, "votes_30d"), pendingVoteRewards: metric(votes, "pending_rewards"),
+      purchases: metric(purchases, "purchases"), buyers: metric(purchases, "buyers"),
+      purchases30d: metric(purchases, "purchases_30d"), shopStarsSpent: metric(purchases, "stars_spent"),
+    },
+    deliveries: {
+      total: metric(deliveries, "deliveries"), pending: metric(deliveries, "pending"),
+      leased: metric(deliveries, "leased"), delivered: metric(deliveries, "delivered"), failed: metric(deliveries, "failed"),
+    },
+    daily,
+    players: playersResult[0].map((player) => ({
+      id: player.id, discordId: player.discord_id, discordUsername: player.discord_username,
+      discordName: player.discord_global_name, discordAvatarUrl: player.discord_id && player.discord_avatar
+        ? `https://cdn.discordapp.com/avatars/${player.discord_id}/${player.discord_avatar}.png?size=64` : null,
+      discordJoinedAt: player.discord_guild_joined_at, minecraftUsername: player.minecraft_username,
+      minecraftUuid: player.minecraft_uuid, minecraftLinkedAt: player.minecraft_linked_at,
+      createdAt: player.created_at, balance: Number(player.balance), votes: Number(player.votes),
+      lastVote: player.last_vote, purchases: Number(player.purchases), starsSpent: Number(player.stars_spent),
+      lastPurchase: player.last_purchase,
+    })),
+    voteSites: voteSitesResult[0].map((site) => ({ ...site, votes: Number(site.votes), voters: Number(site.voters) })),
+    products: productsResult[0].map((product) => ({ ...product, purchases: Number(product.purchases), buyers: Number(product.buyers), starsSpent: Number(product.stars_spent) })),
+  };
+});
 
 app.get("/api/wiki", { config: { rateLimit: { max: 240, timeWindow: "1 minute" } } }, async (_request, reply) => {
   const wiki = await wikiSlot("published");
@@ -329,7 +573,7 @@ app.get("/api/wiki/admins", async (request, reply) => {
   const [rows] = await pool.execute<(RowDataPacket & { email: string; created_at: Date })[]>(`SELECT email,created_at FROM wiki_admins ORDER BY created_at,email`);
   const dynamic: Array<{ email: string; createdAt: Date | null; bootstrap: boolean }> = rows.map((row) => ({ email: row.email, createdAt: row.created_at, bootstrap: isBootstrapEmail(row.email) }));
   for (const email of bootstrapWikiAdmins()) if (!dynamic.some((admin) => admin.email === email)) dynamic.unshift({ email, createdAt: null, bootstrap: true });
-  return { admins: dynamic, currentEmail: account.email };
+  return { admins: dynamic, currentEmail: account.email ?? "" };
 });
 
 app.post("/api/wiki/admins", { config: { rateLimit: { max: 20, timeWindow: "1 minute" } } }, async (request, reply) => {
@@ -767,6 +1011,7 @@ app.setNotFoundHandler((request, reply) => {
 });
 
 app.setErrorHandler((error, _request, reply) => {
+  if (error instanceof z.ZodError) return reply.code(400).send({ error: "INVALID_INPUT" });
   const details = error as { statusCode?: number; code?: string; message?: string };
   const status = details.statusCode && details.statusCode >= 400 && details.statusCode <= 599 ? details.statusCode : 500;
   const message = details.message ?? "Unexpected error";

@@ -18,6 +18,20 @@ export default function MinecraftLinkGate({ open, onClose, context }: { open: bo
     });
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [open, onClose]);
+
   async function prepare() {
     try {
       const me = await fetch("/api/me", { credentials: "include" });
@@ -40,15 +54,17 @@ export default function MinecraftLinkGate({ open, onClose, context }: { open: bo
 
   if (!open) return null;
   return <div className="checkout-overlay" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
-    <section className="link-gate-modal" role="dialog" aria-modal="true" aria-labelledby="link-gate-title">
-      <button className="checkout-close" type="button" onClick={onClose} aria-label="Fermer">×</button>
+    <section className="link-gate-modal" role="dialog" aria-modal="true" aria-labelledby="link-gate-title" aria-describedby="link-gate-description">
+      <button className="checkout-close" type="button" onClick={onClose} aria-label="Fermer la vérification" autoFocus>×</button>
       <div className="link-gate-status"><span>PREMIÈRE {context === "achat" ? "RECHARGE" : "PARTICIPATION"}</span><i>{state === "linked" ? "COMPTE LIÉ" : "VÉRIFICATION"}</i></div>
       <h2 id="link-gate-title">Confirme ton compte<br /><em>depuis le serveur.</em></h2>
-      {state === "loading" && <div className="link-waiting"><span className="status-dot" /><div><b>Préparation de la vérification…</b><small>Quelques secondes suffisent.</small></div></div>}
-      {state === "signed-out" && <><p>Connecte-toi d’abord à ton compte CobbleStar pour obtenir ta commande personnelle.</p><a className="link-account-cta" href="/compte/">Se connecter ou créer un compte <span>→</span></a></>}
-      {state === "linked" && <><p>Ton UUID Minecraft est déjà associé. Tu es prêt pour {context === "achat" ? "les futures recharges de Stars" : "les futures récompenses de vote"}.</p><div className="link-waiting"><span className="status-dot" /><div><b>Compte vérifié</b><small>Aucune nouvelle commande /link nécessaire.</small></div></div></>}
-      {state === "code" && <><p>Cette vérification relie définitivement ton compte CobbleStar à ton UUID Minecraft. Elle ne sera demandée qu’une seule fois.</p><div className="link-command-card"><small>1 — REJOINS COBBLESTAR ET ÉCRIS</small><code>{command}</code><button type="button" onClick={copyCode}>{copied ? "Commande copiée ✓" : "Copier la commande"}</button></div><div className="link-waiting"><span className="status-dot" /><div><b>En attente de la commande en jeu</b><small>Le mod serveur confirmera automatiquement la liaison.</small></div></div></>}
-      {state === "error" && <><p>La vérification est momentanément indisponible.</p><button className="link-account-cta" type="button" onClick={prepare}>Réessayer <span>→</span></button></>}
+      <div id="link-gate-description" aria-live="polite">
+        {state === "loading" && <div className="link-waiting"><span className="status-dot" /><div><b>Vérification du compte…</b><small>Quelques secondes suffisent.</small></div></div>}
+        {state === "signed-out" && <><p>Connecte-toi d’abord avec Discord pour obtenir ta commande personnelle.</p><a className="link-account-cta" href="/compte/">Continuer avec Discord <span>→</span></a></>}
+        {state === "linked" && <><p>Ton UUID Minecraft est déjà associé. Tu peux recevoir {context === "achat" ? "tes recharges de Stars" : "tes récompenses de vote"}.</p><div className="link-waiting"><span className="status-dot" /><div><b>Compte vérifié</b><small>Aucune nouvelle commande /link nécessaire.</small></div></div></>}
+        {state === "code" && <><p>Cette vérification relie définitivement ton compte CobbleStar à ton UUID Minecraft. Elle ne sera demandée qu’une seule fois.</p><div className="link-command-card"><small>1 — REJOINS COBBLESTAR ET ÉCRIS</small><code>{command}</code><button type="button" onClick={copyCode}>{copied ? "Commande copiée ✓" : "Copier la commande"}</button></div><div className="link-waiting"><span className="status-dot" /><div><b>En attente de la commande en jeu</b><small>Le mod serveur confirmera automatiquement la liaison.</small></div></div></>}
+        {state === "error" && <><p>La vérification est momentanément indisponible.</p><button className="link-account-cta" type="button" onClick={prepare}>Réessayer <span>→</span></button></>}
+      </div>
       <div className="link-gate-details"><span><b>Un seul lien</b><small>Valable pour la boutique et les votes</small></span><span><b>10 minutes</b><small>Le code expire automatiquement</small></span><span><b>UUID sécurisé</b><small>Ton pseudo pourra changer</small></span></div>
     </section>
   </div>;

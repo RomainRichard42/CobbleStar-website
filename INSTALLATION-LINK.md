@@ -29,11 +29,17 @@ Dans le `.env` du serveur **CobbleStar Web/API** sur Kinetic :
 
 ```env
 MINECRAFT_SERVER_KEY=COLLER_LA_CLE_ICI
-NEXT_PUBLIC_ACCOUNTS_ENABLED=false
+DISCORD_CLIENT_ID=IDENTIFIANT_APPLICATION_DISCORD
+DISCORD_CLIENT_SECRET=SECRET_APPLICATION_DISCORD
+DISCORD_BOT_TOKEN=TOKEN_PRIVE_DU_BOT_DISCORD
+DISCORD_GUILD_ID=1540002066469101629
 ```
 
-Utiliser `true` à la place de `false` uniquement quand l'espace compte doit être
-accessible. Redémarrer le serveur Web après toute modification du `.env`.
+Dans le portail développeur Discord, ajouter exactement l’URL de redirection
+`https://cobblestar-mc.fr/api/auth/discord/callback` dans **OAuth2 → Redirects**.
+Le bot de la même application doit être ajouté au serveur CobbleStar avec la
+permission **Créer une invitation**. Ne jamais publier son token.
+Redémarrer le serveur Web après toute modification du `.env`.
 
 ## 3. Récupérer le mod compilé
 
@@ -65,12 +71,11 @@ accessible. Redémarrer le serveur Web après toute modification du `.env`.
 
 ## 5. Tester le parcours
 
-1. Passer temporairement `NEXT_PUBLIC_ACCOUNTS_ENABLED=true`, puis redémarrer le
-   serveur Web afin qu'il reconstruise le site.
-2. Ouvrir `https://cobblestar-mc.fr/compte/` et créer un compte.
-3. Cliquer sur **Obtenir ma commande /link**.
-4. Rejoindre `play.cobblestar-mc.fr` avec le même compte Minecraft.
+1. Ouvrir `https://cobblestar-mc.fr/compte/` puis choisir **Continuer avec Discord**.
+2. Autoriser l’identification et l’ajout au serveur, puis vérifier que le compte rejoint le Discord CobbleStar.
+3. Cliquer sur **Générer ma commande /link**.
+4. Rejoindre `play.cobblestar-mc.fr` avec le compte Minecraft à associer.
 5. Exécuter la commande affichée, par exemple `/link CS-ABCDE-23456`.
-6. La page doit indiquer automatiquement que l'UUID est lié.
+6. La page doit afficher automatiquement le pseudo et l’UUID Minecraft liés au profil Discord.
 
 La validation Microsoft du launcher n'intervient pas dans ce mécanisme.

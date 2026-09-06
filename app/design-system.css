@@ -1,0 +1,95 @@
+:root {
+  color-scheme: dark;
+
+  /* Couleurs de marque */
+  --cs-ink-950: #080616;
+  --cs-ink-900: #0d091f;
+  --cs-surface-800: #141027;
+  --cs-surface-700: #1d1737;
+  --cs-surface-600: #282048;
+  --cs-text-100: #fffaf4;
+  --cs-text-200: #e8e2ec;
+  --cs-text-400: #aaa4b8;
+  --cs-text-500: #817a91;
+  --cs-dragon: #f0a944;
+  --cs-cloud: #8edff3;
+  --cs-wing: #43b3a9;
+  --cs-gold: #f7d875;
+  --cs-berry: #b5164f;
+  --cs-violet: #745bd3;
+  --cs-success: #67dfa5;
+  --cs-danger: #f06f8f;
+
+  /* Alias sémantiques réutilisés par l'existant */
+  --ink: var(--cs-ink-950);
+  --panel: var(--cs-surface-800);
+  --panel-soft: var(--cs-surface-700);
+  --text: var(--cs-text-100);
+  --muted: var(--cs-text-400);
+  --pink: var(--cs-dragon);
+  --cyan: var(--cs-cloud);
+  --yellow: var(--cs-gold);
+  --violet: var(--cs-violet);
+  --berry: var(--cs-berry);
+  --wing: var(--cs-wing);
+
+  /* Typographie */
+  --cs-font-body: "Segoe UI Variable Text", "Segoe UI", Inter, Arial, sans-serif;
+  --cs-font-display: "Segoe UI Variable Display", "Arial Black", Arial, sans-serif;
+  --cs-font-mono: "Cascadia Mono", Consolas, "SFMono-Regular", monospace;
+
+  /* Grille 4 px */
+  --cs-space-1: 4px;
+  --cs-space-2: 8px;
+  --cs-space-3: 12px;
+  --cs-space-4: 16px;
+  --cs-space-5: 20px;
+  --cs-space-6: 24px;
+  --cs-space-8: 32px;
+  --cs-space-10: 40px;
+  --cs-space-12: 48px;
+  --cs-space-16: 64px;
+  --cs-space-20: 80px;
+  --cs-space-24: 96px;
+
+  /* Formes et profondeur */
+  --cs-radius-control: 12px;
+  --cs-radius-card: 18px;
+  --cs-radius-panel: 28px;
+  --cs-radius-pill: 999px;
+  --cs-line: rgba(255, 255, 255, .1);
+  --cs-line-strong: rgba(142, 223, 243, .24);
+  --cs-shadow-card: 0 22px 55px rgba(2, 1, 10, .24);
+  --cs-shadow-panel: 0 36px 100px rgba(2, 1, 10, .38);
+  --cs-glow-brand: 0 0 48px rgba(240, 169, 68, .14);
+
+  /* Mouvement */
+  --cs-ease: cubic-bezier(.2, .8, .2, 1);
+  --cs-fast: 180ms;
+  --cs-slow: 360ms;
+}
+
+html { background: var(--cs-ink-950); }
+body {
+  background: var(--cs-ink-950);
+  color: var(--cs-text-100);
+  font-family: var(--cs-font-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+button, input, textarea, select { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+small { font-size: max(.75em, 10px); }
+::selection { color: var(--cs-ink-950); background: var(--cs-cloud); }
+:focus-visible { outline: 3px solid var(--cs-cloud); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}

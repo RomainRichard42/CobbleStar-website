@@ -32,9 +32,9 @@ les fichiers destinés au serveur Kinetic.
 ## Déploiement
 
 - Chaque pull request exécute les vérifications sans modifier la production.
-- Chaque push sur `main` construit puis déploie automatiquement sur Kinetic.
+- Chaque push sur `main` construit et vérifie l’application, puis publie l’artefact `cobblestar-kinetic` dans GitHub Actions.
 - Le fichier `.env` reste uniquement sur Kinetic et n'est jamais envoyé sur GitHub.
-- Le workflow redémarre le processus Node puis vérifie `/api/health`.
+- Le workflow actuel ne transfère pas les fichiers sur Kinetic et ne redémarre pas Node. Un push réussi n’est donc pas une preuve de déploiement.
 
 Consulte [`docs/DEPLOIEMENT_KINETIC.md`](docs/DEPLOIEMENT_KINETIC.md) pour la
 configuration initiale des secrets GitHub et de Kinetic.
@@ -59,9 +59,18 @@ dans les variables Kinetic et dans les secrets GitHub.
 
 ## Liaison Minecraft
 
-L'espace compte peut rester fermé avec `NEXT_PUBLIC_ACCOUNTS_ENABLED=false`.
-Le flux API et le mod sont néanmoins prêts. Le mod serveur se construit dans
-GitHub Actions à chaque push sur `main`; son JAR est disponible dans l'artefact
+L’espace joueur utilise Discord comme identité principale, puis la commande
+temporaire `/link` associe l’UUID Minecraft au même compte. La connexion ajoute
+également le membre au Discord officiel CobbleStar avec son autorisation. Les
+Stars, achats et votes restent ainsi rattachés au bon joueur même si son pseudo
+Minecraft change.
+
+Le portail développeur Discord doit autoriser l’URL
+`https://cobblestar-mc.fr/api/auth/discord/callback`, avec
+`DISCORD_CLIENT_ID`, `DISCORD_CLIENT_SECRET`, `DISCORD_BOT_TOKEN` et
+`DISCORD_GUILD_ID=1540002066469101629` configurés dans l’environnement Kinetic.
+Le bot de la même application doit être membre du Discord CobbleStar. Le mod serveur se construit dans GitHub Actions à chaque push sur
+`main`; son JAR est disponible dans l’artefact
 `cobblestar-link-fabric-1.21.1`. Voir [`minecraft-mod/README.md`](minecraft-mod/README.md).
 
 ## Votes

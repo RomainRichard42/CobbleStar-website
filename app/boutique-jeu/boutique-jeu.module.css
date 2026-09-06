@@ -1,12 +1,12 @@
 .viewport {
-  --ink: #080615;
-  --panel: #110c24;
-  --panel-2: #18102f;
-  --line: #6450a1;
-  --violet: #9a7cff;
-  --cyan: #70e4ee;
-  --pink: #f28bc8;
-  --yellow: #ffe276;
+  --ink: #080616;
+  --panel: #141027;
+  --panel-2: #1d1737;
+  --line: #745bd3;
+  --violet: #745bd3;
+  --cyan: #8edff3;
+  --pink: #f0a944;
+  --yellow: #f7d875;
   min-height: 100vh;
   padding: clamp(18px, 4vh, 52px) clamp(14px, 4vw, 72px);
   display: grid;
@@ -84,3 +84,9 @@
 @media (max-width: 520px) {
   .headerActions{gap:5px}.wallet{padding:0 8px}.wallet small{display:none}.close{width:38px;height:38px}.tabs button{font-size:8px}.tabs button:nth-child(2){display:none}.cart{font-size:0}.cart b{font-size:8px}.productGrid{grid-template-columns:1fr}.heroCopy{padding:22px}.heroCopy h1{font-size:31px}.heroCopy p{font-size:11px}.heroCopy>div small{display:none}
 }
+
+/* Lisibilité de l'interface boutique sans agrandir son empreinte. */
+.brand small,.wallet small,.eyebrow,.heroCopy div small,.passBadge span,.sectionTitle small{font-size:10px}.cart,.heroCopy button{font-size:11px}.cart b{font-size:10px}
+.newBadge,.viewHint,.cardInfo>small,.cardInfo span i,.emblemArt i,.tagArt i,.detailTop span,.detailTop b,.detailCopy>small,.quantity>span,.total>span,.footer,.footer>b{font-size:9px}
+.cardInfo>strong{font-size:12px}.cardInfo span b{font-size:11px}.detailCopy p{font-size:12px}.detailCopy ul{font-size:10px}.buyButton span,.buyButton b,.notice{font-size:10px}
+@media(max-width:520px){.tabs button{font-size:10px}.cart b{font-size:10px}.heroCopy p{font-size:12px}}

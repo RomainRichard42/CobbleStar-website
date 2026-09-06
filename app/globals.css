@@ -153,7 +153,7 @@ footer { width: min(1180px, calc(100% - 48px)); margin: auto; padding: 45px 0 35
 }
 
 /* Refined CobbleStar identity */
-body { overflow-x: hidden; background: #08051a; }
+body { overflow-x: clip; background: #08051a; }
 main { overflow: visible; background: radial-gradient(circle at 50% 8%, #201945 0, #0b071e 31%, #08051a 65%); }
 .nav-frame { width: 100%; position: relative; z-index: 50; padding-top: 18px; }
 .nav-wrap { width: min(1220px, calc(100% - 40px)); height: 72px; padding: 0 12px 0 14px; border: 1px solid rgba(255,255,255,.1); border-radius: 20px; background: rgba(12,8,31,.72); box-shadow: 0 18px 55px rgba(0,0,0,.2), inset 0 1px rgba(255,255,255,.04); backdrop-filter: blur(22px); }

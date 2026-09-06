@@ -10,7 +10,7 @@ const organizationStructuredData = {
       url: SITE_URL,
       logo: `${SITE_URL}${OG_IMAGE}`,
       description:
-        "Communauté Minecraft Cobblemon francophone avec une bêta privée sur serveur 1.21.1.",
+        "Communauté Minecraft Cobblemon francophone sur serveur 1.21.1.",
     },
     {
       "@type": "SoftwareApplication",
@@ -42,7 +42,7 @@ const organizationStructuredData = {
         "@id": `${SITE_URL}/#organization`,
       },
       description:
-        "Serveur Minecraft Cobblemon francophone en bêta sur Fabric 1.21.1.",
+        "Serveur Minecraft Cobblemon francophone sur Fabric 1.21.1.",
     },
     {
       "@type": "VideoGame",

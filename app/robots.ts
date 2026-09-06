@@ -12,6 +12,9 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           "/api/",
           "/api/*",
+          "/admin/",
+          "/actualites/admin/",
+          "/wiki/admin/",
         ],
       },
     ],

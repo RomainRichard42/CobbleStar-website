@@ -1,8 +1,9 @@
-# Déploiement automatique sur Kinetic
+# Déploiement sur Kinetic
 
-Le workflow `.github/workflows/deploy.yml` est lancé après chaque push sur
-`main`. Il construit le site et l'API sur GitHub, transfère l'artefact par SFTP,
-redémarre Node avec l'API du panel, puis vérifie le site public.
+Le workflow présent est `.github/workflows/ci.yml` : il vérifie le site et l’API,
+puis fournit un artefact `cobblestar-kinetic`. Aucun `deploy.yml` n’est installé.
+Il faut transférer cet artefact sur Kinetic et redémarrer l’application, ou
+configurer explicitement un déploiement automatique avec les accès ci-dessous.
 
 ## 1. Créer le dépôt
 
@@ -44,12 +45,17 @@ Au redémarrage, Kinetic exécute `npm install`, puis démarre `dist/server.js`.
 
 ## 5. Premier lancement
 
-Le premier push sur `main` échouera tant que les sept secrets ne seront pas
-présents. Après leur ajout, ouvrir l'Action échouée puis choisir **Re-run all
-jobs**. Les pushes suivants seront entièrement automatiques.
+La CI fonctionne sans les secrets de déploiement. Leur ajout seul n’installe pas
+de déploiement automatique : il faut aussi créer et vérifier le workflow de
+transfert/redémarrage. Ne pas considérer un build vert comme une mise en ligne.
+
+Après transfert, `/api/health` doit annoncer `version: "player-admin-v1"`.
+`GET /api/internal/admin/status`, avec la clé Minecraft en Bearer, permet de
+vérifier la configuration Discord/admin et la réception des relevés, sans
+exposer ces informations publiquement.
 
 ## Retour arrière
 
 Pour restaurer une version, ouvrir le commit stable dans GitHub, créer un commit
 qui annule les changements (`git revert`), puis le pousser sur `main`. Le même
-workflow redéploiera cette version.
+processus de transfert permettra ensuite de remettre cette version en ligne.

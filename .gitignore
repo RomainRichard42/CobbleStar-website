@@ -19,3 +19,5 @@ minecraft-mod/run/
 .DS_Store
 .asset-extract/
 .chrome-*/
+ui-review-*/
+ui-review-game-admin-*.png

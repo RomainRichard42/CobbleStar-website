@@ -3,7 +3,7 @@ import { SITE_URL } from "@/app/lib/seo";
 
 export const dynamic = "force-static";
 
-const lastModified = new Date("2026-08-20T00:00:00Z");
+const lastModified = new Date("2026-09-05T00:00:00Z");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -14,6 +14,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      url: `${SITE_URL}/actualites/`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
+      url: `${SITE_URL}/wiki/`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.85,
+    },
+    {
       url: `${SITE_URL}/boutique/`,
       lastModified,
       changeFrequency: "weekly",
@@ -21,6 +33,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/vote/`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${SITE_URL}/roadmap/`,
       lastModified,
       changeFrequency: "weekly",
       priority: 0.8,

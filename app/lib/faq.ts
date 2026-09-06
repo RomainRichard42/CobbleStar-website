@@ -12,11 +12,11 @@ export const HOME_FAQ: ReadonlyArray<FaqEntry> = [
   },
   {
     question: "À quel serveur dois-je me connecter ?",
-    answer: `Entre l’adresse ${SITE_NAME} dans ton client : ${"play.cobblestar-mc.fr"}. Le serveur est encore en phase de bêta privée selon les périodes d’ouverture.`,
+    answer: `Entre l’adresse ${SITE_NAME} dans ton client : ${"play.cobblestar-mc.fr"}. Le launcher installe automatiquement la configuration nécessaire.`,
   },
   {
     question: "Ai-je besoin de payer pour télécharger le launcher ?",
-    answer: "Non. Le launcher et le modpack d’installation sont gratuits pendant la phase beta.",
+    answer: "Non. Le launcher et le modpack d’installation sont gratuits.",
   },
   {
     question: "Puis-je rejoindre en simple et bon serveur vanilla ?",
@@ -35,7 +35,7 @@ export const SHOP_FAQ: ReadonlyArray<FaqEntry> = [
   },
   {
     question: "Quels moyens de paiement sont utilisés ?",
-    answer: "La plateforme n’active la monétisation que quand l’équipe le précise ; la page affiche l’état et les options disponibles au moment de l’ouverture.",
+    answer: "Les moyens de paiement proposés et le montant total sont affichés avant chaque validation. Aucun abonnement n’est ajouté à l’achat d’un pack de Stars.",
   },
 ];
 
@@ -64,7 +64,11 @@ export const ACCOUNT_FAQ: ReadonlyArray<FaqEntry> = [
     answer: "Seules les données utiles au service de connexion et de liaison sont conservées, comme précisé dans la politique de confidentialité.",
   },
   {
-    question: "Mon mot de passe est-il stocké en clair ?",
-    answer: "Non, les mots de passe du portail web ne sont jamais conservés en clair ; ils sont protégés par des mécanismes standards côté serveur.",
+    question: "Comment fonctionne la connexion Discord ?",
+    answer: "Discord confirme ton identité et t’ajoute au serveur officiel CobbleStar avec ton autorisation. CobbleStar conserve ton identifiant et ton profil Discord, mais jamais ton mot de passe ni le jeton de connexion Discord.",
+  },
+  {
+    question: "Pourquoi dois-je encore utiliser /link en jeu ?",
+    answer: "Discord confirme ton compte web ; la commande temporaire /link prouve que tu contrôles aussi le joueur Minecraft auquel seront envoyés tes Stars et récompenses.",
   },
 ];

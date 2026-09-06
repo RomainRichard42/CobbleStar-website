@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "test:game-admin": "npm run build && node --test test/game-admin.test.mjs",
     "start": "node dist/server.js",
     "migrate": "node dist/migrate.js",
     "kinetic": "npm run migrate && npm start"

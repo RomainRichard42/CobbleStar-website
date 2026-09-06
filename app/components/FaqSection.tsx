@@ -11,7 +11,7 @@ type FaqSectionProps = {
 
 export default function FaqSection({ title, id, items }: FaqSectionProps) {
   return (
-    <section id={id} aria-labelledby={`${id}-title`} className="legal-content">
+    <section id={id} aria-labelledby={`${id}-title`} className="faq-section">
       <div className="faq-heading">
         <span className="kicker">FAQ</span>
         <h2 id={`${id}-title`}>{title}</h2>
