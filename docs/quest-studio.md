@@ -1,5 +1,7 @@
 # Studio Quêtes & PNJ
 
+> L’interface a été remplacée par l’Atelier Scénarios. Pour les auteurs, lire [Écrire une aventure](atelier-scenarios.md). Ce document conserve les détails techniques de la passerelle.
+
 Route : `/admin/creation/`, accessible depuis le panneau admin, entrée **Quêtes & PNJ**.
 Le studio utilise la session Discord et les droits existants `GAME_ADMIN_DISCORD_IDS` (écriture) et `GAME_ADMIN_READ_DISCORD_IDS` (lecture). Il ne crée pas de connexion publique ni de console distante.
 
@@ -17,11 +19,11 @@ Une API ancienne répondra 404 à la passerelle. Un JAR ancien ne fera pas appar
 ## Créer une rencontre de bout en bout
 
 1. Choisir le serveur. **Importer l’existant du serveur** récupère les quêtes locales et les modèles web déjà connus, sans modifier le jeu. Les PNJ locaux non liés apparaissent dans l’inventaire des placements ; leurs dialogues locaux ne sont pas convertis automatiquement en modèles web.
-2. Créer une quête : titre, catégorie, fréquence, prérequis, objectifs, filtres et récompenses. Organiser les quêtes narratives dans les chapitres si nécessaire.
+2. Créer une quête : introduction, prérequis, étapes guidées et récompenses. Organiser les quêtes narratives dans les chapitres si nécessaire.
 3. Créer un PNJ avec un nom unique, par exemple `Professeur Asteria`. Choisir sa fonction, ses quêtes, sa couleur, son skin et ses répliques. Relier les réponses à d’autres répliques et, si souhaité, à l’acceptation d’une quête attribuée à ce PNJ.
 4. **Enregistrer** ne modifie que le brouillon. **Publier en jeu** demande une confirmation et un motif conservé avec l’identité Discord et la version.
 5. Attendre **Serveur à jour**. L’accusé d’application remonte lors de l’échange suivant : compter généralement 15 à 30 secondes à 20 TPS, davantage si le serveur ralentit.
-6. En jeu, obtenir le bâton avec `/queteadmin baton` (opérateur niveau 4), puis placer ou éditer un PNJ. Dans son champ nom, saisir `Professeur Asteria` ou l’identifiant du modèle affiché sur le site, puis enregistrer. La casse et les espaces répétés du nom ne bloquent pas la correspondance.
+6. En jeu, obtenir le bâton avec `/queteadmin baton` (opérateur niveau 4), puis placer ou éditer un PNJ. Dans son champ nom, saisir `Professeur Asteria` (la liaison interne utilise un identifiant stable masqué), puis enregistrer. La casse et les espaces répétés du nom ne bloquent pas la correspondance.
 7. Le PNJ prend les réglages publiés. Son identifiant web est désormais conservé : un renommage sur le site continue de mettre à jour le même personnage. Plusieurs PNJ placés peuvent utiliser un même modèle. Le site ne crée pas de nouvelles entités et ne déplace pas leurs ancres.
 8. Tester la rencontre avec un compte joueur : dialogue, acceptation, progression réelle de l’objectif, remise et récompense. Vérifier également les prérequis et les permissions avec un compte non opérateur.
 
@@ -37,7 +39,7 @@ Les réglages web sont prioritaires pour un PNJ lié. Pour le rendre local, enre
 - Les commandes de récompense web sont limitées à `give {player} namespace:objet 1–64` et `experience add {player} quantité points|levels`. Pas de commandes arbitraires, de permissions, de grades ou de modifications d’un autre joueur. Une ancienne quête avec d’autres commandes doit être adaptée avant enregistrement web ; rien n’est retiré silencieusement.
 - Les identifiants d’objets et événements viennent du moteur et des mods installés. Le site valide leur format, pas leur présence dans le registre Minecraft ; vérifier les objets, filtres et événements en jeu. Il ne crée pas de nouveaux événements de progression.
 - Offres de marchand : une ligne `namespace:objet|quantité|prix achat|prix revente`, quantité de 1 à 64, prix entiers ; 0 désactive ce sens de transaction. Exemple : `cobblemon:poke_ball|8|100|0`.
-- Skins : texture déjà incluse dans les ressources du client, champ vide pour Steve, ou `player:UUID:pseudo` avec UUID complet. Pas d’envoi de fichier ou d’URL de skin depuis le site. Les skins de joueurs dépendent de la résolution du profil par le client ; un échec peut afficher Steve.
+- Skins : l’interface propose des apparences par nom et conserve les skins personnalisés existants. Les formats techniques historiques restent lisibles côté mod. Pas d’envoi de fichier ou d’URL de skin depuis le site. Les skins de joueurs dépendent de la résolution du profil par le client ; un échec peut afficher Steve.
 - Une fiche PNJ est limitée à 18 Ko UTF-8 pour respecter le paquet réseau Minecraft. Maximum 80 répliques et 8 choix par réplique, sous cette limite totale. Si le catalogue dépasse le paquet de l’éditeur natif, le bâton conserve l’édition du personnage mais renvoie vers le site pour les quêtes.
 - Le parcours des branches dans le studio est une simulation de logique, pas un aperçu du rendu Minecraft. Il n’accepte pas réellement de quête pour un joueur.
 - Le dernier contenu appliqué est mis en cache dans `<monde>/cobblestar-quests/web-published.json`. Les fichiers modifiés possèdent une copie précédente `.web-backup`. Les écritures sont atomiques par fichier quand le système le permet, pas une transaction globale entre plusieurs fichiers. Une erreur d’application est remontée et la publication sera retentée.
