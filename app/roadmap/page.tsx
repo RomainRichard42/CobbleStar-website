@@ -29,24 +29,24 @@ type Stop = {
 
 const stops: Stop[] = [
   {
-    id: "depart", number: "00", x: 2, y: 0, kind: "intro", kicker: "ROADMAP · ORDRE PRÉVISIONNEL",
-    title: "D’abord, on descend.", accent: "Puis chaque cran avance dans le temps.",
-    copy: "Cette fois, le tracé suit l’ordre des livraisons CobbleStar. Chaque arrêt indique une fenêtre de sortie, ce qu’elle doit contenir et le jalon qui vient ensuite.",
-    status: "MODE D’EMPLOI", window: "DU SOCLE AUX SAISONS", image: "/cobblemon-lakeside.webp", facts: [],
+    id: "depart", number: "00", x: 2, y: 0, kind: "intro", kicker: "COBBLESTAR · LA ROADMAP",
+    title: "L’aventure est lancée.", accent: "Et ce n’est que le début.",
+    copy: "CobbleStar est officiellement sorti. Retrouve les étapes déjà franchies et découvre ce qui se prépare pour Asteria et Nébélia : de nouvelles aventures, des activités et des rendez-vous à partager.",
+    status: "OFFICIELLEMENT DISPONIBLE", window: "SORTIE OFFICIELLE", image: "/cobblemon-lakeside.webp", facts: [],
   },
   {
     id: "fondations", number: "01", x: 2, y: 1.05, kicker: "JALON 01 · FONDATIONS",
-    title: "Le socle CobbleStar est assemblé.", accent: "Site, launcher & modpack",
-    copy: "Avant la première saison : une identité commune, une installation guidée et une base serveur capable de recevoir les systèmes sans casser l’expérience.",
-    status: "BASE ACTUELLE", window: "PHASE 00 · EN COURS DE CONSOLIDATION", image: "/cobblemon-lakeside.webp",
-    visual: "quality", milestone: "Site, launcher, modpack et langage visuel commun aux interfaces CobbleStar.", nextMilestone: "Figer la version et le contenu exacts inclus au lancement.", placeholder: "Capture finale du launcher et de l’écran d’accueil du site côte à côte",
+    title: "Tout est prêt pour nous rejoindre.", accent: "Site, launcher & modpack",
+    copy: "Le site et le launcher accompagnent tes premiers pas. Installe le modpack, connecte ton compte Discord et retrouve ton aventure sur le serveur.",
+    status: "DISPONIBLE", window: "DÉJÀ SORTI · ACCÈS AU SERVEUR", image: "/cobblemon-lakeside.webp",
+    visual: "quality", milestone: "Site public, launcher et modpack CobbleStar disponibles.", nextMilestone: "Découvrir Asteria et Nébélia, les deux mondes de l’aventure.",
     facts: [{ value: "WEB", label: "site public" }, { value: "APP", label: "launcher guidé" }, { value: "PACK", label: "mise à jour commune" }],
   },
   {
     id: "lancement", number: "02", x: 3.025, y: 1.445, kicker: "JALON 02 · OUVERTURE",
-    title: "Asteria et Nébélia ouvrent ensemble.", accent: "Le lancement public",
-    copy: "Les deux mondes arrivent dans le même jalon : exploration Cobblemon, construction persistante et dimensions reliées, sans présenter l’un sans l’autre.",
-    status: "PRÉVU AU LANCEMENT", window: "LANCEMENT · DATE À CONFIRMER", image: "/cobblemon-lakeside.webp", secondImage: "/cobblemon-desert.webp",
+    title: "Asteria et Nébélia vous accueillent.", accent: "L’aventure est ouverte",
+    copy: "Deux mondes à explorer, des Pokémon à rencontrer et une place pour construire ton histoire. À toi de choisir ton point de départ et les joueurs qui partageront ton voyage.",
+    status: "DISPONIBLE", window: "DÉJÀ SORTI · OUVERTURE OFFICIELLE", image: "/cobblemon-lakeside.webp", secondImage: "/cobblemon-desert.webp",
     visual: "worlds", milestone: "Asteria et Nébélia, avec leur Overworld, leur Nether et leur End.", nextMilestone: "Activer le premier fil narratif et ses quêtes en jeu.",
     facts: [{ value: "02", label: "mondes simultanés" }, { value: "06", label: "dimensions reliées" }, { value: "J0", label: "ouverture commune" }],
   },
@@ -166,7 +166,7 @@ function ChapterModule({ stop }: { stop: Stop }) {
       </div>;
     case "quality":
       return <div className={styles.qualityModule}>
-        {[{ name: "LISIBILITÉ", value: 92 }, { name: "COHÉRENCE", value: 88 }, { name: "FLUIDITÉ", value: 96 }].map((metric) => <span key={metric.name}><small>{metric.name}</small><i><b style={{ width: `${metric.value}%` }} /></i><strong>{metric.value}</strong></span>)}
+        {["SITE PUBLIC", "LAUNCHER", "MODPACK"].map(name => <span key={name}><small>{name}</small><strong>Disponible ✓</strong></span>)}
         <div>JEU <i /> SITE <i /> LAUNCHER</div>
       </div>;
     case "closure":
@@ -189,7 +189,6 @@ function ChapterVisual({ stop }: { stop: Stop }) {
         <figure><img src={stop.secondImage} alt="Paysage utilisé pour représenter Nébélia" /><figcaption>NÉBÉLIA</figcaption></figure>
       </div> : <img src={stop.image} alt="Illustration actuelle du chapitre" />}
       <ChapterModule stop={stop} />
-      {stop.placeholder && <div className={styles.placeholderNote}><span>PLAN IMAGE À PRODUIRE</span><p>{stop.placeholder}</p></div>}
     </div>
     <div className={styles.visualBrief}>
       <article><small>DANS CE CHAPITRE</small><p>{stop.milestone}</p></article>
@@ -321,8 +320,13 @@ export default function RoadmapPokeballPage() {
     let wheelAmount = 0;
     let lastWheelTime = 0;
     let wheelGestureConsumed = false;
+    const chapterCanScroll = (target: EventTarget | null, direction: number) => {
+      const chapter = target instanceof Element ? target.closest<HTMLElement>("[data-roadmap-scroll]") : null;
+      return !!chapter && (direction > 0 ? chapter.scrollTop + chapter.clientHeight < chapter.scrollHeight - 2 : chapter.scrollTop > 2);
+    };
     const onWheel = (event: WheelEvent) => {
       if (event.ctrlKey || Math.abs(event.deltaX) > Math.abs(event.deltaY) || !insideJourney()) return;
+      if (chapterCanScroll(event.target, Math.sign(event.deltaY))) return;
       const step = currentStep();
       const direction = Math.sign(event.deltaY);
       if ((step === 0 && direction < 0) || (step === stops.length && direction > 0)) return;
@@ -357,11 +361,13 @@ export default function RoadmapPokeballPage() {
     let touchLastX = 0;
     let touchLastY = 0;
     let touchTracking = false;
+    let touchReadChapter = false;
     const onTouchStart = (event: TouchEvent) => {
       if (event.touches.length !== 1 || !insideJourney()) return;
       touchStartX = touchLastX = event.touches[0].clientX;
       touchStartY = touchLastY = event.touches[0].clientY;
       touchTracking = true;
+      touchReadChapter = false;
     };
     const onTouchMove = (event: TouchEvent) => {
       if (!touchTracking || event.touches.length !== 1) return;
@@ -370,6 +376,8 @@ export default function RoadmapPokeballPage() {
       const deltaX = touchStartX - touchLastX;
       const deltaY = touchStartY - touchLastY;
       if (Math.abs(deltaY) <= Math.abs(deltaX) * 1.15) return;
+      if (chapterCanScroll(event.target, Math.sign(deltaY))) { touchReadChapter = true; return; }
+      if (touchReadChapter) return;
       const step = currentStep();
       if ((step === 0 && deltaY < 0) || (step === stops.length && deltaY > 0)) return;
       event.preventDefault();
@@ -377,6 +385,7 @@ export default function RoadmapPokeballPage() {
     const onTouchEnd = () => {
       if (!touchTracking) return;
       touchTracking = false;
+      if (touchReadChapter) return;
       const deltaX = touchStartX - touchLastX;
       const deltaY = touchStartY - touchLastY;
       if (Math.abs(deltaY) < 54 || Math.abs(deltaY) <= Math.abs(deltaX) * 1.15 || performance.now() < interactionLockedUntilRef.current) return;
@@ -392,6 +401,7 @@ export default function RoadmapPokeballPage() {
       const forwards = event.key === "ArrowDown" || event.key === "PageDown" || (event.key === " " && !event.shiftKey);
       const backwards = event.key === "ArrowUp" || event.key === "PageUp" || (event.key === " " && event.shiftKey);
       if (!forwards && !backwards) return;
+      if (chapterCanScroll(event.target, forwards ? 1 : -1)) return;
       const step = currentStep();
       if ((step === 0 && backwards) || (step === stops.length && forwards)) return;
       event.preventDefault();
@@ -455,7 +465,7 @@ export default function RoadmapPokeballPage() {
 
         <nav className={styles.routeMap} aria-label="Parcours de la roadmap">
           <span className={styles.mapStem} /><span className={styles.mapBall} /><span className={styles.mapBelt} /><span className={styles.mapCore} />
-          {stops.map((stop, index) => <button type="button" key={stop.id} className={activeIndex === index ? styles.routeActive : ""} style={{ left: `${10 + stop.x * 20}%`, top: `${5 + stop.y * 22}%` }} onClick={() => goTo(index)} aria-label={`Étape ${stop.number} : ${stop.kicker}`} aria-current={activeIndex === index ? "step" : undefined}><i /></button>)}
+          {stops.map((stop, index) => <button type="button" key={stop.id} className={activeIndex === index ? styles.routeActive : ""} style={{ left: `${index === 9 ? 50 : 10 + stop.x * 20}%`, top: `${index === 9 ? 58 : 5 + stop.y * 22}%` }} onClick={() => goTo(index)} aria-label={`Étape ${stop.number} : ${stop.kicker}`} aria-current={activeIndex === index ? "step" : undefined}><i /></button>)}
         </nav>
 
         <div className={styles.world} ref={worldRef}>
@@ -467,9 +477,9 @@ export default function RoadmapPokeballPage() {
             <div className={styles.sceneNumber}>{stop.number}</div>
 
             {stop.kind === "intro" ? <>
-              <div className={styles.introCopy}><small>{stop.kicker}</small><h1>D’abord,<br /><em>on descend.</em></h1><strong>{stop.accent}</strong><p>{stop.copy}</p><div className={styles.introStats}><span><b>09</b> JALONS ORDONNÉS</span><span><b>03</b> ÉTATS LISIBLES</span><span><b>↻</b> DATES MISES À JOUR</span></div><button type="button" onClick={() => goTo(1)}>Voir le calendrier <b>↓</b></button></div>
+              <div className={styles.introCopy} data-roadmap-scroll tabIndex={0} aria-label="Présentation de la roadmap"><small>{stop.kicker}</small><h1>L’aventure<br /><em>est lancée.</em></h1><strong>{stop.accent}</strong><p>{stop.copy}</p><div className={styles.introStats}><span><b>DISPONIBLE</b> DÈS MAINTENANT</span><span><b>ASTERIA</b> & NÉBÉLIA</span><span><b>À VENIR</b> LES PROCHAINS JALONS</span></div><button type="button" onClick={() => goTo(1)}>Explorer la roadmap <b>↓</b></button></div>
               <div className={styles.mascotOrbit}><i /><i /><img src="/cobblestar-logo.png" alt="Dracolosse, mascotte de CobbleStar" /></div>
-            </> : <div className={`${styles.chapterLayout} ${index % 2 === 0 ? styles.chapterReverse : ""}`}>
+            </> : <div className={`${styles.chapterLayout} ${index % 2 === 0 ? styles.chapterReverse : ""}`} data-roadmap-scroll tabIndex={0} aria-label={`Lire le jalon ${stop.number}`}>
               <div className={styles.content}>
                 <div className={styles.meta}><span>{stop.number} / 09</span><i /><b>{stop.kicker}</b></div>
                 <div className={styles.releaseWindow}><i />{stop.window}</div>
@@ -494,7 +504,7 @@ export default function RoadmapPokeballPage() {
             })}
             <div className={styles.ballLogo}><span /><img src="/cobblestar-logo.png" alt="Dracolosse, mascotte de CobbleStar" /></div>
           </div>
-          <div className={styles.revealCopy}><small>VUE FINALE · 09 JALONS DANS L’ORDRE</small><h2>La Poké Ball devient le calendrier CobbleStar.</h2><p>Du socle technique aux futures saisons, chaque point représente désormais une livraison. Les dates à confirmer seront remplacées ici dès qu’elles seront verrouillées.</p><div><button type="button" onClick={() => goTo(0)}>Rejouer la chronologie ↑</button><Link href="/roadmap-carte/">Vue constellation ↗</Link></div></div>
+          <div className={styles.revealCopy}><small>DÉJÀ SORTI · ET LA SUITE</small><h2>L’aventure continue avec vous.</h2><p>Le serveur est ouvert. Retrouve les jalons disponibles et les prochaines évolutions d’Asteria et de Nébélia. Les dates à venir seront annoncées une fois confirmées.</p><div><button type="button" onClick={() => goTo(0)}>Revenir au départ ↑</button><Link href="/roadmap-carte/">Autre vue de la roadmap ↗</Link></div></div>
         </section>
 
         <div className={styles.progress}><span /><b>{String(Math.min(activeIndex + 1, stops.length + 1)).padStart(2, "0")} / {String(stops.length + 1).padStart(2, "0")}</b></div>

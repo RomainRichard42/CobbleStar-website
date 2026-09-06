@@ -1,9 +1,10 @@
 import { z } from "zod";
+import { pokemonChange, pokemonEditor } from "./pokemon-admin-schema.js";
 
 export const gameUuid = z.string().regex(/^[a-f0-9]{32}$/);
 const resource = z.string().regex(/^[a-z0-9_.-]+:[a-z0-9_./-]+$/).max(160);
 export const gameItem = z.object({ slot: z.number().int().min(0).max(53), id: resource, name: z.string().max(500), count: z.number().int().min(1).max(999), maxCount: z.number().int().min(1).max(999), fingerprint: z.string().length(64), components: z.string().max(100_000) });
-export const gamePokemon = z.object({ uuid: z.string().uuid(), species: z.string().max(160), name: z.string().max(160), level: z.number().int().min(1).max(1000), shiny: z.boolean(), storage: z.enum(["party", "pc"]), data: z.record(z.string(), z.unknown()) });
+export const gamePokemon = z.object({ uuid: z.string().uuid(), species: z.string().max(160), name: z.string().max(160), level: z.number().int().min(1).max(1000), shiny: z.boolean(), storage: z.enum(["party", "pc"]), data: z.record(z.string(), z.unknown()), editor: pokemonEditor.optional() });
 export const gameSnapshot = z.object({
   schemaVersion: z.literal(1), sessionStartedAt: z.number().int().nonnegative(),
   health: z.number().finite(), maxHealth: z.number().finite(), food: z.number().int(), xpLevel: z.number().int(), xpProgress: z.number().finite(),
@@ -22,6 +23,7 @@ export const actionInput = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("food"), value: z.number().int().min(0).max(20) }).strict(),
   z.object({ kind: z.literal("inventory_count"), storage: z.enum(["inventory", "enderChest"]), slot: z.number().int().min(0).max(40), value: z.number().int().min(0).max(99) }).strict(),
   z.object({ kind: z.literal("pokemon_level"), pokemonUuid: z.string().uuid(), value: z.number().int().min(1).max(100) }).strict(),
+  z.object({ kind: z.literal("pokemon_edit"), pokemonUuid: z.string().uuid(), change: pokemonChange }).strict(),
   z.object({ kind: z.literal("cosmetic_unlock"), cosmeticId: z.string().regex(/^[a-z0-9_-]{1,64}$/) }).strict(),
   z.object({ kind: z.literal("cosmetics_disable") }).strict(),
 ]);
@@ -38,6 +40,12 @@ export function prepareAction(snapshot: GameSnapshot, action: z.infer<typeof act
     const pokemon = snapshot.pokemon.find((entry) => entry.uuid === action.pokemonUuid);
     if (!pokemon) throw new Error("POKEMON_NOT_FOUND");
     return { ...action, expected: pokemon.level };
+  }
+  if (action.kind === "pokemon_edit") {
+    const pokemon = snapshot.pokemon.find(entry => entry.uuid === action.pokemonUuid);
+    if (!pokemon?.editor) throw new Error("POKEMON_EDITOR_UNAVAILABLE");
+    if (action.change.field === "currentHealth" && action.change.value > pokemon.editor.maxHealth) throw new Error("HEALTH_TOO_HIGH");
+    return { ...action, expected: pokemon.editor.fingerprint };
   }
   if (action.kind === "cosmetic_unlock") {
     if (!snapshot.cosmeticIds.includes(action.cosmeticId)) throw new Error("UNKNOWN_COSMETIC");

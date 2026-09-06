@@ -30,11 +30,18 @@ const sample = () => ({
   events: [{ id: "event", kind: "join", at: Date.now(), detail: {} }], eventsTotal: 1, eventsPage: 1, actions: [],
 });
 let profile = sample(), deny = false, unavailable = false, missing = false, sent = [];
+const statBlock = n => ({ hp: n, attack: n, defence: n, special_attack: n, special_defence: n, speed: n });
+function editorSample() {
+  const data = sample(); data.snapshot.capabilities.push("pokemon_edit");
+  data.snapshot.pokemon[0].editor = { fingerprint: "d".repeat(64), maxHealth: 190, stats: { hp: 190, attack: 170, defence: 125, special_attack: 132, special_defence: 125, speed: 110 }, effectiveIvs: statBlock(31), types: ["dragon", "flying"], dexNumber: 149, form: "Normal", values: { species: "cobblemon:dragonite", experience: 160000, status: "", hyperIvs: statBlock(-1), level: 55, nickname: "Dracolosse de test", shiny: false, gender: "MALE", friendship: 160, nature: "cobblemon:adamant", mintedNature: "", ability: "innerfocus", ivs: statBlock(31), evs: { ...statBlock(0), attack: 252, speed: 252, hp: 6 }, moves: [{ id: "dragonclaw", pp: 15, ppUps: 0 }, { id: "thunderbolt", pp: 15, ppUps: 0 }], currentHealth: 170, heldItem: "", caughtBall: "cobblemon:poke_ball", teraType: "cobblemon:dragon", scale: 1, dmaxLevel: 0, gmaxFactor: false, tradeable: true } };
+  return data;
+}
 const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   const pageErrors = []; page.on("pageerror", (error) => pageErrors.push(error.message));
   await page.route("**/api/**", async (route) => {
+    if (new URL(route.request().url()).hostname === "pokeapi.co") return route.fulfill({ json: { sprites: { other: { "official-artwork": { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png", front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/149.png" } } } } });
     if (deny) return route.fulfill({ status: 403, json: { error: "GAME_ADMIN_REQUIRED" } });
     if (unavailable) return route.fulfill({ status: 500, json: { error: "Internal Server Error", code: "ER_CANT_AGGREGATE_2COLLATIONS" } });
     const request = route.request(), url = new URL(request.url());
@@ -63,6 +70,38 @@ try {
   assert.equal(sent[0].expected, "b".repeat(64));
   assert.deepEqual(sent[0].action, { kind: "inventory_count", value: 3, slot: 0, storage: "inventory" });
   assert.equal(await page.getByRole("button", { name: "Préparer la modification" }).isEnabled(), false);
+  profile = editorSample();
+  await page.reload(); await page.getByRole("heading", { name: "TEST_DRESSEUR", exact: true }).waitFor();
+  await page.getByRole("button", { name: "Pokémon", exact: true }).click();
+  await page.getByLabel("Attaque EV", { exact: true }).waitFor();
+  await page.getByLabel("PV EV", { exact: true }).fill("252");
+  await page.getByRole("button", { name: "Préparer · EV", exact: true }).click();
+  await page.getByRole("alert").getByText("Le total des EV ne peut pas dépasser 510.").waitFor();
+  assert.equal(sent.length, 1);
+  await page.getByLabel("PV EV", { exact: true }).fill("6");
+  await page.getByLabel("Attaque IV", { exact: true }).fill("30");
+  if (process.env.TEST_POKEMON_ART === "1") await page.waitForFunction(() => [...document.querySelectorAll('img[alt*="illustration Pokémon"]')].some(img => img.complete && img.naturalWidth > 0));
+  await page.screenshot({ path: "ui-review-pokemon-desktop.png", fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
+  assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true, "Pokemon mobile layout must not overflow");
+  await page.screenshot({ path: "ui-review-pokemon-mobile.png", fullPage: true });
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.getByRole("button", { name: "Préparer · IV", exact: true }).click();
+  await page.getByLabel("Motif obligatoire").fill("Correction IV sur fixture sans Minecraft");
+  await page.getByRole("checkbox").check();
+  await page.getByRole("button", { name: "Confirmer et transmettre" }).click();
+  await page.getByText("En attente du serveur", { exact: true }).waitFor();
+  assert.equal(sent.length, 2); assert.equal(sent[1].expected, "d".repeat(64));
+  assert.deepEqual(sent[1].action, { kind: "pokemon_edit", pokemonUuid: profile.snapshot.pokemon[0].uuid, change: { field: "ivs", value: { ...statBlock(31), attack: 30 } } });
+  profile = editorSample(); await page.reload(); await page.getByRole("button", { name: "Pokémon", exact: true }).click();
+  await page.getByLabel("Attaque IV", { exact: true }).fill("29");
+  profile.snapshot.pokemon[0].editor.fingerprint = "e".repeat(64);
+  await page.getByRole("button", { name: "Actualiser ↻", exact: true }).click();
+  await page.getByRole("button", { name: "Recharger les valeurs du serveur" }).waitFor();
+  assert.equal(await page.getByLabel("Attaque IV", { exact: true }).inputValue(), "29");
+  assert.equal(await page.getByRole("button", { name: "Préparer · IV", exact: true }).isEnabled(), false);
+  await page.getByRole("button", { name: "Recharger les valeurs du serveur" }).click();
+  assert.equal(await page.getByLabel("Attaque IV", { exact: true }).inputValue(), "31");
   profile = sample(); profile.canWrite = false;
   await page.reload(); await page.getByRole("heading", { name: "TEST_DRESSEUR", exact: true }).waitFor();
   await page.getByRole("button", { name: /TEST_DRESSEUR/ }).waitFor();
@@ -85,5 +124,5 @@ try {
   await page.getByText("Ce joueur n’a pas encore été synchronisé par le serveur.", { exact: true }).waitFor();
   await page.getByRole("heading", { name: "Fiche indisponible", exact: true }).waitFor();
   assert.deepEqual(pageErrors, []);
-  console.log("PASS: actual UI with synthetic fixtures — detail, inventory, confirmation, one request, pending lock, read-only, 390px layout, denied access, API 500 distinguished from zero players, missing player distinguished from loading, no browser errors. No live game mutation tested.");
+  console.log("PASS: actual UI with synthetic fixtures — inventory and Pokemon requests, IV/EV validation, confirmation, stale-draft lock/reload, pending lock, read-only, 390px layout, denied access, API 500 vs zero players, missing player vs loading, no browser errors. No live game mutation tested.");
 } finally { await browser.close(); await new Promise((done) => server.close(done)); }

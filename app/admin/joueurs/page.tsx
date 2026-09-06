@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import s from "./players.module.css";
+import PokemonWorkspace, { type Pokemon, type PokemonChange } from "./PokemonWorkspace";
 
 type Item = { slot: number; id: string; name: string; count: number; maxCount: number; components: string; fingerprint: string };
-type Pokemon = { uuid: string; species: string; name: string; level: number; shiny: boolean; storage: "party" | "pc"; data: Record<string, unknown> };
 type PlayerRow = { uuid: string; username: string; online: number; discordUsername: string | null; receivedAt: string };
-type Action = { kind: string; value?: number; slot?: number; storage?: string; pokemonUuid?: string; cosmeticId?: string };
+type Action = { kind: string; value?: number; slot?: number; storage?: string; pokemonUuid?: string; cosmeticId?: string; change?: PokemonChange };
 type Profile = {
   uuid: string; username: string; serverId: string; snapshotId: string; observedAt: number; firstSeenAt: string; online: boolean; canWrite: boolean;
   account: null | { discord_username: string; discord_id: string; stars: number; votes: number; purchases: number; created_at: string; minecraft_linked_at: string };
@@ -40,7 +40,6 @@ export default function PlayersAdmin() {
   const [kind, setKind] = useState("xp_level"), [value, setValue] = useState("1"), [cosmetic, setCosmetic] = useState("");
   const [itemTarget, setItemTarget] = useState<Item | null>(null), [itemStorage, setItemStorage] = useState("inventory");
   const [pokemonTarget, setPokemonTarget] = useState<Pokemon | null>(null);
-  const [pokemonPage, setPokemonPage] = useState(1);
   const loadId = useRef(0);
   const [now, setNow] = useState(0);
 
@@ -63,8 +62,9 @@ export default function PlayersAdmin() {
     return () => { clearTimeout(initial); clearInterval(interval); };
   }, [loadProfile, loadList]);
   const choose = (uuid: string) => { loadId.current++; setSelected(uuid); setProfile(null); setTab("Vue d’ensemble"); setEventPage(1); setProposal(null); setItemTarget(null); setPokemonTarget(null); setError(""); setNotice(""); window.history.replaceState(null, "", `?uuid=${uuid}`); };
-  const propose = (action: Action, description: string) => {
+  const propose = (action: Action, description: string, pokemonFingerprint?: string) => {
     if (!profile) return;
+    if (action.kind === "pokemon_edit" && profile.snapshot.pokemon.find(p => p.uuid === action.pokemonUuid)?.editor?.fingerprint !== pokemonFingerprint) { setNotice("Ce Pokémon a changé. Recharge ses valeurs avant de préparer une modification."); return; }
     if (action.kind === "inventory_count" && profile.snapshot[itemStorage as "inventory" | "enderChest"].find((item) => item.slot === itemTarget?.slot)?.fingerprint !== itemTarget?.fingerprint) {
       setNotice("Cet objet a changé depuis sa sélection. Sélectionne-le à nouveau dans Inventaires."); return;
     }
@@ -72,7 +72,7 @@ export default function PlayersAdmin() {
       setNotice("Ce Pokémon a changé depuis sa sélection. Sélectionne-le à nouveau."); return;
     }
     const expected = action.kind === "inventory_count" ? itemTarget?.fingerprint : action.kind === "pokemon_level" ? pokemonTarget?.level : action.kind === "xp_level" ? profile.snapshot.xpLevel : action.kind === "health" ? profile.snapshot.health : action.kind === "food" ? profile.snapshot.food : undefined;
-    setProposal({ requestId: crypto.randomUUID(), uuid: profile.uuid, snapshotId: profile.snapshotId, expected, action, description }); setReason(""); setConfirmed(false); setNotice("");
+    setProposal({ requestId: crypto.randomUUID(), uuid: profile.uuid, snapshotId: profile.snapshotId, expected: pokemonFingerprint ?? expected, action, description }); setReason(""); setConfirmed(false); setNotice("");
   };
   async function submit() {
     if (!proposal || pending || !confirmed || reason.trim().length < 5) return;
@@ -112,14 +112,14 @@ export default function PlayersAdmin() {
               <p className={s.hint}>Relevés périodiques, pas une vidéo de chaque action. Les anciens compteurs Minecraft sont consultables ; l’historique détaillé commence à l’activation de la passerelle.</p>
             </>}
             {tab === "Inventaires" && <><h3>Objets réellement présents</h3><p className={s.hint}>Inventaire principal, barre rapide, armure, seconde main et coffre de l’End. Les métadonnées sont conservées ; modifier une quantité ne remplace pas l’objet.</p>{(["inventory", "enderChest"] as const).map((storage) => <section key={storage}><h4>{storage === "inventory" ? "Inventaire & équipement" : "Coffre de l’End"} · {snapshot[storage].length} emplacements occupés</h4><div className={s.items}>{snapshot[storage].map((item) => <article key={item.slot} className={s.item}><header><small>SLOT {item.slot}</small><b>×{item.count}</b></header><h4>{item.name}</h4><code>{item.id}</code><details><summary>Composants de l’objet</summary><pre>{item.components}</pre></details><button disabled={!writable} onClick={() => { setItemTarget(item); setItemStorage(storage); setValue(String(item.count)); setKind("inventory_count"); setTab("Actions admin"); }}>Modifier la quantité</button></article>)}</div>{!snapshot[storage].length && <p>Inventaire vide.</p>}</section>)}</>}
-            {tab === "Pokémon" && <><input aria-label="Rechercher un Pokémon" placeholder="Nom, espèce ou UUID…" value={filter} onChange={(e) => { setFilter(e.target.value); setPokemonPage(1); }}/>{snapshot.pokemonError && <p className={s.warning}>{snapshot.pokemonError} La liste peut être incomplète.</p>}{snapshot.pokemonTruncated && <p className={s.warning}>Limite de 6 000 Pokémon atteinte : relevé incomplet.</p>}{(["party", "pc"] as const).map((storage) => <section key={storage}><h3>{storage === "party" ? "Équipe active" : "PC Pokémon"}</h3><div className={s.items}>{snapshot.pokemon.filter((pokemon) => pokemon.storage === storage && matches(`${pokemon.name} ${pokemon.species} ${pokemon.uuid}`)).slice(storage === "pc" ? (pokemonPage - 1) * 24 : 0, storage === "pc" ? pokemonPage * 24 : 6).map((pokemon) => <article key={pokemon.uuid} className={s.pokemon}><small>{pokemon.shiny ? "✦ CHROMATIQUE" : "POKÉMON"} · NIV. {pokemon.level}</small><h4>{pokemon.name}</h4><code>{pokemon.species}</code><DataTree label="IV, EV, capacités, talent et données sauvegardées" value={pokemon.data}/><button disabled={!writable} onClick={() => { setPokemonTarget(pokemon); setValue(String(pokemon.level)); setKind("pokemon_level"); setTab("Actions admin"); }}>Modifier le niveau</button></article>)}</div>{storage === "pc" && <Pagination page={pokemonPage} pages={Math.max(1, Math.ceil(snapshot.pokemon.filter((pokemon) => pokemon.storage === "pc" && matches(`${pokemon.name} ${pokemon.species} ${pokemon.uuid}`)).length / 24))} onPage={setPokemonPage}/>}</section>)}</>}
+            {tab === "Pokémon" && <>{snapshot.pokemonError && <p className={s.warning}>{snapshot.pokemonError} La liste peut être incomplète.</p>}{snapshot.pokemonTruncated && <p className={s.warning}>Limite de 6 000 Pokémon atteinte : relevé incomplet.</p>}<PokemonWorkspace key={profile.uuid} pokemon={snapshot.pokemon} writable={writable} capable={snapshot.capabilities.includes("pokemon_edit")} onLegacy={pokemon => { setPokemonTarget(pokemon); setValue(String(pokemon.level)); setKind("pokemon_level"); setTab("Actions admin"); }} onEdit={(pokemon, change, fingerprint, description) => { propose({ kind: "pokemon_edit", pokemonUuid: pokemon.uuid, change }, description, fingerprint); setTab("Actions admin"); }}/></>}
             {tab === "Statistiques" && <><h3>Compteurs Minecraft</h3><p className={s.hint}>Valeurs brutes du serveur : temps en ticks, distances en centimètres. Seuls les compteurs non nuls sont présents.</p><input aria-label="Filtrer les statistiques" placeholder="Ex. mined, killed, play_time, jump…" value={filter} onChange={(e) => setFilter(e.target.value)}/><div className={s.statList}>{Object.entries(snapshot.statistics).filter(([key]) => matches(key)).sort(([a], [b]) => a.localeCompare(b)).map(([key, count]) => <div key={key}><code>{key}</code><strong>{fmt(count)}</strong></div>)}</div></>}
             {tab === "Collection" && <><h3>Collection CobbleStar</h3><p>Cartes et exemplaires, cosmétiques possédés et actifs, noms des compagnons, historique des coffres et profil de dresseur.</p><DataTree value={snapshot.academy} label="Données de collection" expanded/></>}
             {tab === "Quêtes" && <><h3>Progression enregistrée</h3><p>Quêtes acceptées, objectifs, récompenses et rotations présents dans la sauvegarde du joueur. Consultation seule pour préserver les règles de progression.</p><DataTree value={snapshot.quests} label="Sauvegarde des quêtes" expanded/></>}
             {tab === "Historique" && <><h3>Journal d’activité · {fmt(profile.eventsTotal)} événements</h3><p className={s.hint}>Connexions et déconnexions, morts constatées et différences entre relevés. Un objet acquis puis utilisé entre deux relevés peut ne pas apparaître. Conservation : 90 jours.</p><div className={s.timeline}>{profile.events.map((event) => <article key={event.id}><time>{date(event.at)}</time><h4>{labels[event.kind] ?? event.kind}</h4><DataTree value={event.detail} label="Détails du relevé"/></article>)}</div>{!profile.events.length && <p>Aucun événement enregistré pour cette période.</p>}<Pagination page={eventPage} pages={Math.max(1, Math.ceil(profile.eventsTotal / 40))} onPage={setEventPage}/></>}
             {tab === "Actions admin" && <>
               <div className={s.panel}><h3>Modifier en jeu</h3><p>{!profile.canWrite ? "Ce compte dispose uniquement d’un accès en lecture." : !writable ? "Actions désactivées : présence non confirmée, données périmées ou action déjà en attente." : "Le joueur est présent. Chaque changement sera revérifié par le serveur."}</p>
-                <div className={s.form}><label>Action<select value={kind} onChange={(e) => setKind(e.target.value)}>{snapshot.capabilities.map((capability) => <option key={capability} value={capability}>{labels[capability] ?? capability}</option>)}</select></label>
+                <div className={s.form}><label>Action<select value={kind} onChange={(e) => setKind(e.target.value)}>{snapshot.capabilities.filter(capability => capability !== "pokemon_edit").map((capability) => <option key={capability} value={capability}>{labels[capability] ?? capability}</option>)}</select></label>
                   {kind === "cosmetic_unlock" ? <label>Cosmétique<select value={cosmetic} onChange={(e) => setCosmetic(e.target.value)}><option value="">Choisir un cosmétique</option>{snapshot.cosmeticIds.map((id) => <option key={id}>{id}</option>)}</select></label> : kind !== "cosmetics_disable" && <label>Nouvelle valeur<input type="number" min={kind === "health" || kind === "pokemon_level" ? 1 : 0} max={kind === "pokemon_level" ? 100 : kind === "xp_level" ? 1000 : kind === "health" ? snapshot.maxHealth : kind === "food" ? 20 : itemTarget?.maxCount ?? 99} value={value} onChange={(e) => setValue(e.target.value)}/></label>}
                   {kind === "inventory_count" && <p>{itemTarget ? `${itemTarget.name} · ${itemStorage} / slot ${itemTarget.slot} · aperçu ×${itemTarget.count}` : "Choisis d’abord un objet dans l’onglet Inventaires."}</p>}
                   {kind === "pokemon_level" && <p>{pokemonTarget ? `${pokemonTarget.name} · ${pokemonTarget.uuid} · aperçu niveau ${pokemonTarget.level}` : "Choisis d’abord un Pokémon dans l’onglet Pokémon."}</p>}

@@ -86,7 +86,7 @@ export default function SiteHeader() {
       <a className="skip-link" href="#contenu">Aller au contenu</a>
       <div className="nav-stack">
         <div className="nav-utility">
-          <div><span className="status-dot" /><b>Serveur francophone en ligne</b></div>
+          <div><span className="status-dot" /><b><span className="nav-status-full">Serveur francophone en ligne</span><span className="nav-status-short">En ligne</span></b></div>
           <button type="button" onClick={copyServerAddress}><small>IP DU SERVEUR</small><b>{copied ? "Adresse copiée" : "play.cobblestar-mc.fr"}</b><span>{copied ? "✓" : "⧉"}</span></button>
         </div>
         <header className="nav-wrap">

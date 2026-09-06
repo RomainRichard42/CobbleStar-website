@@ -44,12 +44,12 @@
 .brandMark img { width: 51px; height: 51px; object-fit: contain; }
 .brand > span:last-child { display: grid; gap: 1px; }
 .brand strong { font-size: 20px; line-height: 1; letter-spacing: -.045em; }
-.brand small { color: var(--ink-soft); font-size: 8px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.brand small { color: var(--ink-soft); font-size: var(--cs-type-label, 14px); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
 .navigation { display: flex; align-items: center; gap: 5px; padding: 5px; border-radius: 14px; background: #eee9dd; }
-.navigation a { padding: 11px 15px; color: #52696b; border-radius: 10px; font-size: 12px; font-weight: 700; transition: .2s ease; }
+.navigation a { padding: 11px 15px; color: #52696b; border-radius: 10px; font-size: var(--cs-type-label, 14px); font-weight: 700; transition: .2s ease; }
 .navigation a:hover { color: var(--ink); background: var(--paper-soft); }
 .navigation a.navActive { color: #100b24; background: linear-gradient(110deg, var(--orange), var(--sky)); box-shadow: 0 7px 18px rgba(142,223,243,.13); }
-.headerCta { justify-self: end; height: 46px; padding: 0 7px 0 18px; display: flex; align-items: center; gap: 16px; color: white; border-radius: 13px; background: var(--ink); font-size: 12px; font-weight: 800; }
+.headerCta { justify-self: end; height: 46px; padding: 0 7px 0 18px; display: flex; align-items: center; gap: 16px; color: white; border-radius: 13px; background: var(--ink); font-size: var(--cs-type-label, 14px); font-weight: 800; }
 .headerCta b { width: 32px; height: 32px; display: grid; place-items: center; border-radius: 9px; color: var(--ink); background: var(--orange); font-size: 16px; }
 
 .hero {
@@ -67,7 +67,7 @@
 }
 .hero::before { content: ""; position: absolute; left: -110px; bottom: -230px; width: 430px; height: 430px; border: 1px solid rgba(23, 56, 59, .13); border-radius: 50%; box-shadow: 0 0 0 55px rgba(255,255,255,.17), 0 0 0 110px rgba(255,255,255,.12); }
 .heroCopy { position: relative; z-index: 3; animation: homeCopyIn .8s var(--cs-ease) both; }
-.overline { display: flex; align-items: center; gap: 11px; color: var(--ink-soft); font: 800 10px "Cascadia Mono", Consolas, monospace; letter-spacing: .12em; }
+.overline { display: flex; align-items: center; gap: 11px; color: var(--ink-soft); font: 800 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; letter-spacing: .12em; }
 .overline span { padding: 8px 10px; color: white; border-radius: 8px; background: var(--teal); }
 .overline i { width: 28px; height: 1px; background: rgba(23, 56, 59, .35); }
 .hero h1 { margin: 35px 0 29px; font-size: clamp(70px, 6.7vw, 108px); line-height: .84; letter-spacing: -.075em; font-weight: 900; }
@@ -75,17 +75,17 @@
 .hero h1 em::after { content: ""; position: absolute; left: 2%; right: 0; bottom: -3px; height: 8px; border-radius: 50%; border-top: 3px solid var(--berry); transform: rotate(-1.2deg); opacity: .65; }
 .heroCopy > p { max-width: 620px; color: var(--ink-soft); font-size: 17px; line-height: 1.72; }
 .heroActions { margin-top: 32px; display: flex; align-items: stretch; gap: 10px; }
-.primaryButton { min-height: 60px; padding: 0 23px; display: inline-flex; align-items: center; gap: 25px; color: white; border-radius: 17px; background: var(--berry); box-shadow: 0 13px 0 #82133b, 0 20px 35px rgba(181, 22, 79, .16); font-size: 13px; font-weight: 850; transition: transform .2s ease, box-shadow .2s ease; }
+.primaryButton { min-height: 60px; padding: 0 23px; display: inline-flex; align-items: center; gap: 25px; color: white; border-radius: 17px; background: var(--berry); box-shadow: 0 13px 0 #82133b, 0 20px 35px rgba(181, 22, 79, .16); font-size: var(--cs-type-label, 14px); font-weight: 850; transition: transform .2s ease, box-shadow .2s ease; }
 .primaryButton:hover { transform: translateY(-3px); box-shadow: 0 16px 0 #82133b, 0 25px 40px rgba(181, 22, 79, .2); }
 .primaryButton span { font-size: 18px; }
 .addressButton { min-height: 60px; min-width: 245px; padding: 8px 8px 8px 15px; display: flex; align-items: center; justify-content: space-between; gap: 15px; color: var(--ink); border: 1px solid rgba(23,56,59,.15); border-radius: 17px; background: var(--paper-soft); cursor: pointer; text-align: left; }
 .addressButton > span { display: grid; gap: 4px; }
-.addressButton small { color: #7b8d8f; font-size: 7px; font-weight: 800; letter-spacing: .1em; }
-.addressButton strong { font: 800 11px "Cascadia Mono", Consolas, monospace; }
-.addressButton b { min-width: 58px; padding: 11px 8px; color: var(--teal); border-radius: 10px; background: #e2f2ee; font-size: 9px; text-align: center; }
+.addressButton small { color: #7b8d8f; font-size: var(--cs-type-label, 14px); font-weight: 800; letter-spacing: .1em; }
+.addressButton strong { font: 800 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; }
+.addressButton b { min-width: 58px; padding: 11px 8px; color: var(--teal); border-radius: 10px; background: #e2f2ee; font-size: var(--cs-type-label, 14px); text-align: center; }
 .heroProof { margin-top: 38px; padding-top: 24px; display: flex; gap: 24px; border-top: 1px solid rgba(23, 56, 59, .12); }
-.heroProof span { display: flex; align-items: center; gap: 7px; color: #647a7c; font-size: 9px; font-weight: 700; }
-.heroProof b { color: var(--berry); font: 800 8px "Cascadia Mono", Consolas, monospace; }
+.heroProof span { display: flex; align-items: center; gap: 7px; color: #647a7c; font-size: var(--cs-type-label, 14px); font-weight: 700; }
+.heroProof b { color: var(--berry); font: 800 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; }
 
 .heroVisual { position: relative; height: 650px; animation: homeVisualIn 1s .12s var(--cs-ease) both; }
 .heroPhoto { position: absolute; inset: 4% 1% 7% 8%; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; gap: 3px; border: 8px solid var(--paper-soft); border-radius: 46% 22px 46% 24px; box-shadow: 0 30px 70px rgba(23, 56, 59, .24), 12px 15px 0 var(--ink); transform: rotate(2deg); }
@@ -94,23 +94,23 @@
 .heroWorld:first-child img { object-position: 58% center; }
 .heroWorld:last-child img { object-position: 54% center; }
 .heroWorld:hover img { transform: scale(1.055); filter: saturate(1.15); }
-.heroWorld span { position: absolute; z-index: 3; left: 18px; bottom: 19px; padding: 7px 9px; border: 1px solid rgba(255,255,255,.18); border-radius: 8px 8px 3px 8px; color: white; background: rgba(8,6,22,.62); backdrop-filter: blur(8px); font: 850 8px "Cascadia Mono",Consolas,monospace; letter-spacing: .11em; text-transform: uppercase; }
+.heroWorld span { position: absolute; z-index: 3; left: 18px; bottom: 19px; padding: 7px 9px; border: 1px solid rgba(255,255,255,.18); border-radius: 8px 8px 3px 8px; color: white; background: rgba(8,6,22,.62); backdrop-filter: blur(8px); font: 850 var(--cs-type-label, 14px) "Cascadia Mono",Consolas,monospace; letter-spacing: .11em; text-transform: uppercase; }
 .heroPhoto::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(130deg, rgba(142,223,243,.12), transparent 45%, rgba(23,56,59,.17)); }
 .heroLogo { position: absolute; z-index: 4; left: -8%; bottom: -1%; width: min(430px, 60%); filter: drop-shadow(0 23px 23px rgba(23,56,59,.24)); animation: homeMascotFloat 4.8s 1s ease-in-out infinite; }
 .heroLogo img { width: 100%; height: auto; object-fit: contain; }
 .postcard { position: absolute; z-index: 6; right: -4%; top: 14%; width: 235px; min-height: 126px; padding: 22px; display: grid; align-content: center; color: var(--ink); border: 1px solid rgba(23,56,59,.15); border-radius: 10px; background: var(--paper-soft); box-shadow: 10px 10px 0 var(--orange); transform: rotate(-3deg); }
 .postcard::before { content: ""; position: absolute; top: 50%; left: -8px; width: 15px; height: 15px; border-radius: 50%; background: var(--paper); }
-.postcard small { color: var(--berry); font: 800 7px "Cascadia Mono", Consolas, monospace; letter-spacing: .12em; }
+.postcard small { color: var(--berry); font: 800 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; letter-spacing: .12em; }
 .postcard strong { margin: 7px 0 4px; font-size: 22px; line-height: 1; letter-spacing: -.04em; }
-.postcard span { color: var(--ink-soft); font-size: 9px; }
-.heroStamp { position: absolute; z-index: 7; top: 5%; left: 2%; width: 76px; height: 76px; display: grid; place-items: center; color: var(--berry); border: 2px solid var(--berry); border-radius: 50%; font: 900 11px/1.2 "Cascadia Mono", Consolas, monospace; text-align: center; transform: rotate(-12deg); opacity: .82; }
+.postcard span { color: var(--ink-soft); font-size: var(--cs-type-label, 14px); }
+.heroStamp { position: absolute; z-index: 7; top: 5%; left: 2%; width: 76px; height: 76px; display: grid; place-items: center; color: var(--berry); border: 2px solid var(--berry); border-radius: 50%; font: 900 var(--cs-type-label, 14px)/1.2 "Cascadia Mono", Consolas, monospace; text-align: center; transform: rotate(-12deg); opacity: .82; }
 
-.ticker { min-height: 58px; padding: 0 30px; display: flex; justify-content: center; align-items: center; gap: clamp(20px, 3vw, 55px); color: white; background: var(--ink); font: 800 9px "Cascadia Mono", Consolas, monospace; letter-spacing: .13em; white-space: nowrap; }
+.ticker { min-height: 58px; padding: 0 30px; display: flex; justify-content: center; align-items: center; gap: clamp(20px, 3vw, 55px); color: white; background: var(--ink); font: 800 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; letter-spacing: .13em; white-space: nowrap; }
 .ticker i { color: var(--orange); font-style: normal; }
 
 .adventureSection, .journalSection, .newsSection { width: min(1340px, calc(100% - 40px)); margin: auto; padding: 130px 0; }
 .sectionIntro, .journalHeader { display: grid; grid-template-columns: 1fr .78fr; gap: 80px; align-items: end; margin-bottom: 58px; }
-.sectionIntro small, .worldCopy > small, .journalHeader small, .statusIntro > small, .newsTitle > small, .finalCta small { color: var(--berry); font: 850 9px "Cascadia Mono", Consolas, monospace; letter-spacing: .16em; }
+.sectionIntro small, .worldCopy > small, .journalHeader small, .statusIntro > small, .newsTitle > small, .finalCta small { color: var(--berry); font: 850 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; letter-spacing: .16em; }
 .sectionIntro h2, .journalHeader h2, .statusIntro h2, .newsTitle h2 { margin: 13px 0 0; font-size: clamp(49px, 5.5vw, 78px); line-height: .93; letter-spacing: -.06em; }
 .sectionIntro > p { max-width: 520px; margin: 0 0 5px; color: var(--ink-soft); font-size: 15px; line-height: 1.75; }
 .adventureGrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
@@ -121,11 +121,11 @@
 .adventureCard:hover .cardPhoto img { transform: scale(1.045); }
 .cardPhoto::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(23,32,57,.36)); }
 .cardTop { padding: 17px 25px 0; display: flex; align-items: center; justify-content: space-between; }
-.cardTop span { color: var(--card-accent); font: 900 11px "Cascadia Mono", Consolas, monospace; }
-.cardTop small { padding: 7px 9px; color: var(--ink); border-radius: 99px; background: var(--card-soft); font-size: 8px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+.cardTop span { color: var(--card-accent); font: 900 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; }
+.cardTop small { padding: 7px 9px; color: var(--ink); border-radius: 99px; background: var(--card-soft); font-size: var(--cs-type-label, 14px); font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
 .cardBody { padding: 25px; }
 .cardBody h3 { min-height: 76px; margin-bottom: 17px; font-size: 25px; line-height: 1.05; letter-spacing: -.045em; }
-.cardBody p { margin: 0; color: var(--ink-soft); font-size: 12px; line-height: 1.65; }
+.cardBody p { margin: 0; color: var(--ink-soft); font-size: var(--cs-type-label, 14px); line-height: 1.65; }
 .sky { --card-accent: #358ca0; --card-soft: #d8f3f7; }
 .orange { --card-accent: #bf7117; --card-soft: #f9e5c3; }
 .violet { --card-accent: #7564b8; --card-soft: #e7e1f5; }
@@ -142,9 +142,9 @@
 .worldLabelA, .worldLabelB { position: absolute; z-index: 6; display: grid; color: white; text-shadow: 0 2px 13px rgba(0,0,0,.45); }
 .worldLabelA { left: 7%; bottom: 33%; }
 .worldLabelB { right: 6%; bottom: 7%; text-align: right; }
-.worldLabelA small, .worldLabelB small { color: var(--orange); font: 800 8px "Cascadia Mono", Consolas, monospace; letter-spacing: .12em; }
+.worldLabelA small, .worldLabelB small { color: var(--orange); font: 800 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; letter-spacing: .12em; }
 .worldLabelA strong, .worldLabelB strong { font-size: 34px; letter-spacing: -.04em; }
-.worldLabelA span, .worldLabelB span { font-size: 10px; opacity: .78; }
+.worldLabelA span, .worldLabelB span { font-size: var(--cs-type-label, 14px); opacity: .78; }
 .worldSeal { position: absolute; z-index: 8; left: 47%; top: 42%; width: 108px; height: 108px; display: grid; place-items: center; border-radius: 50%; background: var(--orange); box-shadow: 0 12px 24px rgba(0,0,0,.28); transform: rotate(-8deg); }
 .worldSeal img { width: 94px; height: 94px; object-fit: contain; }
 .worldCopy > small { color: var(--sky); }
@@ -154,27 +154,27 @@
 .worldFacts { margin-top: 48px; padding-top: 31px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; border-top: 1px solid rgba(255,255,255,.13); }
 .worldFacts span { display: grid; gap: 5px; }
 .worldFacts b { color: var(--orange); font-size: 31px; line-height: 1; letter-spacing: -.05em; }
-.worldFacts small { color: #89999f; font-size: 8px; line-height: 1.4; text-transform: uppercase; }
+.worldFacts small { color: #89999f; font-size: var(--cs-type-label, 14px); line-height: 1.4; text-transform: uppercase; }
 
 .journalSection { padding-top: 140px; }
 .journalHeader { grid-template-columns: 1fr auto; }
 .chapterTabs { display: flex; gap: 7px; padding: 6px; border-radius: 14px; background: #e9e4d9; }
-.chapterTabs button { padding: 12px 15px; color: #657b7e; border: 0; border-radius: 10px; background: transparent; cursor: pointer; font-size: 10px; font-weight: 750; }
+.chapterTabs button { padding: 12px 15px; color: #657b7e; border: 0; border-radius: 10px; background: transparent; cursor: pointer; font-size: var(--cs-type-label, 14px); font-weight: 750; }
 .chapterTabs button.activeTab { color: white; background: var(--ink); }
 .chapterPanel { min-height: 570px; display: grid; grid-template-columns: 1fr 1fr; overflow: hidden; border: 1px solid rgba(23,56,59,.15); border-radius: 38px 38px 12px 38px; background: var(--paper-soft); box-shadow: 14px 16px 0 #e3dbcd; animation: reveal .35s ease both; }
 @keyframes reveal { from { opacity: .55; transform: translateY(5px); } }
 .chapterImage { position: relative; min-height: 570px; overflow: hidden; }
 .chapterImage img { object-fit: cover; }
 .chapterImage::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, rgba(23,32,57,.48)); }
-.chapterImage > span { position: absolute; z-index: 3; left: 32px; bottom: 30px; padding: 9px 12px; color: white; border-radius: 8px; background: var(--berry); font: 850 8px "Cascadia Mono", Consolas, monospace; letter-spacing: .12em; }
+.chapterImage > span { position: absolute; z-index: 3; left: 32px; bottom: 30px; padding: 9px 12px; color: white; border-radius: 8px; background: var(--berry); font: 850 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; letter-spacing: .12em; }
 .chapterCopy { padding: clamp(46px, 6vw, 90px); display: flex; flex-direction: column; justify-content: center; }
-.chapterCopy > small { color: var(--teal); font: 850 9px "Cascadia Mono", Consolas, monospace; letter-spacing: .14em; text-transform: uppercase; }
+.chapterCopy > small { color: var(--teal); font: 850 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; letter-spacing: .14em; text-transform: uppercase; }
 .chapterCopy h3 { margin: 19px 0 22px; font-size: clamp(37px, 4vw, 56px); line-height: .98; letter-spacing: -.055em; }
 .chapterCopy > p { color: var(--ink-soft); font-size: 14px; line-height: 1.72; }
 .chapterCopy ul { margin: 25px 0 0; padding: 25px 0 0; display: grid; gap: 13px; list-style: none; border-top: 1px solid rgba(23,56,59,.12); }
-.chapterCopy li { display: flex; align-items: center; gap: 11px; color: #435f62; font-size: 11px; font-weight: 700; }
+.chapterCopy li { display: flex; align-items: center; gap: 11px; color: #435f62; font-size: var(--cs-type-label, 14px); font-weight: 700; }
 .chapterCopy li::before { content: ""; width: 8px; height: 8px; border: 2px solid var(--orange); border-radius: 50%; }
-.chapterLink { width: fit-content; min-height: 44px; margin-top: 24px; padding: 0 8px 0 15px; display: flex; align-items: center; gap: 18px; border-radius: 12px 12px 4px 12px; color: #100b24; background: linear-gradient(110deg,var(--orange),var(--sky)); font-size: 9px; font-weight: 900; }
+.chapterLink { width: fit-content; min-height: 44px; margin-top: 24px; padding: 0 8px 0 15px; display: flex; align-items: center; gap: 18px; border-radius: 12px 12px 4px 12px; color: #100b24; background: linear-gradient(110deg,var(--orange),var(--sky)); font-size: var(--cs-type-label, 14px); font-weight: 900; }
 .chapterLink span { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 9px 9px 3px 9px; color: white; background: #251a45; }
 
 @keyframes homeCopyIn { from { opacity: 0; translate: 0 35px; } to { opacity: 1; translate: 0 0; } }
@@ -189,11 +189,11 @@
 .liveDot { position: absolute; top: 2px; left: -24px; width: 9px; height: 9px; border-radius: 50%; background: #fff5c7; box-shadow: 0 0 0 8px rgba(255,245,199,.15); }
 .statusList { border-top: 1px solid rgba(255,255,255,.25); }
 .statusRow { min-height: 92px; display: grid; grid-template-columns: 42px 1fr auto; gap: 15px; align-items: center; border-bottom: 1px solid rgba(255,255,255,.2); }
-.statusRow > span { color: #b7e1dc; font: 800 9px "Cascadia Mono", Consolas, monospace; }
+.statusRow > span { color: #b7e1dc; font: 800 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; }
 .statusRow > div { display: grid; gap: 4px; }
 .statusRow strong { font-size: 17px; }
-.statusRow small { color: #b9ddd9; font-size: 9px; }
-.statusRow > b { min-width: 95px; padding: 9px 11px; border-radius: 99px; font-size: 8px; text-align: center; text-transform: uppercase; }
+.statusRow small { color: #b9ddd9; font-size: var(--cs-type-label, 14px); }
+.statusRow > b { min-width: 95px; padding: 9px 11px; border-radius: 99px; font-size: var(--cs-type-label, 14px); text-align: center; text-transform: uppercase; }
 .statusRow > b.live { color: #174d45; background: #d6f3d7; }
 .statusRow > b.beta { color: #714c12; background: #ffe3a9; }
 .statusRow > b.soon { color: #41376e; background: #e2dcff; }
@@ -203,7 +203,7 @@
 .newsTitle { margin-bottom: 55px; display: grid; grid-template-columns: 1fr auto; align-items: end; }
 .newsTitle > small { grid-column: 1; }
 .newsTitle h2 { grid-column: 1; }
-.newsTitle > a { grid-column: 2; grid-row: 1 / 3; align-self: end; padding-bottom: 7px; color: var(--berry); font-size: 11px; font-weight: 800; }
+.newsTitle > a { grid-column: 2; grid-row: 1 / 3; align-self: end; padding-bottom: 7px; color: var(--berry); font-size: var(--cs-type-label, 14px); font-weight: 800; }
 .newsGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .newsCard { position: relative; min-height: 510px; overflow: hidden; color: var(--ink); border: 1px solid rgba(23,56,59,.15); border-radius: 27px 27px 9px 27px; background: var(--paper-soft); box-shadow: 0 15px 35px rgba(23,56,59,.06); transition: transform .25s ease; }
 .newsCard:hover { transform: translateY(-7px); }
@@ -211,39 +211,39 @@
 .newsImage img { object-fit: cover; transition: transform .5s ease; }
 .newsCard:hover .newsImage img { transform: scale(1.04); }
 .newsBody { padding: 22px 27px 27px; }
-.newsBody > div { display: flex; justify-content: space-between; color: #728588; font: 750 8px "Cascadia Mono", Consolas, monospace; letter-spacing: .08em; }
+.newsBody > div { display: flex; justify-content: space-between; color: #728588; font: 750 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; letter-spacing: .08em; }
 .newsBody > div span { color: var(--berry); }
 .newsBody h3 { margin: 20px 0 13px; font-size: 25px; line-height: 1.08; letter-spacing: -.04em; }
-.newsBody p { color: var(--ink-soft); font-size: 11px; line-height: 1.65; }
-.newsBody > b { margin-top: 19px; display: flex; justify-content: space-between; color: var(--teal); font-size: 10px; }
-.newsIndex { position: absolute; right: 17px; top: 18px; width: 39px; height: 39px; display: grid; place-items: center; color: white; border-radius: 50%; background: var(--ink); font: 800 9px "Cascadia Mono", Consolas, monospace; }
+.newsBody p { color: var(--ink-soft); font-size: var(--cs-type-label, 14px); line-height: 1.65; }
+.newsBody > b { margin-top: 19px; display: flex; justify-content: space-between; color: var(--teal); font-size: var(--cs-type-label, 14px); }
+.newsIndex { position: absolute; right: 17px; top: 18px; width: 39px; height: 39px; display: grid; place-items: center; color: white; border-radius: 50%; background: var(--ink); font: 800 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; }
 
 .faqSection { width: min(1340px, calc(100% - 40px)); margin: auto; padding: 20px 0 140px; display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(55px, 8vw, 130px); }
-.faqHeading small { color: var(--sky); font: 850 9px "Cascadia Mono", Consolas, monospace; letter-spacing: .16em; }
+.faqHeading small { color: var(--sky); font: 850 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; letter-spacing: .16em; }
 .faqHeading h2 { margin: 15px 0 22px; font-size: clamp(46px, 5vw, 72px); line-height: .93; letter-spacing: -.06em; }
-.faqHeading p { max-width: 390px; color: var(--ink-soft); font-size: 13px; line-height: 1.7; }
+.faqHeading p { max-width: 390px; color: var(--ink-soft); font-size: var(--cs-type-label, 14px); line-height: 1.7; }
 .faqList { border-top: 1px solid rgba(255,255,255,.11); }
 .faqList details { border-bottom: 1px solid rgba(255,255,255,.11); }
 .faqList summary { min-height: 82px; display: grid; grid-template-columns: 40px 1fr auto; gap: 14px; align-items: center; cursor: pointer; list-style: none; }
 .faqList summary::-webkit-details-marker { display: none; }
-.faqList summary span { color: var(--orange); font: 850 8px "Cascadia Mono", Consolas, monospace; }
+.faqList summary span { color: var(--orange); font: 850 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; }
 .faqList summary b { font-size: 15px; }
 .faqList summary i { width: 30px; height: 30px; display: grid; place-items: center; color: var(--sky); border: 1px solid rgba(142,223,243,.2); border-radius: 50%; font-style: normal; transition: transform .2s ease; }
 .faqList details[open] summary i { transform: rotate(45deg); }
-.faqList details > p { margin: -4px 45px 28px 54px; color: var(--ink-soft); font-size: 12px; line-height: 1.7; }
+.faqList details > p { margin: -4px 45px 28px 54px; color: var(--ink-soft); font-size: var(--cs-type-label, 14px); line-height: 1.7; }
 
 .fieldSection { padding: 125px max(24px, calc((100vw - 1340px) / 2)); color: var(--ink); background: var(--night); }
 .fieldHeading { display: grid; grid-template-columns: 1fr .75fr; gap: 80px; align-items: end; margin-bottom: 55px; }
-.fieldHeading small { color: var(--sky); font: 850 9px "Cascadia Mono", Consolas, monospace; letter-spacing: .16em; }
+.fieldHeading small { color: var(--sky); font: 850 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; letter-spacing: .16em; }
 .fieldHeading h2 { margin: 13px 0 0; font-size: clamp(49px, 5.5vw, 78px); line-height: .93; letter-spacing: -.06em; }
 .fieldHeading > p { max-width: 520px; margin: 0 0 5px; color: var(--ink-soft); font-size: 14px; line-height: 1.75; }
 .fieldGrid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(255,255,255,.12); border-left: 1px solid rgba(255,255,255,.12); }
 .fieldGrid article { min-height: 260px; padding: 31px; border-right: 1px solid rgba(255,255,255,.12); border-bottom: 1px solid rgba(255,255,255,.12); background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.008)); transition: background .2s ease; }
 .fieldGrid article:hover { background: linear-gradient(145deg, rgba(116,91,211,.16), rgba(142,223,243,.035)); }
-.fieldGrid article > div { display: flex; justify-content: space-between; color: var(--sky); font: 800 8px "Cascadia Mono", Consolas, monospace; letter-spacing: .12em; }
+.fieldGrid article > div { display: flex; justify-content: space-between; color: var(--sky); font: 800 var(--cs-type-label, 14px) "Cascadia Mono", Consolas, monospace; letter-spacing: .12em; }
 .fieldGrid article > div small { color: var(--orange); }
 .fieldGrid h3 { margin: 47px 0 15px; font-size: 23px; line-height: 1.05; letter-spacing: -.04em; }
-.fieldGrid p { margin: 0; color: var(--ink-soft); font-size: 11px; line-height: 1.65; }
+.fieldGrid p { margin: 0; color: var(--ink-soft); font-size: var(--cs-type-label, 14px); line-height: 1.65; }
 
 .finalCta { position: relative; width: min(1340px, calc(100% - 40px)); min-height: 540px; margin: 20px auto 110px; padding: 65px 90px; display: grid; grid-template-columns: .8fr 1.2fr; align-items: center; overflow: hidden; color: white; border-radius: 48px 48px 14px 48px; background: var(--berry); box-shadow: 18px 20px 0 #7e1039; }
 .finalCta::before { content: ""; position: absolute; right: -140px; top: -140px; width: 470px; height: 470px; border: 1px solid rgba(255,255,255,.18); border-radius: 50%; box-shadow: 0 0 0 65px rgba(255,255,255,.045), 0 0 0 130px rgba(255,255,255,.035); }
@@ -254,15 +254,15 @@
 .finalCta small { color: #ffd6e3; }
 .finalCta h2 { margin: 16px 0 23px; font-size: clamp(58px, 6.3vw, 91px); line-height: .84; letter-spacing: -.07em; }
 .finalCta p { max-width: 520px; color: #f5d8e3; font-size: 14px; line-height: 1.7; }
-.finalCta a { width: fit-content; min-height: 58px; margin-top: 28px; padding: 0 10px 0 20px; display: flex; align-items: center; gap: 28px; color: var(--ink); border-radius: 15px; background: var(--paper-soft); box-shadow: 0 10px 0 #e4d5d3; font-size: 11px; font-weight: 850; }
+.finalCta a { width: fit-content; min-height: 58px; margin-top: 28px; padding: 0 10px 0 20px; display: flex; align-items: center; gap: 28px; color: var(--ink); border-radius: 15px; background: var(--paper-soft); box-shadow: 0 10px 0 #e4d5d3; font-size: var(--cs-type-label, 14px); font-weight: 850; }
 .finalCta a span { width: 38px; height: 38px; display: grid; place-items: center; color: white; border-radius: 10px; background: var(--teal); font-size: 17px; }
 
 .footer { width: min(1340px, calc(100% - 40px)); min-height: 150px; margin: auto; padding: 35px 0 45px; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 32px; border-top: 1px solid rgba(23,56,59,.15); }
 .footerBrand { display: flex; align-items: center; gap: 10px; font-size: 17px; letter-spacing: -.03em; }
 .footerBrand img { object-fit: contain; }
-.footer > p { margin: 0; color: var(--ink-soft); font-size: 9px; line-height: 1.55; }
-.footer > div:nth-of-type(2) { display: flex; gap: 24px; font-size: 10px; font-weight: 700; }
-.footer > small { grid-column: 1 / -1; color: #7a8c8e; font-size: 8px; text-align: center; }
+.footer > p { margin: 0; color: var(--ink-soft); font-size: var(--cs-type-label, 14px); line-height: 1.55; }
+.footer > div:nth-of-type(2) { display: flex; gap: 24px; font-size: var(--cs-type-label, 14px); font-weight: 700; }
+.footer > small { grid-column: 1 / -1; color: #7a8c8e; font-size: var(--cs-type-label, 14px); text-align: center; }
 
 @media (max-width: 1100px) {
   .navigation { display: none; }
@@ -290,7 +290,7 @@
   .headerCta { width: 42px; height: 42px; padding: 5px; }
   .headerCta b { width: 32px; }
   .hero { min-height: auto; padding: 112px 16px 65px; gap: 35px; }
-  .overline { font-size: 8px; }
+  .overline { font-size: var(--cs-type-label, 14px); }
   .heroCopy, .heroCopy > * { min-width: 0; }
   .hero h1 { max-width: 100%; margin-top: 29px; font-size: clamp(48px, 14vw, 64px); line-height: .88; }
   .heroCopy > p { font-size: 14px; }
@@ -303,7 +303,7 @@
   .heroLogo { left: -9%; width: 67%; }
   .postcard { right: -3%; top: 12%; width: 180px; min-height: 105px; padding: 16px; }
   .postcard strong { font-size: 22px; }
-  .heroStamp { width: 61px; height: 61px; font-size: 9px; }
+  .heroStamp { width: 61px; height: 61px; font-size: var(--cs-type-label, 14px); }
   .ticker { justify-content: flex-start; overflow: hidden; }
   .adventureSection, .journalSection, .newsSection { width: calc(100% - 28px); padding: 90px 0; }
   .sectionIntro, .journalHeader { grid-template-columns: 1fr; gap: 24px; align-items: start; }
@@ -332,7 +332,7 @@
   .statusSection { padding: 90px 20px; gap: 50px; }
   .liveDot { display: none; }
   .statusRow { grid-template-columns: 31px 1fr auto; }
-  .statusRow > b { min-width: 78px; font-size: 7px; }
+  .statusRow > b { min-width: 78px; font-size: var(--cs-type-label, 14px); }
   .newsTitle { grid-template-columns: 1fr; gap: 22px; }
   .newsTitle > a { grid-column: 1; grid-row: auto; }
   .newsGrid { grid-template-columns: 1fr; }
@@ -445,7 +445,7 @@
   .mobileNav summary::-webkit-details-marker { display: none; }
   .mobileNav summary i { width: 16px; height: 1px; display: block; background: var(--ink); }
   .mobileNav > div { position: absolute; z-index: 30; top: 50px; right: 0; width: 210px; padding: 8px; display: grid; gap: 3px; border: 1px solid rgba(255,255,255,.1); border-radius: 15px; background: #141027; box-shadow: 0 20px 50px rgba(0,0,0,.45); }
-  .mobileNav a { padding: 12px 13px; color: var(--ink-soft); border-radius: 9px; font-size: 11px; font-weight: 750; }
+  .mobileNav a { padding: 12px 13px; color: var(--ink-soft); border-radius: 9px; font-size: var(--cs-type-label, 14px); font-weight: 750; }
   .mobileNav a.navActive { color: #100b24; background: linear-gradient(110deg, var(--orange), var(--sky)); }
   .header { grid-template-columns: 1fr auto auto; gap: 8px; }
 }

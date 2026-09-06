@@ -34,6 +34,8 @@
   --wing: var(--cs-wing);
 
   /* Typographie */
+  --cs-type-label: 14px;
+  --cs-type-body: 16px;
   --cs-font-body: "Segoe UI Variable Text", "Segoe UI", Inter, Arial, sans-serif;
   --cs-font-display: "Segoe UI Variable Display", "Arial Black", Arial, sans-serif;
   --cs-font-mono: "Cascadia Mono", Consolas, "SFMono-Regular", monospace;
@@ -80,7 +82,7 @@ body {
 
 button, input, textarea, select { font: inherit; }
 button, a { -webkit-tap-highlight-color: transparent; }
-small { font-size: max(.75em, 10px); }
+small { font-size: max(.75em, var(--cs-type-label, 14px)); }
 ::selection { color: var(--cs-ink-950); background: var(--cs-cloud); }
 :focus-visible { outline: 3px solid var(--cs-cloud); outline-offset: 3px; }
 
