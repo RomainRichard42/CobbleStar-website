@@ -445,13 +445,13 @@ app.get("/api/admin/stats", { config: { rateLimit: { max: 30, timeWindow: "1 min
     pool.execute<MetricRow[]>(`SELECT COUNT(*) sessions,COUNT(DISTINCT user_id) users
       FROM sessions s JOIN users u ON u.id=s.user_id WHERE s.expires_at>UTC_TIMESTAMP() AND s.discord_id=u.discord_id AND u.merged_into IS NULL`),
     pool.execute<DailyRow[]>(`SELECT DATE_FORMAT(created_at,'%Y-%m-%d') day,COUNT(*) value FROM users
-      WHERE merged_into IS NULL AND created_at>=UTC_DATE()-INTERVAL 29 DAY GROUP BY DATE(created_at) ORDER BY day`),
+      WHERE merged_into IS NULL AND created_at>=UTC_DATE()-INTERVAL 29 DAY GROUP BY DATE_FORMAT(created_at,'%Y-%m-%d') ORDER BY day`),
     pool.execute<DailyRow[]>(`SELECT DATE_FORMAT(minecraft_linked_at,'%Y-%m-%d') day,COUNT(*) value FROM users
-      WHERE minecraft_linked_at>=UTC_DATE()-INTERVAL 29 DAY GROUP BY DATE(minecraft_linked_at) ORDER BY day`),
+      WHERE minecraft_linked_at>=UTC_DATE()-INTERVAL 29 DAY GROUP BY DATE_FORMAT(minecraft_linked_at,'%Y-%m-%d') ORDER BY day`),
     pool.execute<DailyRow[]>(`SELECT DATE_FORMAT(voted_at,'%Y-%m-%d') day,COUNT(*) value FROM vote_claims
-      WHERE voted_at>=UTC_DATE()-INTERVAL 29 DAY GROUP BY DATE(voted_at) ORDER BY day`),
+      WHERE voted_at>=UTC_DATE()-INTERVAL 29 DAY GROUP BY DATE_FORMAT(voted_at,'%Y-%m-%d') ORDER BY day`),
     pool.execute<DailyRow[]>(`SELECT DATE_FORMAT(created_at,'%Y-%m-%d') day,COUNT(*) value FROM shop_purchases
-      WHERE created_at>=UTC_DATE()-INTERVAL 29 DAY GROUP BY DATE(created_at) ORDER BY day`),
+      WHERE created_at>=UTC_DATE()-INTERVAL 29 DAY GROUP BY DATE_FORMAT(created_at,'%Y-%m-%d') ORDER BY day`),
     pool.execute<(RowDataPacket & {
       id: string; discord_id: string | null; discord_username: string | null; discord_global_name: string | null;
       discord_avatar: string | null; discord_guild_joined_at: Date | null; minecraft_username: string | null;
@@ -997,5 +997,10 @@ app.setErrorHandler((error, _request, reply) => {
   return reply.code(500).send({ error: "INTERNAL_ERROR" });
 });
 
-await applyMigrations();
-await app.listen({ host: config.HOST, port: config.PORT });
+// Integration tests exercise the real routes without opening a port or applying
+// migrations implicitly. Production startup remains unchanged.
+export { app };
+if (config.NODE_ENV !== "test") {
+  await applyMigrations();
+  await app.listen({ host: config.HOST, port: config.PORT });
+}

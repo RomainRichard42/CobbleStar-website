@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { randomUUID, randomBytes } from "node:crypto";
+import { randomUUID, randomBytes, createHash } from "node:crypto";
 import { readFile, readdir } from "node:fs/promises";
 import mysql from "mysql2/promise";
 import { confirmPlayerLink } from "../dist/account-link.js";
@@ -120,5 +120,63 @@ test("MySQL: UUID recovery, preserved records, rollback, replay and concurrent c
     assert.equal(results.filter(r => r.status === "fulfilled").length, 1);
     const [rows] = await db.execute("SELECT CAST(balance AS CHAR) balance FROM wallets WHERE user_id=?", [f.targetId]);
     assert.equal(rows[0].balance, "48");
+  });
+  await t.test("real admin stats route works with ONLY_FULL_GROUP_BY, including post-recovery data", async () => {
+    const adminDiscord = "111111111111111111";
+    // Explicit isolated configuration; never use production DB_* or secrets.
+    Object.assign(process.env, {
+      NODE_ENV: "test", HOST: "127.0.0.1", PORT: "25577",
+      PUBLIC_API_URL: "https://example.test", SITE_ORIGIN: "https://example.test",
+      DB_HOST: "127.0.0.1", DB_PORT: process.env.LINK_TEST_MYSQL_PORT,
+      DB_NAME: "cobblestar_link_test", DB_USER: "cobblestar_test", DB_PASSWORD: "cobblestar-test-only", DB_SSL: "false",
+      COOKIE_SECRET: "isolated-test-cookie-secret-never-used-in-production",
+      MINECRAFT_SERVER_KEY: "isolated-test-server-secret-never-used-in-production",
+      GAME_ADMIN_DISCORD_IDS: adminDiscord, GAME_ADMIN_READ_DISCORD_IDS: "", WIKI_ADMIN_EMAILS: "staff-only@example.test",
+    });
+    const { app } = await import("../dist/server.js");
+    const { pool: apiPool } = await import("../dist/db.js");
+    const originalExecute = apiPool.execute.bind(apiPool);
+    let strictQueryCount = 0;
+    // Every query uses an actual MySQL connection with strict grouping explicitly
+    // enabled. The route, authorization and response mapping are NOT mocked.
+    apiPool.execute = async (...args) => {
+      const connection = await apiPool.getConnection();
+      try {
+        const [mode] = await connection.query("SELECT @@SESSION.sql_mode AS mode");
+        const modes = new Set(mode[0].mode.split(",")); modes.add("ONLY_FULL_GROUP_BY");
+        await connection.query("SET SESSION sql_mode=?", [[...modes].join(",")]);
+        strictQueryCount++;
+        return await connection.execute(...args);
+      } finally { connection.release(); }
+    };
+    try {
+      const userId = randomUUID(), rawSession = hex() + hex();
+      const sessionHash = createHash("sha256").update(rawSession).digest("hex");
+      await db.execute("INSERT INTO users(id,discord_id) VALUES(?,?)", [userId, adminDiscord]);
+      await db.execute("INSERT INTO sessions(token_hash,user_id,discord_id,expires_at) VALUES(?,?,?,DATE_ADD(UTC_TIMESTAMP(),INTERVAL 1 DAY))", [sessionHash, userId, adminDiscord]);
+      assert.equal((await app.inject({ url: "/api/admin/stats" })).statusCode, 401);
+      const normal = await seed({ targetExists: false });
+      // A hash is not a valid cookie; denial must not expose statistics.
+      assert.equal((await app.inject({ url: "/api/admin/stats", headers: { cookie: `cobblestar_session=${normal.session}` } })).statusCode, 401);
+      const normalRawSession = hex() + hex();
+      await db.execute("INSERT INTO sessions(token_hash,user_id,discord_id,expires_at) VALUES(?,?,?,DATE_ADD(UTC_TIMESTAMP(),INTERVAL 1 DAY))", [createHash("sha256").update(normalRawSession).digest("hex"), normal.sourceId, normal.discord]);
+      assert.equal((await app.inject({ url: "/api/admin/stats", headers: { cookie: `cobblestar_session=${normalRawSession}` } })).statusCode, 403);
+      const response = await app.inject({ url: "/api/admin/stats", headers: { cookie: `cobblestar_session=${rawSession}` } });
+      assert.equal(response.statusCode, 200, response.body);
+      const stats = response.json();
+      assert.equal(stats.daily.length, 30);
+      assert.ok(stats.daily.every(day => /^\d{4}-\d{2}-\d{2}$/.test(day.day)));
+      for (const series of ["accounts", "links", "votes", "purchases"]) {
+        assert.ok(stats.daily.reduce((sum, day) => sum + day[series], 0) > 0, series);
+      }
+      const [expectedUsers] = await db.query("SELECT COUNT(*) n FROM users WHERE merged_into IS NULL");
+      assert.equal(stats.overview.users, Number(expectedUsers[0].n));
+      const [expectedWallet] = await db.query("SELECT COALESCE(SUM(w.balance),0) n FROM wallets w JOIN users u ON u.id=w.user_id WHERE u.merged_into IS NULL");
+      assert.equal(stats.economy.circulatingStars, Number(expectedWallet[0].n));
+      assert.ok(strictQueryCount >= 16, "All dashboard queries must run in strict mode");
+    } finally {
+      apiPool.execute = originalExecute;
+      await app.close(); await apiPool.end();
+    }
   });
 });
