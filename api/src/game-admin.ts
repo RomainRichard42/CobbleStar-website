@@ -52,9 +52,13 @@ export function registerGameAdmin(app: FastifyInstance, auth: Auth) {
     const pattern = `%${q.replace(/[!%_]/g, "!$&")}%`;
     const args = [pattern, pattern, pattern];
     const where = "WHERE p.username LIKE ? ESCAPE '!' OR p.uuid LIKE ? ESCAPE '!' OR u.discord_username LIKE ? ESCAPE '!'";
+    // users uses utf8mb4_unicode_ci, while game_players may inherit MySQL 8's
+    // utf8mb4_0900_ai_ci. Compare canonical UUIDs explicitly without rewriting
+    // existing tables; keep users.minecraft_uuid unwrapped for its unique index.
+    const accountJoin = "LEFT JOIN users u ON u.minecraft_uuid=CONVERT(p.uuid USING utf8mb4) COLLATE utf8mb4_unicode_ci";
     const [[total], [players]] = await Promise.all([
-      pool.execute<RowDataPacket[]>(`SELECT COUNT(*) AS total FROM game_players p LEFT JOIN users u ON u.minecraft_uuid=p.uuid ${where}`, args),
-      pool.execute<RowDataPacket[]>(`SELECT p.uuid,p.username,p.server_id AS serverId,p.first_seen_at AS firstSeenAt,p.received_at AS receivedAt,p.observed_at AS observedAt,(p.online AND TIMESTAMPDIFF(SECOND,p.received_at,UTC_TIMESTAMP())<45 AND p.observed_at>UNIX_TIMESTAMP(UTC_TIMESTAMP(3))*1000-45000) AS online,u.discord_username AS discordUsername FROM game_players p LEFT JOIN users u ON u.minecraft_uuid=p.uuid ${where} ORDER BY online DESC,p.received_at DESC,p.uuid LIMIT 24 OFFSET ${(page - 1) * 24}`, args),
+      pool.execute<RowDataPacket[]>(`SELECT COUNT(*) AS total FROM game_players p ${accountJoin} ${where}`, args),
+      pool.execute<RowDataPacket[]>(`SELECT p.uuid,p.username,p.server_id AS serverId,p.first_seen_at AS firstSeenAt,p.received_at AS receivedAt,p.observed_at AS observedAt,(p.online AND TIMESTAMPDIFF(SECOND,p.received_at,UTC_TIMESTAMP())<45 AND p.observed_at>UNIX_TIMESTAMP(UTC_TIMESTAMP(3))*1000-45000) AS online,u.discord_username AS discordUsername FROM game_players p ${accountJoin} ${where} ORDER BY online DESC,p.received_at DESC,p.uuid LIMIT 24 OFFSET ${(page - 1) * 24}`, args),
     ]);
     return { players, total: Number(total[0]?.total ?? 0), page, canWrite: canWriteGame(actor) };
   });

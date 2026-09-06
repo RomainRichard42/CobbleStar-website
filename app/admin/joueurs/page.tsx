@@ -24,7 +24,7 @@ const errors: Record<string, string> = { AUTH_REQUIRED: "Connecte-toi avec ton c
 async function api<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(path, { ...init, credentials: "include", cache: "no-store" });
   const body = await response.json().catch(() => ({ error: "API indisponible : vérifie que le backend est démarré." }));
-  if (!response.ok) throw Object.assign(new Error(errors[body.error] ?? body.error ?? `Erreur HTTP ${response.status}`), { status: response.status });
+  if (!response.ok) throw Object.assign(new Error(errors[body.error] ?? (response.status >= 500 ? "Impossible de lire les données du serveur. Réessaie après la remise en service de l’API." : body.error ?? `Erreur HTTP ${response.status}`)), { status: response.status });
   return body as T;
 }
 
@@ -92,17 +92,17 @@ export default function PlayersAdmin() {
     <header className={s.header}><Link href="/admin/">← Centre de contrôle</Link><span>COBBLESTAR / JOUEURS</span><Link href="/compte/">Mon compte</Link></header>
     <section className={s.title}><div><span className={s.eyebrow}>OBSERVATOIRE DES DRESSEURS</span><h1>Le jeu, côté <em>coulisses.</em></h1><p>Une fiche par joueur. Des données du serveur, des modifications tracées.</p></div><button onClick={() => { void loadList(); void loadProfile(); }}>Actualiser ↻</button></section>
     <div className={s.workspace}>
-      <aside className={s.directory}><label htmlFor="player-search">Rechercher un joueur</label><input id="player-search" placeholder="Pseudo, UUID, Discord…" value={query} onChange={(e) => { setQuery(e.target.value); setPage(1); }}/><small>{fmt(total)} joueurs observés · même sans /link</small>
+      <aside className={s.directory}><label htmlFor="player-search">Rechercher un joueur</label><input id="player-search" placeholder="Pseudo, UUID, Discord…" value={query} onChange={(e) => { setQuery(e.target.value); setPage(1); }}/><small>{listError ? "Nombre de joueurs indisponible" : loading ? "Lecture du nombre de joueurs…" : `${fmt(total)} joueurs observés · même sans /link`}</small>
         {listError && <p role="alert" className={s.warning}>{listError}</p>}
         {loading && <p role="status">Chargement des joueurs…</p>}
         {!loading && !listError && !players.length && <p>Aucun joueur synchronisé. Active la passerelle serveur ; les fiches apparaîtront lors de leurs connexions.</p>}
         <div className={s.playerList}>{players.map((player) => <button key={player.uuid} className={selected === player.uuid ? s.selected : ""} onClick={() => choose(player.uuid)}><span className={s.avatar}>{player.username.slice(0, 2).toUpperCase()}</span><span><b>{player.username}</b><small>{player.discordUsername ? `@${player.discordUsername}` : "Compte web non lié"}</small></span><i className={player.online ? s.online : s.offline} title={player.online ? "Présence confirmée récemment" : "Hors ligne ou présence inconnue"}/></button>)}</div>
-        <Pagination page={page} pages={Math.max(1, Math.ceil(total / 24))} onPage={setPage}/>
+        {!listError && !loading && <Pagination page={page} pages={Math.max(1, Math.ceil(total / 24))} onPage={setPage}/>}
       </aside>
       <section className={s.dossier} aria-label="Fiche du joueur">
         {error && <p role="alert" className={s.warning}>{error} {profile && "Les données affichées peuvent être périmées ; modifications désactivées."}</p>}
         {notice && <p role="status" className={s.notice}>{notice}</p>}
-        {!profile ? <div className={s.empty}><span>✦</span><h2>{selected ? "Lecture de la fiche…" : "Ouvre une fiche joueur"}</h2><p>Équipe Pokémon, inventaires, progression et historique, au même endroit. Aucune donnée fictive n’est affichée.</p></div> : <>
+        {!profile ? <div className={s.empty}><span>✦</span><h2>{error ? "Fiche indisponible" : selected ? "Lecture de la fiche…" : "Ouvre une fiche joueur"}</h2><p>{error ? "La fiche n’a pas pu être chargée. Aucune modification ne peut être envoyée. Utilise Actualiser pour réessayer." : "Équipe Pokémon, inventaires, progression et historique, au même endroit. Aucune donnée fictive n’est affichée."}</p></div> : <>
           <div className={s.identity}><div><span className={s.eyebrow}>{profile.serverId} · {fresh ? "PRÉSENCE RÉCENTE" : "HORS LIGNE / NON CONFIRMÉ"}</span><h2>{profile.username}</h2><code>{profile.uuid}</code><p>Dernier relevé : {date(profile.observedAt)} · Suivi commencé le {date(profile.firstSeenAt)}</p></div><span className={s.access}>{profile.canWrite ? "GESTION JOUEUR" : "LECTURE SEULE"}</span></div>
           <nav className={s.tabs} aria-label="Sections de la fiche">{tabs.map((item) => <button key={item} aria-current={tab === item ? "page" : undefined} onClick={() => { setTab(item); setFilter(""); }}>{item}</button>)}</nav>
           {snapshot && <div className={s.content}>

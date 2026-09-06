@@ -29,14 +29,16 @@ const sample = () => ({
     statistics: { "minecraft:custom/minecraft:play_time": 144000 }, academy: { cosmetics: ["asteria_aura"], activeCosmetics: [] }, quests: { completed: ["test"] }, cosmeticIds: ["asteria_aura"], capabilities: ["xp_level", "health", "food", "inventory_count", "pokemon_level", "cosmetic_unlock", "cosmetics_disable"] },
   events: [{ id: "event", kind: "join", at: Date.now(), detail: {} }], eventsTotal: 1, eventsPage: 1, actions: [],
 });
-let profile = sample(), deny = false, sent = [];
+let profile = sample(), deny = false, unavailable = false, missing = false, sent = [];
 const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   const pageErrors = []; page.on("pageerror", (error) => pageErrors.push(error.message));
   await page.route("**/api/**", async (route) => {
     if (deny) return route.fulfill({ status: 403, json: { error: "GAME_ADMIN_REQUIRED" } });
+    if (unavailable) return route.fulfill({ status: 500, json: { error: "Internal Server Error", code: "ER_CANT_AGGREGATE_2COLLATIONS" } });
     const request = route.request(), url = new URL(request.url());
+    if (missing && url.pathname.endsWith(`/players/${uuid}`)) return route.fulfill({ status: 404, json: { error: "PLAYER_NOT_OBSERVED" } });
     if (request.method() === "POST") {
       const body = request.postDataJSON(); sent.push(body);
       profile.actions = [{ id: body.requestId, actor: "111111111111111111", reason: body.reason, payload: body.action, status: "queued", result: null, createdAt: new Date().toISOString() }];
@@ -74,6 +76,14 @@ try {
   await page.screenshot({ path: "ui-review-game-admin-desktop.png", fullPage: true });
   deny = true; await page.reload(); await page.getByRole("alert").first().waitFor();
   assert.equal(await page.getByRole("heading", { name: "TEST_DRESSEUR", exact: true }).count(), 0);
+  deny = false; unavailable = true; await page.reload();
+  await page.getByText("Nombre de joueurs indisponible", { exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Fiche indisponible", exact: true }).waitFor();
+  assert.equal(await page.getByText(/^0 joueurs observés/).count(), 0);
+  assert.equal(await page.getByRole("heading", { name: "Lecture de la fiche…", exact: true }).count(), 0);
+  unavailable = false; missing = true; await page.reload();
+  await page.getByText("Ce joueur n’a pas encore été synchronisé par le serveur.", { exact: true }).waitFor();
+  await page.getByRole("heading", { name: "Fiche indisponible", exact: true }).waitFor();
   assert.deepEqual(pageErrors, []);
-  console.log("PASS: actual UI with synthetic fixtures — detail, inventory, confirmation, one request, pending lock, read-only, 390px layout, denied access, no browser errors. No live game mutation tested.");
+  console.log("PASS: actual UI with synthetic fixtures — detail, inventory, confirmation, one request, pending lock, read-only, 390px layout, denied access, API 500 distinguished from zero players, missing player distinguished from loading, no browser errors. No live game mutation tested.");
 } finally { await browser.close(); await new Promise((done) => server.close(done)); }

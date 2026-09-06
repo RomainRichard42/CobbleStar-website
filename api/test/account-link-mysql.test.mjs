@@ -121,7 +121,7 @@ test("MySQL: UUID recovery, preserved records, rollback, replay and concurrent c
     const [rows] = await db.execute("SELECT CAST(balance AS CHAR) balance FROM wallets WHERE user_id=?", [f.targetId]);
     assert.equal(rows[0].balance, "48");
   });
-  await t.test("real admin stats route works with ONLY_FULL_GROUP_BY, including post-recovery data", async () => {
+  await t.test("real admin stats and player routes: strict grouping, mixed collations and server sync", async () => {
     const adminDiscord = "111111111111111111";
     // Explicit isolated configuration; never use production DB_* or secrets.
     Object.assign(process.env, {
@@ -174,6 +174,46 @@ test("MySQL: UUID recovery, preserved records, rollback, replay and concurrent c
       const [expectedWallet] = await db.query("SELECT COALESCE(SUM(w.balance),0) n FROM wallets w JOIN users u ON u.id=w.user_id WHERE u.merged_into IS NULL");
       assert.equal(stats.economy.circulatingStars, Number(expectedWallet[0].n));
       assert.ok(strictQueryCount >= 16, "All dashboard queries must run in strict mode");
+      // Reproduce the production schema mismatch explicitly in this disposable
+      // database. Do not change production collations or weaken strict mode.
+      await db.query("ALTER TABLE game_players MODIFY uuid CHAR(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL");
+      const [collations] = await db.query("SELECT TABLE_NAME,COLLATION_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA='cobblestar_link_test' AND ((TABLE_NAME='users' AND COLUMN_NAME='minecraft_uuid') OR (TABLE_NAME='game_players' AND COLUMN_NAME='uuid'))");
+      assert.equal(collations.find(c => c.TABLE_NAME === "users").COLLATION_NAME, "utf8mb4_unicode_ci");
+      assert.equal(collations.find(c => c.TABLE_NAME === "game_players").COLLATION_NAME, "utf8mb4_0900_ai_ci");
+      const adminHeaders = { cookie: `cobblestar_session=${rawSession}` };
+      const listBeforeSync = await app.inject({ url: "/api/admin/game/players?page=1", headers: adminHeaders });
+      assert.equal(listBeforeSync.statusCode, 200, listBeforeSync.body);
+      assert.equal(listBeforeSync.json().total, 0);
+      const observed = await seed({ linkedSource: true, targetExists: false });
+      await db.execute("UPDATE users SET discord_username='fixture_discord' WHERE id=?", [observed.sourceId]);
+      const snapshotId = randomUUID();
+      const snapshot = {
+        schemaVersion: 1, sessionStartedAt: Date.now(), health: 20, maxHealth: 20, food: 20,
+        xpLevel: 5, xpProgress: 0, dimension: "minecraft:overworld", x: 0, y: 64, z: 0, gameMode: "survival",
+        inventory: [], enderChest: [], pokemon: [], pokemonTruncated: false, statistics: {},
+        academy: {}, quests: {}, cosmeticIds: [], capabilities: ["xp_level"],
+      };
+      const sync = await app.inject({ method: "POST", url: "/api/internal/admin/sync",
+        headers: { authorization: `Bearer ${process.env.MINECRAFT_SERVER_KEY}` },
+        payload: { uuid: observed.sourceUuid, username: "TEST_DRESSEUR", serverId: "main", snapshotId, online: true,
+          observedAt: Date.now(), snapshot, events: [{ id: randomUUID(), kind: "join", at: Date.now(), detail: {} }] } });
+      assert.equal(sync.statusCode, 200, sync.body);
+      for (const query of ["", observed.sourceUuid, "TEST_DRESSEUR", "fixture_discord"]) {
+        const list = await app.inject({ url: `/api/admin/game/players?page=1&q=${encodeURIComponent(query)}`, headers: adminHeaders });
+        assert.equal(list.statusCode, 200, list.body);
+        assert.equal(list.json().total, 1); assert.equal(list.json().players[0].uuid, observed.sourceUuid);
+        assert.equal(list.json().players[0].discordUsername, "fixture_discord");
+      }
+      const escaped = await app.inject({ url: "/api/admin/game/players?q=%25", headers: adminHeaders });
+      assert.equal(escaped.statusCode, 200, escaped.body); assert.equal(escaped.json().total, 0);
+      const nextPage = await app.inject({ url: "/api/admin/game/players?page=2", headers: adminHeaders });
+      assert.equal(nextPage.statusCode, 200, nextPage.body); assert.equal(nextPage.json().players.length, 0);
+      const detail = await app.inject({ url: `/api/admin/game/players/${observed.sourceUuid}`, headers: adminHeaders });
+      assert.equal(detail.statusCode, 200, detail.body);
+      assert.equal(detail.json().snapshotId, snapshotId); assert.equal(detail.json().eventsTotal, 1);
+      assert.equal(detail.json().snapshot.xpLevel, 5); assert.equal(detail.json().account.discord_id, observed.discord);
+      const missing = await app.inject({ url: `/api/admin/game/players/${hex()}`, headers: adminHeaders });
+      assert.equal(missing.statusCode, 404); assert.equal(missing.json().error, "PLAYER_NOT_OBSERVED");
     } finally {
       apiPool.execute = originalExecute;
       await app.close(); await apiPool.end();
