@@ -16,6 +16,7 @@ import { digest, normalizeEmail, randomToken } from "./security.js";
 import { findShopProduct, getGameShopCatalog, getShopTheme } from "./shop.js";
 import { findVoteSite, getVoteSites, playerVoteUrl } from "./votes.js";
 import { canReadGame, registerGameAdmin } from "./game-admin.js";
+import { registerQuestStudio } from "./quest-studio.js";
 import { accountIdentity } from "./account-link.js";
 import { registerAccountLink } from "./account-link-routes.js";
 import { siteSecurity } from "./site-security.js";
@@ -389,6 +390,7 @@ app.get("/api/me", { preHandler: requireAccount }, async (request, reply) => {
 });
 
 registerGameAdmin(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
+registerQuestStudio(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerAccountLink(app, {
   session: loadSession,
   sessionHash: request => request.cookies[sessionCookie] ? digest(request.cookies[sessionCookie]!) : null,

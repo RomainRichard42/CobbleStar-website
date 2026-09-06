@@ -96,7 +96,7 @@ export default function AdminDashboard() {
     <header className={styles.topbar}>
       <Link className={styles.brand} href="/"><img src="/cobblestar-logo.png" alt=""/><span><small>COBBLESTAR</small><b>CONTROL CENTER</b></span></Link>
       <div className={styles.live}><i/><span><small>DONNÉES ACTUALISÉES</small><b>{new Date(data.generatedAt).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}</b></span></div>
-      <nav><Link href="/admin/joueurs/">Joueurs en jeu</Link><Link href="/compte/">Mon compte</Link><Link href="/wiki/admin/">Studio wiki</Link><button onClick={() => void load()} disabled={loading}>{loading ? "Actualisation…" : "Actualiser ↻"}</button></nav>
+      <nav><Link href="/admin/joueurs/">Joueurs en jeu</Link><Link href="/admin/creation/">Quêtes & PNJ</Link><Link href="/compte/">Mon compte</Link><Link href="/wiki/admin/">Studio wiki</Link><button onClick={() => void load()} disabled={loading}>{loading ? "Actualisation…" : "Actualiser ↻"}</button></nav>
     </header>
 
     {error && <p role="alert">{error} Les données affichées proviennent du dernier chargement réussi.</p>}

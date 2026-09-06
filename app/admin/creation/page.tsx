@@ -1,0 +1,156 @@
+"use client";
+
+import Link from "next/link";
+import { useCallback, useEffect, useState } from "react";
+import type { StudioContent, StudioQuest, StudioNpc } from "../../../api/src/quest-studio-schema";
+import s from "./studio.module.css";
+
+type State = { content: StudioContent; observed: StudioContent | null; draftRevision: number; publishedRevision: number; appliedRevision: number;
+  lastSeenAt: string | null; error: string; canWrite: boolean; placements: { key: string; name: string; templateId: string }[];
+  history: { revision: number; actor: string; reason: string; createdAt: string }[] };
+type Server = { serverId: string };
+type Tab = "quests" | "npcs" | "chapters";
+const empty = (): StudioContent => ({ questConfig: { resetHour: 6, quests: [], chapters: [] }, npcs: [] });
+const sources = ["daily_login", "cobblemon_capture", "cobblemon_new_species", "cobblemon_wild_victory", "cobblemon_npc_victory", "vanilla_new_biome", "cobblestar_custom_raid"];
+const optionLabels: Record<string, string> = { DIALOGUE_ONLY: 'Dialogue uniquement', DIALOGUE_QUEST: 'Dialogue et quêtes', TURN_IN: 'Remise de quêtes', DAYCARE: 'Pension', RANKED: 'Combats classés', SHOP: 'Marchand', STORY: 'Histoire principale', SIDE: 'Aventure secondaire', MERCHANT: 'Marchand', EVENT: 'Événement', NONE: 'Sans couleur', ROLE: 'Selon le rôle', CYAN: 'Cyan', PINK: 'Rose', GOLD: 'Or', GREEN: 'Vert', VIOLET: 'Violet', DAILY: 'Quotidienne', WEEKLY: 'Hebdomadaire', MONTHLY: 'Mensuelle', FACILE: 'Facile', NORMAL: 'Normal', DIFFICILE: 'Difficile', EXPERT: 'Expert', PREVIOUS: 'Après le chapitre précédent', IMMEDIATE: 'Disponible immédiatement', MANUAL: 'Déblocage manuel' };
+const makeId = (prefix: string) => `${prefix}_${crypto.randomUUID().slice(0, 8)}`;
+const newQuest = (): StudioQuest => ({ id: makeId("quete"), title: "Nouvelle quête", description: "", category: "AVENTURE", chapterId: "", chapterTitle: "Aventure", kind: "SIDE", difficulty: "NORMAL", icon: "minecraft:book", accent: "#9B8CFF", order: 1, autoStart: false, requires: [], objectives: [{ source: "cobblemon_capture", label: "Capturer un Pokémon", target: 1, unique: false, optional: false, alternativeGroup: "", filters: {} }], rewards: [] });
+const newNpc = (): StudioNpc => ({ id: makeId("pnj"), name: "Nouveau personnage", enabled: true, role: "DIALOGUE_QUEST", dialogue: "Bienvenue, Dresseur !", questIds: [], permission: 0, repeatableDialogue: true, skin: "", nameColor: "ROLE", visualRole: "STORY", shopOffers: "", dialogueGraph: { start: "accueil", nodes: [{ id: "accueil", title: "Accueil", text: "Bienvenue, Dresseur !", canvasX: 24, canvasY: 42, choices: [] }] } });
+async function api<T>(url: string, init?: RequestInit): Promise<T> {
+  const res = await fetch(url, { credentials: "include", cache: "no-store", ...init, headers: { "Content-Type": "application/json", ...init?.headers } });
+  const body = await res.json();
+  if (!res.ok) throw new Error(body.message || ({ AUTH_REQUIRED: "Connecte-toi avec Discord.", GAME_ADMIN_REQUIRED: "Accès réservé aux administrateurs du jeu.", DRAFT_CONFLICT: "Brouillon modifié ailleurs : recharge avant d'enregistrer.", INVALID_INPUT: "Publication invalide : vérifie les identifiants, les branches et les récompenses." } as Record<string, string>)[body.error] || "API indisponible");
+  return body as T;
+}
+
+export default function CreationStudio() {
+  const [servers, setServers] = useState<Server[]>([]), [server, setServer] = useState("");
+  const [state, setState] = useState<State | null>(null), [content, setContent] = useState<StudioContent>(empty);
+  const [tab, setTab] = useState<Tab>("quests"), [selected, setSelected] = useState(0), [query, setQuery] = useState("");
+  const [message, setMessage] = useState("Chargement du studio…"), [busy, setBusy] = useState(false), [dirty, setDirty] = useState(false);
+  const [reason, setReason] = useState(""), [publishOpen, setPublishOpen] = useState(false), [previewNode, setPreviewNode] = useState("");
+  const [now, setNow] = useState(0);
+  const load = useCallback(async (id: string) => {
+    const result = await api<State>(`/api/admin/quests/${id}`); setNow(Date.now());
+    setState(result); setContent(result.content); setDirty(false); setMessage(""); setSelected(0); setPreviewNode("");
+  }, []);
+  useEffect(() => { let active = true;
+    void api<{ servers: Server[] }>("/api/admin/quests").then(async r => {
+      if (!active) return; setServers(r.servers);
+      if (r.servers[0]) { setServer(r.servers[0].serverId); await load(r.servers[0].serverId); }
+      else setMessage("Aucun serveur connecté au Studio. Installe le nouveau JAR et active la passerelle admin, puis actualise cette page.");
+    }).catch(e => { if (active) setMessage(e.message); }); return () => { active = false; };
+  }, [load]);
+  useEffect(() => {
+    if (!server) return;
+    let active = true;
+    const timer = window.setInterval(() => { setNow(Date.now()); void api<State>(`/api/admin/quests/${server}`).then(r => {
+      if (active) setState(old => old ? { ...old, canWrite: r.canWrite, appliedRevision: r.appliedRevision, publishedRevision: r.publishedRevision, lastSeenAt: r.lastSeenAt, error: r.error, placements: r.placements } : old);
+    }).catch(() => undefined); }, 15000);
+    return () => { active = false; window.clearInterval(timer); };
+  }, [server]);
+  useEffect(() => {
+    const warn = (e: BeforeUnloadEvent) => { if (dirty) e.preventDefault(); };
+    window.addEventListener("beforeunload", warn); return () => window.removeEventListener("beforeunload", warn);
+  }, [dirty]);
+  useEffect(() => {
+    if (!publishOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const keyboard = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && !busy) setPublishOpen(false);
+      if (e.key !== "Tab") return;
+      const elements = Array.from(document.querySelectorAll<HTMLElement>('[role="dialog"] textarea, [role="dialog"] button:not(:disabled)'));
+      const first = elements[0], last = elements.at(-1);
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+    };
+    document.addEventListener("keydown", keyboard);
+    return () => { document.body.style.overflow = previousOverflow; document.removeEventListener("keydown", keyboard); };
+  }, [publishOpen, busy]);
+  function edit(fn: (draft: StudioContent) => void) { const draft = structuredClone(content); fn(draft); setContent(draft); setDirty(true); }
+  function patchQuest(patch: Partial<StudioQuest>) { edit(d => Object.assign(d.questConfig.quests[selected], patch)); }
+  function patchNpc(patch: Partial<StudioNpc>) { edit(d => Object.assign(d.npcs[selected], patch)); }
+  async function task(fn: () => Promise<void>) { setBusy(true); try { await fn(); } catch (e) { setMessage((e as Error).message); } finally { setBusy(false); } }
+  async function save() {
+    const result = await api<{ draftRevision: number }>(`/api/admin/quests/${server}`, { method: "PUT", body: JSON.stringify({ baseRevision: state!.draftRevision, content }) });
+    setState(old => old ? { ...old, draftRevision: result.draftRevision } : old); setDirty(false); setMessage("Brouillon enregistré. Rien n'a changé en jeu.");
+  }
+  const quest = tab === "quests" ? content.questConfig.quests[selected] : null;
+  const npc = tab === "npcs" ? content.npcs[selected] : null;
+  const chapter = tab === "chapters" ? content.questConfig.chapters[selected] : null;
+  const entries = tab === "quests" ? content.questConfig.quests.map(q => ({ id: q.id, title: q.title, detail: q.kind })) : tab === "npcs" ? content.npcs.map(n => ({ id: n.id, title: n.name, detail: n.enabled ? n.role : "SYNCHRO EN PAUSE" })) : content.questConfig.chapters.map(c => ({ id: c.id, title: c.title, detail: `${c.questIds.length} quêtes` }));
+  const currentNode = npc?.dialogueGraph.nodes.find(n => n.id === previewNode) ?? npc?.dialogueGraph.nodes.find(n => n.id === npc.dialogueGraph.start);
+  const fresh = state?.lastSeenAt && now - new Date(state.lastSeenAt).getTime() < 60000;
+
+  return <main className={s.page} id="contenu">
+    <header className={s.header}><Link href="/admin/">← Centre de contrôle</Link><span>COBBLESTAR · STUDIO NARRATIF</span><Link href="/compte/">Mon compte</Link></header>
+    <section className={s.hero}><div><p>LES HISTOIRES COMMENCENT ICI</p><h1>Des rencontres.<br/><em>De vraies aventures.</em></h1><p>Écris, relie, publie. Ton serveur donne vie à tes personnages.</p></div><aside><b>Site → nom du PNJ → jeu</b><p>Place un PNJ avec le bâton, saisis le nom exact ou l’identifiant du modèle, puis enregistre. La liaison survit aux renommages sur le site.</p></aside></section>
+    {message && <p className={s.notice} role="status">{message}</p>}
+    {state && <>
+      <div className={s.toolbar}><label>Serveur<select value={server} disabled={busy} onChange={e => { if (dirty && !confirm("Abandonner les modifications non enregistrées ?")) return; const id = e.target.value; setServer(id); void task(() => load(id)); }}>{servers.map(x => <option key={x.serverId}>{x.serverId}</option>)}</select></label>
+        <span className={s.sync}>{!fresh ? "Serveur hors ligne / réponse ancienne" : state.error ? "Application refusée" : state.appliedRevision === state.publishedRevision ? "Serveur à jour" : "En attente du serveur"}<small>Brouillon {state.draftRevision} · publié {state.publishedRevision} · appliqué {state.appliedRevision}</small></span>
+        <button disabled={busy} onClick={() => { if (!dirty || confirm("Recharger et abandonner le brouillon local ?")) void task(() => load(server)); }}>Actualiser</button>
+        {state.canWrite && <><button disabled={busy || !dirty} onClick={() => void task(save)}>Enregistrer{dirty ? " *" : ""}</button><button className={s.primary} disabled={busy || dirty || state.draftRevision === 0} onClick={() => setPublishOpen(true)}>Publier en jeu</button></>}
+      </div>
+      {state.error && <p className={s.notice} role="alert">{state.error}</p>}
+      <div className={s.workspace}>
+        <aside className={s.directory}><nav>{([['quests', 'Quêtes'], ['npcs', 'PNJ'], ['chapters', 'Chapitres']] as const).map(([id, title]) => <button key={id} aria-pressed={tab === id} onClick={() => { setTab(id); setSelected(0); setPreviewNode(""); }}>{title}</button>)}</nav>
+          <input aria-label="Rechercher dans le studio" placeholder="Rechercher…" value={query} onChange={e => setQuery(e.target.value)} />
+          {entries.map((entry, i) => `${entry.title} ${entry.id}`.toLowerCase().includes(query.toLowerCase()) && <button className={s.entry} aria-pressed={selected === i} key={entry.id + i} onClick={() => { setSelected(i); setPreviewNode(""); }}><b>{entry.title}</b><small>{entry.detail}</small><code>{entry.id}</code></button>)}
+          {state.canWrite && <button className={s.add} onClick={() => edit(d => {
+            if (tab === 'quests') { setSelected(d.questConfig.quests.length); d.questConfig.quests.push(newQuest()); }
+            else if (tab === 'npcs') { setSelected(d.npcs.length); d.npcs.push(newNpc()); }
+            else { setSelected(d.questConfig.chapters.length); d.questConfig.chapters.push({ id: makeId('chapitre'), title: 'Nouveau chapitre', order: d.questConfig.chapters.length + 1, unlockMode: 'IMMEDIATE', questIds: [] }); }
+          })}>+ Créer {tab === 'quests' ? 'une quête' : tab === 'npcs' ? 'un PNJ' : 'un chapitre'}</button>}
+          {state.canWrite && state.observed && <button onClick={() => { if (confirm("Importer les quêtes et modèles connus du serveur dans ce brouillon ? Tes changements locaux seront remplacés, pas le contenu en jeu.")) { setContent(structuredClone(state.observed!)); setDirty(true); setSelected(0); } }}>Importer l’existant du serveur</button>}
+          <p>Importer permet de reprendre les quêtes existantes. Publier fusionne les identifiants : aucune progression ni quête locale n’est supprimée.</p>
+        </aside>
+        <fieldset className={s.editor} disabled={!state.canWrite || busy}>
+          {!quest && !npc && !chapter && <div className={s.empty}><h2>Ton prochain chapitre t’attend.</h2><p>Crée une première fiche ou importe le catalogue du serveur.</p></div>}
+          {quest && <>
+            <div className={s.sectionTitle}><h2>{quest.title}</h2><button onClick={() => edit(d => { const copy = structuredClone(quest); copy.id = makeId('quete'); copy.title += ' · copie'; d.questConfig.quests.push(copy); setSelected(d.questConfig.quests.length - 1); })}>Dupliquer</button></div>
+            <div className={s.grid}><Field title="Identifiant stable" value={quest.id} onChange={id => patchQuest({ id })}/><Field title="Titre" value={quest.title} onChange={title => patchQuest({ title })}/></div>
+            <label>Description<textarea value={quest.description} onChange={e => patchQuest({ description: e.target.value })}/></label>
+            <div className={s.grid}><Select title="Type" value={quest.kind} options={['STORY','SIDE','DAILY','WEEKLY','MONTHLY']} onChange={kind => patchQuest({ kind: kind as StudioQuest['kind'] })}/><Select title="Difficulté" value={quest.difficulty} options={['FACILE','NORMAL','DIFFICILE','EXPERT']} onChange={difficulty => patchQuest({ difficulty: difficulty as StudioQuest['difficulty'] })}/><Field title="Catégorie" value={quest.category} onChange={category => patchQuest({ category })}/><Field title="Icône · identifiant du vrai objet" value={quest.icon} onChange={icon => patchQuest({ icon })}/><Field title="Couleur hex" value={quest.accent} onChange={accent => patchQuest({ accent })}/><label><input type="checkbox" checked={quest.autoStart} onChange={e => patchQuest({ autoStart: e.target.checked })}/> Démarrage automatique (forcé pour les rotations)</label></div>
+            <h3>Prérequis</h3><div className={s.checks}>{content.questConfig.quests.filter(q => q.id !== quest.id).map(q => <label key={q.id}><input type="checkbox" checked={quest.requires.includes(q.id)} onChange={e => patchQuest({ requires: e.target.checked ? [...quest.requires, q.id] : quest.requires.filter(id => id !== q.id) })}/>{q.title}</label>)}</div>
+            <h3>Objectifs</h3><p>Si la quête a déjà commencé, changer la source, les filtres ou l’ordre exige un nouvel identifiant. Le libellé et la quantité restent modifiables.</p>
+            {quest.objectives.map((o, i) => <article className={s.card} key={i}><div className={s.grid}><Field title="Objectif" value={o.label} onChange={label => edit(d => { d.questConfig.quests[selected].objectives[i].label = label; })}/><label>Source de progression<input list="quest-sources" value={o.source} onChange={e => edit(d => { d.questConfig.quests[selected].objectives[i].source = e.target.value; })}/></label><label>Quantité<input type="number" min="1" max="1000000" value={o.target} onChange={e => edit(d => { d.questConfig.quests[selected].objectives[i].target = +e.target.value; })}/></label><Field title="Groupe alternatif (OU)" value={o.alternativeGroup} onChange={v => edit(d => { d.questConfig.quests[selected].objectives[i].alternativeGroup = v; })}/></div>
+              <div className={s.checks}>{(['unique','optional'] as const).map(k => <label key={k}><input type="checkbox" checked={o[k]} onChange={e => edit(d => { d.questConfig.quests[selected].objectives[i][k] = e.target.checked; })}/>{k === 'unique' ? 'Événements uniques' : 'Objectif facultatif'}</label>)}</div>
+              <FilterField key={quest.id + ':' + i} filters={o.filters} onChange={filters => edit(d => { d.questConfig.quests[selected].objectives[i].filters = filters; })}/>
+              <button onClick={() => edit(d => { d.questConfig.quests[selected].objectives.splice(i, 1); })}>Retirer cet objectif</button></article>)}
+            <button onClick={() => edit(d => { d.questConfig.quests[selected].objectives.push(newQuest().objectives[0]); })}>+ Ajouter un objectif</button><datalist id="quest-sources">{sources.map(x => <option key={x}>{x}</option>)}</datalist>
+            <h3>Récompenses</h3><p>Commandes limitées aux objets et à l’expérience. Pas de console libre ni d’attribution de permissions.</p>
+            {quest.rewards.map((r, i) => <article className={s.card} key={i}><div className={s.grid}><Field title="Nom de la récompense" value={r.label} onChange={v => edit(d => { d.questConfig.quests[selected].rewards[i].label = v; })}/><Field title="Icône réelle" value={r.icon} onChange={v => edit(d => { d.questConfig.quests[selected].rewards[i].icon = v; })}/></div><label><input type="checkbox" checked={r.choice} onChange={e => edit(d => { d.questConfig.quests[selected].rewards[i].choice = e.target.checked; })}/> Récompense au choix (4 maximum)</label><label>Une commande par ligne<textarea placeholder="give {player} cobblemon:poke_ball 8" value={r.commands.join('\n')} onChange={e => edit(d => { d.questConfig.quests[selected].rewards[i].commands = e.target.value.split('\n'); })}/></label><button onClick={() => edit(d => { d.questConfig.quests[selected].rewards.splice(i, 1); })}>Retirer</button></article>)}
+            <button onClick={() => edit(d => { d.questConfig.quests[selected].rewards.push({ label: 'Poké Balls', icon: 'cobblemon:poke_ball', choice: false, commands: ['give {player} cobblemon:poke_ball 8'] }); })}>+ Ajouter une récompense</button>
+          </>}
+          {npc && <>
+            <div className={s.sectionTitle}><h2>{npc.name}</h2><button onClick={() => edit(d => { const copy = structuredClone(npc); copy.id = makeId('pnj'); copy.name += ' · copie'; d.npcs.push(copy); setSelected(d.npcs.length - 1); })}>Dupliquer</button></div>
+            <div className={s.grid}><Field title="Identifiant stable · liaison du bâton" value={npc.id} onChange={id => patchNpc({ id })}/><Field title="Nom du PNJ · liaison du bâton" value={npc.name} onChange={name => patchNpc({ name })}/><Select title="Fonction" value={npc.role} options={['DIALOGUE_ONLY','DIALOGUE_QUEST','TURN_IN','DAYCARE','RANKED','SHOP']} onChange={role => patchNpc({ role: role as StudioNpc['role'] })}/><Select title="Style du personnage" value={npc.visualRole} options={['STORY','SIDE','MERCHANT','EVENT']} onChange={visualRole => patchNpc({ visualRole: visualRole as StudioNpc['visualRole'] })}/><Select title="Couleur du nom" value={npc.nameColor} options={['NONE','ROLE','CYAN','PINK','GOLD','GREEN','VIOLET']} onChange={nameColor => patchNpc({ nameColor: nameColor as StudioNpc['nameColor'] })}/><Field title="Skin · identifiant du mod" value={npc.skin} onChange={skin => patchNpc({ skin })}/><label>Niveau opérateur minimum<input type="number" min="0" max="4" value={npc.permission} onChange={e => patchNpc({ permission: +e.target.value })}/></label></div>
+            <div className={s.checks}><label><input type="checkbox" checked={npc.enabled} onChange={e => patchNpc({ enabled: e.target.checked })}/> Synchroniser ce modèle (décocher fige les PNJ déjà liés)</label><label><input type="checkbox" checked={npc.repeatableDialogue} onChange={e => patchNpc({ repeatableDialogue: e.target.checked })}/> Dialogue répétable</label></div>
+            <p>Skin : une texture déjà installée dans le mod, ou <code>player:UUID:pseudo</code>. Vide = Steve. Le rendu dépend des ressources du client ; aucune image distante n’est importée ici.</p>
+            <label>Texte de secours (client sans interface)<textarea value={npc.dialogue} onChange={e => patchNpc({ dialogue: e.target.value })}/></label>
+            <h3>Quêtes proposées</h3><div className={s.checks}>{content.questConfig.quests.map(q => <label key={q.id}><input type="checkbox" checked={npc.questIds.includes(q.id)} onChange={e => patchNpc({ questIds: e.target.checked ? [...npc.questIds, q.id] : npc.questIds.filter(id => id !== q.id) })}/>{q.title}</label>)}</div>
+            {npc.role === 'SHOP' && <label>Offres · objet|quantité|prix achat|prix revente<textarea placeholder="cobblemon:poke_ball|8|100|0" value={npc.shopOffers} onChange={e => patchNpc({ shopOffers: e.target.value })}/></label>}
+            <h3>Dialogue à embranchements</h3><label>Réplique d’entrée<select value={npc.dialogueGraph.start} onChange={e => patchNpc({ dialogueGraph: { ...npc.dialogueGraph, start: e.target.value } })}>{npc.dialogueGraph.nodes.map(n => <option key={n.id} value={n.id}>{n.title}</option>)}</select></label>
+            {npc.dialogueGraph.nodes.map((node, i) => <article className={s.card} key={node.id}><div className={s.sectionTitle}><b>{node.id}</b><button disabled={npc.dialogueGraph.nodes.length === 1} onClick={() => { if (confirm('Supprimer cette réplique ? Les choix qui y mènent fermeront le dialogue.')) edit(d => { const graph = d.npcs[selected].dialogueGraph; graph.nodes.splice(i,1); if (graph.start === node.id) graph.start = graph.nodes[0].id; graph.nodes.forEach(n => n.choices.forEach(c => { if (c.target === node.id) c.target = ''; })); }); }}>Retirer la réplique</button></div><Field title="Titre de travail" value={node.title} onChange={v => edit(d => { d.npcs[selected].dialogueGraph.nodes[i].title = v; })}/><label>Le PNJ dit…<textarea value={node.text} onChange={e => edit(d => { d.npcs[selected].dialogueGraph.nodes[i].text = e.target.value; })}/></label>
+              {node.choices.map((choice, j) => <div className={s.choice} key={j}><Field title="Réponse du joueur" value={choice.label} onChange={v => edit(d => { d.npcs[selected].dialogueGraph.nodes[i].choices[j].label = v; })}/><label>Puis aller vers<select value={choice.target} onChange={e => edit(d => { d.npcs[selected].dialogueGraph.nodes[i].choices[j].target = e.target.value; })}><option value="">Fermer le dialogue</option>{npc.dialogueGraph.nodes.map(n => <option key={n.id} value={n.id}>{n.title}</option>)}</select></label><label>Action<select aria-label="Action" value={choice.action} onChange={e => edit(d => { d.npcs[selected].dialogueGraph.nodes[i].choices[j].action = e.target.value; })}><option value="">Aucune</option><option value="close">Fermer</option>{npc.questIds.map(id => <option key={id} value={`accept:${id}`}>Accepter : {content.questConfig.quests.find(q => q.id === id)?.title ?? id}</option>)}</select></label><button onClick={() => edit(d => { d.npcs[selected].dialogueGraph.nodes[i].choices.splice(j,1); })}>Retirer</button></div>)}
+              <button disabled={node.choices.length >= 8} onClick={() => edit(d => { d.npcs[selected].dialogueGraph.nodes[i].choices.push({ label: 'Continuer', target: '', action: '' }); })}>+ Ajouter une réponse</button></article>)}
+            <button onClick={() => edit(d => { d.npcs[selected].dialogueGraph.nodes.push({ id: makeId('replique'), title: 'Nouvelle réplique', text: '', canvasX: 24, canvasY: 42, choices: [] }); })}>+ Ajouter une réplique</button>
+            <section className={s.preview}><p>PARCOURS DU GRAPHE · PAS UN APERÇU DU RENDU MINECRAFT</p><h3>{npc.name} · {currentNode?.title}</h3><p>{currentNode?.text}</p>{currentNode?.choices.map((c,i) => <button key={i} onClick={() => { if (c.action.startsWith('accept:')) setMessage(`Simulation uniquement : accepter ${c.action.slice(7)}. Aucun joueur modifié.`); setPreviewNode(c.target || npc.dialogueGraph.start); }}>{c.label} → {c.target || 'fin / retour au début'}</button>)}<button onClick={() => setPreviewNode(npc.dialogueGraph.start)}>Recommencer</button></section>
+          </>}
+          {chapter && <><h2>{chapter.title}</h2><div className={s.grid}><Field title="Identifiant du chapitre" value={chapter.id} onChange={v => edit(d => { d.questConfig.chapters[selected].id = v; })}/><Field title="Titre du chapitre" value={chapter.title} onChange={v => edit(d => { d.questConfig.chapters[selected].title = v; })}/><Select title="Déblocage" value={chapter.unlockMode} options={['PREVIOUS','IMMEDIATE','MANUAL']} onChange={v => edit(d => { d.questConfig.chapters[selected].unlockMode = v as typeof chapter.unlockMode; })}/><label>Heure de réinitialisation des rotations<input type="number" min="0" max="23" value={content.questConfig.resetHour} onChange={e => edit(d => { d.questConfig.resetHour = +e.target.value; })}/></label></div><h3>Ordre des quêtes</h3><p>Les quêtes narratives sélectionnées sont retirées des autres chapitres. Les rotations restent indépendantes.</p>{chapter.questIds.map((id, i) => <div className={s.choice} key={id}><b>{i+1}. {content.questConfig.quests.find(q => q.id === id)?.title ?? id}</b><button disabled={i === 0} onClick={() => edit(d => { const ids = d.questConfig.chapters[selected].questIds; [ids[i-1], ids[i]] = [ids[i], ids[i-1]]; })}>Monter</button><button onClick={() => edit(d => { d.questConfig.chapters[selected].questIds.splice(i,1); })}>Retirer</button></div>)}<label>Ajouter une quête<select value="" onChange={e => { const id = e.target.value; if (id) edit(d => { d.questConfig.chapters.forEach(c => { c.questIds = c.questIds.filter(q => q !== id); }); d.questConfig.chapters[selected].questIds.push(id); }); }}><option value="">Choisir…</option>{content.questConfig.quests.filter(q => ['STORY','SIDE'].includes(q.kind) && !chapter.questIds.includes(q.id)).map(q => <option key={q.id} value={q.id}>{q.title}</option>)}</select></label><button disabled={selected === 0} onClick={() => edit(d => { const cs = d.questConfig.chapters; [cs[selected-1], cs[selected]] = [cs[selected], cs[selected-1]]; setSelected(selected-1); })}>Monter ce chapitre</button></>}
+        </fieldset>
+      </div>
+      <section className={s.audit}><div><h2>PNJ placés sur le serveur</h2>{state.placements.length === 0 && <p>Aucun PNJ remonté par le bâton.</p>}{state.placements.map(p => <p key={p.key}><b>{p.name}</b> · {p.templateId || 'Local · pas encore lié'}<small>{p.key}</small></p>)}</div><div><h2>Publications tracées</h2>{state.history.map(h => <article key={h.revision}><b>Version {h.revision}</b><p>{h.reason}</p><small>{h.actor} · {new Date(h.createdAt).toLocaleString('fr-FR')}</small>{state.canWrite && <button disabled={busy} onClick={() => { if (confirm('Reprendre cette version dans le brouillon ? Il faudra enregistrer et publier pour l’appliquer.')) void task(async () => { const r = await api<{ content: StudioContent }>(`/api/admin/quests/${server}/history/${h.revision}`); setContent(r.content); setDirty(true); setSelected(0); }); }}>Reprendre en brouillon</button>}</article>)}</div></section>
+    </>}
+    {publishOpen && <div className={s.overlay}><section role="dialog" aria-modal="true" aria-labelledby="publish-title"><h2 id="publish-title">Publier sur {server} ?</h2><p>{content.questConfig.quests.length} quêtes et {content.npcs.filter(n => n.enabled).length} modèles PNJ actifs. Les PNJ liés recevront ces réglages au prochain échange avec le serveur.</p><label>Motif de publication<textarea autoFocus value={reason} onChange={e => setReason(e.target.value)} placeholder="Ex. ajout de la rencontre avec le professeur"/></label><button disabled={busy} onClick={() => setPublishOpen(false)}>Annuler</button><button className={s.primary} disabled={busy || reason.trim().length < 5} onClick={() => void task(async () => { const r = await api<{ publishedRevision: number }>(`/api/admin/quests/${server}/publish`, { method: 'POST', body: JSON.stringify({ baseRevision: state!.draftRevision, reason }) }); setPublishOpen(false); setReason(''); await load(server); setMessage(`Version ${r.publishedRevision} publiée. Attends la confirmation « Serveur à jour » avant le test en jeu.`); })}>Confirmer la publication</button></section></div>}
+  </main>;
+}
+
+function Field({ title, value, onChange }: { title: string; value: string; onChange: (value: string) => void }) { return <label>{title}<input value={value ?? ''} onChange={e => onChange(e.target.value)}/></label>; }
+function FilterField({ filters, onChange }: { filters: Record<string, string>; onChange: (value: Record<string, string>) => void }) {
+  const [value, setValue] = useState(() => Object.entries(filters).map(([k,v]) => `${k}=${v}`).join(';'));
+  return <label>Filtres · clé=valeur séparés par ; (ex. species=eevee;min_level=10)<input value={value} onChange={e => setValue(e.target.value)} onBlur={() => onChange(Object.fromEntries(value.split(';').filter(Boolean).map(part => { const [key, ...rest] = part.split('='); return [key.trim(), rest.join('=').trim()]; })))}/></label>;
+}
+function Select({ title, value, options, onChange }: { title: string; value: string; options: string[]; onChange: (value: string) => void }) { return <label>{title}<select value={value} onChange={e => onChange(e.target.value)}>{options.map(x => <option key={x} value={x}>{optionLabels[x] ?? x}</option>)}</select></label>; }

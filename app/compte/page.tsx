@@ -34,6 +34,7 @@ async function api<T>(path: string, init?: RequestInit): Promise<T> {
   }
   const response = await fetch(path, {
     credentials: "include",
+    cache: "no-store",
     ...init,
     headers,
   });
@@ -59,6 +60,29 @@ function AccountPortal() {
   const [expiresAt, setExpiresAt] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    let generation = 0;
+    const refreshAccess = async () => {
+      const current = ++generation;
+      // Do not leave a stale admin link visible while rechecking an expired session.
+      setAccount(previous => previous ? { ...previous, admin: false } : previous);
+      try {
+        const result = await api<{ user: Account }>("/api/me");
+        if (!cancelled && current === generation) setAccount(result.user);
+      } catch {
+        if (!cancelled && current === generation) setAccount(null);
+      }
+    };
+    window.addEventListener("focus", refreshAccess);
+    window.addEventListener("cobblestar:account-changed", refreshAccess);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("focus", refreshAccess);
+      window.removeEventListener("cobblestar:account-changed", refreshAccess);
+    };
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -280,7 +304,7 @@ function AccountPortal() {
 
             {success && <p className={styles.linkSuccess} role="status">✓ {success}</p>}
 
-            {account.admin && <Link className={styles.adminLink} href="/admin/"><span><small>ACCÈS ADMINISTRATEUR</small><b>Ouvrir le centre de contrôle</b></span><strong>→</strong></Link>}
+            {account.admin === true && <Link className={styles.adminLink} href="/admin/"><span><small>ACCÈS ADMINISTRATEUR</small><b>Ouvrir le centre de contrôle</b></span><strong>→</strong></Link>}
 
             {error && <div className={styles.alert} role="alert"><span>!</span><div><b>Impossible de continuer</b><p>{error}</p></div><button type="button" onClick={createCode} disabled={loading}>Réessayer</button></div>}
             <button className={styles.logout} type="button" onClick={logout}>Se déconnecter <span>↗</span></button>

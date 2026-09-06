@@ -1,0 +1,56 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { studioContent, emptyStudio, rewardCommand } from '../dist/quest-studio-schema.js';
+Object.assign(process.env, { NODE_ENV:'test', PUBLIC_API_URL:'https://example.test', SITE_ORIGIN:'https://example.test', DB_HOST:'127.0.0.1', DB_NAME:'unused_test', DB_USER:'unused_test', DB_PASSWORD:'unused_test', COOKIE_SECRET:'isolated-test-cookie-secret-never-production', MINECRAFT_SERVER_KEY:'isolated-test-server-secret-never-production', GAME_ADMIN_DISCORD_IDS:'111111111111111111', GAME_ADMIN_READ_DISCORD_IDS:'222222222222222222' });
+const { default: Fastify } = await import('fastify');
+const { registerQuestStudio } = await import('../dist/quest-studio.js');
+const { pool } = await import('../dist/db.js');
+const content = () => ({ questConfig: { resetHour:6, chapters:[], quests:[{ id:'first_capture', title:'Première capture', description:'Une rencontre', category:'AVENTURE', chapterId:'', chapterTitle:'Aventure', kind:'SIDE', difficulty:'FACILE', icon:'cobblemon:poke_ball', accent:'#9B8CFF', order:1, autoStart:false, requires:[], objectives:[{ source:'cobblemon_capture', label:'Capturer', target:1, unique:false, optional:false, alternativeGroup:'', filters:{} }], rewards:[{ label:'Balls', icon:'cobblemon:poke_ball', choice:false, commands:['give {player} cobblemon:poke_ball 8'] }] }] }, npcs:[{ id:'professor', name:'Professeur Asteria', enabled:true, role:'DIALOGUE_QUEST', dialogue:'Bonjour', dialogueGraph:{ start:'hello', nodes:[{ id:'hello', title:'Accueil', text:'Une mission ?', canvasX:24, canvasY:42, choices:[{ label:'Oui', target:'', action:'accept:first_capture' }] }] }, questIds:['first_capture'], permission:0, repeatableDialogue:true, skin:'', nameColor:'ROLE', visualRole:'STORY', shopOffers:'' }] });
+test('studio roundtrip preserves the actual quest and dialogue wire fields', () => { assert.deepEqual(studioContent.parse(content()), content()); assert.deepEqual(studioContent.parse(emptyStudio), emptyStudio); });
+test('dangling branches, duplicate names, unknown quests and prerequisite cycles fail validation', () => {
+  for (const mutate of [d => d.npcs[0].dialogueGraph.nodes[0].choices[0].target='missing', d => d.npcs.push({...structuredClone(d.npcs[0]),id:'other',name:'  professeur asteria  '}), d => d.npcs[0].questIds=[], d => d.questConfig.quests[0].requires=['first_capture'], d => d.questConfig.quests.push(structuredClone(d.questConfig.quests[0]))]) { const d=content(); mutate(d); assert.equal(studioContent.safeParse(d).success,false); }
+});
+test('rewards cannot execute arbitrary console commands or target someone else', () => {
+  for (const command of ['op {player}','execute as {player} run op {player}','give @a minecraft:diamond 8','give {player} minecraft:diamond 65','give {player} minecraft:diamond 8\nop intruder','lp user {player} parent add admin']) assert.equal(rewardCommand.safeParse(command).success,false,command);
+  assert.equal(rewardCommand.safeParse('experience add {player} 100 points').success,true);
+});
+test('unsupported skins, malformed trades and oversized dialogue packets fail explicitly', () => {
+  for (const mutate of [d => d.npcs[0].skin='https://example.test/skin.png', d => d.npcs[0].skin='player:JustAName', d => d.npcs[0].shopOffers='minecraft:diamond|oops|12|0', d => { d.npcs[0].dialogueGraph.nodes = Array.from({length:8}, (_,i) => ({id:i ? `node_${i}` : 'hello',title:'Texte',text:'é'.repeat(3000),canvasX:0,canvasY:0,choices:[]})); }]) {
+    const d=content(); mutate(d); assert.equal(studioContent.safeParse(d).success,false);
+  }
+  const d=content(); d.npcs[0].skin='minecraft:textures/entity/player/wide/steve.png'; d.npcs[0].shopOffers='cobblemon:poke_ball|8|100|0';
+  assert.equal(studioContent.safeParse(d).success,true);
+});
+function app() { const a=Fastify(); registerQuestStudio(a,{session:async req=>req.headers['x-test-role']?{id:'fixture',discord_id:req.headers['x-test-role']}:null,server:req=>req.headers.authorization==='Bearer fixture-server'}); return a; }
+test('studio routes enforce game roles, origin, and server authentication before DB access', async () => {
+  const a=app(), original=pool.execute; pool.execute=async()=>{throw Error('Unexpected DB access');};
+  try {
+    for (const url of ['/api/admin/quests','/api/admin/quests/main','/api/admin/quests/main/history/1']) { assert.equal((await a.inject({url})).statusCode,401); assert.equal((await a.inject({url,headers:{'x-test-role':'333'}})).statusCode,403); }
+    for (const [method,url] of [['PUT','/api/admin/quests/main'],['POST','/api/admin/quests/main/publish']]) {
+      assert.equal((await a.inject({method,url,headers:{'x-test-role':'222222222222222222',origin:'https://example.test'},payload:{}})).statusCode,403);
+      assert.equal((await a.inject({method,url,headers:{'x-test-role':'111111111111111111',origin:'https://attacker.test'},payload:{}})).statusCode,403);
+    }
+    assert.equal((await a.inject({method:'POST',url:'/api/internal/quests/sync',payload:{}})).statusCode,401);
+  } finally { pool.execute=original; await a.close(); }
+});
+test('draft/save/publish/conflict/server-ack contract with DB double (not a MySQL test)', async () => {
+  const a=app(), origExec=pool.execute, origConnection=pool.getConnection;
+  const row={draft_revision:0,published_revision:0,draft_json:null,published_json:null}; let publication=null;
+  async function execute(sql,args) {
+    if (sql.startsWith('SELECT')) return [[{...row}]];
+    if (sql.startsWith('UPDATE quest_studio SET draft_json')) { row.draft_json=args[0]; row.draft_revision++; }
+    else if (sql.startsWith('INSERT INTO quest_publications')) publication=args;
+    else if (sql.startsWith('UPDATE quest_studio SET published_json')) { row.published_json=args[0]; row.published_revision=args[1]; }
+    return [{affectedRows:1}];
+  }
+  pool.execute=execute; pool.getConnection=async()=>({beginTransaction:async()=>{},commit:async()=>{},rollback:async()=>{},release:()=>{},execute});
+  const headers={'x-test-role':'111111111111111111',origin:'https://example.test'};
+  try {
+    let r=await a.inject({method:'PUT',url:'/api/admin/quests/main',headers,payload:{baseRevision:0,content:content()}}); assert.equal(r.statusCode,200); assert.equal(r.json().draftRevision,1); assert.equal(row.published_json,null);
+    r=await a.inject({method:'PUT',url:'/api/admin/quests/main',headers,payload:{baseRevision:0,content:content()}}); assert.equal(r.statusCode,409);
+    r=await a.inject({method:'POST',url:'/api/admin/quests/main/publish',headers,payload:{baseRevision:1,reason:'Première rencontre'}}); assert.equal(r.statusCode,200); assert.equal(r.json().publishedRevision,1); assert.equal(publication[3],headers['x-test-role']);
+    r=await a.inject({method:'POST',url:'/api/internal/quests/sync',headers:{authorization:'Bearer fixture-server'},payload:{serverId:'main',appliedRevision:0,error:'',observed:content(),placements:[]}}); assert.equal(r.statusCode,200); assert.deepEqual(r.json().content,content());
+    const bad=content(); bad.npcs[0].dialogueGraph.start='nonexistent';
+    r=await a.inject({method:'PUT',url:'/api/admin/quests/main',headers,payload:{baseRevision:1,content:bad}}); assert.equal(r.statusCode,400); assert.match(r.json().message,/dialogue/);
+  } finally {pool.execute=origExec;pool.getConnection=origConnection;await a.close();}
+});
