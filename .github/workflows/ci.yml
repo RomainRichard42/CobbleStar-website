@@ -13,6 +13,23 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: cobblestar-test-root-only
+          MYSQL_DATABASE: cobblestar_link_test
+          MYSQL_USER: cobblestar_test
+          MYSQL_PASSWORD: cobblestar-test-only
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping --silent"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    env:
+      LINK_TEST_MYSQL_PORT: 3306
     steps:
       - name: Récupérer le dépôt
         uses: actions/checkout@v4

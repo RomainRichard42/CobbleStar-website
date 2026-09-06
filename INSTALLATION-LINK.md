@@ -1,5 +1,8 @@
 # Installer la liaison compte CobbleStar ↔ Minecraft
 
+Pour le modèle UUID principal, la récupération d'un ancien compte et le changement
+de Discord, suivre [Identité Minecraft](docs/IDENTITE-MINECRAFT.md).
+
 ## 1. Mettre à jour le site
 
 Depuis le dossier du site :

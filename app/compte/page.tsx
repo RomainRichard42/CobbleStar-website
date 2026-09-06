@@ -11,6 +11,8 @@ import styles from "./account.module.css";
 
 type Account = {
   id: string;
+  name: string;
+  identity: { kind: "minecraft" | "provisional"; id: string };
   admin: boolean;
   email: string | null;
   discord: { id: string; username: string | null; globalName: string | null; avatarUrl: string | null } | null;
@@ -18,7 +20,10 @@ type Account = {
 };
 
 const messages: Record<string, string> = {
-  ALREADY_LINKED: "Ce compte Minecraft est déjà lié.",
+  RELINK_DISABLED: "La récupération doit être activée par un administrateur sur l’API, après vérification de l’authentification Minecraft.",
+  RELINK_CONFIRMATION_REQUIRED: "Confirme le remplacement de la liaison avant de générer ta commande.",
+  LINK_BUSY_RETRY: "Une autre opération est en cours. Réessaie dans quelques instants.",
+  AUTH_REQUIRED: "Ta session a changé ou expiré. Reconnecte-toi avec Discord.",
 };
 const DISCORD_INVITE_URL = "https://discord.gg/Sd387Ky4M";
 
@@ -46,30 +51,26 @@ function AccountPortal() {
   const [balance, setBalance] = useState(0);
   const [command, setCommand] = useState("");
   const [commandCopied, setCommandCopied] = useState(false);
+  const [requestId, setRequestId] = useState("");
+  const [relinkEnabled, setRelinkEnabled] = useState(false);
+  const [showRelink, setShowRelink] = useState(false);
+  const [linkConsent, setLinkConsent] = useState(false);
+  const [success, setSuccess] = useState("");
   const [expiresAt, setExpiresAt] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
-  async function refreshAccount() {
-    const data = await api<{ user: Account }>("/api/me");
-    setAccount(data.user);
-    window.dispatchEvent(new Event("cobblestar:account-changed"));
-    if (data.user.minecraft.linked) {
-      setCommand("");
-      setExpiresAt(null);
-    }
-    return data.user;
-  }
 
   useEffect(() => {
     let cancelled = false;
     void Promise.all([
       api<{ user: Account }>("/api/me"),
       api<{ balance: number }>("/api/wallet"),
-    ]).then(([profile, wallet]) => {
+      api<{ relinkEnabled: boolean }>("/api/link/status"),
+    ]).then(([profile, wallet, link]) => {
       if (!cancelled) {
         setAccount(profile.user);
         setBalance(wallet.balance);
+        setRelinkEnabled(link.relinkEnabled);
       }
     }).catch(() => {
       if (!cancelled) setAccount(null);
@@ -96,24 +97,54 @@ function AccountPortal() {
   }, []);
 
   useEffect(() => {
-    if (!command || account?.minecraft.linked) return;
-    const timer = window.setInterval(() => {
-      if (expiresAt && Date.now() >= expiresAt) {
-        setCommand("");
-        setExpiresAt(null);
-        setError("Ce code a expiré. Génère une nouvelle commande pour continuer.");
-        return;
-      }
-      void refreshAccount().catch(() => undefined);
+    if (!command || !requestId) return;
+    let cancelled = false;
+    let inFlight = false;
+    const timer = window.setInterval(async () => {
+      if (inFlight) return;
+      inFlight = true;
+      try {
+        const status = await api<{ request: { state: string } }>(`/api/link/status?requestId=${encodeURIComponent(requestId)}`);
+        if (cancelled) return;
+        if (status.request.state === "completed") {
+          const [profile, wallet] = await Promise.all([api<{ user: Account }>("/api/me"), api<{ balance: number }>("/api/wallet")]);
+          if (cancelled) return;
+          setAccount(profile.user);
+          setBalance(wallet.balance);
+          setCommand("");
+          setExpiresAt(null);
+          setShowRelink(false);
+          setLinkConsent(false);
+          setSuccess("Liaison confirmée. Ton Discord accède maintenant au profil de cet UUID Minecraft.");
+          window.dispatchEvent(new Event("cobblestar:account-changed"));
+        } else if (status.request.state !== "pending" || (expiresAt && Date.now() >= expiresAt)) {
+          setCommand("");
+          setExpiresAt(null);
+          setError("Ce code a expiré ou a été remplacé. Génère une nouvelle commande.");
+        }
+      } catch (caught) {
+        if (cancelled) return;
+        if (caught instanceof Error && caught.message === "AUTH_REQUIRED") {
+          setAccount(null);
+          setCommand("");
+          setError(messages.AUTH_REQUIRED);
+        } else if (expiresAt && Date.now() >= expiresAt) {
+          setCommand("");
+          setError("La confirmation n’a pas pu être vérifiée. Recharge ton compte avant de réessayer.");
+        }
+      } finally { inFlight = false; }
     }, 2500);
-    return () => window.clearInterval(timer);
-  }, [command, expiresAt, account?.minecraft.linked]);
+    return () => { cancelled = true; window.clearInterval(timer); };
+  }, [command, expiresAt, requestId]);
 
   async function createCode() {
+    if (!linkConsent) { setError("Confirme d’abord la liaison avec ton Discord ci-dessous."); return; }
     setLoading(true);
     setError("");
+    setSuccess("");
     try {
-      const data = await api<{ command: string; expiresInSeconds: number }>("/api/link/code", { method: "POST" });
+      const data = await api<{ requestId: string; command: string; expiresInSeconds: number }>("/api/link/code", { method: "POST", body: JSON.stringify({ allowRelink: relinkEnabled }) });
+      setRequestId(data.requestId);
       setCommand(data.command);
       setCommandCopied(false);
       setExpiresAt(Date.now() + data.expiresInSeconds * 1000);
@@ -182,9 +213,9 @@ function AccountPortal() {
 
           <div className={styles.passportCopy}>
             <small>{account ? "PASSEPORT DE DRESSEUR" : "UNE IDENTITÉ, PARTOUT"}</small>
-            <h2>{account ? discordName : "Prêt à nous rejoindre ?"}</h2>
+            <h2>{account ? account.minecraft.username || discordName : "Prêt à nous rejoindre ?"}</h2>
             <p>{account
-              ? linked ? `Ton Discord et ${account.minecraft.username || "ton joueur Minecraft"} partagent maintenant le même passeport CobbleStar.` : "Ton Discord est reconnu. Une commande en jeu suffit maintenant pour rattacher ton joueur Minecraft."
+              ? linked ? "Ton UUID Minecraft est ton identité permanente. Discord est ta clé de connexion, même si ton pseudo ou ton e-mail change." : "Ton Discord est reconnu. La commande /link crée ou retrouve ton profil Minecraft par UUID, sans dépendre de ton e-mail."
               : "Connecte Discord, confirme ton joueur directement sur le serveur et retrouve ensuite tout au même endroit."}</p>
           </div>
 
@@ -209,7 +240,7 @@ function AccountPortal() {
                 <span aria-hidden="true">{accountInitial}</span>
                 {account.discord?.avatarUrl && <img src={account.discord.avatarUrl} alt="" onError={(event) => { event.currentTarget.style.display = "none"; }} />}
               </div>
-              <div><small>MON ESPACE</small><h2>{discordName}</h2><p>{discordHandle}</p></div>
+              <div><small>MON ESPACE</small><h2>{account.minecraft.username || discordName}</h2><p>Connexion Discord · {discordHandle}</p></div>
               <span className={`${styles.linkBadge} ${linked ? styles.linked : styles.pending}`}>{linked ? "✓ Identité liée" : "Liaison requise"}</span>
             </header>
 
@@ -224,9 +255,15 @@ function AccountPortal() {
               <span className={linked ? styles.progressDone : styles.progressCurrent}><i>{linked ? "✓" : "2"}</i><b>Minecraft lié</b><small>{linked ? "Identité confirmée" : "À faire en jeu"}</small></span>
             </div>
 
-            {!linked && <section className={styles.linkPanel} aria-labelledby="minecraft-link-title">
-              <div className={styles.linkHeading}><span>02</span><div><small>DERNIÈRE ÉTAPE</small><h3 id="minecraft-link-title">Confirme ton joueur en jeu</h3><p>La commande est personnelle, temporaire et cette page détecte automatiquement sa validation.</p></div></div>
-              {!command ? <button className={styles.primaryAction} type="button" onClick={createCode} disabled={loading}><span>{loading ? "Génération…" : "Générer ma commande /link"}</span><b>→</b></button> : <div className={styles.commandFlow}>
+            {(!linked || showRelink) && <section className={styles.linkPanel} aria-labelledby="minecraft-link-title">
+              <div className={styles.linkHeading}><span>02</span><div><small>{linked ? "MODIFIER LA LIAISON" : "CRÉER OU RETROUVER TON PROFIL"}</small><h3 id="minecraft-link-title">{linked ? "Confirme à nouveau en jeu" : "Confirme ton joueur en jeu"}</h3><p>Exécute uniquement la commande de ton propre espace. Ne partage jamais ce code.</p></div></div>
+              <div className={styles.linkExplanation}>
+                <p>Discord à associer : <b>{discordHandle}</b> · <code>{account.discord?.id}</code></p>
+                <p>{relinkEnabled ? "Un profil existe déjà pour cet UUID ? Tu le récupères, même avec un e-mail différent. Son ancien accès Discord sera remplacé." : "La récupération d’un profil déjà lié doit d’abord être activée par un administrateur. La première liaison reste disponible."}</p>
+                <p>{linked ? "Si tu choisis un autre joueur Minecraft, les Stars, achats et votes du joueur actuel restent sur son UUID. Ils ne sont pas transférés entre joueurs." : "Les Stars, achats et votes de ce compte provisoire rejoignent le profil Minecraft récupéré, sans rejouer les récompenses déjà livrées."}</p>
+                {!command && <label className={styles.linkConsent}><input type="checkbox" checked={linkConsent} onChange={event => setLinkConsent(event.target.checked)} /><span>Je confirme que ce Discord est le mien et j’autorise son association au joueur qui exécutera /link{relinkEnabled ? ", en remplacement de l’ancienne connexion si nécessaire" : ""}.</span></label>}
+              </div>
+              {!command ? <button className={styles.primaryAction} type="button" onClick={createCode} disabled={loading || !linkConsent || (linked && !relinkEnabled)}><span>{loading ? "Génération…" : "Générer ma commande /link"}</span><b>→</b></button> : <div className={styles.commandFlow}>
                 <div className={styles.commandMeta}><span>COMMANDE PERSONNELLE</span><small>Expire dans 10 minutes</small></div>
                 <div className={styles.commandRow}><code>{command}</code><button type="button" onClick={copyCommand}>{commandCopied ? "Copiée ✓" : "Copier"}</button></div>
                 <ol><li><span>1</span><p>Rejoins <b>play.cobblestar-mc.fr</b></p></li><li><span>2</span><p>Colle la commande dans le chat</p></li><li><span>3</span><p>Attends la confirmation automatique ici</p></li></ol>
@@ -237,8 +274,11 @@ function AccountPortal() {
             {linked && <section className={styles.readyPanel}>
               <div><span>✓</span><p><small>PASSEPORT ACTIF</small><b>Tu es prêt pour CobbleStar.</b></p></div>
               <p>Ton compte est reconnu par la boutique et le système de votes. Tes Stars restent synchronisées avec ce profil.</p>
-              {account.minecraft.uuid && <code>UUID · {account.minecraft.uuid}</code>}
+              {account.minecraft.uuid && <div className={styles.identityKey}><small>IDENTIFIANT PRINCIPAL DU COMPTE</small><code>{account.minecraft.uuid}</code><p>Le pseudo est un nom d’affichage. Cet UUID conserve ton profil.</p></div>}
+              <button className={styles.regenerate} type="button" onClick={() => setShowRelink(true)} disabled={showRelink}>Récupérer / changer la liaison Minecraft</button>
             </section>}
+
+            {success && <p className={styles.linkSuccess} role="status">✓ {success}</p>}
 
             {account.admin && <Link className={styles.adminLink} href="/admin/"><span><small>ACCÈS ADMINISTRATEUR</small><b>Ouvrir le centre de contrôle</b></span><strong>→</strong></Link>}
 
@@ -249,7 +289,7 @@ function AccountPortal() {
 
             <div className={styles.discordCard}>
               <span className={styles.discordMark} aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19.5 5.34A16.3 16.3 0 0 0 15.44 4l-.5 1.02a15 15 0 0 0-5.88 0L8.56 4A16.5 16.5 0 0 0 4.5 5.35C1.93 9.2 1.24 12.96 1.6 16.66a16.4 16.4 0 0 0 4.98 2.52l1.2-1.65a10.7 10.7 0 0 1-1.88-.9l.46-.35c3.63 1.68 7.57 1.68 11.16 0l.47.35c-.6.36-1.23.66-1.88.9l1.2 1.65a16.4 16.4 0 0 0 4.98-2.52c.43-4.28-.74-8-2.79-11.32ZM8.52 14.42c-1.09 0-1.98-1-1.98-2.22 0-1.23.87-2.23 1.98-2.23s2 1.01 1.98 2.23c0 1.23-.87 2.22-1.98 2.22Zm6.96 0c-1.09 0-1.98-1-1.98-2.22 0-1.23.87-2.23 1.98-2.23s2 1.01 1.98 2.23c0 1.23-.87 2.22-1.98 2.22Z" /></svg></span>
-              <div><small>IDENTITÉ PRINCIPALE</small><strong>Ton profil Discord devient ton compte CobbleStar</strong><p>La connexion récupère ton profil et te fait rejoindre automatiquement le Discord officiel CobbleStar.</p></div>
+              <div><small>CONNEXION DISCORD · IDENTITÉ MINECRAFT</small><strong>Un profil par UUID Minecraft</strong><p>Discord te connecte et te fait rejoindre la communauté. Ensuite, /link crée ou retrouve ton profil par UUID. Ton e-mail n’est pas utilisé pour identifier ton joueur.</p></div>
             </div>
 
             {error && <p className={styles.formError} role="alert">{error}</p>}

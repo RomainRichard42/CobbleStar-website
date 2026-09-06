@@ -23,6 +23,8 @@ export const config = z.object({
   DISCORD_BOT_TOKEN: z.string().trim().default(""),
   DISCORD_GUILD_ID: z.string().regex(/^\d{15,24}$/).default("1540002066469101629"),
   MINECRAFT_SERVER_KEY: generatedSecret,
+  // Enable ONLY with authenticated Minecraft UUIDs (online-mode or a secured proxy).
+  MINECRAFT_RELINK_ENABLED: bool,
   GAME_ADMIN_DISCORD_IDS: z.string().default(""),
   GAME_ADMIN_READ_DISCORD_IDS: z.string().default(""),
   ENABLE_TEST_PURCHASES: bool,

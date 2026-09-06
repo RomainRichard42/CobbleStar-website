@@ -56,8 +56,12 @@ export const VOTE_FAQ: ReadonlyArray<FaqEntry> = [
 
 export const ACCOUNT_FAQ: ReadonlyArray<FaqEntry> = [
   {
-    question: "Puis-je utiliser le même pseudo Minecraft pour plusieurs comptes ?",
-    answer: "Non, chaque UUID Minecraft ne peut être lié qu’à un seul compte du portail CobbleStar.",
+    question: "Quelle est l’identité de mon compte CobbleStar ?",
+    answer: "Après /link, ton UUID Minecraft est ton identifiant principal et ton pseudo reste le nom affiché. Changer de pseudo ou d’e-mail ne crée pas un nouveau profil. Discord reste le moyen de connexion.",
+  },
+  {
+    question: "Puis-je récupérer mon profil avec un autre Discord ?",
+    answer: "Oui, lorsque la récupération est activée : connecte le bon Discord, confirme le remplacement dans Mon compte puis exécute ta commande /link avec le joueur concerné. L’ancien accès Discord est révoqué. Les données du compte provisoire sont regroupées avec le profil récupéré ; celles de deux UUID Minecraft distincts ne sont jamais fusionnées.",
   },
   {
     question: "Mes données personnelles sont-elles récupérées ?",
