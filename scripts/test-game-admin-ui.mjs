@@ -5,6 +5,15 @@ import { readFile } from "node:fs/promises";
 import { resolve, extname, sep } from "node:path";
 import { pathToFileURL } from "node:url";
 import assert from "node:assert/strict";
+import { createRequire } from "node:module";
+import { siteSecurity } from "../api/dist/site-security.js";
+
+const requireApi = createRequire(new URL("../api/package.json", import.meta.url));
+const securityApp = requireApi("fastify")();
+await securityApp.register(requireApi("@fastify/helmet"), siteSecurity);
+securityApp.get("/", async () => "policy");
+const productionCsp = (await securityApp.inject("/")).headers["content-security-policy"];
+await securityApp.close();
 
 const { chromium } = await import(pathToFileURL(process.argv[2]).href);
 const root = resolve("out");
@@ -15,6 +24,7 @@ const server = createServer(async (request, response) => {
     if (!target.startsWith(root + sep)) { response.writeHead(403).end(); return; }
     const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".png": "image/png", ".svg": "image/svg+xml" };
     response.setHeader("Content-Type", types[extname(target)] ?? "application/octet-stream");
+    response.setHeader("Content-Security-Policy", productionCsp);
     response.end(await readFile(target));
   } catch { response.writeHead(404).end(); }
 });
@@ -40,8 +50,15 @@ const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   const pageErrors = []; page.on("pageerror", (error) => pageErrors.push(error.message));
+  await page.addInitScript(() => {
+    window.__cspViolations = [];
+    document.addEventListener("securitypolicyviolation", event => window.__cspViolations.push(event.blockedURI));
+  });
   await page.route("**/api/**", async (route) => {
-    if (new URL(route.request().url()).hostname === "pokeapi.co") return route.fulfill({ json: { sprites: { other: { "official-artwork": { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png", front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/149.png" } } } } });
+    if (new URL(route.request().url()).hostname === "pokeapi.co") {
+      if (process.env.TEST_POKEMON_ART === "1") return route.continue();
+      return route.fulfill({ json: { sprites: { other: { "official-artwork": { front_default: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png", front_shiny: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/149.png" } } } } });
+    }
     if (deny) return route.fulfill({ status: 403, json: { error: "GAME_ADMIN_REQUIRED" } });
     if (unavailable) return route.fulfill({ status: 500, json: { error: "Internal Server Error", code: "ER_CANT_AGGREGATE_2COLLATIONS" } });
     const request = route.request(), url = new URL(request.url());
@@ -81,6 +98,7 @@ try {
   await page.getByLabel("PV EV", { exact: true }).fill("6");
   await page.getByLabel("Attaque IV", { exact: true }).fill("30");
   if (process.env.TEST_POKEMON_ART === "1") await page.waitForFunction(() => [...document.querySelectorAll('img[alt*="illustration Pokémon"]')].some(img => img.complete && img.naturalWidth > 0));
+  assert.equal(await page.evaluate(() => window.__cspViolations.some(url => /pokeapi|PokeAPI/.test(url))), false, "Production CSP must allow metadata and portraits");
   await page.screenshot({ path: "ui-review-pokemon-desktop.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth), true, "Pokemon mobile layout must not overflow");

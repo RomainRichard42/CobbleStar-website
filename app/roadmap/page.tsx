@@ -211,6 +211,11 @@ export default function RoadmapPokeballPage() {
     let activeValue = 0;
     let revealValue = false;
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const host = journeyRef.current;
+    const revealElement = host?.querySelector<HTMLElement>(`.${styles.finalReveal}`);
+    const hudElements = host?.querySelectorAll<HTMLElement>(`.${styles.directionHud}, .${styles.routeMap}, .${styles.wheelHint}`);
+    const progressElement = host?.querySelector<HTMLElement>(`.${styles.progress} > span`);
+    const sceneElements = host?.querySelectorAll<HTMLElement>(`.${styles.scene}`);
 
     const readExactPosition = () => {
       const journey = journeyRef.current;
@@ -252,14 +257,17 @@ export default function RoadmapPokeballPage() {
       const finalX = window.innerWidth / 2 - 2.5 * window.innerWidth * finalScale;
       const finalY = window.innerHeight / 2 - 2.85 * window.innerHeight * finalScale;
 
-      world.style.setProperty("--camera-x", `${normalX + (finalX - normalX) * reveal}px`);
-      world.style.setProperty("--camera-y", `${normalY + (finalY - normalY) * reveal}px`);
-      world.style.setProperty("--camera-scale", String(scale));
-      journey.style.setProperty("--journey-progress", String(exact / stops.length));
-      journey.style.setProperty("--reveal-opacity", String(reveal));
-      journey.style.setProperty("--reveal-scale", String(.82 + reveal * .18));
-      journey.style.setProperty("--world-opacity", String(1 - reveal * .86));
-      journey.style.setProperty("--hud-opacity", String(1 - reveal));
+      // Non-inherited properties: a camera frame must not restyle every child of all ten scenes.
+      world.style.transform = `translate3d(${normalX + (finalX - normalX) * reveal}px,${normalY + (finalY - normalY) * reveal}px,0) scale(${scale})`;
+      world.style.opacity = String(1 - reveal * .86);
+      if (progressElement) progressElement.style.transform = `scaleX(${exact / stops.length})`;
+      if (revealElement) { revealElement.style.opacity = String(reveal); revealElement.style.transform = `scale(${.82 + reveal * .18})`; }
+      hudElements?.forEach(element => { element.style.opacity = String(1 - reveal); });
+      sceneElements?.forEach((scene, index) => {
+        const nearby = reveal > 0 || (Math.abs(stops[index].x - pathX) < 1.15 && Math.abs(stops[index].y - pathY) < 1.15);
+        const visibility = nearby ? "visible" : "hidden";
+        if (scene.style.visibility !== visibility) scene.style.visibility = visibility;
+      });
 
       const nextActive = rawReveal > .52 ? stops.length : Math.round(pathExact);
       if (nextActive !== activeValue) {
@@ -442,12 +450,6 @@ export default function RoadmapPokeballPage() {
     window.scrollTo({ top: journey.offsetTop + travel * (safeIndex / stops.length), behavior: reduceMotion ? "auto" : "smooth" });
   }
 
-  function parallax(event: React.PointerEvent<HTMLElement>) {
-    const bounds = event.currentTarget.getBoundingClientRect();
-    event.currentTarget.style.setProperty("--pointer-x", `${((event.clientX - bounds.left) / bounds.width - .5) * 18}px`);
-    event.currentTarget.style.setProperty("--pointer-y", `${((event.clientY - bounds.top) / bounds.height - .5) * 14}px`);
-  }
-
   const direction = activeIndex === stops.length
     ? "POKÉ BALL COMPLÈTE ✦"
     : activeIndex === 0
@@ -469,7 +471,7 @@ export default function RoadmapPokeballPage() {
         </nav>
 
         <div className={styles.world} ref={worldRef}>
-          {stops.map((stop, index) => <section className={`${styles.scene} ${activeIndex === index ? styles.sceneActive : ""} ${stop.kind === "intro" ? styles.intro : ""}`} key={stop.id} id={stop.id} style={{ left: `${stop.x * 100}vw`, top: `${stop.y * 100}vh` }} onPointerMove={parallax}>
+          {stops.map((stop, index) => <section className={`${styles.scene} ${activeIndex === index ? styles.sceneActive : ""} ${stop.kind === "intro" ? styles.intro : ""}`} key={stop.id} id={stop.id} style={{ left: `${stop.x * 100}vw`, top: `${stop.y * 100}vh` }}>
             <div className={styles.backdrop}>
               {stop.secondImage ? <div className={styles.dualWorlds}><figure><img src={stop.image} alt="Paysage d’Asteria" /><figcaption>ASTERIA</figcaption></figure><figure><img src={stop.secondImage} alt="Paysage de Nébélia" /><figcaption>NÉBÉLIA</figcaption></figure></div> : <img src={stop.image} alt="" />}
               <span />

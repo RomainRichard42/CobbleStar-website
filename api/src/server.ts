@@ -18,6 +18,7 @@ import { findVoteSite, getVoteSites, playerVoteUrl } from "./votes.js";
 import { canReadGame, registerGameAdmin } from "./game-admin.js";
 import { accountIdentity } from "./account-link.js";
 import { registerAccountLink } from "./account-link-routes.js";
+import { siteSecurity } from "./site-security.js";
 
 type UserRow = RowDataPacket & {
   id: string; email: string | null; discord_email: string | null; password_hash: string | null;
@@ -32,14 +33,7 @@ declare module "fastify" {
 }
 
 const app = Fastify({ logger: { redact: ["req.headers.authorization", "req.headers.cookie", "body.password"] }, trustProxy: true });
-await app.register(helmet, {
-  contentSecurityPolicy: {
-    directives: {
-      scriptSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "data:", "https://mc-heads.net", "https://cdn.discordapp.com"],
-    },
-  },
-});
+await app.register(helmet, siteSecurity);
 await app.register(cookie, { secret: config.COOKIE_SECRET });
 await app.register(cors, { origin: config.SITE_ORIGIN, credentials: true, methods: ["GET", "POST", "PUT", "DELETE"] });
 await app.register(rateLimit, {
