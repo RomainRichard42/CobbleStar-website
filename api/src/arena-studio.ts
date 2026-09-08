@@ -7,6 +7,8 @@ import { config } from "./config.js";
 import { canReadGame, canWriteGame } from "./game-admin.js";
 import { arenaContent, arenaCatalog, arenaSync, ARENA_MAX_REVISION, validateArenaCatalog } from "./arena-studio-schema.js";
 import { ArenaChunks, arenaChunk, ChunkFailure, CHUNK_BODY_LIMIT } from "./arena-chunks.js";
+import { pasteInput, previewArenaPaste, PASTE_MAX_BYTES } from "./arena-pokepaste.js";
+import { downloadPokepaste, PasteDownloadError } from "./pokepaste-download.js";
 
 type Actor = { id: string; discord_id: string | null };
 type Auth = { session: (req: FastifyRequest) => Promise<Actor | null>; server: (req: FastifyRequest) => boolean };
@@ -26,7 +28,7 @@ function parse<T>(schema: z.ZodType<T>, value: unknown, reply: FastifyReply): T 
 }
 class SyncConflict extends Error {}
 
-export function registerArenaStudio(app: FastifyInstance, auth: Auth) {
+export function registerArenaStudio(app: FastifyInstance, auth: Auth, readPaste = downloadPokepaste) {
   const chunks = new ArenaChunks();
   app.addHook("onClose", async () => chunks.clear());
   async function authorize(req: FastifyRequest, reply: FastifyReply, write = false) {
@@ -55,6 +57,24 @@ export function registerArenaStudio(app: FastifyInstance, auth: Auth) {
     return { content, hasUnpublishedChanges, observed: observed?.arenaConfig ?? null, catalog: observed?.catalog ?? null, runtime: observed?.runtime ?? null,
       draftRevision: Number(row.draft_revision), publishedRevision: Number(row.published_revision), appliedRevision: Number(row.applied_revision),
       lastSeenAt: row.last_seen_at, error: row.sync_error, history, canWrite: canWriteGame(actor) };
+  });
+  app.post("/api/admin/arenas/:serverId/import-team", { bodyLimit: PASTE_MAX_BYTES * 2, config: { rateLimit: { max: 12, timeWindow: "1 minute" } } }, async (req, reply) => {
+    if (!await authorize(req, reply, true)) return;
+    const p = parse(params, req.params, reply); if (!p) return;
+    const input = parse(pasteInput, req.body, reply); if (!input) return;
+    const [rows] = await pool.execute<RowDataPacket[]>("SELECT observed_json FROM arena_studio WHERE server_id=?", [p.serverId]);
+    if (!rows[0]) return reply.code(404).send({ error: "SERVER_NOT_OBSERVED" });
+    const registry = arenaCatalog.safeParse(decode(rows[0].observed_json)?.catalog);
+    if (!registry.success) return reply.code(409).send({ error: "ARENA_CATALOG_REQUIRED", message: "Synchronise d’abord le catalogue du serveur pour reconnaître les vraies espèces, formes, attaques et objets." });
+    const remote = /^https?:\/\//i.test(input.source);
+    try {
+      const text = remote ? await readPaste(input.source) : input.source;
+      const preview = previewArenaPaste(text, registry.data);
+      return { ...preview, source: remote ? "pokepaste" : "text" };
+    } catch (e) {
+      if (e instanceof PasteDownloadError) return reply.code(422).send({ error: "POKEPASTE_UNAVAILABLE", message: e.message });
+      throw e;
+    }
   });
   app.put("/api/admin/arenas/:serverId", options, async (req, reply) => {
     if (!await authorize(req, reply, true)) return;

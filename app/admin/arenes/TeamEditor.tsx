@@ -5,6 +5,7 @@ import PokemonPortrait from "../joueurs/PokemonPortrait";
 import type { Pokemon } from "../joueurs/PokemonWorkspace";
 import { allStats, labelFor, newPokemon, normalized, STATS, total, type Catalog, type PokemonSpec } from "./model";
 import { ChoiceField, NumberField } from "./Fields";
+import { TeamImport } from "./TeamImport";
 import s from "./arenas.module.css";
 
 function formFor(p: PokemonSpec, catalog: Catalog | null) {
@@ -15,7 +16,7 @@ export function TeamPortrait({ pokemon: p, catalog, compact = true }: { pokemon:
   const model: Pokemon = { uuid: "arena-preview", species: p.species.includes(":") ? p.species : `cobblemon:${p.species}`, name: labelFor(catalog?.species, p.species), level: p.level, shiny: p.shiny, storage: "party", data: {}, editor: { fingerprint: "", values: { gender: p.gender.toUpperCase() }, stats: {}, effectiveIvs: {}, maxHealth: 1, types: [], dexNumber: 0, form: form?.id || (p.aspects.length ? p.aspects.join("-") : "normal") } };
   return <PokemonPortrait pokemon={model} compact={compact}/>;
 }
-export function TeamEditor({ team, catalog, level, onChange, single = false }: { team: PokemonSpec[]; catalog: Catalog | null; level: number; onChange: (team: PokemonSpec[]) => void; single?: boolean }) {
+export function TeamEditor({ team, catalog, level, onChange, single = false, serverId }: { team: PokemonSpec[]; catalog: Catalog | null; level: number; onChange: (team: PokemonSpec[]) => void; single?: boolean; serverId?: string }) {
   const [selected, setSelected] = useState(0);
   const active = Math.max(0, Math.min(selected, team.length - 1)), p = team[active];
   const patch = (value: Partial<PokemonSpec>) => onChange(team.map((entry, i) => i === active ? { ...entry, ...value } : entry));
@@ -24,6 +25,7 @@ export function TeamEditor({ team, catalog, level, onChange, single = false }: {
   const evTotal = p ? total(p.evs) : 0;
   return <section className={s.teamEditor}>
     <div className={s.sectionHeading}><div><h3>{single ? "Le gardien de cette épreuve." : "Une équipe, une identité."}</h3><p>{single ? "Un Pokémon Alpha / Totem à découvrir puis à vaincre avant le champion." : "De 1 à 6 Pokémon. Clique sur un membre pour préparer son combat."}</p></div><span className={s.pill}>{team.length} / {single ? 1 : 6}</span></div>
+    {serverId && <TeamImport serverId={serverId} team={team} catalog={catalog} limit={single ? 1 : 6} onChange={next => { setSelected(0); onChange(next); }} portrait={pokemon => <TeamPortrait pokemon={pokemon} catalog={catalog}/>}/>}
     <div className={s.roster} aria-label="Équipe du dresseur">{team.map((entry, i) => <button key={i} type="button" aria-pressed={active === i} onClick={() => setSelected(i)}><TeamPortrait pokemon={entry} catalog={catalog}/><span><b>{labelFor(catalog?.species, entry.species)}</b><small>Niv. {entry.level}{entry.shiny && " · Shiny"}</small></span><span className={s.teamIndex}>{i + 1}</span></button>)}
       {!single && team.length < 6 && <button type="button" className={s.addPokemon} disabled={!catalog?.species.length} onClick={() => { setSelected(team.length); onChange([...team, newPokemon(catalog!.species[0].id, level)]); }}><span>＋</span>Ajouter un Pokémon</button>}
     </div>
