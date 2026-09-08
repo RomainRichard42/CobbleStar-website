@@ -15,6 +15,10 @@
   font: var(--cs-type-body)/1.6 var(--cs-font-body);
 }
 .container { max-width: 1600px; margin: auto; }
+.signature { margin-bottom: var(--cs-space-6); padding: clamp(16px, 2vw, 24px); border: 1px solid var(--arena-line); border-radius: 20px; background: linear-gradient(125deg, color-mix(in srgb, var(--arena-accent) 14%, var(--arena-surface)), var(--arena-surface)); }
+.signaturePortrait { width: 72px; height: 72px; flex: 0 0 72px; }
+.signature > label { display: grid; gap: 8px; font-weight: 650; }
+.signature > small { display: block; line-height: 1.6; color: var(--arena-muted); }
 .page * { box-sizing: border-box; min-width: 0; }
 .page h1, .page h2, .page h3, .page h4 { text-transform: none; letter-spacing: -.025em; line-height: 1.22; }
 .page h1 { font: 800 clamp(32px, 3.6vw, 58px)/1.1 var(--cs-font-display); margin: 12px 0 18px; letter-spacing: -.035em; }

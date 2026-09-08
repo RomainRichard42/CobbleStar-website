@@ -10,6 +10,11 @@ export const arenaSites = [
   ["elite_ghost", "league", 0, 480], ["elite_dragon", "league", 48, 480],
   ["champion", "league", 96, 480],
 ] as const;
+export const epreuveSites = [...arenaSites.slice(0, 8),
+  ["elite_ghost", "league", -96, 480], ["elite_dragon", "league", -48, 480],
+  ["elite_fairy", "league", 0, 480], ["elite_steel", "league", 48, 480],
+  ["champion", "league", 96, 480],
+] as const;
 const resource = z.string().max(160).regex(/^[a-z0-9_.-]+:[a-z0-9_./-]+$/).refine(v => !v.includes("://"), "Choisis une ressource du serveur, pas une URL.");
 const trait = z.string().max(160).regex(/^(?:[a-z0-9_.-]+:)?[a-z0-9_./-]+$/).refine(v => !v.includes("://"), "Choisis une ressource du serveur, pas une URL.");
 const optionalTrait = z.union([z.literal(""), trait]);
@@ -21,7 +26,10 @@ const stats = (max: number) => z.object({
   def: z.number().int().min(0).max(max), spa: z.number().int().min(0).max(max),
   spd: z.number().int().min(0).max(max), spe: z.number().int().min(0).max(max),
 }).strict();
+const memberId = z.string().regex(/^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$/);
 export const arenaPokemon = z.object({
+  // Optional stable authoring identity, never an in-game Pokemon UUID.
+  memberId: memberId.optional(),
   species: trait, level: z.number().int().min(1).max(100), shiny: z.boolean(),
   nature: optionalTrait, ability: optionalTrait, moves: z.array(trait).max(4),
   heldItem: z.union([z.literal(""), resource.refine(v => v !== "minecraft:air", "Choisis un objet, ou laisse vide.")]),
@@ -42,7 +50,8 @@ export const arenaRewards = z.object({
 export const arenaTrainer = z.object({
   id: z.string().regex(/^[a-z0-9][a-z0-9_-]{0,47}$/).refine(v => v !== "champion" && v !== "alpha", "Identifiant réservé au champion ou au gardien Alpha."), name: name(64), enabled: z.boolean(), required: z.boolean(),
   slot: z.number().int().min(0).max(5), npcClass: resource, skill: z.number().int().min(0).max(100),
-  team: z.array(arenaPokemon).min(1).max(6), rewards: arenaRewards,
+  team: z.array(arenaPokemon).max(6), rewards: arenaRewards,
+  hardTeam: z.array(arenaPokemon).max(6).optional(),
 }).strict();
 // These identifiers address the eight native puzzles. This is not a script or command editor.
 export const arenaPuzzles: Record<string, string> = {
@@ -55,26 +64,38 @@ export const arenaTrial = z.object({
   alpha: z.object({ name: name(80), pokemon: arenaPokemon, rewards: arenaRewards }).strict(),
 }).strict();
 export const arenaStage = z.object({
-  id: z.string().max(48), index: z.number().int(), name: name(80), theme: z.string().max(32), champion: name(64),
+  id: z.string().max(48), index: z.number().int(), name: name(80), theme: z.string().max(32), champion: z.union([z.literal(""), name(64)]),
   level: z.number().int().min(1).max(100), x: z.number().int(), z: z.number().int(), league: z.boolean(),
   badgeItem: resource, npcClass: resource, skill: z.number().int().min(0).max(100),
-  team: z.array(arenaPokemon).min(1).max(6), rewards: arenaRewards, trainers: z.array(arenaTrainer).max(6),
+  team: z.array(arenaPokemon).max(6), rewards: arenaRewards, trainers: z.array(arenaTrainer).max(6),
+  // Explicitly chosen for V3. Legacy stages are not assigned an arbitrary principal.
+  signaturePokemonId: memberId.optional(),
+  hardTeam: z.array(arenaPokemon).max(6).optional(),
+  hardSignaturePokemonId: memberId.optional(),
   // Optional preserves pre-adventure saved/publication bytes and optimistic revision semantics.
   trial: arenaTrial.nullable().optional(),
 }).strict();
-export const arenaContent = z.object({ schemaVersion: z.literal(1), stages: z.array(arenaStage).length(13) }).strict().superRefine((content, ctx) => {
+export const arenaContent = z.object({ schemaVersion: z.union([z.literal(1), z.literal(2)]), stages: z.array(arenaStage).length(13), legacyLeagueStages: z.array(arenaStage).max(2).optional() }).strict().superRefine((content, ctx) => {
+  if (content.legacyLeagueStages && (new Set(content.legacyLeagueStages.map(s => s.id)).size !== content.legacyLeagueStages.length || content.legacyLeagueStages.some(s => !["elite_electric", "elite_ground"].includes(s.id)))) ctx.addIssue({ code: "custom", path: ["legacyLeagueStages"], message: "Les archives conservent seulement les anciens Conseils Électrique et Sol." });
   content.stages.forEach((stage, i) => {
-    const site = arenaSites[i]!;
+    const site = (content.schemaVersion === 2 ? epreuveSites : arenaSites)[i]!;
     const fail = (message: string, path: (string | number)[] = []) => ctx.addIssue({ code: "custom", path: ["stages", i, ...path], message });
     if (stage.id !== site[0] || stage.theme !== site[1] || stage.x !== site[2] || stage.z !== site[3] || stage.index !== i + 1 || stage.league !== (i >= 8)) fail("L'ordre, le type et la position des 13 sites ne peuvent pas être modifiés.");
+    if (content.schemaVersion === 1 && (!stage.team.length || !stage.champion.trim() || stage.trainers.some(t => !t.team.length))) fail("Le format historique exige un champion nommé et des équipes ; le nouveau schéma permet les brouillons à préparer.");
     if (stage.badgeItem !== `cobblestar_planets:arena_badge_${site[1]}`) fail("Le badge de cette arène est fixe.", ["badgeItem"]);
     if (new Set(stage.trainers.map(t => t.id)).size !== stage.trainers.length) fail("Identifiants de dresseurs dupliqués.", ["trainers"]);
     if (new Set(stage.trainers.map(t => t.slot)).size !== stage.trainers.length) fail("Chaque dresseur doit avoir un emplacement distinct.", ["trainers"]);
     if (stage.trainers.some(t => t.required && !t.enabled)) fail("Un dresseur obligatoire doit être activé.", ["trainers"]);
+    for (const [label, team] of [["team", stage.team], ["hardTeam", stage.hardTeam ?? []], ...stage.trainers.flatMap(t => [[`trainers.${t.id}`, t.team], [`trainers.${t.id}.hardTeam`, t.hardTeam ?? []]] as const)] as const) {
+      const ids = team.flatMap(p => p.memberId ? [p.memberId] : []);
+      if (new Set(ids).size !== ids.length) fail("Les membres d’une équipe doivent avoir des identifiants distincts.", [label]);
+    }
+    if (stage.signaturePokemonId && (stage.league || stage.team.filter(p => p.memberId === stage.signaturePokemonId).length !== 1)) fail("Le Pokémon principal doit désigner un membre présent dans l’équipe du Capitaine.", ["signaturePokemonId"]);
+    if (stage.hardSignaturePokemonId && (stage.league || (stage.hardTeam ?? []).filter(p => p.memberId === stage.hardSignaturePokemonId).length !== 1)) fail("La référence du principal archivé doit rester valide.", ["hardSignaturePokemonId"]);
     if (stage.league && stage.trial) fail("La Ligue suit les cinq combats successifs, pas une épreuve d’arène.", ["trial"]);
     if (!stage.league && stage.trial && stage.trial.puzzleId !== arenaPuzzles[stage.id]) fail("L’énigme est propre à cette arène : elle ne peut pas être remplacée par celle d’un autre site.", ["trial", "puzzleId"]);
     if (!stage.league && stage.trial && stage.trainers.some(t => t.enabled && !t.required)) fail("Dans une arène, chaque dresseur présent doit être vaincu avant le Totem et le champion.", ["trainers"]);
-    if (!stage.league && stage.trial && !stage.trainers.some(t => t.enabled)) fail("Le parcours doit garder au moins un dresseur présent.", ["trainers"]);
+    if (content.schemaVersion === 1 && !stage.league && stage.trial && !stage.trainers.some(t => t.enabled)) fail("Le parcours doit garder au moins un dresseur présent.", ["trainers"]);
   });
 });
 
@@ -108,7 +129,7 @@ export function validateArenaCatalog(content: ArenaContent, catalog: ArenaCatalo
     npcClasses: new Set(catalog.npcClasses.map(v => normalizeTrait(v.id))),
   };
   const issues: string[] = [];
-  const oldPokemon = preserved.flatMap(c => c.stages.flatMap(s => [...s.team, ...s.trainers.flatMap(t => t.team), ...(s.trial ? [s.trial.alpha.pokemon] : [])]));
+  const oldPokemon = preserved.flatMap(c => c.stages.flatMap(s => [...s.team, ...(s.hardTeam ?? []), ...s.trainers.flatMap(t => [...t.team, ...(t.hardTeam ?? [])]), ...(s.trial ? [s.trial.alpha.pokemon] : [])]));
   const aspectKey = (aspects: string[]) => [...aspects].sort().join(",");
   const oldAspects = new Set(oldPokemon.map(p => `${normalizeTrait(p.species)}|${aspectKey(p.aspects)}`));
   const oldProperties = new Set(oldPokemon.filter(p => p.legacyProperties).map(p => `${normalizeTrait(p.species)}|${p.legacyProperties}`));
@@ -120,10 +141,11 @@ export function validateArenaCatalog(content: ArenaContent, catalog: ArenaCatalo
     if (!stage.league && !stage.trial && preserved.some(c => c.stages.some(s => s.id === stage.id && s.trial))) issues.push(`${stage.name} : le parcours reçu du serveur doit être conservé. Actualise le brouillon, puis enregistre les nouvelles épreuves avant de publier.`);
     check("items", stage.badgeItem, `${stage.name}, badge`);
     const alpha = stage.trial ? [{ name: stage.trial.alpha.name, npcClass: "", team: [stage.trial.alpha.pokemon], rewards: stage.trial.alpha.rewards }] : [];
-    for (const person of [{ name: stage.champion, npcClass: stage.npcClass, team: stage.team, rewards: stage.rewards }, ...stage.trainers, ...alpha]) {
+    for (const person of [{ name: stage.champion, npcClass: stage.npcClass, team: stage.team, hardTeam: stage.hardTeam, rewards: stage.rewards }, ...stage.trainers, ...alpha]) {
       const label = `${stage.name} · ${person.name}`;
       check("npcClasses", person.npcClass, `${label}, apparence`);
-      for (const [i, pokemon] of person.team.entries()) {
+      const teams = [person.team, ...("hardTeam" in person && Array.isArray(person.hardTeam) ? [person.hardTeam] : [])];
+      for (const [i, pokemon] of teams.flat().entries()) {
         const prefix = `${label}, Pokémon ${i + 1}`;
         check("species", pokemon.species, prefix);
         check("natures", pokemon.nature, `${prefix}, nature`);

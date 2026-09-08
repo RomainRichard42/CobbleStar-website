@@ -28,7 +28,8 @@ export function TeamImport({ serverId, catalog, team, limit, onChange, portrait 
   function cancel() { controller.current?.abort(); setBusy(false); setOpen(false); setPreview(null); setError(""); button.current?.focus(); }
   function apply() {
     if (!preview || changed || preview.errors.length || !preview.team.length || preview.team.length > limit || (preview.warnings.length && !acknowledged)) return;
-    onChange(structuredClone(preview.team)); setOpen(false); setPreview(null); setSource(""); setMessage(`Équipe importée dans le brouillon : ${preview.team.length} Pokémon. Enregistre puis publie pour l’envoyer en jeu.`); button.current?.focus();
+    const imported = structuredClone(preview.team); for (const pokemon of imported) delete pokemon.memberId;
+    onChange(imported); setOpen(false); setPreview(null); setSource(""); setMessage(`Équipe importée dans le brouillon : ${preview.team.length} Pokémon. Vérifie de nouveau le Pokémon principal du Capitaine s’il s’agit de son équipe, puis enregistre et publie.`); button.current?.focus();
   }
   return <section className={s.importer} aria-label="Import Poképaste">
     <div className={s.importHeading}><div><b>Ton équipe est déjà sur Poképaste ?</b><p>Un lien ou un export Showdown, puis une vérification avant de remplacer l’équipe.</p></div><button ref={button} type="button" disabled={!catalog} aria-expanded={open} aria-controls={id} onClick={() => open ? cancel() : setOpen(true)}>Importer un Poképaste</button></div>

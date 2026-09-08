@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { arenaContent, arenaCatalog, arenaPuzzles, validateArenaCatalog } from "../dist/arena-studio-schema.js";
+import { arenaContent, arenaCatalog, arenaPuzzles, epreuveSites, validateArenaCatalog } from "../dist/arena-studio-schema.js";
 import { content, catalog, pokemon, rewards, trainer, exerciseArenaStudio } from "./fixtures/arena-studio.mjs";
 import { chunkEnvelope } from "./fixtures/arena-chunks.mjs";
 Object.assign(process.env, { NODE_ENV: "test", PUBLIC_API_URL: "https://example.test", SITE_ORIGIN: "https://example.test", DB_HOST: "127.0.0.1", DB_NAME: "unused_test", DB_USER: "unused_test", DB_PASSWORD: "unused_test", COOKIE_SECRET: "isolated-test-cookie-secret-never-production", MINECRAFT_SERVER_KEY: "isolated-test-server-secret-never-production", GAME_ADMIN_DISCORD_IDS: "111111111111111111", GAME_ADMIN_READ_DISCORD_IDS: "222222222222222222" });
@@ -18,6 +18,65 @@ function adventureContent() {
   }
   return d;
 }
+function epreuveContent() {
+  const old = adventureContent();
+  return { schemaVersion: 2, legacyLeagueStages: old.stages.filter(s => ["elite_electric", "elite_ground"].includes(s.id)), stages: epreuveSites.map(([id, theme, x, z], i) => {
+    const source = old.stages.find(s => s.id === id);
+    return source ? { ...structuredClone(source), index: i + 1, x, z } : { ...structuredClone(old.stages[12]), id, index: i + 1, name: id, theme, x, z, champion: "", team: [], level: 100 };
+  }) };
+}
+test("schema 2 keeps semantic League members and archives without fabricating Fairy/Steel teams", () => {
+  const d = epreuveContent();
+  assert.deepEqual(arenaContent.parse(d), d);
+  assert.deepEqual(d.stages.slice(8).map(s => s.id), ["elite_ghost", "elite_dragon", "elite_fairy", "elite_steel", "champion"]);
+  assert.deepEqual(d.legacyLeagueStages.map(s => s.id), ["elite_electric", "elite_ground"]);
+  assert.deepEqual(d.stages[8].team, adventureContent().stages[10].team);
+  assert.deepEqual(d.stages[10].team, []); assert.equal(d.stages[10].champion, "");
+  assert.deepEqual(validateArenaCatalog(d, catalog()), []);
+  const wrong = structuredClone(d); wrong.stages[8].id = "elite_electric"; assert.equal(arenaContent.safeParse(wrong).success, false);
+  wrong.stages[8].id = "elite_ghost"; wrong.legacyLeagueStages.push(wrong.legacyLeagueStages[0]); assert.equal(arenaContent.safeParse(wrong).success, false);
+});
+test("Archived optional teams are preserved without creating a second active team", () => {
+  const d = epreuveContent(), stage = d.stages[0];
+  assert.equal("hardTeam" in arenaContent.parse(d).stages[0], false);
+  stage.hardTeam = []; assert.equal(arenaContent.safeParse(d).success, true);
+  stage.team[0].memberId = "easy-member"; stage.signaturePokemonId = "easy-member";
+  stage.hardTeam = [{ ...pokemon(), memberId: "hard-member", level: 55 }]; stage.hardSignaturePokemonId = "hard-member";
+  stage.trainers[0].hardTeam = [{ ...pokemon(), level: 51 }];
+  assert.deepEqual(arenaContent.parse(d), d); assert.deepEqual(validateArenaCatalog(d, catalog()), []);
+  stage.hardSignaturePokemonId = "easy-member"; assert.equal(arenaContent.safeParse(d).success, false);
+  stage.hardSignaturePokemonId = "hard-member"; stage.hardTeam[0].species = "missing"; assert.ok(validateArenaCatalog(d, catalog()).some(e => e.includes("missing")));
+  stage.hardTeam[0].species = "eevee"; stage.hardTeam.push(structuredClone(stage.hardTeam[0])); assert.equal(arenaContent.safeParse(d).success, false);
+});
+
+test("Captain principal is optional for legacy, explicit, stable through reorder and preserved by sync", () => {
+  const legacy = adventureContent();
+  assert.deepEqual(arenaContent.parse(legacy), legacy);
+  assert.equal("signaturePokemonId" in arenaContent.parse(legacy).stages[0], false);
+  const d = adventureContent(), captain = d.stages[0];
+  captain.team.push(pokemon()); captain.team[1].memberId = "signature-unique-member";
+  captain.signaturePokemonId = "signature-unique-member";
+  assert.deepEqual(arenaContent.parse(d), d);
+  captain.team.reverse();
+  assert.deepEqual(arenaContent.parse(d), d, "Reference is independent of team slot");
+  assert.equal(captain.team.find(p => p.memberId === captain.signaturePokemonId), captain.team[0]);
+  assert.deepEqual(validateArenaCatalog(d, catalog()), []);
+  captain.team = [pokemon()];
+  assert.equal(arenaContent.safeParse(d).success, false, "Removing/importing the source requires explicit reselection");
+  delete captain.signaturePokemonId;
+  assert.equal(arenaContent.safeParse(d).success, true, "Incomplete V3 link remains a valid legacy-compatible draft");
+});
+test("Captain principal rejects orphan, duplicate, unsafe or League references", () => {
+  for (const change of [
+    s => s.signaturePokemonId = "absent",
+    s => { s.team[0].memberId = "same"; s.team.push({ ...pokemon(), memberId: "same" }); s.signaturePokemonId = "same"; },
+    s => s.team[0].memberId = "", s => s.team[0].memberId = "x".repeat(65),
+    s => s.team[0].memberId = "unsafe\nvalue", s => s.signaturePokemonId = "",
+    s => { s.trainers[0].team = [{ ...pokemon(), memberId: "same" }, { ...pokemon(), memberId: "same" }]; },
+  ]) { const d = adventureContent(); change(d.stages[0]); assert.equal(arenaContent.safeParse(d).success, false, change.toString()); }
+  const d = content(); d.stages[8].team[0].memberId = "valid"; d.stages[8].signaturePokemonId = "valid";
+  assert.equal(arenaContent.safeParse(d).success, false);
+});
 
 test("eight fixed adventures are additive: old publications keep their exact content", () => {
   assert.deepEqual(arenaContent.parse(content()), content());
@@ -223,6 +282,41 @@ test("adventure sync does not overwrite an old draft; explicit save and publish 
     assert.equal(response.json().content.stages[0].trial.alpha.pokemon.level, 42);
   } finally { Object.assign(pool, originals); await a.close(); }
 });
+test("schema 2 migration survives real sync, explicit draft save, publication and server acknowledgement", async () => {
+  const a = app(), originals = { execute: pool.execute, query: pool.query, getConnection: pool.getConnection };
+  Object.assign(pool, databaseDouble());
+  const route = "/api/admin/arenas/epreuves", previous = adventureContent(), observed = epreuveContent();
+  previous.stages[0].champion = "Capitaine personnalisé";
+  const sync = (arenaConfig, appliedRevision = 0) => a.inject({ method: "POST", url: "/api/internal/arenas/sync", headers: { authorization: "Bearer fixture-server" }, payload: { serverId: "epreuves", appliedRevision, error: "", observed: { arenaConfig, catalog: catalog() } } });
+  try {
+    assert.equal((await sync(previous)).statusCode, 200);
+    assert.equal((await sync(observed)).statusCode, 200);
+    let response = await a.inject({ url: route, headers: writeHeaders });
+    assert.deepEqual(response.json().content, previous, "New JAR never overwrites owner's unsaved draft");
+    assert.equal(response.json().observed.schemaVersion, 2);
+    const edited = structuredClone(observed);
+    edited.stages[0].champion = previous.stages[0].champion;
+    edited.stages[0].team[0].memberId = "principal-owner-choice";
+    edited.stages[0].signaturePokemonId = "principal-owner-choice";
+    edited.stages[0].trainers = [trainer(), { ...trainer(), id: "second", slot: 1 }];
+    edited.stages[0].rewards.cobbleCoins = 333;
+    response = await a.inject({ method: "PUT", url: route, headers: writeHeaders, payload: { baseRevision: 1, content: edited } });
+    assert.equal(response.statusCode, 200, response.body);
+    response = await a.inject({ method: "POST", url: `${route}/publish`, headers: writeHeaders, payload: { baseRevision: 2, reason: "Publication des nouvelles Épreuves" } });
+    assert.equal(response.statusCode, 200, response.body);
+    response = await sync(observed);
+    assert.deepEqual(response.json(), { revision: 1, content: edited }, "Server receives canonical IDs, one team, principal, trainers, rewards and archive intact");
+    assert.equal((await a.inject({ url: route, headers: writeHeaders })).json().appliedRevision, 0);
+    assert.equal((await sync(edited, 1)).statusCode, 200);
+    response = await a.inject({ url: route, headers: writeHeaders });
+    assert.equal(response.json().appliedRevision, 1);
+    assert.equal(response.json().history.length, 1);
+    assert.equal(response.json().content.stages[0].signaturePokemonId, "principal-owner-choice");
+    assert.deepEqual(response.json().content.stages[10].team, [], "Unconfigured Fairy team is not fabricated");
+    assert.deepEqual(response.json().content.legacyLeagueStages, observed.legacyLeagueStages);
+  } finally { Object.assign(pool, originals); await a.close(); }
+});
+
 test("unknown servers, missing catalogs and forged first acknowledgements fail closed", async () => {
   const a = app(), originals = { execute: pool.execute, query: pool.query, getConnection: pool.getConnection };
   Object.assign(pool, databaseDouble());
