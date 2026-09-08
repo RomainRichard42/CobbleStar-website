@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { arenaContent, arenaCatalog, arenaPuzzles, validateArenaCatalog } from "../dist/arena-studio-schema.js";
 import { content, catalog, pokemon, rewards, trainer, exerciseArenaStudio } from "./fixtures/arena-studio.mjs";
+import { chunkEnvelope } from "./fixtures/arena-chunks.mjs";
 Object.assign(process.env, { NODE_ENV: "test", PUBLIC_API_URL: "https://example.test", SITE_ORIGIN: "https://example.test", DB_HOST: "127.0.0.1", DB_NAME: "unused_test", DB_USER: "unused_test", DB_PASSWORD: "unused_test", COOKIE_SECRET: "isolated-test-cookie-secret-never-production", MINECRAFT_SERVER_KEY: "isolated-test-server-secret-never-production", GAME_ADMIN_DISCORD_IDS: "111111111111111111", GAME_ADMIN_READ_DISCORD_IDS: "222222222222222222" });
 const { default: Fastify } = await import("fastify");
 const { registerArenaStudio } = await import("../dist/arena-studio.js");
@@ -150,6 +151,41 @@ function databaseDouble() {
     return { execute, beginTransaction: async () => { snapshot = structuredClone({ rows, publications }); }, commit: async () => {}, rollback: async () => { ({ rows, publications } = snapshot); }, release: () => unlock() };
   } };
 }
+test("chunk endpoint authenticates, keeps partial data invisible and commits a >1 MiB snapshot atomically", async () => {
+  const a = app(), originals = { execute: pool.execute, query: pool.query, getConnection: pool.getConnection };
+  Object.assign(pool, databaseDouble());
+  const path = "/api/internal/arenas/sync/chunk";
+  const send = payload => a.inject({ method: "POST", url: path, headers: { authorization: "Bearer fixture-server" }, payload });
+  try {
+    const registry = catalog();
+    registry.items = Array.from({ length: 6500 }, (_, i) => ({ id: "minecraft:fixture_" + i, label: "É".repeat(90) }));
+    const envelope = { serverId: "main", appliedRevision: 0, error: "", observed: { arenaConfig: adventureContent(), catalog: registry } };
+    assert.ok(Buffer.byteLength(JSON.stringify(envelope)) > 1024 * 1024);
+    const parts = chunkEnvelope(envelope);
+    assert.equal((await a.inject({ method: "POST", url: path, payload: parts[0] })).statusCode, 401);
+    assert.equal((await send({ ...parts[0], data: "x".repeat(190000) })).statusCode, 413);
+    for (const part of parts.slice(0, -1)) {
+      const r = await send(part); assert.equal(r.statusCode, 200, r.body); assert.equal(r.json().pending, true);
+      assert.equal((await a.inject({ url: "/api/admin/arenas/main", headers: readHeaders })).statusCode, 404);
+    }
+    let r = await send(parts.at(-1)); assert.equal(r.statusCode, 200, r.body); assert.equal(r.json().revision, 0);
+    r = await a.inject({ url: "/api/admin/arenas/main", headers: readHeaders });
+    assert.deepEqual(r.json().content, envelope.observed.arenaConfig); assert.deepEqual(r.json().catalog, registry);
+    const before = r.json();
+    for (const invalid of [{ ...envelope, serverId: "other" }, { ...envelope, observed: {} }, { ...envelope, appliedRevision: 5 }]) {
+      for (const part of chunkEnvelope(invalid, "main")) r = await send(part);
+      assert.ok([400, 409].includes(r.statusCode), r.body);
+      assert.deepEqual((await a.inject({ url: "/api/admin/arenas/main", headers: readHeaders })).json(), before);
+    }
+    // A new upload after a lost final response is safe: it cannot reset an edited draft.
+    const edited = structuredClone(envelope.observed.arenaConfig); edited.stages[0].champion = "Champion modifié";
+    r = await a.inject({ method: "PUT", url: "/api/admin/arenas/main", headers: writeHeaders, payload: { baseRevision: 1, content: edited } });
+    assert.equal(r.statusCode, 200, r.body);
+    for (const part of chunkEnvelope(envelope)) r = await send(part);
+    assert.equal(r.statusCode, 200, r.body);
+    assert.deepEqual((await a.inject({ url: "/api/admin/arenas/main", headers: readHeaders })).json().content, edited);
+  } finally { Object.assign(pool, originals); await a.close(); }
+});
 test("server import, draft conflict, publication audit, idempotency and ack with transactional DB double", async () => {
   const a = app(), originals = { execute: pool.execute, query: pool.query, getConnection: pool.getConnection };
   Object.assign(pool, databaseDouble());

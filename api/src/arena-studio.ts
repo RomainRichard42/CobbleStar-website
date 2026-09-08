@@ -6,6 +6,7 @@ import { pool, transaction } from "./db.js";
 import { config } from "./config.js";
 import { canReadGame, canWriteGame } from "./game-admin.js";
 import { arenaContent, arenaCatalog, arenaSync, ARENA_MAX_REVISION, validateArenaCatalog } from "./arena-studio-schema.js";
+import { ArenaChunks, arenaChunk, ChunkFailure, CHUNK_BODY_LIMIT } from "./arena-chunks.js";
 
 type Actor = { id: string; discord_id: string | null };
 type Auth = { session: (req: FastifyRequest) => Promise<Actor | null>; server: (req: FastifyRequest) => boolean };
@@ -26,6 +27,8 @@ function parse<T>(schema: z.ZodType<T>, value: unknown, reply: FastifyReply): T 
 class SyncConflict extends Error {}
 
 export function registerArenaStudio(app: FastifyInstance, auth: Auth) {
+  const chunks = new ArenaChunks();
+  app.addHook("onClose", async () => chunks.clear());
   async function authorize(req: FastifyRequest, reply: FastifyReply, write = false) {
     reply.header("Cache-Control", "no-store");
     const actor = await auth.session(req);
@@ -106,7 +109,30 @@ export function registerArenaStudio(app: FastifyInstance, auth: Auth) {
   app.post("/api/internal/arenas/sync", options, async (req, reply) => {
     reply.header("Cache-Control", "no-store");
     if (!auth.server(req)) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
-    const input = parse(arenaSync, req.body, reply); if (!input) return;
+    return synchronize(req.body, reply);
+  });
+  app.post("/api/internal/arenas/sync/chunk", {
+    bodyLimit: CHUNK_BODY_LIMIT,
+    config: { rateLimit: { max: 240, timeWindow: "1 minute" } },
+    onRequest: async (req, reply) => {
+      reply.header("Cache-Control", "no-store");
+      if (!auth.server(req)) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+    },
+  }, async (req, reply) => {
+    const chunk = parse(arenaChunk, req.body, reply); if (!chunk) return;
+    try {
+      const envelope = chunks.accept(chunk);
+      if (envelope === null) return { pending: true, uploadId: chunk.uploadId, index: chunk.index };
+      const input = parse(arenaSync, envelope, reply); if (!input) return;
+      if (input.serverId !== chunk.serverId) return reply.code(400).send({ error: "TRANSFER_IDENTITY_MISMATCH" });
+      return synchronize(input, reply);
+    } catch (error) {
+      if (error instanceof ChunkFailure) return reply.code(error.status).send({ error: "INVALID_TRANSFER", message: error.message });
+      throw error;
+    }
+  });
+  async function synchronize(body: unknown, reply: FastifyReply) {
+    const input = parse(arenaSync, body, reply); if (!input) return;
     try {
       return await transaction(async c => {
         await c.execute("INSERT INTO arena_studio(server_id) VALUES(?) ON DUPLICATE KEY UPDATE server_id=VALUES(server_id)", [input.serverId]);
@@ -128,5 +154,5 @@ export function registerArenaStudio(app: FastifyInstance, auth: Auth) {
       if (error instanceof SyncConflict) return reply.code(409).send({ error: "UNKNOWN_APPLIED_REVISION", message: error.message });
       throw error;
     }
-  });
+  }
 }
