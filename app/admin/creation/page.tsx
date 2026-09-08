@@ -87,7 +87,7 @@ export default function CreationStudio() {
   const fresh = state?.lastSeenAt && now - new Date(state.lastSeenAt).getTime() < 60000;
 
   return <main className={s.page} id="contenu">
-    <header className={s.header}><Link href="/admin/">← Centre de contrôle</Link><span>COBBLESTAR · STUDIO NARRATIF</span><Link href="/compte/">Mon compte</Link></header>
+    <header className={s.header}><Link href="/admin/">← Centre de contrôle</Link><span>COBBLESTAR · STUDIO NARRATIF</span><Link href="/admin/arenes/">Arènes & Ligue</Link><Link href="/compte/">Mon compte</Link></header>
     <section className={s.hero}><div><p>LES HISTOIRES COMMENCENT ICI</p><h1>Écris la prochaine<br/><em>aventure CobbleStar.</em></h1><p>Des personnages, des scènes et des rencontres. Tu racontes l’histoire, le jeu en suit les étapes.</p></div><aside><b>Site → nom du PNJ → jeu</b><p>Place un PNJ avec le bâton, saisis le nom du personnage, puis enregistre. La liaison survit aux renommages sur le site.</p></aside></section>
     {message && <p className={s.notice} role="status">{message}</p>}
     {state && <>

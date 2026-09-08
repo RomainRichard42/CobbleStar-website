@@ -214,6 +214,10 @@ test("MySQL: UUID recovery, preserved records, rollback, replay and concurrent c
       assert.equal(detail.json().snapshot.xpLevel, 5); assert.equal(detail.json().account.discord_id, observed.discord);
       const missing = await app.inject({ url: `/api/admin/game/players/${hex()}`, headers: adminHeaders });
       assert.equal(missing.statusCode, 404); assert.equal(missing.json().error, "PLAYER_NOT_OBSERVED");
+      // Arena studio uses the same disposable database and actual authenticated routes.
+      // Exercises migration 011, row locks, two editors, publication audit and server acknowledgement.
+      const { exerciseArenaStudio } = await import("./fixtures/arena-studio.mjs");
+      await exerciseArenaStudio(app, { ...adminHeaders, origin: "https://example.test" }, { authorization: `Bearer ${process.env.MINECRAFT_SERVER_KEY}` });
     } finally {
       apiPool.execute = originalExecute;
       await app.close(); await apiPool.end();
