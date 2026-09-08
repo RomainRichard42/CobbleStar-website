@@ -108,6 +108,9 @@ export const ARENA_MAX_REVISION = 2147483647;
 export const arenaRuntime = z.object({
   pendingRewards: z.number().int().min(0).max(ARENA_MAX_REVISION), reviewRewards: z.number().int().min(0).max(ARENA_MAX_REVISION),
   activeBattles: z.number().int().min(0).max(ARENA_MAX_REVISION), worldReady: z.boolean(),
+  // CobbleStar 6.26 added this diagnostic before the strict API contract was updated.
+  // Optional accepts both the shipped 6.26 body and the compatibility bridge's four-field runtime.
+  worldStatus: z.string().max(500).optional(),
 }).strict();
 export const arenaObserved = z.object({ arenaConfig: arenaContent, catalog: arenaCatalog.optional(), runtime: arenaRuntime.optional() }).strict();
 export const arenaSync = z.object({

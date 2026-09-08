@@ -102,6 +102,8 @@ export function registerArenaStudio(app: FastifyInstance, auth: Auth, readPaste 
       if (!catalog.success) return { error: "ARENA_ENGINE_REQUIRED", status: 409, message: "Le mod serveur doit transmettre son catalogue d'arènes avant la publication. Le brouillon est conservé." };
       const parsed = arenaContent.safeParse(decode(row.draft_json));
       if (!parsed.success) return { error: "ARENA_INCOMPLETE", status: 400, message: issueText(parsed.error) };
+      if (parsed.data.schemaVersion === 1 && observed?.arenaConfig?.schemaVersion === 2)
+        return { error: "ARENA_SCHEMA_MIGRATION_REQUIRED", status: 409, message: "Le serveur a déjà transmis les nouvelles Épreuves. Actualise le panneau, puis enregistre la migration du brouillon avant de publier ; les équipes Fée et Acier ne doivent pas être écrasées par un ancien catalogue." };
       const preserved = [observed?.arenaConfig, decode(row.published_json)].flatMap(value => {
         const p = arenaContent.safeParse(value); return p.success ? [p.data] : [];
       });
