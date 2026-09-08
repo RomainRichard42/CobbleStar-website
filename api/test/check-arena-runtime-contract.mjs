@@ -23,7 +23,9 @@ assert.ok(bytes <= 2 * 1024 * 1024, `Actual sync body ${bytes} bytes exceeds 2 M
 validated(arenaSync, { serverId: "arena_runtime_probe", appliedRevision: 1, error: "", observed: { arenaConfig: content, runtime } }, "Lightweight acknowledgement");
 assert.equal(arenaSync.safeParse({ ...complete, appliedRevision: 2147483648 }).success, false, "API revisions must fit the Java bridge signed int");
 console.log(JSON.stringify({ result: "PASS", source: path, stages: content.stages.length,
-  configuredPokemon: content.stages.reduce((n, s) => n + s.team.length + s.trainers.reduce((m, t) => m + t.team.length, 0), 0),
+  configuredPokemon: content.stages.reduce((n, s) => n + s.team.length + s.trainers.reduce((m, t) => m + t.team.length, 0) + (s.trial ? 1 : 0), 0),
+  adventureTrials: content.stages.filter(s => s.trial).length,
+  nativeGuardianEntitiesSpawned: probe.guardianEntitiesSpawned ?? null,
   species: catalog.species.length, forms: catalog.species.reduce((n, s) => n + (s.forms?.length ?? 0), 0),
   items: catalog.items.length, moves: catalog.moves.length, abilities: catalog.abilities.length, natures: catalog.natures.length, npcClasses: catalog.npcClasses.length,
   fullSyncBytes: bytes, nativeProbePassed: probe.passed ?? null, nativePokemonCreated: probe.pokemonCreated ?? null }, null, 2));

@@ -40,15 +40,27 @@ export const arenaRewards = z.object({
   cobbleCoins: z.number().int().min(0).max(1000000),
 }).strict();
 export const arenaTrainer = z.object({
-  id: z.string().regex(/^[a-z0-9][a-z0-9_-]{0,47}$/).refine(v => v !== "champion", "Identifiant réservé au champion."), name: name(64), enabled: z.boolean(), required: z.boolean(),
+  id: z.string().regex(/^[a-z0-9][a-z0-9_-]{0,47}$/).refine(v => v !== "champion" && v !== "alpha", "Identifiant réservé au champion ou au gardien Alpha."), name: name(64), enabled: z.boolean(), required: z.boolean(),
   slot: z.number().int().min(0).max(5), npcClass: resource, skill: z.number().int().min(0).max(100),
   team: z.array(arenaPokemon).min(1).max(6), rewards: arenaRewards,
+}).strict();
+// These identifiers address the eight native puzzles. This is not a script or command editor.
+export const arenaPuzzles: Record<string, string> = {
+  bug: "canopy_sequence", grass: "root_paths", water: "tide_valves", ice: "frozen_route",
+  rock: "resonant_crystals", fire: "ember_furnaces", flying: "wind_currents", psychic: "astral_memory",
+};
+const explanation = (max: number) => z.string().trim().min(1).max(max).refine(v => !/[\u0000-\u0008\u000b-\u001f\u007f§]/.test(v), "Aucun code de formatage ou caractère de contrôle.");
+export const arenaTrial = z.object({
+  enabled: z.literal(true), puzzleId: z.string().max(48), intro: explanation(600), hint: explanation(400),
+  alpha: z.object({ name: name(80), pokemon: arenaPokemon, rewards: arenaRewards }).strict(),
 }).strict();
 export const arenaStage = z.object({
   id: z.string().max(48), index: z.number().int(), name: name(80), theme: z.string().max(32), champion: name(64),
   level: z.number().int().min(1).max(100), x: z.number().int(), z: z.number().int(), league: z.boolean(),
   badgeItem: resource, npcClass: resource, skill: z.number().int().min(0).max(100),
   team: z.array(arenaPokemon).min(1).max(6), rewards: arenaRewards, trainers: z.array(arenaTrainer).max(6),
+  // Optional preserves pre-adventure saved/publication bytes and optimistic revision semantics.
+  trial: arenaTrial.nullable().optional(),
 }).strict();
 export const arenaContent = z.object({ schemaVersion: z.literal(1), stages: z.array(arenaStage).length(13) }).strict().superRefine((content, ctx) => {
   content.stages.forEach((stage, i) => {
@@ -59,6 +71,10 @@ export const arenaContent = z.object({ schemaVersion: z.literal(1), stages: z.ar
     if (new Set(stage.trainers.map(t => t.id)).size !== stage.trainers.length) fail("Identifiants de dresseurs dupliqués.", ["trainers"]);
     if (new Set(stage.trainers.map(t => t.slot)).size !== stage.trainers.length) fail("Chaque dresseur doit avoir un emplacement distinct.", ["trainers"]);
     if (stage.trainers.some(t => t.required && !t.enabled)) fail("Un dresseur obligatoire doit être activé.", ["trainers"]);
+    if (stage.league && stage.trial) fail("La Ligue suit les cinq combats successifs, pas une épreuve d’arène.", ["trial"]);
+    if (!stage.league && stage.trial && stage.trial.puzzleId !== arenaPuzzles[stage.id]) fail("L’énigme est propre à cette arène : elle ne peut pas être remplacée par celle d’un autre site.", ["trial", "puzzleId"]);
+    if (!stage.league && stage.trial && stage.trainers.some(t => t.enabled && !t.required)) fail("Dans une arène, chaque dresseur présent doit être vaincu avant le Totem et le champion.", ["trainers"]);
+    if (!stage.league && stage.trial && !stage.trainers.some(t => t.enabled)) fail("Le parcours doit garder au moins un dresseur présent.", ["trainers"]);
   });
 });
 
@@ -92,7 +108,7 @@ export function validateArenaCatalog(content: ArenaContent, catalog: ArenaCatalo
     npcClasses: new Set(catalog.npcClasses.map(v => normalizeTrait(v.id))),
   };
   const issues: string[] = [];
-  const oldPokemon = preserved.flatMap(c => c.stages.flatMap(s => [...s.team, ...s.trainers.flatMap(t => t.team)]));
+  const oldPokemon = preserved.flatMap(c => c.stages.flatMap(s => [...s.team, ...s.trainers.flatMap(t => t.team), ...(s.trial ? [s.trial.alpha.pokemon] : [])]));
   const aspectKey = (aspects: string[]) => [...aspects].sort().join(",");
   const oldAspects = new Set(oldPokemon.map(p => `${normalizeTrait(p.species)}|${aspectKey(p.aspects)}`));
   const oldProperties = new Set(oldPokemon.filter(p => p.legacyProperties).map(p => `${normalizeTrait(p.species)}|${p.legacyProperties}`));
@@ -101,8 +117,10 @@ export function validateArenaCatalog(content: ArenaContent, catalog: ArenaCatalo
     if (value && !sets[kind].has(kind === "items" ? value : normalizeTrait(value))) issues.push(`${label} : « ${value} » n'existe plus dans le catalogue du serveur.`);
   };
   for (const stage of content.stages) {
+    if (!stage.league && !stage.trial && preserved.some(c => c.stages.some(s => s.id === stage.id && s.trial))) issues.push(`${stage.name} : le parcours reçu du serveur doit être conservé. Actualise le brouillon, puis enregistre les nouvelles épreuves avant de publier.`);
     check("items", stage.badgeItem, `${stage.name}, badge`);
-    for (const person of [{ name: stage.champion, npcClass: stage.npcClass, team: stage.team, rewards: stage.rewards }, ...stage.trainers]) {
+    const alpha = stage.trial ? [{ name: stage.trial.alpha.name, npcClass: "", team: [stage.trial.alpha.pokemon], rewards: stage.trial.alpha.rewards }] : [];
+    for (const person of [{ name: stage.champion, npcClass: stage.npcClass, team: stage.team, rewards: stage.rewards }, ...stage.trainers, ...alpha]) {
       const label = `${stage.name} · ${person.name}`;
       check("npcClasses", person.npcClass, `${label}, apparence`);
       for (const [i, pokemon] of person.team.entries()) {

@@ -98,6 +98,27 @@
 .nextCard > span { font-size: 14px; color: var(--arena-highlight); }
 .nextCard h4 { margin-top: 8px; }
 .nextCard button { margin-top: 8px; }
+.adventureRoute { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; list-style: none; margin: 0 0 28px; padding: 0; counter-reset: none; }
+.adventureRoute > li { padding: 20px; border-radius: var(--cs-radius-card); background: linear-gradient(145deg, color-mix(in srgb, var(--arena-accent) 14%, var(--arena-raised)), var(--arena-raised)); border: 1px solid var(--arena-line); }
+.adventureRoute > li > span { display: inline-grid; place-items: center; width: 36px; height: 36px; margin-bottom: 18px; border-radius: 12px; color: var(--arena-highlight); background: var(--arena-bg); font-weight: 800; }
+.adventureRoute > li:last-child { border-color: var(--arena-accent); }
+.adventureRoute p { font-size: 15px; }
+.adventureRoute button { padding: 8px 10px; font-size: 14px; }
+.trialStory { display: grid; gap: 24px; }
+.trialStory .hint { margin: 0; }
+.alphaName { margin: 24px 0; max-width: 520px; }
+.leagueAdmission { display: flex; align-items: center; gap: 24px; padding: 24px; margin-bottom: 24px; border-radius: var(--cs-radius-card); background: linear-gradient(125deg, color-mix(in srgb, var(--arena-accent) 25%, var(--arena-raised)), var(--arena-raised)); }
+.leagueAdmission > span { font-size: 44px; font-weight: 800; color: var(--arena-highlight); }
+.leagueAdmission p { margin-bottom: 0; }
+.leagueRoute { list-style: none; display: grid; gap: 12px; padding: 0 0 0 18px; margin: 0 0 24px 18px; border-left: 2px solid var(--arena-line); }
+.leagueRoute li { display: flex; align-items: center; gap: 18px; padding: 16px; border-radius: var(--cs-radius-control); background: var(--arena-raised); border: 1px solid transparent; }
+.leagueRoute li[data-selected=true] { border-color: var(--arena-highlight); }
+.leagueRoute li > span { min-width: 36px; height: 36px; border-radius: 12px; display: grid; place-items: center; background: var(--arena-soft); color: var(--arena-highlight); font-weight: 800; }
+.leagueRoute li > div:nth-child(2) { flex: 1; }
+.leagueRoute p { font-size: 14px; margin: 3px 0 0; }
+.leaguePortrait { width: 64px; height: 64px; }
+.leaguePortrait img { width: 100%; height: 100%; object-fit: contain; }
+@media (max-width: 1000px) { .adventureRoute { grid-template-columns: 1fr; } .adventureRoute > li { position: relative; padding-left: 72px; } .adventureRoute > li > span { position: absolute; left: 20px; top: 20px; } }
 .subsection { margin-top: 30px; padding-top: 26px; border-top: 1px solid var(--arena-line); }
 .inlineActions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 .roster { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-bottom: 24px; }

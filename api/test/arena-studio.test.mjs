@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { arenaContent, arenaCatalog, validateArenaCatalog } from "../dist/arena-studio-schema.js";
-import { content, catalog, trainer, exerciseArenaStudio } from "./fixtures/arena-studio.mjs";
+import { arenaContent, arenaCatalog, arenaPuzzles, validateArenaCatalog } from "../dist/arena-studio-schema.js";
+import { content, catalog, pokemon, rewards, trainer, exerciseArenaStudio } from "./fixtures/arena-studio.mjs";
 Object.assign(process.env, { NODE_ENV: "test", PUBLIC_API_URL: "https://example.test", SITE_ORIGIN: "https://example.test", DB_HOST: "127.0.0.1", DB_NAME: "unused_test", DB_USER: "unused_test", DB_PASSWORD: "unused_test", COOKIE_SECRET: "isolated-test-cookie-secret-never-production", MINECRAFT_SERVER_KEY: "isolated-test-server-secret-never-production", GAME_ADMIN_DISCORD_IDS: "111111111111111111", GAME_ADMIN_READ_DISCORD_IDS: "222222222222222222" });
 const { default: Fastify } = await import("fastify");
 const { registerArenaStudio } = await import("../dist/arena-studio.js");
@@ -9,6 +9,52 @@ const { pool } = await import("../dist/db.js");
 const writeHeaders = { "x-test-role": "111111111111111111", origin: "https://example.test" };
 const readHeaders = { "x-test-role": "222222222222222222" };
 function app() { const a = Fastify(); registerArenaStudio(a, { session: async req => req.headers["x-test-role"] ? { id: "fixture", discord_id: req.headers["x-test-role"] } : null, server: req => req.headers.authorization === "Bearer fixture-server" }); return a; }
+function adventureContent() {
+  const d = content();
+  for (const stage of d.stages.filter(s => !s.league)) {
+    stage.trainers = [trainer()];
+    stage.trial = { enabled: true, puzzleId: arenaPuzzles[stage.id], intro: "Explore le parcours, puis affronte son gardien.", hint: "Observe les indices dans le décor.", alpha: { name: "Gardien du parcours", pokemon: pokemon(), rewards: rewards() } };
+  }
+  return d;
+}
+
+test("eight fixed adventures are additive: old publications keep their exact content", () => {
+  assert.deepEqual(arenaContent.parse(content()), content());
+  const d = adventureContent();
+  assert.deepEqual(arenaContent.parse(d), d);
+  assert.deepEqual(validateArenaCatalog(d, catalog()), []);
+  assert.equal(new Set(d.stages.flatMap(s => s.trial ? [s.trial.puzzleId] : [])).size, 8);
+  assert.equal(d.stages.filter(s => s.league).every(s => !s.trial), true);
+  assert.ok(validateArenaCatalog(content(), catalog(), [d]).some(issue => issue.includes("parcours reçu")), "An upgraded adventure cannot be removed through an old-shaped publish");
+});
+test("adventures cannot disable prerequisites, change puzzle, add League Totems or unsafe data", () => {
+  const changes = [
+    d => d.stages[0].trial.enabled = false,
+    d => d.stages[0].trial.puzzleId = "tide_valves",
+    d => d.stages[0].trial.intro = "",
+    d => d.stages[0].trial.hint = "x".repeat(401),
+    d => d.stages[0].trial.alpha.name = "Injected§cName",
+    d => d.stages[0].trial.alpha.pokemon.level = 101,
+    d => d.stages[0].trial.alpha.pokemon.evs.hp = 252,
+    d => d.stages[0].trial.alpha.rewards.items[0].count = 65,
+    d => d.stages[0].trial.alpha.rewards.commands = ["op @a"],
+    d => d.stages[0].trial.alpha.team = [pokemon()],
+    d => d.stages[0].trainers = [],
+    d => d.stages[0].trainers[0].required = false,
+    d => { d.stages[0].trainers[0].enabled = false; d.stages[0].trainers[0].required = false; },
+    d => d.stages[8].trial = structuredClone(d.stages[0].trial),
+  ];
+  for (const change of changes) { const d = adventureContent(); change(d); assert.equal(arenaContent.safeParse(d).success, false, change.toString()); }
+});
+test("Totem species, forms, traits and rewards use the real server registry validation", () => {
+  for (const change of [
+    a => a.pokemon.species = "missing", a => a.pokemon.nature = "missing", a => a.pokemon.ability = "missing",
+    a => a.pokemon.moves = ["missing"], a => a.pokemon.heldItem = "minecraft:missing", a => a.pokemon.aspects = ["missing"],
+    a => a.rewards.items[0].item = "minecraft:missing", a => a.pokemon.legacyProperties = "eevee freeform=forbidden",
+  ]) { const d = adventureContent(); change(d.stages[0].trial.alpha); assert.ok(validateArenaCatalog(d, catalog()).length, change.toString()); }
+  const old = adventureContent(); old.stages[0].trial.alpha.pokemon.legacyProperties = "eevee legacy=true"; old.stages[0].trial.alpha.pokemon.aspects = ["historical_form"];
+  assert.deepEqual(validateArenaCatalog(old, catalog(), [old]), [], "Historical Totem properties remain preservable but not newly authorable");
+});
 
 test("13 canonical sites, full teams, forms and bounded rewards roundtrip", () => {
   assert.deepEqual(arenaContent.parse(content()), content());
@@ -43,7 +89,7 @@ test("immutable map/badge identities and malformed teams/rewards/trainers are re
     d => d.stages[0].rewards.items[0].item = "minecraft:air", d => d.stages[0].npcClass = "https://attacker.test",
     d => d.stages[0].trainers.push(trainer()), d => { const t = trainer(); t.id = "other"; d.stages[0].trainers.push(t); },
     d => d.stages[0].trainers[0].slot = 6, d => d.stages[0].trainers[0].enabled = false,
-    d => d.stages[0].trainers[0].id = "champion", d => d.stages[0].trainers[0].id = "_foo", d => d.stages[0].npcClass = "standard",
+    d => d.stages[0].trainers[0].id = "champion", d => d.stages[0].trainers[0].id = "alpha", d => d.stages[0].trainers[0].id = "_foo", d => d.stages[0].npcClass = "standard",
   ];
   for (const change of changes) { const d = content(); change(d); assert.equal(arenaContent.safeParse(d).success, false, change.toString()); }
 });
@@ -109,6 +155,37 @@ test("server import, draft conflict, publication audit, idempotency and ack with
   Object.assign(pool, databaseDouble());
   try { await exerciseArenaStudio(a, writeHeaders, { authorization: "Bearer fixture-server" }); }
   finally { Object.assign(pool, originals); await a.close(); }
+});
+test("adventure sync does not overwrite an old draft; explicit save and publish carry Totem changes", async () => {
+  const a = app(), originals = { execute: pool.execute, query: pool.query, getConnection: pool.getConnection };
+  Object.assign(pool, databaseDouble());
+  const route = "/api/admin/arenas/adventure", observed = adventureContent(), original = content();
+  original.stages[0].champion = "Champion déjà personnalisé";
+  const sync = (arenaConfig, appliedRevision = 0) => a.inject({ method: "POST", url: "/api/internal/arenas/sync", headers: { authorization: "Bearer fixture-server" }, payload: { serverId: "adventure", appliedRevision, error: "", observed: { arenaConfig, catalog: catalog() } } });
+  try {
+    assert.equal((await sync(original)).statusCode, 200);
+    assert.equal((await sync(observed)).statusCode, 200);
+    let response = await a.inject({ url: route, headers: writeHeaders });
+    assert.deepEqual(response.json().content, original, "New mod observations must not silently rewrite a custom draft");
+    assert.deepEqual(response.json().observed, observed);
+    const edited = structuredClone(observed); edited.stages[0].champion = original.stages[0].champion;
+    edited.stages[0].trial.hint = "Lis les symboles près de chaque rencontre.";
+    edited.stages[0].trial.alpha.pokemon.level = 42;
+    edited.stages[0].trial.alpha.rewards.cobbleCoins = 333;
+    response = await a.inject({ method: "PUT", url: route, headers: writeHeaders, payload: { baseRevision: 1, content: edited } });
+    assert.equal(response.statusCode, 200, response.body);
+    response = await a.inject({ method: "POST", url: `${route}/publish`, headers: writeHeaders, payload: { baseRevision: 2, reason: "Préparation des aventures et Totems" } });
+    assert.equal(response.statusCode, 200, response.body);
+    response = await sync(observed);
+    assert.deepEqual(response.json(), { revision: 1, content: edited });
+    response = await a.inject({ url: route, headers: writeHeaders });
+    assert.equal(response.json().appliedRevision, 0, "Publication is not an acknowledgement");
+    assert.equal((await sync(edited, 1)).statusCode, 200);
+    response = await a.inject({ url: route, headers: writeHeaders });
+    assert.equal(response.json().appliedRevision, 1); assert.equal(response.json().history.length, 1);
+    assert.equal(response.json().content.stages[0].champion, "Champion déjà personnalisé");
+    assert.equal(response.json().content.stages[0].trial.alpha.pokemon.level, 42);
+  } finally { Object.assign(pool, originals); await a.close(); }
 });
 test("unknown servers, missing catalogs and forged first acknowledgements fail closed", async () => {
   const a = app(), originals = { execute: pool.execute, query: pool.query, getConnection: pool.getConnection };

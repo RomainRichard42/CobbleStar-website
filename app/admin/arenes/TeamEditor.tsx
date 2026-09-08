@@ -15,7 +15,7 @@ export function TeamPortrait({ pokemon: p, catalog, compact = true }: { pokemon:
   const model: Pokemon = { uuid: "arena-preview", species: p.species.includes(":") ? p.species : `cobblemon:${p.species}`, name: labelFor(catalog?.species, p.species), level: p.level, shiny: p.shiny, storage: "party", data: {}, editor: { fingerprint: "", values: { gender: p.gender.toUpperCase() }, stats: {}, effectiveIvs: {}, maxHealth: 1, types: [], dexNumber: 0, form: form?.id || (p.aspects.length ? p.aspects.join("-") : "normal") } };
   return <PokemonPortrait pokemon={model} compact={compact}/>;
 }
-export function TeamEditor({ team, catalog, level, onChange }: { team: PokemonSpec[]; catalog: Catalog | null; level: number; onChange: (team: PokemonSpec[]) => void }) {
+export function TeamEditor({ team, catalog, level, onChange, single = false }: { team: PokemonSpec[]; catalog: Catalog | null; level: number; onChange: (team: PokemonSpec[]) => void; single?: boolean }) {
   const [selected, setSelected] = useState(0);
   const active = Math.max(0, Math.min(selected, team.length - 1)), p = team[active];
   const patch = (value: Partial<PokemonSpec>) => onChange(team.map((entry, i) => i === active ? { ...entry, ...value } : entry));
@@ -23,9 +23,9 @@ export function TeamEditor({ team, catalog, level, onChange }: { team: PokemonSp
   const currentForm = p ? formFor(p, catalog) : undefined;
   const evTotal = p ? total(p.evs) : 0;
   return <section className={s.teamEditor}>
-    <div className={s.sectionHeading}><div><h3>Une équipe, une identité.</h3><p>De 1 à 6 Pokémon. Clique sur un membre pour préparer son combat.</p></div><span className={s.pill}>{team.length} / 6</span></div>
+    <div className={s.sectionHeading}><div><h3>{single ? "Le gardien de cette épreuve." : "Une équipe, une identité."}</h3><p>{single ? "Un Pokémon Alpha / Totem à découvrir puis à vaincre avant le champion." : "De 1 à 6 Pokémon. Clique sur un membre pour préparer son combat."}</p></div><span className={s.pill}>{team.length} / {single ? 1 : 6}</span></div>
     <div className={s.roster} aria-label="Équipe du dresseur">{team.map((entry, i) => <button key={i} type="button" aria-pressed={active === i} onClick={() => setSelected(i)}><TeamPortrait pokemon={entry} catalog={catalog}/><span><b>{labelFor(catalog?.species, entry.species)}</b><small>Niv. {entry.level}{entry.shiny && " · Shiny"}</small></span><span className={s.teamIndex}>{i + 1}</span></button>)}
-      {team.length < 6 && <button type="button" className={s.addPokemon} disabled={!catalog?.species.length} onClick={() => { setSelected(team.length); onChange([...team, newPokemon(catalog!.species[0].id, level)]); }}><span>＋</span>Ajouter un Pokémon</button>}
+      {!single && team.length < 6 && <button type="button" className={s.addPokemon} disabled={!catalog?.species.length} onClick={() => { setSelected(team.length); onChange([...team, newPokemon(catalog!.species[0].id, level)]); }}><span>＋</span>Ajouter un Pokémon</button>}
     </div>
     {!catalog && <p className={s.notice}>Le catalogue doit être synchronisé par le serveur pour choisir ses Pokémon, talents et objets.</p>}
     {p && <div className={s.pokemonEditor}>
@@ -46,7 +46,7 @@ export function TeamEditor({ team, catalog, level, onChange }: { team: PokemonSp
         <div className={s.evBudget}><span>Budget EV <b>{evTotal} / 510</b></span><progress max={510} value={Math.min(510, evTotal)} aria-label="Budget EV utilisé"/>{evTotal > 510 && <small role="alert">Retire {evTotal - 510} EV avant d’enregistrer.</small>}</div>
         <div className={s.statGrid}>{STATS.map(([key, label]) => <div key={key}><b>{label}</b><NumberField label={`IV · ${label}`} max={31} value={p.ivs[key]} onChange={value => patch({ ivs: { ...p.ivs, [key]: value } })}/><NumberField label={`EV · ${label}`} max={252} value={p.evs[key]} onChange={value => patch({ evs: { ...p.evs, [key]: value } })}/></div>)}</div>
       </section>
-      <footer className={s.inlineActions}><button type="button" disabled={active === 0} onClick={() => { const next = [...team]; [next[active - 1], next[active]] = [next[active], next[active - 1]]; onChange(next); setSelected(active - 1); }}>← Avant</button><button type="button" disabled={active === team.length - 1} onClick={() => { const next = [...team]; [next[active + 1], next[active]] = [next[active], next[active + 1]]; onChange(next); setSelected(active + 1); }}>Après →</button><button type="button" disabled={team.length >= 6} onClick={() => { onChange([...team, structuredClone(p)]); setSelected(team.length); }}>Dupliquer ce Pokémon</button><button type="button" className={s.danger} disabled={team.length <= 1} onClick={() => { onChange(team.filter((_, i) => i !== active)); setSelected(Math.max(0, active - 1)); }}>Retirer ce Pokémon</button></footer>
+      {!single && <footer className={s.inlineActions}><button type="button" disabled={active === 0} onClick={() => { const next = [...team]; [next[active - 1], next[active]] = [next[active], next[active - 1]]; onChange(next); setSelected(active - 1); }}>← Avant</button><button type="button" disabled={active === team.length - 1} onClick={() => { const next = [...team]; [next[active + 1], next[active]] = [next[active], next[active + 1]]; onChange(next); setSelected(active + 1); }}>Après →</button><button type="button" disabled={team.length >= 6} onClick={() => { onChange([...team, structuredClone(p)]); setSelected(team.length); }}>Dupliquer ce Pokémon</button><button type="button" className={s.danger} disabled={team.length <= 1} onClick={() => { onChange(team.filter((_, i) => i !== active)); setSelected(Math.max(0, active - 1)); }}>Retirer ce Pokémon</button></footer>}
     </div>}
   </section>;
 }

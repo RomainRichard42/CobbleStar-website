@@ -77,11 +77,11 @@ try {
   await page.getByText('Badge d’arène automatique', { exact: true }).waitFor();
   await page.getByRole('button', { name: '4 Dresseurs 0', exact: true }).click();
   const slots = page.getByLabel('Emplacements prédéfinis des dresseurs', { exact: true }).getByRole('button');
-  assert.deepEqual(await slots.locator('small').allTextContents(), ['Fond gauche', 'Fond droite', 'Milieu gauche', 'Milieu droite', 'Avant gauche', 'Avant droite'], 'Diagram follows native slots 0/1=-Z by champion, 4/5=+Z by entrance');
+  assert.deepEqual(await slots.locator('small').allTextContents(), ['Rencontre 1', 'Rencontre 2', 'Rencontre 3', 'Rencontre 4', 'Rencontre 5', 'Rencontre 6'], 'Stable encounter IDs do not pretend to depict the different native buildings');
   await page.getByRole('button', { name: '＋ Ajouter un dresseur', exact: true }).click();
   await page.getByLabel('Nom du dresseur', { exact: true }).fill('Marin Camille');
   assert.equal(await page.getByLabel('Emplacement du dresseur', { exact: true }).inputValue(), '0');
-  assert.equal(await page.getByLabel('Emplacement du dresseur', { exact: true }).locator('option:checked').textContent(), 'Fond gauche');
+  assert.equal(await page.getByLabel('Emplacement du dresseur', { exact: true }).locator('option:checked').textContent(), 'Rencontre 1');
   await slots.nth(0).getByText('Marin Camille', { exact: true }).waitFor();
   await page.getByLabel('Victoire obligatoire avant le champion', { exact: true }).check();
   await page.getByLabel('Présent dans l’arène', { exact: true }).uncheck();
@@ -91,7 +91,7 @@ try {
   await page.getByRole('button', { name: '＋ Ajouter un dresseur', exact: true }).click();
   await page.getByLabel('Nom du dresseur', { exact: true }).fill('Exploratrice Lina');
   assert.equal(await page.getByLabel('Emplacement du dresseur', { exact: true }).inputValue(), '1');
-  assert.equal(await page.getByLabel('Emplacement du dresseur', { exact: true }).locator('option:checked').textContent(), 'Fond droite');
+  assert.equal(await page.getByLabel('Emplacement du dresseur', { exact: true }).locator('option:checked').textContent(), 'Rencontre 2');
   await slots.nth(1).getByText('Exploratrice Lina', { exact: true }).waitFor();
   await page.getByRole('button', { name: 'Ses récompenses', exact: true }).click();
   await page.getByLabel('CobbleCoins offerts', { exact: true }).fill('100');

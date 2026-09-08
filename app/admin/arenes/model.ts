@@ -5,20 +5,32 @@ export type Stats = Record<(typeof STATS)[number][0], number>;
 export type PokemonSpec = { species: string; level: number; shiny: boolean; nature: string; ability: string; moves: string[]; heldItem: string; gender: "random" | "male" | "female" | "genderless"; ivs: Stats; evs: Stats; aspects: string[]; legacyProperties?: string };
 export type RewardSpec = { items: { item: string; count: number }[]; experiencePoints: number; cobbleCoins: number };
 export type TrainerSpec = { id: string; name: string; enabled: boolean; required: boolean; slot: number; npcClass: string; skill: number; team: PokemonSpec[]; rewards: RewardSpec };
-export type ArenaStage = { id: string; index: number; name: string; theme: string; champion: string; level: number; x: number; z: number; league: boolean; badgeItem: string; npcClass: string; skill: number; team: PokemonSpec[]; rewards: RewardSpec; trainers: TrainerSpec[] };
+export type TrialSpec = { enabled: true; puzzleId: string; intro: string; hint: string; alpha: { name: string; pokemon: PokemonSpec; rewards: RewardSpec } };
+export type ArenaStage = { id: string; index: number; name: string; theme: string; champion: string; level: number; x: number; z: number; league: boolean; badgeItem: string; npcClass: string; skill: number; team: PokemonSpec[]; rewards: RewardSpec; trainers: TrainerSpec[]; trial?: TrialSpec | null };
 export type ArenaContent = { schemaVersion: 1; stages: ArenaStage[] };
 export type ArenaRuntime = { pendingRewards: number; reviewRewards: number; activeBattles: number; worldReady: boolean };
 export type ArenaState = { content: ArenaContent; observed: ArenaContent | null; catalog: Catalog | null; runtime?: ArenaRuntime | null; draftRevision: number; publishedRevision: number; appliedRevision: number; hasUnpublishedChanges?: boolean; lastSeenAt: string | null; error: string; canWrite: boolean; history: { revision: number; actor: string; reason: string; createdAt: string }[] };
 export type Server = { serverId: string };
 export const THEME: Record<string, string> = { bug: "Insecte", grass: "Plante", water: "Eau", ice: "Glace", rock: "Roche", fire: "Feu", flying: "Vol", psychic: "Psy", league: "Ligue" };
-// The player enters from +Z facing the champion at -Z: slots 0/1 are at the back.
-export const SLOT_LABELS = ["Fond gauche", "Fond droite", "Milieu gauche", "Milieu droite", "Avant gauche", "Avant droite"];
+// Stable encounter IDs; positions are different in each native adventure, not one shared floor plan.
+export const SLOT_LABELS = ["Rencontre 1", "Rencontre 2", "Rencontre 3", "Rencontre 4", "Rencontre 5", "Rencontre 6"];
 export const total = (values: Stats) => Object.values(values).reduce((a, b) => a + b, 0);
 export const normalized = (id: string) => id.includes(":") ? id : `cobblemon:${id}`;
 export const labelFor = (choices: Choice[] | undefined, id: string) => choices?.find(c => normalized(c.id) === normalized(id))?.label ?? id.replace(/^\w+:/, "").replaceAll("_", " ");
 export const blankRewards = (): RewardSpec => ({ items: [], experiencePoints: 0, cobbleCoins: 0 });
 export const allStats = (n: number): Stats => ({ hp: n, atk: n, def: n, spa: n, spd: n, spe: n });
 export const newPokemon = (species: string, level: number): PokemonSpec => ({ species, level, shiny: false, nature: "", ability: "", moves: [], heldItem: "", gender: "random", ivs: allStats(0), evs: allStats(0), aspects: [] });
+/** Hydrate only missing new settings from real server data. Never replace a saved champion/team/reward. */
+export function hydrateAdventure(content: ArenaContent, observed: ArenaContent | null): ArenaContent {
+  return { ...content, stages: content.stages.map(stage => {
+    if (stage.league) return stage;
+    const serverStage = observed?.stages.find(value => value.id === stage.id);
+    const trial = stage.trial ?? serverStage?.trial;
+    if (!trial) return stage;
+    const trainers = !stage.trial && !stage.trainers.length ? serverStage?.trainers ?? stage.trainers : stage.trainers;
+    return { ...stage, trial: structuredClone(trial), trainers: trainers.map(t => t.enabled ? { ...t, required: true } : t) };
+  }) };
+}
 export function validate(content: ArenaContent, catalog: Catalog | null): string[] {
   const errors: string[] = [];
   const validChoice = (choices: Choice[] | undefined, value: string) => !value || !choices?.length || choices.some(c => normalized(c.id) === normalized(value));
@@ -42,6 +54,12 @@ export function validate(content: ArenaContent, catalog: Catalog | null): string
     if (!stage.champion.trim()) errors.push(`${stage.name} : nom du champion requis.`);
     if (!validChoice(catalog?.npcClasses, stage.npcClass) || !Number.isInteger(stage.skill) || stage.skill < 0 || stage.skill > 100) errors.push(`${stage.name} : vérifie le modèle et la stratégie du champion.`);
     teamErrors(stage.team, stage.name); rewardErrors(stage.rewards, stage.name);
+    if (stage.trial) {
+      const trial = stage.trial;
+      if (!stage.trainers.some(t => t.enabled)) errors.push(`${stage.name} : garde au moins un dresseur présent dans l’épreuve.`);
+      if (!trial.alpha.name.trim() || !trial.intro.trim() || trial.intro.length > 600 || !trial.hint.trim() || trial.hint.length > 400) errors.push(`${stage.name} : complète le nom du Totem, la présentation et l’indice du parcours.`);
+      teamErrors([trial.alpha.pokemon], `${stage.name}, Totem`); rewardErrors(trial.alpha.rewards, `${stage.name}, Totem`);
+    }
     if (stage.trainers.length > 6 || new Set(stage.trainers.map(t => t.slot)).size !== stage.trainers.length) errors.push(`${stage.name} : six emplacements distincts maximum pour les dresseurs.`);
     stage.trainers.forEach(t => {
       if (!t.name.trim()) errors.push(`${stage.name} : nom du dresseur requis.`);
