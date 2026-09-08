@@ -42,7 +42,22 @@ try {
   await mkdir("ui-review-arena-studio", { recursive: true }); await page.screenshot({ path: "ui-review-arena-studio/pokepaste-preview-desktop.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true, "No mobile horizontal overflow");
-  await page.screenshot({ path: "ui-review-arena-studio/pokepaste-preview-mobile.png", fullPage: true });
+  const member = page.getByRole("region", { name: "Import Poképaste", exact: true }).locator("article");
+  const layout = await member.evaluate(el => {
+    const card = el.getBoundingClientRect(), header = el.querySelector("header").getBoundingClientRect(), portrait = el.querySelector("header > span").getBoundingClientRect(), attacks = el.querySelector("p").getBoundingClientRect(), table = el.querySelector("table").getBoundingClientRect();
+    return { cardHeight: card.height, cardWidth: card.width, headerHeight: header.height, portraitHeight: portrait.height, statsGap: table.top - attacks.bottom, statsHeight: table.height };
+  });
+  assert.ok(layout.cardHeight >= 400 && layout.cardHeight <= 650, `Mobile preview card must stay compact: ${JSON.stringify(layout)}`);
+  assert.ok(layout.headerHeight <= 100 && layout.portraitHeight <= 80, `Portrait must not stretch the card: ${JSON.stringify(layout)}`);
+  assert.ok(layout.statsGap >= 0 && layout.statsGap <= 24 && layout.statsHeight < 300, `Stats must follow attacks without empty space: ${JSON.stringify(layout)}`);
+  // Chromium full-page capture after responsive resize omitted off-screen text despite correct DOM bounds.
+  // Capture the actual painted viewport after scrolling, not an altered UI or a misleading blank full page.
+  await page.getByText("Ton équipe est déjà sur Poképaste ?", { exact: true }).scrollIntoViewIfNeeded();
+  await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
+  await page.screenshot({ path: "ui-review-arena-studio/pokepaste-mobile-entry.png" });
+  await member.scrollIntoViewIfNeeded();
+  await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
+  await page.screenshot({ path: "ui-review-arena-studio/pokepaste-preview-mobile.png" });
   await apply.click(); assert.equal(await page.getByLabel("Niveau du Pokémon", { exact: true }).inputValue(), "68");
   assert.equal(await page.getByLabel("IV · Att. spéciale", { exact: true }).inputValue(), "0"); assert.equal(saves, 0); assert.equal(publications, 0);
   await page.getByRole("button", { name: "↶ Annuler", exact: true }).click(); assert.equal(await page.getByLabel("Niveau du Pokémon", { exact: true }).inputValue(), "35");
