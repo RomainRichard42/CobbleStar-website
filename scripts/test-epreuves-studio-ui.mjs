@@ -31,6 +31,8 @@ try {
  });
  await page.goto(`http://127.0.0.1:${server.address().port}/admin/arenes/`,{waitUntil:"networkidle"});
  await page.getByText("Migration préparée dans ton brouillon",{exact:false}).waitFor();
+ await page.getByText(/Préparation nécessaire —/).waitFor();
+ assert.equal(await page.getByText(/tous les Pokémon doivent être de niveau 50–55/).count(),2,"Actual level guard diagnosed for Captain and first saved trainer, without modifying them");
  assert.equal(await page.getByLabel("Nom du Capitaine",{exact:true}).inputValue(),"Capitaine conservé");
  assert.equal(saves,0,"Observations cannot autosave migration");
  await page.getByRole("button",{name:"2 Équipe",exact:true}).click();

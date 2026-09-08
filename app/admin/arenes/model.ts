@@ -34,6 +34,24 @@ export function signaturePokemon(stage: ArenaStage): PokemonSpec | undefined {
   const matches = stage.team.filter(p => p.memberId === stage.signaturePokemonId);
   return matches.length === 1 ? matches[0] : undefined;
 }
+/** Visible preparation diagnostics only; incomplete drafts can still be saved and published. */
+export function launchIssues(stage: ArenaStage): string[] {
+  const range = stage.league ? [100, 100] : stage.id === "bug" ? [50, 55] : stage.id === "grass" ? [60, 65] : stage.id === "water" ? [70, 75] : stage.id === "ice" ? [80, 85] : [90, 95];
+  const issues: string[] = [], expected = range[0] === range[1] ? String(range[0]) : range.join("–");
+  const checkTeam = (team: PokemonSpec[], name: string) => {
+    if (!team.length) issues.push(`${name} : équipe à composer.`);
+    else if (team.some(p => p.level < range[0] || p.level > range[1])) issues.push(`${name} : tous les Pokémon doivent être de niveau ${expected}. Aucun niveau n’a été modifié automatiquement.`);
+  };
+  if (!stage.champion.trim()) issues.push(stage.league ? "Renseigne le nom du membre du Conseil ou du Maître." : "Renseigne le nom du Capitaine.");
+  checkTeam(stage.team, stage.league ? "Rencontre de Ligue" : "Capitaine");
+  if (!stage.league) {
+    if (!signaturePokemon(stage)) issues.push("Désigne explicitement le Pokémon principal du Capitaine pour créer le Totem.");
+    const trainers = stage.trainers.filter(t => t.enabled);
+    if (trainers.length !== 2) issues.push("Exactement deux dresseurs doivent être présents dans l’épreuve.");
+    trainers.forEach(t => checkTeam(t.team, t.name));
+  }
+  return issues;
+}
 /** Hydrate only missing new settings from real server data. Never replace a saved champion/team/reward. */
 export function hydrateAdventure(content: ArenaContent, observed: ArenaContent | null): ArenaContent {
   if (content.schemaVersion === 1 && observed?.schemaVersion === 2) {
