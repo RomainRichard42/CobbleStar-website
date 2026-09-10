@@ -53,11 +53,56 @@ test('draft/save/publish/conflict/server-ack contract with DB double (not a MySQ
     r=await a.inject({method:'POST',url:'/api/internal/quests/sync',headers:{authorization:'Bearer fixture-server'},payload:{serverId:'main',appliedRevision:0,error:'',observed:content(),placements:[]}}); assert.equal(r.statusCode,200); assert.deepEqual(r.json().content,studioContent.parse(content()));
     row.observed_json=null;
     r=await a.inject({method:'POST',url:'/api/admin/quests/main/publish',headers,payload:{baseRevision:1,reason:'Ancien moteur'}}); assert.equal(r.statusCode,409); assert.equal(r.json().error,'STORY_ENGINE_REQUIRED');
+    assert.match(r.json().message,/catalogue/i); assert.doesNotMatch(r.json().message,/Mets à jour le mod/);
     const bad=content(); bad.npcs[0].dialogueGraph.start='nonexistent';
     r=await a.inject({method:'PUT',url:'/api/admin/quests/main',headers,payload:{baseRevision:1,content:bad}}); assert.equal(r.statusCode,200,'Incomplete work can be saved as a draft');
     row.observed_json={catalog};
     r=await a.inject({method:'POST',url:'/api/admin/quests/main/publish',headers,payload:{baseRevision:2,reason:'Dialogue incomplet'}}); assert.equal(r.statusCode,400); assert.match(r.json().message,/dialogue/);
   } finally {pool.execute=origExec;pool.getConnection=origConnection;await a.close();}
+});
+
+test('large modpack catalogue exceeds 2 MiB, sync accepts it intact; heartbeat preserves catalogue and draft', async () => {
+  const a=app(), original=pool.execute;
+  const catalog={protocol:2,items:Array.from({length:12000},(_,i)=>({id:`test:item_${i}`,label:'é'.repeat(100)})),blocks:[],entities:[],species:[],biomes:[],dimensions:[]};
+  const body={serverId:'main',appliedRevision:0,error:'',observed:{...content(),catalog},placements:[]};
+  assert.ok(Buffer.byteLength(JSON.stringify(body))>2*1024*1024);
+  const draft=JSON.stringify(content()); let observed={}, writes=0;
+  pool.execute=async(sql,args)=>{
+    if(sql.startsWith('INSERT INTO quest_studio')) {
+      assert.match(sql,/JSON_MERGE_PATCH/); assert.doesNotMatch(sql,/draft_json/);
+      observed={...observed,...JSON.parse(args[1])}; writes++;
+      return [{affectedRows:1}];
+    }
+    return [[{published_revision:0,published_json:null}]];
+  };
+  const headers={authorization:'Bearer fixture-server'};
+  try {
+    let r=await a.inject({method:'POST',url:'/api/internal/quests/sync',headers,payload:body});
+    assert.equal(r.statusCode,200,r.body); assert.deepEqual(observed.catalog,catalog);
+    const heartbeat=structuredClone(body); delete heartbeat.observed.catalog; heartbeat.error='API HTTP 413';
+    r=await a.inject({method:'POST',url:'/api/internal/quests/sync',headers,payload:heartbeat});
+    assert.equal(r.statusCode,200); assert.deepEqual(observed.catalog,catalog); assert.equal(draft,JSON.stringify(content()));
+    const invalid=structuredClone(heartbeat); invalid.observed.catalog={protocol:2,items:[]};
+    r=await a.inject({method:'POST',url:'/api/internal/quests/sync',headers,payload:invalid});
+    assert.equal(r.statusCode,400); assert.equal(r.json().error,'INVALID_QUEST_SYNC'); assert.equal(writes,2);
+    r=await a.inject({method:'POST',url:'/api/internal/quests/sync',headers:{...headers,'content-type':'application/json'},payload:JSON.stringify({padding:'x'.repeat(16*1024*1024)})});
+    assert.equal(r.statusCode,413); assert.equal(writes,2);
+    r=await a.inject({method:'PUT',url:'/api/admin/quests/main',headers:{'x-test-role':'111111111111111111',origin:'https://example.test'},payload:body});
+    assert.equal(r.statusCode,413,'Draft input remains bounded at 2 MiB');
+  } finally {pool.execute=original;await a.close();}
+});
+
+test('quest freshness uses the UTC database timestamp, not a host-timezone Date conversion', async () => {
+  const a=app(), original=pool.execute, iso='2026-09-10T15:30:00.123Z';
+  pool.execute=async sql=>{
+    if(sql.startsWith('SELECT revision')) return [[]];
+    assert.match(sql,/DATE_FORMAT\(last_seen_at/); assert.match(sql,/AS last_seen_iso/);
+    return [[{draft_json:content(),observed_json:content(),draft_revision:1,published_revision:0,applied_revision:0,last_seen_iso:iso,last_seen_at:new Date('2026-09-10T13:30:00.123Z'),sync_error:''}]];
+  };
+  try {
+    const response=await a.inject({url:'/api/admin/quests/main',headers:{'x-test-role':'111111111111111111'}});
+    assert.equal(response.statusCode,200,response.body); assert.equal(response.json().lastSeenAt,iso);
+  } finally {pool.execute=original;await a.close();}
 });
 test('scenario choices reject retired rotations, unsupported events, missing actors and invalid dialogue conditions', () => {
   for (const mutate of [d=>d.questConfig.quests[0].kind='DAILY',d=>d.questConfig.quests[0].kind='WEEKLY',d=>d.questConfig.quests[0].kind='MONTHLY',d=>d.questConfig.quests[0].objectives[0].source='imaginary_event',d=>d.questConfig.quests[0].objectives[0].source='story_npc_talk',d=>d.questConfig.quests[0].objectives[0].filters={type:'fire'},d=>d.npcs[0].dialogueGraph.nodes[0].when={questId:'missing',status:'ACTIVE'},d=>d.npcs[0].dialogueGraph.nodes[0].when={questId:'first_capture',status:'ACTIVE',objectiveIndex:12}]) {const d=content();mutate(d);assert.equal(studioContent.safeParse(d).success,false);}

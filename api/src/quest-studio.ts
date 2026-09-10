@@ -13,6 +13,11 @@ const serverId = z.string().regex(/^[a-zA-Z0-9_-]{1,48}$/);
 const params = z.object({ serverId });
 const decode = (v: unknown) => typeof v === "string" ? JSON.parse(v) : v;
 const options = { bodyLimit: 2 * 1024 * 1024, config: { rateLimit: { max: 60, timeWindow: "1 minute" } } };
+// The installed modpack registry is much larger than a draft. Keep drafts at
+// 2 MiB and raise only the authenticated server catalogue transport to 16 MiB.
+const syncOptions = { ...options, bodyLimit: 16 * 1024 * 1024 };
+// last_seen_at is written with UTC_TIMESTAMP, regardless of the Node host TZ.
+const lastSeenSql = "CONCAT(LEFT(DATE_FORMAT(last_seen_at,'%Y-%m-%dT%H:%i:%s.%f'),23),'Z')";
 const saveBody = z.object({ baseRevision: z.number().int().nonnegative(), content: studioDraft }).strict();
 const publishBody = z.object({ baseRevision: z.number().int().nonnegative(), reason: z.string().trim().min(5).max(300) }).strict();
 const choice = z.object({ id: z.string().max(180), label: z.string().max(240) });
@@ -37,20 +42,20 @@ export function registerQuestStudio(app: FastifyInstance, auth: Auth) {
   }
   app.get("/api/admin/quests", options, async (req, reply) => {
     const actor = await authorize(req, reply); if (!actor) return;
-    const [servers] = await pool.query<RowDataPacket[]>("SELECT server_id AS serverId,published_revision AS publishedRevision,applied_revision AS appliedRevision,last_seen_at AS lastSeenAt,sync_error AS error FROM quest_studio ORDER BY server_id");
+    const [servers] = await pool.query<RowDataPacket[]>(`SELECT server_id AS serverId,published_revision AS publishedRevision,applied_revision AS appliedRevision,${lastSeenSql} AS lastSeenAt,sync_error AS error FROM quest_studio ORDER BY server_id`);
     return { servers, canWrite: canWriteGame(actor) };
   });
   app.get("/api/admin/quests/:serverId", options, async (req, reply) => {
     const actor = await authorize(req, reply); if (!actor) return;
     const { serverId: key } = params.parse(req.params);
-    const [rows] = await pool.execute<RowDataPacket[]>("SELECT * FROM quest_studio WHERE server_id=?", [key]);
+    const [rows] = await pool.execute<RowDataPacket[]>(`SELECT *,${lastSeenSql} AS last_seen_iso FROM quest_studio WHERE server_id=?`, [key]);
     if (!rows[0]) return reply.code(404).send({ error: "SERVER_NOT_OBSERVED" });
     const row = rows[0];
     const [history] = await pool.execute<RowDataPacket[]>("SELECT revision,actor_discord_id AS actor,reason,created_at AS createdAt FROM quest_publications WHERE server_id=? ORDER BY revision DESC LIMIT 20", [key]);
     const observed = decode(row.observed_json);
     return { content: narrativeOnly(row.draft_json), observed: observed ? narrativeOnly(observed) : null, catalog: observed?.catalog ?? null, placements: decode(row.placements_json) ?? [],
       draftRevision: Number(row.draft_revision), publishedRevision: Number(row.published_revision), appliedRevision: Number(row.applied_revision),
-      lastSeenAt: row.last_seen_at, error: row.sync_error, history, canWrite: canWriteGame(actor) };
+      lastSeenAt: row.last_seen_iso ?? null, error: row.sync_error, history, canWrite: canWriteGame(actor) };
   });
   app.put("/api/admin/quests/:serverId", options, async (req, reply) => {
     if (!await authorize(req, reply, true)) return;
@@ -100,7 +105,7 @@ export function registerQuestStudio(app: FastifyInstance, auth: Auth) {
       await c.execute("UPDATE quest_studio SET published_json=?,published_revision=? WHERE server_id=?", [content, next, key]);
       return next;
     });
-    if (revision === -1) return reply.code(409).send({ error: "STORY_ENGINE_REQUIRED", message: "Mets à jour le mod serveur pour publier les scénarios. Le brouillon reste enregistré." });
+    if (revision === -1) return reply.code(409).send({ error: "STORY_ENGINE_REQUIRED", message: "Le catalogue des scénarios du serveur est absent ou incompatible. Vérifie la synchronisation Quest Studio dans le journal serveur et la version de l’API. Le brouillon reste enregistré." });
     if (revision === -2) return reply.code(400).send({ error: "STORY_INCOMPLETE", message: validationMessage });
     if (revision === null) return reply.code(409).send({ error: "DRAFT_CONFLICT" });
     return { publishedRevision: revision };
@@ -112,13 +117,21 @@ export function registerQuestStudio(app: FastifyInstance, auth: Auth) {
     if (!rows[0]) return reply.code(404).send({ error: "REVISION_NOT_FOUND" });
     return { content: narrativeOnly(rows[0].content_json) };
   });
-  app.post("/api/internal/quests/sync", options, async (req, reply) => {
+  app.post("/api/internal/quests/sync", { ...syncOptions, onRequest: async (req: FastifyRequest, reply: FastifyReply) => {
+    if (!auth.server(req)) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  } }, async (req, reply) => {
     reply.header("Cache-Control", "no-store");
     if (!auth.server(req)) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
-    const input = z.object({ serverId, appliedRevision: z.number().int().nonnegative(), error: z.string().max(500),
+    const parsed = z.object({ serverId, appliedRevision: z.number().int().nonnegative(), error: z.string().max(500),
       observed: z.object({ questConfig: z.record(z.string(), z.unknown()), npcs: z.array(z.unknown()).max(250), catalog: catalogSchema.optional() }),
       placements: z.array(z.object({ key: z.string().max(160), name: z.string().max(64), templateId: z.string().max(48) })).max(2000),
-    }).strict().parse(req.body);
+    }).strict().safeParse(req.body);
+    if (!parsed.success) {
+      // Paths/codes only: no catalogue, dialogue, request headers or server key.
+      req.log.warn({ issues: parsed.error.issues.slice(0, 8).map(i => ({ path: i.path.join('.'), code: i.code })) }, 'Quest Studio sync schema rejected');
+      return reply.code(400).send({ error: "INVALID_QUEST_SYNC", message: "Catalogue ou PNJ non conformes au schéma Quest Studio." });
+    }
+    const input = parsed.data;
     await pool.execute(`INSERT INTO quest_studio(server_id,observed_json,placements_json,applied_revision,sync_error,last_seen_at) VALUES(?,?,?,?,?,UTC_TIMESTAMP(3))
       ON DUPLICATE KEY UPDATE observed_json=JSON_MERGE_PATCH(COALESCE(observed_json,JSON_OBJECT()),VALUES(observed_json)),placements_json=VALUES(placements_json),applied_revision=VALUES(applied_revision),sync_error=VALUES(sync_error),last_seen_at=UTC_TIMESTAMP(3)`,
     [input.serverId, JSON.stringify(input.observed), JSON.stringify(input.placements), input.appliedRevision, input.error]);
