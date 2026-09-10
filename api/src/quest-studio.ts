@@ -6,6 +6,7 @@ import { config } from "./config.js";
 import { canReadGame, canWriteGame } from "./game-admin.js";
 import { studioContent, studioDraft, emptyStudio } from "./quest-studio-schema.js";
 import { storyEvents } from "./quest-events.js";
+import { createQuestUploadReceiver } from "./quest-sync-upload.js";
 
 type Actor = { id: string; discord_id: string | null };
 type Auth = { session: (req: FastifyRequest) => Promise<Actor | null>; server: (req: FastifyRequest) => boolean };
@@ -32,6 +33,7 @@ function narrativeOnly(value: unknown) {
 }
 
 export function registerQuestStudio(app: FastifyInstance, auth: Auth) {
+  const receiveUpload = createQuestUploadReceiver();
   async function authorize(req: FastifyRequest, reply: FastifyReply, write = false) {
     reply.header("Cache-Control", "no-store");
     const actor = await auth.session(req);
@@ -119,13 +121,24 @@ export function registerQuestStudio(app: FastifyInstance, auth: Auth) {
   });
   app.post("/api/internal/quests/sync", { ...syncOptions, onRequest: async (req: FastifyRequest, reply: FastifyReply) => {
     if (!auth.server(req)) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
-  } }, async (req, reply) => {
+  } }, async (req, reply) => sync(req, reply, req.body));
+  app.post("/api/internal/quests/sync-chunk", {
+    bodyLimit: 96 * 1024, config: { rateLimit: { max: 1800, timeWindow: "1 minute" } },
+    onRequest: async (req: FastifyRequest, reply: FastifyReply) => {
+      if (!auth.server(req)) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+    },
+  }, async (req, reply) => {
+    reply.header("Cache-Control", "no-store");
+    const result = await receiveUpload(req.body);
+    return result.complete ? sync(req, reply, result.body) : result;
+  });
+  async function sync(req: FastifyRequest, reply: FastifyReply, body: unknown) {
     reply.header("Cache-Control", "no-store");
     if (!auth.server(req)) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
     const parsed = z.object({ serverId, appliedRevision: z.number().int().nonnegative(), error: z.string().max(500),
       observed: z.object({ questConfig: z.record(z.string(), z.unknown()), npcs: z.array(z.unknown()).max(250), catalog: catalogSchema.optional() }),
       placements: z.array(z.object({ key: z.string().max(160), name: z.string().max(64), templateId: z.string().max(48) })).max(2000),
-    }).strict().safeParse(req.body);
+    }).strict().safeParse(body);
     if (!parsed.success) {
       // Paths/codes only: no catalogue, dialogue, request headers or server key.
       req.log.warn({ issues: parsed.error.issues.slice(0, 8).map(i => ({ path: i.path.join('.'), code: i.code })) }, 'Quest Studio sync schema rejected');
@@ -137,5 +150,5 @@ export function registerQuestStudio(app: FastifyInstance, auth: Auth) {
     [input.serverId, JSON.stringify(input.observed), JSON.stringify(input.placements), input.appliedRevision, input.error]);
     const [rows] = await pool.execute<RowDataPacket[]>("SELECT published_revision,published_json FROM quest_studio WHERE server_id=?", [input.serverId]);
     return { revision: Number(rows[0]!.published_revision), content: decode(rows[0]!.published_json) };
-  });
+  }
 }

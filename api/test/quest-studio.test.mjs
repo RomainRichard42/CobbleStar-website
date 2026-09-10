@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { gzipSync } from 'node:zlib';
+import { createHash, randomUUID } from 'node:crypto';
 import { studioContent, emptyStudio, rewardCommand } from '../dist/quest-studio-schema.js';
 Object.assign(process.env, { NODE_ENV:'test', PUBLIC_API_URL:'https://example.test', SITE_ORIGIN:'https://example.test', DB_HOST:'127.0.0.1', DB_NAME:'unused_test', DB_USER:'unused_test', DB_PASSWORD:'unused_test', COOKIE_SECRET:'isolated-test-cookie-secret-never-production', MINECRAFT_SERVER_KEY:'isolated-test-server-secret-never-production', GAME_ADMIN_DISCORD_IDS:'111111111111111111', GAME_ADMIN_READ_DISCORD_IDS:'222222222222222222' });
 const { default: Fastify } = await import('fastify');
@@ -102,6 +104,25 @@ test('quest freshness uses the UTC database timestamp, not a host-timezone Date 
   try {
     const response=await a.inject({url:'/api/admin/quests/main',headers:{'x-test-role':'111111111111111111'}});
     assert.equal(response.statusCode,200,response.body); assert.equal(response.json().lastSeenAt,iso);
+  } finally {pool.execute=original;await a.close();}
+});
+test('chunk route authenticates and writes the complete validated catalogue exactly once',async()=>{
+  const a=app(), original=pool.execute;
+  const payload={serverId:'main',appliedRevision:0,error:'',observed:{...content(),catalog:{protocol:2,items:[{id:'cobblemon:poke_ball',label:'Poké Ball'}],blocks:[],entities:[],species:[],biomes:[],dimensions:[]}},placements:[]};
+  const gzip=gzipSync(JSON.stringify(payload)), size=Math.ceil(gzip.length/3), count=Math.ceil(gzip.length/size);
+  const digest=createHash('sha256').update(gzip).digest('hex'),uploadId=randomUUID(); let writes=0;
+  pool.execute=async(sql,args)=>{
+    if(sql.startsWith('INSERT')) { writes++; assert.deepEqual(JSON.parse(args[1]),payload.observed); return [{affectedRows:1}]; }
+    return [[{published_revision:0,published_json:null}]];
+  };
+  try {
+    assert.equal((await a.inject({method:'POST',url:'/api/internal/quests/sync-chunk',payload:{}})).statusCode,401);
+    for(let index=0;index<count;index++) {
+      const response=await a.inject({method:'POST',url:'/api/internal/quests/sync-chunk',headers:{authorization:'Bearer fixture-server'},payload:{serverId:'main',uploadId,digest,index,count,data:gzip.subarray(index*size,(index+1)*size).toString('base64')}});
+      assert.equal(response.statusCode,200,response.body);
+      if(index<count-1) { assert.equal(response.json().accepted,true); assert.equal(writes,0); }
+      else { assert.equal(response.json().revision,0); assert.equal(writes,1); }
+    }
   } finally {pool.execute=original;await a.close();}
 });
 test('scenario choices reject retired rotations, unsupported events, missing actors and invalid dialogue conditions', () => {
