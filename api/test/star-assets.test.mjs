@@ -17,6 +17,22 @@ function unpack(zip){let at=0;const files=new Map();while(zip.readUInt32LE(at)==
 test('Deterministic pack preserves previous species and only adds Star resolver',()=>{const a=fixture(),b={...fixture(),species:'eevee'},cat=[native,{...native,species:'eevee',poser:'cobblemon:eevee'}];const zip=buildStarPack([a,b],cat);assert.deepEqual(zip,buildStarPack([b,a],cat));const files=unpack(zip);assert.equal(files.size,9);assert.ok(files.has('licenses/Cobblemon.txt'));assert.equal(JSON.parse(files.get('pack.mcmeta')).pack.pack_format,34);for(const id of ['dragonite','eevee']){const r=JSON.parse(files.get(`assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_${id}.json`));assert.deepEqual(r.variations[0].aspects,['cobblestar-star']);assert.equal(r.variations[0].poser,'cobblemon:'+id);assert.equal(r.order,10000);}});
 test('Optional emissive texture becomes a dedicated luminous layer',()=>{const files=unpack(buildStarPack([{...fixture(),emissive:texture}],[native]));const r=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_dragonite.json'));assert.equal(r.variations[0].layers[0].emissive,true);assert.ok(files.has('assets/cobblestar_planets/textures/pokemon/star/star_dragonite_glow.png'));});
 
+test('Charmander Star replaces native flame by four blue animated frames without overriding normal assets',()=>{
+ const asset={...fixture(),species:'charmander',emissive:texture};
+ const files=unpack(buildStarPack([asset],[{...native,species:'charmander',poser:'cobblemon:charmander'}]));
+ const r=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_charmander.json'));
+ assert.deepEqual(r.variations[0].aspects,['cobblestar-star']);
+ const flame=r.variations[0].layers.filter(l=>l.name==='flame');assert.equal(flame.length,1);
+ assert.equal(flame[0].emissive,true);assert.equal(flame[0].translucent,true);
+ assert.equal(flame[0].texture.fps,10);assert.equal(flame[0].texture.loop,true);
+ assert.equal(flame[0].texture.frames.length,4);
+ const frames=flame[0].texture.frames.map(path=>files.get('assets/'+path.replace(':','/')));
+ assert.ok(frames.every(f=>f&&f.readUInt32BE(16)===64&&f.readUInt32BE(20)===64));
+ assert.equal(new Set(frames.map(f=>f.toString('base64'))).size,4);
+ assert.ok([...files.keys()].every(path=>!path.startsWith('assets/cobblemon/')));
+ assert.ok(r.variations[0].layers.some(l=>l.name==='star_glow'));
+});
+
 test('Shipped Dragonite Star preset is importable with native animations and emissive marks',()=>{
  const file=name=>readFileSync(new URL(`../../public/downloads/pokemon-star/dragonite/${name}`,import.meta.url));
  const model=JSON.parse(file('dragonite.geo.json')),geometry=model['minecraft:geometry'][0];

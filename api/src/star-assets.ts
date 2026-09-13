@@ -65,6 +65,18 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[]) {
   files.set(root+`textures/pokemon/star/${id}.png`,Buffer.from(asset.texture,"base64"));
   const layers=[];
   if(asset.emissive){files.set(root+`textures/pokemon/star/${id}_glow.png`,Buffer.from(asset.emissive,"base64"));layers.push({name:"star_glow",texture:`cobblestar_planets:textures/pokemon/star/${id}_glow.png`,emissive:true});}
+  if(asset.species==="charmander"){
+   // Cobblemon merges layers by name: replace "flame", not an additional orange+blue overlay.
+   // Star resolver only; normal and shiny Charmander keep their native animation.
+   const frames=[];
+   for(let frame=1;frame<=4;frame++){
+    const bytes=readFileSync(new URL(`../star-layers/charmander/flame${frame}.png`,import.meta.url));
+    png(bytes.toString("base64"),64,64);
+    const path=`textures/pokemon/star/${id}_flame${frame}.png`;
+    files.set(root+path,bytes);frames.push(`cobblestar_planets:${path}`);
+   }
+   layers.push({name:"flame",texture:{frames,fps:10,loop:true},emissive:true,translucent:true});
+  }
   files.set(root+`bedrock/pokemon/resolvers/star/${id}.json`,Buffer.from(JSON.stringify({species:"cobblemon:"+asset.species,order:10000,variations:[{aspects:["cobblestar-star"],poser:native.poser,model:`cobblestar_planets:${id}.geo`,texture:`cobblestar_planets:textures/pokemon/star/${id}.png`,layers}]})));
  }
  return zipAssets(files);
