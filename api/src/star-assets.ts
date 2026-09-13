@@ -1,6 +1,7 @@
 import { z } from "zod";
-import { deflateRawSync, inflateSync } from "node:zlib";
+import { deflateRawSync, inflateSync, inflateRawSync } from "node:zlib";
 import { readFileSync } from "node:fs";
+import { isDeepStrictEqual } from "node:util";
 
 const vector = z.tuple([z.number().finite().min(-512).max(512), z.number().finite().min(-512).max(512), z.number().finite().min(-512).max(512)]);
 const name = z.string().regex(/^[a-zA-Z0-9_.-]{1,80}$/);
@@ -17,6 +18,45 @@ export const starModel = z.object({
 }).strict();
 export type StarModel = z.infer<typeof starModel>;
 export type NativeModel = { species: string; poser: string; bones: { name: string; parent?: string }[] };
+type NativeGeometry = { model: StarModel["model"]; reference: string; poser: string };
+const nativeGeometries = new Map<string, NativeGeometry | null>();
+/** Read only our bundled, exporter-generated native kits; never an uploaded ZIP. */
+function nativeGeometry(species: string): NativeGeometry | null {
+ if(nativeGeometries.has(species))return nativeGeometries.get(species)!;
+ let zip:Buffer;
+ try{zip=readFileSync(new URL(`../star-templates/${species}.zip`,import.meta.url));}
+ catch(error){if((error as NodeJS.ErrnoException).code!=="ENOENT")throw error;nativeGeometries.set(species,null);return null;}
+ const entries=new Map<string,Buffer>();
+ let offset=0;
+ while(offset+30<=zip.length&&zip.readUInt32LE(offset)===0x04034b50){
+  const method=zip.readUInt16LE(offset+8),compressed=zip.readUInt32LE(offset+18),nameLength=zip.readUInt16LE(offset+26);
+  const start=offset+30+nameLength+zip.readUInt16LE(offset+28),end=start+compressed;
+  if(end>zip.length)throw new Error("NATIVE_TEMPLATE_TRUNCATED");
+  const name=zip.toString("utf8",offset+30,offset+30+nameLength);
+  if(name===`${species}.geo.json`||name==="reference/resolver.json"){
+   if(![0,8].includes(method))throw new Error("NATIVE_TEMPLATE_COMPRESSION");
+   const bytes=method===8?inflateRawSync(zip.subarray(start,end),{maxOutputLength:8*1024*1024}):zip.subarray(start,end);
+   if(crc32(bytes)!==zip.readUInt32LE(offset+14))throw new Error("NATIVE_TEMPLATE_CHECKSUM");
+   entries.set(name,bytes);
+  }
+  offset=end;
+ }
+ const geometry=entries.get(`${species}.geo.json`),resolver=entries.get("reference/resolver.json");
+ if(!geometry||!resolver)throw new Error("NATIVE_TEMPLATE_ASSETS_MISSING");
+ const definition=JSON.parse(resolver.toString());
+ const base=definition.variations.find((v:{aspects?:string[];model?:string;poser?:string})=>v.aspects?.length===0&&v.model&&v.poser);
+ if(definition.species!==`cobblemon:${species}`||!base||!/^cobblemon:[a-z0-9_./-]+$/.test(base.model)||!/^cobblemon:[a-z0-9_./-]+$/.test(base.poser))throw new Error("NATIVE_TEMPLATE_REFERENCE_INVALID");
+ const result={model:JSON.parse(geometry.toString()),reference:base.model,poser:base.poser};
+ nativeGeometries.set(species,result);return result;
+}
+function nativeRecolorReference(asset: StarModel,native:NativeModel): string | undefined {
+ const baseline=nativeGeometry(asset.species);
+ if(!baseline||baseline.poser!==native.poser)return undefined;
+ const candidate=structuredClone(asset.model);
+ // Blockbench may rename the geometry identifier on export without changing any bones.
+ candidate["minecraft:geometry"][0]!.description.identifier=baseline.model["minecraft:geometry"][0]!.description.identifier;
+ return isDeepStrictEqual(candidate,baseline.model)?baseline.reference:undefined;
+}
 function png(encoded: string, width: number, height: number) {
  if (!/^[A-Za-z0-9+/]+={0,2}$/.test(encoded)) throw new Error("PNG_BASE64_INVALID");
  const bytes = Buffer.from(encoded,"base64");
@@ -60,8 +100,14 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[]) {
  for(const input of [...assets].sort((a,b)=>a.species.localeCompare(b.species))){
   const native=catalog.find(n=>n.species===input.species);if(!native)throw new Error("SPECIES_NOT_IN_SERVER_CATALOG");
   const asset=validateStar(input,native), id="star_"+asset.species, root="assets/cobblestar_planets/";
-  const geometry=structuredClone(asset.model);geometry["minecraft:geometry"][0]!.description.identifier="geometry."+id;
-  files.set(root+`bedrock/pokemon/models/star/${id}.geo.json`,Buffer.from(JSON.stringify(geometry)));
+  // Recolors must share the native (poser, model) pair. Cobblemon keys its posed
+  // model cache by this pair; a renamed duplicate unnecessarily splits that path.
+  // Actual geometry edits still get their own model and native animation rig.
+  const nativeReference=nativeRecolorReference(asset,native);
+  if(!nativeReference){
+   const geometry=structuredClone(asset.model);geometry["minecraft:geometry"][0]!.description.identifier="geometry."+id;
+   files.set(root+`bedrock/pokemon/models/star/${id}.geo.json`,Buffer.from(JSON.stringify(geometry)));
+  }
   files.set(root+`textures/pokemon/star/${id}.png`,Buffer.from(asset.texture,"base64"));
   const layers=[];
   if(asset.emissive){
@@ -82,7 +128,7 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[]) {
    }
    layers.push({name:"flame",texture:{frames,fps:10,loop:true},emissive:true,translucent:true});
   }
-  files.set(root+`bedrock/pokemon/resolvers/star/${id}.json`,Buffer.from(JSON.stringify({species:"cobblemon:"+asset.species,order:10000,variations:[{aspects:["cobblestar-star"],poser:native.poser,model:`cobblestar_planets:${id}.geo`,texture:`cobblestar_planets:textures/pokemon/star/${id}.png`,layers}]})));
+  files.set(root+`bedrock/pokemon/resolvers/star/${id}.json`,Buffer.from(JSON.stringify({species:"cobblemon:"+asset.species,order:10000,variations:[{aspects:["cobblestar-star"],poser:native.poser,model:nativeReference??`cobblestar_planets:${id}.geo`,texture:`cobblestar_planets:textures/pokemon/star/${id}.png`,layers}]})));
  }
  return zipAssets(files);
 }

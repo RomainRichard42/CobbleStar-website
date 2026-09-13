@@ -59,3 +59,38 @@ test('Shipped Dragonite Star preset is importable with native animations and emi
  assert.equal(resolver.variations[0].poser,'cobblemon:dragonite');assert.equal(resolver.variations[0].layers[0].emissive,true);
  assert.ok(files.get('licenses/Cobblemon.txt').length>1000);
 });
+
+function nativeKingambit(){
+ const kit=unpack(readFileSync(new URL('../star-templates/kingambit.zip',import.meta.url)));
+ const model=JSON.parse(kit.get('kingambit.geo.json'));
+ return {
+  asset:{species:'kingambit',model,texture:kit.get('kingambit.png').toString('base64'),emissive:kit.get('kingambit_glow.png').toString('base64')},
+  native:{species:'kingambit',poser:'cobblemon:kingambit',bones:model['minecraft:geometry'][0].bones.map(({name,parent})=>({name,...(parent?{parent}:{})}))}
+ };
+}
+test('Kingambit recolor uses the SAME native model and poser pair as normal Kingambit',()=>{
+ const {asset,native}=nativeKingambit();
+ // Identifier-only changes are not geometry edits.
+ asset.model['minecraft:geometry'][0].description.identifier='geometry.my_star_export';
+ const files=unpack(buildStarPack([asset],[native]));
+ const r=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_kingambit.json'));
+ assert.equal(r.variations[0].model,'cobblemon:kingambit.geo');
+ assert.equal(r.variations[0].poser,'cobblemon:kingambit');
+ assert.deepEqual(r.variations[0].aspects,['cobblestar-star']);
+ assert.equal(r.variations[0].texture,'cobblestar_planets:textures/pokemon/star/star_kingambit.png');
+ assert.equal(r.variations[0].layers[0].emissive,true);
+ assert.ok(![...files.keys()].some(p=>p.endsWith('.geo.json')));
+ assert.ok(![...files.keys()].some(p=>p.startsWith('assets/cobblemon/')));
+});
+test('Actual Kingambit geometry or pivot edits are preserved, not replaced by the native model',()=>{
+ for(const edit of ['cube','pivot']){
+  const {asset,native}=nativeKingambit();
+  const bone=asset.model['minecraft:geometry'][0].bones.find(b=>b.cubes?.length);
+  if(edit==='cube')bone.cubes[0].size[0]+=0.5;else bone.pivot[0]+=0.5;
+  const files=unpack(buildStarPack([asset],[native]));
+  const r=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_kingambit.json'));
+  assert.equal(r.variations[0].model,'cobblestar_planets:star_kingambit.geo');
+  const saved=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/models/star/star_kingambit.geo.json'));
+  assert.deepEqual(saved['minecraft:geometry'][0].bones,asset.model['minecraft:geometry'][0].bones);
+ }
+});
