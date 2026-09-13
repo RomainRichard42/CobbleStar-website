@@ -37,6 +37,7 @@ await Promise.all([
 await cp(join(projectDir, "out"), join(deployDir, "site"), { recursive: true });
 await cp(join(projectDir, "api", "dist"), join(deployDir, "dist"), { recursive: true });
 await cp(join(projectDir, "api", "migrations"), join(deployDir, "migrations"), { recursive: true });
+await cp(join(projectDir, "api", "licenses"), join(deployDir, "licenses"), { recursive: true });
 
 for (const file of ["package.json", "package-lock.json", "shop.catalog.json", "vote-sites.json", ".env.example", "README-KINETIC.md"]) {
   await cp(join(projectDir, "api", file), join(deployDir, file));
