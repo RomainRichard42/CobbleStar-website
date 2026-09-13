@@ -4,12 +4,14 @@ import { readFileSync } from "node:fs";
 
 const vector = z.tuple([z.number().finite().min(-512).max(512), z.number().finite().min(-512).max(512), z.number().finite().min(-512).max(512)]);
 const name = z.string().regex(/^[a-zA-Z0-9_.-]{1,80}$/);
-const cube = z.object({ origin: vector, size: vector, uv: z.union([z.tuple([z.number(), z.number()]), z.record(z.string(), z.object({ uv: z.tuple([z.number(), z.number()]), uv_size: z.tuple([z.number(), z.number()]) }))]), pivot: vector.optional(), rotation: vector.optional(), inflate: z.number().finite().min(-1).max(2).optional(), mirror: z.boolean().optional() }).strict();
+// Native Cobblemon 1.8 Cinderace uses -6.75; preserve native shrinking cubes.
+const inflation = z.number().finite().min(-8).max(2);
+const cube = z.object({ origin: vector, size: vector, uv: z.union([z.tuple([z.number(), z.number()]), z.record(z.string(), z.object({ uv: z.tuple([z.number(), z.number()]), uv_size: z.tuple([z.number(), z.number()]) }))]), pivot: vector.optional(), rotation: vector.optional(), inflate: inflation.optional(), mirror: z.boolean().optional() }).strict();
 export const starModel = z.object({
  species: z.string().regex(/^[a-z0-9_]{1,80}$/),
  model: z.object({ format_version: z.string().max(20), "minecraft:geometry": z.array(z.object({
   description: z.object({ identifier: z.string().max(100), texture_width: z.number().int().min(1).max(1024), texture_height: z.number().int().min(1).max(1024), visible_bounds_width: z.number().min(0).max(32).optional(), visible_bounds_height: z.number().min(0).max(32).optional(), visible_bounds_offset: vector.optional() }).strict(),
-  bones: z.array(z.object({ name, parent: name.optional(), pivot: vector.optional(), rotation: vector.optional(), mirror: z.boolean().optional(), inflate: z.number().min(-1).max(2).optional(), cubes: z.array(cube).max(1024).optional(), locators: z.record(z.string(), z.union([vector,z.object({ offset: vector, rotation: vector.optional() })])).optional() }).strict()).min(1).max(256),
+  bones: z.array(z.object({ name, parent: name.optional(), pivot: vector.optional(), rotation: vector.optional(), mirror: z.boolean().optional(), inflate: inflation.optional(), cubes: z.array(cube).max(1024).optional(), locators: z.record(z.string(), z.union([vector,z.object({ offset: vector, rotation: vector.optional() })])).optional() }).strict()).min(1).max(256),
  }).strict()).length(1) }).strict(),
  texture: z.string().max(3_000_000), emissive: z.string().max(3_000_000).optional(),
 }).strict();

@@ -7,6 +7,7 @@ import { config } from "./config.js";
 import { canReadGame, canWriteGame } from "./game-admin.js";
 import { buildStarPack, validateStar, type NativeModel, type StarModel } from "./star-assets.js";
 import { createQuestUploadReceiver } from "./quest-sync-upload.js";
+import { starTemplates, sameSkeleton, nativeStarKit, editableStarKit } from "./star-library.js";
 type Actor={id:string;discord_id:string|null};
 type Auth={session:(r:FastifyRequest)=>Promise<Actor|null>;server:(r:FastifyRequest)=>boolean};
 const decode=(v:unknown)=>typeof v==="string"?JSON.parse(v):v;
@@ -24,7 +25,34 @@ export function registerStarStudio(app:FastifyInstance,auth:Auth){
  app.get("/api/admin/star",async(r,reply)=>{
   const actor=await authorize(r,reply);if(!actor)return;
   const [[models],[servers],[publication],native]=await Promise.all([pool.query<RowDataPacket[]>("SELECT species,revision,published_revision AS publishedRevision,updated_at AS updatedAt FROM star_models ORDER BY species"),pool.query<RowDataPacket[]>("SELECT * FROM star_servers"),pool.query<RowDataPacket[]>("SELECT sha1 FROM star_publication WHERE id=1"),catalog()]);
-  return {models,servers,hash:publication[0]?.sha1??"",catalog:native.map(n=>({species:n.species,poser:n.poser})),canWrite:canWriteGame(actor)};
+  const templates=await starTemplates();
+  return {models,servers,hash:publication[0]?.sha1??"",catalog:native.map(n=>({species:n.species,poser:n.poser})),templates:templates.species.map(t=>({species:t.species,name:t.name,compatible:!native.some(n=>n.species===t.species)||sameSkeleton(t,native.find(n=>n.species===t.species)!)})),templateVersion:templates.version,canWrite:canWriteGame(actor)};
+ });
+ const versionQuery=z.object({version:z.enum(["published","draft"]).default("published")});
+ app.get("/api/admin/star/:species/asset",async(r,reply)=>{
+  if(!await authorize(r,reply))return;const {species}=params.parse(r.params),{version}=versionQuery.parse(r.query);
+  const [rows]=await pool.execute<RowDataPacket[]>("SELECT draft_json,published_json,revision,published_revision FROM star_models WHERE species=?",[species]);
+  const row=rows[0],value=row?.[version==="published"?"published_json":"draft_json"];
+  if(!value)return reply.code(404).send({error:"MODEL_NOT_FOUND"});
+  return {asset:decode(value),revision:row![version==="published"?"published_revision":"revision"],version};
+ });
+ app.get("/api/admin/star/:species/kit",{config:{rateLimit:{max:60,timeWindow:"1 minute"}}},async(r,reply)=>{
+  if(!await authorize(r,reply))return;const {species}=params.parse(r.params);
+  const {source}=z.object({source:z.enum(["native","published","draft"]).default("native")}).parse(r.query);
+  let zip:Buffer;
+  if(source==="native"){
+   const template=(await starTemplates()).species.find(t=>t.species===species);
+   if(!template)return reply.code(404).send({error:"NATIVE_KIT_NOT_AVAILABLE"});
+   const native=(await catalog()).find(n=>n.species===species);
+   if(native&&!sameSkeleton(template,native))return reply.code(409).send({error:"NATIVE_KIT_SERVER_VERSION_MISMATCH"});
+   zip=await nativeStarKit(species);
+  }else{
+   const [rows]=await pool.execute<RowDataPacket[]>("SELECT draft_json,published_json,revision,published_revision FROM star_models WHERE species=?",[species]);
+   const row=rows[0],value=row?.[source==="published"?"published_json":"draft_json"];
+   if(!value)return reply.code(404).send({error:"MODEL_NOT_FOUND"});
+   zip=await editableStarKit(decode(value) as StarModel,row![source==="published"?"published_revision":"revision"],source);
+  }
+  return reply.type("application/zip").header("Content-Disposition",`attachment; filename="${species}-star-${source}.zip"`).send(zip);
  });
  app.put("/api/admin/star/:species",{bodyLimit:8*1024*1024,config:{rateLimit:{max:20,timeWindow:"1 minute"}}},async(r,reply)=>{
   const actor=await authorize(r,reply,true);if(!actor)return;const {species}=params.parse(r.params);
