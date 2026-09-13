@@ -8,11 +8,12 @@ import { canReadGame, canWriteGame } from "./game-admin.js";
 import { buildStarPack, validateStar, type NativeModel, type StarModel } from "./star-assets.js";
 import { createQuestUploadReceiver } from "./quest-sync-upload.js";
 import { starTemplates, sameSkeleton, nativeStarKit, editableStarKit } from "./star-library.js";
+import {addonSource,addonIndex} from './star-addon-templates.js';
 type Actor={id:string;discord_id:string|null};
 type Auth={session:(r:FastifyRequest)=>Promise<Actor|null>;server:(r:FastifyRequest)=>boolean};
 const decode=(v:unknown)=>typeof v==="string"?JSON.parse(v):v;
 const params=z.object({species:z.string().regex(/^[a-z0-9_]{1,80}$/)});
-const catalogSchema=z.array(z.object({species:z.string().regex(/^[a-z0-9_]{1,80}$/),poser:z.string().regex(/^cobblemon:[a-z0-9_./-]+$/),bones:z.array(z.object({name:z.string().max(80),parent:z.string().max(80).optional()})).max(256)})).max(2000);
+const catalogSchema=z.array(z.object({species:z.string().regex(/^[a-z0-9_]{1,80}$/),poser:z.string().max(200).regex(/^[a-z0-9_.-]+:[a-z0-9_./-]+$/).refine(s=>!s.includes('..')),bones:z.array(z.object({name:z.string().max(80),parent:z.string().max(80).optional()})).max(256),source:addonSource.optional()})).max(2000);
 export function registerStarStudio(app:FastifyInstance,auth:Auth){
  const receiveUpload=createQuestUploadReceiver(Date.now,"STAR");
  async function authorize(r:FastifyRequest,reply:FastifyReply,write=false){
@@ -26,7 +27,7 @@ export function registerStarStudio(app:FastifyInstance,auth:Auth){
   const actor=await authorize(r,reply);if(!actor)return;
   const [[models],[servers],[publication],native]=await Promise.all([pool.query<RowDataPacket[]>("SELECT species,revision,published_revision AS publishedRevision,updated_at AS updatedAt FROM star_models ORDER BY species"),pool.query<RowDataPacket[]>("SELECT * FROM star_servers"),pool.query<RowDataPacket[]>("SELECT sha1 FROM star_publication WHERE id=1"),catalog()]);
   const templates=await starTemplates();
-  return {models,servers,hash:publication[0]?.sha1??"",catalog:native.map(n=>({species:n.species,poser:n.poser})),templates:templates.species.map(t=>({species:t.species,name:t.name,compatible:!native.some(n=>n.species===t.species)||sameSkeleton(t,native.find(n=>n.species===t.species)!)})),templateVersion:templates.version,canWrite:canWriteGame(actor)};
+  return {models,servers,hash:publication[0]?.sha1??"",catalog:native.map(n=>({species:n.species,poser:n.poser,source:n.source})),templates:templates.species.map(t=>({species:t.species,name:t.name,source:t.source,compatible:!native.some(n=>n.species===t.species)||sameSkeleton(t,native.find(n=>n.species===t.species)!)})),unavailableTemplates:addonIndex().skipped??[],templateVersion:templates.version,canWrite:canWriteGame(actor)};
  });
  const versionQuery=z.object({version:z.enum(["published","draft"]).default("published")});
  app.get("/api/admin/star/:species/asset",async(r,reply)=>{

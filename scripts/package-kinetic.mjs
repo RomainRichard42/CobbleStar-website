@@ -1,4 +1,4 @@
-import { access, cp, mkdir, rm } from "node:fs/promises";
+import { access, cp, mkdir, rm, readFile } from "node:fs/promises";
 import { constants } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -40,6 +40,15 @@ await cp(join(projectDir, "api", "dist"), join(deployDir, "dist"), { recursive: 
 await cp(join(projectDir, "api", "migrations"), join(deployDir, "migrations"), { recursive: true });
 await cp(join(projectDir, "api", "licenses"), join(deployDir, "licenses"), { recursive: true });
 await cp(join(projectDir, "api", "star-templates"), join(deployDir, "star-templates"), { recursive: true });
+await cp(join(projectDir, "api", "star-layers"), join(deployDir, "star-layers"), { recursive: true });
+await mkdir(join(deployDir,"star-addon-templates"),{recursive:true});
+const addonDir=join(projectDir,"api","star-addon-templates");
+const addonIndex=JSON.parse(await readFile(join(addonDir,"index.json"),"utf8"));
+await cp(join(addonDir,"index.json"),join(deployDir,"star-addon-templates","index.json"));
+for(const row of addonIndex.species){
+  if(!/^[a-z0-9_]{1,80}$/.test(row.species))throw new Error("Invalid addon template species");
+  await cp(join(addonDir,row.species+".zip"),join(deployDir,"star-addon-templates",row.species+".zip"));
+}
 
 for (const file of ["package.json", "package-lock.json", "shop.catalog.json", "vote-sites.json", ".env.example", "README-KINETIC.md"]) {
   await cp(join(projectDir, "api", file), join(deployDir, file));

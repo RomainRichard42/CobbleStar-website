@@ -68,19 +68,68 @@ function nativeKingambit(){
   native:{species:'kingambit',poser:'cobblemon:kingambit',bones:model['minecraft:geometry'][0].bones.map(({name,parent})=>({name,...(parent?{parent}:{})}))}
  };
 }
-test('Kingambit recolor uses the SAME native model and poser pair as normal Kingambit',()=>{
+test('Kingambit recolor isolates its official geometry, poser AND global animation group from addons',()=>{
  const {asset,native}=nativeKingambit();
  // Identifier-only changes are not geometry edits.
  asset.model['minecraft:geometry'][0].description.identifier='geometry.my_star_export';
  const files=unpack(buildStarPack([asset],[native]));
  const r=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_kingambit.json'));
- assert.equal(r.variations[0].model,'cobblemon:kingambit.geo');
- assert.equal(r.variations[0].poser,'cobblemon:kingambit');
+ assert.equal(r.variations[0].model,'cobblestar_planets:star_kingambit.geo');
+ assert.equal(r.variations[0].poser,'cobblestar_planets:cobblestar_kingambit_official');
  assert.deepEqual(r.variations[0].aspects,['cobblestar-star']);
  assert.equal(r.variations[0].texture,'cobblestar_planets:textures/pokemon/star/star_kingambit.png');
  assert.equal(r.variations[0].layers[0].emissive,true);
- assert.ok(![...files.keys()].some(p=>p.endsWith('.geo.json')));
+ assert.ok(files.has('assets/cobblestar_planets/bedrock/pokemon/models/star/star_kingambit.geo.json'));
  assert.ok(![...files.keys()].some(p=>p.startsWith('assets/cobblemon/')));
+});
+test('Isolated Kingambit retains the exact original poses and animation keyframes',()=>{
+ const {asset,native}=nativeKingambit(),files=unpack(buildStarPack([asset],[native]));
+ const kit=unpack(readFileSync(new URL('../star-templates/kingambit.zip',import.meta.url)));
+ const poser=files.get('assets/cobblestar_planets/bedrock/pokemon/posers/star/cobblestar_kingambit_official.json').toString();
+ const animations=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/animations/star/cobblestar_kingambit_official.animation.json'));
+ const original=JSON.parse(kit.get('reference/animations/0983_kingambit/kingambit.animation.json'));
+ assert.deepEqual(JSON.parse(poser.replaceAll("'cobblestar_kingambit_official'","'kingambit'")),JSON.parse(kit.get('reference/posers/0983_kingambit/kingambit.json')));
+ assert.equal(JSON.parse(poser).rootBone,'kingambit');
+ const names=new Set(asset.model['minecraft:geometry'][0].bones.map(b=>b.name));
+ assert.equal(Object.keys(animations.animations).length,Object.keys(original.animations).length);
+ for(const [key,value] of Object.entries(original.animations)){
+  assert.deepEqual(animations.animations[key.replace('animation.kingambit.','animation.cobblestar_kingambit_official.')],value);
+ }
+ // Both idle and random blinking must resolve inside the private group.
+ for(const match of poser.matchAll(/q\.bedrock(?:_quirk)?\('([^']+)',\s*'([^']+)'\)/g)){
+  assert.equal(match[1],'cobblestar_kingambit_official');
+  const active=animations.animations[`animation.${match[1]}.${match[2]}`];
+  assert.ok(active);
+  // Only playable animations: the original file also contains unused authoring tests.
+  for(const bone of Object.keys(active.bones??{}))assert.ok(names.has(bone),`Active animation targets missing bone ${bone}`);
+ }
+ assert.ok(!poser.includes("'kingambit'"));
+});
+test('Addon-owned native IDs cannot substitute any Kingambit Star rig resource',()=>{
+ const {asset,native}=nativeKingambit();
+ // A server addon may report another skeleton. The trusted, bundled official rig is still accepted.
+ const addonCatalog={...native,bones:[{name:'kingambit'},{name:'leg_left0',parent:'kingambit'}]};
+ const files=unpack(buildStarPack([asset],[addonCatalog]));
+ const r=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_kingambit.json')).variations[0];
+ // Same resolution keys as Cobblemon: model/poser are namespace+basename,
+ // animation groups are basename ONLY (not namespace).
+ const models=new Map([['cobblemon:kingambit.geo','addon model']]);
+ const posers=new Map([['cobblemon:kingambit','addon poser']]);
+ const groups=new Map([['kingambit','addon animations']]);
+ for(const [path,data] of files){
+  const stem=path.split('/').at(-1),namespace=path.split('/')[1];
+  if(path.includes('/models/'))models.set(`${namespace}:${stem.replace(/\.json$/,'')}`,JSON.parse(data));
+  if(path.includes('/posers/'))posers.set(`${namespace}:${stem.replace(/\.json$/,'')}`,JSON.parse(data));
+  if(path.includes('/animations/'))groups.set(stem.replace(/\.animation\.json$/,''),JSON.parse(data));
+ }
+ assert.deepEqual(models.get(r.model)['minecraft:geometry'][0].bones,asset.model['minecraft:geometry'][0].bones);
+ assert.equal(posers.get(r.poser).rootBone,'kingambit');
+ assert.ok(groups.get('cobblestar_kingambit_official').animations['animation.cobblestar_kingambit_official.ground_idle']);
+ assert.equal(models.get('cobblemon:kingambit.geo'),'addon model');
+ assert.equal(groups.get('kingambit'),'addon animations');
+ const incompatible=structuredClone(asset);
+ incompatible.model['minecraft:geometry'][0].bones=addonCatalog.bones;
+ assert.throws(()=>validateStar(incompatible,addonCatalog),/PRESERVE_NATIVE_BONES_AND_PARENTS/);
 });
 test('Actual Kingambit geometry or pivot edits are preserved, not replaced by the native model',()=>{
  for(const edit of ['cube','pivot']){

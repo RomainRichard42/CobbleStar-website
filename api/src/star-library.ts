@@ -1,19 +1,23 @@
 import { readFile } from "node:fs/promises";
 import { zipAssets, type StarModel, type NativeModel } from "./star-assets.js";
+import {addonIndex,addonKit,addonTemplate,sameSource} from './star-addon-templates.js';
 
 type Template = NativeModel & { name:string };
 type Templates = { version:string; species:Template[] };
 let cached:Promise<Templates>|undefined;
 export function starTemplates():Promise<Templates> {
- return cached ??= readFile(new URL("../star-templates/index.json",import.meta.url),"utf8").then(text=>JSON.parse(text) as Templates).catch(error=>{cached=undefined;throw error;});
+ return cached ??= readFile(new URL("../star-templates/index.json",import.meta.url),"utf8").then(text=>{
+  const native=JSON.parse(text) as Templates,seen=new Set(native.species.map(t=>t.species));
+  return {...native,species:[...native.species,...addonIndex().species.filter(t=>!seen.has(t.species))]};
+ }).catch(error=>{cached=undefined;throw error;});
 }
 export function sameSkeleton(template:NativeModel,native:NativeModel) {
  const signature=(model:NativeModel)=>JSON.stringify(model.bones.map(b=>[b.name,b.parent??""]).sort((a,b)=>a[0]!.localeCompare(b[0]!)));
- return template.poser===native.poser && signature(template)===signature(native);
+ return sameSource(template.source,native.source)&&template.poser===native.poser && signature(template)===signature(native);
 }
 export async function nativeStarKit(species:string) {
  if(!/^[a-z0-9_]{1,80}$/.test(species))throw new Error("INVALID_SPECIES");
- return readFile(new URL(`../star-templates/${species}.zip`,import.meta.url));
+ return addonKit(species)??readFile(new URL(`../star-templates/${species}.zip`,import.meta.url));
 }
 export async function editableStarKit(asset:StarModel,revision:number,version:string) {
  const files=new Map<string,Buffer>([
@@ -23,5 +27,11 @@ export async function editableStarKit(asset:StarModel,revision:number,version:st
   ["licenses/Cobblemon.txt",await readFile(new URL("../licenses/Cobblemon.txt",import.meta.url))]
  ]);
  if(asset.emissive)files.set(`${asset.species}_glow.png`,Buffer.from(asset.emissive,"base64"));
+ if(asset.templateSource){
+  const template=addonTemplate(asset.species);
+  files.set('source.json',Buffer.from(JSON.stringify(asset.templateSource,null,2)));
+  if(template&&sameSource(asset.templateSource,template.row.source))for(const [name,bytes] of template.entries)if(name.startsWith('licenses/')||name.startsWith('reference/'))files.set(name,bytes);
+  files.set('README.txt',Buffer.from(`Variante Star ${asset.species}, revision ${revision}.\nSource : ${asset.templateSource.name} ${asset.templateSource.version}.\nConserver les noms et parents des os. Les poses et animations de cet addon sont isolees automatiquement a la publication.\nReimporter le modele et les textures dans l'atelier. Ne pas importer les references comme geometrie.\nLa publication verifie la provenance du kit et sa compatibilite avec le serveur.\n`));
+ }
  return zipAssets(files);
 }
