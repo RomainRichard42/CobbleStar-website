@@ -14,10 +14,10 @@ const chunkSchema = z.object({
   data: z.string().min(4).max(65536).regex(/^[A-Za-z0-9+/]+={0,2}$/),
 }).strict().refine(v => v.index < v.count);
 type Pending = { count: number; digest: string; expires: number; size: number; parts: Map<number, Buffer> };
-const fail = (code: string, statusCode = 400): never => { throw Object.assign(new Error(code), { statusCode }); };
 
 /** Per application instance. No database updates until verified, complete JSON. */
-export function createQuestUploadReceiver(clock = Date.now) {
+export function createQuestUploadReceiver(clock = Date.now, namespace: 'QUEST' | 'STAR' = 'QUEST') {
+  const fail = (code: string, statusCode = 400): never => { throw Object.assign(new Error(code.replace('QUEST', namespace)), { statusCode }); };
   const pending = new Map<string, Pending>();
   let total = 0, decoding = 0;
   function remove(key: string) { const entry = pending.get(key); if (entry) total -= entry.size; pending.delete(key); }

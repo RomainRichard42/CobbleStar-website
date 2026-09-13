@@ -6,12 +6,14 @@ import { pool, transaction } from "./db.js";
 import { config } from "./config.js";
 import { canReadGame, canWriteGame } from "./game-admin.js";
 import { buildStarPack, validateStar, type NativeModel, type StarModel } from "./star-assets.js";
+import { createQuestUploadReceiver } from "./quest-sync-upload.js";
 type Actor={id:string;discord_id:string|null};
 type Auth={session:(r:FastifyRequest)=>Promise<Actor|null>;server:(r:FastifyRequest)=>boolean};
 const decode=(v:unknown)=>typeof v==="string"?JSON.parse(v):v;
 const params=z.object({species:z.string().regex(/^[a-z0-9_]{1,80}$/)});
 const catalogSchema=z.array(z.object({species:z.string().regex(/^[a-z0-9_]{1,80}$/),poser:z.string().regex(/^cobblemon:[a-z0-9_./-]+$/),bones:z.array(z.object({name:z.string().max(80),parent:z.string().max(80).optional()})).max(256)})).max(2000);
 export function registerStarStudio(app:FastifyInstance,auth:Auth){
+ const receiveUpload=createQuestUploadReceiver(Date.now,"STAR");
  async function authorize(r:FastifyRequest,reply:FastifyReply,write=false){
   reply.header("Cache-Control","no-store");const actor=await auth.session(r);
   if(!actor){reply.code(401).send({error:"AUTH_REQUIRED"});return null;}
@@ -50,14 +52,20 @@ export function registerStarStudio(app:FastifyInstance,auth:Auth){
    await db.execute("UPDATE star_publication SET sha1=? WHERE id=1",[sha1]);return {ok:true,hash:sha1};
   });}catch(e){return reply.code(400).send({error:e instanceof Error?e.message:"PUBLICATION_FAILED"});}
  });
- app.post("/api/internal/star/sync",{bodyLimit:4*1024*1024,config:{rateLimit:{max:120,timeWindow:"1 minute"}}},async(r,reply)=>{
+ const serverAuth=async(r:FastifyRequest,reply:FastifyReply)=>{if(!auth.server(r))return reply.code(401).send({error:"INVALID_SERVER_KEY"});};
+ app.post("/api/internal/star/sync",{bodyLimit:4*1024*1024,config:{rateLimit:{max:120,timeWindow:"1 minute"}},onRequest:serverAuth},async(r,reply)=>sync(r,reply,r.body));
+ app.post("/api/internal/star/sync-chunk",{bodyLimit:96*1024,config:{rateLimit:{max:1800,timeWindow:"1 minute"}},onRequest:serverAuth},async(r,reply)=>{
+  reply.header("Cache-Control","no-store");const result=await receiveUpload(r.body);
+  return result.complete?sync(r,reply,result.body):result;
+ });
+ async function sync(r:FastifyRequest,reply:FastifyReply,value:unknown){
   if(!auth.server(r))return reply.code(401).send({error:"INVALID_SERVER_KEY"});
-  const body=z.object({serverId:z.string().regex(/^[a-zA-Z0-9_-]{1,48}$/),hash:z.string().regex(/^([a-f0-9]{40})?$/),ready:z.number().int().min(0),total:z.number().int().min(0),error:z.string().max(400),catalog:catalogSchema.optional()}).parse(r.body);
+  const body=z.object({serverId:z.string().regex(/^[a-zA-Z0-9_-]{1,48}$/),hash:z.string().regex(/^([a-f0-9]{40})?$/),ready:z.number().int().min(0),total:z.number().int().min(0),error:z.string().max(400),catalog:catalogSchema.min(1).optional()}).parse(value);
   if(body.catalog)await pool.execute("INSERT INTO star_catalog(id,catalog_json) VALUES(1,?) ON DUPLICATE KEY UPDATE catalog_json=VALUES(catalog_json)",[JSON.stringify(body.catalog)]);
   await pool.execute("INSERT INTO star_servers(server_id,applied_hash,ready_clients,total_clients,last_error) VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE applied_hash=VALUES(applied_hash),ready_clients=VALUES(ready_clients),total_clients=VALUES(total_clients),last_error=VALUES(last_error),seen_at=CURRENT_TIMESTAMP",[body.serverId,body.hash,body.ready,body.total,body.error]);
   const [rows]=await pool.query<RowDataPacket[]>("SELECT p.sha1,k.species_json FROM star_publication p LEFT JOIN star_packs k ON k.sha1=p.sha1 WHERE p.id=1");
-  reply.header("Cache-Control","no-store");return {schema:1,hash:rows[0]?.sha1??"",species:rows[0]?.species_json?decode(rows[0].species_json):[]};
- });
+  reply.header("Cache-Control","no-store");return {schema:1,hash:rows[0]?.sha1??"",species:rows[0]?.species_json?decode(rows[0].species_json):[],catalogAccepted:!!body.catalog};
+ }
  app.get("/api/star/packs/:hash.zip",{config:{rateLimit:{max:300,timeWindow:"1 minute"}}},async(r,reply)=>{
   const {hash}=z.object({hash:z.string().regex(/^[a-f0-9]{40}$/)}).parse(r.params);
   const [rows]=await pool.execute<RowDataPacket[]>("SELECT pack FROM star_packs WHERE sha1=?",[hash]);if(!rows[0])return reply.code(404).send({error:"PACK_NOT_FOUND"});
