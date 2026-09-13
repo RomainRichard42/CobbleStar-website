@@ -17,6 +17,20 @@ function unpack(zip){let at=0;const files=new Map();while(zip.readUInt32LE(at)==
 test('Deterministic pack preserves previous species and only adds Star resolver',()=>{const a=fixture(),b={...fixture(),species:'eevee'},cat=[native,{...native,species:'eevee',poser:'cobblemon:eevee'}];const zip=buildStarPack([a,b],cat);assert.deepEqual(zip,buildStarPack([b,a],cat));const files=unpack(zip);assert.equal(files.size,9);assert.ok(files.has('licenses/Cobblemon.txt'));assert.equal(JSON.parse(files.get('pack.mcmeta')).pack.pack_format,34);for(const id of ['dragonite','eevee']){const r=JSON.parse(files.get(`assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_${id}.json`));assert.deepEqual(r.variations[0].aspects,['cobblestar-star']);assert.equal(r.variations[0].poser,'cobblemon:'+id);assert.equal(r.order,10000);}});
 test('Optional emissive texture becomes a dedicated luminous layer',()=>{const files=unpack(buildStarPack([{...fixture(),emissive:texture}],[native]));const r=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_dragonite.json'));assert.equal(r.variations[0].layers[0].emissive,true);assert.ok(files.has('assets/cobblestar_planets/textures/pokemon/star/star_dragonite_glow.png'));});
 
+test('Chimchar Star glow replaces the orange native emissive layer only for Star',()=>{
+ const cat={...native,species:'chimchar',poser:'cobblemon:chimchar'};
+ const asset={...fixture(),species:'chimchar',emissive:texture};
+ const files=unpack(buildStarPack([asset],[cat]));
+ const r=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_chimchar.json'));
+ assert.deepEqual(r.variations[0].aspects,['cobblestar-star']);
+ assert.equal(r.variations[0].layers.length,1);
+ assert.deepEqual(r.variations[0].layers[0],{name:'emissive',texture:'cobblestar_planets:textures/pokemon/star/star_chimchar_glow.png',emissive:true,translucent:true});
+ assert.ok([...files.keys()].every(p=>!p.startsWith('assets/cobblemon/')));
+ const without={...asset};delete without.emissive;
+ const plain=unpack(buildStarPack([without],[cat]));
+ assert.deepEqual(JSON.parse(plain.get('assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_chimchar.json')).variations[0].layers,[]);
+});
+
 test('Charmander Star replaces native flame by four blue animated frames without overriding normal assets',()=>{
  const asset={...fixture(),species:'charmander',emissive:texture};
  const files=unpack(buildStarPack([asset],[{...native,species:'charmander',poser:'cobblemon:charmander'}]));

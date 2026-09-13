@@ -64,7 +64,12 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[]) {
   files.set(root+`bedrock/pokemon/models/star/${id}.geo.json`,Buffer.from(JSON.stringify(geometry)));
   files.set(root+`textures/pokemon/star/${id}.png`,Buffer.from(asset.texture,"base64"));
   const layers=[];
-  if(asset.emissive){files.set(root+`textures/pokemon/star/${id}_glow.png`,Buffer.from(asset.emissive,"base64"));layers.push({name:"star_glow",texture:`cobblestar_planets:textures/pokemon/star/${id}_glow.png`,emissive:true});}
+  if(asset.emissive){
+   files.set(root+`textures/pokemon/star/${id}_glow.png`,Buffer.from(asset.emissive,"base64"));
+   // Chimchar's supplied glow includes the recolored flame. Override the native
+   // layer by its exact name, or its orange pixels would cover the blue flame.
+   layers.push({name:asset.species==="chimchar"?"emissive":"star_glow",texture:`cobblestar_planets:textures/pokemon/star/${id}_glow.png`,emissive:true,...(asset.species==="chimchar"?{translucent:true}:{})});
+  }
   if(asset.species==="charmander"){
    // Cobblemon merges layers by name: replace "flame", not an additional orange+blue overlay.
    // Star resolver only; normal and shiny Charmander keep their native animation.
