@@ -1,0 +1,32 @@
+{
+  "order": 1,
+  "species": "cobblemon:greninja",
+  "variations": [
+    {
+      "aspects": ["ash"],
+      "layers": [
+        {
+          "emissive": false,
+          "name": "backshuriken",
+          "texture": {
+            "fps": 10,
+            "frames": [
+              "cobblemon:textures/pokemon/0658_greninja/water_shuriken.png",
+              "cobblemon:textures/pokemon/0658_greninja/water_shuriken1.png",
+              "cobblemon:textures/pokemon/0658_greninja/water_shuriken2.png",
+              "cobblemon:textures/pokemon/0658_greninja/water_shuriken3.png"
+            ],
+            "loop": true
+          },
+          "translucent": true
+        }
+      ],
+      "model": "cobblemon:ashgreninja.geo",
+      "poser": "cobblemon:ashgreninja",
+      "texture": "cobblemon:textures/pokemon/0658_greninja/ash_greninja.png"
+    }, {
+      "aspects": ["ash", "shiny"],
+      "texture": "cobblemon:textures/pokemon/0658_greninja/ash_greninja_shiny.png"
+    }
+  ]
+}

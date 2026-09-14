@@ -20,6 +20,7 @@ export default function StarStudio(){
  const [state,setState]=useState<State|null>(null),[species,setSpecies]=useState("dragonite"),[model,setModel]=useState<File|null>(null),[texture,setTexture]=useState<File|null>(null),[glow,setGlow]=useState<File|null>(null);
  const [busy,setBusy]=useState(false),[error,setError]=useState(""),[message,setMessage]=useState(""),[query,setQuery]=useState(""),[tab,setTab]=useState<"published"|"missing">("published"),[page,setPage]=useState(0);
  const [observedAt,setObservedAt]=useState(0);
+ const [ashFile,setAshFile]=useState<File|null>(null),[removeAsh,setRemoveAsh]=useState(false),[showAsh,setShowAsh]=useState(false);
  const load=useCallback(async()=>{const next=await api<State>("/api/admin/star");setState(next);setObservedAt(Date.now());},[]);
  useEffect(()=>{let active=true;const refresh=()=>api<State>("/api/admin/star").then(next=>{if(active){setState(next);setObservedAt(Date.now());}}).catch(e=>{if(active)setError((e as Error).message);});void refresh();const timer=setInterval(()=>void refresh(),15000);return()=>{active=false;clearInterval(timer);};},[]);
  const selected=state?.models.find(m=>m.species===species),template=state?.templates?.find(t=>t.species===species),known=state?.catalog.some(c=>c.species===species);
@@ -35,9 +36,22 @@ export default function StarStudio(){
  const published=library.filter(t=>!!t.model?.publishedRevision),missing=library.filter(t=>!t.model?.publishedRevision);
  const filtered=(tab==="published"?published:missing).filter(t=>normalize(t.name+" "+t.species).includes(normalize(query)));
  const lastPage=Math.max(0,Math.ceil(filtered.length/6)-1),currentPage=Math.min(page,lastPage),visible=filtered.slice(currentPage*6,currentPage*6+6);
- function choose(id:string){setSpecies(id);setModel(null);setTexture(null);setGlow(null);setMessage("");}
+ function choose(id:string){setSpecies(id);setModel(null);setTexture(null);setGlow(null);setAshFile(null);setRemoveAsh(false);setShowAsh(false);setMessage("");}
  async function task(work:()=>Promise<void>){setBusy(true);setError("");setMessage("");try{await work();await load();}catch(e){setError((e as Error).message);}finally{setBusy(false);}}
- async function save(){await task(async()=>{if(!model||!texture)throw new Error("Ajoute le modèle et sa texture.");if(model.size>1_500_000)throw new Error("Modèle trop grand : maximum 1,5 Mo.");const asset={species,model:JSON.parse(await model.text()),texture:await png(texture),...(glow?{emissive:await png(glow)}:{})};await api(`/api/admin/star/${species}`,{method:"PUT",body:JSON.stringify({expectedRevision:selected?.revision??0,asset})});setMessage("Brouillon enregistré. La version publiée reste inchangée jusqu’à publication.");});}
+ async function save(){await task(async()=>{
+  if(model&&model.size>1_500_000)throw new Error("Modèle trop grand : maximum 1,5 Mo.");
+  type Upload={species:string;model:unknown;texture:string;emissive?:string;ash?:{texture:string;emissive?:string}};
+  let previous:Upload|undefined;
+  if(species==="greninja"&&selected){const saved=await api<{asset:Upload;revision:number}>(`/api/admin/star/${species}/asset?version=draft`);if(saved.revision!==selected.revision)throw new Error("Le brouillon a changé. Recharge avant d’enregistrer.");previous=saved.asset;}
+  if((model&&!texture)||(!model&&texture)||(!model&&!previous))throw new Error("Ajoute le modèle et sa texture ensemble.");
+  const asset:Upload=model&&texture?{species,model:JSON.parse(await model.text()),texture:await png(texture),...(glow?{emissive:await png(glow)}:{})}:{...previous!};
+  if(species==="greninja"){
+   if(removeAsh)delete asset.ash;
+   else if(ashFile){if(ashFile.size>6_100_000)throw new Error("Fichier Sachanobi trop grand.");asset.ash=JSON.parse(await ashFile.text());}
+   else if(previous?.ash)asset.ash=previous.ash;
+  }
+  await api(`/api/admin/star/${species}`,{method:"PUT",body:JSON.stringify({expectedRevision:selected?.revision??0,asset})});setMessage("Brouillon enregistré. Publie pour envoyer les apparences aux joueurs.");
+ });}
  async function publish(){if(!selected||!window.confirm(`Publier le modèle Star de ${species} ? Le pack sera envoyé aux joueurs connectés.`))return;await task(async()=>{await api(`/api/admin/star/${species}/publish`,{method:"POST",body:JSON.stringify({revision:selected.revision})});setMessage("Publié. Attends la synchronisation serveur puis le chargement du pack par les clients.");});}
  async function download(id:string,source:"native"|"published"|"draft"){
   setBusy(true);setError("");
@@ -74,9 +88,11 @@ export default function StarStudio(){
    <label>Calque lumineux PNG (facultatif)<input disabled={busy||!state?.canWrite} key={species+"glow"} type="file" accept="image/png" onChange={e=>setGlow(e.target.files?.[0]??null)}/></label>
    {model&&texture&&<p>Prêt : {model.name} · {texture.name}{glow?` · ${glow.name}`:" · sans calque lumineux"}</p>}
    <p>Les PNG doivent avoir les dimensions UV du modèle (1024 × 1024 maximum). Le calque lumineux reste transparent en dehors des détails à faire briller.</p>
-   <button disabled={busy||!state?.canWrite||!compatible||!model||!texture} onClick={()=>void save()}>Enregistrer le brouillon</button>
+   {species==="greninja"&&<fieldset><legend>Forme Sacha · Sachanobi Star</legend><p>Modèle CCC 2.1.0 requis chez les joueurs. Le fichier ci-dessous contient ses textures propres : il ne remplace pas Amphinobi et ne débloque pas la transformation. Sans nouvel import, la variante enregistrée est conservée.</p><label>Importer sachanobi-star.json<input disabled={busy||!state?.canWrite||removeAsh} key={species+"ash"} type="file" accept=".json" onChange={e=>setAshFile(e.target.files?.[0]??null)}/></label><label><input disabled={busy||!state?.canWrite} type="checkbox" checked={removeAsh} onChange={e=>setRemoveAsh(e.target.checked)}/>Retirer la variante Sacha à la prochaine publication</label><p>Si Amphinobi a déjà un brouillon, tu peux importer uniquement ce fichier, puis enregistrer et publier.</p></fieldset>}
+   <button disabled={busy||!state?.canWrite||!compatible||(!(model&&texture)&&!(species==="greninja"&&selected&&(ashFile||removeAsh)))} onClick={()=>void save()}>Enregistrer le brouillon</button>
   </section><section><h2>3. Vérifier et publier</h2>
-   {selected?<><StarPreview key={`${species}-${selected.revision}`} url={`/api/admin/star/${species}/asset?version=draft&revision=${selected.revision}`} label={`Brouillon ${template?.name??species}`}/><p>Aperçu du brouillon v{selected.revision}{selected.revision!==selected.publishedRevision?" — pas encore en jeu":" — identique à la version publiée"}.</p></>:<p>Aucun modèle Star enregistré pour {template?.name??species}. Télécharge le kit de base pour commencer.</p>}
+   {species==="greninja"&&selected&&<label><input type="checkbox" checked={showAsh} onChange={e=>setShowAsh(e.target.checked)}/>Voir Sachanobi enregistré (après import)</label>}
+   {selected?<><StarPreview key={`${species}-${selected.revision}-${showAsh}`} url={`/api/admin/star/${species}/asset?version=draft&revision=${selected.revision}&form=${showAsh?"ash":"base"}`} label={`Brouillon ${showAsh?"Sachanobi":template?.name??species}`}/><p>Aperçu du brouillon v{selected.revision}{selected.revision!==selected.publishedRevision?" — pas encore en jeu":" — identique à la version publiée"}.</p></>:<p>Aucun modèle Star enregistré pour {template?.name??species}. Télécharge le kit de base pour commencer.</p>}
    <div className={s.status}><strong>{template?.name??species}</strong><span>Brouillon : {selected?.revision??"aucun"}</span><span>Publié : {selected?.publishedRevision||"non"}</span></div>
    <button disabled={busy||!state?.canWrite||!compatible||!selected||selected.revision===selected.publishedRevision} onClick={()=>void publish()}>Publier le modèle Star</button>
    {state&&!state.canWrite&&<p className={s.warning}>Accès en lecture seule : consultation et téléchargement autorisés, modification désactivée.</p>}

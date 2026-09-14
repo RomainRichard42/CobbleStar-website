@@ -17,9 +17,16 @@ export const starModel = z.object({
  }).strict()).length(1) }).strict(),
  texture: z.string().max(3_000_000), emissive: z.string().max(3_000_000).optional(),
  templateSource:addonSource.optional(),
+ // Sacha is a form of Greninja, never a separate spawnable species.
+ ash: z.object({texture:z.string().max(3_000_000),emissive:z.string().max(3_000_000).optional()}).strict().optional(),
 }).strict();
 export type StarModel = z.infer<typeof starModel>;
 export type NativeModel = { species: string; poser: string; bones: { name: string; parent?: string }[];source?:AddonSource };
+export function ashStarPreview(asset:StarModel) {
+ if(asset.species!=="greninja"||!asset.ash)throw new Error("ASH_STAR_NOT_CONFIGURED");
+ const model=JSON.parse(readFileSync(new URL("../star-layers/ashgreninja/ashgreninja.geo.json",import.meta.url),"utf8"));
+ return {species:"greninja",model,...asset.ash};
+}
 type NativeGeometry = { model: StarModel["model"]; reference: string; poser: string; sources: Map<string,Buffer> };
 const nativeGeometries = new Map<string, NativeGeometry | null>();
 /** Read only our bundled, exporter-generated native kits; never an uploaded ZIP. */
@@ -111,6 +118,10 @@ export function validateStar(value: unknown, native: NativeModel): StarModel {
  for(const bone of requiredBones){const candidate=byName.get(bone.name);if(!candidate || (candidate.parent??"")!==(bone.parent??""))throw new Error("PRESERVE_NATIVE_BONES_AND_PARENTS: "+bone.name);}
  png(asset.texture,geometry.description.texture_width,geometry.description.texture_height);
  if(asset.emissive)png(asset.emissive,geometry.description.texture_width,geometry.description.texture_height);
+ if(asset.ash){
+  if(asset.species!=="greninja")throw new Error("ASH_REQUIRES_GRENINJA");
+  png(asset.ash.texture,130,92);if(asset.ash.emissive)png(asset.ash.emissive,130,92);
+ }
  return asset;
 }
 function crc32(bytes: Buffer){let crc=0xffffffff;for(const b of bytes){crc^=b;for(let j=0;j<8;j++)crc=(crc>>>1)^((crc&1)?0xedb88320:0);}return (crc^0xffffffff)>>>0;}
@@ -170,6 +181,19 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[]) {
    layers.push({name:"flame",texture:{frames,fps:10,loop:true},emissive:true,translucent:true});
   }
   files.set(root+`bedrock/pokemon/resolvers/star/${id}.json`,Buffer.from(JSON.stringify({species:"cobblemon:"+asset.species,order:10000,variations:[{aspects:["cobblestar-star"],poser:poserReference,model:nativeReference??`cobblestar_planets:${id}.geo`,texture:`cobblestar_planets:textures/pokemon/star/${id}.png`,layers}]})));
+  if(asset.ash){
+   const variation=JSON.parse(readFileSync(new URL("../star-layers/ashgreninja/resolver.json",import.meta.url),"utf8")).variations.find((v:{aspects:string[]})=>v.aspects.length===1&&v.aspects[0]==="ash");
+   if(variation?.model!=="cobblemon:ashgreninja.geo"||variation?.poser!=="cobblemon:ashgreninja")throw new Error("ASH_NATIVE_REFERENCE_INVALID");
+   variation.aspects=["ash","cobblestar-star"];
+   variation.texture="cobblestar_planets:textures/pokemon/star/star_ashgreninja.png";
+   files.set(root+"textures/pokemon/star/star_ashgreninja.png",Buffer.from(asset.ash.texture,"base64"));
+   // Override base Star glow by the SAME name: its 128x64 UVs must not leak onto Ash.
+   const glow=asset.ash.emissive??Buffer.from(readFileSync(new URL("../star-layers/ashgreninja/blank.png",import.meta.url))).toString("base64");
+   files.set(root+"textures/pokemon/star/star_ashgreninja_glow.png",Buffer.from(glow,"base64"));
+   variation.layers.push({name:"star_glow",texture:"cobblestar_planets:textures/pokemon/star/star_ashgreninja_glow.png",emissive:true});
+   files.set(root+"bedrock/pokemon/resolvers/star/star_ashgreninja.json",Buffer.from(JSON.stringify({species:"cobblemon:greninja",order:10001,variations:[variation]})));
+   files.set("licenses/CCC-Sachanobi.txt",readFileSync(new URL("../star-layers/ashgreninja/LICENSE-CCC.txt",import.meta.url)));
+  }
  }
  return zipAssets(files);
 }

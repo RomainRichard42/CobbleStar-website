@@ -20,6 +20,14 @@ test('Editable Star ZIP retains exact published model, texture and glow',async()
  assert.deepEqual(JSON.parse(files.get('dragonite.geo.json')),asset.model);assert.equal(files.get('dragonite.png').toString('base64'),asset.texture);assert.equal(files.get('dragonite_glow.png').toString('base64'),asset.emissive);assert.match(files.get('README.txt').toString(),/révision 7/);
 });
 
+test('Editable Greninja kit retains the independently imported Sacha textures',async()=>{
+ const texture=readFileSync(new URL('../star-layers/ashgreninja/blank.png',import.meta.url)).toString('base64');
+ const asset={...fixture(),species:'greninja',ash:{texture,emissive:texture}};
+ const files=unpack(await editableStarKit(asset,3,'draft'));
+ assert.deepEqual(JSON.parse(files.get('sachanobi-star.json')),asset.ash);
+ assert.deepEqual(JSON.parse(files.get('greninja.geo.json')),asset.model);
+});
+
 test('Admin preview and downloads are authenticated and distinguish draft from published',async()=>{
  Object.assign(process.env,{NODE_ENV:'test',PUBLIC_API_URL:'http://localhost:3000',SITE_ORIGIN:'http://localhost:3000',DB_HOST:'127.0.0.1',DB_NAME:'test',DB_USER:'test',DB_PASSWORD:'test',COOKIE_SECRET:'a'.repeat(40),MINECRAFT_SERVER_KEY:'b'.repeat(40),GAME_ADMIN_READ_DISCORD_IDS:'123'});
  const [{default:Fastify},{registerStarStudio},{pool}]=await Promise.all([import('fastify'),import('../dist/star-studio.js'),import('../dist/db.js')]);
@@ -35,5 +43,10 @@ test('Admin preview and downloads are authenticated and distinguish draft from p
   const b=await get('/api/admin/star/dragonite/asset?version=draft');assert.equal(b.json().revision,8);assert.equal(b.json().asset.emissive,undefined);
   for(const source of ['native','published','draft']){const r=await get(`/api/admin/star/dragonite/kit?source=${source}`);assert.equal(r.statusCode,200);assert.match(r.headers['content-type'],/application\/zip/);assert.match(r.headers['content-disposition'],new RegExp(`star-${source}\\.zip`));assert.ok(unpack(r.rawPayload).has('dragonite.png'));}
   assert.equal((await app.inject({method:'PUT',url:'/api/admin/star/dragonite',headers:{authorization:'reader'},payload:{}})).statusCode,403);
+  assert.equal((await get('/api/admin/star/dragonite/asset?form=ash')).statusCode,404);
+  published.species='greninja';published.ash={texture:readFileSync(new URL('../star-layers/ashgreninja/blank.png',import.meta.url)).toString('base64')};
+  assert.equal((await app.inject('/api/admin/star/greninja/asset?form=ash')).statusCode,401);
+  const ash=await get('/api/admin/star/greninja/asset?form=ash');assert.equal(ash.statusCode,200);assert.equal(ash.json().asset.model['minecraft:geometry'][0].description.texture_width,130);
+  assert.equal((await get('/api/admin/star/greninja/asset?form=ash&version=draft')).statusCode,404);
  }finally{pool.query=originalQuery;pool.execute=originalExecute;await app.close();await pool.end();}
 });

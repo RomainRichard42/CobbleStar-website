@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { deflateSync, inflateRawSync } from 'node:zlib';
 import { readFileSync } from 'node:fs';
-import { validateStar, buildStarPack } from '../dist/star-assets.js';
+import { validateStar, buildStarPack, ashStarPreview } from '../dist/star-assets.js';
 function crc(bytes){let c=0xffffffff;for(const b of bytes){c^=b;for(let j=0;j<8;j++)c=(c>>>1)^((c&1)?0xedb88320:0);}return(c^0xffffffff)>>>0;}
 function chunk(type,data){const name=Buffer.from(type),out=Buffer.alloc(data.length+12);out.writeUInt32BE(data.length);name.copy(out,4);data.copy(out,8);out.writeUInt32BE(crc(Buffer.concat([name,data])),data.length+8);return out;}
 const ihdr=Buffer.alloc(13);ihdr.writeUInt32BE(1,0);ihdr.writeUInt32BE(1,4);ihdr[8]=8;ihdr[9]=6;
@@ -16,6 +16,27 @@ test('Broken PNG refused before publication',()=>{const v=fixture();v.texture=Bu
 function unpack(zip){let at=0;const files=new Map();while(zip.readUInt32LE(at)===0x04034b50){const compressed=zip.readUInt32LE(at+18),nameLength=zip.readUInt16LE(at+26),extra=zip.readUInt16LE(at+28),start=at+30+nameLength+extra;const name=zip.toString('utf8',at+30,at+30+nameLength),bytes=inflateRawSync(zip.subarray(start,start+compressed));assert.equal(crc(bytes),zip.readUInt32LE(at+14));files.set(name,bytes);at=start+compressed;}assert.equal(zip.readUInt32LE(at),0x02014b50);return files;}
 test('Deterministic pack preserves previous species and only adds Star resolver',()=>{const a=fixture(),b={...fixture(),species:'eevee'},cat=[native,{...native,species:'eevee',poser:'cobblemon:eevee'}];const zip=buildStarPack([a,b],cat);assert.deepEqual(zip,buildStarPack([b,a],cat));const files=unpack(zip);assert.equal(files.size,9);assert.ok(files.has('licenses/Cobblemon.txt'));assert.equal(JSON.parse(files.get('pack.mcmeta')).pack.pack_format,34);for(const id of ['dragonite','eevee']){const r=JSON.parse(files.get(`assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_${id}.json`));assert.deepEqual(r.variations[0].aspects,['cobblestar-star']);assert.equal(r.variations[0].poser,'cobblemon:'+id);assert.equal(r.order,10000);}});
 test('Optional emissive texture becomes a dedicated luminous layer',()=>{const files=unpack(buildStarPack([{...fixture(),emissive:texture}],[native]));const r=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_dragonite.json'));assert.equal(r.variations[0].layers[0].emissive,true);assert.ok(files.has('assets/cobblestar_planets/textures/pokemon/star/star_dragonite_glow.png'));});
+
+test('Sachanobi is an optional Greninja form, preserves the base and native animated shuriken',()=>{
+ const blank=readFileSync(new URL('../star-layers/ashgreninja/blank.png',import.meta.url)).toString('base64');
+ const base={...fixture(),species:'greninja',emissive:texture},cat={...native,species:'greninja',poser:'cobblemon:greninja'};
+ const asset={...base,ash:{texture:blank,emissive:blank}};
+ assert.throws(()=>validateStar({...fixture(),ash:asset.ash},native),/ASH_REQUIRES_GRENINJA/);
+ assert.throws(()=>validateStar({...base,ash:{texture}},cat),/PNG_DIMENSIONS/);
+ assert.throws(()=>validateStar({...base,ash:{...asset.ash,model:{}}},cat));
+ const files=unpack(buildStarPack([asset],[cat])),plain=unpack(buildStarPack([base],[cat]));
+ for(const [name,data] of plain)assert.deepEqual(files.get(name),data);
+ const r=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_ashgreninja.json')),v=r.variations[0];
+ assert.equal(r.order,10001);assert.equal(r.species,'cobblemon:greninja');assert.deepEqual(v.aspects,['ash','cobblestar-star']);
+ assert.equal(v.model,'cobblemon:ashgreninja.geo');assert.equal(v.poser,'cobblemon:ashgreninja');
+ assert.equal(v.layers[0].name,'backshuriken');assert.equal(v.layers[0].texture.frames.length,4);assert.equal(v.layers[0].texture.fps,10);
+ assert.equal(v.layers[1].name,'star_glow');assert.equal(v.layers[1].emissive,true);
+ for(const aspects of [[],['ash'],['cobblestar-star'],['ash','cobblestar-star'],['ash','shiny','cobblestar-star']])assert.equal(v.aspects.every(a=>aspects.includes(a)),aspects.includes('ash')&&aspects.includes('cobblestar-star'));
+ const preview=ashStarPreview(asset);assert.equal(preview.model['minecraft:geometry'][0].description.texture_width,130);assert.equal(preview.texture,blank);
+ const noGlow=unpack(buildStarPack([{...base,ash:{texture:blank}}],[cat]));
+ assert.equal(noGlow.get('assets/cobblestar_planets/textures/pokemon/star/star_ashgreninja_glow.png').toString('base64'),blank);
+ assert.ok([...files.keys()].every(p=>!p.startsWith('data/')&&!p.startsWith('assets/cobblemon/')));
+});
 
 test('Chimchar Star glow replaces the orange native emissive layer only for Star',()=>{
  const cat={...native,species:'chimchar',poser:'cobblemon:chimchar'};

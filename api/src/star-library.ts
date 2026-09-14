@@ -27,6 +27,7 @@ export async function editableStarKit(asset:StarModel,revision:number,version:st
   ["licenses/Cobblemon.txt",await readFile(new URL("../licenses/Cobblemon.txt",import.meta.url))]
  ]);
  if(asset.emissive)files.set(`${asset.species}_glow.png`,Buffer.from(asset.emissive,"base64"));
+ if(asset.ash)files.set("sachanobi-star.json",Buffer.from(JSON.stringify(asset.ash)));
  if(asset.templateSource){
   const template=addonTemplate(asset.species);
   files.set('source.json',Buffer.from(JSON.stringify(asset.templateSource,null,2)));

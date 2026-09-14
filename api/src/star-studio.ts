@@ -5,7 +5,7 @@ import { z } from "zod";
 import { pool, transaction } from "./db.js";
 import { config } from "./config.js";
 import { canReadGame, canWriteGame } from "./game-admin.js";
-import { buildStarPack, validateStar, type NativeModel, type StarModel } from "./star-assets.js";
+import { buildStarPack, validateStar, ashStarPreview, type NativeModel, type StarModel } from "./star-assets.js";
 import { createQuestUploadReceiver } from "./quest-sync-upload.js";
 import { starTemplates, sameSkeleton, nativeStarKit, editableStarKit } from "./star-library.js";
 import {addonSource,addonIndex} from './star-addon-templates.js';
@@ -29,13 +29,15 @@ export function registerStarStudio(app:FastifyInstance,auth:Auth){
   const templates=await starTemplates();
   return {models,servers,hash:publication[0]?.sha1??"",catalog:native.map(n=>({species:n.species,poser:n.poser,source:n.source})),templates:templates.species.map(t=>({species:t.species,name:t.name,source:t.source,compatible:!native.some(n=>n.species===t.species)||sameSkeleton(t,native.find(n=>n.species===t.species)!)})),unavailableTemplates:addonIndex().skipped??[],templateVersion:templates.version,canWrite:canWriteGame(actor)};
  });
- const versionQuery=z.object({version:z.enum(["published","draft"]).default("published")});
+ const versionQuery=z.object({version:z.enum(["published","draft"]).default("published"),form:z.enum(["base","ash"]).default("base")});
  app.get("/api/admin/star/:species/asset",async(r,reply)=>{
-  if(!await authorize(r,reply))return;const {species}=params.parse(r.params),{version}=versionQuery.parse(r.query);
+  if(!await authorize(r,reply))return;const {species}=params.parse(r.params),{version,form}=versionQuery.parse(r.query);
   const [rows]=await pool.execute<RowDataPacket[]>("SELECT draft_json,published_json,revision,published_revision FROM star_models WHERE species=?",[species]);
   const row=rows[0],value=row?.[version==="published"?"published_json":"draft_json"];
   if(!value)return reply.code(404).send({error:"MODEL_NOT_FOUND"});
-  return {asset:decode(value),revision:row![version==="published"?"published_revision":"revision"],version};
+  const asset=decode(value) as StarModel;
+  if(form==="ash"&&(species!=="greninja"||!asset.ash))return reply.code(404).send({error:"ASH_STAR_NOT_CONFIGURED"});
+  return {asset:form==="ash"?ashStarPreview(asset):asset,revision:row![version==="published"?"published_revision":"revision"],version};
  });
  app.get("/api/admin/star/:species/kit",{config:{rateLimit:{max:60,timeWindow:"1 minute"}}},async(r,reply)=>{
   if(!await authorize(r,reply))return;const {species}=params.parse(r.params);
