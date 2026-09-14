@@ -139,6 +139,12 @@ export function zipAssets(files: Map<string,Buffer>) {
 }
 export function buildStarPack(assets: StarModel[], catalog: NativeModel[]) {
  const files=new Map<string,Buffer>();files.set("pack.mcmeta",Buffer.from(JSON.stringify({pack:{pack_format:34,description:"CobbleStar · Pokémon Star"}})));
+ // Shared cosmetics are shipped even when no species has been published yet.
+ const effects=JSON.parse(readFileSync(new URL("../star-effects/manifest.json",import.meta.url),"utf8")) as {files:string[]};
+ for(const path of effects.files){
+  if(!/^assets\/cobblestar_planets\/[a-z0-9_./-]+$/.test(path)||path.includes("..")||files.has(path))throw new Error("INVALID_STAR_EFFECT_PATH");
+  files.set(path,readFileSync(new URL("../star-effects/"+path,import.meta.url)));
+ }
  files.set("licenses/Cobblemon.txt",readFileSync(new URL("../licenses/Cobblemon.txt",import.meta.url)));
  files.set("licenses/NOTICE.txt",Buffer.from("Native Pokemon geometry and base assets: Cobblemon team, Cobblemon 1.8.0. https://gitlab.com/cable-mc/cobblemon\nStar variants are modified adaptations supplied by CobbleStar administrators. Kingambit includes official animations and poser with isolated identifiers to prevent addon collisions. Other native animations remain in Cobblemon. Original asset license included as Cobblemon.txt.\n"));
  for(const input of [...assets].sort((a,b)=>a.species.localeCompare(b.species))){

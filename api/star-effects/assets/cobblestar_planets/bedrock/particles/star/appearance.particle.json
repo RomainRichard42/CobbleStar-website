@@ -1,0 +1,116 @@
+{
+  "format_version": "1.10.0",
+  "particle_effect": {
+    "description": {
+      "identifier": "cobblestar_planets:star_appearance",
+      "basic_render_parameters": {
+        "material": "particles_blend",
+        "texture": "cobblestar_planets:textures/particles/star/blue_star"
+      }
+    },
+    "events": {
+      "note_low": {
+        "sound_effect": {
+          "event_name": "cobblestar_planets:star.appearance.low"
+        }
+      },
+      "note_mid": {
+        "sound_effect": {
+          "event_name": "cobblestar_planets:star.appearance.mid"
+        }
+      },
+      "note_high": {
+        "sound_effect": {
+          "event_name": "cobblestar_planets:star.appearance.high"
+        }
+      },
+      "orbit": {
+        "particle_effect": {
+          "effect": "cobblestar_planets:star_orbit",
+          "type": "emitter"
+        }
+      },
+      "burst": {
+        "particle_effect": {
+          "effect": "cobblestar_planets:star_burst",
+          "type": "emitter"
+        }
+      }
+    },
+    "components": {
+      "minecraft:emitter_local_space": {
+        "position": true,
+        "rotation": false
+      },
+      "minecraft:emitter_lifetime_once": {
+        "active_time": 1.8
+      },
+      "minecraft:emitter_shape_point": {
+        "offset": [
+          0,
+          0,
+          0
+        ],
+        "direction": [
+          0,
+          1,
+          0
+        ]
+      },
+      "minecraft:particle_initial_speed": 0,
+      "minecraft:particle_appearance_billboard": {
+        "size": [
+          "0.12 * math.clamp(q.entity_size, 0.8, 2)",
+          "0.12 * math.clamp(q.entity_size, 0.8, 2)"
+        ],
+        "facing_camera_mode": "rotate_xyz",
+        "uv": {
+          "texture_width": 32,
+          "texture_height": 32,
+          "uv": [
+            0,
+            0
+          ],
+          "uv_size": [
+            32,
+            32
+          ]
+        }
+      },
+      "minecraft:emitter_rate_instant": {
+        "num_particles": 8
+      },
+      "minecraft:emitter_lifetime_events": {
+        "creation_event": [
+          "note_low",
+          "orbit"
+        ],
+        "timeline": {
+          "0.20": "note_mid",
+          "0.40": [
+            "note_high",
+            "burst"
+          ]
+        }
+      },
+      "minecraft:particle_lifetime_expression": {
+        "max_lifetime": 1.25
+      },
+      "minecraft:particle_motion_parametric": {
+        "relative_position": [
+          "math.cos(v.particle_random_1 * 360) * (0.6 + v.particle_age * 0.35) * math.clamp(q.entity_size, 0.7, 2.5)",
+          "(v.particle_random_2 - 0.3 + v.particle_age * 0.4) * math.clamp(q.entity_size, 0.7, 2.5)",
+          "math.sin(v.particle_random_1 * 360) * (0.6 + v.particle_age * 0.35) * math.clamp(q.entity_size, 0.7, 2.5)"
+        ]
+      },
+      "minecraft:particle_appearance_tinting": {
+        "color": [
+          0.5,
+          0.85,
+          1,
+          "math.clamp((1.25-v.particle_age)*3,0,1)"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "files": [
+    "assets/cobblestar_planets/sounds.json",
+    "assets/cobblestar_planets/lang/fr_fr.json",
+    "assets/cobblestar_planets/lang/en_us.json",
+    "assets/cobblestar_planets/bedrock/particles/star/appearance.particle.json",
+    "assets/cobblestar_planets/bedrock/particles/star/orbit.particle.json",
+    "assets/cobblestar_planets/bedrock/particles/star/burst.particle.json",
+    "assets/cobblestar_planets/textures/particle/star/blue_star.png"
+  ]
+}

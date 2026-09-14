@@ -17,6 +17,7 @@ const required = [
   "api/package.json",
   "api/package-lock.json",
   "api/star-templates/index.json",
+  "api/star-effects/manifest.json",
 ];
 
 for (const relativePath of required) {
@@ -41,6 +42,7 @@ await cp(join(projectDir, "api", "migrations"), join(deployDir, "migrations"), {
 await cp(join(projectDir, "api", "licenses"), join(deployDir, "licenses"), { recursive: true });
 await cp(join(projectDir, "api", "star-templates"), join(deployDir, "star-templates"), { recursive: true });
 await cp(join(projectDir, "api", "star-layers"), join(deployDir, "star-layers"), { recursive: true });
+await cp(join(projectDir, "api", "star-effects"), join(deployDir, "star-effects"), { recursive: true });
 await mkdir(join(deployDir,"star-addon-templates"),{recursive:true});
 const addonDir=join(projectDir,"api","star-addon-templates");
 const addonIndex=JSON.parse(await readFile(join(addonDir,"index.json"),"utf8"));

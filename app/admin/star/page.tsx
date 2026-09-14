@@ -96,7 +96,10 @@ export default function StarStudio(){
    <div className={s.status}><strong>{template?.name??species}</strong><span>Brouillon : {selected?.revision??"aucun"}</span><span>Publié : {selected?.publishedRevision||"non"}</span></div>
    <button disabled={busy||!state?.canWrite||!compatible||!selected||selected.revision===selected.publishedRevision} onClick={()=>void publish()}>Publier le modèle Star</button>
    {state&&!state.canWrite&&<p className={s.warning}>Accès en lecture seule : consultation et téléchargement autorisés, modification désactivée.</p>}
-   <h2>Synchronisation</h2>{!state?.servers.length&&<p>Aucun serveur connecté. Vérifie le mod et sa configuration de passerelle.</p>}
+   <h2>Synchronisation</h2>
+   <p>Les sons et effets Star sont ajoutés automatiquement au pack à la première synchronisation après une mise à jour de l’API. Le téléchargement est obligatoire à la connexion. Les modèles publiés sont conservés, les brouillons restent intacts. Le bouton ci-dessous permet seulement de relancer la publication manuellement.</p>
+   <button disabled={busy||!state?.canWrite} onClick={()=>{if(window.confirm("Publier les sons et effets du pack serveur ? Les joueurs connectés recevront la mise à jour. Aucun brouillon Pokémon ne sera publié."))void task(async()=>{await api("/api/admin/star/publish-effects",{method:"POST",body:"{}"});setMessage("Pack publié. Le serveur l’enverra après synchronisation ; /pokemonstar sync permet de la lancer maintenant.");});}}>Publier les sons et effets du pack</button>
+   {!state?.servers.length&&<p>Aucun serveur connecté. Vérifie le mod et sa configuration de passerelle.</p>}
    {state?.servers.map(server=><div className={s.status} key={server.server_id}><strong>{server.server_id}</strong><span>{observedAt-new Date(server.seen_at).getTime()>90000?"Serveur hors ligne / réponse ancienne":server.applied_hash===state.hash&&state.hash?"Pack transmis au serveur":"Publication en attente"}</span><span>{server.ready_clients} / {server.total_clients} clients ont chargé le pack</span>{server.last_error&&<span className={s.error}>{server.last_error}</span>}</div>)}
    <p>Une sauvegarde ne publie rien. Après publication, les nouveaux spawns Star attendent le chargement du pack par les clients connectés.</p>
   </section></div>

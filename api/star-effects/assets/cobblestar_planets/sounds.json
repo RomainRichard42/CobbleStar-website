@@ -1,0 +1,41 @@
+{
+  "star.appearance.low": {
+    "replace": true,
+    "subtitle": "cobblestar.subtitle.star_appearance",
+    "sounds": [
+      {
+        "name": "minecraft:block.note_block.chime",
+        "type": "event",
+        "pitch": 0.8,
+        "volume": 1,
+        "attenuation_distance": 32
+      }
+    ]
+  },
+  "star.appearance.mid": {
+    "replace": true,
+    "subtitle": "cobblestar.subtitle.star_appearance",
+    "sounds": [
+      {
+        "name": "minecraft:block.note_block.chime",
+        "type": "event",
+        "pitch": 1.05,
+        "volume": 1,
+        "attenuation_distance": 32
+      }
+    ]
+  },
+  "star.appearance.high": {
+    "replace": true,
+    "subtitle": "cobblestar.subtitle.star_appearance",
+    "sounds": [
+      {
+        "name": "minecraft:block.note_block.chime",
+        "type": "event",
+        "pitch": 1.4,
+        "volume": 1,
+        "attenuation_distance": 32
+      }
+    ]
+  }
+}

@@ -69,6 +69,35 @@ export function registerStarStudio(app:FastifyInstance,auth:Auth){
    await db.execute("INSERT INTO star_models(species,draft_json,actor_id) VALUES(?,?,?) ON DUPLICATE KEY UPDATE draft_json=VALUES(draft_json),actor_id=VALUES(actor_id),revision=revision+1",[species,JSON.stringify(asset),actor.id]);return true;
   });return result?{ok:true}:reply.code(409).send({error:"DRAFT_CHANGED_REFRESH"});
  });
+ // Rebuild shared cosmetics without ever promoting an unfinished Pokemon draft.
+ async function publishSharedEffects(){
+  const native=await catalog();
+  return transaction(async db=>{
+   await db.query("SELECT id FROM star_publication WHERE id=1 FOR UPDATE");
+   const [rows]=await db.query<RowDataPacket[]>("SELECT published_json FROM star_models ORDER BY species FOR UPDATE");
+   const assets=rows.flatMap(row=>row.published_json?[decode(row.published_json)]:[]) as StarModel[];
+   const pack=buildStarPack(assets,native),sha1=createHash("sha1").update(pack).digest("hex");
+   await db.execute("INSERT IGNORE INTO star_packs(sha1,pack,species_json) VALUES(?,?,?)",[sha1,pack,JSON.stringify(assets.map(a=>a.species).sort())]);
+   await db.execute("UPDATE star_publication SET sha1=? WHERE id=1",[sha1]);
+   return {ok:true,hash:sha1};
+  });
+ }
+ let effectsPublished=false,effectsAttempt:Promise<void>|undefined,retryEffectsAt=0;
+ async function ensureSharedEffects(){
+  if(effectsPublished)return;
+  if(effectsAttempt)return effectsAttempt;
+  if(Date.now()<retryEffectsAt)return;
+  effectsAttempt=publishSharedEffects().then(()=>{effectsPublished=true;}).catch(()=>{
+   retryEffectsAt=Date.now()+60_000;
+   app.log.warn("Star FX: automatic pack rebuild failed; previous publication preserved, retry in 60 seconds.");
+  }).finally(()=>{effectsAttempt=undefined;});
+  return effectsAttempt;
+ }
+ app.post("/api/admin/star/publish-effects",async(r,reply)=>{
+  if(!await authorize(r,reply,true))return;
+  try{const result=await publishSharedEffects();effectsPublished=true;return result;}
+  catch(e){return reply.code(400).send({error:e instanceof Error?e.message:"PUBLICATION_FAILED"});}
+ });
  app.post("/api/admin/star/:species/publish",async(r,reply)=>{
   if(!await authorize(r,reply,true))return;const {species}=params.parse(r.params);
   const {revision}=z.object({revision:z.number().int().positive()}).parse(r.body);const native=await catalog();
@@ -93,6 +122,9 @@ export function registerStarStudio(app:FastifyInstance,auth:Auth){
   if(!auth.server(r))return reply.code(401).send({error:"INVALID_SERVER_KEY"});
   const body=z.object({serverId:z.string().regex(/^[a-zA-Z0-9_-]{1,48}$/),hash:z.string().regex(/^([a-f0-9]{40})?$/),ready:z.number().int().min(0),total:z.number().int().min(0),error:z.string().max(400),catalog:catalogSchema.min(1).optional()}).parse(value);
   if(body.catalog)await pool.execute("INSERT INTO star_catalog(id,catalog_json) VALUES(1,?) ON DUPLICATE KEY UPDATE catalog_json=VALUES(catalog_json)",[JSON.stringify(body.catalog)]);
+  // First authenticated sync after an API deployment automatically includes the shipped FX.
+  // Deterministic ZIPs keep the same hash when nothing changed, so clients do not re-download.
+  await ensureSharedEffects();
   await pool.execute("INSERT INTO star_servers(server_id,applied_hash,ready_clients,total_clients,last_error) VALUES(?,?,?,?,?) ON DUPLICATE KEY UPDATE applied_hash=VALUES(applied_hash),ready_clients=VALUES(ready_clients),total_clients=VALUES(total_clients),last_error=VALUES(last_error),seen_at=CURRENT_TIMESTAMP",[body.serverId,body.hash,body.ready,body.total,body.error]);
   const [rows]=await pool.query<RowDataPacket[]>("SELECT p.sha1,k.species_json FROM star_publication p LEFT JOIN star_packs k ON k.sha1=p.sha1 WHERE p.id=1");
   reply.header("Cache-Control","no-store");return {schema:1,hash:rows[0]?.sha1??"",species:rows[0]?.species_json?decode(rows[0].species_json):[],catalogAccepted:!!body.catalog};
