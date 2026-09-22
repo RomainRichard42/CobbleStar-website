@@ -1,0 +1,19 @@
+{
+    "species":  "cobblemon:blaziken",
+    "order":  500,
+    "variations":  [
+                       {
+                           "aspects":  [
+                                           "cobblestar_nebelia"
+                                       ],
+                           "texture":  "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia.png"
+                       },
+                       {
+                           "aspects":  [
+                                           "cobblestar_nebelia",
+                                           "shiny"
+                                       ],
+                           "texture":  "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia_shiny.png"
+                       }
+                   ]
+}

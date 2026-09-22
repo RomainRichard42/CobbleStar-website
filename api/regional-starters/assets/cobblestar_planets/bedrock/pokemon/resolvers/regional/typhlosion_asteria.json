@@ -1,0 +1,35 @@
+{
+    "species":  "cobblemon:typhlosion",
+    "order":  500,
+    "variations":  [
+                       {
+                           "texture":  "cobblestar_planets:textures/pokemon/regional/typhlosion_asteria.png",
+                           "aspects":  [
+                                           "cobblestar_asteria"
+                                       ],
+                           "layers":  [
+                                          {
+                                              "texture":  "cobblestar_planets:textures/pokemon/regional/typhlosion_asteria_emissive.png",
+                                              "name":  "emissive",
+                                              "emissive":  true,
+                                              "translucent":  true
+                                          }
+                                      ]
+                       },
+                       {
+                           "texture":  "cobblestar_planets:textures/pokemon/regional/typhlosion_asteria_shiny.png",
+                           "aspects":  [
+                                           "cobblestar_asteria",
+                                           "shiny"
+                                       ],
+                           "layers":  [
+                                          {
+                                              "texture":  "cobblestar_planets:textures/pokemon/regional/typhlosion_asteria_emissive_shiny.png",
+                                              "name":  "emissive",
+                                              "emissive":  true,
+                                              "translucent":  true
+                                          }
+                                      ]
+                       }
+                   ]
+}

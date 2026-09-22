@@ -145,6 +145,20 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[]) {
   if(!/^assets\/cobblestar_planets\/[a-z0-9_./-]+$/.test(path)||path.includes("..")||files.has(path))throw new Error("INVALID_STAR_EFFECT_PATH");
   files.set(path,readFileSync(new URL("../star-effects/"+path,import.meta.url)));
  }
+ // Regional starters are shared assets, not Star drafts. They must be present
+ // for every player before the server exposes their regional forms.
+ const regionals=JSON.parse(readFileSync(new URL("../regional-starters/manifest.json",import.meta.url),"utf8")) as {files:string[]};
+ for(const path of regionals.files){
+  if(!/^assets\/cobblestar_planets\/[a-z0-9_./-]+$/.test(path)||path.includes(".."))throw new Error("INVALID_REGIONAL_ASSET_PATH");
+  const incoming=readFileSync(new URL("../regional-starters/"+path,import.meta.url));
+  if(files.has(path)){
+   if(!/^assets\/cobblestar_planets\/lang\/(?:fr_fr|en_us)\.json$/.test(path))throw new Error("REGIONAL_ASSET_COLLISION");
+   const previous=JSON.parse(files.get(path)!.toString()) as Record<string,string>;
+   const next=JSON.parse(incoming.toString()) as Record<string,string>;
+   if(Object.keys(next).some(key=>Object.hasOwn(previous,key)))throw new Error("REGIONAL_LANGUAGE_COLLISION");
+   files.set(path,Buffer.from(JSON.stringify({...previous,...next})));
+  }else files.set(path,incoming);
+ }
  files.set("licenses/Cobblemon.txt",readFileSync(new URL("../licenses/Cobblemon.txt",import.meta.url)));
  files.set("licenses/NOTICE.txt",Buffer.from("Native Pokemon geometry and base assets: Cobblemon team, Cobblemon 1.8.0. https://gitlab.com/cable-mc/cobblemon\nStar variants are modified adaptations supplied by CobbleStar administrators. Kingambit includes official animations and poser with isolated identifiers to prevent addon collisions. Other native animations remain in Cobblemon. Original asset license included as Cobblemon.txt.\n"));
  for(const input of [...assets].sort((a,b)=>a.species.localeCompare(b.species))){

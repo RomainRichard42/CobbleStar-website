@@ -1,0 +1,19 @@
+{
+    "species":  "cobblemon:bayleef",
+    "order":  500,
+    "variations":  [
+                       {
+                           "aspects":  [
+                                           "cobblestar_asteria"
+                                       ],
+                           "texture":  "cobblestar_planets:textures/pokemon/regional/bayleef_asteria.png"
+                       },
+                       {
+                           "aspects":  [
+                                           "cobblestar_asteria",
+                                           "shiny"
+                                       ],
+                           "texture":  "cobblestar_planets:textures/pokemon/regional/bayleef_asteria_shiny.png"
+                       }
+                   ]
+}

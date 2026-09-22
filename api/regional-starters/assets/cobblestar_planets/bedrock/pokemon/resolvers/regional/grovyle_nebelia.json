@@ -1,0 +1,19 @@
+{
+    "species":  "cobblemon:grovyle",
+    "order":  500,
+    "variations":  [
+                       {
+                           "aspects":  [
+                                           "cobblestar_nebelia"
+                                       ],
+                           "texture":  "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia.png"
+                       },
+                       {
+                           "aspects":  [
+                                           "cobblestar_nebelia",
+                                           "shiny"
+                                       ],
+                           "texture":  "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia_shiny.png"
+                       }
+                   ]
+}

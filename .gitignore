@@ -16,6 +16,7 @@ minecraft-mod/run/
 !api/.env.example
 
 *.log
+*.tsbuildinfo
 .DS_Store
 .asset-extract/
 .chrome-*/

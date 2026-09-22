@@ -1,0 +1,19 @@
+{
+    "species":  "cobblemon:meganium",
+    "order":  500,
+    "variations":  [
+                       {
+                           "aspects":  [
+                                           "cobblestar_asteria"
+                                       ],
+                           "texture":  "cobblestar_planets:textures/pokemon/regional/meganium_asteria.png"
+                       },
+                       {
+                           "aspects":  [
+                                           "cobblestar_asteria",
+                                           "shiny"
+                                       ],
+                           "texture":  "cobblestar_planets:textures/pokemon/regional/meganium_asteria_shiny.png"
+                       }
+                   ]
+}

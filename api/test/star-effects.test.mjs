@@ -28,5 +28,5 @@ test('Even an empty Star catalogue gets shared FX and resolvable sound/texture d
  }
  const fx=effects.get('cobblestar_planets:star_appearance');
  assert.deepEqual(fx.components['minecraft:emitter_lifetime_events'].timeline,{'0.20':'note_mid','0.40':['note_high','burst']});
- assert.ok([...files.keys()].every(n=>!n.includes('resolvers/')));
+ assert.ok([...files.keys()].every(n=>!n.includes('/resolvers/star/')));
 });

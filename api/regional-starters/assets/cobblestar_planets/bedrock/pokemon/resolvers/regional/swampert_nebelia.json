@@ -1,0 +1,19 @@
+{
+    "species":  "cobblemon:swampert",
+    "order":  500,
+    "variations":  [
+                       {
+                           "aspects":  [
+                                           "cobblestar_nebelia"
+                                       ],
+                           "texture":  "cobblestar_planets:textures/pokemon/regional/swampert_nebelia.png"
+                       },
+                       {
+                           "aspects":  [
+                                           "cobblestar_nebelia",
+                                           "shiny"
+                                       ],
+                           "texture":  "cobblestar_planets:textures/pokemon/regional/swampert_nebelia_shiny.png"
+                       }
+                   ]
+}
