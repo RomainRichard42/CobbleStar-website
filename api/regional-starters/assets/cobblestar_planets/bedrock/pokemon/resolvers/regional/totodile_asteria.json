@@ -1,19 +1,58 @@
 {
-    "species":  "cobblemon:totodile",
-    "order":  500,
-    "variations":  [
-                       {
-                           "aspects":  [
-                                           "cobblestar_asteria"
-                                       ],
-                           "texture":  "cobblestar_planets:textures/pokemon/regional/totodile_asteria.png"
-                       },
-                       {
-                           "aspects":  [
-                                           "cobblestar_asteria",
-                                           "shiny"
-                                       ],
-                           "texture":  "cobblestar_planets:textures/pokemon/regional/totodile_asteria_shiny.png"
-                       }
-                   ]
+  "species": "cobblemon:totodile",
+  "order": 500,
+  "variations": [
+    {
+      "aspects": [
+        "cobblestar_asteria"
+      ],
+      "model": "cobblestar_planets:totodile_asteria.geo",
+      "poser": "cobblemon:totodile",
+      "texture": "cobblestar_planets:textures/pokemon/regional/totodile_asteria.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_asteria",
+        "shiny"
+      ],
+      "model": "cobblestar_planets:totodile_asteria.geo",
+      "poser": "cobblemon:totodile",
+      "texture": "cobblestar_planets:textures/pokemon/regional/totodile_asteria_shiny.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_asteria",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:totodile_asteria.geo",
+      "poser": "cobblemon:totodile",
+      "texture": "cobblestar_planets:textures/pokemon/regional/totodile_asteria.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/totodile_asteria_alpha.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_asteria",
+        "shiny",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:totodile_asteria.geo",
+      "poser": "cobblemon:totodile",
+      "texture": "cobblestar_planets:textures/pokemon/regional/totodile_asteria_shiny.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/totodile_asteria_alpha.png",
+          "emissive": true
+        }
+      ]
+    }
+  ]
 }

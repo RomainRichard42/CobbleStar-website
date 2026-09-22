@@ -1,0 +1,58 @@
+{
+  "species": "cobblemon:meowscarada",
+  "order": 500,
+  "variations": [
+    {
+      "aspects": [
+        "cobblestar_nebelia"
+      ],
+      "model": "cobblestar_planets:meowscarada_nebelia.geo",
+      "poser": "cobblemon:meowscarada",
+      "texture": "cobblestar_planets:textures/pokemon/regional/meowscarada_nebelia.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "shiny"
+      ],
+      "model": "cobblestar_planets:meowscarada_nebelia.geo",
+      "poser": "cobblemon:meowscarada",
+      "texture": "cobblestar_planets:textures/pokemon/regional/meowscarada_nebelia_shiny.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:meowscarada_nebelia.geo",
+      "poser": "cobblemon:meowscarada",
+      "texture": "cobblestar_planets:textures/pokemon/regional/meowscarada_nebelia.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/meowscarada_nebelia_alpha.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "shiny",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:meowscarada_nebelia.geo",
+      "poser": "cobblemon:meowscarada",
+      "texture": "cobblestar_planets:textures/pokemon/regional/meowscarada_nebelia_shiny.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/meowscarada_nebelia_alpha.png",
+          "emissive": true
+        }
+      ]
+    }
+  ]
+}

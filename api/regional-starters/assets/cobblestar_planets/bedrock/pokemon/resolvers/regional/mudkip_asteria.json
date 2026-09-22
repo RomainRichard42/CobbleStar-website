@@ -1,0 +1,58 @@
+{
+  "species": "cobblemon:mudkip",
+  "order": 500,
+  "variations": [
+    {
+      "aspects": [
+        "cobblestar_asteria"
+      ],
+      "model": "cobblestar_planets:mudkip_nebelia.geo",
+      "poser": "cobblemon:mudkip",
+      "texture": "cobblestar_planets:textures/pokemon/regional/mudkip_nebelia.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_asteria",
+        "shiny"
+      ],
+      "model": "cobblestar_planets:mudkip_nebelia.geo",
+      "poser": "cobblemon:mudkip",
+      "texture": "cobblestar_planets:textures/pokemon/regional/mudkip_nebelia_shiny.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_asteria",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:mudkip_nebelia.geo",
+      "poser": "cobblemon:mudkip",
+      "texture": "cobblestar_planets:textures/pokemon/regional/mudkip_nebelia.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/mudkip_nebelia_alpha.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_asteria",
+        "shiny",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:mudkip_nebelia.geo",
+      "poser": "cobblemon:mudkip",
+      "texture": "cobblestar_planets:textures/pokemon/regional/mudkip_nebelia_shiny.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/mudkip_nebelia_alpha.png",
+          "emissive": true
+        }
+      ]
+    }
+  ]
+}

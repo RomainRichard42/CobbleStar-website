@@ -17,15 +17,31 @@ function unpack(zip){let at=0;const files=new Map();while(zip.readUInt32LE(at)==
 test('Deterministic pack preserves previous species and only adds Star resolver',()=>{const a=fixture(),b={...fixture(),species:'eevee'},cat=[native,{...native,species:'eevee',poser:'cobblemon:eevee'}];const zip=buildStarPack([a,b],cat);assert.deepEqual(zip,buildStarPack([b,a],cat));const files=unpack(zip);assert.equal(files.size,9+JSON.parse(readFileSync(new URL('../star-effects/manifest.json',import.meta.url))).files.length+JSON.parse(readFileSync(new URL('../regional-starters/manifest.json',import.meta.url))).files.length-2);assert.ok(files.has('licenses/Cobblemon.txt'));assert.equal(JSON.parse(files.get('pack.mcmeta')).pack.pack_format,34);for(const id of ['dragonite','eevee']){const r=JSON.parse(files.get(`assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_${id}.json`));assert.deepEqual(r.variations[0].aspects,['cobblestar-star']);assert.equal(r.variations[0].poser,'cobblemon:'+id);assert.equal(r.order,10000);}});
 test('Shared pack includes both regional starter trios without changing native starter textures',()=>{
  const files=unpack(buildStarPack([],[]));
- for(const [region,species] of [['asteria','chikorita'],['asteria','cyndaquil'],['asteria','totodile'],['nebelia','treecko'],['nebelia','torchic'],['nebelia','mudkip']]){
+ for(const [region,species] of [['asteria','chikorita'],['asteria','charmander'],['asteria','mudkip'],['nebelia','sprigatito'],['nebelia','litten'],['nebelia','piplup']]){
   const path=`assets/cobblestar_planets/bedrock/pokemon/resolvers/regional/${species}_${region}.json`;
   const resolver=JSON.parse(files.get(path));
   assert.equal(resolver.species,`cobblemon:${species}`);
   assert.deepEqual(resolver.variations[0].aspects,[`cobblestar_${region}`]);
   assert.deepEqual(resolver.variations[1].aspects,[`cobblestar_${region}`,'shiny']);
-  assert.ok(files.get(`assets/cobblestar_planets/textures/pokemon/regional/${species}_${region}.png`).subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex')));
+  const texture=files.get('assets/'+resolver.variations[0].texture.replace(':','/'));
+  assert.ok(texture.subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex')));
+  const modelName=resolver.variations[0].model.split(':')[1];
+  const model=JSON.parse(files.get(`assets/cobblestar_planets/bedrock/pokemon/models/regional/${modelName}.json`));
+  assert.equal(model['minecraft:geometry'][0].description.texture_width,texture.readUInt32BE(16));
+  assert.equal(model['minecraft:geometry'][0].description.texture_height,texture.readUInt32BE(20));
  }
  assert.ok([...files.keys()].every(path=>!path.startsWith('assets/cobblemon/')));
+});
+test('Regional pack ships 30 species including legacy forms and three distinct female rigs',()=>{
+ const files=unpack(buildStarPack([],[]));
+ const geometries=[...files.keys()].filter(p=>p.includes('/models/regional/')&&p.endsWith('.geo.json'));
+ assert.equal(geometries.length,33);
+ for(const species of ['torchic','combusken','blaziken']){
+  const r=JSON.parse(files.get(`assets/cobblestar_planets/bedrock/pokemon/resolvers/regional/${species}_nebelia.json`));
+  const female=r.variations.find(v=>v.aspects.includes('female')&&!v.aspects.includes('shiny'));
+  assert.equal(female.model,`cobblestar_planets:${species}_nebelia_female.geo`);
+  assert.equal(female.poser,`cobblemon:${species}`);
+ }
 });
 test('Optional emissive texture becomes a dedicated luminous layer',()=>{const files=unpack(buildStarPack([{...fixture(),emissive:texture}],[native]));const r=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_dragonite.json'));assert.equal(r.variations[0].layers[0].emissive,true);assert.ok(files.has('assets/cobblestar_planets/textures/pokemon/star/star_dragonite_glow.png'));});
 

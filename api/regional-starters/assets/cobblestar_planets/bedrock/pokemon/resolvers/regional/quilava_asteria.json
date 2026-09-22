@@ -1,35 +1,80 @@
 {
-    "species":  "cobblemon:quilava",
-    "order":  500,
-    "variations":  [
-                       {
-                           "texture":  "cobblestar_planets:textures/pokemon/regional/quilava_asteria.png",
-                           "aspects":  [
-                                           "cobblestar_asteria"
-                                       ],
-                           "layers":  [
-                                          {
-                                              "texture":  "cobblestar_planets:textures/pokemon/regional/quilava_asteria_emissive.png",
-                                              "name":  "emissive",
-                                              "emissive":  true,
-                                              "translucent":  true
-                                          }
-                                      ]
-                       },
-                       {
-                           "texture":  "cobblestar_planets:textures/pokemon/regional/quilava_asteria_shiny.png",
-                           "aspects":  [
-                                           "cobblestar_asteria",
-                                           "shiny"
-                                       ],
-                           "layers":  [
-                                          {
-                                              "texture":  "cobblestar_planets:textures/pokemon/regional/quilava_asteria_emissive_shiny.png",
-                                              "name":  "emissive",
-                                              "emissive":  true,
-                                              "translucent":  true
-                                          }
-                                      ]
-                       }
-                   ]
+  "species": "cobblemon:quilava",
+  "order": 500,
+  "variations": [
+    {
+      "aspects": [
+        "cobblestar_asteria"
+      ],
+      "model": "cobblestar_planets:quilava_asteria.geo",
+      "poser": "cobblemon:quilava",
+      "texture": "cobblestar_planets:textures/pokemon/regional/quilava_asteria.png",
+      "layers": [
+        {
+          "name": "emissive",
+          "texture": "cobblestar_planets:textures/pokemon/regional/quilava_asteria_glow.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_asteria",
+        "shiny"
+      ],
+      "model": "cobblestar_planets:quilava_asteria.geo",
+      "poser": "cobblemon:quilava",
+      "texture": "cobblestar_planets:textures/pokemon/regional/quilava_asteria_shiny.png",
+      "layers": [
+        {
+          "name": "emissive",
+          "texture": "cobblestar_planets:textures/pokemon/regional/quilava_asteria_glow_shiny.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_asteria",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:quilava_asteria.geo",
+      "poser": "cobblemon:quilava",
+      "texture": "cobblestar_planets:textures/pokemon/regional/quilava_asteria.png",
+      "layers": [
+        {
+          "name": "emissive",
+          "texture": "cobblestar_planets:textures/pokemon/regional/quilava_asteria_glow.png",
+          "emissive": true
+        },
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/quilava_asteria_alpha.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_asteria",
+        "shiny",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:quilava_asteria.geo",
+      "poser": "cobblemon:quilava",
+      "texture": "cobblestar_planets:textures/pokemon/regional/quilava_asteria_shiny.png",
+      "layers": [
+        {
+          "name": "emissive",
+          "texture": "cobblestar_planets:textures/pokemon/regional/quilava_asteria_glow_shiny.png",
+          "emissive": true
+        },
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/quilava_asteria_alpha.png",
+          "emissive": true
+        }
+      ]
+    }
+  ]
 }

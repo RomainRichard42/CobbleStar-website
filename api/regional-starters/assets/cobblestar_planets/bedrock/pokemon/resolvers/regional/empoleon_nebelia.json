@@ -1,0 +1,58 @@
+{
+  "species": "cobblemon:empoleon",
+  "order": 500,
+  "variations": [
+    {
+      "aspects": [
+        "cobblestar_nebelia"
+      ],
+      "model": "cobblestar_planets:empoleon_nebelia.geo",
+      "poser": "cobblemon:empoleon",
+      "texture": "cobblestar_planets:textures/pokemon/regional/empoleon_nebelia.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "shiny"
+      ],
+      "model": "cobblestar_planets:empoleon_nebelia.geo",
+      "poser": "cobblemon:empoleon",
+      "texture": "cobblestar_planets:textures/pokemon/regional/empoleon_nebelia_shiny.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:empoleon_nebelia.geo",
+      "poser": "cobblemon:empoleon",
+      "texture": "cobblestar_planets:textures/pokemon/regional/empoleon_nebelia.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/empoleon_nebelia_alpha.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "shiny",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:empoleon_nebelia.geo",
+      "poser": "cobblemon:empoleon",
+      "texture": "cobblestar_planets:textures/pokemon/regional/empoleon_nebelia_shiny.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/empoleon_nebelia_alpha.png",
+          "emissive": true
+        }
+      ]
+    }
+  ]
+}

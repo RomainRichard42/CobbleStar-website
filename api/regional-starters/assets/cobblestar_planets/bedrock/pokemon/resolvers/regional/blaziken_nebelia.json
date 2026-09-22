@@ -1,19 +1,114 @@
 {
-    "species":  "cobblemon:blaziken",
-    "order":  500,
-    "variations":  [
-                       {
-                           "aspects":  [
-                                           "cobblestar_nebelia"
-                                       ],
-                           "texture":  "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia.png"
-                       },
-                       {
-                           "aspects":  [
-                                           "cobblestar_nebelia",
-                                           "shiny"
-                                       ],
-                           "texture":  "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia_shiny.png"
-                       }
-                   ]
+  "species": "cobblemon:blaziken",
+  "order": 500,
+  "variations": [
+    {
+      "aspects": [
+        "cobblestar_nebelia"
+      ],
+      "model": "cobblestar_planets:blaziken_nebelia_male.geo",
+      "poser": "cobblemon:blaziken",
+      "texture": "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia_male.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "shiny"
+      ],
+      "model": "cobblestar_planets:blaziken_nebelia_male.geo",
+      "poser": "cobblemon:blaziken",
+      "texture": "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia_male_shiny.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:blaziken_nebelia_male.geo",
+      "poser": "cobblemon:blaziken",
+      "texture": "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia_male.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia_male_alpha.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "shiny",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:blaziken_nebelia_male.geo",
+      "poser": "cobblemon:blaziken",
+      "texture": "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia_male_shiny.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia_male_alpha.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "female"
+      ],
+      "model": "cobblestar_planets:blaziken_nebelia_female.geo",
+      "poser": "cobblemon:blaziken",
+      "texture": "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia_female.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "shiny",
+        "female"
+      ],
+      "model": "cobblestar_planets:blaziken_nebelia_female.geo",
+      "poser": "cobblemon:blaziken",
+      "texture": "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia_female_shiny.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "female",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:blaziken_nebelia_female.geo",
+      "poser": "cobblemon:blaziken",
+      "texture": "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia_female.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia_female_alpha.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "shiny",
+        "female",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:blaziken_nebelia_female.geo",
+      "poser": "cobblemon:blaziken",
+      "texture": "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia_female_shiny.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/blaziken_nebelia_female_alpha.png",
+          "emissive": true
+        }
+      ]
+    }
+  ]
 }

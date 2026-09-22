@@ -1,0 +1,58 @@
+{
+  "species": "cobblemon:swampert",
+  "order": 500,
+  "variations": [
+    {
+      "aspects": [
+        "cobblestar_asteria"
+      ],
+      "model": "cobblestar_planets:swampert_nebelia.geo",
+      "poser": "cobblemon:swampert",
+      "texture": "cobblestar_planets:textures/pokemon/regional/swampert_nebelia.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_asteria",
+        "shiny"
+      ],
+      "model": "cobblestar_planets:swampert_nebelia.geo",
+      "poser": "cobblemon:swampert",
+      "texture": "cobblestar_planets:textures/pokemon/regional/swampert_nebelia_shiny.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_asteria",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:swampert_nebelia.geo",
+      "poser": "cobblemon:swampert",
+      "texture": "cobblestar_planets:textures/pokemon/regional/swampert_nebelia.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/swampert_nebelia_alpha.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_asteria",
+        "shiny",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:swampert_nebelia.geo",
+      "poser": "cobblemon:swampert",
+      "texture": "cobblestar_planets:textures/pokemon/regional/swampert_nebelia_shiny.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/swampert_nebelia_alpha.png",
+          "emissive": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,19 +1,128 @@
 {
-    "species":  "cobblemon:grovyle",
-    "order":  500,
-    "variations":  [
-                       {
-                           "aspects":  [
-                                           "cobblestar_nebelia"
-                                       ],
-                           "texture":  "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia.png"
-                       },
-                       {
-                           "aspects":  [
-                                           "cobblestar_nebelia",
-                                           "shiny"
-                                       ],
-                           "texture":  "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia_shiny.png"
-                       }
-                   ]
+  "species": "cobblemon:grovyle",
+  "order": 500,
+  "variations": [
+    {
+      "aspects": [
+        "cobblestar_nebelia"
+      ],
+      "model": "cobblestar_planets:grovyle_nebelia.geo",
+      "poser": "cobblemon:grovyle",
+      "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "shiny"
+      ],
+      "model": "cobblestar_planets:grovyle_nebelia.geo",
+      "poser": "cobblemon:grovyle",
+      "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia_shiny.png",
+      "layers": []
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:grovyle_nebelia.geo",
+      "poser": "cobblemon:grovyle",
+      "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia_alpha.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "shiny",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:grovyle_nebelia.geo",
+      "poser": "cobblemon:grovyle",
+      "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia_shiny.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia_alpha.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "cosmetic_item-stick"
+      ],
+      "model": "cobblestar_planets:grovyle_nebelia.geo",
+      "poser": "cobblemon:grovyle",
+      "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia.png",
+      "layers": [
+        {
+          "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia_stick.png"
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "shiny",
+        "cosmetic_item-stick"
+      ],
+      "model": "cobblestar_planets:grovyle_nebelia.geo",
+      "poser": "cobblemon:grovyle",
+      "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia_shiny.png",
+      "layers": [
+        {
+          "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia_stick.png"
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "alpha_eyes",
+        "cosmetic_item-stick"
+      ],
+      "model": "cobblestar_planets:grovyle_nebelia.geo",
+      "poser": "cobblemon:grovyle",
+      "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia_alpha.png",
+          "emissive": true
+        },
+        {
+          "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia_stick.png"
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_nebelia",
+        "shiny",
+        "alpha_eyes",
+        "cosmetic_item-stick"
+      ],
+      "model": "cobblestar_planets:grovyle_nebelia.geo",
+      "poser": "cobblemon:grovyle",
+      "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia_shiny.png",
+      "layers": [
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia_alpha.png",
+          "emissive": true
+        },
+        {
+          "texture": "cobblestar_planets:textures/pokemon/regional/grovyle_nebelia_stick.png"
+        }
+      ]
+    }
+  ]
 }

@@ -160,7 +160,7 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[]) {
   }else files.set(path,incoming);
  }
  files.set("licenses/Cobblemon.txt",readFileSync(new URL("../licenses/Cobblemon.txt",import.meta.url)));
- files.set("licenses/NOTICE.txt",Buffer.from("Native Pokemon geometry and base assets: Cobblemon team, Cobblemon 1.8.0. https://gitlab.com/cable-mc/cobblemon\nStar variants are modified adaptations supplied by CobbleStar administrators. Kingambit includes official animations and poser with isolated identifiers to prevent addon collisions. Other native animations remain in Cobblemon. Original asset license included as Cobblemon.txt.\n"));
+ files.set("licenses/NOTICE.txt",Buffer.from("Native Pokemon geometry and base assets: Cobblemon team, Cobblemon 1.8.0. https://gitlab.com/cable-mc/cobblemon\nStar variants are modified adaptations supplied by CobbleStar administrators. Regional starters V2 are CobbleStar adaptations of the official models and textures, with modified cubes and pixel palettes; original rig metadata is preserved. Kingambit includes official animations and poser with isolated identifiers to prevent addon collisions. Other native animations remain in Cobblemon. Original asset license included as Cobblemon.txt.\n"));
  for(const input of [...assets].sort((a,b)=>a.species.localeCompare(b.species))){
   const native=catalog.find(n=>n.species===input.species);if(!native)throw new Error("SPECIES_NOT_IN_SERVER_CATALOG");
   const asset=validateStar(input,native), id="star_"+asset.species, root="assets/cobblestar_planets/";
