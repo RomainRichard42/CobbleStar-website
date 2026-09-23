@@ -12,7 +12,7 @@ await new Promise(r=>server.listen(0,'127.0.0.1',r));
 const browser=await chromium.launch({headless:true});
 const catalog={protocol:2,items:[{id:'minecraft:bread',label:'Pain'},{id:'cobblemon:poke_ball',label:'Poké Ball'}],blocks:[{id:'minecraft:stone',label:'Pierre'}],species:[{id:'cobblemon:eevee',label:'Évoli'}],biomes:[{id:'minecraft:forest',label:'Forêt'}],dimensions:[{id:'minecraft:overworld',label:'Monde principal'}],entities:[{id:'minecraft:zombie',label:'Zombie'}]};
 let state={catalog,content:structuredClone(emptyStudio),observed:structuredClone(emptyStudio),draftRevision:0,publishedRevision:0,appliedRevision:0,lastSeenAt:new Date().toISOString(),error:'',canWrite:true,placements:[],history:[]};
-let saves=0,publishes=0,denied=false;
+let saves=0,publishes=0,denied=false,publicationFailure=true;
 try{
  const page=await browser.newPage({viewport:{width:1440,height:1000}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.route('https://**',r=>r.abort());
@@ -21,7 +21,7 @@ try{
   if(denied)return r.fulfill({status:403,json:{error:'GAME_ADMIN_REQUIRED'}});
   if(url.pathname==='/api/admin/quests')return r.fulfill({json:{servers:[{serverId:'fixture'}],canWrite:state.canWrite}});
   if(method==='PUT'){const input=r.request().postDataJSON();const parsed=studioContent.safeParse(input.content);if(!parsed.success)return r.fulfill({status:400,json:{message:parsed.error.message}});state.content=parsed.data;state.draftRevision++;saves++;return r.fulfill({json:{draftRevision:state.draftRevision}});}
-  if(method==='POST'){publishes++;state.publishedRevision++;return r.fulfill({json:{publishedRevision:state.publishedRevision}});}
+  if(method==='POST'){if(publicationFailure)return r.fulfill({status:400,json:{message:'Étape 2 : choisis le personnage à rencontrer.'}});publishes++;state.publishedRevision++;return r.fulfill({json:{publishedRevision:state.publishedRevision}});}
   return r.fulfill({json:state});
  });
  const url=`http://127.0.0.1:${server.address().port}/admin/creation/`;
@@ -76,6 +76,9 @@ try{
  assert.equal(state.content.npcs[0].dialogueGraph.nodes[1].when.objectiveIndex,1);
  await page.getByRole('button',{name:'Publier en jeu',exact:true}).click();assert.equal(publishes,0);
  await page.getByLabel('Motif de publication').fill('Publication de test uniquement');
+ await page.getByRole('button',{name:'Confirmer la publication',exact:true}).click();
+ await page.getByRole('dialog').getByRole('alert').filter({hasText:'Étape 2 : choisis le personnage'}).waitFor({state:'visible'});
+ assert.equal(publishes,0);publicationFailure=false;
  await page.getByRole('button',{name:'Confirmer la publication',exact:true}).click();
  await page.getByRole('status').filter({hasText:'Version 1 publiée'}).waitFor();assert.equal(publishes,1);
  await mkdir('ui-review-quest-studio',{recursive:true});

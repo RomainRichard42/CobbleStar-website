@@ -32,6 +32,7 @@ export default function CreationStudio() {
   const [tab, setTab] = useState<Tab>("quests"), [selected, setSelected] = useState(0), [query, setQuery] = useState("");
   const [message, setMessage] = useState("Chargement du studio…"), [busy, setBusy] = useState(false), [dirty, setDirty] = useState(false);
   const [reason, setReason] = useState(""), [publishOpen, setPublishOpen] = useState(false);
+  const [publicationError, setPublicationError] = useState('');
   const [now, setNow] = useState(0);
   const [undo, setUndo] = useState<StudioContent[]>([]), [redo, setRedo] = useState<StudioContent[]>([]);
   const load = useCallback(async (id: string) => {
@@ -87,7 +88,7 @@ export default function CreationStudio() {
       setMessage('Fiche retirée du brouillon. Enregistre puis publie pour appliquer la suppression en jeu.');
     } catch (error) { setMessage((error as Error).message); }
   }
-  async function task(fn: () => Promise<void>) { setBusy(true); try { await fn(); } catch (e) { setMessage((e as Error).message); } finally { setBusy(false); } }
+  async function task(fn: () => Promise<void>) { setBusy(true); try { await fn(); } catch (e) { setMessage((e as Error).message); if (publishOpen) setPublicationError((e as Error).message); } finally { setBusy(false); } }
   async function save() {
     const result = await api<{ draftRevision: number }>(`/api/admin/quests/${server}`, { method: "PUT", body: JSON.stringify({ baseRevision: state!.draftRevision, content }) });
     setState(old => old ? { ...old, draftRevision: result.draftRevision } : old); setDirty(false); setMessage("Brouillon enregistré. Rien n'a changé en jeu.");
@@ -107,7 +108,7 @@ export default function CreationStudio() {
         <span className={s.sync}>{!fresh ? "Serveur hors ligne / réponse ancienne" : state.error ? "Application refusée" : state.appliedRevision === state.publishedRevision ? "Serveur à jour" : "En attente du serveur"}<small>Brouillon {state.draftRevision} · publié {state.publishedRevision} · appliqué {state.appliedRevision}</small></span>
         <button disabled={busy} onClick={() => { if (!dirty || confirm("Recharger et abandonner le brouillon local ?")) void task(() => load(server)); }}>Actualiser</button>
         {state.canWrite && <><button disabled={busy || !undo.length} onClick={() => { setRedo(values => [...values,content]); setContent(undo[undo.length-1]); setUndo(values => values.slice(0,-1)); setDirty(true); }}>↶ Annuler la modification</button><button disabled={busy || !redo.length} onClick={() => { setUndo(values => [...values,content]); setContent(redo[redo.length-1]); setRedo(values => values.slice(0,-1)); setDirty(true); }}>↷ Rétablir</button></>}
-        {state.canWrite && <><button disabled={busy || !dirty} onClick={() => void task(save)}>Enregistrer{dirty ? " *" : ""}</button><button className={s.primary} disabled={busy || dirty || state.draftRevision === 0} onClick={() => setPublishOpen(true)}>Publier en jeu</button></>}
+        {state.canWrite && <><button disabled={busy || !dirty} onClick={() => void task(save)}>Enregistrer{dirty ? " *" : ""}</button><button className={s.primary} disabled={busy || dirty || state.draftRevision === 0} onClick={() => { setPublicationError(''); setPublishOpen(true); }}>Publier en jeu</button></>}
       </div>
       {state.error && <p className={s.notice} role="alert">{state.error}</p>}
       <div className={s.workspace}>
@@ -132,7 +133,7 @@ export default function CreationStudio() {
       </div>
       <section className={s.audit}><div><h2>PNJ placés sur le serveur</h2>{state.placements.length === 0 && <p>Aucun PNJ remonté par le bâton.</p>}{state.placements.map(p => <p key={p.key}><b>{p.name}</b> · {content.npcs.find(n => n.id === p.templateId)?.name || 'Local · pas encore lié'}</p>)}</div><div><h2>Publications tracées</h2>{state.history.map(h => <article key={h.revision}><b>Version {h.revision}</b><p>{h.reason}</p><small>{h.actor} · {new Date(h.createdAt).toLocaleString('fr-FR')}</small>{state.canWrite && <button disabled={busy} onClick={() => { if (confirm('Reprendre cette version dans le brouillon ? Il faudra enregistrer et publier pour l’appliquer.')) void task(async () => { const r = await api<{ content: StudioContent }>(`/api/admin/quests/${server}/history/${h.revision}`); setContent(r.content); setDirty(true); setSelected(0); }); }}>Reprendre en brouillon</button>}</article>)}</div></section>
     </>}
-    {publishOpen && <div className={s.overlay}><section role="dialog" aria-modal="true" aria-labelledby="publish-title"><h2 id="publish-title">Publier sur {server} ?</h2><p>{content.questConfig.quests.length} quêtes et {content.npcs.filter(n => n.enabled).length} modèles PNJ actifs. Les PNJ liés recevront ces réglages au prochain échange avec le serveur.</p><label>Motif de publication<textarea autoFocus value={reason} onChange={e => setReason(e.target.value)} placeholder="Ex. ajout de la rencontre avec le professeur"/></label><button disabled={busy} onClick={() => setPublishOpen(false)}>Annuler</button><button className={s.primary} disabled={busy || reason.trim().length < 5} onClick={() => void task(async () => { const r = await api<{ publishedRevision: number }>(`/api/admin/quests/${server}/publish`, { method: 'POST', body: JSON.stringify({ baseRevision: state!.draftRevision, reason }) }); setPublishOpen(false); setReason(''); await load(server); setMessage(`Version ${r.publishedRevision} publiée. Attends la confirmation « Serveur à jour » avant le test en jeu.`); })}>Confirmer la publication</button></section></div>}
+    {publishOpen && <div className={s.overlay}><section role="dialog" aria-modal="true" aria-labelledby="publish-title"><h2 id="publish-title">Publier sur {server} ?</h2><p>{content.questConfig.quests.length} quêtes et {content.npcs.filter(n => n.enabled).length} modèles PNJ actifs. Les PNJ liés recevront ces réglages au prochain échange avec le serveur.</p>{publicationError && <p className={s.notice} role="alert">{publicationError}</p>}<label>Motif de publication<textarea maxLength={300} autoFocus value={reason} onChange={e => setReason(e.target.value)} placeholder="Ex. ajout de la rencontre avec le professeur"/></label><button disabled={busy} onClick={() => setPublishOpen(false)}>Annuler</button><button className={s.primary} disabled={busy || reason.trim().length < 5} onClick={() => void task(async () => { const r = await api<{ publishedRevision: number }>(`/api/admin/quests/${server}/publish`, { method: 'POST', body: JSON.stringify({ baseRevision: state!.draftRevision, reason }) }); setPublishOpen(false); setReason(''); await load(server); setMessage(`Version ${r.publishedRevision} publiée. Attends la confirmation « Serveur à jour » avant le test en jeu.`); })}>Confirmer la publication</button></section></div>}
   </main>;
 }
 
