@@ -7,6 +7,7 @@ import s from "./studio.module.css";
 import { StoryEditor } from "./StoryEditor";
 import { CharacterEditor } from "./CharacterEditor";
 import type { StoryCatalog } from "../../../api/src/quest-events";
+import { deleteStudioEntry } from "../../../api/src/quest-studio-delete";
 
 type State = { catalog: StoryCatalog | null; content: StudioContent; observed: StudioContent | null; draftRevision: number; publishedRevision: number; appliedRevision: number;
   lastSeenAt: string | null; error: string; canWrite: boolean; placements: { key: string; name: string; templateId: string }[];
@@ -75,6 +76,17 @@ export default function CreationStudio() {
   function edit(fn: (draft: StudioContent) => void) { const draft = structuredClone(content); fn(draft); commit(draft); }
   function patchQuest(patch: Partial<StudioQuest>) { edit(d => Object.assign(d.questConfig.quests[selected], patch)); }
   function patchNpc(patch: Partial<StudioNpc>) { edit(d => Object.assign(d.npcs[selected], patch)); }
+  function removeSelected() {
+    const entry = entries[selected];
+    if (!entry || !state?.canWrite || busy) return;
+    try {
+      const next = deleteStudioEntry(content, tab, entry.id);
+      const impact = tab === 'npcs' ? 'Ses PNJ liés placés en jeu seront également retirés.' : tab === 'quests' ? 'Ses liens simples avec les personnages et chapitres seront retirés. L’historique de progression des joueurs sera conservé.' : 'Les quêtes du chapitre seront conservées.';
+      if (!confirm(`Supprimer « ${entry.title} » ?\n${impact}\nLa suppression ne sera appliquée en jeu qu’après Enregistrer puis Publier. Tu peux encore annuler cette modification du brouillon.`)) return;
+      commit(next); setSelected(Math.max(0, selected - 1));
+      setMessage('Fiche retirée du brouillon. Enregistre puis publie pour appliquer la suppression en jeu.');
+    } catch (error) { setMessage((error as Error).message); }
+  }
   async function task(fn: () => Promise<void>) { setBusy(true); try { await fn(); } catch (e) { setMessage((e as Error).message); } finally { setBusy(false); } }
   async function save() {
     const result = await api<{ draftRevision: number }>(`/api/admin/quests/${server}`, { method: "PUT", body: JSON.stringify({ baseRevision: state!.draftRevision, content }) });
@@ -108,9 +120,10 @@ export default function CreationStudio() {
             else { setSelected(d.questConfig.chapters.length); d.questConfig.chapters.push({ id: makeId('chapitre'), title: 'Nouveau chapitre', order: d.questConfig.chapters.length + 1, unlockMode: 'IMMEDIATE', questIds: [] }); }
           })}>+ Créer {tab === 'quests' ? 'une histoire' : tab === 'npcs' ? 'un personnage' : 'un chapitre'}</button>}
           {state.canWrite && state.observed && <button onClick={() => { if (confirm("Importer les quêtes et modèles connus du serveur dans ce brouillon ? Tes changements locaux seront remplacés, pas le contenu en jeu.")) { setContent({ questConfig: structuredClone(state.observed!.questConfig), npcs: structuredClone(state.observed!.npcs) }); setDirty(true); setSelected(0); } }}>Importer l’existant du serveur</button>}
-          <p>Importer permet de reprendre les quêtes existantes. Publier fusionne les identifiants : aucune progression ni quête locale n’est supprimée.</p>
+          <p>Les suppressions confirmées sont appliquées après Enregistrer puis Publier. Les autres quêtes locales et l’historique de progression sont conservés.</p>
         </aside>
         <fieldset className={s.editor} disabled={!state.canWrite || busy}>
+          {(quest || npc || chapter) && state.canWrite && <button className={s.danger} onClick={removeSelected}>Supprimer {tab === 'quests' ? 'cette quête' : tab === 'npcs' ? 'ce personnage' : 'ce chapitre'}</button>}
           {!quest && !npc && !chapter && <div className={s.empty}><h2>Ton prochain chapitre t’attend.</h2><p>Crée une première fiche ou importe le catalogue du serveur.</p></div>}
           {quest && <StoryEditor key={quest.id} quest={quest} content={content} catalog={state.catalog} onChange={q => patchQuest(q)} onContent={commit} onDuplicate={() => edit(d => { const copy = structuredClone(quest); copy.id = makeId('quete'); copy.title += ' · copie'; d.questConfig.quests.push(copy); setSelected(d.questConfig.quests.length - 1); })}/>}
           {npc && <CharacterEditor key={npc.id} npc={npc} content={content} catalog={state.catalog} onChange={n => patchNpc(n)} onDuplicate={() => edit(d => { const copy = structuredClone(npc); copy.id = makeId('pnj'); copy.name += ' · copie'; d.npcs.push(copy); setSelected(d.npcs.length - 1); })}/>}

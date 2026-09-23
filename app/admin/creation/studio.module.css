@@ -17,3 +17,4 @@
 @media(max-width:540px){.events{grid-template-columns:1fr}.inspector{padding:16px}.storyTabs button>span{width:22px;height:22px}.page h2{font-size:24px}.hero h1{font-size:32px}.toolbar label{max-width:none}.eventLibrary .eyebrow{font-size:12px}.timeline{max-height:340px}}
 .hero{margin:18px 0}.hero h1{font-size:clamp(28px,2.5vw,36px);margin:8px 0 12px}.hero>div>p:first-child{display:none}.hero>div>p:last-child{font-size:15px}.notice{padding:10px 16px}
 @media(max-width:650px){.toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.toolbar>label,.toolbar>.sync{grid-column:1/-1;width:100%;max-width:none;min-width:0}.toolbar>button{width:100%;min-height:46px;padding:10px;font-size:14px;white-space:normal;overflow-wrap:anywhere}.toolbar>.primary{grid-column:1/-1}.hero h1{font-size:28px}}
+.danger { border: 1px solid #ef8eac !important; color: #ffd5e2 !important; background: #401c30 !important; margin-bottom: 1rem; }

@@ -7,6 +7,7 @@ import { canReadGame, canWriteGame } from "./game-admin.js";
 import { studioContent, studioDraft, emptyStudio } from "./quest-studio-schema.js";
 import { storyEvents } from "./quest-events.js";
 import { createQuestUploadReceiver } from "./quest-sync-upload.js";
+import { studioValidationMessage } from './quest-studio-errors.js';
 
 type Actor = { id: string; discord_id: string | null };
 type Auth = { session: (req: FastifyRequest) => Promise<Actor | null>; server: (req: FastifyRequest) => boolean };
@@ -22,7 +23,7 @@ const lastSeenSql = "CONCAT(LEFT(DATE_FORMAT(last_seen_at,'%Y-%m-%dT%H:%i:%s.%f'
 const saveBody = z.object({ baseRevision: z.number().int().nonnegative(), content: studioDraft }).strict();
 const publishBody = z.object({ baseRevision: z.number().int().nonnegative(), reason: z.string().trim().min(5).max(300) }).strict();
 const choice = z.object({ id: z.string().max(180), label: z.string().max(240) });
-const catalogSchema = z.object({ protocol: z.literal(2), items: z.array(choice).max(30000), blocks: z.array(choice).max(20000), entities: z.array(choice).max(10000), species: z.array(choice).max(10000), biomes: z.array(choice).max(10000), dimensions: z.array(choice).max(1000) });
+const catalogSchema = z.object({ protocol: z.literal(2), supportsDeletion: z.boolean().optional(), items: z.array(choice).max(30000), blocks: z.array(choice).max(20000), entities: z.array(choice).max(10000), species: z.array(choice).max(10000), biomes: z.array(choice).max(10000), dimensions: z.array(choice).max(1000) });
 function narrativeOnly(value: unknown) {
   const content = decode(value) as typeof emptyStudio | null;
   if (!content) return emptyStudio;
@@ -63,7 +64,7 @@ export function registerQuestStudio(app: FastifyInstance, auth: Auth) {
     if (!await authorize(req, reply, true)) return;
     const { serverId: key } = params.parse(req.params);
     const parsed = saveBody.safeParse(req.body);
-    if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT", message: parsed.error.issues.slice(0, 12).map(i => `${i.path.join(".")} : ${i.message}`).join("\n") });
+    if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT", message: studioValidationMessage(parsed.error) });
     const input = parsed.data;
     const result = await transaction(async c => {
       const [rows] = await c.execute<RowDataPacket[]>("SELECT draft_revision FROM quest_studio WHERE server_id=? FOR UPDATE", [key]);
@@ -76,7 +77,10 @@ export function registerQuestStudio(app: FastifyInstance, auth: Auth) {
   });
   app.post("/api/admin/quests/:serverId/publish", options, async (req, reply) => {
     const actor = await authorize(req, reply, true); if (!actor) return;
-    const { serverId: key } = params.parse(req.params), input = publishBody.parse(req.body);
+    const { serverId: key } = params.parse(req.params);
+    const publication = publishBody.safeParse(req.body);
+    if (!publication.success) return reply.code(400).send({ error: 'INVALID_INPUT', message: studioValidationMessage(publication.error) });
+    const input = publication.data;
     let validationMessage = '';
     const revision = await transaction(async c => {
       const [rows] = await c.execute<RowDataPacket[]>("SELECT * FROM quest_studio WHERE server_id=? FOR UPDATE", [key]);
@@ -84,9 +88,12 @@ export function registerQuestStudio(app: FastifyInstance, auth: Auth) {
       if (!row || !row.draft_json || Number(row.draft_revision) !== input.baseRevision) return null;
       if (decode(row.observed_json)?.catalog?.protocol !== 2) return -1;
       const parsed = studioContent.safeParse(decode(row.draft_json));
-      if (!parsed.success) { validationMessage = parsed.error.issues.slice(0,12).map(i => i.message).join('\n'); return -2; }
+      if (!parsed.success) { validationMessage = studioValidationMessage(parsed.error); return -2; }
       const catalog = catalogSchema.safeParse(decode(row.observed_json)?.catalog);
       if (!catalog.success) return -1;
+      if (parsed.data.deleted && Object.values(parsed.data.deleted).some(ids => ids.length) && !catalog.data.supportsDeletion) {
+        validationMessage = 'Le serveur ne prend pas encore en charge les suppressions du Studio. Mets à jour le mod serveur, puis attends sa synchronisation. Le brouillon est conservé.'; return -2;
+      }
       for (const q of parsed.data.questConfig.quests) {
         if (!q.autoStart && !parsed.data.npcs.some(n => n.enabled && ['DIALOGUE_QUEST','TURN_IN','SHOP'].includes(n.role) && n.questIds.includes(q.id))) {
           validationMessage = `${q.title} : choisis le personnage qui propose l’histoire, ou un démarrage automatique.`; return -2;

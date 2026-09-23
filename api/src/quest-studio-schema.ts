@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { storyEvents } from "./quest-events.js";
 
-const id = z.string().regex(/^[a-z0-9_-]{2,48}$/);
+const id = z.string().regex(/^[a-z0-9_-]{2,48}$/, 'Identifiant technique : 2 à 48 caractères, lettres minuscules sans accent, chiffres, tirets ou underscores. Les accents restent autorisés dans les textes.');
 const item = z.string().regex(/^[a-z0-9_.-]+:[a-z0-9_./-]+$/);
 const text = (max: number) => z.string().max(max);
 const skin = text(256).refine(v => v === ""
@@ -44,12 +44,17 @@ export const npcTemplateSchema = z.object({
   visualRole: z.enum(["STORY", "SIDE", "MERCHANT", "EVENT"]), shopOffers,
 }).strict();
 export const studioDraft = z.object({
+  deleted: z.object({ quests: z.array(id).max(5000), npcs: z.array(id).max(5000), chapters: z.array(id).max(5000) }).strict().optional(),
   questConfig: z.object({ resetHour: z.number().int().min(0).max(23), quests: z.array(questSchema).max(500),
     chapters: z.array(z.object({ id, title: z.string().min(1).max(100), order: z.number().int().min(0).max(10000), unlockMode: z.enum(["PREVIOUS", "IMMEDIATE", "MANUAL"]), questIds: z.array(id).max(500) }).strict()).max(80),
   }).strict(), npcs: z.array(npcTemplateSchema).max(250),
 }).strict();
 export const studioContent = studioDraft.superRefine((content, ctx) => {
   const fail = (message: string) => ctx.addIssue({ code: "custom", message });
+  for (const section of ['quests', 'npcs', 'chapters'] as const) {
+    const entries = section === 'npcs' ? content.npcs : content.questConfig[section];
+    if (entries.some(entry => content.deleted?.[section].includes(entry.id))) fail(`Une fiche ${section} ne peut pas être publiée et supprimée en même temps.`);
+  }
   const quests = new Map(content.questConfig.quests.map(q => [q.id, q]));
   if (quests.size !== content.questConfig.quests.length) fail("Identifiants de quête dupliqués");
   const visiting = new Set<string>(), visited = new Set<string>();

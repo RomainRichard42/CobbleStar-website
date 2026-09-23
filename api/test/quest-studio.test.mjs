@@ -24,6 +24,31 @@ test('unsupported skins, malformed trades and oversized dialogue packets fail ex
   assert.equal(studioContent.safeParse(d).success,true);
 });
 function app() { const a=Fastify(); registerQuestStudio(a,{session:async req=>req.headers['x-test-role']?{id:'fixture',discord_id:req.headers['x-test-role']}:null,server:req=>req.headers.authorization==='Bearer fixture-server'}); return a; }
+test('deletion publication requires a capable server and delivers tombstones after a skipped revision', async () => {
+  const a=app(), original=pool.execute, originalConnection=pool.getConnection;
+  const draft={...structuredClone(emptyStudio),deleted:{quests:['old_quest'],npcs:['old_npc'],chapters:['old_chapter']}};
+  const catalog={protocol:2,items:[],blocks:[],entities:[],species:[],biomes:[],dimensions:[]};
+  const row={draft_revision:3,published_revision:2,draft_json:draft,published_json:null,observed_json:{catalog}};
+  const execute=async(sql,args)=>{
+    if(sql.startsWith('SELECT')) return [[row]];
+    if(sql.startsWith('UPDATE quest_studio SET published_json')) {row.published_json=args[0];row.published_revision=args[1];}
+    return [{affectedRows:1}];
+  };
+  pool.execute=execute;pool.getConnection=async()=>({beginTransaction:async()=>{},commit:async()=>{},rollback:async()=>{},release:()=>{},execute});
+  const headers={'x-test-role':'111111111111111111',origin:'https://example.test'};
+  try {
+    let r=await a.inject({method:'POST',url:'/api/admin/quests/main/publish',headers,payload:{baseRevision:3,reason:'Retrait du scénario'}});
+    assert.equal(r.statusCode,400);assert.match(r.json().message,/suppressions/);assert.equal(row.published_json,null);
+    catalog.supportsDeletion=true;
+    r=await a.inject({method:'POST',url:'/api/admin/quests/main/publish',headers,payload:{baseRevision:3,reason:'Retrait du scénario'}});
+    assert.equal(r.statusCode,200,r.body);
+    r=await a.inject({method:'POST',url:'/api/internal/quests/sync',headers:{authorization:'Bearer fixture-server'},payload:{serverId:'main',appliedRevision:1,error:'',observed:content(),placements:[]}});
+    assert.equal(r.statusCode,200);assert.deepEqual(r.json().content.deleted,draft.deleted);
+    r=await a.inject({method:'POST',url:'/api/admin/quests/main/publish',headers,payload:{baseRevision:3,reason:'x'.repeat(301)}});
+    assert.equal(r.statusCode,400);assert.match(r.json().message,/reason/);
+  } finally {pool.execute=original;pool.getConnection=originalConnection;await a.close();}
+});
+
 test('studio routes enforce game roles, origin, and server authentication before DB access', async () => {
   const a=app(), original=pool.execute; pool.execute=async()=>{throw Error('Unexpected DB access');};
   try {
