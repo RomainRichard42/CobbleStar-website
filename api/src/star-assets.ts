@@ -3,6 +3,7 @@ import { deflateRawSync, inflateSync, inflateRawSync } from "node:zlib";
 import { readFileSync } from "node:fs";
 import { isDeepStrictEqual } from "node:util";
 import {addonSource,addonTemplate,sameSource,type AddonSource} from './star-addon-templates.js';
+import {appendRankTags} from './rank-tags.js';
 
 const vector = z.tuple([z.number().finite().min(-512).max(512), z.number().finite().min(-512).max(512), z.number().finite().min(-512).max(512)]);
 const name = z.string().regex(/^[a-zA-Z0-9_.-]{1,80}$/);
@@ -215,5 +216,7 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[]) {
    files.set("licenses/CCC-Sachanobi.txt",readFileSync(new URL("../star-layers/ashgreninja/LICENSE-CCC.txt",import.meta.url)));
   }
  }
+ // Rank badges join the same mandatory pack, alongside every existing asset.
+ appendRankTags(files);
  return zipAssets(files);
 }

@@ -18,6 +18,7 @@ const required = [
   "api/package-lock.json",
   "api/star-templates/index.json",
   "api/star-effects/manifest.json",
+  "api/rank-tags/manifest.json",
   "api/regional-starters/manifest.json",
 ];
 
@@ -44,6 +45,7 @@ await cp(join(projectDir, "api", "licenses"), join(deployDir, "licenses"), { rec
 await cp(join(projectDir, "api", "star-templates"), join(deployDir, "star-templates"), { recursive: true });
 await cp(join(projectDir, "api", "star-layers"), join(deployDir, "star-layers"), { recursive: true });
 await cp(join(projectDir, "api", "star-effects"), join(deployDir, "star-effects"), { recursive: true });
+await cp(join(projectDir, "api", "rank-tags"), join(deployDir, "rank-tags"), { recursive: true });
 await cp(join(projectDir, "api", "regional-starters"), join(deployDir, "regional-starters"), { recursive: true });
 await mkdir(join(deployDir,"star-addon-templates"),{recursive:true});
 const addonDir=join(projectDir,"api","star-addon-templates");

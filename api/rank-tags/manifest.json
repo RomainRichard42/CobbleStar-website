@@ -1,0 +1,183 @@
+{
+    "schema":  1,
+    "source":  "PackTagComplet.zip",
+    "sourceSha256":  "f8158b916fbd1882fd349809d0be161fc916e06b434a3ed471442bc556f941f3",
+    "creator":  "LarkAvery",
+    "font":  "cobblestar_planets:ranks",
+    "tags":  [
+                 {
+                     "id":  "admin",
+                     "codepoint":  "E001",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/admin.png",
+                     "sha256":  "8c72f87bb8a3a9ce73b704ce6cbf51c5b1edc6e750cab73183ef988be9b5239a",
+                     "width":  61,
+                     "height":  22
+                 },
+                 {
+                     "id":  "modo",
+                     "codepoint":  "E002",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/modo.png",
+                     "sha256":  "10cdaca46b77db5e36f8c5476c39f8069974fe3dc04480c973d4d649721ac9ae",
+                     "width":  51,
+                     "height":  22
+                 },
+                 {
+                     "id":  "guide",
+                     "codepoint":  "E003",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/guide.png",
+                     "sha256":  "4e351eabafc6db7c16e4a4d870eb8c3048d3c1c0acee3b2e83fc4def7d35c677",
+                     "width":  54,
+                     "height":  22
+                 },
+                 {
+                     "id":  "recrue",
+                     "codepoint":  "E004",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/recrue.png",
+                     "sha256":  "60a821f371670ca0d7e28d615f7e83566f0649ee7583431ba6f715483abe24ff",
+                     "width":  65,
+                     "height":  22
+                 },
+                 {
+                     "id":  "eclaireur",
+                     "codepoint":  "E005",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/eclaireur.png",
+                     "sha256":  "3241d253a59f9ebf005e09f39cc58cfbbf67bdad6a82a725111943dbba134e61",
+                     "width":  88,
+                     "height":  22
+                 },
+                 {
+                     "id":  "aventurier",
+                     "codepoint":  "E006",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/aventurier.png",
+                     "sha256":  "f1c27a20df47b6a7dcf317a4a55754c09cf19b983468c5c0324f9e7335cc4954",
+                     "width":  99,
+                     "height":  22
+                 },
+                 {
+                     "id":  "prodige",
+                     "codepoint":  "E007",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/prodige.png",
+                     "sha256":  "8fc1cd1a4a152a647254470abe6fba59f5c8bdc39aeda6269fa182557e233a51",
+                     "width":  72,
+                     "height":  22
+                 },
+                 {
+                     "id":  "veteran",
+                     "codepoint":  "E008",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/veteran.png",
+                     "sha256":  "c6977e038fba5c031395d6f15f43c2a3cd07b3594caa29579709b03c0a417c49",
+                     "width":  77,
+                     "height":  22
+                 },
+                 {
+                     "id":  "gardien",
+                     "codepoint":  "E009",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/gardien.png",
+                     "sha256":  "d9e6d684a4810ebc8ff789b32bff7155023fa40a40a2f58cd3825d726b2cec91",
+                     "width":  74,
+                     "height":  22
+                 },
+                 {
+                     "id":  "elite",
+                     "codepoint":  "E010",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/elite.png",
+                     "sha256":  "02d7394db24e1674b0d3bdc88e99ae0d9194c5dc76ae1d06002bae240d4a38d2",
+                     "width":  70,
+                     "height":  22
+                 },
+                 {
+                     "id":  "mercenaire",
+                     "codepoint":  "E011",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/mercenaire.png",
+                     "sha256":  "9e29e2f7dc3a008443321e99400dbb5ef6688a3a3020047e8e18e41915c5bde0",
+                     "width":  116,
+                     "height":  22
+                 },
+                 {
+                     "id":  "etoile",
+                     "codepoint":  "E012",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/etoile.png",
+                     "sha256":  "07109045f401a516372462b81ed32019b87937d51881017d29d7b4b3ec0b89d0",
+                     "width":  88,
+                     "height":  22
+                 },
+                 {
+                     "id":  "cosmiquea",
+                     "codepoint":  "E013",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/cosmiquea.png",
+                     "sha256":  "12387fe0ed26120314db2ef3ead5821457c01df47f16f652db6ec92e46b12fbe",
+                     "width":  100,
+                     "height":  22
+                 },
+                 {
+                     "id":  "cosmiqueb",
+                     "codepoint":  "E014",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/cosmiqueb.png",
+                     "sha256":  "cc14e4da2b5a3ef8745c0fca4870ea6a08435fba8fb9400327a62e6c1d3685ae",
+                     "width":  100,
+                     "height":  22
+                 },
+                 {
+                     "id":  "galactiquea",
+                     "codepoint":  "E015",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/galactiquea.png",
+                     "sha256":  "fcff2ac8e11612d46344e9a23544c6d8f15577fa38fc3be1b81eaf7fe3b0e4fd",
+                     "width":  115,
+                     "height":  22
+                 },
+                 {
+                     "id":  "galactiqueb",
+                     "codepoint":  "E016",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/galactiqueb.png",
+                     "sha256":  "495a19bdf9f491431ed13a68290e44a659100534d04d898ba93e6516dc040681",
+                     "width":  115,
+                     "height":  22
+                 },
+                 {
+                     "id":  "ranger",
+                     "codepoint":  "E017",
+                     "glyph":  "",
+                     "file":  "assets/cobblestar_planets/textures/ranks/ranger.png",
+                     "sha256":  "ebbd0650b47f8c18b71306b77abc5513382456f522dbdaf716319e9283749d95",
+                     "width":  67,
+                     "height":  22
+                 }
+             ],
+    "files":  [
+                  "assets/cobblestar_planets/textures/ranks/admin.png",
+                  "assets/cobblestar_planets/textures/ranks/modo.png",
+                  "assets/cobblestar_planets/textures/ranks/guide.png",
+                  "assets/cobblestar_planets/textures/ranks/recrue.png",
+                  "assets/cobblestar_planets/textures/ranks/eclaireur.png",
+                  "assets/cobblestar_planets/textures/ranks/aventurier.png",
+                  "assets/cobblestar_planets/textures/ranks/prodige.png",
+                  "assets/cobblestar_planets/textures/ranks/veteran.png",
+                  "assets/cobblestar_planets/textures/ranks/gardien.png",
+                  "assets/cobblestar_planets/textures/ranks/elite.png",
+                  "assets/cobblestar_planets/textures/ranks/mercenaire.png",
+                  "assets/cobblestar_planets/textures/ranks/etoile.png",
+                  "assets/cobblestar_planets/textures/ranks/cosmiquea.png",
+                  "assets/cobblestar_planets/textures/ranks/cosmiqueb.png",
+                  "assets/cobblestar_planets/textures/ranks/galactiquea.png",
+                  "assets/cobblestar_planets/textures/ranks/galactiqueb.png",
+                  "assets/cobblestar_planets/textures/ranks/ranger.png",
+                  "assets/cobblestar_planets/font/ranks.json",
+                  "licenses/RankTags-NOTICE.txt"
+              ]
+}

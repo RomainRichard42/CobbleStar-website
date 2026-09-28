@@ -1,0 +1,6 @@
+Cobblestar Rank Pack
+Created by LarkAvery (credit from the supplied pack.mcmeta).
+Source: PackTagComplet.zip supplied by the CobbleStar administrator.
+PNG textures preserved byte-for-byte. Resource namespace isolated to cobblestar_planets.
+Original glyph codes preserved; Ranger U+E017 registered according to the supplied rank hierarchy.
+No additional licence grant is asserted by this integration.
