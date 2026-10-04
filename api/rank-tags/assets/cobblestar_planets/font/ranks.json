@@ -3,8 +3,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/admin.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -12,8 +12,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/modo.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -21,8 +21,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/guide.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -30,8 +30,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/recrue.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -39,8 +39,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/eclaireur.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -48,8 +48,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/aventurier.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -57,8 +57,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/prodige.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -66,8 +66,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/veteran.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -75,8 +75,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/gardien.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -84,8 +84,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/elite.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -93,8 +93,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/mercenaire.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -102,8 +102,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/etoile.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -111,8 +111,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/cosmiquea.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -120,8 +120,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/cosmiqueb.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -129,8 +129,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/galactiquea.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -138,8 +138,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/galactiqueb.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]
@@ -147,8 +147,8 @@
                       {
                           "type":  "bitmap",
                           "file":  "cobblestar_planets:ranks/ranger.png",
-                          "ascent":  8,
-                          "height":  8,
+                          "ascent":  9,
+                          "height":  11,
                           "chars":  [
                                         ""
                                     ]

@@ -48,7 +48,8 @@ for ($i=0; $i -lt $ids.Count; $i++) {
     $sha=[Security.Cryptography.SHA256]::Create()
     try { $hash=([BitConverter]::ToString($sha.ComputeHash($bytes))).Replace('-','').ToLowerInvariant() } finally { $sha.Dispose() }
     $rows += [ordered]@{id=$id;codepoint=$code;glyph=$glyph;file=$path;sha256=$hash;width=$width;height=$height}
-    $providers += [ordered]@{type='bitmap';file="cobblestar_planets:ranks/$id.png";ascent=8;height=8;chars=@($glyph)}
+    # Keep source validation above at 8/8, but render the original 22px textures at half size.
+    $providers += [ordered]@{type='bitmap';file="cobblestar_planets:ranks/$id.png";ascent=9;height=11;chars=@($glyph)}
 }
 $fontPath='assets/cobblestar_planets/font/ranks.json'
 $outputs[$fontPath]=$utf8.GetBytes((ConvertTo-Json -InputObject @{providers=$providers} -Depth 8)+"`n")

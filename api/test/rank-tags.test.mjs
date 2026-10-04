@@ -22,7 +22,8 @@ test('All 17 supplied badges retain their bytes and PDF glyphs, including missin
   assert.equal(createHash('sha256').update(data).digest('hex'),tag.sha256);
   assert.equal(data.subarray(0,8).toString('hex'),'89504e470d0a1a0a');assert.equal(data.readUInt32BE(16),tag.width);assert.equal(data.readUInt32BE(20),22);
   const provider=font.providers.find(p=>p.chars[0]===tag.glyph);assert.ok(provider,tag.id);
-  assert.deepEqual(provider,{type:'bitmap',file:`cobblestar_planets:ranks/${tag.id}.png`,ascent:8,height:8,chars:[tag.glyph]});
+  assert.deepEqual(provider,{type:'bitmap',file:`cobblestar_planets:ranks/${tag.id}.png`,ascent:9,height:11,chars:[tag.glyph]});
+  assert.equal(provider.height/tag.height,0.5,'all original 22px badges render at half size, not 8/22');
   assert.ok(files.has('assets/'+provider.file.replace(':','/textures/')));
  }
  assert.deepEqual(JSON.parse(files.get(defaultPath)),{providers:[{type:'reference',id:'cobblestar_planets:ranks'}]});
@@ -50,4 +51,16 @@ test('The pack remains deterministic and Kinetic deployment includes the rank as
  const packager=readFileSync(new URL('../../scripts/package-kinetic.mjs',import.meta.url),'utf8');
  assert.match(packager,/"api\/rank-tags\/manifest\.json"/);
  assert.match(packager,/cp\(join\(projectDir, "api", "rank-tags"\), join\(deployDir, "rank-tags"\)/);
+ const importer=readFileSync(new URL('../../scripts/import-rank-tags.ps1',import.meta.url),'utf8');
+ assert.match(importer,/ascent=9;height=11/,'re-import must not restore the undersized 8px font');
+});
+
+test('Both dedicated chat font and vanilla TAB font use the same larger badges',()=>{
+ const files=unpack(buildStarPack([],[]));
+ const reference=JSON.parse(files.get(defaultPath)).providers.find(p=>p.type==='reference'&&p.id==='cobblestar_planets:ranks');
+ assert.ok(reference,'TAB/default font must point to the same font used explicitly by chat');
+ const font=JSON.parse(files.get('assets/cobblestar_planets/font/ranks.json'));
+ assert.ok(font.providers.every(p=>p.height===11&&p.ascent===9));
+ const oldFont={...font,providers:font.providers.map(p=>({...p,height:8,ascent:8}))};
+ assert.notEqual(createHash('sha1').update(JSON.stringify(font)).digest('hex'),createHash('sha1').update(JSON.stringify(oldFont)).digest('hex'),'font change must invalidate the previous asset bytes');
 });
