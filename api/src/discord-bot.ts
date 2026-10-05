@@ -11,7 +11,8 @@ import type { FastifyBaseLogger } from "fastify";
 import type { RowDataPacket, ResultSetHeader } from "mysql2/promise";
 import { config } from "./config.js";
 import { pool, transaction } from "./db.js";
-import { eventKinds, stages, plain, summary, inviteAttribution, mayConfirm, type EventKind, type Settings } from "./discord-policy.js";
+import { eventKinds, stages, roleSources, gradeIds, rankedIds, plain, summary, inviteAttribution, mayConfirm, type EventKind, type Settings } from "./discord-policy.js";
+import {DiscordGameSync} from "./discord-game-bot.js";
 import { enqueue, json, saveSettings, settings, ticketFor, type Ticket } from "./discord-store.js";
 
 const ephemeral = {flags: MessageFlags.Ephemeral} as const;
@@ -44,6 +45,16 @@ export function discordCommands() {
       .addIntegerOption(o => o.setName("jours").setDescription("Jours").setRequired(true).setMinValue(1).setMaxValue(90)))
     .addSubcommand(s => s.setName("panneau").setDescription("Publier le bouton de création de tickets ici"))
     .addSubcommand(s => s.setName("initialiser").setDescription("Créer les salons et catégories manquants après configuration des rôles"))
+    .addSubcommand(s=>s.setName("synchronisation").setDescription("Activer les rôles liés aux comptes Minecraft")
+      .addBooleanOption(o=>o.setName("actif").setDescription("Synchroniser les rôles configurés").setRequired(true)))
+    .addSubcommand(s=>s.setName("sync-role").setDescription("Associer un grade, rang ranked ou club à un rôle sans permission staff")
+      .addStringOption(o=>o.setName("type").setDescription("Source en jeu").setRequired(true).addChoices(...roleSources.map(value=>({name:value,value}))))
+      .addStringOption(o=>o.setName("valeur").setDescription("Identifiant : recrue, eclaireur, maitre, star, ou UUID du club").setRequired(true).setMaxLength(64))
+      .addRoleOption(o=>o.setName("role").setDescription("Rôle à synchroniser ; absent = retirer l’association")))
+    .addSubcommand(s=>s.setName("serveur").setDescription("Statut et joueurs dans une seule catégorie de compteurs")
+      .addBooleanOption(o=>o.setName("actif").setDescription("Activer les compteurs Minecraft").setRequired(true))
+      .addChannelOption(o=>o.setName("categorie").setDescription("Catégorie existante ; sinon création automatique").addChannelTypes(ChannelType.GuildCategory))
+      .addStringOption(o=>o.setName("source").setDescription("serverId du serveur Minecraft, main par défaut").setMaxLength(48)))
     .addSubcommand(s => s.setName("statut").setDescription("Voir la configuration sans secrets"));
   const ticket = new SlashCommandBuilder().setName("ticket").setDescription("Assistance CobbleStar")
     .addSubcommand(s=>s.setName("creer").setDescription("Ouvrir un ticket avec un formulaire"))
@@ -85,6 +96,8 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
   client.on(Events.Error, () => log.warn("Erreur de connexion Discord."));
 
   async function guild() { return client.guilds.fetch(config.DISCORD_GUILD_ID); }
+  const gameSync=new DiscordGameSync(guild,log);
+  client.on(Events.GuildMemberAdd,m=>{gameSync.invalidate(m.id);});
   async function member(g: Guild, id: string) { return g.members.fetch(id); }
   function isAdmin(m: GuildMember) { return m.permissions.has(P.Administrator); }
   function isStaff(m: GuildMember, s: Settings) { return isAdmin(m) || !!s.staffRole && m.roles.cache.has(s.staffRole); }
@@ -230,6 +243,22 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
         const c=await g.channels.create({name:names[kind],type:ChannelType.GuildText,permissionOverwrites:permissions});
         s.channels[kind]=c.id;await saveSettings(s);await destination(s,kind);
       }
+    } else if(sub==="synchronisation") {
+      s.roleSyncEnabled=i.options.getBoolean("actif",true);
+    } else if(sub==="sync-role") {
+      const source=i.options.getString("type",true) as typeof roleSources[number];
+      const key=i.options.getString("valeur",true).trim().toLowerCase();
+      if(!/^[a-z0-9_-]{1,64}$/.test(key)||source==="grade"&&!gradeIds.some(id=>id===key)||source==="ranked"&&!rankedIds.some(id=>id===key))return userError("Identifiant inconnu. Grades : recrue/eclaireur/aventurier/prodige/veteran/gardien/elite/mercenaire. Ranked : bronze/argent/or/platine/diamant/maitre/star. Club : UUID du club.");
+      const role=i.options.getRole("role");
+      if(role)await gameSync.validateRole(s,role.id);
+      s.roleMappings=s.roleMappings.filter(m=>m.source!==source||m.key!==key);
+      if(role)s.roleMappings.push({source,key,role:role.id});
+    } else if(sub==="serveur") {
+      const source=i.options.getString("source");
+      if(source&&!/^[a-zA-Z0-9_-]{1,48}$/.test(source))return userError("serverId invalide.");
+      if(source)s.gameServerId=source;
+      s.statusEnabled=i.options.getBoolean("actif",true);
+      if(s.statusEnabled)await gameSync.setupStatus(s,i.options.getChannel("categorie")?.id);
     } else if(sub==="role") {
       const role=i.options.getRole("role",true);
       if(role.id===g.id || role.managed) return userError("Choisis un rôle privé non géré par une intégration.");
@@ -254,7 +283,8 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
       const c=await textChannel(i.channelId);
       await c.send({content:"**Assistance CobbleStar**\nDécris ta demande dans le formulaire. Le ticket est privé entre toi, les personnes ajoutées et le staff. Les échanges sont archivés pour traiter ta demande.",components:[row(button("cs:ticket:create","Créer un ticket",ButtonStyle.Primary))]});
     } else if(sub==="statut") {
-      await i.editReply({content:`Configuration :\n\`\`\`json\n${JSON.stringify(s,null,2)}\n\`\`\``}); return;
+      const encoded=JSON.stringify(s,null,2);
+      await i.editReply({content:await gameSync.report(s),files:[new AttachmentBuilder(Buffer.from(encoded,"utf8"),{name:"configuration-discord.json"})]}); return;
     }
     await saveSettings(s);
     await i.editReply({content:"Configuration enregistrée."});
@@ -433,6 +463,7 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
         }
       }
       await cleanup(s);
+      await gameSync.tick(s);
     } finally { busy=false; }
   }
   try {

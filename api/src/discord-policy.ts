@@ -4,6 +4,10 @@ export const snowflake = z.string().regex(/^\d{15,24}$/);
 export const eventKinds = ["moderation", "members", "tickets", "gts", "chat", "private", "minigame"] as const;
 export type EventKind = typeof eventKinds[number];
 export const stages = ["reception", "en_cours", "bug", "a_fermer"] as const;
+export const roleSources = ["grade", "ranked", "club"] as const;
+export const gradeIds = ["recrue", "eclaireur", "aventurier", "prodige", "veteran", "gardien", "elite", "mercenaire"] as const;
+export const rankedIds = ["bronze", "argent", "or", "platine", "diamant", "maitre", "star"] as const;
+export const roleMapping = z.object({source:z.enum(roleSources), key:z.string().regex(/^[a-z0-9_-]{1,64}$/), role:snowflake}).strict();
 export const settingsSchema = z.object({
   staffRole: snowflake.optional(), adminRole: snowflake.optional(),
   channels: z.partialRecord(z.enum(eventKinds), snowflake).default({}),
@@ -11,6 +15,11 @@ export const settingsSchema = z.object({
   watched: z.array(snowflake).max(100).default([]),
   retentionDays: z.number().int().min(1).max(90).default(30),
   privateEnabled: z.boolean().default(false),
+  gameServerId: z.string().regex(/^[a-zA-Z0-9_-]{1,48}$/).default("main"),
+  roleSyncEnabled: z.boolean().default(false),
+  roleMappings: z.array(roleMapping).max(200).default([]),
+  statusEnabled: z.boolean().default(false),
+  statusCategory: snowflake.optional(), statusChannel: snowflake.optional(), playersChannel: snowflake.optional(),
 });
 export type Settings = z.infer<typeof settingsSchema>;
 export const bridgeSchema = z.object({

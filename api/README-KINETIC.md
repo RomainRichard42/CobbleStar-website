@@ -168,6 +168,34 @@ Le premier joueur à donner la bonne réponse gagne ; les accents/majuscules son
 
 Commandes OP niveau 4. `demarrer` sert au test immédiat. `stop` arrête la session ; mettre `enabled:false` dans le fichier pour rester désactivé après redémarrage. Une partie interrompue par redémarrage n’attribue aucune récompense et est reprogrammée.
 
+### Rôles Minecraft synchronisés et compteurs du serveur (mod 6.47.16)
+
+Déployer l’API et la migration `015_discord_game_sync.sql`, installer le mod serveur 6.47.16 et activer la passerelle. Il n’y a pas de nouvelle dépendance ni de mise à jour client nécessaire pour ces deux fonctions. L’erreur MySQL `1206` de l’hébergeur doit être résolue : une compilation réussie ne suffit pas à démarrer les migrations.
+
+Le mod utilise la même clé serveur et transmet un instantané toutes les 30 secondes. Dans `config/cobblestar-discord.json`, les nouveaux paramètres sont `roleSync:true`, `serverStatus:true` et `maintenance:false` ; leur absence dans un ancien fichier conserve ces valeurs par défaut, mais `enabled:true` reste obligatoire. Les rôles et compteurs sont également désactivés par défaut côté Discord, à activer séparément.
+
+Le bot doit avoir **Gérer les rôles** et **Gérer les salons** ; son rôle doit être au-dessus des rôles de progression à synchroniser. Aucun rôle staff, rôle privilégié, rôle d’intégration ou `@everyone` ne peut être associé. Les rôles existants non gérés par cette fonction ne sont pas remplacés.
+
+```text
+/csconfig sync-role type:grade valeur:recrue role:@Recrue
+/csconfig sync-role type:grade valeur:eclaireur role:@Éclaireur
+/csconfig sync-role type:ranked valeur:star role:@Star
+/csconfig sync-role type:club valeur:UUID-DU-CLUB role:@MonClub
+/csconfig synchronisation actif:true
+/csconfig serveur actif:true
+/csconfig statut
+```
+
+L’appel `/csconfig serveur actif:true` crée une seule catégorie **🌌 COBBLESTAR** avec deux salons vocaux de compteurs, visibles mais non connectables : **Serveur : En ligne / Maintenance / Hors ligne / Sans réponse** et **Joueurs : N / capacité**. Pour choisir une catégorie existante : `/csconfig serveur actif:true categorie:MaCatégorie`. Les appels répétés réutilisent les salons créés. Les renommages sont regroupés au plus une fois toutes les 5 minutes par compteur ; discord.js suit en plus les limites retournées par Discord. La réception est visible avec `/csconfig statut`, sans attendre le renommage.
+
+Les grades acceptés sont `recrue`, `eclaireur`, `aventurier`, `prodige`, `veteran`, `gardien`, `elite`, `mercenaire`. C’est le grade de progression, pas les tags cosmétiques équipés dans le chat. Le rôle ranked utilise le meilleur rang **placé** de la **saison actuelle** parmi les files solo, double et coop : `bronze`, `argent`, `or`, `platine`, `diamant`, `maitre`, `star`. Les tests solo et matchs de placement ne donnent pas de rôle ranked. Aucun rang Star ne donne de permission administrative.
+
+Un club est identifié par son UUID stable : `/discordbridge clubs` (OP 4) affiche ses noms/identifiants. Renommer le club ne change pas son association. Le bot n’en crée pas de rôle sans configuration admin. Omettre `role` dans `/csconfig sync-role` retire l’association ; les badges auparavant gérés seront retirés lors de la prochaine synchronisation active.
+
+Seuls les comptes Minecraft liés au site sont synchronisés. L’API résout le compte Discord depuis la liaison actuelle ; ni un pseudo choisi ni le client du jeu ne peut désigner un destinataire ou un rôle. Les profils connus sont envoyés par lots de 100 en rotation, y compris hors ligne. Un nouveau compte lié est pris en compte au passage suivant de son profil ; un compte jamais observé par le mod doit d’abord rejoindre le jeu. Les rôles sont traités par lots de 20, avec réconciliation périodique. Une panne du serveur ne supprime pas tous les badges : elle rend les compteurs périmés après 2 minutes, affichés au prochain renommage. Une déliaison ou un changement de compte retire uniquement les badges suivis par le bot sur l’ancien compte.
+
+`source` dans `/csconfig serveur` sélectionne le `serverId` autorisé pour ces fonctions, `main` par défaut. Les autres serveurs sont refusés. Des instantanés rejoués ou l’arrêt tardif d’une ancienne session ne peuvent pas écraser la nouvelle session. Cette fonction n’ajoute pas de commande distante exécutée en jeu.
+
 ### Limites et vérification réelle
 
 - Les messages supprimés avant que le bot les ait observés ne peuvent pas être reconstruits. L’auteur du message n’est pas présenté comme la personne l’ayant supprimé.

@@ -2,8 +2,10 @@ import type { FastifyInstance, FastifyRequest } from "fastify";
 import { bridgeSchema } from "./discord-policy.js";
 import { enqueue, settings } from "./discord-store.js";
 import { config } from "./config.js";
+import {registerDiscordGame} from "./discord-game.js";
 
 export function registerDiscordBridge(app: FastifyInstance, authorized: (request: FastifyRequest) => boolean) {
+  registerDiscordGame(app,authorized);
   app.post("/internal/discord/events", {bodyLimit: 256 * 1024}, async (request, reply) => {
     if (!authorized(request)) return reply.code(401).send({error: "INVALID_SERVER_KEY"});
     if (!config.DISCORD_GATEWAY_ENABLED) return reply.code(503).send({error: "DISCORD_DISABLED"});
