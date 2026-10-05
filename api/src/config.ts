@@ -21,6 +21,7 @@ export const config = z.object({
   DISCORD_CLIENT_ID: z.string().trim().default(""),
   DISCORD_CLIENT_SECRET: z.string().trim().default(""),
   DISCORD_BOT_TOKEN: z.string().trim().default(""),
+  DISCORD_GATEWAY_ENABLED: bool,
   DISCORD_GUILD_ID: z.string().regex(/^\d{15,24}$/).default("1540002066469101629"),
   MINECRAFT_SERVER_KEY: generatedSecret,
   // Enable ONLY with authenticated Minecraft UUIDs (online-mode or a secured proxy).

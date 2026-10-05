@@ -12,6 +12,8 @@ import { readFile } from "node:fs/promises";
 import { config, isProduction } from "./config.js";
 import { pool, transaction } from "./db.js";
 import { applyMigrations } from "./migrations.js";
+import { registerDiscordBridge } from "./discord-bridge.js";
+import { startDiscordBot } from "./discord-bot.js";
 import { digest, normalizeEmail, randomToken } from "./security.js";
 import { findShopProduct, getGameShopCatalog, getShopTheme } from "./shop.js";
 import { findVoteSite, getVoteSites, playerVoteUrl } from "./votes.js";
@@ -391,6 +393,7 @@ app.get("/api/me", { preHandler: requireAccount }, async (request, reply) => {
   return { user: { ...publicUser(account), admin: canReadGame(account) || await isWikiAdmin(account), gameAdmin: canReadGame(account) } };
 });
 
+registerDiscordBridge(app, request => serverKeyMatches(serverKeyFrom(request)));
 registerGameAdmin(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerQuestStudio(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerArenaStudio(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
@@ -1002,5 +1005,14 @@ app.setErrorHandler((error, _request, reply) => {
 export { app };
 if (config.NODE_ENV !== "test") {
   await applyMigrations();
+  let stopDiscordBot: (() => Promise<void>) | undefined;
+  app.addHook("onClose", async () => { await stopDiscordBot?.(); });
   await app.listen({ host: config.HOST, port: config.PORT });
+  if (config.DISCORD_GATEWAY_ENABLED) {
+    try {
+      stopDiscordBot = await startDiscordBot(app.log);
+    } catch {
+      app.log.error("Bot Discord non démarré : vérifier token, intents et verrou SQL. La connexion du site reste disponible.");
+    }
+  }
 }
