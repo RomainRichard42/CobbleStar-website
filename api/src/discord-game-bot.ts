@@ -88,7 +88,7 @@ export class DiscordGameSync {
     const owned=candidate.roles?json<string[]>(candidate.roles):[];
     // A missing snapshot for an unchanged link is not a grade loss (API/server outage).
     if(!profile&&candidate.uuid&&candidate.uuid===candidate.owner_uuid)return;
-    const wanted=desiredRoles(s,profile);
+    const wanted=desiredRoles(s,profile,candidate.uuid===candidate.owner_uuid?owned:[]);
     const signature=JSON.stringify([s.staffRole,s.adminRole,candidate.uuid,owned,wanted]);
     const last=this.checked.get(candidate.discord_id),now=Date.now();
     if(last?.signature===signature&&now-last.at<300000)return;

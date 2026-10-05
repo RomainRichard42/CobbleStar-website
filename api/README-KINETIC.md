@@ -168,9 +168,9 @@ Le premier joueur à donner la bonne réponse gagne ; les accents/majuscules son
 
 Commandes OP niveau 4. `demarrer` sert au test immédiat. `stop` arrête la session ; mettre `enabled:false` dans le fichier pour rester désactivé après redémarrage. Une partie interrompue par redémarrage n’attribue aucune récompense et est reprogrammée.
 
-### Rôles Minecraft synchronisés et compteurs du serveur (mod 6.47.16)
+### Rôles Minecraft synchronisés et compteurs du serveur (mod 6.47.17)
 
-Déployer l’API et la migration `015_discord_game_sync.sql`, installer le mod serveur 6.47.16 et activer la passerelle. Il n’y a pas de nouvelle dépendance ni de mise à jour client nécessaire pour ces deux fonctions. L’erreur MySQL `1206` de l’hébergeur doit être résolue : une compilation réussie ne suffit pas à démarrer les migrations.
+Déployer l’API et la migration `015_discord_game_sync.sql`, installer le mod serveur 6.47.17 et activer la passerelle. Il n’y a pas de nouvelle dépendance ni de mise à jour client nécessaire pour ces fonctions. L’erreur MySQL `1206` de l’hébergeur doit être résolue : une compilation réussie ne suffit pas à démarrer les migrations.
 
 Le mod utilise la même clé serveur et transmet un instantané toutes les 30 secondes. Dans `config/cobblestar-discord.json`, les nouveaux paramètres sont `roleSync:true`, `serverStatus:true` et `maintenance:false` ; leur absence dans un ancien fichier conserve ces valeurs par défaut, mais `enabled:true` reste obligatoire. Les rôles et compteurs sont également désactivés par défaut côté Discord, à activer séparément.
 
@@ -179,6 +179,9 @@ Le bot doit avoir **Gérer les rôles** et **Gérer les salons** ; son rôle doi
 ```text
 /csconfig sync-role type:grade valeur:recrue role:@Recrue
 /csconfig sync-role type:grade valeur:eclaireur role:@Éclaireur
+/csconfig sync-role type:premium valeur:etoile role:@Étoile
+/csconfig sync-role type:premium valeur:cosmique role:@Cosmique
+/csconfig sync-role type:premium valeur:galactique role:@Galactique
 /csconfig sync-role type:ranked valeur:star role:@Star
 /csconfig sync-role type:club valeur:UUID-DU-CLUB role:@MonClub
 /csconfig synchronisation actif:true
@@ -189,6 +192,10 @@ Le bot doit avoir **Gérer les rôles** et **Gérer les salons** ; son rôle doi
 L’appel `/csconfig serveur actif:true` crée une seule catégorie **🌌 COBBLESTAR** avec deux salons vocaux de compteurs, visibles mais non connectables : **Serveur : En ligne / Maintenance / Hors ligne / Sans réponse** et **Joueurs : N / capacité**. Pour choisir une catégorie existante : `/csconfig serveur actif:true categorie:MaCatégorie`. Les appels répétés réutilisent les salons créés. Les renommages sont regroupés au plus une fois toutes les 5 minutes par compteur ; discord.js suit en plus les limites retournées par Discord. La réception est visible avec `/csconfig statut`, sans attendre le renommage.
 
 Les grades acceptés sont `recrue`, `eclaireur`, `aventurier`, `prodige`, `veteran`, `gardien`, `elite`, `mercenaire`. C’est le grade de progression, pas les tags cosmétiques équipés dans le chat. Le rôle ranked utilise le meilleur rang **placé** de la **saison actuelle** parmi les files solo, double et coop : `bronze`, `argent`, `or`, `platine`, `diamant`, `maitre`, `star`. Les tests solo et matchs de placement ne donnent pas de rôle ranked. Aucun rang Star ne donne de permission administrative.
+
+La source `premium` synchronise **le plus haut grade payant possédé**, indépendamment du grade gratuit : `etoile`, `cosmique`, `galactique`. Les variantes de tags A/B donnent la même famille. Le mod lit les droits effectifs LuckPerms (`cobblestar.tags.etoile`, `.cosmiquea`, `.cosmiqueb`, `.galactiquea`, `.galactiqueb`) ou les glyphes de leurs préfixes réels ; un refus explicite l’emporte. Le préfixe transitoire de `/tags` est ignoré. Les groupes et achats ne sont jamais modifiés par Discord. Si tes groupes commerciaux ne contiennent pas déjà ces droits/préfixes, ajoute la permission de tag correspondante au groupe LuckPerms réellement attribué par ta boutique.
+
+Les joueurs hors ligne sont lus en arrière-plan via l’API publique LuckPerms, avec un cache d’une minute et des lots bornés. Une révocation confirmée enlève le badge payant suivi par le bot. En cas de panne LuckPerms ou de mod plus ancien, le champ payant est inconnu : conserver le badge déjà suivi, ne pas en attribuer un nouveau. Une déliaison le retire normalement. Compter au moins un passage de lecture, puis un nouvel envoi du profil et le lot Discord ; ce n’est pas instantané. Voir [UserManager LuckPerms](https://raw.githubusercontent.com/LuckPerms/LuckPerms/master/api/src/main/java/net/luckperms/api/model/user/UserManager.java).
 
 Un club est identifié par son UUID stable : `/discordbridge clubs` (OP 4) affiche ses noms/identifiants. Renommer le club ne change pas son association. Le bot n’en crée pas de rôle sans configuration admin. Omettre `role` dans `/csconfig sync-role` retire l’association ; les badges auparavant gérés seront retirés lors de la prochaine synchronisation active.
 

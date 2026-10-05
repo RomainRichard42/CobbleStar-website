@@ -4,11 +4,11 @@ import type {RowDataPacket} from "mysql2/promise";
 import {config} from "./config.js";
 import {pool, transaction} from "./db.js";
 import {settings, json} from "./discord-store.js";
-import {gradeIds, rankedIds, type Settings} from "./discord-policy.js";
+import {gradeIds, premiumIds, rankedIds, type Settings} from "./discord-policy.js";
 
 const uuid=z.string().regex(/^[0-9a-f]{32}$/);
 export const gameProfileSchema=z.object({uuid, grade:z.enum(gradeIds), ranked:z.enum(rankedIds).nullable(),
-  club:z.string().regex(/^[a-z0-9_-]{1,64}$/).nullable()}).strict();
+  club:z.string().regex(/^[a-z0-9_-]{1,64}$/).nullable(), premium:z.enum(premiumIds).nullable().optional()}).strict();
 export type GameProfile=z.infer<typeof gameProfileSchema>;
 export const gameStateSchema=z.object({
   serverId:z.string().regex(/^[a-zA-Z0-9_-]{1,48}$/), sessionId:z.string().uuid(),
@@ -21,9 +21,11 @@ export type GameState=z.infer<typeof gameStateSchema>;
 export function newerState(old:{started_at:number; session_id:string; sequence_no:number}|undefined, next:GameState) {
   return !old||next.startedAt>Number(old.started_at)||next.startedAt===Number(old.started_at)&&next.sessionId===old.session_id&&next.sequence>Number(old.sequence_no);
 }
-export function desiredRoles(s:Settings, profile:GameProfile|null) {
+export function desiredRoles(s:Settings, profile:GameProfile|null, owned:string[]=[]) {
   if(!profile)return [];
-  return [...new Set(s.roleMappings.filter(m=>profile[m.source]===m.key).map(m=>m.role))];
+  // Older mods or unavailable LuckPerms omit premium: preserve owned paid badges, never grant one.
+  return [...new Set(s.roleMappings.filter(m=>m.source==="premium"&&profile.premium===undefined
+    ?owned.includes(m.role):profile[m.source]===m.key).map(m=>m.role))];
 }
 export function statusNames(state:GameState|null, receivedAt:number, now=Date.now()) {
   if(!state)return {status:"⚪ Serveur : En attente",players:"👥 Joueurs : —"};

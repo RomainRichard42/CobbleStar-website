@@ -32,6 +32,21 @@ test('Counts distinguish unconfigured, fresh, stale, maintenance and orderly shu
   assert.match(statusNames(state({online:false,players:0}),now,now).status,/Hors ligne/);
   assert.match(statusNames(state({online:false,players:0}),now-600000,now).status,/Hors ligne/);
 });
+test('Paid grades are separate, highest family is mapped, unknown is not a revocation',()=>{
+  const s=settingsSchema.parse({roleMappings:[{source:'grade',key:'recrue',role:grade},
+    {source:'premium',key:'etoile',role:promoted},{source:'premium',key:'cosmique',role:rank},{source:'premium',key:'galactique',role:club}]});
+  const p=state().profiles[0];
+  for(const [premium,role] of [['etoile',promoted],['cosmique',rank],['galactique',club]]) {
+    assert.ok(gameStateSchema.safeParse(state({profiles:[{...p,premium}]})).success);
+    assert.deepEqual(desiredRoles(s,{...p,premium},[club]),[grade,role]);
+  }
+  assert.deepEqual(desiredRoles(s,p,[rank,staff]),[grade,rank]);
+  assert.deepEqual(desiredRoles(s,p),[grade]);
+  assert.deepEqual(desiredRoles(s,{...p,premium:null},[rank]),[grade]);
+  assert.deepEqual(desiredRoles(s,null,[rank]),[]);
+  assert.equal(gameStateSchema.safeParse(state({profiles:[{...p,premium:'admin'}]})).success,false);
+  assert.equal(gameStateSchema.safeParse(state({profiles:[{...p,premium:['etoile','galactique']}]})).success,false);
+});
 test('Old heartbeats/shutdowns cannot overwrite a new server session or refresh the expiry',()=>{
   const next=state({startedAt:1000,sequence:5});
   const old={started_at:1000,session_id:session,sequence_no:5};
@@ -82,6 +97,22 @@ test('Unlink removes owned roles; an unavailable snapshot for an unchanged link 
   });
   assert.deepEqual(f.calls,[['remove',grade]]);assert.ok(f.m.roles.cache.has(staff));
   assert.deepEqual(f.saved.at(-1).roles,[]);
+});
+test('Paid badges survive unavailable LP, disappear on revocation and are never transferred on relink',async()=>{
+  const f=fixture({roleMappings:[{source:'premium',key:'etoile',role:grade},{source:'premium',key:'cosmique',role:promoted}]});
+  await withPool(f,async()=>{
+    await f.sync.syncCandidate(f.g,f.s,f.candidate,f.me);
+    assert.equal(f.calls.length,0);
+    await f.sync.syncCandidate(f.g,f.s,{...f.candidate,profile:{...f.candidate.profile,premium:'cosmique'}},f.me);
+    assert.deepEqual(f.calls,[['remove',grade],['add',promoted]]);
+    f.calls.length=0;
+    await f.sync.syncCandidate(f.g,f.s,{...f.candidate,roles:[promoted],profile:{...f.candidate.profile,premium:null}},f.me);
+    assert.deepEqual(f.calls,[['remove',promoted]]);
+    f.calls.length=0;f.m.roles.cache.set(grade,f.roles.get(grade));
+    await f.sync.syncCandidate(f.g,f.s,{...f.candidate,uuid:'b'.repeat(32)},f.me);
+    assert.deepEqual(f.calls,[['remove',grade]]);
+    assert.ok(f.m.roles.cache.has(staff));
+  });
 });
 test('Role safety rejects staff, moderation, integrations, @everyone and roles above the bot',async()=>{
   const f=fixture();assert.equal(safeSyncRole(f.roles.get(grade),f.me,f.s),true);

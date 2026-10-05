@@ -11,7 +11,7 @@ import type { FastifyBaseLogger } from "fastify";
 import type { RowDataPacket, ResultSetHeader } from "mysql2/promise";
 import { config } from "./config.js";
 import { pool, transaction } from "./db.js";
-import { eventKinds, stages, roleSources, gradeIds, rankedIds, plain, summary, inviteAttribution, mayConfirm, type EventKind, type Settings } from "./discord-policy.js";
+import { eventKinds, stages, roleSources, gradeIds, premiumIds, rankedIds, plain, summary, inviteAttribution, mayConfirm, type EventKind, type Settings } from "./discord-policy.js";
 import {DiscordGameSync} from "./discord-game-bot.js";
 import { enqueue, json, saveSettings, settings, ticketFor, type Ticket } from "./discord-store.js";
 
@@ -47,7 +47,7 @@ export function discordCommands() {
     .addSubcommand(s => s.setName("initialiser").setDescription("Créer les salons et catégories manquants après configuration des rôles"))
     .addSubcommand(s=>s.setName("synchronisation").setDescription("Activer les rôles liés aux comptes Minecraft")
       .addBooleanOption(o=>o.setName("actif").setDescription("Synchroniser les rôles configurés").setRequired(true)))
-    .addSubcommand(s=>s.setName("sync-role").setDescription("Associer un grade, rang ranked ou club à un rôle sans permission staff")
+    .addSubcommand(s=>s.setName("sync-role").setDescription("Associer un grade gratuit/payant, rang ou club à un rôle sans permission staff")
       .addStringOption(o=>o.setName("type").setDescription("Source en jeu").setRequired(true).addChoices(...roleSources.map(value=>({name:value,value}))))
       .addStringOption(o=>o.setName("valeur").setDescription("Identifiant : recrue, eclaireur, maitre, star, ou UUID du club").setRequired(true).setMaxLength(64))
       .addRoleOption(o=>o.setName("role").setDescription("Rôle à synchroniser ; absent = retirer l’association")))
@@ -248,7 +248,7 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
     } else if(sub==="sync-role") {
       const source=i.options.getString("type",true) as typeof roleSources[number];
       const key=i.options.getString("valeur",true).trim().toLowerCase();
-      if(!/^[a-z0-9_-]{1,64}$/.test(key)||source==="grade"&&!gradeIds.some(id=>id===key)||source==="ranked"&&!rankedIds.some(id=>id===key))return userError("Identifiant inconnu. Grades : recrue/eclaireur/aventurier/prodige/veteran/gardien/elite/mercenaire. Ranked : bronze/argent/or/platine/diamant/maitre/star. Club : UUID du club.");
+      if(!/^[a-z0-9_-]{1,64}$/.test(key)||source==="grade"&&!gradeIds.some(id=>id===key)||source==="premium"&&!premiumIds.some(id=>id===key)||source==="ranked"&&!rankedIds.some(id=>id===key))return userError("Identifiant inconnu. Grades : recrue/eclaireur/aventurier/prodige/veteran/gardien/elite/mercenaire. Premium : etoile/cosmique/galactique. Ranked : bronze/argent/or/platine/diamant/maitre/star. Club : UUID du club.");
       const role=i.options.getRole("role");
       if(role)await gameSync.validateRole(s,role.id);
       s.roleMappings=s.roleMappings.filter(m=>m.source!==source||m.key!==key);

@@ -19,11 +19,12 @@ test('MySQL game-state tables: migration replay, linked identity joins and owner
     await conn.execute('INSERT INTO users VALUES(?,?,NULL,NOW())',[did,uuid]);
     await conn.execute('INSERT INTO discord_role_state (guild_id,discord_id,roles,uuid) VALUES(?,?,?,?)',[gid,did,'["123456789012345672"]',uuid]);
     const insert=`INSERT INTO discord_game_players(guild_id,server_id,uuid,profile) SELECT ?,?,?,? FROM users WHERE minecraft_uuid=? AND discord_id IS NOT NULL AND merged_into IS NULL AND minecraft_linked_at IS NOT NULL ON DUPLICATE KEY UPDATE profile=VALUES(profile),updated_at=NOW()`;
-    await conn.execute(insert,[gid,'main',uuid,JSON.stringify({uuid,grade:'elite',ranked:'star',club:null}),uuid]);
+    await conn.execute(insert,[gid,'main',uuid,JSON.stringify({uuid,grade:'elite',ranked:'star',club:null,premium:'galactique'}),uuid]);
     await conn.execute(insert,[gid,'main','b'.repeat(32),'{}','b'.repeat(32)]);
     const [rows]=await conn.query(`SELECT u.discord_id,p.profile,r.uuid AS owner_uuid FROM users u JOIN discord_game_players p ON p.uuid=u.minecraft_uuid AND p.guild_id=? AND p.server_id=? LEFT JOIN discord_role_state r ON r.discord_id=u.discord_id AND r.guild_id=? WHERE u.merged_into IS NULL`,[gid,'main',gid]);
     assert.equal(rows.length,1);assert.equal(rows[0].owner_uuid,uuid);
     assert.equal((typeof rows[0].profile==='string'?JSON.parse(rows[0].profile):rows[0].profile).ranked,'star');
+    assert.equal((typeof rows[0].profile==='string'?JSON.parse(rows[0].profile):rows[0].profile).premium,'galactique');
     await conn.query('UPDATE users SET discord_id=NULL,minecraft_uuid=NULL,minecraft_linked_at=NULL');
     const [unlinked]=await conn.query('SELECT r.discord_id,u.minecraft_uuid FROM discord_role_state r LEFT JOIN users u ON u.discord_id=r.discord_id WHERE r.guild_id=?',[gid]);
     assert.equal(unlinked.length,1);assert.equal(unlinked[0].minecraft_uuid,null);
