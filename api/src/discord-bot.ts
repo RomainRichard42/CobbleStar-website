@@ -13,6 +13,7 @@ import { config } from "./config.js";
 import { pool, transaction } from "./db.js";
 import { eventKinds, stages, roleSources, gradeIds, premiumIds, rankedIds, plain, summary, inviteAttribution, mayConfirm, type EventKind, type Settings } from "./discord-policy.js";
 import {DiscordGameSync} from "./discord-game-bot.js";
+import {communityEventCommand,DiscordCommunityEvents} from "./discord-community-events-bot.js";
 import { enqueue, json, saveSettings, settings, ticketFor, type Ticket } from "./discord-store.js";
 
 const ephemeral = {flags: MessageFlags.Ephemeral} as const;
@@ -67,7 +68,7 @@ export function discordCommands() {
       .addStringOption(o=>o.setName("resume").setDescription("Conclusion / résolution").setRequired(true).setMaxLength(1000)))
     .addSubcommand(s=>s.setName("forcer-fermeture").setDescription("Archiver et fermer sans confirmation (staff)")
       .addStringOption(o=>o.setName("resume").setDescription("Conclusion et motif de fermeture").setRequired(true).setMaxLength(1000)));
-  return [setup.toJSON(), ticket.toJSON()];
+  return [setup.toJSON(), ticket.toJSON(),communityEventCommand()];
 }
 
 export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (options: ClientOptions) => Client = options => new Client(options)): Promise<() => Promise<void>> {
@@ -97,6 +98,7 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
 
   async function guild() { return client.guilds.fetch(config.DISCORD_GUILD_ID); }
   const gameSync=new DiscordGameSync(guild,log);
+  const communityEvents=new DiscordCommunityEvents(guild,()=>client.user!.id,log);
   client.on(Events.GuildMemberAdd,m=>{gameSync.invalidate(m.id);});
   async function member(g: Guild, id: string) { return g.members.fetch(id); }
   function isAdmin(m: GuildMember) { return m.permissions.has(P.Administrator); }
@@ -323,12 +325,17 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
   const interacting = new Set<string>();
   client.on(Events.InteractionCreate,i=>safe(async()=> {
     if(stopped||i.guildId!==config.DISCORD_GUILD_ID) return;
-    const ours=i.isChatInputCommand()?["ticket","csconfig"].includes(i.commandName):(i.isButton()||i.isModalSubmit())&&i.customId.startsWith("cs:");
+    const ours=i.isChatInputCommand()?["ticket","csconfig","evenement"].includes(i.commandName):(i.isButton()||i.isModalSubmit())&&i.customId.startsWith("cs:");
     if(!ours) return;
-    const resource=i.isChatInputCommand()&&i.commandName==="csconfig"?"configuration":i.channelId??i.user.id;
+    const resource=communityEvents.owns(i)?`evenement:${i.user.id}`:i.isChatInputCommand()&&i.commandName==="csconfig"?"configuration":i.channelId??i.user.id;
     if(interacting.has(resource)) {if(i.isRepliable()) await i.reply({content:"Une action est déjà en cours ici. Réessaie dans un instant.",...ephemeral});return;}
     interacting.add(resource);
     try {
+      if(communityEvents.owns(i)) {
+        const showForm=i.isChatInputCommand()&&["creer","modifier","annuler"].includes(i.options.getSubcommand());
+        if(!showForm&&i.isRepliable())await i.deferReply(ephemeral);
+        await communityEvents.handle(i,await settings());return;
+      }
       if((i.isButton()&&i.customId==="cs:ticket:create")||(i.isChatInputCommand()&&i.commandName==="ticket"&&i.options.getSubcommand()==="creer")) {
         await i.showModal(new ModalBuilder().setCustomId("cs:ticket:form").setTitle("Assistance CobbleStar")
           .addComponents(textField("subject","Sujet",120),textField("description","Ta demande / étapes du bug",3000,true))); return;
@@ -351,7 +358,9 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
         await i.editReply({content:"Choix enregistré."});
       }
     } catch(error) {
-      const message=error instanceof Error&&error.message.startsWith("USER:")?error.message.slice(5):"Action non terminée. Vérifie les permissions/configurations ; le ticket n’a pas été supprimé.";
+      const message=error instanceof Error&&error.message.startsWith("USER:")?error.message.slice(5):communityEvents.owns(i)
+        ?"Action non terminée. Vérifie les permissions/configurations. Les données de l’événement sont conservées."
+        :"Action non terminée. Vérifie les permissions/configurations ; le ticket n’a pas été supprimé.";
       if(i.isRepliable()) { if(i.deferred||i.replied) await i.editReply({content:message}); else await i.reply({content:message,...ephemeral}); }
       if(!(error instanceof Error&&error.message.startsWith("USER:"))) log.warn("Action Discord échouée (détails sensibles masqués).");
     } finally {interacting.delete(resource);}
@@ -464,6 +473,7 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
       }
       await cleanup(s);
       await gameSync.tick(s);
+      await communityEvents.tick(s);
     } finally { busy=false; }
   }
   try {
@@ -483,7 +493,7 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
     await pool.execute("UPDATE discord_tickets SET status='a_fermer' WHERE guild_id=? AND status='closing'",[g.id]);
     await snapshotInvites(g);
     timer=setInterval(()=>safe(tick),5000);
-    log.info("Bot CobbleStar connecté ; commandes /ticket et /csconfig disponibles.");
+    log.info("Bot CobbleStar connecté ; commandes /ticket, /csconfig et /evenement disponibles.");
     return stop;
   } catch(error) { await stop(); throw error; }
 }

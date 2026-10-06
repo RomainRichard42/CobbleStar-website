@@ -203,6 +203,43 @@ Seuls les comptes Minecraft liés au site sont synchronisés. L’API résout le
 
 `source` dans `/csconfig serveur` sélectionne le `serverId` autorisé pour ces fonctions, `main` par défaut. Les autres serveurs sont refusés. Des instantanés rejoués ou l’arrêt tardif d’une ancienne session ne peuvent pas écraser la nouvelle session. Cette fonction n’ajoute pas de commande distante exécutée en jeu.
 
+### Événements communautaires avec inscriptions
+
+Ajout côté API/bot uniquement : appliquer la migration `016_discord_community_events.sql` et redémarrer l’API avec la passerelle active. Aucun nouveau JAR Minecraft ni pack n’est nécessaire. Le bot enregistre `/evenement` dans le serveur Discord configuré, sans supprimer les autres commandes.
+
+Le rôle défini par `/csconfig role usage:staff role:@Staff`, ou un administrateur Discord, peut créer, modifier et annuler les événements. Les autres membres peuvent consulter et s’inscrire. Le bot doit avoir **Voir le salon**, **Envoyer des messages**, **Intégrer des liens** et **Voir les anciens messages** dans le salon choisi. Il n’a pas besoin de Gérer les événements Discord : ce système utilise ses propres annonces et son stockage SQL, pas les événements natifs Discord.
+
+Dans le salon où publier l’annonce :
+
+```text
+/evenement creer type:tournoi
+/evenement creer type:raid
+/evenement creer type:mini_jeux
+```
+
+Un formulaire demande le titre, la date `JJ/MM/AAAA HH:mm` **heure de Paris**, la durée en minutes, le nombre de places et les détails (lieu, rendez-vous, règles). Durée de 15 minutes à 24 heures ; date entre une minute et un an à l’avance ; 1 à 500 places, ou 0 sans limite de places (plafond de sécurité de 5 000 inscriptions). Au changement d’heure, les heures ambiguës/inexistantes sont refusées ; une date ISO précise, par exemple `2026-10-25T02:30+02:00`, permet de choisir l’occurrence voulue. Le message affiche ensuite les horaires dans le fuseau local de chaque lecteur Discord.
+
+L’annonce violette CobbleStar comporte **S’inscrire**, **Se désinscrire**, **Participants** et **Rappels MP**. L’inscription est visible dans la liste : le message le précise avant l’inscription. Une inscription par compte Discord ; les bots sont exclus. Quand les places sont pleines, les suivants vont en liste d’attente. Un désistement ou une augmentation du nombre de places confirme les premiers en attente, dans l’ordre d’inscription. Les transactions verrouillent la ligne de l’événement : deux joueurs ne peuvent pas prendre simultanément la dernière place. Les MP sont désactivés par défaut, activables/désactivables pour chaque événement. Discord peut les bloquer ; aucune relance publique nominative ne remplace un MP bloqué.
+
+```text
+/evenement liste
+/evenement participants id:ID-COMPLET
+/evenement participants id:ID-COMPLET page:2
+/evenement participants id:ID-COMPLET export:true
+/evenement modifier id:ID-COMPLET
+/evenement annuler id:ID-COMPLET
+```
+
+L’ID complet figure sous l’annonce. Liste paginée de 25 membres ; export texte complet réservé au staff. Seuls les événements dont le membre peut voir le salon sont consultables. Un compte Minecraft lié n’est pas obligatoire pour s’inscrire à un événement Discord. Une modification conserve les inscrits : diminuer les places sous le nombre déjà confirmé est refusé. Modifier la date remplace les rappels du planning précédent. Annuler demande un motif et la saisie exacte `ANNULER` ; l’annonce est mise à jour, les rappels ordinaires sont annulés, et un MP d’annulation est prévu uniquement pour ceux qui ont activé les MP. Les inscriptions sont fermées au début, puis l’annonce passe en « Terminé » à l’heure de fin.
+
+Rappels publics dans le salon à **24 h, 1 h, 10 min et au début**, sans ping `@everyone`/rôle. Les mêmes rappels sont proposés en MP aux inscrits confirmés ayant donné leur accord ; un joueur en attente ayant choisi les MP est prévenu si une place se libère. Un rappel dont l’échéance précède la création/l’activation des MP n’est pas envoyé rétroactivement. Après panne, les rappels trop anciens sont ignorés plutôt que regroupés en rafale. Dates, inscriptions, listes d’attente, révisions d’annonces et file de rappels sont stockées en MySQL et reprennent après redémarrage. Une panne entre envoi Discord et confirmation SQL peut néanmoins répéter un rappel : livraison au moins une fois, pas de garantie « exactement une fois ».
+
+Les données d’inscription et les rappels sont purgés selon `retentionDays`, après la fin effective ou l’annulation. L’annonce Discord publique reste comme historique, mais la liste expirée n’est plus disponible. La publication est réessayée en cas d’erreur ; une annonce supprimée peut être recréée lors d’une modification staff. Si le salon lui-même est supprimé, ses annonces/rappels restent en attente jusqu’à correction ou expiration.
+
+Ce système **organise** les événements : il ne lance pas automatiquement un tournoi, raid Minecraft, mini-jeu ou TP, et ne distribue pas de récompenses. Aucun message réel ni événement réel n’est créé par les tests. Les tests unitaires utilisent Discord/SQL simulés ; le test MySQL de concurrence utilise une base jetable du service CI (`LINK_TEST_MYSQL_PORT`) et est ignoré en local si cette base n’est pas disponible.
+
+Les interactions différées et les formulaires suivent la [documentation Discord](https://docs.discord.com/developers/interactions/receiving-and-responding). Pour la recette réelle : créer un événement avec une place, inscrire deux comptes, désinscrire le premier, vérifier la promotion, activer les MP, modifier la date puis annuler. Vérifier aussi qu’un compte sans rôle staff ne peut ni créer, ni modifier, ni exporter, et qu’un membre sans accès au salon ne voit pas l’événement.
+
 ### Limites et vérification réelle
 
 - Les messages supprimés avant que le bot les ait observés ne peuvent pas être reconstruits. L’auteur du message n’est pas présenté comme la personne l’ayant supprimé.
