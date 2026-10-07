@@ -42,7 +42,7 @@ test('Allodus cosmetics ship automatically, merging translations and audio witho
  assert.ok(![...files.keys()].some(path=>path.startsWith('data/')&&/allodus|cobblestarjudgment|cobblestaromnitype/.test(path)));
 });
 
-test('Allodus V4 has a quadrupedal flight-first titan rig and supported native root scale, without enlarging UI portraits',()=>{
+test('Allodus V5 has fuller quadrupedal anatomy and the proven flight-first native rig, without enlarging UI portraits',()=>{
  const files=unpack(buildStarPack([],[]));
  const prefix='assets/cobblestar_planets/bedrock/pokemon/';
  const geometry=JSON.parse(files.get(prefix+'models/allodus/allodus.geo.json'))['minecraft:geometry'][0];
@@ -51,6 +51,19 @@ test('Allodus V4 has a quadrupedal flight-first titan rig and supported native r
  for(const bone of ['pelvis','spine','chest','neck_mid','neck_upper','jaw','tail_11','left_wing_elbow','right_wing_elbow','left_sail_2','right_sail_2'])assert.ok(names.has(bone));
  for(const bone of geometry.bones)if(bone.parent)assert.ok(names.has(bone.parent));
  assert.equal(geometry.bones.filter(b=>b.name.startsWith('gem_')).length,18);
+ const bone=name=>geometry.bones.find(b=>b.name===name),width=name=>Math.max(...bone(name).cubes.map(c=>c.size[0]));
+ assert.ok(width('neck')>=8.5&&width('neck_upper')>=6.4,'Continuous thick neck anatomy');
+ assert.equal(bone('head').pivot[1]-bone('neck').pivot[1],19,'Shorter neck instead of a narrow stalk');
+ assert.ok(width('head')>=6.2&&width('chest')>=23,'Larger head and broader thorax');
+ for(const side of ['left','right']){
+  assert.ok(width(side+'_hand')>=7.2&&width(side+'_foot')>=7.4,'Padded substantial paws');
+  assert.equal(Math.abs(bone(side+'_hand').pivot[0]),12.5,'Wider four-leg supporting stance');
+ }
+ for(const name of ['forehead_star','chest_star'])assert.equal(bone(name).pivot[0],0,'Stars centered on the 3D rig');
+ for(const part of geometry.bones)for(const cube of part.cubes){
+  const [u,v]=cube.uv,[w,h,d]=cube.size;
+  assert.ok(u%64+2*(w+d)<=64&&v%64+h+d<=64,'Reshaped anatomy must not sample adjacent material tiles');
+ }
  const animations=JSON.parse(files.get(prefix+'animations/allodus/allodus.animation.json')).animations;
  assert.equal(Object.keys(animations).length,23);
  assert.deepEqual(animations['animation.allodus.colossus'].bones.root_part.scale,[4,4,4]);
