@@ -61,6 +61,7 @@ test('Allodus V2 has a colossal articulated rig and native vector keyframes, wit
   }
  }
  const poser=JSON.parse(files.get(prefix+'posers/allodus/allodus.json'));
+ for(const reference of Object.values(poser.animations))if(reference.includes('q.bedrock_primary'))assert.ok(reference.includes("q.exclude_labels('all')"),'Do not shrink Allodus when a primary attack suppresses idle poses');
  for(const [name,pose]of Object.entries(poser.poses)){
   assert.equal(pose.animations.includes("q.bedrock('allodus', 'colossus')"),name!=='portrait');
  }

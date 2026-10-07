@@ -16,10 +16,10 @@
     "cry": "q.bedrock_stateful('allodus', 'cry')",
     "send_out": "q.bedrock_stateful('allodus', 'send_out')",
     "hurt": "q.bedrock_stateful('allodus', 'hurt')",
-    "faint": "q.bedrock_primary('allodus', 'faint', q.curve('one'))",
-    "cobblestarjudgment": "q.bedrock_primary('allodus', 'astral_judgment', q.curve('symmetrical_wide'))",
-    "physical": "q.bedrock_primary('allodus', 'astral_judgment', q.curve('symmetrical_wide'))",
-    "special": "q.bedrock_primary('allodus', 'astral_judgment', q.curve('symmetrical_wide'))"
+    "faint": "q.bedrock_primary('allodus', 'faint', q.exclude_labels('all'), q.curve('one'))",
+    "cobblestarjudgment": "q.bedrock_primary('allodus', 'astral_judgment', q.exclude_labels('all'), q.curve('symmetrical_wide'))",
+    "physical": "q.bedrock_primary('allodus', 'astral_judgment', q.exclude_labels('all'), q.curve('symmetrical_wide'))",
+    "special": "q.bedrock_primary('allodus', 'astral_judgment', q.exclude_labels('all'), q.curve('symmetrical_wide'))"
   },
   "poses": {
     "sleep": {
