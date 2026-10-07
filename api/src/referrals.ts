@@ -65,8 +65,8 @@ export class ReferralStore {
   // Map the old four stages to the new four stages. Preserve acquired rewards
   // without paying an already earned stage twice during the policy upgrade.
   for(const reward of rewardPlan(links.length,cfg)){
-   const previous=Number(legacy.find(r=>Number(r.milestone)===legacyMilestones[reward.milestone-1])?.vote_keys??0);
-   await c.execute('INSERT IGNORE INTO referral_rewards_v2 VALUES(?,?,?,?,?,?,?,?)',[guild,inviter.minecraft_uuid,'inviter',reward.milestone,Math.max(0,reward.keys-previous),0,reward.alliance?1:0,Date.now()]);
+   const previouslyEarned=legacy.some(r=>Number(r.milestone)===legacyMilestones[reward.milestone-1]);
+   await c.execute('INSERT IGNORE INTO referral_rewards_v2 VALUES(?,?,?,?,?,?,?,?)',[guild,inviter.minecraft_uuid,'inviter',reward.milestone,previouslyEarned?0:reward.keys,0,reward.alliance?1:0,Date.now()]);
   }
  }
  /** Cumulative server-authoritative counters; guild row lock serializes join, qualification and grants. */

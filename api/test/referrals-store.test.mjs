@@ -68,6 +68,7 @@ test('Store: ambiguous attribution is repairable once; pause stops grants and re
 test('Store: welcome hours do not qualify a referral early, and legacy stages are not paid twice',async()=>{
  const f=fixture(),parent=f.user('parent',100),child=f.user('child',1);await f.store.campaign('g');await f.store.joined('g','child',f.at,null,'parent');
  f.legacy.set('old',{uuid:parent.minecraft_uuid,role:'inviter',milestone:1,vote_keys:1,alliance:0});
+ await f.store.configure('g','admin',{keys:[64,2,3,5]});
  let r=await f.store.sync('g',[f.profile(child,3599)]);assert.deepEqual(r.players[0].inviteeTiers,[]);assert.equal(f.members[0].qualified_uuid,null);
  r=await f.store.sync('g',[f.profile(child,3600)]);assert.deepEqual(r.players[0].inviteeTiers,[1]);assert.equal(f.members[0].qualified_uuid,null);
  r=await f.store.sync('g',[f.profile(child,10800)]);assert.deepEqual(r.players[0].inviteeTiers,[1,2]);assert.equal(f.members[0].qualified_uuid,null);
