@@ -1,19 +1,21 @@
 {
   "rootBone": "allodus",
-  "portraitScale": 0.6,
+  "portraitScale": 0.46,
   "portraitTranslation": [
     0,
-    2.55,
+    3.48,
     0
   ],
-  "profileScale": 0.34,
+  "profileScale": 0.22,
   "profileTranslation": [
     0,
-    1.25,
+    1.92,
     0
   ],
   "animations": {
     "cry": "q.bedrock_stateful('allodus', 'cry')",
+    "send_out": "q.bedrock_stateful('allodus', 'send_out')",
+    "hurt": "q.bedrock_stateful('allodus', 'hurt')",
     "faint": "q.bedrock_primary('allodus', 'faint', q.curve('one'))",
     "cobblestarjudgment": "q.bedrock_primary('allodus', 'astral_judgment', q.curve('symmetrical_wide'))",
     "physical": "q.bedrock_primary('allodus', 'astral_judgment', q.curve('symmetrical_wide'))",
@@ -25,44 +27,75 @@
         "SLEEP"
       ],
       "animations": [
+        "q.bedrock('allodus', 'colossus')",
         "q.look('head')",
         "q.bedrock('allodus', 'sleep')",
-        "q.bedrock('allodus', 'halo_spin')"
-      ]
+        "q.bedrock('allodus', 'halo_spin')",
+        "q.bedrock('allodus', 'orbit_spin')"
+      ],
+      "quirks": []
     },
     "battle": {
       "poseTypes": [
         "STAND"
       ],
       "animations": [
+        "q.bedrock('allodus', 'colossus')",
         "q.look('head')",
         "q.bedrock('allodus', 'battle_idle')",
-        "q.bedrock('allodus', 'halo_spin')"
+        "q.bedrock('allodus', 'halo_spin')",
+        "q.bedrock('allodus', 'orbit_spin')"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('allodus', 'blink')"
       ],
       "isBattle": true
     },
     "standing": {
       "poseTypes": [
         "STAND",
-        "NONE",
+        "NONE"
+      ],
+      "animations": [
+        "q.bedrock('allodus', 'colossus')",
+        "q.look('head')",
+        "q.bedrock('allodus', 'ground_idle')",
+        "q.bedrock('allodus', 'halo_spin')",
+        "q.bedrock('allodus', 'orbit_spin')"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('allodus', 'blink')"
+      ],
+      "isBattle": false
+    },
+    "portrait": {
+      "poseTypes": [
         "PORTRAIT",
         "PROFILE"
       ],
       "animations": [
         "q.look('head')",
         "q.bedrock('allodus', 'ground_idle')",
-        "q.bedrock('allodus', 'halo_spin')"
+        "q.bedrock('allodus', 'halo_spin')",
+        "q.bedrock('allodus', 'orbit_spin')"
       ],
-      "isBattle": false
+      "quirks": [
+        "q.bedrock_quirk('allodus', 'blink')"
+      ]
     },
     "walk": {
       "poseTypes": [
         "WALK"
       ],
       "animations": [
+        "q.bedrock('allodus', 'colossus')",
         "q.look('head')",
         "q.bedrock('allodus', 'ground_walk')",
-        "q.bedrock('allodus', 'halo_spin')"
+        "q.bedrock('allodus', 'halo_spin')",
+        "q.bedrock('allodus', 'orbit_spin')"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('allodus', 'blink')"
       ]
     },
     "hover": {
@@ -71,9 +104,14 @@
         "FLOAT"
       ],
       "animations": [
+        "q.bedrock('allodus', 'colossus')",
         "q.look('head')",
         "q.bedrock('allodus', 'air_idle')",
-        "q.bedrock('allodus', 'halo_spin')"
+        "q.bedrock('allodus', 'halo_spin')",
+        "q.bedrock('allodus', 'orbit_spin')"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('allodus', 'blink')"
       ]
     },
     "fly": {
@@ -82,9 +120,14 @@
         "SWIM"
       ],
       "animations": [
+        "q.bedrock('allodus', 'colossus')",
         "q.look('head')",
         "q.bedrock('allodus', 'air_fly')",
-        "q.bedrock('allodus', 'halo_spin')"
+        "q.bedrock('allodus', 'halo_spin')",
+        "q.bedrock('allodus', 'orbit_spin')"
+      ],
+      "quirks": [
+        "q.bedrock_quirk('allodus', 'blink')"
       ]
     }
   }

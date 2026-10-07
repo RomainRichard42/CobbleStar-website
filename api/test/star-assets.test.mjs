@@ -42,6 +42,34 @@ test('Allodus cosmetics ship automatically, merging translations and audio witho
  assert.ok(![...files.keys()].some(path=>path.startsWith('data/')&&/allodus|cobblestarjudgment|cobblestaromnitype/.test(path)));
 });
 
+test('Allodus V2 has a colossal articulated rig and native vector keyframes, without enlarging UI portraits',()=>{
+ const files=unpack(buildStarPack([],[]));
+ const prefix='assets/cobblestar_planets/bedrock/pokemon/';
+ const geometry=JSON.parse(files.get(prefix+'models/allodus/allodus.geo.json'))['minecraft:geometry'][0];
+ const names=new Set(geometry.bones.map(b=>b.name));
+ assert.ok(names.size>=80);assert.ok(geometry.description.visible_bounds_height>=20);
+ for(const bone of ['jaw','tail_11','left_wing_elbow','right_wing_elbow','left_sail_2','right_sail_2'])assert.ok(names.has(bone));
+ for(const bone of geometry.bones)if(bone.parent)assert.ok(names.has(bone.parent));
+ assert.equal(geometry.bones.filter(b=>b.name.startsWith('gem_')).length,18);
+ const animations=JSON.parse(files.get(prefix+'animations/allodus/allodus.animation.json')).animations;
+ assert.equal(Object.keys(animations).length,16);
+ assert.deepEqual(animations['animation.allodus.colossus'].bones.allodus.scale,[1.75,1.75,1.75]);
+ for(const animation of Object.values(animations))for(const [name,channels]of Object.entries(animation.bones)){
+  assert.ok(names.has(name));
+  for(const value of Object.values(channels))if(value&&typeof value==='object'&&!Array.isArray(value)){
+   for(const frame of Object.values(value))assert.ok(Array.isArray(frame)&&frame.length===3,'Scalar timed keyframes make Cobblemon reject the entire animation group');
+  }
+ }
+ const poser=JSON.parse(files.get(prefix+'posers/allodus/allodus.json'));
+ for(const [name,pose]of Object.entries(poser.poses)){
+  assert.equal(pose.animations.includes("q.bedrock('allodus', 'colossus')"),name!=='portrait');
+ }
+ for(const match of JSON.stringify(poser).matchAll(/q\.bedrock(?:_primary|_stateful|_quirk)?\('allodus', '([^']+)'/g))assert.ok(animations['animation.allodus.'+match[1]]);
+ const cry=animations['animation.allodus.cry'];
+ assert.equal(cry.particle_effects['.7'].effect,'cobblestar_planets:allodus_burst');
+ assert.equal(cry.sound_effects['.55'].effect,'cobblestar_planets:allodus.cry');
+});
+
 test('All four approved arcade cabinets ship through the mandatory pack without replacing balls or loot',()=>{
  const files=unpack(buildStarPack([],[]));
  const manifest=JSON.parse(readFileSync(new URL('../arcade-assets/manifest.json',import.meta.url)));
