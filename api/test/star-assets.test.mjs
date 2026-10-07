@@ -42,18 +42,24 @@ test('Allodus cosmetics ship automatically, merging translations and audio witho
  assert.ok(![...files.keys()].some(path=>path.startsWith('data/')&&/allodus|cobblestarjudgment|cobblestaromnitype/.test(path)));
 });
 
-test('Allodus V2 has a colossal articulated rig and native vector keyframes, without enlarging UI portraits',()=>{
+test('Allodus V3 has a fully animated titan rig and native vector keyframes, without enlarging UI portraits',()=>{
  const files=unpack(buildStarPack([],[]));
  const prefix='assets/cobblestar_planets/bedrock/pokemon/';
  const geometry=JSON.parse(files.get(prefix+'models/allodus/allodus.geo.json'))['minecraft:geometry'][0];
  const names=new Set(geometry.bones.map(b=>b.name));
- assert.ok(names.size>=80);assert.ok(geometry.description.visible_bounds_height>=20);
- for(const bone of ['jaw','tail_11','left_wing_elbow','right_wing_elbow','left_sail_2','right_sail_2'])assert.ok(names.has(bone));
+ assert.ok(names.size>=87);assert.ok(geometry.description.visible_bounds_height>=40);assert.ok(geometry.description.visible_bounds_width>=40);
+ for(const bone of ['pelvis','spine','chest','neck_mid','neck_upper','jaw','tail_11','left_wing_elbow','right_wing_elbow','left_sail_2','right_sail_2'])assert.ok(names.has(bone));
  for(const bone of geometry.bones)if(bone.parent)assert.ok(names.has(bone.parent));
  assert.equal(geometry.bones.filter(b=>b.name.startsWith('gem_')).length,18);
  const animations=JSON.parse(files.get(prefix+'animations/allodus/allodus.animation.json')).animations;
  assert.equal(Object.keys(animations).length,16);
- assert.deepEqual(animations['animation.allodus.colossus'].bones.allodus.scale,[1.75,1.75,1.75]);
+ assert.deepEqual(animations['animation.allodus.colossus'].bones.allodus.scale,[4,4,4]);
+ const kinetic=['pelvis','spine','chest','neck','neck_mid','neck_upper','head','jaw','tail_0','tail_11'];
+ for(const side of ['left','right'])for(const part of ['arm','forearm','hand','leg','shin','foot','wing','wing_elbow','claw_0','claw_2','toe_0','toe_2','sail_0','sail_2'])kinetic.push(side+'_'+part);
+ for(const pose of ['ground_idle','battle_idle','ground_walk','air_idle','air_fly','sleep'])for(const joint of kinetic){
+  const rotation=animations['animation.allodus.'+pose].bones[joint]?.rotation;
+  assert.ok(rotation?.some(value=>typeof value==='string'&&value.includes('query.anim_time')),pose+' must actually animate '+joint);
+ }
  for(const animation of Object.values(animations))for(const [name,channels]of Object.entries(animation.bones)){
   assert.ok(names.has(name));
   for(const value of Object.values(channels))if(value&&typeof value==='object'&&!Array.isArray(value)){
