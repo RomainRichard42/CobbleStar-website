@@ -15,6 +15,54 @@ test('Missing native bones and cyclic hierarchy refused',()=>{const v=fixture();
 test('Broken PNG refused before publication',()=>{const v=fixture();v.texture=Buffer.from(texture,'base64').subarray(0,33).toString('base64');assert.throws(()=>validateStar(v,native));const broken=Buffer.from(texture,'base64');broken[45]^=1;assert.throws(()=>validateStar({...fixture(),texture:broken.toString('base64')},native));});
 function unpack(zip){let at=0;const files=new Map();while(zip.readUInt32LE(at)===0x04034b50){const compressed=zip.readUInt32LE(at+18),nameLength=zip.readUInt16LE(at+26),extra=zip.readUInt16LE(at+28),start=at+30+nameLength+extra;const name=zip.toString('utf8',at+30,at+30+nameLength),bytes=inflateRawSync(zip.subarray(start,start+compressed));assert.equal(crc(bytes),zip.readUInt32LE(at+14));files.set(name,bytes);at=start+compressed;}assert.equal(zip.readUInt32LE(at),0x02014b50);return files;}
 
+test('Allodus cosmetics ship automatically, merging translations and audio without shipping executable battle data',()=>{
+ const files=unpack(buildStarPack([],[]));
+ const manifest=JSON.parse(readFileSync(new URL('../allodus-assets/manifest.json',import.meta.url)));
+ assert.equal(manifest.files.length,11);
+ for(const path of manifest.files){
+  assert.ok(path.startsWith('assets/cobblestar_planets/'));
+  if(path.includes('/allodus/lang/')||path.endsWith('/allodus/sounds.json'))continue;
+  assert.deepEqual(files.get(path),readFileSync(new URL('../allodus-assets/'+path,import.meta.url)),path);
+ }
+ const resolver=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/resolvers/allodus/0_allodus_base.json'));
+ assert.equal(resolver.species,'cobblestar_planets:allodus');
+ assert.equal(resolver.variations[0].layers[0].emissive,true);
+ const burst=JSON.parse(files.get('assets/cobblestar_planets/bedrock/particles/allodus/allodus_burst.particle.json')).particle_effect;
+ const particleTexture='assets/'+burst.description.basic_render_parameters.texture.replace('textures/particles/','textures/particle/').replace(':','/')+'.png';
+ assert.deepEqual(files.get(particleTexture),files.get('assets/cobblestar_planets/textures/particles/allodus_star.png'));
+ assert.equal(burst.components['minecraft:emitter_rate_instant'].num_particles,32);
+ for(const lang of ['fr_fr','en_us']){
+  const strings=JSON.parse(files.get(`assets/cobblestar_planets/lang/${lang}.json`));
+  assert.equal(strings['cobblemon.species.allodus.name'],'Allodus');
+  assert.equal(strings['cobblestar_planets.species.allodus.name'],'Allodus');
+  assert.ok(strings['cobblemon.move.cobblestarjudgment']);
+ }
+ const sounds=JSON.parse(files.get('assets/cobblestar_planets/sounds.json'));
+ for(const id of ['allodus.appear','allodus.cry','allodus.judgment','star.appearance.high'])assert.ok(sounds[id]);
+ assert.ok(![...files.keys()].some(path=>path.startsWith('data/')&&/allodus|cobblestarjudgment|cobblestaromnitype/.test(path)));
+});
+
+test('All four approved arcade cabinets ship through the mandatory pack without replacing balls or loot',()=>{
+ const files=unpack(buildStarPack([],[]));
+ const manifest=JSON.parse(readFileSync(new URL('../arcade-assets/manifest.json',import.meta.url)));
+ assert.equal(manifest.version,1);assert.equal(manifest.files.length,9);
+ for(const path of manifest.files)assert.deepEqual(files.get(path),readFileSync(new URL('../arcade-assets/'+path,import.meta.url)),path);
+ for(const id of ['vote','nova','pulsar','quasar']){
+  const model=JSON.parse(files.get(`assets/cobblestar_planets/models/cosmic/crate_${id}.json`));
+  assert.equal(model.design,'capture-station-v2');assert.equal(model.gashapon,true);
+  assert.ok(!model.faces.some(f=>/dragonite|feraligatr|gengar|jirachi|antenna|header mount/.test(f.name)));
+  assert.deepEqual(model.tokenSlot,[7,15.354545454545454,2.7]);
+  assert.equal(model.tokenYaw,90);
+  assert.ok(model.faces.some(f=>f.part==='delivery'));assert.ok(model.faces.some(f=>f.emissive));
+  assert.ok(model.faces.some(f=>f.name==='original logo cercle 5'));
+  assert.ok(model.faces.some(f=>f.name==='capture button white'));
+  assert.ok(model.faces.some(f=>f.name==='capture name '+id.toUpperCase()&&f.emissive));
+ }
+ assert.ok(!manifest.files.some(path=>/ball_|key_|loot|species|resolver/.test(path)));
+ assert.ok(files.has('assets/cobblestar_planets/gallery/models/sga_slab.json'));
+ assert.ok(JSON.parse(files.get('assets/cobblestar_planets/sounds.json'))['star.appearance.high']);
+});
+
 test('Articulated NPC rig and 34 presets ship even without any published Star species',()=>{
  const files=unpack(buildStarPack([],[]));
  const rig=JSON.parse(files.get('assets/cobblestar_planets/models/entity/quest_npc_rig.json'));

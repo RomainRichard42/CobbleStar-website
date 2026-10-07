@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "files": [
+    "assets/cobblestar_planets/bedrock/pokemon/models/allodus/allodus.geo.json",
+    "assets/cobblestar_planets/bedrock/pokemon/animations/allodus/allodus.animation.json",
+    "assets/cobblestar_planets/bedrock/pokemon/posers/allodus/allodus.json",
+    "assets/cobblestar_planets/bedrock/pokemon/resolvers/allodus/0_allodus_base.json",
+    "assets/cobblestar_planets/textures/pokemon/allodus/allodus.png",
+    "assets/cobblestar_planets/textures/pokemon/allodus/allodus_glow.png",
+    "assets/cobblestar_planets/allodus/sounds.json",
+    "assets/cobblestar_planets/bedrock/particles/allodus/allodus_burst.particle.json",
+    "assets/cobblestar_planets/textures/particles/allodus_star.png",
+    "assets/cobblestar_planets/allodus/lang/fr_fr.json",
+    "assets/cobblestar_planets/allodus/lang/en_us.json"
+  ]
+}

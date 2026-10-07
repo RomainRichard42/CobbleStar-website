@@ -1,0 +1,91 @@
+{
+  "rootBone": "allodus",
+  "portraitScale": 0.6,
+  "portraitTranslation": [
+    0,
+    2.55,
+    0
+  ],
+  "profileScale": 0.34,
+  "profileTranslation": [
+    0,
+    1.25,
+    0
+  ],
+  "animations": {
+    "cry": "q.bedrock_stateful('allodus', 'cry')",
+    "faint": "q.bedrock_primary('allodus', 'faint', q.curve('one'))",
+    "cobblestarjudgment": "q.bedrock_primary('allodus', 'astral_judgment', q.curve('symmetrical_wide'))",
+    "physical": "q.bedrock_primary('allodus', 'astral_judgment', q.curve('symmetrical_wide'))",
+    "special": "q.bedrock_primary('allodus', 'astral_judgment', q.curve('symmetrical_wide'))"
+  },
+  "poses": {
+    "sleep": {
+      "poseTypes": [
+        "SLEEP"
+      ],
+      "animations": [
+        "q.look('head')",
+        "q.bedrock('allodus', 'sleep')",
+        "q.bedrock('allodus', 'halo_spin')"
+      ]
+    },
+    "battle": {
+      "poseTypes": [
+        "STAND"
+      ],
+      "animations": [
+        "q.look('head')",
+        "q.bedrock('allodus', 'battle_idle')",
+        "q.bedrock('allodus', 'halo_spin')"
+      ],
+      "isBattle": true
+    },
+    "standing": {
+      "poseTypes": [
+        "STAND",
+        "NONE",
+        "PORTRAIT",
+        "PROFILE"
+      ],
+      "animations": [
+        "q.look('head')",
+        "q.bedrock('allodus', 'ground_idle')",
+        "q.bedrock('allodus', 'halo_spin')"
+      ],
+      "isBattle": false
+    },
+    "walk": {
+      "poseTypes": [
+        "WALK"
+      ],
+      "animations": [
+        "q.look('head')",
+        "q.bedrock('allodus', 'ground_walk')",
+        "q.bedrock('allodus', 'halo_spin')"
+      ]
+    },
+    "hover": {
+      "poseTypes": [
+        "HOVER",
+        "FLOAT"
+      ],
+      "animations": [
+        "q.look('head')",
+        "q.bedrock('allodus', 'air_idle')",
+        "q.bedrock('allodus', 'halo_spin')"
+      ]
+    },
+    "fly": {
+      "poseTypes": [
+        "FLY",
+        "SWIM"
+      ],
+      "animations": [
+        "q.look('head')",
+        "q.bedrock('allodus', 'air_fly')",
+        "q.bedrock('allodus', 'halo_spin')"
+      ]
+    }
+  }
+}

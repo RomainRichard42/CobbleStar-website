@@ -1,0 +1,629 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.allodus.ground_idle": {
+      "loop": true,
+      "animation_length": 20,
+      "bones": {
+        "body": {
+          "rotation": [
+            "0.6 * math.sin(query.anim_time * 90 + 0)",
+            0,
+            0
+          ]
+        },
+        "neck": {
+          "rotation": [
+            "1.2 * math.sin(query.anim_time * 90 + 35)",
+            0,
+            0
+          ]
+        },
+        "tail_0": {
+          "rotation": [
+            0,
+            "3 * math.sin(query.anim_time * 72 + 0)",
+            0
+          ]
+        },
+        "tail_3": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 45)",
+            "4 * math.sin(query.anim_time * 72 + 60)",
+            0
+          ]
+        },
+        "left_wing": {
+          "rotation": [
+            0,
+            "2.3 * math.sin(query.anim_time * 72 + 0)",
+            "0.8 * math.sin(query.anim_time * 72 + 0)"
+          ]
+        },
+        "right_wing": {
+          "rotation": [
+            0,
+            "-2.3 * math.sin(query.anim_time * 72 + 0)",
+            "-0.8 * math.sin(query.anim_time * 72 + 0)"
+          ]
+        },
+        "chest_star": {
+          "scale": "1 + 0.025 * math.sin(query.anim_time * 90)"
+        }
+      }
+    },
+    "animation.allodus.battle_idle": {
+      "loop": true,
+      "animation_length": 20,
+      "bones": {
+        "body": {
+          "rotation": [
+            "0.6 * math.sin(query.anim_time * 90 + 0)",
+            0,
+            0
+          ]
+        },
+        "neck": {
+          "rotation": [
+            "1.2 * math.sin(query.anim_time * 90 + 35)",
+            0,
+            0
+          ]
+        },
+        "tail_0": {
+          "rotation": [
+            0,
+            "3 * math.sin(query.anim_time * 72 + 0)",
+            0
+          ]
+        },
+        "tail_3": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 45)",
+            "4 * math.sin(query.anim_time * 72 + 60)",
+            0
+          ]
+        },
+        "left_wing": {
+          "rotation": [
+            0,
+            "2.3 * math.sin(query.anim_time * 72 + 0)",
+            "0.8 * math.sin(query.anim_time * 72 + 0)"
+          ]
+        },
+        "right_wing": {
+          "rotation": [
+            0,
+            "-2.3 * math.sin(query.anim_time * 72 + 0)",
+            "-0.8 * math.sin(query.anim_time * 72 + 0)"
+          ]
+        },
+        "chest_star": {
+          "scale": "1 + 0.025 * math.sin(query.anim_time * 90)"
+        },
+        "left_arm": {
+          "rotation": [
+            -14,
+            0,
+            -8
+          ]
+        },
+        "right_arm": {
+          "rotation": [
+            -14,
+            0,
+            8
+          ]
+        },
+        "left_forearm": {
+          "rotation": [
+            -12,
+            0,
+            0
+          ]
+        },
+        "right_forearm": {
+          "rotation": [
+            -12,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.allodus.ground_walk": {
+      "loop": true,
+      "animation_length": 20,
+      "bones": {
+        "body": {
+          "rotation": [
+            0,
+            0,
+            "1.4 * math.sin(query.anim_time * 360 + 0)"
+          ]
+        },
+        "neck": {
+          "rotation": [
+            "1.2 * math.sin(query.anim_time * 90 + 35)",
+            0,
+            0
+          ]
+        },
+        "tail_0": {
+          "rotation": [
+            0,
+            "3 * math.sin(query.anim_time * 72 + 0)",
+            0
+          ]
+        },
+        "tail_3": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 45)",
+            "4 * math.sin(query.anim_time * 72 + 60)",
+            0
+          ]
+        },
+        "left_wing": {
+          "rotation": [
+            0,
+            "2.3 * math.sin(query.anim_time * 72 + 0)",
+            "0.8 * math.sin(query.anim_time * 72 + 0)"
+          ]
+        },
+        "right_wing": {
+          "rotation": [
+            0,
+            "-2.3 * math.sin(query.anim_time * 72 + 0)",
+            "-0.8 * math.sin(query.anim_time * 72 + 0)"
+          ]
+        },
+        "chest_star": {
+          "scale": "1 + 0.025 * math.sin(query.anim_time * 90)"
+        },
+        "left_leg": {
+          "rotation": [
+            "21 * math.sin(query.anim_time * 360 + 0)",
+            0,
+            0
+          ]
+        },
+        "right_leg": {
+          "rotation": [
+            "-21 * math.sin(query.anim_time * 360 + 0)",
+            0,
+            0
+          ]
+        },
+        "left_arm": {
+          "rotation": [
+            "-12 * math.sin(query.anim_time * 360 + 0)",
+            0,
+            0
+          ]
+        },
+        "right_arm": {
+          "rotation": [
+            "12 * math.sin(query.anim_time * 360 + 0)",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.allodus.air_idle": {
+      "loop": true,
+      "animation_length": 20,
+      "bones": {
+        "body": {
+          "position": [
+            0,
+            "0.7 * math.sin(query.anim_time * 180 + 0)",
+            0
+          ]
+        },
+        "neck": {
+          "rotation": [
+            "1.2 * math.sin(query.anim_time * 90 + 35)",
+            0,
+            0
+          ]
+        },
+        "tail_0": {
+          "rotation": [
+            0,
+            "3 * math.sin(query.anim_time * 72 + 0)",
+            0
+          ]
+        },
+        "tail_3": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 45)",
+            "4 * math.sin(query.anim_time * 72 + 60)",
+            0
+          ]
+        },
+        "left_wing": {
+          "rotation": [
+            0,
+            "10 * math.sin(query.anim_time * 180 + 0)",
+            -5
+          ]
+        },
+        "right_wing": {
+          "rotation": [
+            0,
+            "-10 * math.sin(query.anim_time * 180 + 0)",
+            5
+          ]
+        },
+        "chest_star": {
+          "scale": "1 + 0.025 * math.sin(query.anim_time * 90)"
+        },
+        "left_leg": {
+          "rotation": [
+            15,
+            0,
+            0
+          ]
+        },
+        "right_leg": {
+          "rotation": [
+            15,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.allodus.air_fly": {
+      "loop": true,
+      "animation_length": 20,
+      "bones": {
+        "body": {
+          "rotation": [
+            18,
+            0,
+            0
+          ]
+        },
+        "neck": {
+          "rotation": [
+            "1.2 * math.sin(query.anim_time * 90 + 35)",
+            0,
+            0
+          ]
+        },
+        "tail_0": {
+          "rotation": [
+            0,
+            "3 * math.sin(query.anim_time * 72 + 0)",
+            0
+          ]
+        },
+        "tail_3": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 45)",
+            "4 * math.sin(query.anim_time * 72 + 60)",
+            0
+          ]
+        },
+        "left_wing": {
+          "rotation": [
+            0,
+            "20 * math.sin(query.anim_time * 288 + 0)",
+            -8
+          ]
+        },
+        "right_wing": {
+          "rotation": [
+            0,
+            "-20 * math.sin(query.anim_time * 288 + 0)",
+            8
+          ]
+        },
+        "chest_star": {
+          "scale": "1 + 0.025 * math.sin(query.anim_time * 90)"
+        },
+        "left_leg": {
+          "rotation": [
+            25,
+            0,
+            0
+          ]
+        },
+        "right_leg": {
+          "rotation": [
+            25,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.allodus.sleep": {
+      "loop": true,
+      "animation_length": 20,
+      "bones": {
+        "body": {
+          "rotation": [
+            "0.6 * math.sin(query.anim_time * 90 + 0)",
+            0,
+            0
+          ]
+        },
+        "neck": {
+          "rotation": [
+            "1.2 * math.sin(query.anim_time * 90 + 35)",
+            0,
+            0
+          ]
+        },
+        "tail_0": {
+          "rotation": [
+            0,
+            "3 * math.sin(query.anim_time * 72 + 0)",
+            0
+          ]
+        },
+        "tail_3": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 45)",
+            "4 * math.sin(query.anim_time * 72 + 60)",
+            0
+          ]
+        },
+        "left_wing": {
+          "rotation": [
+            0,
+            32,
+            0
+          ]
+        },
+        "right_wing": {
+          "rotation": [
+            0,
+            -32,
+            0
+          ]
+        },
+        "chest_star": {
+          "scale": "1 + 0.025 * math.sin(query.anim_time * 90)"
+        },
+        "head": {
+          "rotation": [
+            16,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.allodus.halo_spin": {
+      "loop": true,
+      "animation_length": 72,
+      "bones": {
+        "halo": {
+          "rotation": [
+            0,
+            0,
+            "query.anim_time * 5"
+          ]
+        }
+      }
+    },
+    "animation.allodus.cry": {
+      "loop": false,
+      "animation_length": 1.7,
+      "bones": {
+        "head": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".35": [
+              -18,
+              0,
+              0
+            ],
+            ".8": [
+              -12,
+              0,
+              0
+            ],
+            "1.7": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "left_wing": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".4": [
+              0,
+              -15,
+              -7
+            ],
+            "1.7": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "right_wing": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".4": [
+              0,
+              15,
+              7
+            ],
+            "1.7": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "chest_star": {
+          "scale": {
+            "0": 1,
+            ".4": 1.2,
+            "1.7": 1
+          }
+        }
+      },
+      "sound_effects": {
+        "0": {
+          "effect": "cobblestar_planets:allodus.cry"
+        }
+      }
+    },
+    "animation.allodus.astral_judgment": {
+      "loop": false,
+      "animation_length": 1.6,
+      "bones": {
+        "head": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".3": [
+              -8,
+              0,
+              0
+            ],
+            ".75": [
+              12,
+              0,
+              0
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "left_arm": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".45": [
+              -65,
+              0,
+              -25
+            ],
+            ".85": [
+              -20,
+              0,
+              -10
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "right_arm": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".45": [
+              -65,
+              0,
+              25
+            ],
+            ".85": [
+              -20,
+              0,
+              10
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "chest_star": {
+          "scale": {
+            "0": 1,
+            ".4": 1.3,
+            ".8": 1.1,
+            "1.6": 1
+          }
+        }
+      }
+    },
+    "animation.allodus.faint": {
+      "loop": false,
+      "animation_length": 1.2,
+      "bones": {
+        "body": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            "1.2": [
+              65,
+              0,
+              0
+            ]
+          }
+        },
+        "left_wing": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            "1.2": [
+              0,
+              35,
+              0
+            ]
+          }
+        },
+        "right_wing": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            "1.2": [
+              0,
+              -35,
+              0
+            ]
+          }
+        }
+      }
+    }
+  }
+}

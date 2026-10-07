@@ -1,0 +1,9 @@
+{
+  "cobblemon.species.allodus.name": "Allodus",
+  "cobblestar_planets.species.allodus.name": "Allodus",
+  "cobblemon.species.allodus.desc": "Souverain astral de CobbleStar, il porte les dix-huit éléments dans son anneau céleste. Réservé aux administrateurs.",
+  "cobblemon.move.cobblestarjudgment": "Jugement astral",
+  "cobblemon.move.cobblestarjudgment.desc": "Le verdict d'Allodus. Toujours super efficace ; met la cible K.O. en un seul coup, même sous Abri, Fermeté ou Ceinture Force.",
+  "cobblemon.ability.cobblestaromnitype": "Souverain des étoiles",
+  "cobblemon.ability.cobblestaromnitype.desc": "Allodus possède les dix-huit types en combat et 1000 dans chacune de ses six stats."
+}

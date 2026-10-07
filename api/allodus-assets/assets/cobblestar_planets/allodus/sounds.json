@@ -1,0 +1,32 @@
+{
+  "allodus.appear": {
+    "sounds": [
+      {
+        "name": "minecraft:block.beacon.activate",
+        "type": "event",
+        "pitch": 0.65,
+        "volume": 0.8
+      }
+    ]
+  },
+  "allodus.cry": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.ender_dragon.growl",
+        "type": "event",
+        "pitch": 1.45,
+        "volume": 0.55
+      }
+    ]
+  },
+  "allodus.judgment": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.warden.sonic_boom",
+        "type": "event",
+        "pitch": 1.25,
+        "volume": 0.65
+      }
+    ]
+  }
+}

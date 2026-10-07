@@ -1,0 +1,19 @@
+{
+  "species": "cobblestar_planets:allodus",
+  "order": 0,
+  "variations": [
+    {
+      "aspects": [],
+      "poser": "cobblestar_planets:allodus",
+      "model": "cobblestar_planets:allodus.geo",
+      "texture": "cobblestar_planets:textures/pokemon/allodus/allodus.png",
+      "layers": [
+        {
+          "name": "stellar_cores",
+          "texture": "cobblestar_planets:textures/pokemon/allodus/allodus_glow.png",
+          "emissive": true
+        }
+      ]
+    }
+  ]
+}

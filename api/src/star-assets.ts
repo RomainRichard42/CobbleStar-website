@@ -155,10 +155,62 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[], npcSk
   files.set(`assets/cobblestar_planets/textures/entity/quest_npc/upload/${skin.hash}.png`,png(skin.png.toString('base64'),64,64));
  }
  // Shared cosmetics are shipped even when no species has been published yet.
+ // Original admin-only Allodus cosmetics, never server definitions or scripts.
+ const allodus=JSON.parse(readFileSync(new URL("../allodus-assets/manifest.json",import.meta.url),"utf8")) as {version:number;files:string[]};
+ const allodusPaths=new Set([
+  "assets/cobblestar_planets/bedrock/pokemon/models/allodus/allodus.geo.json",
+  "assets/cobblestar_planets/bedrock/pokemon/animations/allodus/allodus.animation.json",
+  "assets/cobblestar_planets/bedrock/pokemon/posers/allodus/allodus.json",
+  "assets/cobblestar_planets/bedrock/pokemon/resolvers/allodus/0_allodus_base.json",
+  "assets/cobblestar_planets/bedrock/particles/allodus/allodus_burst.particle.json",
+  "assets/cobblestar_planets/textures/particles/allodus_star.png",
+  "assets/cobblestar_planets/allodus/sounds.json",
+  ...["allodus","allodus_glow"].map(n=>`assets/cobblestar_planets/textures/pokemon/allodus/${n}.png`),
+  ...["fr_fr","en_us"].map(n=>`assets/cobblestar_planets/allodus/lang/${n}.json`)
+ ]);
+ if(allodus.version!==1||allodus.files.length!==allodusPaths.size||new Set(allodus.files).size!==allodusPaths.size)throw new Error("INVALID_ALLODUS_MANIFEST");
+ const allodusLang=new Map<string,Record<string,string>>();
+ let allodusSounds:Record<string,unknown>={};
+ for(const path of allodus.files){
+  if(!allodusPaths.has(path)||files.has(path))throw new Error("INVALID_ALLODUS_PATH");
+  const bytes=readFileSync(new URL("../allodus-assets/"+path,import.meta.url));
+  if(bytes.length>500_000)throw new Error("ALLODUS_ASSET_TOO_LARGE");
+  if(path.endsWith(".png"))png(bytes.toString("base64"),path.endsWith("allodus_star.png")?16:512,path.endsWith("allodus_star.png")?16:512);
+  else {
+   const value=JSON.parse(bytes.toString());
+   if(path.endsWith("/allodus/sounds.json")){
+    if(Object.keys(value).sort().join(",")!=="allodus.appear,allodus.cry,allodus.judgment")throw new Error("INVALID_ALLODUS_SOUNDS");
+    allodusSounds=value;continue;
+   }
+   if(path.includes("/allodus/lang/")){
+    if(Object.entries(value).some(([key,text])=>!/^(?:cobblestar_planets\.species\.allodus\.|cobblemon\.(?:species\.allodus\.|move\.cobblestarjudgment(?:\.|$)|ability\.cobblestaromnitype(?:\.|$)))/.test(key)||typeof text!=="string"))throw new Error("INVALID_ALLODUS_LANG");
+    allodusLang.set(path.split("/").at(-1)!,value);
+    continue;
+   }
+  }
+  files.set(path,bytes);
+  // Cobblemon remaps Bedrock textures/particles to the Java particle atlas.
+  if(path==="assets/cobblestar_planets/textures/particles/allodus_star.png"){
+   files.set(path.replace("textures/particles/","textures/particle/"),bytes);
+  }
+ }
  const effects=JSON.parse(readFileSync(new URL("../star-effects/manifest.json",import.meta.url),"utf8")) as {files:string[]};
  for(const path of effects.files){
   if(!/^assets\/cobblestar_planets\/[a-z0-9_./-]+$/.test(path)||path.includes("..")||files.has(path))throw new Error("INVALID_STAR_EFFECT_PATH");
   files.set(path,readFileSync(new URL("../star-effects/"+path,import.meta.url)));
+ }
+ // Approved arcade cabinets are cosmetic resources; all loot and simulation stay in the mod.
+ const arcade=JSON.parse(readFileSync(new URL("../arcade-assets/manifest.json",import.meta.url),"utf8")) as {version:number;files:string[]};
+ const arcadePaths=new Set(["assets/cobblestar_planets/textures/block/crates/arcade_atlas.png",
+  ...["vote","nova","pulsar","quasar"].flatMap(id=>["cosmic","item"].map(kind=>`assets/cobblestar_planets/models/${kind}/crate_${id}.json`))]);
+ if(arcade.version!==1||arcade.files.length!==arcadePaths.size||new Set(arcade.files).size!==arcadePaths.size)throw new Error("INVALID_ARCADE_MANIFEST");
+ for(const path of arcade.files){
+  if(!arcadePaths.has(path)||files.has(path))throw new Error("INVALID_ARCADE_PATH");
+  const bytes=readFileSync(new URL("../arcade-assets/"+path,import.meta.url));
+  if(bytes.length>2_000_000)throw new Error("ARCADE_ASSET_TOO_LARGE");
+  if(path.endsWith(".json"))JSON.parse(bytes.toString());
+  else png(bytes.toString("base64"),1024,256);
+  files.set(path,bytes);
  }
  // Gallery geometry and SGA cosmetics share mandatory pack delivery. The mod
  // provides interactions/rendering; a pack never installs executable gameplay.
@@ -261,5 +313,11 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[], npcSk
  }
  // Rank badges join the same mandatory pack, alongside every existing asset.
  appendRankTags(files);
+ const allodusSoundPath="assets/cobblestar_planets/sounds.json";
+ files.set(allodusSoundPath,Buffer.from(JSON.stringify({...JSON.parse(files.get(allodusSoundPath)?.toString()??"{}"),...allodusSounds})));
+ for(const [name,entries] of allodusLang){
+  const path=`assets/cobblestar_planets/lang/${name}`;
+  files.set(path,Buffer.from(JSON.stringify({...JSON.parse(files.get(path)?.toString()??"{}"),...entries})));
+ }
  return zipAssets(files);
 }

@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "design": "capture-station-v2",
+  "files": [
+    "assets/cobblestar_planets/models/cosmic/crate_vote.json",
+    "assets/cobblestar_planets/models/item/crate_vote.json",
+    "assets/cobblestar_planets/models/cosmic/crate_nova.json",
+    "assets/cobblestar_planets/models/item/crate_nova.json",
+    "assets/cobblestar_planets/models/cosmic/crate_pulsar.json",
+    "assets/cobblestar_planets/models/item/crate_pulsar.json",
+    "assets/cobblestar_planets/models/cosmic/crate_quasar.json",
+    "assets/cobblestar_planets/models/item/crate_quasar.json",
+    "assets/cobblestar_planets/textures/block/crates/arcade_atlas.png"
+  ]
+}

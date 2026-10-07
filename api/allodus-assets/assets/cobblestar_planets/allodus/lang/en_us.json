@@ -1,0 +1,9 @@
+{
+  "cobblemon.species.allodus.name": "Allodus",
+  "cobblestar_planets.species.allodus.name": "Allodus",
+  "cobblemon.species.allodus.desc": "CobbleStar's astral sovereign carries all eighteen elements in its celestial halo. Administrators only.",
+  "cobblemon.move.cobblestarjudgment": "Astral Judgment",
+  "cobblemon.move.cobblestarjudgment.desc": "Allodus' verdict is always super effective and knocks its target out in one hit, bypassing Protect, Sturdy and Focus Sash.",
+  "cobblemon.ability.cobblestaromnitype": "Stellar Sovereign",
+  "cobblemon.ability.cobblestaromnitype.desc": "Allodus has all eighteen types in battle and exactly 1000 in each of its six stats."
+}

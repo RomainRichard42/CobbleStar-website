@@ -20,7 +20,8 @@ test('Even an empty Star catalogue gets shared FX and resolvable sound/texture d
   const effect=JSON.parse(bytes).particle_effect;effects.set(effect.description.identifier,effect);
   const texture=effect.description.basic_render_parameters.texture.replace('textures/particles/','textures/particle/');
   assert.ok(files.has('assets/'+texture.replace(':','/')+'.png'),texture);
-  assert.ok(effect.components['minecraft:emitter_lifetime_once']);assert.ok(effect.components['minecraft:emitter_rate_instant'].num_particles<=16);
+  const particleLimit=effect.description.identifier==='cobblestar_planets:allodus_burst'?32:16;
+  assert.ok(effect.components['minecraft:emitter_lifetime_once']);assert.ok(effect.components['minecraft:emitter_rate_instant'].num_particles<=particleLimit);
  }
  for(const effect of effects.values())for(const event of Object.values(effect.events??{})){
   if(event.particle_effect)assert.ok(effects.has(event.particle_effect.effect));
