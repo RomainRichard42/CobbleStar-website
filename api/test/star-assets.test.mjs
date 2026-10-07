@@ -42,7 +42,7 @@ test('Allodus cosmetics ship automatically, merging translations and audio witho
  assert.ok(![...files.keys()].some(path=>path.startsWith('data/')&&/allodus|cobblestarjudgment|cobblestaromnitype/.test(path)));
 });
 
-test('Allodus V3 has a fully animated titan rig and native vector keyframes, without enlarging UI portraits',()=>{
+test('Allodus V4 has a quadrupedal flight-first titan rig and supported native root scale, without enlarging UI portraits',()=>{
  const files=unpack(buildStarPack([],[]));
  const prefix='assets/cobblestar_planets/bedrock/pokemon/';
  const geometry=JSON.parse(files.get(prefix+'models/allodus/allodus.geo.json'))['minecraft:geometry'][0];
@@ -52,8 +52,13 @@ test('Allodus V3 has a fully animated titan rig and native vector keyframes, wit
  for(const bone of geometry.bones)if(bone.parent)assert.ok(names.has(bone.parent));
  assert.equal(geometry.bones.filter(b=>b.name.startsWith('gem_')).length,18);
  const animations=JSON.parse(files.get(prefix+'animations/allodus/allodus.animation.json')).animations;
- assert.equal(Object.keys(animations).length,16);
- assert.deepEqual(animations['animation.allodus.colossus'].bones.allodus.scale,[4,4,4]);
+ assert.equal(Object.keys(animations).length,23);
+ assert.deepEqual(animations['animation.allodus.colossus'].bones.root_part.scale,[4,4,4]);
+ assert.ok(!Object.values(animations).some(a=>a.bones.allodus));
+ for(const side of ['left','right']){
+  const paw=geometry.bones.find(b=>b.name===side+'_hand'),foot=geometry.bones.find(b=>b.name===side+'_foot');
+  assert.ok(paw.pivot[2]<-15&&foot.pivot[2]>15);assert.equal(paw.pivot[1],foot.pivot[1]);
+ }
  const kinetic=['pelvis','spine','chest','neck','neck_mid','neck_upper','head','jaw','tail_0','tail_11'];
  for(const side of ['left','right'])for(const part of ['arm','forearm','hand','leg','shin','foot','wing','wing_elbow','claw_0','claw_2','toe_0','toe_2','sail_0','sail_2'])kinetic.push(side+'_'+part);
  for(const pose of ['ground_idle','battle_idle','ground_walk','air_idle','air_fly','sleep'])for(const joint of kinetic){
@@ -61,12 +66,17 @@ test('Allodus V3 has a fully animated titan rig and native vector keyframes, wit
   assert.ok(rotation?.some(value=>typeof value==='string'&&value.includes('query.anim_time')),pose+' must actually animate '+joint);
  }
  for(const animation of Object.values(animations))for(const [name,channels]of Object.entries(animation.bones)){
-  assert.ok(names.has(name));
+  assert.ok(names.has(name)||name==='root_part');
   for(const value of Object.values(channels))if(value&&typeof value==='object'&&!Array.isArray(value)){
    for(const frame of Object.values(value))assert.ok(Array.isArray(frame)&&frame.length===3,'Scalar timed keyframes make Cobblemon reject the entire animation group');
   }
  }
  const poser=JSON.parse(files.get(prefix+'posers/allodus/allodus.json'));
+ assert.ok(poser.poses.standing.animations.includes("q.bedrock('allodus', 'air_idle')"));
+ assert.ok(poser.poses.walk.transitions.standing.includes("'takeoff'"));
+ assert.ok(poser.poses.standing.transitions.walk.includes("'landing'"));
+ assert.equal(Object.values(poser.poses).reduce((count,pose)=>count+Object.keys(pose.transitions??{}).length,0),16);
+ for(const name of ['standing','hover','fly','battle'])assert.ok(poser.poses[name].quirks.some(q=>typeof q==='object'&&q.animations[0].includes("'bank_left'")));
  for(const reference of Object.values(poser.animations))if(reference.includes('q.bedrock_primary'))assert.ok(reference.includes("q.exclude_labels('all')"),'Do not shrink Allodus when a primary attack suppresses idle poses');
  for(const [name,pose]of Object.entries(poser.poses)){
   assert.equal(pose.animations.includes("q.bedrock('allodus', 'colossus')"),name!=='portrait');

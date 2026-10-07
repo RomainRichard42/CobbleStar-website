@@ -13,13 +13,18 @@
     0
   ],
   "animations": {
-    "cry": "q.bedrock_stateful('allodus', 'cry')",
+    "cry": "q.bedrock_stateful('allodus', 'astral_roar')",
     "send_out": "q.bedrock_stateful('allodus', 'send_out')",
     "hurt": "q.bedrock_stateful('allodus', 'hurt')",
     "faint": "q.bedrock_primary('allodus', 'faint', q.exclude_labels('all'), q.curve('one'))",
     "cobblestarjudgment": "q.bedrock_primary('allodus', 'astral_judgment', q.exclude_labels('all'), q.curve('symmetrical_wide'))",
     "physical": "q.bedrock_primary('allodus', 'astral_judgment', q.exclude_labels('all'), q.curve('symmetrical_wide'))",
-    "special": "q.bedrock_primary('allodus', 'astral_judgment', q.exclude_labels('all'), q.curve('symmetrical_wide'))"
+    "special": "q.bedrock_primary('allodus', 'astral_judgment', q.exclude_labels('all'), q.curve('symmetrical_wide'))",
+    "takeoff": "q.bedrock_stateful('allodus', 'takeoff')",
+    "landing": "q.bedrock_stateful('allodus', 'landing')",
+    "bank_left": "q.bedrock_stateful('allodus', 'bank_left')",
+    "bank_right": "q.bedrock_stateful('allodus', 'bank_right')",
+    "celestial_channel": "q.bedrock_stateful('allodus', 'celestial_channel')"
   },
   "poses": {
     "sleep": {
@@ -33,7 +38,15 @@
         "q.bedrock('allodus', 'halo_spin')",
         "q.bedrock('allodus', 'orbit_spin')"
       ],
-      "quirks": []
+      "quirks": [],
+      "transitions": {
+        "standing": "q.bedrock_stateful('allodus', 'takeoff')",
+        "battle": "q.bedrock_stateful('allodus', 'takeoff')",
+        "hover": "q.bedrock_stateful('allodus', 'takeoff')",
+        "fly": "q.bedrock_stateful('allodus', 'takeoff')"
+      },
+      "poseName": "sleep",
+      "transformTicks": 20
     },
     "battle": {
       "poseTypes": [
@@ -47,9 +60,48 @@
         "q.bedrock('allodus', 'orbit_spin')"
       ],
       "quirks": [
-        "q.bedrock_quirk('allodus', 'blink')"
+        "q.bedrock_quirk('allodus', 'blink')",
+        {
+          "minSecondsBetweenOccurrences": 12,
+          "maxSecondsBetweenOccurrences": 24,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'wing_stretch')"
+          ]
+        },
+        {
+          "minSecondsBetweenOccurrences": 26,
+          "maxSecondsBetweenOccurrences": 46,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'bank_left')"
+          ]
+        },
+        {
+          "minSecondsBetweenOccurrences": 38,
+          "maxSecondsBetweenOccurrences": 62,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'bank_right')"
+          ]
+        },
+        {
+          "minSecondsBetweenOccurrences": 45,
+          "maxSecondsBetweenOccurrences": 75,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'celestial_channel')"
+          ]
+        },
+        "q.bedrock_quirk('allodus', 'look_around')"
       ],
-      "isBattle": true
+      "isBattle": true,
+      "transitions": {
+        "walk": "q.bedrock_stateful('allodus', 'landing')",
+        "sleep": "q.bedrock_stateful('allodus', 'landing')"
+      },
+      "poseName": "battle",
+      "transformTicks": 20
     },
     "standing": {
       "poseTypes": [
@@ -59,14 +111,53 @@
       "animations": [
         "q.bedrock('allodus', 'colossus')",
         "q.look('head')",
-        "q.bedrock('allodus', 'ground_idle')",
+        "q.bedrock('allodus', 'air_idle')",
         "q.bedrock('allodus', 'halo_spin')",
         "q.bedrock('allodus', 'orbit_spin')"
       ],
       "quirks": [
-        "q.bedrock_quirk('allodus', 'blink')"
+        "q.bedrock_quirk('allodus', 'blink')",
+        {
+          "minSecondsBetweenOccurrences": 12,
+          "maxSecondsBetweenOccurrences": 24,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'wing_stretch')"
+          ]
+        },
+        {
+          "minSecondsBetweenOccurrences": 26,
+          "maxSecondsBetweenOccurrences": 46,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'bank_left')"
+          ]
+        },
+        {
+          "minSecondsBetweenOccurrences": 38,
+          "maxSecondsBetweenOccurrences": 62,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'bank_right')"
+          ]
+        },
+        {
+          "minSecondsBetweenOccurrences": 45,
+          "maxSecondsBetweenOccurrences": 75,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'celestial_channel')"
+          ]
+        },
+        "q.bedrock_quirk('allodus', 'look_around')"
       ],
-      "isBattle": false
+      "isBattle": false,
+      "transitions": {
+        "walk": "q.bedrock_stateful('allodus', 'landing')",
+        "sleep": "q.bedrock_stateful('allodus', 'landing')"
+      },
+      "poseName": "standing",
+      "transformTicks": 20
     },
     "portrait": {
       "poseTypes": [
@@ -81,7 +172,9 @@
       ],
       "quirks": [
         "q.bedrock_quirk('allodus', 'blink')"
-      ]
+      ],
+      "poseName": "portrait",
+      "transformTicks": 20
     },
     "walk": {
       "poseTypes": [
@@ -96,7 +189,15 @@
       ],
       "quirks": [
         "q.bedrock_quirk('allodus', 'blink')"
-      ]
+      ],
+      "transitions": {
+        "standing": "q.bedrock_stateful('allodus', 'takeoff')",
+        "battle": "q.bedrock_stateful('allodus', 'takeoff')",
+        "hover": "q.bedrock_stateful('allodus', 'takeoff')",
+        "fly": "q.bedrock_stateful('allodus', 'takeoff')"
+      },
+      "poseName": "walk",
+      "transformTicks": 20
     },
     "hover": {
       "poseTypes": [
@@ -111,8 +212,47 @@
         "q.bedrock('allodus', 'orbit_spin')"
       ],
       "quirks": [
-        "q.bedrock_quirk('allodus', 'blink')"
-      ]
+        "q.bedrock_quirk('allodus', 'blink')",
+        {
+          "minSecondsBetweenOccurrences": 12,
+          "maxSecondsBetweenOccurrences": 24,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'wing_stretch')"
+          ]
+        },
+        {
+          "minSecondsBetweenOccurrences": 26,
+          "maxSecondsBetweenOccurrences": 46,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'bank_left')"
+          ]
+        },
+        {
+          "minSecondsBetweenOccurrences": 38,
+          "maxSecondsBetweenOccurrences": 62,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'bank_right')"
+          ]
+        },
+        {
+          "minSecondsBetweenOccurrences": 45,
+          "maxSecondsBetweenOccurrences": 75,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'celestial_channel')"
+          ]
+        },
+        "q.bedrock_quirk('allodus', 'look_around')"
+      ],
+      "transitions": {
+        "walk": "q.bedrock_stateful('allodus', 'landing')",
+        "sleep": "q.bedrock_stateful('allodus', 'landing')"
+      },
+      "poseName": "hover",
+      "transformTicks": 20
     },
     "fly": {
       "poseTypes": [
@@ -127,8 +267,47 @@
         "q.bedrock('allodus', 'orbit_spin')"
       ],
       "quirks": [
-        "q.bedrock_quirk('allodus', 'blink')"
-      ]
+        "q.bedrock_quirk('allodus', 'blink')",
+        {
+          "minSecondsBetweenOccurrences": 12,
+          "maxSecondsBetweenOccurrences": 24,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'wing_stretch')"
+          ]
+        },
+        {
+          "minSecondsBetweenOccurrences": 26,
+          "maxSecondsBetweenOccurrences": 46,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'bank_left')"
+          ]
+        },
+        {
+          "minSecondsBetweenOccurrences": 38,
+          "maxSecondsBetweenOccurrences": 62,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'bank_right')"
+          ]
+        },
+        {
+          "minSecondsBetweenOccurrences": 45,
+          "maxSecondsBetweenOccurrences": 75,
+          "loopTimes": 1,
+          "animations": [
+            "q.bedrock_stateful('allodus', 'celestial_channel')"
+          ]
+        },
+        "q.bedrock_quirk('allodus', 'look_around')"
+      ],
+      "transitions": {
+        "walk": "q.bedrock_stateful('allodus', 'landing')",
+        "sleep": "q.bedrock_stateful('allodus', 'landing')"
+      },
+      "poseName": "fly",
+      "transformTicks": 20
     }
   }
 }
