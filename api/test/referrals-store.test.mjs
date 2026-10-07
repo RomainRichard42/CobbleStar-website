@@ -5,7 +5,7 @@ const {ReferralStore}=await import('../dist/referrals.js');
 const {pool}=await import('../dist/db.js');after(()=>pool.end());
 // Deterministic persistence double; SQL semantics still require a MySQL integration run.
 function fixture(){
- const users=[],members=[],clocks=new Map(),identities=new Map(),grants=new Map(),invites=new Map();let campaign;
+ const users=[],members=[],clocks=new Map(),identities=new Map(),grants=new Map(),legacy=new Map(),invites=new Map();let campaign;
  const run=async(sql,p=[])=>{
   const s=sql.replace(/\s+/g,' ').trim();
   if(s.startsWith('INSERT IGNORE INTO referral_campaigns'))campaign??={id:p[1],config:p[2],started_at_ms:p[3]};
@@ -24,9 +24,10 @@ function fixture(){
   else if(s.startsWith('SELECT active_seconds'))return [[clocks.get(p[1])]];
   else if(s.startsWith('INSERT IGNORE INTO referral_identities')){if(!identities.has(p[1])&&![...identities.values()].includes(p[2]))identities.set(p[1],p[2]);}
   else if(s.startsWith('SELECT uuid FROM referral_identities'))return [[...(identities.has(p[1])?[{uuid:identities.get(p[1])}]:[])]];
-  else if(s.startsWith('INSERT IGNORE INTO referral_rewards VALUES')){const key=p.slice(1,4).join(':');if(!grants.has(key))grants.set(key,{uuid:p[1],role:p[2],milestone:p[3],vote_keys:p[4],alliance:p[5]});}
-  else if(s.startsWith('INSERT IGNORE INTO referral_rewards(')){for(const m of members.filter(m=>m.inviter_id===p[5]&&m.qualified_uuid)){const key=`${m.qualified_uuid}:invitee:${p[0]}`;if(!grants.has(key))grants.set(key,{uuid:m.qualified_uuid,role:'invitee',milestone:p[0],vote_keys:p[1],alliance:p[2]});}}
-  else if(s.startsWith('SELECT COALESCE(SUM')){const own=[...grants.values()].filter(g=>g.uuid===p[1]);return [[{keysTotal:own.reduce((n,g)=>n+g.vote_keys,0),alliance:own.some(g=>g.alliance)?1:0}]];}
+  else if(s.startsWith('SELECT milestone,vote_keys FROM referral_rewards'))return [[...[...legacy.values()].filter(g=>g.uuid===p[1]&&g.role==='inviter')]];
+  else if(s.startsWith('INSERT IGNORE INTO referral_rewards_v2 VALUES')){const key=p.slice(1,4).join(':');if(!grants.has(key))grants.set(key,{uuid:p[1],role:p[2],milestone:p[3],vote_keys:p[4],pulsar_keys:p[5],alliance:p[6]});}
+  else if(s.startsWith('SELECT role,milestone'))return [[...[...grants.values()].filter(g=>g.uuid===p[1]).sort((a,b)=>a.milestone-b.milestone)]];
+  else if(s.startsWith('SELECT COALESCE(SUM')){const own=[...legacy.values()].filter(g=>g.uuid===p[1]);return [[{keysTotal:own.reduce((n,g)=>n+g.vote_keys,0),alliance:own.some(g=>g.alliance)?1:0}]];}
   else throw new Error(`Unhandled query: ${s}`);
   return [{affectedRows:1}];
  };
@@ -34,21 +35,25 @@ function fixture(){
  const store=new ReferralStore({getConnection:async()=>c,execute:run,query:run});
  const uuid=n=>n.toString(16).padStart(32,'0');const at=Date.now()+1000;
  const user=(id,n)=>{const u={discord_id:id,minecraft_uuid:uuid(n),minecraft_linked_at:new Date(at+1)};users.push(u);return u;};
- const profile=u=>({uuid:u.minecraft_uuid,activeSeconds:18000,firstSeen:at});
- return {store,users,members,grants,uuid,at,user,profile};
+ const profile=(u,seconds=18000)=>({uuid:u.minecraft_uuid,activeSeconds:seconds,firstSeen:at});
+ return {store,users,members,grants,legacy,uuid,at,user,profile};
 }
-test('Store: qualification, cumulative group rewards, replay and a late eleventh invitee',async()=>{
+test('Store: separate inviter counts, own invitee hours, Pulsar, replay and late referral',async()=>{
  const f=fixture(),parent=f.user('parent',100);await f.store.campaign('g');await f.store.invite('g','link','parent');
- for(let n=1;n<=10;n++){const u=f.user('child'+n,n);await f.store.joined('g',u.discord_id,f.at,'link',null);await f.store.sync('g',[f.profile(u)]);}
+ for(let n=1;n<=4;n++){
+  const u=f.user('child'+n,n);await f.store.joined('g',u.discord_id,f.at,'link',null);await f.store.sync('g',[f.profile(u)]);
+  const r=await f.store.sync('g',[f.profile(parent)]);assert.equal(r.players[0].keysTotal,[1,3,6,11][n-1]);assert.equal(r.players[0].alliance,n===4);
+ }
  let r=await f.store.sync('g',[f.profile(parent)]);assert.equal(r.players[0].keysTotal,11);assert.equal(r.players[0].alliance,true);
- const child=f.users[1];r=await f.store.sync('g',[f.profile(child)]);assert.equal(r.players[0].keysTotal,11);
+ const child=f.users[1];r=await f.store.sync('g',[f.profile(child)]);assert.equal(r.players[0].keysTotal,0);assert.equal(r.players[0].alliance,false);assert.deepEqual(r.players[0].inviteeTiers,[1,2,3]);assert.equal(r.players[0].pulsarTotal,0);
  const count=f.grants.size;await f.store.sync('g',[f.profile(child),f.profile(parent)]);assert.equal(f.grants.size,count);
- const late=f.user('late',11);await f.store.joined('g','late',f.at,'link',null);r=await f.store.sync('g',[f.profile(late)]);assert.equal(r.players[0].keysTotal,11);assert.equal(r.players[0].alliance,true);
+ r=await f.store.sync('g',[f.profile(child,36000)]);assert.deepEqual(r.players[0].inviteeTiers,[1,2,3,4]);assert.equal(r.players[0].pulsarTotal,1);assert.equal(r.players[0].alliance,false);
+ const late=f.user('late',11);await f.store.joined('g','late',f.at,'link',null);r=await f.store.sync('g',[f.profile(late,3600)]);assert.equal(r.players[0].keysTotal,0);assert.equal(r.players[0].alliance,false);assert.deepEqual(r.players[0].inviteeTiers,[1]);
 });
 test('Store: frozen reward amounts and frozen Minecraft identities prevent relink rewards',async()=>{
  const f=fixture(),parent=f.user('parent',100),child=f.user('child',1);await f.store.campaign('g');await f.store.joined('g','child',f.at,null,'parent');
  await f.store.sync('g',[f.profile(child)]);await f.store.configure('g','admin',{keys:[64,2,3,5]});
- let r=await f.store.sync('g',[f.profile(parent),f.profile(child)]);assert.deepEqual(r.players.map(p=>p.keysTotal),[1,1]);
+ let r=await f.store.sync('g',[f.profile(parent),f.profile(child)]);assert.deepEqual(r.players.map(p=>p.keysTotal),[1,0]);
  parent.minecraft_uuid=f.uuid(101);child.minecraft_uuid=f.uuid(2);r=await f.store.sync('g',[f.profile(parent),f.profile(child)]);assert.deepEqual(r.players.map(p=>p.keysTotal),[0,0]);
  await f.store.left('g','child');await f.store.joined('g','child',f.at+1,null,'different');assert.equal(f.members[0].inviter_id,'parent');
 });
@@ -58,5 +63,13 @@ test('Store: ambiguous attribution is repairable once; pause stops grants and re
  await f.store.attribute('g','admin','child','parent');await assert.rejects(()=>f.store.attribute('g','admin','child','other'),/indéterminée/);
  await f.store.configure('g','admin',{enabled:false});await f.store.left('g','child');await f.store.joined('g','child',f.at+1,null,'other');assert.equal(f.members[0].active,1);
  r=await f.store.sync('g',[f.profile(child)]);assert.equal(r.players[0].keysTotal,0);
- await f.store.configure('g','admin',{enabled:true});r=await f.store.sync('g',[f.profile(child)]);assert.equal(r.players[0].keysTotal,1);
+ await f.store.configure('g','admin',{enabled:true});r=await f.store.sync('g',[f.profile(child)]);assert.equal(r.players[0].keysTotal,0);assert.deepEqual(r.players[0].inviteeTiers,[1,2,3]);
+});
+test('Store: welcome hours do not qualify a referral early, and legacy stages are not paid twice',async()=>{
+ const f=fixture(),parent=f.user('parent',100),child=f.user('child',1);await f.store.campaign('g');await f.store.joined('g','child',f.at,null,'parent');
+ f.legacy.set('old',{uuid:parent.minecraft_uuid,role:'inviter',milestone:1,vote_keys:1,alliance:0});
+ let r=await f.store.sync('g',[f.profile(child,3599)]);assert.deepEqual(r.players[0].inviteeTiers,[]);assert.equal(f.members[0].qualified_uuid,null);
+ r=await f.store.sync('g',[f.profile(child,3600)]);assert.deepEqual(r.players[0].inviteeTiers,[1]);assert.equal(f.members[0].qualified_uuid,null);
+ r=await f.store.sync('g',[f.profile(child,10800)]);assert.deepEqual(r.players[0].inviteeTiers,[1,2]);assert.equal(f.members[0].qualified_uuid,null);
+ await f.store.sync('g',[f.profile(child,18000)]);r=await f.store.sync('g',[f.profile(parent)]);assert.equal(r.players[0].keysTotal,1);assert.equal(f.grants.get(parent.minecraft_uuid+':inviter:1').vote_keys,0);
 });

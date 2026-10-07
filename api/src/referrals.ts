@@ -3,7 +3,10 @@ import {randomUUID} from 'node:crypto';
 import type {Pool,PoolConnection,RowDataPacket} from 'mysql2/promise';
 import {pool} from './db.js';
 import {json} from './discord-store.js';
-export const milestones=[1,3,5,10] as const;
+export const milestones=[1,2,3,4] as const;
+export const inviteeHours=[1,3,5,10] as const;
+export const inviteeLabels=['10 Super Balls','5 Bonbons Exp. L','15 Hyper Balls + 5 000 Cobblecoins','5 Bonbons Exp. XL + 10 000 Cobblecoins + 1 clé Pulsar'] as const;
+const legacyMilestones=[1,3,5,10] as const;
 export const referralConfig=z.object({enabled:z.boolean().default(true),seconds:z.number().int().min(3600).max(864000).default(18000),
  keys:z.array(z.number().int().min(0).max(64)).length(4).default([1,2,3,5])}).strict();
 export type ReferralConfig=z.infer<typeof referralConfig>;
@@ -17,7 +20,7 @@ export function referralEligible(member:Member,invitee:Account|undefined,inviter
   &&new Date(invitee.minecraft_linked_at).getTime()>=Math.floor(Number(member.joined_at_ms)/1000)*1000;
 }
 export function rewardPlan(count:number,cfg:ReferralConfig) {
- return milestones.flatMap((n,i)=>count>=n?[{milestone:n,keys:cfg.keys[i]!,alliance:n===10}]:[]);
+ return milestones.flatMap((n,i)=>count>=n?[{milestone:n,keys:cfg.keys[i]!,alliance:n===4}]:[]);
 }
 export class ReferralStore {
  constructor(private db:Pool=pool){}
@@ -58,13 +61,12 @@ export class ReferralStore {
   await c.execute('INSERT IGNORE INTO referral_identities VALUES(?,?,?)',[guild,inviterId,inviter.minecraft_uuid]);
   const [bound]=await c.query<RowDataPacket[]>('SELECT uuid FROM referral_identities WHERE guild_id=? AND discord_id=?',[guild,inviterId]);
   if(bound[0]?.uuid!==inviter.minecraft_uuid)return;
-  // Bulk insert, not one round trip for every invitee on every heartbeat.
+  const [legacy]=await c.query<RowDataPacket[]>("SELECT milestone,vote_keys FROM referral_rewards WHERE guild_id=? AND uuid=? AND role='inviter'",[guild,inviter.minecraft_uuid]);
+  // Map the old four stages to the new four stages. Preserve acquired rewards
+  // without paying an already earned stage twice during the policy upgrade.
   for(const reward of rewardPlan(links.length,cfg)){
-   const now=Date.now();
-   await c.execute('INSERT IGNORE INTO referral_rewards VALUES(?,?,?,?,?,?,?)',[guild,inviter.minecraft_uuid,'inviter',reward.milestone,reward.keys,reward.alliance?1:0,now]);
-   await c.execute(`INSERT IGNORE INTO referral_rewards(guild_id,uuid,role,milestone,vote_keys,alliance,created_at_ms)
-    SELECT guild_id,qualified_uuid,'invitee',?,?,?,? FROM referral_members
-    WHERE guild_id=? AND inviter_id=? AND qualified_uuid IS NOT NULL`,[reward.milestone,reward.keys,reward.alliance?1:0,now,guild,inviterId]);
+   const previous=Number(legacy.find(r=>Number(r.milestone)===legacyMilestones[reward.milestone-1])?.vote_keys??0);
+   await c.execute('INSERT IGNORE INTO referral_rewards_v2 VALUES(?,?,?,?,?,?,?,?)',[guild,inviter.minecraft_uuid,'inviter',reward.milestone,Math.max(0,reward.keys-previous),0,reward.alliance?1:0,Date.now()]);
   }
  }
  /** Cumulative server-authoritative counters; guild row lock serializes join, qualification and grants. */
@@ -75,13 +77,19 @@ export class ReferralStore {
    const [users]=await c.query<Account[]>("SELECT discord_id,minecraft_uuid,DATE_FORMAT(minecraft_linked_at,'%Y-%m-%dT%H:%i:%sZ') AS minecraft_linked_at FROM users WHERE minecraft_uuid=? AND discord_id IS NOT NULL AND minecraft_linked_at IS NOT NULL AND merged_into IS NULL",[p.uuid]);
    const user=users[0];if(!user)continue;
    const [members]=await c.query<Member[]>('SELECT * FROM referral_members WHERE guild_id=? AND invitee_id=?',[guild,user.discord_id]);
-   const member=members[0];if(member?.inviter_id&&!member.qualified_uuid){
+   const member=members[0];if(member?.inviter_id){
     const [inviters]=await c.query<Account[]>("SELECT discord_id,minecraft_uuid,DATE_FORMAT(minecraft_linked_at,'%Y-%m-%dT%H:%i:%sZ') AS minecraft_linked_at FROM users WHERE discord_id=? AND minecraft_linked_at IS NOT NULL AND merged_into IS NULL",[member.inviter_id]);
     const [clock]=await c.query<RowDataPacket[]>('SELECT active_seconds,first_seen_ms FROM referral_playtime WHERE guild_id=? AND uuid=?',[guild,p.uuid]);
-    if(referralEligible(member,user,inviters[0],Number(clock[0]!.active_seconds),Number(clock[0]!.first_seen_ms),cfg)){
+    const seconds=Number(clock[0]!.active_seconds);
+    if(referralEligible(member,user,inviters[0],seconds,Number(clock[0]!.first_seen_ms),{...cfg,seconds:3600})){
      await c.execute('INSERT IGNORE INTO referral_identities VALUES(?,?,?)',[guild,user.discord_id,p.uuid]);
      const [bound]=await c.query<RowDataPacket[]>('SELECT uuid FROM referral_identities WHERE guild_id=? AND discord_id=?',[guild,user.discord_id]);
-     if(bound[0]?.uuid===p.uuid)await c.execute('UPDATE referral_members SET qualified_uuid=?,qualified_at_ms=? WHERE guild_id=? AND invitee_id=? AND qualified_uuid IS NULL',[p.uuid,Date.now(),guild,user.discord_id]);
+     if(bound[0]?.uuid===p.uuid){
+      if(!member.qualified_uuid&&seconds>=cfg.seconds)await c.execute('UPDATE referral_members SET qualified_uuid=?,qualified_at_ms=? WHERE guild_id=? AND invitee_id=? AND qualified_uuid IS NULL',[p.uuid,Date.now(),guild,user.discord_id]);
+      // Invitee rewards depend only on their own playtime, not the group size.
+      for(let i=0;i<inviteeHours.length;i++)if(seconds>=inviteeHours[i]!*3600)
+       await c.execute('INSERT IGNORE INTO referral_rewards_v2 VALUES(?,?,?,?,?,?,?,?)',[guild,p.uuid,'invitee',i+1,0,i===3?1:0,0,Date.now()]);
+     }
     }
    }
    // Reconcile both paths: a late-linked inviter and all previously qualified invitees.
@@ -90,7 +98,10 @@ export class ReferralStore {
   const players=[];
   for(const p of profiles){
    const [r]=await c.query<RowDataPacket[]>('SELECT COALESCE(SUM(vote_keys),0) AS keysTotal,COALESCE(MAX(alliance),0) AS alliance FROM referral_rewards WHERE guild_id=? AND uuid=?',[guild,p.uuid]);
-   players.push({uuid:p.uuid,keysTotal:Number(r[0]!.keysTotal),alliance:!!r[0]!.alliance});
+   const [v2]=await c.query<RowDataPacket[]>('SELECT role,milestone,vote_keys,pulsar_keys,alliance FROM referral_rewards_v2 WHERE guild_id=? AND uuid=? ORDER BY milestone',[guild,p.uuid]);
+   players.push({uuid:p.uuid,keysTotal:Number(r[0]!.keysTotal)+v2.reduce((n,r)=>n+Number(r.vote_keys),0),
+    alliance:!!r[0]!.alliance||v2.some(r=>!!r.alliance),pulsarTotal:v2.reduce((n,r)=>n+Number(r.pulsar_keys),0),
+    inviteeTiers:v2.filter(r=>r.role==='invitee').map(r=>Number(r.milestone))});
   }
   return {campaignId:event.id,enabled:cfg.enabled,requiredSeconds:cfg.seconds,players};
  });}

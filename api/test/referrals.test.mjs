@@ -8,12 +8,12 @@ const cfg=referralConfig.parse({}),at=Date.now()-20000000;
 const member={invitee_id:'child',inviter_id:'parent',joined_at_ms:at,qualified_uuid:null,qualified_at_ms:null,active:1};
 const child={discord_id:'child',minecraft_uuid:'a'.repeat(32),minecraft_linked_at:new Date(at+1)};
 const parent={discord_id:'parent',minecraft_uuid:'b'.repeat(32),minecraft_linked_at:new Date(at-100)};
-test('Approved defaults: five hours, 1/3/5/10, cumulative keys and Alliance only at ten',()=>{
+test('Approved defaults: five hours per referral, 1/2/3/4 inviters and Alliance only at four',()=>{
  assert.equal(cfg.seconds,18000);assert.deepEqual(cfg.keys,[1,2,3,5]);
- assert.deepEqual(rewardPlan(0,cfg),[]);assert.equal(rewardPlan(2,cfg).length,1);
- assert.deepEqual(rewardPlan(5,cfg).map(r=>r.keys),[1,2,3]);
- assert.equal(rewardPlan(9,cfg).some(r=>r.alliance),false);
- assert.equal(rewardPlan(10,cfg).reduce((n,r)=>n+r.keys,0),11);assert.equal(rewardPlan(11,cfg).filter(r=>r.alliance).length,1);
+ assert.deepEqual(rewardPlan(0,cfg),[]);assert.equal(rewardPlan(2,cfg).length,2);
+ assert.deepEqual(rewardPlan(3,cfg).map(r=>r.keys),[1,2,3]);
+ assert.equal(rewardPlan(3,cfg).some(r=>r.alliance),false);
+ assert.equal(rewardPlan(4,cfg).reduce((n,r)=>n+r.keys,0),11);assert.equal(rewardPlan(5,cfg).filter(r=>r.alliance).length,1);
 });
 test('New linked players qualify; AFK/insufficient progress, self, old players, unlinked accounts and departed members do not',()=>{
  assert.equal(referralEligible(member,child,parent,18000,at,cfg),true);
@@ -39,7 +39,7 @@ test('Reward records freeze amounts and reject duplicate UUIDs and rejoin attrib
  assert.match(sql,/UNIQUE KEY referral_identity_uuid\(guild_id,uuid\)/);
  assert.match(sql,/PRIMARY KEY\(guild_id,uuid,role,milestone\)/);
  const source=readFileSync(new URL('../src/referrals.ts',import.meta.url),'utf8');
- assert.match(source,/INSERT IGNORE INTO referral_rewards/);assert.match(source,/GREATEST\(active_seconds/);
+ assert.match(source,/INSERT IGNORE INTO referral_rewards_v2/);assert.match(source,/GREATEST\(active_seconds/);
  assert.match(source,/qualified_uuid\|\|r\[0\]\.inviter_id/);
 });
 test('Slash definitions and runtime checks restrict configuration to administrators',async()=>{
