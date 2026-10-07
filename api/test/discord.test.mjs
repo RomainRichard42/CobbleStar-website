@@ -38,7 +38,7 @@ test('Authenticated ingest is bounded, idempotent and drops disabled private log
   Object.assign(process.env,{NODE_ENV:'test',PUBLIC_API_URL:'http://localhost:3000',SITE_ORIGIN:'http://localhost:3000',DB_HOST:'127.0.0.1',DB_NAME:'test',DB_USER:'test',DB_PASSWORD:'test',COOKIE_SECRET:'a'.repeat(40),MINECRAFT_SERVER_KEY:'b'.repeat(40),DISCORD_GATEWAY_ENABLED:'true'});
   const [{default:Fastify},{registerDiscordBridge},{pool},{discordCommands}]=await Promise.all([import('fastify'),import('../dist/discord-bridge.js'),import('../dist/db.js'),import('../dist/discord-bot.js')]);
   const commands=discordCommands();
-  assert.deepEqual(commands.map(c=>c.name),['csconfig','ticket','evenement']);
+  assert.deepEqual(commands.map(c=>c.name),['csconfig','ticket','evenement','parrainage','parrainage-admin']);
   assert.ok(commands[0].default_member_permissions);
   assert.ok(commands[1].options.some(o=>o.name==='forcer-fermeture'));
   const original={query:pool.query,execute:pool.execute};let cfg={channels:{chat:'123456789012345678',private:'123456789012345679'},privateEnabled:false};

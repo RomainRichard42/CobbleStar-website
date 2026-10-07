@@ -1,0 +1,19 @@
+{
+  "species": "cobblemon:dragonite",
+  "order": 9000,
+  "variations": [
+    {
+      "aspects": ["cobblestar-alliance"],
+      "model": "cobblemon:dragonite.geo",
+      "poser": "cobblemon:dragonite",
+      "texture": "cobblestar_planets:textures/pokemon/referral/dragonite_alliance.png",
+      "layers": [
+        {
+          "name": "alliance_glow",
+          "texture": "cobblestar_planets:textures/pokemon/referral/dragonite_alliance_glow.png",
+          "emissive": true
+        }
+      ]
+    }
+  ]
+}

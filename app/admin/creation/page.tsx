@@ -17,7 +17,7 @@ type Tab = "quests" | "npcs" | "chapters";
 const empty = (): StudioContent => ({ questConfig: { resetHour: 6, quests: [], chapters: [] }, npcs: [] });
 const optionLabels: Record<string, string> = { DIALOGUE_ONLY: 'Dialogue uniquement', DIALOGUE_QUEST: 'Dialogue et quêtes', TURN_IN: 'Remise de quêtes', DAYCARE: 'Pension', RANKED: 'Combats classés', SHOP: 'Marchand', STORY: 'Histoire principale', SIDE: 'Aventure secondaire', MERCHANT: 'Marchand', EVENT: 'Événement', NONE: 'Sans couleur', ROLE: 'Selon le rôle', CYAN: 'Cyan', PINK: 'Rose', GOLD: 'Or', GREEN: 'Vert', VIOLET: 'Violet', FACILE: 'Facile', NORMAL: 'Normal', DIFFICILE: 'Difficile', EXPERT: 'Expert', PREVIOUS: 'Après le chapitre précédent', IMMEDIATE: 'Disponible immédiatement', MANUAL: 'Déblocage manuel' };
 const makeId = (prefix: string) => `${prefix}_${crypto.randomUUID().slice(0, 8)}`;
-const newQuest = (): StudioQuest => ({ id: makeId("quete"), title: "Nouvelle quête", description: "", category: "AVENTURE", chapterId: "", chapterTitle: "Aventure", kind: "SIDE", sequential: true, difficulty: "NORMAL", icon: "minecraft:book", accent: "#9B8CFF", order: 1, autoStart: false, requires: [], objectives: [{ source: "cobblemon_capture", label: "Capturer un Pokémon", target: 1, unique: false, optional: false, alternativeGroup: "", filters: {} }], rewards: [] });
+const newQuest = (): StudioQuest => ({ id: makeId("quete"), title: "Nouvelle quête", description: "", category: "AVENTURE", chapterId: "", chapterTitle: "", kind: "SIDE", sequential: true, difficulty: "NORMAL", icon: "minecraft:book", accent: "#9B8CFF", order: 1, autoStart: false, requires: [], objectives: [{ source: "cobblemon_capture", label: "Capturer un Pokémon", target: 1, unique: false, optional: false, alternativeGroup: "", filters: {} }], rewards: [] });
 const newNpc = (): StudioNpc => ({ id: makeId("pnj"), name: "Nouveau personnage", enabled: true, role: "DIALOGUE_QUEST", dialogue: "Bienvenue, Dresseur !", questIds: [], permission: 0, repeatableDialogue: true, skin: "", nameColor: "ROLE", visualRole: "STORY", shopOffers: "", dialogueGraph: { start: "accueil", nodes: [{ id: "accueil", title: "Accueil", text: "Bienvenue, Dresseur !", canvasX: 24, canvasY: 42, choices: [] }] } });
 async function api<T>(url: string, init?: RequestInit): Promise<T> {
   const res = await fetch(url, { credentials: "include", cache: "no-store", ...init, headers: { "Content-Type": "application/json", ...init?.headers } });
@@ -50,7 +50,7 @@ export default function CreationStudio() {
     if (!server) return;
     let active = true;
     const timer = window.setInterval(() => { setNow(Date.now()); void api<State>(`/api/admin/quests/${server}`).then(r => {
-      if (active) setState(old => old ? { ...old, canWrite: r.canWrite, appliedRevision: r.appliedRevision, publishedRevision: r.publishedRevision, lastSeenAt: r.lastSeenAt, error: r.error, placements: r.placements, catalog: r.catalog } : old);
+      if (active) setState(old => old ? { ...old, canWrite: r.canWrite, appliedRevision: r.appliedRevision, publishedRevision: r.publishedRevision, lastSeenAt: r.lastSeenAt, error: r.error, placements: r.placements, catalog: r.catalog, observed: r.observed } : old);
     }).catch(() => undefined); }, 15000);
     return () => { active = false; window.clearInterval(timer); };
   }, [server]);
@@ -111,6 +111,13 @@ export default function CreationStudio() {
         {state.canWrite && <><button disabled={busy || !dirty} onClick={() => void task(save)}>Enregistrer{dirty ? " *" : ""}</button><button className={s.primary} disabled={busy || dirty || state.draftRevision === 0} onClick={() => { setPublicationError(''); setPublishOpen(true); }}>Publier en jeu</button></>}
       </div>
       {state.error && <p className={s.notice} role="alert">{state.error}</p>}
+      <details className={s.notice}><summary>Comprendre le contenu du journal en jeu</summary>
+        <p>Les quêtes et les chapitres de ce studio sont reliés aux PNJ. Sans chapitre choisi, une quête reste indépendante ; seuls ses prérequis explicites s’appliquent.</p>
+        <p>Les parcours automatiques sont séparés dans « Épreuves » en jeu. Ils se configurent dans <Link href="/admin/arenes/">Arènes & Ligue</Link>, pas comme des quêtes narratives.</p>
+        {state.observed && <><p>Quêtes connues du serveur mais absentes de ce brouillon (conservées, pas supprimées lors d’une publication) :</p>
+          {state.observed.questConfig.quests.filter(q => !content.questConfig.quests.some(d => d.id === q.id)).length ? <ul>{state.observed.questConfig.quests.filter(q => !content.questConfig.quests.some(d => d.id === q.id)).map(q => <li key={q.id}>{q.title} · <code>{q.id}</code></li>)}</ul> : <p>Aucune.</p>}
+          <p>Pour les gérer ici, utilise « Importer l’existant du serveur » après avoir enregistré ton brouillon. L’import remplace le brouillon, pas les progressions en jeu.</p></>}
+      </details>
       <div className={s.workspace}>
         <aside className={s.directory}><nav>{([['quests', 'Histoires'], ['npcs', 'Personnages'], ['chapters', 'Chapitres']] as const).map(([id, title]) => <button key={id} aria-pressed={tab === id} onClick={() => { setTab(id); setSelected(0); }}>{title}</button>)}</nav>
           <input aria-label="Rechercher dans le studio" placeholder="Rechercher…" value={query} onChange={e => setQuery(e.target.value)} />

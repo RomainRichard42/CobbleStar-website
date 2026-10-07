@@ -77,7 +77,7 @@ test('Ticket workflow with mocked Discord: permissions, claim, moves, members, c
   let stop;
   try {
     stop=await startDiscordBot({info:()=>{},warn:()=>{}},()=>client);
-    assert.deepEqual(registered.map(c=>c.name),['csconfig','ticket','evenement']);
+    assert.deepEqual(registered.map(c=>c.name),['csconfig','ticket','evenement','parrainage','parrainage-admin']);
     const created=await dispatch(ids.owner,'public',null,{subject:'Bug',description:'Une demande'},'modal');
     assert.match(created.content,/Ton ticket/);assert.equal(tickets.size,1);
     const t=[...tickets.values()][0],c=channels.get(t.channel_id);

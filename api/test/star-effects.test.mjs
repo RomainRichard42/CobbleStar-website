@@ -30,3 +30,27 @@ test('Even an empty Star catalogue gets shared FX and resolvable sound/texture d
  assert.deepEqual(fx.components['minecraft:emitter_lifetime_events'].timeline,{'0.20':'note_mid','0.40':['note_high','burst']});
  assert.ok([...files.keys()].every(n=>!n.includes('/resolvers/star/')));
 });
+
+test('Approved quest journal assets and fonts are shipped through the mandatory pack',()=>{
+ const files=unpack(buildStarPack([],[])),root='assets/cobblestar_planets/';
+ for(const name of ['frame','inset','card','selected','button','button-hover','next','done']){
+  const png=files.get(root+'textures/gui/quest_journal/carnet/'+name+'.png');assert.ok(png,name);
+  assert.equal(png.subarray(1,4).toString(),'PNG');
+  assert.equal(png.readUInt32BE(16),name==='frame'?1600:name==='done'?32:512);
+  assert.equal(png.readUInt32BE(20),name==='frame'?1054:name==='done'?32:128);
+ }
+ for(const font of ['market','market_bold']){
+  const json=JSON.parse(files.get(root+'font/'+font+'.json'));
+  for(const provider of json.providers){const [namespace,path]=provider.file.split(':');assert.ok(files.has('assets/'+namespace+'/font/'+path),provider.file);}
+ }
+ assert.ok(files.has(root+'textures/gui/combat/logo.png'));
+});
+
+test('Dedicated NPC studio remote model and label are included in the mandatory pack',()=>{
+ const files=unpack(buildStarPack([],[])),root='assets/cobblestar_planets/';
+ const model=JSON.parse(files.get(root+'models/item/npc_studio_remote.json'));
+ assert.equal(model.parent,'minecraft:item/generated');
+ assert.equal(model.textures.layer0,'minecraft:item/spyglass');
+ const labels=JSON.parse(files.get(root+'lang/fr_fr.json'));
+ assert.equal(labels['item.cobblestar_planets.npc_studio_remote'],'Télécommande Studio PNJ');
+});

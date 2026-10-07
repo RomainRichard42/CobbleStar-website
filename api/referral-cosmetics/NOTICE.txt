@@ -1,0 +1,5 @@
+Dracolosse Alliance: CobbleStar referral cosmetic, adapted from the native
+Cobblemon 1.8.0 Dragonite texture. Original geometry, UVs, bones, poser and
+animations are retained, not replaced. Original asset license: Cobblemon.txt.
+This cosmetic is opt-in (aspect cobblestar-alliance), not a Star rarity or
+a new naturally spawning species. Do not combine it with the Star aspect.

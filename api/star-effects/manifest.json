@@ -3,9 +3,24 @@
     "assets/cobblestar_planets/sounds.json",
     "assets/cobblestar_planets/lang/fr_fr.json",
     "assets/cobblestar_planets/lang/en_us.json",
+    "assets/cobblestar_planets/models/item/npc_studio_remote.json",
     "assets/cobblestar_planets/bedrock/particles/star/appearance.particle.json",
     "assets/cobblestar_planets/bedrock/particles/star/orbit.particle.json",
     "assets/cobblestar_planets/bedrock/particles/star/burst.particle.json",
-    "assets/cobblestar_planets/textures/particle/star/blue_star.png"
+    "assets/cobblestar_planets/textures/particle/star/blue_star.png",
+    "assets/cobblestar_planets/textures/gui/quest_journal/carnet/frame.png",
+    "assets/cobblestar_planets/textures/gui/quest_journal/carnet/inset.png",
+    "assets/cobblestar_planets/textures/gui/quest_journal/carnet/card.png",
+    "assets/cobblestar_planets/textures/gui/quest_journal/carnet/selected.png",
+    "assets/cobblestar_planets/textures/gui/quest_journal/carnet/button.png",
+    "assets/cobblestar_planets/textures/gui/quest_journal/carnet/button-hover.png",
+    "assets/cobblestar_planets/textures/gui/quest_journal/carnet/next.png",
+    "assets/cobblestar_planets/textures/gui/quest_journal/carnet/done.png",
+    "assets/cobblestar_planets/font/market.json",
+    "assets/cobblestar_planets/font/market_bold.json",
+    "assets/cobblestar_planets/font/rubik_medium.ttf",
+    "assets/cobblestar_planets/font/rubik_bold.ttf",
+    "assets/cobblestar_planets/font/rubik-ofl.txt",
+    "assets/cobblestar_planets/textures/gui/combat/logo.png"
   ]
 }

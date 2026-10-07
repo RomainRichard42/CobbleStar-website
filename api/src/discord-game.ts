@@ -5,6 +5,7 @@ import {config} from "./config.js";
 import {pool, transaction} from "./db.js";
 import {settings, json} from "./discord-store.js";
 import {gradeIds, premiumIds, rankedIds, type Settings} from "./discord-policy.js";
+import {ReferralStore} from './referrals.js';
 
 const uuid=z.string().regex(/^[0-9a-f]{32}$/);
 export const gameProfileSchema=z.object({uuid, grade:z.enum(gradeIds), ranked:z.enum(rankedIds).nullable(),
@@ -15,8 +16,10 @@ export const gameStateSchema=z.object({
   startedAt:z.number().int().positive().max(Number.MAX_SAFE_INTEGER), sequence:z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER),
   online:z.boolean(), maintenance:z.boolean(), players:z.number().int().min(0).max(100000),
   maxPlayers:z.number().int().min(1).max(100000), profiles:z.array(gameProfileSchema).max(100),
+  referralProfiles:z.array(z.object({uuid,activeSeconds:z.number().int().min(0).max(315360000),firstSeen:z.number().int().min(0).max(Number.MAX_SAFE_INTEGER)}).strict()).max(100).optional(),
 }).strict().refine(v=>v.online||v.players===0,{message:"Un serveur arrêté ne peut pas avoir de joueurs connectés"})
-  .refine(v=>new Set(v.profiles.map(p=>p.uuid)).size===v.profiles.length,{message:"UUID répété"});
+  .refine(v=>new Set(v.profiles.map(p=>p.uuid)).size===v.profiles.length,{message:"UUID répété"})
+  .refine(v=>new Set(v.referralProfiles?.map(p=>p.uuid)).size===(v.referralProfiles?.length??0),{message:"UUID parrainage répété"});
 export type GameState=z.infer<typeof gameStateSchema>;
 export function newerState(old:{started_at:number; session_id:string; sequence_no:number}|undefined, next:GameState) {
   return !old||next.startedAt>Number(old.started_at)||next.startedAt===Number(old.started_at)&&next.sessionId===old.session_id&&next.sequence>Number(old.sequence_no);
@@ -49,7 +52,7 @@ export function registerDiscordGame(app:FastifyInstance,authorized:(request:Fast
       const [rows]=await c.query<RowDataPacket[]>("SELECT started_at,session_id,sequence_no FROM discord_game_status WHERE guild_id=? AND server_id=? FOR UPDATE",[config.DISCORD_GUILD_ID,value.serverId]);
       if(!newerState(rows[0] as {started_at:number;session_id:string;sequence_no:number}|undefined,value))return;
       await c.execute("UPDATE discord_game_status SET session_id=?,started_at=?,sequence_no=?,state=?,received_at=NOW() WHERE guild_id=? AND server_id=?",
-        [value.sessionId,value.startedAt,value.sequence,JSON.stringify({...value,profiles:[]}),config.DISCORD_GUILD_ID,value.serverId]);
+        [value.sessionId,value.startedAt,value.sequence,JSON.stringify({...value,profiles:[],referralProfiles:[]}),config.DISCORD_GUILD_ID,value.serverId]);
       for(const p of value.profiles) {
         // Keep only linked accounts. Discord identity is always resolved from the current
         // users table; the game cannot supply an arbitrary Discord user or role ID.
@@ -59,7 +62,9 @@ export function registerDiscordGame(app:FastifyInstance,authorized:(request:Fast
           [config.DISCORD_GUILD_ID,value.serverId,p.uuid,JSON.stringify(p),p.uuid]);
       }
     });
-    return {ok:true};
+    const profiles=(value.referralProfiles??[]).filter(p=>p.firstSeen<=Date.now()+300000);
+    const referral=profiles.length?await new ReferralStore().sync(config.DISCORD_GUILD_ID,profiles):undefined;
+    return {ok:true,...(referral?{referral}:{})};
   });
 }
 export async function gameStatus(serverId:string) {

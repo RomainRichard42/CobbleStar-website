@@ -13,6 +13,8 @@ import { config } from "./config.js";
 import { pool, transaction } from "./db.js";
 import { eventKinds, stages, roleSources, gradeIds, premiumIds, rankedIds, plain, summary, inviteAttribution, mayConfirm, type EventKind, type Settings } from "./discord-policy.js";
 import {DiscordGameSync} from "./discord-game-bot.js";
+import {ReferralStore} from './referrals.js';
+import {referralCommands,handleReferral} from './referrals-bot.js';
 import {communityEventCommand,DiscordCommunityEvents} from "./discord-community-events-bot.js";
 import { enqueue, json, saveSettings, settings, ticketFor, type Ticket } from "./discord-store.js";
 
@@ -68,7 +70,7 @@ export function discordCommands() {
       .addStringOption(o=>o.setName("resume").setDescription("Conclusion / résolution").setRequired(true).setMaxLength(1000)))
     .addSubcommand(s=>s.setName("forcer-fermeture").setDescription("Archiver et fermer sans confirmation (staff)")
       .addStringOption(o=>o.setName("resume").setDescription("Conclusion et motif de fermeture").setRequired(true).setMaxLength(1000)));
-  return [setup.toJSON(), ticket.toJSON(),communityEventCommand()];
+  return [setup.toJSON(), ticket.toJSON(),communityEventCommand(),...referralCommands()];
 }
 
 export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (options: ClientOptions) => Client = options => new Client(options)): Promise<() => Promise<void>> {
@@ -99,6 +101,8 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
   async function guild() { return client.guilds.fetch(config.DISCORD_GUILD_ID); }
   const gameSync=new DiscordGameSync(guild,log);
   const communityEvents=new DiscordCommunityEvents(guild,()=>client.user!.id,log);
+  const referrals=new ReferralStore();
+  client.on(Events.GuildMemberRemove,m=>{if(m.guild.id===config.DISCORD_GUILD_ID)safe(()=>referrals.left(m.guild.id,m.user.id));});
   client.on(Events.GuildMemberAdd,m=>{gameSync.invalidate(m.id);});
   async function member(g: Guild, id: string) { return g.members.fetch(id); }
   function isAdmin(m: GuildMember) { return m.permissions.has(P.Administrator); }
@@ -325,12 +329,15 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
   const interacting = new Set<string>();
   client.on(Events.InteractionCreate,i=>safe(async()=> {
     if(stopped||i.guildId!==config.DISCORD_GUILD_ID) return;
-    const ours=i.isChatInputCommand()?["ticket","csconfig","evenement"].includes(i.commandName):(i.isButton()||i.isModalSubmit())&&i.customId.startsWith("cs:");
+    const ours=i.isChatInputCommand()?["ticket","csconfig","evenement","parrainage","parrainage-admin"].includes(i.commandName):(i.isButton()||i.isModalSubmit())&&i.customId.startsWith("cs:");
     if(!ours) return;
     const resource=communityEvents.owns(i)?`evenement:${i.user.id}`:i.isChatInputCommand()&&i.commandName==="csconfig"?"configuration":i.channelId??i.user.id;
     if(interacting.has(resource)) {if(i.isRepliable()) await i.reply({content:"Une action est déjà en cours ici. Réessaie dans un instant.",...ephemeral});return;}
     interacting.add(resource);
     try {
+      if(i.isChatInputCommand()&&['parrainage','parrainage-admin'].includes(i.commandName)){
+        await i.deferReply(ephemeral);await handleReferral(i,await guild(),referrals);return;
+      }
       if(communityEvents.owns(i)) {
         const showForm=i.isChatInputCommand()&&["creer","modifier","annuler"].includes(i.options.getSubcommand());
         if(!showForm&&i.isRepliable())await i.deferReply(ephemeral);
@@ -406,20 +413,21 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
   client.on(Events.MessageReactionRemoveAll,m=>safe(async()=> { const s=await settings(); if(await watched(m,s)) await enqueue("moderation",`Toutes les réactions retirées · ${m.channelId}/${m.id}`); }));
   client.on(Events.MessageReactionRemoveEmoji,r=>safe(async()=> {const s=await settings();if(await watched(r.message,s)) await enqueue("moderation",`Réaction ${r.emoji.toString()} entièrement retirée · ${r.message.channelId}/${r.message.id}`);}));
   let invitesQueue=Promise.resolve();
-  async function snapshotInvites(g: Guild,joined?: string) {
+  async function snapshotInvites(g: Guild,joined?: string,joinedAt=Date.now()) {
     const [old]=await pool.query<RowDataPacket[]>("SELECT code,uses FROM discord_invites WHERE guild_id=?",[g.id]);
     let invites;
     try { invites=await g.invites.fetch(); }
-    catch { if(joined) await enqueue("members",`Nouveau membre ${joined} · invitation indéterminée (permission Gérer le serveur absente ou invitation indisponible).`); return; }
+    catch { if(joined){await referrals.joined(g.id,joined,joinedAt,null,null);await enqueue("members",`Nouveau membre ${joined} · invitation indéterminée (permission Gérer le serveur absente ou invitation indisponible).`);} return; }
     const current=[...invites.values()].map(v=>({code:v.code,uses:v.uses??0,inviter:v.inviter?.id??null}));
     const attribution=inviteAttribution(new Map(old.map(v=>[String(v.code),Number(v.uses)])),current);
+    if(joined)await referrals.joined(g.id,joined,joinedAt,attribution?.code??null,attribution?.inviter??null);
     if(joined) await enqueue("members",`Nouveau membre ${joined}\n${attribution?`Invitation probablement utilisée : ${attribution.code} · invitant ${attribution.inviter??"inconnu"} (déduction par compteur)` :"Invitant indéterminé : arrivées simultanées, lien expiré/unique, OAuth ou URL personnalisée possibles."}`);
     await transaction(async conn=> {
       await conn.execute("DELETE FROM discord_invites WHERE guild_id=?",[g.id]);
       for(const v of current) await conn.execute("INSERT INTO discord_invites (guild_id,code,uses,inviter_id) VALUES (?,?,?,?)",[g.id,v.code,v.uses,v.inviter]);
     });
   }
-  client.on(Events.GuildMemberAdd,m=> { if(m.guild.id!==config.DISCORD_GUILD_ID)return; invitesQueue=invitesQueue.then(()=>snapshotInvites(m.guild,m.user.id)).catch(()=>log.warn("Attribution invitation indisponible.")); });
+  client.on(Events.GuildMemberAdd,m=> { if(m.guild.id!==config.DISCORD_GUILD_ID||m.user.bot)return; invitesQueue=invitesQueue.then(()=>snapshotInvites(m.guild,m.user.id,m.joinedTimestamp??Date.now())).catch(()=>log.warn("Attribution invitation indisponible.")); });
   client.on(Events.InviteCreate,i=>safe(async()=> { if(i.guild?.id===config.DISCORD_GUILD_ID) await pool.execute("INSERT INTO discord_invites (guild_id,code,uses,inviter_id) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE uses=VALUES(uses)",[i.guild.id,i.code,i.uses??0,i.inviter?.id??null]); }));
 
   let cleanupAt=0;
@@ -491,6 +499,7 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
     }
     // Preserve unrelated application's slash commands. Restart recovery keeps tickets readable.
     await pool.execute("UPDATE discord_tickets SET status='a_fermer' WHERE guild_id=? AND status='closing'",[g.id]);
+    await referrals.campaign(g.id);
     await snapshotInvites(g);
     timer=setInterval(()=>safe(tick),5000);
     log.info("Bot CobbleStar connecté ; commandes /ticket, /csconfig et /evenement disponibles.");

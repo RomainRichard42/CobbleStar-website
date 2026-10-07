@@ -1,4 +1,5 @@
 import { randomInt, randomUUID, timingSafeEqual } from "node:crypto";
+import { registerVoteProgress } from "./vote-progress.js";
 import Fastify, { FastifyReply, FastifyRequest } from "fastify";
 import cookie from "@fastify/cookie";
 import cors from "@fastify/cors";
@@ -830,6 +831,16 @@ app.post("/api/internal/votes/record", { config: { rateLimit: { max: 180, timeWi
   } catch (error) {
     if ((error as { code?: string }).code === "ER_DUP_ENTRY") return reply.code(409).send({ error: "VOTE_ALREADY_RECORDED" });
     throw error;
+  }
+});
+
+// Lifetime votes for free rank progression, independent from reward-delivery leases.
+registerVoteProgress(app, {
+  authorized: request => serverKeyMatches(serverKeyFrom(request)),
+  count: async uuid => {
+    const [rows] = await pool.execute<(RowDataPacket & { total: number })[]>(`
+      SELECT COUNT(*) AS total FROM vote_claims v JOIN users u ON u.id=v.user_id WHERE u.minecraft_uuid=?`, [uuid]);
+    return Number(rows[0]?.total ?? 0);
   }
 });
 

@@ -5,7 +5,7 @@ import { z } from "zod";
 import { pool, transaction } from "./db.js";
 import { config } from "./config.js";
 import { canReadGame, canWriteGame } from "./game-admin.js";
-import { buildStarPack, validateStar, ashStarPreview, type NativeModel, type StarModel } from "./star-assets.js";
+import { buildStarPack, validateStar, ashStarPreview, png, type NativeModel, type StarModel } from "./star-assets.js";
 import { createQuestUploadReceiver } from "./quest-sync-upload.js";
 import { starTemplates, sameSkeleton, nativeStarKit, editableStarKit } from "./star-library.js";
 import {addonSource,addonIndex} from './star-addon-templates.js';
@@ -76,7 +76,8 @@ export function registerStarStudio(app:FastifyInstance,auth:Auth){
    await db.query("SELECT id FROM star_publication WHERE id=1 FOR UPDATE");
    const [rows]=await db.query<RowDataPacket[]>("SELECT published_json FROM star_models ORDER BY species FOR UPDATE");
    const assets=rows.flatMap(row=>row.published_json?[decode(row.published_json)]:[]) as StarModel[];
-   const pack=buildStarPack(assets,native),sha1=createHash("sha1").update(pack).digest("hex");
+   const [skins]=await db.query<RowDataPacket[]>("SELECT hash,png FROM npc_skins ORDER BY hash");
+   const pack=buildStarPack(assets,native,skins.map(s=>({hash:s.hash,png:s.png}))),sha1=createHash("sha1").update(pack).digest("hex");
    await db.execute("INSERT IGNORE INTO star_packs(sha1,pack,species_json) VALUES(?,?,?)",[sha1,pack,JSON.stringify(assets.map(a=>a.species).sort())]);
    await db.execute("UPDATE star_publication SET sha1=? WHERE id=1",[sha1]);
    return {ok:true,hash:sha1};
@@ -106,11 +107,36 @@ export function registerStarStudio(app:FastifyInstance,auth:Auth){
    const [rows]=await db.query<RowDataPacket[]>("SELECT * FROM star_models ORDER BY species FOR UPDATE");
    const selected=rows.find(row=>row.species===species);if(!selected||selected.revision!==revision)return reply.code(409).send({error:"DRAFT_CHANGED_REFRESH"});
    const assets=rows.flatMap(row=>row.species===species?[decode(row.draft_json)]:row.published_json?[decode(row.published_json)]:[]) as StarModel[];
-   const pack=buildStarPack(assets,native),sha1=createHash("sha1").update(pack).digest("hex"),speciesList=assets.map(a=>a.species).sort();
+   const [skins]=await db.query<RowDataPacket[]>("SELECT hash,png FROM npc_skins ORDER BY hash");
+   const pack=buildStarPack(assets,native,skins.map(s=>({hash:s.hash,png:s.png}))),sha1=createHash("sha1").update(pack).digest("hex"),speciesList=assets.map(a=>a.species).sort();
    await db.execute("INSERT IGNORE INTO star_packs(sha1,pack,species_json) VALUES(?,?,?)",[sha1,pack,JSON.stringify(speciesList)]);
    await db.execute("UPDATE star_models SET published_json=draft_json,published_revision=revision WHERE species=?",[species]);
    await db.execute("UPDATE star_publication SET sha1=? WHERE id=1",[sha1]);return {ok:true,hash:sha1};
   });}catch(e){return reply.code(400).send({error:e instanceof Error?e.message:"PUBLICATION_FAILED"});}
+ });
+ app.post('/api/admin/npc-skins',{bodyLimit:100_000,config:{rateLimit:{max:10,timeWindow:'1 minute'}}},async(r,reply)=>{
+  if(!await authorize(r,reply,true))return;
+  const input=z.object({texture:z.string().max(90_000)}).safeParse(r.body);
+  if(!input.success)return reply.code(400).send({error:'PNG_64X64_REQUIRED'});
+  let bytes:Buffer;
+  try{bytes=png(input.data.texture,64,64);}catch{return reply.code(400).send({error:'PNG_64X64_RGB_RGBA_REQUIRED'});}
+  const hash=createHash('sha256').update(bytes).digest('hex'),native=await catalog();
+  return transaction(async db=>{
+   await db.query('SELECT id FROM star_publication WHERE id=1 FOR UPDATE');
+   const [skins]=await db.query<RowDataPacket[]>('SELECT hash,png FROM npc_skins ORDER BY hash');
+   if(!skins.some(s=>s.hash===hash)){
+    if(skins.length>=512)return reply.code(409).send({error:'NPC_SKIN_LIMIT_REACHED'});
+    await db.execute('INSERT INTO npc_skins(hash,png) VALUES(?,?)',[hash,bytes]);
+    skins.push({hash,png:bytes} as RowDataPacket);
+   }
+   const [models]=await db.query<RowDataPacket[]>('SELECT published_json FROM star_models ORDER BY species FOR UPDATE');
+   const assets=models.flatMap(row=>row.published_json?[decode(row.published_json)]:[]) as StarModel[];
+   const pack=buildStarPack(assets,native,skins.map(s=>({hash:s.hash,png:s.png})));
+   const sha1=createHash('sha1').update(pack).digest('hex');
+   await db.execute('INSERT IGNORE INTO star_packs(sha1,pack,species_json) VALUES(?,?,?)',[sha1,pack,JSON.stringify(assets.map(a=>a.species).sort())]);
+   await db.execute('UPDATE star_publication SET sha1=? WHERE id=1',[sha1]);
+   return {skin:`cobblestar_planets:textures/entity/quest_npc/upload/${hash}.png`,hash:sha1};
+  });
  });
  const serverAuth=async(r:FastifyRequest,reply:FastifyReply)=>{if(!auth.server(r))return reply.code(401).send({error:"INVALID_SERVER_KEY"});};
  app.post("/api/internal/star/sync",{bodyLimit:4*1024*1024,config:{rateLimit:{max:120,timeWindow:"1 minute"}},onRequest:serverAuth},async(r,reply)=>sync(r,reply,r.body));

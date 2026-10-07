@@ -14,7 +14,20 @@ test('Unknown species and path injection refused',()=>{assert.throws(()=>validat
 test('Missing native bones and cyclic hierarchy refused',()=>{const v=fixture();v.model['minecraft:geometry'][0].bones[0].name='other';assert.throws(()=>validateStar(v,native));const cycle=fixture();cycle.model['minecraft:geometry'][0].bones[0].parent='root';assert.throws(()=>validateStar(cycle,native));});
 test('Broken PNG refused before publication',()=>{const v=fixture();v.texture=Buffer.from(texture,'base64').subarray(0,33).toString('base64');assert.throws(()=>validateStar(v,native));const broken=Buffer.from(texture,'base64');broken[45]^=1;assert.throws(()=>validateStar({...fixture(),texture:broken.toString('base64')},native));});
 function unpack(zip){let at=0;const files=new Map();while(zip.readUInt32LE(at)===0x04034b50){const compressed=zip.readUInt32LE(at+18),nameLength=zip.readUInt16LE(at+26),extra=zip.readUInt16LE(at+28),start=at+30+nameLength+extra;const name=zip.toString('utf8',at+30,at+30+nameLength),bytes=inflateRawSync(zip.subarray(start,start+compressed));assert.equal(crc(bytes),zip.readUInt32LE(at+14));files.set(name,bytes);at=start+compressed;}assert.equal(zip.readUInt32LE(at),0x02014b50);return files;}
-test('Deterministic pack preserves previous species and only adds Star resolver',()=>{const a=fixture(),b={...fixture(),species:'eevee'},cat=[native,{...native,species:'eevee',poser:'cobblemon:eevee'}];const zip=buildStarPack([a,b],cat);assert.deepEqual(zip,buildStarPack([b,a],cat));const files=unpack(zip);assert.equal(files.size,9+JSON.parse(readFileSync(new URL('../star-effects/manifest.json',import.meta.url))).files.length+JSON.parse(readFileSync(new URL('../regional-starters/manifest.json',import.meta.url))).files.length-2+JSON.parse(readFileSync(new URL('../rank-tags/manifest.json',import.meta.url))).files.length+1);assert.ok(files.has('licenses/Cobblemon.txt'));assert.equal(JSON.parse(files.get('pack.mcmeta')).pack.pack_format,34);for(const id of ['dragonite','eevee']){const r=JSON.parse(files.get(`assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_${id}.json`));assert.deepEqual(r.variations[0].aspects,['cobblestar-star']);assert.equal(r.variations[0].poser,'cobblemon:'+id);assert.equal(r.order,10000);}});
+test('Deterministic pack preserves shared cosmetics and only adds the requested Star species',()=>{
+ const a=fixture(),b={...fixture(),species:'eevee'},cat=[native,{...native,species:'eevee',poser:'cobblemon:eevee'}];
+ const zip=buildStarPack([a,b],cat);assert.deepEqual(zip,buildStarPack([b,a],cat));
+ const files=unpack(zip),shared=unpack(buildStarPack([],[]));
+ // Two fixture species add exactly model + texture + resolver each. All shared
+ // assets (including referral cosmetics) must remain byte-identical.
+ assert.equal(files.size,shared.size+6);
+ for(const [path,bytes] of shared)assert.deepEqual(files.get(path),bytes,path);
+ assert.ok(files.has('licenses/Cobblemon.txt'));assert.equal(JSON.parse(files.get('pack.mcmeta')).pack.pack_format,34);
+ for(const id of ['dragonite','eevee']){
+  const r=JSON.parse(files.get(`assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_${id}.json`));
+  assert.deepEqual(r.variations[0].aspects,['cobblestar-star']);assert.equal(r.variations[0].poser,'cobblemon:'+id);assert.equal(r.order,10000);
+ }
+});
 test('Shared pack includes both regional starter trios without changing native starter textures',()=>{
  const files=unpack(buildStarPack([],[]));
  for(const [region,species] of [['asteria','chikorita'],['asteria','charmander'],['asteria','mudkip'],['nebelia','sprigatito'],['nebelia','litten'],['nebelia','piplup']]){

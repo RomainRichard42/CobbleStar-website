@@ -89,7 +89,7 @@ function nativeRecolorReference(asset: StarModel,native:NativeModel): string | u
  candidate["minecraft:geometry"][0]!.description.identifier=baseline.model["minecraft:geometry"][0]!.description.identifier;
  return isDeepStrictEqual(candidate,baseline.model)?baseline.reference:undefined;
 }
-function png(encoded: string, width: number, height: number) {
+export function png(encoded: string, width: number, height: number) {
  if (!/^[A-Za-z0-9+/]+={0,2}$/.test(encoded)) throw new Error("PNG_BASE64_INVALID");
  const bytes = Buffer.from(encoded,"base64");
  if (bytes.length > 2_000_000 || bytes.length < 33 || bytes.subarray(0,8).toString("hex") !== "89504e470d0a1a0a" || bytes.toString("ascii",12,16)!=="IHDR" || bytes.readUInt32BE(16)!==width || bytes.readUInt32BE(20)!==height) throw new Error("PNG_DIMENSIONS_OR_FORMAT_INVALID");
@@ -138,14 +138,28 @@ export function zipAssets(files: Map<string,Buffer>) {
  const directory=Buffer.concat(central), end=Buffer.alloc(22);end.writeUInt32LE(0x06054b50);end.writeUInt16LE(files.size,8);end.writeUInt16LE(files.size,10);end.writeUInt32LE(directory.length,12);end.writeUInt32LE(offset,16);
  return Buffer.concat([...local,directory,end]);
 }
-export function buildStarPack(assets: StarModel[], catalog: NativeModel[]) {
+export function buildStarPack(assets: StarModel[], catalog: NativeModel[], npcSkins: {hash:string;png:Buffer}[] = []) {
  const files=new Map<string,Buffer>();files.set("pack.mcmeta",Buffer.from(JSON.stringify({pack:{pack_format:34,description:"CobbleStar · Pokémon Star"}})));
+ for(const skin of [...npcSkins].sort((a,b)=>a.hash.localeCompare(b.hash))){
+  if(!/^[a-f0-9]{64}$/.test(skin.hash))throw new Error('INVALID_NPC_SKIN_HASH');
+  files.set(`assets/cobblestar_planets/textures/entity/quest_npc/upload/${skin.hash}.png`,png(skin.png.toString('base64'),64,64));
+ }
  // Shared cosmetics are shipped even when no species has been published yet.
  const effects=JSON.parse(readFileSync(new URL("../star-effects/manifest.json",import.meta.url),"utf8")) as {files:string[]};
  for(const path of effects.files){
   if(!/^assets\/cobblestar_planets\/[a-z0-9_./-]+$/.test(path)||path.includes("..")||files.has(path))throw new Error("INVALID_STAR_EFFECT_PATH");
   files.set(path,readFileSync(new URL("../star-effects/"+path,import.meta.url)));
  }
+ // Earned referral skins are cosmetics, never published Star species. Assets
+ // share the mandatory pack, while their opt-in aspect leaves native spawns alone.
+ const referral=JSON.parse(readFileSync(new URL("../referral-cosmetics/manifest.json",import.meta.url),"utf8")) as {files:string[]};
+ for(const path of referral.files){
+  if(!/^assets\/cobblestar_planets\/(?:textures\/pokemon\/referral|bedrock\/pokemon\/resolvers\/referral)\/[a-z0-9_.-]+$/.test(path)||path.includes("..")||files.has(path))throw new Error("INVALID_REFERRAL_COSMETIC_PATH");
+  const incoming=readFileSync(new URL("../referral-cosmetics/"+path,import.meta.url));
+  if(path.endsWith(".png"))png(incoming.toString("base64"),256,128);
+  files.set(path,incoming);
+ }
+ files.set("licenses/Dragonite-Alliance-NOTICE.txt",readFileSync(new URL("../referral-cosmetics/NOTICE.txt",import.meta.url)));
  // Regional starters are shared assets, not Star drafts. They must be present
  // for every player before the server exposes their regional forms.
  const regionals=JSON.parse(readFileSync(new URL("../regional-starters/manifest.json",import.meta.url),"utf8")) as {files:string[]};
