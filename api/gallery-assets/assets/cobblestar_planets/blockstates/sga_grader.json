@@ -1,0 +1,1 @@
+{"variants":{"facing=north":{"model":"cobblestar_planets:block/sga_grader","y":0},"facing=east":{"model":"cobblestar_planets:block/sga_grader","y":90},"facing=south":{"model":"cobblestar_planets:block/sga_grader","y":180},"facing=west":{"model":"cobblestar_planets:block/sga_grader","y":270}}}

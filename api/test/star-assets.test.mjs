@@ -14,6 +14,18 @@ test('Unknown species and path injection refused',()=>{assert.throws(()=>validat
 test('Missing native bones and cyclic hierarchy refused',()=>{const v=fixture();v.model['minecraft:geometry'][0].bones[0].name='other';assert.throws(()=>validateStar(v,native));const cycle=fixture();cycle.model['minecraft:geometry'][0].bones[0].parent='root';assert.throws(()=>validateStar(cycle,native));});
 test('Broken PNG refused before publication',()=>{const v=fixture();v.texture=Buffer.from(texture,'base64').subarray(0,33).toString('base64');assert.throws(()=>validateStar(v,native));const broken=Buffer.from(texture,'base64');broken[45]^=1;assert.throws(()=>validateStar({...fixture(),texture:broken.toString('base64')},native));});
 function unpack(zip){let at=0;const files=new Map();while(zip.readUInt32LE(at)===0x04034b50){const compressed=zip.readUInt32LE(at+18),nameLength=zip.readUInt16LE(at+26),extra=zip.readUInt16LE(at+28),start=at+30+nameLength+extra;const name=zip.toString('utf8',at+30,at+30+nameLength),bytes=inflateRawSync(zip.subarray(start,start+compressed));assert.equal(crc(bytes),zip.readUInt32LE(at+14));files.set(name,bytes);at=start+compressed;}assert.equal(zip.readUInt32LE(at),0x02014b50);return files;}
+
+test('Articulated NPC rig and 34 presets ship even without any published Star species',()=>{
+ const files=unpack(buildStarPack([],[]));
+ const rig=JSON.parse(files.get('assets/cobblestar_planets/models/entity/quest_npc_rig.json'));
+ assert.equal(rig.version,1);assert.deepEqual(rig.limbs.map(l=>l.part),['left_arm','right_arm','left_leg','right_leg']);
+ const library=JSON.parse(files.get('assets/cobblestar_planets/npc_studio/presets.json'));
+ assert.equal(library.entries.length,34);assert.equal(library.entries.filter(p=>p.category==='POSE').length,17);
+ assert.equal(library.entries.filter(p=>p.category==='ANIMATION').length,17);
+ assert.equal(library.entries.find(p=>p.id==='release_pokemon').effect,'RELEASE_POKEMON');
+ assert.equal(library.entries.find(p=>p.id==='kneel').frames[0].rotations.left_knee[0],90);
+ for(const path of ['models/entity/quest_npc_rig.json','npc_studio/presets.json'])assert.deepEqual(files.get('assets/cobblestar_planets/'+path),readFileSync(new URL('../npc-studio-assets/assets/cobblestar_planets/'+path,import.meta.url)));
+});
 test('Deterministic pack preserves shared cosmetics and only adds the requested Star species',()=>{
  const a=fixture(),b={...fixture(),species:'eevee'},cat=[native,{...native,species:'eevee',poser:'cobblemon:eevee'}];
  const zip=buildStarPack([a,b],cat);assert.deepEqual(zip,buildStarPack([b,a],cat));
@@ -27,6 +39,58 @@ test('Deterministic pack preserves shared cosmetics and only adds the requested 
   const r=JSON.parse(files.get(`assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_${id}.json`));
   assert.deepEqual(r.variations[0].aspects,['cobblestar-star']);assert.equal(r.variations[0].poser,'cobblemon:'+id);assert.equal(r.order,10000);
  }
+});
+test('Gallery and SGA assets are mandatory even without published Star species',()=>{
+ const files=unpack(buildStarPack([],[]));
+ const manifest=JSON.parse(readFileSync(new URL('../gallery-assets/manifest.json',import.meta.url)));
+ for(const path of manifest.files)assert.deepEqual(files.get(path),readFileSync(new URL('../gallery-assets/'+path,import.meta.url)),path);
+ const sounds=JSON.parse(files.get('assets/cobblestar_planets/sounds.json'));
+ assert.ok(sounds['gallery.sga_scan']);assert.ok(sounds['gallery.sga_reveal']);assert.ok(sounds['star.appearance.high']);
+ const base=JSON.parse(files.get('assets/cobblestar_planets/models/item/card_base.json'));
+ assert.equal(base.parent,'builtin/entity');assert.ok(base.display.firstperson_righthand);
+ for(const id of ['hologram_projector','card_stand','card_vitrine','card_wall_frame','sga_grader']){
+  const variants=JSON.parse(files.get(`assets/cobblestar_planets/blockstates/${id}.json`)).variants;
+  assert.equal(Object.keys(variants).length,4);assert.equal(variants['facing=east'].y,90);
+ }
+});
+test('Card fronts and reduced hand sizes survive mandatory pack delivery',()=>{
+ const files=unpack(buildStarPack([]));
+ const card=JSON.parse(files.get('assets/cobblestar_planets/models/item/card_base.json'));
+ assert.deepEqual(card.display.gui.rotation,[0,180,0]);
+ for(const hand of ['firstperson_righthand','firstperson_lefthand','thirdperson_righthand','thirdperson_lefthand'])assert.ok(card.display[hand].scale.every(s=>s>0&&s<=.38));
+ for(const planet of ['asteria','nebelia']){
+  const booster=JSON.parse(files.get(`assets/cobblestar_planets/models/item/booster_${planet}.json`));
+  for(const hand of ['firstperson_righthand','firstperson_lefthand','thirdperson_righthand','thirdperson_lefthand'])assert.ok(booster.display[hand].scale.every(s=>s>0&&s<=.55));
+ }
+});
+
+test('Held display furniture has small explicit transforms on both hands in the mandatory pack',()=>{
+ const files=unpack(buildStarPack([],[]));
+ for(const item of ['card_stand','card_vitrine','card_wall_frame','sga_grader','hologram_projector','card_cabinet']){
+  const display=JSON.parse(files.get(`assets/cobblestar_planets/models/item/${item}.json`)).display;
+  const limit=item==='card_cabinet'?.12:.38;
+  for(const hand of ['firstperson_righthand','firstperson_lefthand','thirdperson_righthand','thirdperson_lefthand'])assert.ok(display[hand].scale.every(s=>s>0&&s<=limit),`${item} / ${hand}`);
+ }
+});
+
+test('Six cabinet tiles and approved boosters ship through the mandatory shared pack',()=>{
+ const files=unpack(buildStarPack([],[]));
+ const variants=JSON.parse(files.get('assets/cobblestar_planets/blockstates/card_cabinet.json')).variants;
+ assert.equal(Object.keys(variants).length,24);
+ for(const facing of ['north','east','south','west'])for(let part=0;part<6;part++){
+  assert.equal(variants[`facing=${facing},part=${part}`].model,`cobblestar_planets:block/card_cabinet_${part}`);
+  const model=JSON.parse(files.get(`assets/cobblestar_planets/models/block/card_cabinet_${part}.json`));
+  assert.ok(model.elements.length>0);for(const box of model.elements)for(let axis=0;axis<3;axis++)assert.ok(box.from[axis]>=0&&box.to[axis]<=16&&box.from[axis]<box.to[axis]);
+ }
+ assert.equal(JSON.parse(files.get('assets/cobblestar_planets/models/item/card_cabinet.json')).parent,'builtin/entity');
+ for(const planet of ['asteria','nebelia']){
+  assert.equal(JSON.parse(files.get(`assets/cobblestar_planets/models/item/booster_${planet}.json`)).textures.layer0,`cobblestar_planets:item/booster_${planet}_v2`);
+  const png=files.get(`assets/cobblestar_planets/textures/item/booster_${planet}_v2.png`);
+  assert.equal(png.readUInt32BE(12),0x49484452);assert.ok(png.readUInt32BE(16)>=256&&png.readUInt32BE(20)>=400);
+ }
+ const sounds=JSON.parse(files.get('assets/cobblestar_planets/sounds.json'));
+ for(const id of ['booster.tear','booster.slide','booster.rise','booster.reveal'])assert.ok(sounds[id]?.sounds.length);
+ assert.ok(sounds['star.appearance.high']);assert.ok([...files.keys()].every(path=>!path.startsWith('data/')));
 });
 test('Shared pack includes both regional starter trios without changing native starter textures',()=>{
  const files=unpack(buildStarPack([],[]));

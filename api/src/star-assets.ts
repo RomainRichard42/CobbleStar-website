@@ -140,6 +140,16 @@ export function zipAssets(files: Map<string,Buffer>) {
 }
 export function buildStarPack(assets: StarModel[], catalog: NativeModel[], npcSkins: {hash:string;png:Buffer}[] = []) {
  const files=new Map<string,Buffer>();files.set("pack.mcmeta",Buffer.from(JSON.stringify({pack:{pack_format:34,description:"CobbleStar · Pokémon Star"}})));
+ // Articulated quest-NPC geometry and preset motion are pack resources too.
+ const npcStudio=JSON.parse(readFileSync(new URL("../npc-studio-assets/manifest.json",import.meta.url),"utf8")) as {files:string[]};
+ const npcPaths=new Set(["assets/cobblestar_planets/models/entity/quest_npc_rig.json","assets/cobblestar_planets/npc_studio/presets.json"]);
+ if(npcStudio.files.length!==npcPaths.size||new Set(npcStudio.files).size!==npcPaths.size)throw new Error("INVALID_NPC_STUDIO_MANIFEST");
+ for(const path of npcStudio.files){
+  if(!npcPaths.has(path))throw new Error("INVALID_NPC_STUDIO_PATH");
+  const bytes=readFileSync(new URL("../npc-studio-assets/"+path,import.meta.url));
+  if(bytes.length>131072||JSON.parse(bytes.toString()).version!==1)throw new Error("INVALID_NPC_STUDIO_ASSET");
+  files.set(path,bytes);
+ }
  for(const skin of [...npcSkins].sort((a,b)=>a.hash.localeCompare(b.hash))){
   if(!/^[a-f0-9]{64}$/.test(skin.hash))throw new Error('INVALID_NPC_SKIN_HASH');
   files.set(`assets/cobblestar_planets/textures/entity/quest_npc/upload/${skin.hash}.png`,png(skin.png.toString('base64'),64,64));
@@ -150,6 +160,25 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[], npcSk
   if(!/^assets\/cobblestar_planets\/[a-z0-9_./-]+$/.test(path)||path.includes("..")||files.has(path))throw new Error("INVALID_STAR_EFFECT_PATH");
   files.set(path,readFileSync(new URL("../star-effects/"+path,import.meta.url)));
  }
+ // Gallery geometry and SGA cosmetics share mandatory pack delivery. The mod
+ // provides interactions/rendering; a pack never installs executable gameplay.
+ const gallery=JSON.parse(readFileSync(new URL("../gallery-assets/manifest.json",import.meta.url),"utf8")) as {version:number;files:string[]};
+ if(gallery.version!==1||gallery.files.length>64||new Set(gallery.files).size!==gallery.files.length)throw new Error("INVALID_GALLERY_MANIFEST");
+ for(const path of gallery.files){
+  if(!/^assets\/cobblestar_planets\/(?:blockstates\/(?:hologram_projector|card_stand|card_vitrine|card_wall_frame|sga_grader|card_cabinet)\.json|models\/(?:block|item)\/(?:hologram_projector|card_stand|card_vitrine|card_wall_frame|sga_grader|card_cabinet(?:_[0-5])?|card_base|booster_asteria|booster_nebelia)\.json|gallery\/(?:sounds\.json|models\/[a-z0-9_./-]+\.json)|textures\/(?:gallery\/logo_cercle_5|item\/booster_(?:asteria|nebelia)_v2)\.png)$/.test(path)||path.includes("..")||files.has(path))throw new Error("INVALID_GALLERY_PATH");
+  const bytes=readFileSync(new URL("../gallery-assets/"+path,import.meta.url));
+  if(bytes.length>8_000_000)throw new Error("GALLERY_ASSET_TOO_LARGE");
+  if(path.endsWith(".json"))JSON.parse(bytes.toString());
+  files.set(path,bytes);
+ }
+ const gallerySounds=JSON.parse(files.get("assets/cobblestar_planets/gallery/sounds.json")!.toString());
+ const soundsPath="assets/cobblestar_planets/sounds.json";
+ const oldSounds=JSON.parse(files.get(soundsPath)?.toString()??"{}");
+ for(const [name,value] of Object.entries(gallerySounds)){
+  if(!/^(?:gallery\.sga_(scan|reveal)|booster\.(tear|slide|rise|reveal))$/.test(name)||name in oldSounds)throw new Error("INVALID_GALLERY_SOUND");
+  oldSounds[name]=value;
+ }
+ files.set(soundsPath,Buffer.from(JSON.stringify(oldSounds)));
  // Earned referral skins are cosmetics, never published Star species. Assets
  // share the mandatory pack, while their opt-in aspect leaves native spawns alone.
  const referral=JSON.parse(readFileSync(new URL("../referral-cosmetics/manifest.json",import.meta.url),"utf8")) as {files:string[]};

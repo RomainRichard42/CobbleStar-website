@@ -21,6 +21,8 @@ const required = [
   "api/rank-tags/manifest.json",
   "api/regional-starters/manifest.json",
   "api/referral-cosmetics/manifest.json",
+  "api/npc-studio-assets/manifest.json",
+  "api/gallery-assets/manifest.json",
 ];
 
 for (const relativePath of required) {
@@ -49,6 +51,8 @@ await cp(join(projectDir, "api", "star-effects"), join(deployDir, "star-effects"
 await cp(join(projectDir, "api", "rank-tags"), join(deployDir, "rank-tags"), { recursive: true });
 await cp(join(projectDir, "api", "regional-starters"), join(deployDir, "regional-starters"), { recursive: true });
 await cp(join(projectDir, "api", "referral-cosmetics"), join(deployDir, "referral-cosmetics"), { recursive: true });
+await cp(join(projectDir, "api", "npc-studio-assets"), join(deployDir, "npc-studio-assets"), { recursive: true });
+await cp(join(projectDir, "api", "gallery-assets"), join(deployDir, "gallery-assets"), { recursive: true });
 await mkdir(join(deployDir,"star-addon-templates"),{recursive:true});
 const addonDir=join(projectDir,"api","star-addon-templates");
 const addonIndex=JSON.parse(await readFile(join(addonDir,"index.json"),"utf8"));

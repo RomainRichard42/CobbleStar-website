@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "limbs": [
+    {"part":"left_arm","x":-1,"uv":[32,48],"overlay_uv":[48,48]},
+    {"part":"right_arm","x":-3,"uv":[40,16],"overlay_uv":[40,32]},
+    {"part":"left_leg","x":-2,"uv":[16,48],"overlay_uv":[0,48]},
+    {"part":"right_leg","x":-2,"uv":[0,16],"overlay_uv":[0,32]}
+  ]
+}

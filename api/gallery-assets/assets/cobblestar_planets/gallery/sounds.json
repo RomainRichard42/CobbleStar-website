@@ -1,0 +1,8 @@
+{
+  "gallery.sga_scan": {"sounds":[{"name":"minecraft:block.beacon.activate","type":"event","volume":0.35,"pitch":1.5}]},
+  "gallery.sga_reveal": {"sounds":[{"name":"minecraft:block.amethyst_block.chime","type":"event","volume":0.9,"pitch":1.15}]},
+  "booster.tear": {"sounds":[{"name":"minecraft:item.book.page_turn","type":"event","volume":0.8,"pitch":0.75}]},
+  "booster.slide": {"sounds":[{"name":"minecraft:item.book.page_turn","type":"event","volume":0.4,"pitch":1.3}]},
+  "booster.rise": {"sounds":[{"name":"minecraft:block.beacon.activate","type":"event","volume":0.35,"pitch":1.5}]},
+  "booster.reveal": {"sounds":[{"name":"minecraft:block.amethyst_block.chime","type":"event","volume":0.9,"pitch":1.15}]}
+}
