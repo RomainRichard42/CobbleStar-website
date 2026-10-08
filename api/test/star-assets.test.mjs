@@ -100,6 +100,32 @@ test('Allodus V5 has fuller quadrupedal anatomy and the proven flight-first nati
  assert.equal(cry.sound_effects['.55'].effect,'cobblestar_planets:allodus.cry');
 });
 
+test('Patapouf ships automatically with plain appearance, native sneeze, sound and merged translations',()=>{
+ const files=unpack(buildStarPack([],[]));
+ const manifest=JSON.parse(readFileSync(new URL('../patapouf-assets/manifest.json',import.meta.url)));
+ assert.equal(manifest.version,1);assert.equal(manifest.files.length,10);
+ for(const path of manifest.files){
+  assert.ok(path.startsWith('assets/cobblestar_planets/'));
+  if(path.includes('/patapouf/lang/')||path.endsWith('/patapouf/sounds.json'))continue;
+  assert.deepEqual(files.get(path),readFileSync(new URL('../patapouf-assets/'+path,import.meta.url)),path);
+ }
+ const prefix='assets/cobblestar_planets/bedrock/pokemon/';
+ const resolver=JSON.parse(files.get(prefix+'resolvers/patapouf/0_patapouf_base.json'));
+ assert.equal(resolver.species,'cobblestar_planets:patapouf');assert.deepEqual(resolver.variations[0].layers,[]);
+ const g=JSON.parse(files.get(prefix+'models/patapouf/patapouf.geo.json'))['minecraft:geometry'][0];
+ assert.equal(g.bones.length,14);assert.ok(!g.bones.some(b=>/halo|wing|horn|star|gem|armor/.test(b.name)));
+ const animations=JSON.parse(files.get(prefix+'animations/patapouf/patapouf.animation.json')).animations;
+ assert.equal(Object.keys(animations).length,11);
+ for(const name of ['body','sprout','left_arm','right_arm','mouth','left_eye','right_eye'])assert.ok(animations['animation.patapouf.sneeze'].bones[name]);
+ const poser=JSON.parse(files.get(prefix+'posers/patapouf/patapouf.json'));
+ assert.ok(poser.animations.patapoufsneeze.includes("'sneeze'"));assert.ok(poser.poses.standing.quirks.some(q=>q.name==='stumble'));
+ const sounds=JSON.parse(files.get('assets/cobblestar_planets/sounds.json'));
+ assert.equal(sounds['patapouf.sneeze'].sounds[0].name,'minecraft:entity.panda.sneeze');assert.ok(sounds['allodus.judgment']);assert.ok(sounds['star.appearance.high']);
+ for(const lang of ['fr_fr','en_us']){const text=JSON.parse(files.get(`assets/cobblestar_planets/lang/${lang}.json`));assert.equal(text['cobblestar_planets.species.patapouf.name'],'Patapouf');assert.equal(text['cobblestar_planets.species.allodus.name'],'Allodus');assert.ok(text['cobblemon.move.patapoufsneeze']);}
+ assert.deepEqual(files.get('assets/cobblestar_planets/textures/particles/patapouf_puff.png'),files.get('assets/cobblestar_planets/textures/particle/patapouf_puff.png'));
+ assert.ok(![...files.keys()].some(p=>p.startsWith('data/')&&/patapouf|cobblestaromnitype/.test(p)));
+});
+
 test('All four approved arcade cabinets ship through the mandatory pack without replacing balls or loot',()=>{
  const files=unpack(buildStarPack([],[]));
  const manifest=JSON.parse(readFileSync(new URL('../arcade-assets/manifest.json',import.meta.url)));

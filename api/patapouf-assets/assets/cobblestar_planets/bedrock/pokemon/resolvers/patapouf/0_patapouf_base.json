@@ -1,0 +1,13 @@
+{
+  "species": "cobblestar_planets:patapouf",
+  "order": 0,
+  "variations": [
+    {
+      "aspects": [],
+      "poser": "cobblestar_planets:patapouf",
+      "model": "cobblestar_planets:patapouf.geo",
+      "texture": "cobblestar_planets:textures/pokemon/patapouf/patapouf.png",
+      "layers": []
+    }
+  ]
+}

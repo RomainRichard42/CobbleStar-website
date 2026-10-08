@@ -1,0 +1,137 @@
+{
+  "rootBone": "patapouf",
+  "portraitScale": 1.25,
+  "portraitTranslation": [
+    0,
+    0.82,
+    0
+  ],
+  "profileScale": 0.85,
+  "profileTranslation": [
+    0,
+    0.4,
+    0
+  ],
+  "animations": {
+    "cry": "q.bedrock_stateful('patapouf', 'cry')",
+    "send_out": "q.bedrock_stateful('patapouf', 'send_out')",
+    "hurt": "q.bedrock_stateful('patapouf', 'hurt')",
+    "faint": "q.bedrock_primary('patapouf', 'faint', q.exclude_labels('all'), q.curve('one'))",
+    "patapoufsneeze": "q.bedrock_primary('patapouf', 'sneeze', q.exclude_labels('all'), q.curve('symmetrical_wide'))",
+    "physical": "q.bedrock_primary('patapouf', 'sneeze', q.exclude_labels('all'), q.curve('symmetrical_wide'))",
+    "special": "q.bedrock_primary('patapouf', 'sneeze', q.exclude_labels('all'), q.curve('symmetrical_wide'))"
+  },
+  "poses": {
+    "sleep": {
+      "poseName": "sleep",
+      "poseTypes": [
+        "SLEEP"
+      ],
+      "transformTicks": 8,
+      "animations": [
+        "q.bedrock('patapouf', 'sleep')"
+      ],
+      "quirks": []
+    },
+    "battle": {
+      "poseName": "battle",
+      "poseTypes": [
+        "STAND"
+      ],
+      "transformTicks": 8,
+      "animations": [
+        "q.bedrock('patapouf', 'idle')"
+      ],
+      "quirks": [
+        {
+          "name": "blink",
+          "minSecondsBetweenOccurrences": 3,
+          "maxSecondsBetweenOccurrences": 6,
+          "animations": [
+            "q.bedrock('patapouf', 'blink')"
+          ]
+        }
+      ],
+      "isBattle": true
+    },
+    "standing": {
+      "poseName": "standing",
+      "poseTypes": [
+        "STAND",
+        "NONE"
+      ],
+      "transformTicks": 8,
+      "animations": [
+        "q.bedrock('patapouf', 'idle')"
+      ],
+      "quirks": [
+        {
+          "name": "blink",
+          "minSecondsBetweenOccurrences": 3,
+          "maxSecondsBetweenOccurrences": 6,
+          "animations": [
+            "q.bedrock('patapouf', 'blink')"
+          ]
+        },
+        {
+          "name": "stumble",
+          "minSecondsBetweenOccurrences": 12,
+          "maxSecondsBetweenOccurrences": 23,
+          "animations": [
+            "q.bedrock('patapouf', 'stumble')"
+          ]
+        },
+        {
+          "name": "chew",
+          "minSecondsBetweenOccurrences": 8,
+          "maxSecondsBetweenOccurrences": 15,
+          "animations": [
+            "q.bedrock('patapouf', 'chew')"
+          ]
+        }
+      ],
+      "isBattle": false
+    },
+    "walk": {
+      "poseName": "walk",
+      "poseTypes": [
+        "WALK"
+      ],
+      "transformTicks": 8,
+      "animations": [
+        "q.bedrock('patapouf', 'walk')"
+      ],
+      "quirks": [
+        {
+          "name": "blink",
+          "minSecondsBetweenOccurrences": 3,
+          "maxSecondsBetweenOccurrences": 6,
+          "animations": [
+            "q.bedrock('patapouf', 'blink')"
+          ]
+        }
+      ]
+    },
+    "portrait": {
+      "poseName": "portrait",
+      "poseTypes": [
+        "PORTRAIT",
+        "PROFILE"
+      ],
+      "transformTicks": 8,
+      "animations": [
+        "q.bedrock('patapouf', 'idle')"
+      ],
+      "quirks": [
+        {
+          "name": "blink",
+          "minSecondsBetweenOccurrences": 3,
+          "maxSecondsBetweenOccurrences": 6,
+          "animations": [
+            "q.bedrock('patapouf', 'blink')"
+          ]
+        }
+      ]
+    }
+  }
+}

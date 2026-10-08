@@ -1,0 +1,22 @@
+{
+  "patapouf.cry": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.villager.no",
+        "type": "event",
+        "pitch": 1.85,
+        "volume": 0.35
+      }
+    ]
+  },
+  "patapouf.sneeze": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.panda.sneeze",
+        "type": "event",
+        "pitch": 1.65,
+        "volume": 0.55
+      }
+    ]
+  }
+}

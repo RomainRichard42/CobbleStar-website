@@ -1,0 +1,1143 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.patapouf.idle": {
+      "loop": true,
+      "animation_length": 8,
+      "bones": {
+        "body": {
+          "position": [
+            0,
+            "0.16 * math.sin(query.anim_time * 90)",
+            0
+          ],
+          "rotation": [
+            0,
+            "1.5 * math.sin(query.anim_time * 45)",
+            "1.1 * math.sin(query.anim_time * 90)"
+          ]
+        },
+        "head": {
+          "rotation": [
+            "0.4 * math.sin(query.anim_time * 90)",
+            0,
+            "0.5 * math.sin(query.anim_time * 45)"
+          ]
+        },
+        "mouth": {
+          "scale": [
+            1,
+            "1 + 0.04 * math.sin(query.anim_time * 90)",
+            1
+          ]
+        },
+        "tooth": {
+          "rotation": [
+            0,
+            0,
+            "0.5 * math.sin(query.anim_time * 90)"
+          ]
+        },
+        "sprout": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 90 + 40)",
+            0,
+            "4 * math.sin(query.anim_time * 90 + 80)"
+          ]
+        },
+        "left_leaf": {
+          "rotation": [
+            0,
+            0,
+            "4 * math.sin(query.anim_time * 90)"
+          ]
+        },
+        "right_leaf": {
+          "rotation": [
+            0,
+            0,
+            "-4 * math.sin(query.anim_time * 90)"
+          ]
+        },
+        "left_arm": {
+          "rotation": [
+            0,
+            0,
+            "2.2 * math.sin(query.anim_time * 90)"
+          ]
+        },
+        "right_arm": {
+          "rotation": [
+            0,
+            0,
+            "-2.2 * math.sin(query.anim_time * 90)"
+          ]
+        },
+        "left_foot": {
+          "rotation": [
+            0,
+            0,
+            "0.7 * math.sin(query.anim_time * 90)"
+          ]
+        },
+        "right_foot": {
+          "rotation": [
+            0,
+            0,
+            "-0.7 * math.sin(query.anim_time * 90)"
+          ]
+        }
+      }
+    },
+    "animation.patapouf.walk": {
+      "loop": true,
+      "animation_length": 1.6,
+      "bones": {
+        "body": {
+          "position": [
+            0,
+            "0.22 + 0.22 * math.sin(query.anim_time * 450)",
+            0
+          ],
+          "rotation": [
+            0,
+            "2.5 * math.sin(query.anim_time * 225)",
+            "8 * math.sin(query.anim_time * 225)"
+          ]
+        },
+        "head": {
+          "rotation": [
+            "0.4 * math.sin(query.anim_time * 90)",
+            0,
+            "0.5 * math.sin(query.anim_time * 45)"
+          ]
+        },
+        "mouth": {
+          "scale": [
+            1,
+            "1 + 0.04 * math.sin(query.anim_time * 90)",
+            1
+          ]
+        },
+        "tooth": {
+          "rotation": [
+            0,
+            0,
+            "0.5 * math.sin(query.anim_time * 90)"
+          ]
+        },
+        "sprout": {
+          "rotation": [
+            "6 * math.sin(query.anim_time * 225 + 70)",
+            0,
+            "11 * math.sin(query.anim_time * 225 + 50)"
+          ]
+        },
+        "left_leaf": {
+          "rotation": [
+            0,
+            0,
+            "4 * math.sin(query.anim_time * 90)"
+          ]
+        },
+        "right_leaf": {
+          "rotation": [
+            0,
+            0,
+            "-4 * math.sin(query.anim_time * 90)"
+          ]
+        },
+        "left_arm": {
+          "rotation": [
+            "-11 * math.sin(query.anim_time * 225)",
+            0,
+            -7
+          ]
+        },
+        "right_arm": {
+          "rotation": [
+            "11 * math.sin(query.anim_time * 225)",
+            0,
+            7
+          ]
+        },
+        "left_foot": {
+          "rotation": [
+            "22 * math.sin(query.anim_time * 225)",
+            0,
+            "-6 * math.sin(query.anim_time * 225)"
+          ],
+          "position": [
+            0,
+            "0.16 + 0.16 * math.sin(query.anim_time * 225)",
+            0
+          ]
+        },
+        "right_foot": {
+          "rotation": [
+            "-22 * math.sin(query.anim_time * 225)",
+            0,
+            "6 * math.sin(query.anim_time * 225)"
+          ],
+          "position": [
+            0,
+            "0.16 + -0.16 * math.sin(query.anim_time * 225)",
+            0
+          ]
+        }
+      }
+    },
+    "animation.patapouf.sleep": {
+      "loop": true,
+      "animation_length": 8,
+      "bones": {
+        "body": {
+          "rotation": [
+            0,
+            0,
+            9
+          ],
+          "position": [
+            0,
+            -0.5,
+            0
+          ]
+        },
+        "head": {
+          "rotation": [
+            "0.4 * math.sin(query.anim_time * 90)",
+            0,
+            "0.5 * math.sin(query.anim_time * 45)"
+          ]
+        },
+        "mouth": {
+          "scale": [
+            0.6,
+            0.3,
+            1
+          ]
+        },
+        "tooth": {
+          "scale": [
+            1,
+            0.45,
+            1
+          ]
+        },
+        "sprout": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 90 + 40)",
+            0,
+            "4 * math.sin(query.anim_time * 90 + 80)"
+          ]
+        },
+        "left_leaf": {
+          "rotation": [
+            0,
+            0,
+            "4 * math.sin(query.anim_time * 90)"
+          ]
+        },
+        "right_leaf": {
+          "rotation": [
+            0,
+            0,
+            "-4 * math.sin(query.anim_time * 90)"
+          ]
+        },
+        "left_arm": {
+          "rotation": [
+            0,
+            0,
+            8
+          ]
+        },
+        "right_arm": {
+          "rotation": [
+            0,
+            0,
+            -8
+          ]
+        },
+        "left_foot": {
+          "rotation": [
+            0,
+            0,
+            "0.7 * math.sin(query.anim_time * 90)"
+          ]
+        },
+        "right_foot": {
+          "rotation": [
+            0,
+            0,
+            "-0.7 * math.sin(query.anim_time * 90)"
+          ]
+        },
+        "left_eye": {
+          "scale": [
+            1,
+            0.13,
+            1
+          ]
+        },
+        "right_eye": {
+          "scale": [
+            1,
+            0.13,
+            1
+          ]
+        }
+      }
+    },
+    "animation.patapouf.blink": {
+      "loop": false,
+      "animation_length": 0.24,
+      "bones": {
+        "left_eye": {
+          "scale": {
+            "0": [
+              1,
+              1,
+              1
+            ],
+            ".09": [
+              1,
+              0.1,
+              1
+            ],
+            ".16": [
+              1,
+              0.1,
+              1
+            ],
+            ".24": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "right_eye": {
+          "scale": {
+            "0": [
+              1,
+              1,
+              1
+            ],
+            ".09": [
+              1,
+              0.1,
+              1
+            ],
+            ".16": [
+              1,
+              0.1,
+              1
+            ],
+            ".24": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    "animation.patapouf.stumble": {
+      "loop": false,
+      "animation_length": 2.1,
+      "bones": {
+        "body": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".4": [
+              3,
+              0,
+              -18
+            ],
+            ".7": [
+              4,
+              0,
+              13
+            ],
+            "1.05": [
+              0,
+              0,
+              -8
+            ],
+            "1.5": [
+              0,
+              0,
+              4
+            ],
+            "2.1": [
+              0,
+              0,
+              0
+            ]
+          },
+          "position": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".7": [
+              0,
+              0.3,
+              0
+            ],
+            "2.1": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "left_arm": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".4": [
+              0,
+              0,
+              -42
+            ],
+            "1.05": [
+              0,
+              0,
+              -30
+            ],
+            "2.1": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "right_arm": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".4": [
+              0,
+              0,
+              42
+            ],
+            "1.05": [
+              0,
+              0,
+              30
+            ],
+            "2.1": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "sprout": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".65": [
+              0,
+              0,
+              30
+            ],
+            "1.1": [
+              0,
+              0,
+              -16
+            ],
+            "2.1": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.patapouf.sneeze": {
+      "loop": false,
+      "animation_length": 1.45,
+      "bones": {
+        "body": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".35": [
+              -5,
+              0,
+              -2
+            ],
+            ".68": [
+              -10,
+              0,
+              0
+            ],
+            ".78": [
+              24,
+              0,
+              0
+            ],
+            ".9": [
+              9,
+              0,
+              0
+            ],
+            "1.12": [
+              -3,
+              0,
+              0
+            ],
+            "1.45": [
+              0,
+              0,
+              0
+            ]
+          },
+          "scale": {
+            "0": [
+              1,
+              1,
+              1
+            ],
+            ".68": [
+              1.055,
+              1.035,
+              1.075
+            ],
+            ".78": [
+              1.06,
+              0.96,
+              1.025
+            ],
+            "1.45": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "mouth": {
+          "scale": {
+            "0": [
+              1,
+              1,
+              1
+            ],
+            ".35": [
+              1,
+              1.5,
+              1
+            ],
+            ".68": [
+              1.25,
+              2.4,
+              1
+            ],
+            ".8": [
+              1.5,
+              3,
+              1
+            ],
+            "1.1": [
+              0.8,
+              1.1,
+              1
+            ],
+            "1.45": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "tooth": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".68": [
+              0,
+              0,
+              4
+            ],
+            ".9": [
+              0,
+              0,
+              -7
+            ],
+            "1.45": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "sprout": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".68": [
+              -16,
+              0,
+              0
+            ],
+            ".82": [
+              30,
+              0,
+              0
+            ],
+            "1.05": [
+              -12,
+              0,
+              0
+            ],
+            "1.45": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "left_arm": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".68": [
+              -12,
+              0,
+              -9
+            ],
+            ".8": [
+              15,
+              0,
+              -34
+            ],
+            "1.1": [
+              0,
+              0,
+              -9
+            ],
+            "1.45": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "left_foot": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".78": [
+              -12,
+              0,
+              0
+            ],
+            "1.45": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "left_eye": {
+          "scale": {
+            "0": [
+              1,
+              1,
+              1
+            ],
+            ".6": [
+              1,
+              0.1,
+              1
+            ],
+            ".93": [
+              1,
+              0.1,
+              1
+            ],
+            "1.2": [
+              1,
+              1,
+              1
+            ],
+            "1.45": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "left_leaf": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".8": [
+              -25,
+              0,
+              -15
+            ],
+            "1.1": [
+              10,
+              0,
+              8
+            ],
+            "1.45": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "right_arm": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".68": [
+              -12,
+              0,
+              9
+            ],
+            ".8": [
+              15,
+              0,
+              34
+            ],
+            "1.1": [
+              0,
+              0,
+              9
+            ],
+            "1.45": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "right_foot": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".78": [
+              -12,
+              0,
+              0
+            ],
+            "1.45": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "right_eye": {
+          "scale": {
+            "0": [
+              1,
+              1,
+              1
+            ],
+            ".6": [
+              1,
+              0.1,
+              1
+            ],
+            ".93": [
+              1,
+              0.1,
+              1
+            ],
+            "1.2": [
+              1,
+              1,
+              1
+            ],
+            "1.45": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "right_leaf": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".8": [
+              25,
+              0,
+              15
+            ],
+            "1.1": [
+              -10,
+              0,
+              -8
+            ],
+            "1.45": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.patapouf.cry": {
+      "loop": false,
+      "animation_length": 1,
+      "bones": {
+        "mouth": {
+          "scale": {
+            "0": [
+              1,
+              1,
+              1
+            ],
+            "1": [
+              1,
+              1,
+              1
+            ],
+            ".25": [
+              1,
+              2.4,
+              1
+            ],
+            ".6": [
+              1,
+              1.5,
+              1
+            ]
+          }
+        },
+        "body": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            "1": [
+              0,
+              0,
+              0
+            ],
+            ".3": [
+              -4,
+              0,
+              0
+            ]
+          }
+        },
+        "sprout": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            "1": [
+              0,
+              0,
+              0
+            ],
+            ".4": [
+              0,
+              0,
+              12
+            ]
+          }
+        }
+      },
+      "sound_effects": {
+        ".25": {
+          "effect": "cobblestar_planets:patapouf.cry"
+        }
+      }
+    },
+    "animation.patapouf.send_out": {
+      "loop": false,
+      "animation_length": 0.9,
+      "bones": {
+        "root_part": {
+          "scale": {
+            "0": [
+              0.1,
+              0.1,
+              0.1
+            ],
+            ".32": [
+              1.09,
+              0.89,
+              1.09
+            ],
+            ".52": [
+              0.97,
+              1.05,
+              0.97
+            ],
+            ".9": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "body": {
+          "position": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".35": [
+              0,
+              1.5,
+              0
+            ],
+            ".6": [
+              0,
+              0,
+              0
+            ],
+            ".9": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.patapouf.hurt": {
+      "loop": false,
+      "animation_length": 0.55,
+      "bones": {
+        "body": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".12": [
+              -12,
+              0,
+              5
+            ],
+            ".32": [
+              3,
+              0,
+              -2
+            ],
+            ".55": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "sprout": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".2": [
+              0,
+              0,
+              18
+            ],
+            ".55": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.patapouf.faint": {
+      "loop": false,
+      "animation_length": 1.2,
+      "bones": {
+        "body": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".35": [
+              0,
+              0,
+              -12
+            ],
+            ".8": [
+              0,
+              0,
+              84
+            ],
+            "1.2": [
+              0,
+              0,
+              84
+            ]
+          },
+          "position": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".8": [
+              0,
+              -1.8,
+              0
+            ],
+            "1.2": [
+              0,
+              -1.8,
+              0
+            ]
+          }
+        },
+        "left_eye": {
+          "scale": [
+            1,
+            0.12,
+            1
+          ]
+        },
+        "right_eye": {
+          "scale": [
+            1,
+            0.12,
+            1
+          ]
+        }
+      }
+    },
+    "animation.patapouf.chew": {
+      "loop": false,
+      "animation_length": 1.6,
+      "bones": {
+        "mouth": {
+          "scale": {
+            "0": [
+              1,
+              1,
+              1
+            ],
+            "1": [
+              1,
+              0.35,
+              1
+            ],
+            ".2": [
+              1,
+              0.35,
+              1
+            ],
+            ".4": [
+              1,
+              1.2,
+              1
+            ],
+            ".6": [
+              1,
+              0.35,
+              1
+            ],
+            ".8": [
+              1,
+              1.2,
+              1
+            ],
+            "1.2": [
+              1,
+              1.2,
+              1
+            ],
+            "1.6": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "tooth": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".4": [
+              0,
+              0,
+              4
+            ],
+            ".8": [
+              0,
+              0,
+              -4
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    }
+  }
+}

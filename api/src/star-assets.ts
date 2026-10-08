@@ -194,6 +194,42 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[], npcSk
    files.set(path.replace("textures/particles/","textures/particle/"),bytes);
   }
  }
+ // Patapouf is another original admin-only species. Cosmetic files only; no
+ // species definitions, move scripts or executable data may enter the client pack.
+ const patapouf=JSON.parse(readFileSync(new URL("../patapouf-assets/manifest.json",import.meta.url),"utf8")) as {version:number;files:string[]};
+ const patapoufPaths=new Set([
+  "assets/cobblestar_planets/bedrock/pokemon/models/patapouf/patapouf.geo.json",
+  "assets/cobblestar_planets/bedrock/pokemon/animations/patapouf/patapouf.animation.json",
+  "assets/cobblestar_planets/bedrock/pokemon/posers/patapouf/patapouf.json",
+  "assets/cobblestar_planets/bedrock/pokemon/resolvers/patapouf/0_patapouf_base.json",
+  "assets/cobblestar_planets/bedrock/particles/patapouf/patapouf_puff.particle.json",
+  "assets/cobblestar_planets/textures/particles/patapouf_puff.png",
+  "assets/cobblestar_planets/textures/pokemon/patapouf/patapouf.png",
+  "assets/cobblestar_planets/patapouf/sounds.json",
+  ...["fr_fr","en_us"].map(n=>`assets/cobblestar_planets/patapouf/lang/${n}.json`)
+ ]);
+ if(patapouf.version!==1||patapouf.files.length!==patapoufPaths.size||new Set(patapouf.files).size!==patapoufPaths.size)throw new Error("INVALID_PATAPOUF_MANIFEST");
+ const patapoufLang=new Map<string,Record<string,string>>();
+ let patapoufSounds:Record<string,unknown>={};
+ for(const path of patapouf.files){
+  if(!patapoufPaths.has(path)||files.has(path))throw new Error("INVALID_PATAPOUF_PATH");
+  const bytes=readFileSync(new URL("../patapouf-assets/"+path,import.meta.url));
+  if(bytes.length>500_000)throw new Error("PATAPOUF_ASSET_TOO_LARGE");
+  if(path.endsWith(".png"))png(bytes.toString("base64"),path.endsWith("patapouf_puff.png")?16:256,path.endsWith("patapouf_puff.png")?16:256);
+  else {
+   const value=JSON.parse(bytes.toString());
+   if(path.endsWith("/patapouf/sounds.json")){
+    if(Object.keys(value).sort().join(",")!=="patapouf.cry,patapouf.sneeze")throw new Error("INVALID_PATAPOUF_SOUNDS");
+    patapoufSounds=value;continue;
+   }
+   if(path.includes("/patapouf/lang/")){
+    if(Object.entries(value).some(([key,text])=>!/^(?:cobblestar_planets\.species\.patapouf\.|cobblemon\.(?:species\.patapouf\.|move\.patapoufsneeze(?:\.|$)))/.test(key)||typeof text!=="string"))throw new Error("INVALID_PATAPOUF_LANG");
+    patapoufLang.set(path.split("/").at(-1)!,value);continue;
+   }
+  }
+  files.set(path,bytes);
+  if(path.endsWith("textures/particles/patapouf_puff.png"))files.set(path.replace("textures/particles/","textures/particle/"),bytes);
+ }
  const effects=JSON.parse(readFileSync(new URL("../star-effects/manifest.json",import.meta.url),"utf8")) as {files:string[]};
  for(const path of effects.files){
   if(!/^assets\/cobblestar_planets\/[a-z0-9_./-]+$/.test(path)||path.includes("..")||files.has(path))throw new Error("INVALID_STAR_EFFECT_PATH");
@@ -314,8 +350,8 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[], npcSk
  // Rank badges join the same mandatory pack, alongside every existing asset.
  appendRankTags(files);
  const allodusSoundPath="assets/cobblestar_planets/sounds.json";
- files.set(allodusSoundPath,Buffer.from(JSON.stringify({...JSON.parse(files.get(allodusSoundPath)?.toString()??"{}"),...allodusSounds})));
- for(const [name,entries] of allodusLang){
+ files.set(allodusSoundPath,Buffer.from(JSON.stringify({...JSON.parse(files.get(allodusSoundPath)?.toString()??"{}"),...allodusSounds,...patapoufSounds})));
+ for(const [name,entries] of [...allodusLang,...patapoufLang]){
   const path=`assets/cobblestar_planets/lang/${name}`;
   files.set(path,Buffer.from(JSON.stringify({...JSON.parse(files.get(path)?.toString()??"{}"),...entries})));
  }

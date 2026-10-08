@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "files": [
+    "assets/cobblestar_planets/bedrock/pokemon/models/patapouf/patapouf.geo.json",
+    "assets/cobblestar_planets/bedrock/pokemon/animations/patapouf/patapouf.animation.json",
+    "assets/cobblestar_planets/bedrock/pokemon/posers/patapouf/patapouf.json",
+    "assets/cobblestar_planets/bedrock/pokemon/resolvers/patapouf/0_patapouf_base.json",
+    "assets/cobblestar_planets/textures/pokemon/patapouf/patapouf.png",
+    "assets/cobblestar_planets/bedrock/particles/patapouf/patapouf_puff.particle.json",
+    "assets/cobblestar_planets/textures/particles/patapouf_puff.png",
+    "assets/cobblestar_planets/patapouf/sounds.json",
+    "assets/cobblestar_planets/patapouf/lang/fr_fr.json",
+    "assets/cobblestar_planets/patapouf/lang/en_us.json"
+  ]
+}
