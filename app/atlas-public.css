@@ -608,7 +608,7 @@ main:not([class]) { background: transparent; }
 .shop-quick-purchase .shop-v2-heading { margin: 0 0 18px; grid-template-columns: 1fr .62fr; gap: 35px; }
 .shop-quick-purchase .shop-v2-heading h2 { margin-top: 7px; font-size: clamp(35px,3.5vw,50px); }
 .shop-quick-purchase .shop-v2-heading > p { font-size: var(--cs-type-label, 14px); line-height: 1.55; }
-.shop-quick-purchase .shop-v2-packs { grid-template-columns: repeat(4,1fr); gap: 10px; }
+.shop-quick-purchase .shop-v2-packs { grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 10px; }
 .shop-quick-purchase .shop-v2-pack { min-height: 245px; padding: 18px; display: grid; grid-template-columns: 70px 1fr; grid-template-rows: auto auto auto 1fr auto; gap: 2px 12px; border-radius: 18px 18px 6px 18px; }
 .shop-quick-purchase .shop-v2-pack:nth-child(even),.shop-quick-purchase .shop-v2-pack:nth-child(even):hover { transform: none; }
 .shop-quick-purchase .shop-v2-star { width: 45px; height: 45px; grid-row: 1/4; margin: 0; border-radius: 50%; font-size: 18px; }

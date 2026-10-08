@@ -17,6 +17,7 @@ import { registerDiscordBridge } from "./discord-bridge.js";
 import { startDiscordBot } from "./discord-bot.js";
 import { digest, normalizeEmail, randomToken } from "./security.js";
 import { findShopProduct, getGameShopCatalog, getShopTheme } from "./shop.js";
+import { activateSubscription, canPurchaseTier, lockedSubscription, paidTiers, type PaidTier } from "./paid-subscriptions.js";
 import { findVoteSite, getVoteSites, playerVoteUrl } from "./votes.js";
 import { canReadGame, registerGameAdmin } from "./game-admin.js";
 import { registerQuestStudio } from "./quest-studio.js";
@@ -73,7 +74,7 @@ const giveStarsBody = z.object({
   requestId: z.string().uuid(),
   reason: z.string().trim().min(1).max(120).default("Commande administrateur"),
 });
-const testRechargeBody = z.object({ starsAmount: z.number().int().refine((value) => [500, 1100, 2400, 6500].includes(value)) });
+const testRechargeBody = z.object({ starsAmount: z.number().int().refine((value) => [500, 1100, 2400, 3600, 6500].includes(value)) });
 const rewardClaimBody = z.object({ uuid: minecraftUuid });
 const rewardResultBody = z.object({ uuid: minecraftUuid, leaseToken: z.string().min(32).max(200), error: z.string().trim().max(200).optional() });
 const rewardParams = z.object({ id: z.string().uuid() });
@@ -890,6 +891,47 @@ app.get("/api/internal/shop/entitlements", { config: { rateLimit: { max: 180, ti
   return { entitlements: rows.map((row) => row.product_id).filter((id) => entitlementProducts.has(id)) };
 });
 
+app.get("/api/internal/shop/subscription", { config: { rateLimit: { max: 300, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const parsed = z.object({ uuid: minecraftUuid }).safeParse(request.query);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  const [rows] = await pool.execute<(RowDataPacket & { tier: PaidTier; expires_ms: number })[]>(`
+    SELECT s.tier,TIMESTAMPDIFF(MICROSECOND,'1970-01-01 00:00:00',s.expires_at)/1000 AS expires_ms
+    FROM paid_subscriptions s JOIN users u ON u.id=s.user_id WHERE u.minecraft_uuid=?`, [parsed.data.uuid]);
+  const [gifts] = await pool.execute<(RowDataPacket & { tier: PaidTier; status: string })[]>(`
+    SELECT g.tier,g.status FROM paid_subscription_gifts g JOIN users u ON u.id=g.user_id WHERE u.minecraft_uuid=?`, [parsed.data.uuid]);
+  const current = rows[0];
+  return { subscription: current ? { tier: current.tier, expiresAt: Number(current.expires_ms) } : null,
+    gifts: gifts.map(gift => ({ tier: gift.tier, delivered: gift.status === "delivered" })) };
+});
+
+app.post("/api/internal/shop/subscription/gift/claim", { config: { rateLimit: { max: 300, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const parsed = z.object({ uuid: minecraftUuid, tier: z.enum(paidTiers) }).safeParse(request.body);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  const leaseToken = randomToken();
+  const [result] = await pool.execute<ResultSetHeader>(`
+    UPDATE paid_subscription_gifts g JOIN users u ON u.id=g.user_id
+    SET g.status='leased',g.lease_token_hash=?,g.lease_expires_at=DATE_ADD(UTC_TIMESTAMP(),INTERVAL 2 MINUTE)
+    WHERE u.minecraft_uuid=? AND g.tier=? AND (g.status='pending' OR (g.status='leased' AND g.lease_expires_at<UTC_TIMESTAMP()))`,
+    [digest(leaseToken), parsed.data.uuid, parsed.data.tier]);
+  if (result.affectedRows !== 1) return reply.code(409).send({ error: "GIFT_NOT_PENDING" });
+  return { tier: parsed.data.tier, leaseToken };
+});
+
+app.post("/api/internal/shop/subscription/gift/complete", { config: { rateLimit: { max: 300, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  const parsed = z.object({ uuid: minecraftUuid, tier: z.enum(paidTiers), leaseToken: z.string().min(32).max(200) }).safeParse(request.body);
+  if (!parsed.success) return reply.code(400).send({ error: "INVALID_INPUT" });
+  const [result] = await pool.execute<ResultSetHeader>(`
+    UPDATE paid_subscription_gifts g JOIN users u ON u.id=g.user_id
+    SET g.status='delivered',g.delivered_at=UTC_TIMESTAMP(),g.lease_token_hash=NULL,g.lease_expires_at=NULL
+    WHERE u.minecraft_uuid=? AND g.tier=? AND g.status='leased' AND g.lease_token_hash=?`,
+    [parsed.data.uuid, parsed.data.tier, digest(parsed.data.leaseToken)]);
+  if (result.affectedRows !== 1) return reply.code(409).send({ error: "LEASE_INVALID_OR_EXPIRED" });
+  return { delivered: true };
+});
+
 app.post("/api/internal/shop/purchase", { config: { rateLimit: { max: 90, timeWindow: "1 minute" } } }, async (request, reply) => {
   if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
   const parsed = gamePurchaseBody.safeParse(request.body);
@@ -897,6 +939,7 @@ app.post("/api/internal/shop/purchase", { config: { rateLimit: { max: 90, timeWi
   const product = findShopProduct(parsed.data.productId);
   if (!product || (product.testOnly && !config.ENABLE_TEST_PURCHASES)) return reply.code(404).send({ error: "PRODUCT_NOT_FOUND" });
   const quantity = parsed.data.quantity;
+  if (product.deliveryMode === "subscription" && quantity !== 1) return reply.code(400).send({ error: "INVALID_QUANTITY" });
   const totalPrice = product.starsPrice * quantity;
   const totalItemCount = product.itemCount * quantity;
   if (!Number.isSafeInteger(totalPrice) || totalItemCount > 64) {
@@ -911,11 +954,18 @@ app.post("/api/internal/shop/purchase", { config: { rateLimit: { max: 90, timeWi
     const user = users[0];
     if (!user) return { error: "MINECRAFT_ACCOUNT_NOT_LINKED" as const };
 
-    const [existing] = await connection.execute<(RowDataPacket & { id: string })[]>(
-      `SELECT id FROM shop_purchases WHERE id=? LIMIT 1`, [parsed.data.requestId],
+    const [existing] = await connection.execute<(RowDataPacket & { id: string; user_id: string; product_id: string; stars_spent: number })[]>(
+      `SELECT id,user_id,product_id,stars_spent FROM shop_purchases WHERE id=? LIMIT 1`, [parsed.data.requestId],
     );
+    if (existing[0] && (existing[0].user_id !== user.id || existing[0].product_id !== product.id || existing[0].stars_spent !== totalPrice))
+      return { error: "PURCHASE_ID_CONFLICT" as const };
     if (existing[0]) return { balance: user.balance, purchaseId: parsed.data.requestId, duplicate: true };
     if (user.balance < totalPrice) return { error: "INSUFFICIENT_STARS" as const, balance: user.balance };
+
+    const subscription = product.deliveryMode === "subscription" ? await lockedSubscription(connection, user.id) : null;
+    const now = Date.now();
+    if (product.subscriptionTier && !canPurchaseTier(subscription, product.subscriptionTier, now))
+      return { error: "SUBSCRIPTION_HIGHER_TIER_ACTIVE" as const };
 
     await connection.execute(`UPDATE wallets SET balance=balance-? WHERE user_id=?`, [totalPrice, user.id]);
     await connection.execute(
@@ -932,6 +982,7 @@ app.post("/api/internal/shop/purchase", { config: { rateLimit: { max: 90, timeWi
         [randomUUID(), parsed.data.requestId, user.id, product.id, product.itemId, totalItemCount],
       );
     }
+    if (product.subscriptionTier) await activateSubscription(connection, user.id, parsed.data.requestId, product.subscriptionTier, subscription, now);
     return { balance: user.balance - totalPrice, purchaseId: parsed.data.requestId, duplicate: false };
   });
 

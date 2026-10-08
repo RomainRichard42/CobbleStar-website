@@ -24,11 +24,13 @@ type StarPack = {
 const starPacks: StarPack[] = [
   { stars: 500, price: "4,99 €", tone: "cyan" },
   { stars: 1100, price: "9,99 €", bonus: "+ 10 % de Stars", tone: "pink" },
-  { stars: 2400, price: "19,99 €", bonus: "+ 20 % de Stars", popular: true, tone: "yellow" },
+  { stars: 2400, price: "20,00 €", bonus: "+ 20 % de Stars", popular: true, tone: "yellow" },
+  { stars: 3600, price: "30,00 €", bonus: "+ 20 % de Stars", tone: "violet" },
   { stars: 6500, price: "49,99 €", bonus: "+ 30 % de Stars", tone: "violet" },
 ];
 
 const catalog = [
+  { code: "00", name: "Grades mensuels", description: "Étoilé : 1 000 Stars · Cosmique : 2 200 Stars · Galactique : 3 300 Stars. Achat et renouvellement dans /boutique ; tes commandes F2P restent liées à ta progression.", price: "Un mois · renouvellement manuel", tone: "violet" },
   { code: "01", name: "Clés Nova, Pulsar et Quasar", description: "Ouvre les caisses du serveur avec des chances publiées, un historique personnel et des garanties visibles.", price: "350 à 950 Stars", tone: "pink" },
   { code: "02", name: "Effets et accessoires", description: "Retrouve tes particules, titres et apparences dans le Cosmédex, puis active-les ou désactive-les librement.", price: "Dès 300 Stars", tone: "cyan" },
   { code: "03", name: "Compagnons", description: "Choisis le compagnon qui te suit, donne-lui un nom et change-le depuis ta collection sans nouvel achat.", price: "Catalogue en jeu", tone: "yellow" },
@@ -188,11 +190,11 @@ export default function ShopPage() {
       </section>
 
       <section className="shop-quick-catalog" id="catalogue" aria-labelledby="catalog-title">
-        <div className="shop-v2-catalog-heading"><span className="kicker">2 · UTILISE-LES EN JEU</span><h2 id="catalog-title">Ce que tes Stars débloquent.</h2><p>Uniquement des collections et services cosmétiques. Aucun avantage compétitif.</p></div>
+        <div className="shop-v2-catalog-heading"><span className="kicker">2 · UTILISE-LES EN JEU</span><h2 id="catalog-title">Ce que tes Stars débloquent.</h2><p>Collections, services et abonnements mensuels dans /boutique. Consulte les avantages et conditions en jeu avant d’acheter.</p></div>
         <div className="shop-v2-items">{catalog.map((item) => <article className={`shop-v2-item tone-${item.tone}`} key={item.name}><span aria-hidden="true">{item.code}</span><small>CATALOGUE COBBLESTAR</small><h3>{item.name}</h3><p>{item.description}</p><b>{item.price}</b></article>)}</div>
       </section>
 
-      <aside className="shop-quick-trust"><span>PAIEMENT UNIQUE</span><span>LIVRAISON AUTOMATIQUE</span><span>AUCUN PAY-TO-WIN</span><p>Les Stars sont une monnaie virtuelle sans valeur monétaire réelle et ne peuvent pas être reconverties en argent.</p></aside>
+      <aside className="shop-quick-trust"><span>PACK DE STARS : PAIEMENT UNIQUE</span><span>LIVRAISON AUTOMATIQUE</span><span>GRADES : RENOUVELLEMENT MANUEL</span><p>Les Stars sont une monnaie virtuelle sans valeur monétaire réelle et ne peuvent pas être reconverties en argent. Un grade dure un mois ; ses cadeaux sont réservés au premier achat de ce grade.</p></aside>
     </section>
 
     {selectedPack && <div className="shop-v2-overlay" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setSelectedPack(null); }}>

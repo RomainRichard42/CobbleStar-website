@@ -15,7 +15,9 @@ const productSchema = z.object({
   starsPrice: z.number().int().positive().max(10_000_000),
   itemId: z.string().regex(/^[a-z0-9_.-]+:[a-z0-9_./-]+$/),
   itemCount: z.number().int().min(1).max(64),
-  deliveryMode: z.enum(["item", "entitlement"]).default("item"),
+  deliveryMode: z.enum(["item", "entitlement", "subscription"]).default("item"),
+  subscriptionTier: z.enum(["etoile", "cosmique", "galactique"]).optional(),
+  benefits: z.array(z.string().max(160)).max(24).default([]),
   testOnly: z.boolean().default(false),
   category: z.enum(["keys", "cosmetics", "collection", "companions", "boosters", "ranks"]),
   featured: z.boolean().default(false),
@@ -37,6 +39,9 @@ const catalogSchema = z.object({
       code: "custom", path: ["products", index, "id"], message: `Identifiant dupliqué : ${product.id}`,
     });
     ids.add(product.id);
+    if ((product.deliveryMode === "subscription") !== (product.subscriptionTier !== undefined)) {
+      context.addIssue({ code: "custom", path: ["products", index], message: "Un abonnement doit définir son grade, et lui seul." });
+    }
   });
 });
 

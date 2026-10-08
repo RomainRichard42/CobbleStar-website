@@ -8,6 +8,30 @@
   },
   "products": [
     {
+      "id": "rank_etoile_monthly", "name": "Étoilé · 1 mois",
+      "description": "25 homes, +5 boîtes PC, cosmétiques Étoilés, kit Étoilé, warp EVs et +10 % XP. La progression F2P reste indépendante.",
+      "starsPrice": 1000, "itemId": "minecraft:nether_star", "itemCount": 1,
+      "deliveryMode": "subscription", "subscriptionTier": "etoile", "category": "ranks", "featured": true, "isNew": true,
+      "benefits": ["Tag Étoilé dans /tags", "25 homes · +5 boîtes PC", "Cosmétiques Étoilés", "Kit Étoilé : contenu à définir", "Accès au warp EVs", "+10 % XP Battlepass et métiers", "Commandes F2P : conditions habituelles", "1 mois · renouvellement manuel en Stars", "Données conservées après expiration"],
+      "visual": { "accent": "#79DCE8", "badge": "1 MOIS", "previewTexture": "" }
+    },
+    {
+      "id": "rank_cosmique_monthly", "name": "Cosmique · 1 mois",
+      "description": "Avantages Étoilés, /fly, 50 homes, +10 boîtes PC, GTS sans taxe, 5 raids/jour et +20 % XP. 2 shiny au premier achat uniquement.",
+      "starsPrice": 2200, "itemId": "minecraft:nether_star", "itemCount": 1,
+      "deliveryMode": "subscription", "subscriptionTier": "cosmique", "category": "ranks", "featured": true, "isNew": true,
+      "benefits": ["Tags Cosmique A/B dans /tags", "Avantages Étoilés inclus", "/fly · 50 homes · +10 boîtes PC au total", "Cosmétiques Étoilés et Cosmiques", "Kit Cosmique : contenu à définir", "Aucune taxe GTS · 5 raids par jour", "+20 % XP Battlepass et métiers au total", "Premier achat : 2 Pokémon shiny aléatoires", "Commandes F2P : conditions habituelles", "1 mois · renouvellement manuel en Stars", "Données conservées après expiration"],
+      "visual": { "accent": "#9B8CFF", "badge": "1 MOIS", "previewTexture": "" }
+    },
+    {
+      "id": "rank_galactique_monthly", "name": "Galactique · 1 mois",
+      "description": "Avantages Cosmiques, homes illimités, /enderchest, /pc et /pokeheal. Cadeaux de bienvenue au premier achat uniquement, hors Pokémon admin.",
+      "starsPrice": 3300, "itemId": "minecraft:nether_star", "itemCount": 1,
+      "deliveryMode": "subscription", "subscriptionTier": "galactique", "category": "ranks", "featured": true, "isNew": true,
+      "benefits": ["Tags Galactique A/B dans /tags", "Avantages Étoilés et Cosmiques inclus", "Homes illimités · +10 boîtes PC au total", "/fly · /enderchest · /pc · /pokeheal", "Cosmétiques des trois collections", "Kit Galactique : contenu à définir", "Premier achat : 2 000 000 Cobblecoins", "Premier achat : 2 Star et 1 légendaire aléatoires", "Pokémon administrateurs exclus", "Premier achat : 2 clés Pulsar et 1 Quasar", "Autres commandes F2P : conditions habituelles", "1 mois · renouvellement manuel en Stars", "Données conservées après expiration"],
+      "visual": { "accent": "#E8C979", "badge": "1 MOIS", "previewTexture": "" }
+    },
+    {
       "id": "battlepass_premium", "name": "Pass Dresseur Premium",
       "description": "Débloque la voie Premium de la saison actuelle et toutes ses récompenses déjà atteintes.",
       "starsPrice": 1200, "itemId": "minecraft:nether_star", "itemCount": 1, "deliveryMode": "entitlement",

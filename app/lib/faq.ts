@@ -27,7 +27,7 @@ export const HOME_FAQ: ReadonlyArray<FaqEntry> = [
 export const SHOP_FAQ: ReadonlyArray<FaqEntry> = [
   {
     question: "Comment fonctionnent les Stars sur CobbleStar ?",
-    answer: "Les Stars sont une monnaie cosmétique. Elles servent à acheter des éléments visuels et des avantages d’affichage, pas de mécanique de combat payante.",
+    answer: "Les Stars sont la monnaie virtuelle de la boutique : cosmétiques, services, collections et grades mensuels. Chaque offre présente ses avantages en jeu avant l’achat.",
   },
   {
     question: "Puis-je utiliser la boutique sans compte ?",
@@ -36,6 +36,10 @@ export const SHOP_FAQ: ReadonlyArray<FaqEntry> = [
   {
     question: "Quels moyens de paiement sont utilisés ?",
     answer: "Les moyens de paiement proposés et le montant total sont affichés avant chaque validation. Aucun abonnement n’est ajouté à l’achat d’un pack de Stars.",
+  },
+  {
+    question: "Comment acheter et renouveler un grade ?",
+    answer: "Recharge tes Stars, puis achète ton grade dans /boutique en jeu : Étoilé coûte 1 000 Stars, Cosmique 2 200 et Galactique 3 300 pour un mois. Le renouvellement est manuel, sans prélèvement automatique. Les commandes F2P non acquises restent verrouillées ; tes acquis F2P et tes données sont conservés à l’expiration. Les cadeaux éventuels ne sont offerts qu’au premier achat de chaque grade.",
   },
 ];
 
