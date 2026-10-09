@@ -17,6 +17,7 @@ import { registerDiscordBridge } from "./discord-bridge.js";
 import { startDiscordBot } from "./discord-bot.js";
 import { digest, normalizeEmail, randomToken } from "./security.js";
 import { findShopProduct, getGameShopCatalog, getShopTheme } from "./shop.js";
+import { getEconomyPolicy } from "./economy-policy.js";
 import { activateSubscription, canPurchaseTier, lockedSubscription, paidTiers, type PaidTier } from "./paid-subscriptions.js";
 import { findVoteSite, getVoteSites, playerVoteUrl } from "./votes.js";
 import { canReadGame, registerGameAdmin } from "./game-admin.js";
@@ -789,6 +790,12 @@ app.get("/api/internal/stars/balance", { config: { rateLimit: { max: 180, timeWi
   const [rows] = await pool.execute<(RowDataPacket & { balance: number })[]>(`SELECT w.balance FROM users u JOIN wallets w ON w.user_id=u.id WHERE u.minecraft_uuid=? LIMIT 1`, [parsed.data.uuid]);
   if (!rows[0]) return reply.code(404).send({ error: "MINECRAFT_ACCOUNT_NOT_LINKED" });
   return { balance: rows[0].balance, currency: "Stars" };
+});
+
+app.get("/api/internal/economy/policy", { config: { rateLimit: { max: 30, timeWindow: "1 minute" } } }, async (request, reply) => {
+  if (!serverKeyMatches(serverKeyFrom(request))) return reply.code(401).send({ error: "INVALID_SERVER_KEY" });
+  try { return getEconomyPolicy(); }
+  catch { return reply.code(503).send({ error: "ECONOMY_POLICY_UNAVAILABLE" }); }
 });
 
 app.get("/api/internal/shop/catalog", { config: { rateLimit: { max: 180, timeWindow: "1 minute" } } }, async (request, reply) => {

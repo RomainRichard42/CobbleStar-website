@@ -11,6 +11,7 @@ const required = [
   "api/dist/server.js",
   "api/migrations/001_initial.sql",
   "api/shop.catalog.json",
+  "api/economy.policy.json",
   "api/vote-sites.json",
   "wiki.default.json",
   "news.default.json",
@@ -68,7 +69,7 @@ for(const row of addonIndex.species){
   await cp(join(addonDir,row.species+".zip"),join(deployDir,"star-addon-templates",row.species+".zip"));
 }
 
-for (const file of ["package.json", "package-lock.json", "shop.catalog.json", "vote-sites.json", ".env.example", "README-KINETIC.md"]) {
+for (const file of ["package.json", "package-lock.json", "shop.catalog.json", "economy.policy.json", "vote-sites.json", ".env.example", "README-KINETIC.md"]) {
   await cp(join(projectDir, "api", file), join(deployDir, file));
 }
 
