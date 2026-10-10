@@ -1,0 +1,5 @@
+Dracolosse Eclipse: original event-form concept and model adaptation by CobbleStar.
+Based on Dragonite geometry, rig, textures and animations from Cobblemon 1.8.0.
+Native resource identifiers are isolated; no ordinary, Star or Alliance assets replaced.
+Cobblemon license is distributed in licenses/Cobblemon.txt in the shared pack.
+Sounds reference Minecraft assets supplied by the game; no audio is redistributed.

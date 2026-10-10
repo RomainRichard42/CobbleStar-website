@@ -4,6 +4,7 @@ import { readFileSync } from "node:fs";
 import { isDeepStrictEqual } from "node:util";
 import {addonSource,addonTemplate,sameSource,type AddonSource} from './star-addon-templates.js';
 import {appendRankTags} from './rank-tags.js';
+import {appendEventPokemonAssets} from './event-pokemon-assets.js';
 
 const vector = z.tuple([z.number().finite().min(-512).max(512), z.number().finite().min(-512).max(512), z.number().finite().min(-512).max(512)]);
 const name = z.string().regex(/^[a-zA-Z0-9_.-]{1,80}$/);
@@ -291,6 +292,7 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[], npcSk
    files.set(path,Buffer.from(JSON.stringify({...previous,...next})));
   }else files.set(path,incoming);
  }
+ appendEventPokemonAssets(files);
  files.set("licenses/Cobblemon.txt",readFileSync(new URL("../licenses/Cobblemon.txt",import.meta.url)));
  files.set("licenses/NOTICE.txt",Buffer.from("Native Pokemon geometry and base assets: Cobblemon team, Cobblemon 1.8.0. https://gitlab.com/cable-mc/cobblemon\nStar variants are modified adaptations supplied by CobbleStar administrators. Regional starters V2 are CobbleStar adaptations of the official models and textures, with modified cubes and pixel palettes; original rig metadata is preserved. Kingambit includes official animations and poser with isolated identifiers to prevent addon collisions. Other native animations remain in Cobblemon. Original asset license included as Cobblemon.txt.\n"));
  for(const input of [...assets].sort((a,b)=>a.species.localeCompare(b.species))){

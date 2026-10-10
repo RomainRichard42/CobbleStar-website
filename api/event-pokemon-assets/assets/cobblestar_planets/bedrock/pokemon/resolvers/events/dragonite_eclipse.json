@@ -1,0 +1,80 @@
+{
+  "species": "cobblemon:dragonite",
+  "order": 11000,
+  "variations": [
+    {
+      "aspects": [
+        "cobblestar_eclipse"
+      ],
+      "model": "cobblestar_planets:dragonite_eclipse.geo",
+      "poser": "cobblestar_planets:dragonite_eclipse",
+      "texture": "cobblestar_planets:textures/pokemon/events/dragonite_eclipse.png",
+      "layers": [
+        {
+          "name": "eclipse_glow",
+          "texture": "cobblestar_planets:textures/pokemon/events/dragonite_eclipse_glow.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_eclipse",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:dragonite_eclipse.geo",
+      "poser": "cobblestar_planets:dragonite_eclipse",
+      "texture": "cobblestar_planets:textures/pokemon/events/dragonite_eclipse.png",
+      "layers": [
+        {
+          "name": "eclipse_glow",
+          "texture": "cobblestar_planets:textures/pokemon/events/dragonite_eclipse_glow.png",
+          "emissive": true
+        },
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/events/dragonite_eclipse_alpha.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_eclipse",
+        "shiny"
+      ],
+      "model": "cobblestar_planets:dragonite_eclipse.geo",
+      "poser": "cobblestar_planets:dragonite_eclipse",
+      "texture": "cobblestar_planets:textures/pokemon/events/dragonite_eclipse_shiny.png",
+      "layers": [
+        {
+          "name": "eclipse_glow",
+          "texture": "cobblestar_planets:textures/pokemon/events/dragonite_eclipse_glow_shiny.png",
+          "emissive": true
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "cobblestar_eclipse",
+        "shiny",
+        "alpha_eyes"
+      ],
+      "model": "cobblestar_planets:dragonite_eclipse.geo",
+      "poser": "cobblestar_planets:dragonite_eclipse",
+      "texture": "cobblestar_planets:textures/pokemon/events/dragonite_eclipse_shiny.png",
+      "layers": [
+        {
+          "name": "eclipse_glow",
+          "texture": "cobblestar_planets:textures/pokemon/events/dragonite_eclipse_glow_shiny.png",
+          "emissive": true
+        },
+        {
+          "name": "alpha_eyes",
+          "texture": "cobblestar_planets:textures/pokemon/events/dragonite_eclipse_alpha.png",
+          "emissive": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "files": [
+    "assets/cobblestar_planets/bedrock/particles/events/eclipse_appearance.particle.json",
+    "assets/cobblestar_planets/bedrock/pokemon/animations/events/dragonite_eclipse.animation.json",
+    "assets/cobblestar_planets/bedrock/pokemon/models/events/dragonite_eclipse.geo.json",
+    "assets/cobblestar_planets/bedrock/pokemon/posers/events/dragonite_eclipse.json",
+    "assets/cobblestar_planets/bedrock/pokemon/resolvers/events/dragonite_eclipse.json",
+    "assets/cobblestar_planets/events/sounds.json",
+    "assets/cobblestar_planets/lang/en_us.json",
+    "assets/cobblestar_planets/lang/fr_fr.json",
+    "assets/cobblestar_planets/textures/particle/events/eclipse_mist.png",
+    "assets/cobblestar_planets/textures/pokemon/events/dragonite_eclipse.png",
+    "assets/cobblestar_planets/textures/pokemon/events/dragonite_eclipse_alpha.png",
+    "assets/cobblestar_planets/textures/pokemon/events/dragonite_eclipse_glow.png",
+    "assets/cobblestar_planets/textures/pokemon/events/dragonite_eclipse_glow_shiny.png",
+    "assets/cobblestar_planets/textures/pokemon/events/dragonite_eclipse_shiny.png"
+  ]
+}

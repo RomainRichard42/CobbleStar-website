@@ -1,0 +1,38 @@
+{
+  "format_version": "1.10.0",
+  "particle_effect": {
+    "description": {
+      "identifier": "cobblestar_planets:eclipse_appearance",
+      "basic_render_parameters": {
+        "material": "particles_blend",
+        "texture": "cobblestar_planets:textures/particles/events/eclipse_mist"
+      }
+    },
+    "events": {
+      "arrival_sound": {"sound_effect": {"event_name": "cobblestar_planets:eclipse.appear"}}
+    },
+    "components": {
+      "minecraft:emitter_lifetime_once": {"active_time": 1.6},
+      "minecraft:emitter_lifetime_events": {"creation_event": "arrival_sound"},
+      "minecraft:emitter_rate_instant": {"num_particles": 16},
+      "minecraft:emitter_shape_point": {"offset": [0, 0, 0], "direction": [0, 1, 0]},
+      "minecraft:particle_initial_speed": 0,
+      "minecraft:particle_lifetime_expression": {"max_lifetime": 1.6},
+      "minecraft:particle_appearance_billboard": {
+        "size": ["0.22 + v.particle_age * 0.18", "0.22 + v.particle_age * 0.18"],
+        "facing_camera_mode": "rotate_xyz",
+        "uv": {"texture_width": 32, "texture_height": 32, "uv": [0, 0], "uv_size": [32, 32]}
+      },
+      "minecraft:particle_motion_parametric": {
+        "relative_position": [
+          "math.cos(v.particle_random_1 * 360 + v.particle_age * 40) * (0.65 + v.particle_age * 0.3)",
+          "(v.particle_random_2 - 0.5) * 1.4 + v.particle_age * 0.35",
+          "math.sin(v.particle_random_1 * 360 + v.particle_age * 40) * (0.65 + v.particle_age * 0.3)"
+        ]
+      },
+      "minecraft:particle_appearance_tinting": {
+        "color": [0.34, 0.22, 0.46, "0.5 * (1 - v.particle_age / 1.6)"]
+      }
+    }
+  }
+}

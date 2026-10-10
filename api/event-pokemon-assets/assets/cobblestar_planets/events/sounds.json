@@ -1,0 +1,8 @@
+{
+  "eclipse.appear": {
+    "sounds": [
+      {"name": "minecraft:mob/phantom/flap1", "volume": 0.35, "pitch": 0.75},
+      {"name": "minecraft:block/amethyst/resonate1", "volume": 0.45, "pitch": 0.7}
+    ]
+  }
+}
