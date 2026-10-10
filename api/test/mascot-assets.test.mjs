@@ -20,6 +20,7 @@ for(const id of ['astreval','basteros','ludilux'])test(id+': approved native mod
  assert.equal(resolver.species,'cobblestar_planets:'+id);assert.equal(resolver.variations.length,2);
  for(const v of resolver.variations){assert.ok(!v.aspects.includes('star'));assert.equal(v.poser,'cobblestar_planets:'+id);for(const t of [v.texture,...v.layers.map(l=>l.texture)])assert.ok(png(files.get('assets/'+t.replace(':','/')).toString('base64'),512,512));}
  assert.ok(animation[`animation.${id}.walk`]);assert.ok(animation[`animation.${id}.special`]);
+ if(id==='astreval'){const wings=animation['animation.astreval.special'].bones;assert.ok(wings.left_wing.rotation['.35'][2]>0);assert.ok(wings.right_wing.rotation['.35'][2]<0);}
  assert.ok(JSON.parse(files.get(root+'lang/fr_fr.json'))['cobblestar_planets.species.'+id+'.name']);assert.ok(JSON.parse(files.get(root+'sounds.json'))[id+'.cry']);
 });
 test('Mascot append preserves old resources and rejects duplicate overwrites',()=>{
