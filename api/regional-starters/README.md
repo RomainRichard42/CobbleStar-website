@@ -1,5 +1,11 @@
 # Starters régionaux CobbleStar (Cobblemon 1.8.0)
 
+## Lignée fleurie d'Astéria — dessin de Shiroe
+
+Germignon, Macronium et Méganium Plante/Fée utilisent désormais le design crème/pêche/ivoire et rose : grand pétale en cœur et perles roses, bourgeon et collerette de pétales avec cristaux, puis grande fleur et branches fleuries. Les nouveaux volumes restent sur le squelette officiel ; les posers Cobblemon et les identifiants `cobblestar_asteria` sont inchangés. Les Pokémon ordinaires ne sont pas remplacés. Les textures chromatiques lilas/turquoise et la couche yeux Alpha sont incluses.
+
+Cette révision est uniquement visuelle : aucun nouveau JAR n'est nécessaire sur un serveur disposant déjà de ces starters régionaux. Après déploiement/redémarrage de l'API, `ensureSharedEffects` reconstruit le pack obligatoire à la prochaine synchronisation du serveur. Les trois modèles sont aussi appliqués aux Pokémon régionaux déjà obtenus. Rien n'est à importer dans le Studio Star et aucun brouillon Star n'est publié.
+
 Les textures et résolveurs listés dans `manifest.json` sont embarqués dans le pack obligatoire servi par l'API Star. Le mod CobbleStar contient séparément les `species_features`, les `species_additions` et les catégories de starters. Les deux déploiements sont nécessaires : le site seul ne crée pas de nouveaux types, et le mod seul n'affiche pas les couleurs régionales chez les clients.
 
 La V4 propose Germignon Plante/Fée, Salamèche Feu/Électrik et Gobou Eau/Poison pour Astéria ; Poussacha Plante/Glace, Flamiaou Feu/Acier et Tiplouf Eau/Dragon pour Nébélia, avec leurs évolutions. Les 12 espèces retirées du choix restent compatibles : 30 espèces et 33 géométries au total, dont les variantes mâle/femelle historiques de Poussifeu, Galifeu et Braségali. Les articulations natives (noms, parents, pivots, rotations) sont conservées ; les animations/posers viennent de Cobblemon 1.8.0. Les formes Star demeurent indépendantes.
