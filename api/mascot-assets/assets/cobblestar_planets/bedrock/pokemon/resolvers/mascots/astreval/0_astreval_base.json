@@ -1,0 +1,34 @@
+{
+  "species": "cobblestar_planets:astreval",
+  "order": 0,
+  "variations": [
+    {
+      "aspects": [],
+      "poser": "cobblestar_planets:astreval",
+      "model": "cobblestar_planets:astreval.geo",
+      "texture": "cobblestar_planets:textures/pokemon/mascots/astreval/astreval.png",
+      "layers": [
+        {
+          "name": "emissive",
+          "emissive": true,
+          "texture": "cobblestar_planets:textures/pokemon/mascots/astreval/astreval_glow.png"
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "shiny"
+      ],
+      "poser": "cobblestar_planets:astreval",
+      "model": "cobblestar_planets:astreval.geo",
+      "texture": "cobblestar_planets:textures/pokemon/mascots/astreval/astreval_shiny.png",
+      "layers": [
+        {
+          "name": "emissive",
+          "emissive": true,
+          "texture": "cobblestar_planets:textures/pokemon/mascots/astreval/astreval_glow_shiny.png"
+        }
+      ]
+    }
+  ]
+}

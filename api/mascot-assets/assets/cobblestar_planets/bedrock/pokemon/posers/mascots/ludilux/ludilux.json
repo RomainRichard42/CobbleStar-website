@@ -1,0 +1,129 @@
+{
+  "rootBone": "ludilux",
+  "portraitScale": 0.85,
+  "portraitTranslation": [
+    0,
+    1.1,
+    0
+  ],
+  "profileScale": 0.65,
+  "profileTranslation": [
+    0,
+    0.7,
+    0
+  ],
+  "animations": {
+    "cry": "q.bedrock_stateful('ludilux', 'cry')",
+    "send_out": "q.bedrock_stateful('ludilux', 'send_out')",
+    "hurt": "q.bedrock_stateful('ludilux', 'hurt')",
+    "faint": "q.bedrock_primary('ludilux', 'faint', q.exclude_labels('all'), q.curve('one'))",
+    "physical": "q.bedrock_primary('ludilux', 'physical', q.exclude_labels('all'), q.curve('symmetrical_wide'))",
+    "special": "q.bedrock_primary('ludilux', 'special', q.exclude_labels('all'), q.curve('symmetrical_wide'))",
+    "cobblestartilt": "q.bedrock_primary('ludilux', 'special', q.exclude_labels('all'), q.curve('symmetrical_wide'))"
+  },
+  "poses": {
+    "sleep": {
+      "poseName": "sleep",
+      "poseTypes": [
+        "SLEEP"
+      ],
+      "transformTicks": 12,
+      "animations": [
+        "q.bedrock('ludilux', 'sleep')"
+      ],
+      "quirks": []
+    },
+    "battle": {
+      "poseName": "battle",
+      "poseTypes": [
+        "STAND"
+      ],
+      "transformTicks": 12,
+      "animations": [
+        "q.bedrock('ludilux', 'idle')"
+      ],
+      "quirks": [
+        {
+          "name": "blink",
+          "minSecondsBetweenOccurrences": 3,
+          "maxSecondsBetweenOccurrences": 7,
+          "animations": [
+            "q.bedrock('ludilux', 'blink')"
+          ]
+        }
+      ],
+      "isBattle": true
+    },
+    "standing": {
+      "poseName": "standing",
+      "poseTypes": [
+        "STAND",
+        "NONE"
+      ],
+      "transformTicks": 12,
+      "animations": [
+        "q.bedrock('ludilux', 'idle')"
+      ],
+      "quirks": [
+        {
+          "name": "blink",
+          "minSecondsBetweenOccurrences": 3,
+          "maxSecondsBetweenOccurrences": 7,
+          "animations": [
+            "q.bedrock('ludilux', 'blink')"
+          ]
+        },
+        {
+          "name": "prize_reveal",
+          "minSecondsBetweenOccurrences": 14,
+          "maxSecondsBetweenOccurrences": 26,
+          "animations": [
+            "q.bedrock('ludilux', 'prize_reveal')"
+          ]
+        }
+      ],
+      "isBattle": false
+    },
+    "walk": {
+      "poseName": "walk",
+      "poseTypes": [
+        "WALK"
+      ],
+      "transformTicks": 12,
+      "animations": [
+        "q.bedrock('ludilux', 'walk')"
+      ],
+      "quirks": [
+        {
+          "name": "blink",
+          "minSecondsBetweenOccurrences": 3,
+          "maxSecondsBetweenOccurrences": 7,
+          "animations": [
+            "q.bedrock('ludilux', 'blink')"
+          ]
+        }
+      ]
+    },
+    "portrait": {
+      "poseName": "portrait",
+      "poseTypes": [
+        "PORTRAIT",
+        "PROFILE"
+      ],
+      "transformTicks": 12,
+      "animations": [
+        "q.bedrock('ludilux', 'idle')"
+      ],
+      "quirks": [
+        {
+          "name": "blink",
+          "minSecondsBetweenOccurrences": 3,
+          "maxSecondsBetweenOccurrences": 7,
+          "animations": [
+            "q.bedrock('ludilux', 'blink')"
+          ]
+        }
+      ]
+    }
+  }
+}

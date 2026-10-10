@@ -1,0 +1,23 @@
+{
+  "cobblestar_planets.species.astreval.name": "Astreval",
+  "cobblemon.species.astreval.name": "Astreval",
+  "cobblemon.species.astreval.desc": "Ce griffon spectral protège les champions de CobbleStar. Ses ailes tracent les lauriers d’une victoire méritée.",
+  "cobblestar_planets.species.basteros.name": "Bastéros",
+  "cobblemon.species.basteros.name": "Bastéros",
+  "cobblemon.species.basteros.desc": "Sous sa carapace de météorite, Bastéros concentre une force psychique immense. Il incarne la ténacité des équipes de raid.",
+  "cobblestar_planets.species.ludilux.name": "Ludilux",
+  "cobblemon.species.ludilux.name": "Ludilux",
+  "cobblemon.species.ludilux.desc": "Ce petit gardien d’arcade adore interrompre les plans adverses. Sa queue-pince ne lâche jamais sa capsule porte-bonheur.",
+  "cobblemon.ability.cobblestarspectralascendant": "Ascendant spectral",
+  "cobblemon.ability.cobblestarspectralascendant.desc": "Les attaques physiques Vol et Spectre sont renforcées de 20 %.",
+  "cobblemon.ability.cobblestarastralbulwark": "Rempart astral",
+  "cobblemon.ability.cobblestarastralbulwark.desc": "La Défense Spéciale est renforcée de 25 %.",
+  "cobblemon.ability.cobblestarreplay": "Mode Replay",
+  "cobblemon.ability.cobblestarreplay.desc": "Une fois par entrée sur le terrain, la première attaque directe reçue est entravée pendant deux tours.",
+  "cobblemon.move.cobblestarnetherwing": "Aile du Néant",
+  "cobblemon.move.cobblestarnetherwing.desc": "Une attaque physique Spectre avec un taux de critique élevé.",
+  "cobblemon.move.cobblestarastralaegis": "Égide astrale",
+  "cobblemon.move.cobblestarastralaegis.desc": "Une attaque Psy qui augmente la Défense Spéciale du lanceur.",
+  "cobblemon.move.cobblestartilt": "Tilt",
+  "cobblemon.move.cobblestartilt.desc": "Une attaque Électrik qui réduit la Vitesse de la cible."
+}

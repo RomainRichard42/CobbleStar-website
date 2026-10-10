@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "files": [
+    "assets/cobblestar_planets/bedrock/pokemon/models/mascots/astreval/astreval.geo.json",
+    "assets/cobblestar_planets/bedrock/pokemon/animations/mascots/astreval/astreval.animation.json",
+    "assets/cobblestar_planets/bedrock/pokemon/posers/mascots/astreval/astreval.json",
+    "assets/cobblestar_planets/bedrock/pokemon/resolvers/mascots/astreval/0_astreval_base.json",
+    "assets/cobblestar_planets/textures/pokemon/mascots/astreval/astreval.png",
+    "assets/cobblestar_planets/textures/pokemon/mascots/astreval/astreval_shiny.png",
+    "assets/cobblestar_planets/textures/pokemon/mascots/astreval/astreval_glow.png",
+    "assets/cobblestar_planets/textures/pokemon/mascots/astreval/astreval_glow_shiny.png",
+    "assets/cobblestar_planets/bedrock/pokemon/models/mascots/basteros/basteros.geo.json",
+    "assets/cobblestar_planets/bedrock/pokemon/animations/mascots/basteros/basteros.animation.json",
+    "assets/cobblestar_planets/bedrock/pokemon/posers/mascots/basteros/basteros.json",
+    "assets/cobblestar_planets/bedrock/pokemon/resolvers/mascots/basteros/0_basteros_base.json",
+    "assets/cobblestar_planets/textures/pokemon/mascots/basteros/basteros.png",
+    "assets/cobblestar_planets/textures/pokemon/mascots/basteros/basteros_shiny.png",
+    "assets/cobblestar_planets/textures/pokemon/mascots/basteros/basteros_glow.png",
+    "assets/cobblestar_planets/textures/pokemon/mascots/basteros/basteros_glow_shiny.png",
+    "assets/cobblestar_planets/bedrock/pokemon/models/mascots/ludilux/ludilux.geo.json",
+    "assets/cobblestar_planets/bedrock/pokemon/animations/mascots/ludilux/ludilux.animation.json",
+    "assets/cobblestar_planets/bedrock/pokemon/posers/mascots/ludilux/ludilux.json",
+    "assets/cobblestar_planets/bedrock/pokemon/resolvers/mascots/ludilux/0_ludilux_base.json",
+    "assets/cobblestar_planets/textures/pokemon/mascots/ludilux/ludilux.png",
+    "assets/cobblestar_planets/textures/pokemon/mascots/ludilux/ludilux_shiny.png",
+    "assets/cobblestar_planets/textures/pokemon/mascots/ludilux/ludilux_glow.png",
+    "assets/cobblestar_planets/textures/pokemon/mascots/ludilux/ludilux_glow_shiny.png",
+    "assets/cobblestar_planets/mascots/lang/fr_fr.json",
+    "assets/cobblestar_planets/mascots/lang/en_us.json",
+    "assets/cobblestar_planets/mascots/sounds.json"
+  ]
+}

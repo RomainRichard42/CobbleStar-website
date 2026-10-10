@@ -1,0 +1,1 @@
+Original CobbleStar mode mascots. Approved concepts: Astreval (Flying/Ghost), Basteros (Rock/Psychic), Ludilux (Electric/Fairy). Native Bedrock geometry and animations authored for Cobblemon 1.8. No third-party Pokemon model is redistributed.

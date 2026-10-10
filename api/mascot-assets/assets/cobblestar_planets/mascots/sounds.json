@@ -1,0 +1,32 @@
+{
+  "astreval.cry": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.phantom.ambient",
+        "type": "event",
+        "volume": 0.6,
+        "pitch": 1.1
+      }
+    ]
+  },
+  "basteros.cry": {
+    "sounds": [
+      {
+        "name": "minecraft:entity.ravager.roar",
+        "type": "event",
+        "volume": 0.6,
+        "pitch": 0.8
+      }
+    ]
+  },
+  "ludilux.cry": {
+    "sounds": [
+      {
+        "name": "minecraft:block.note_block.chime",
+        "type": "event",
+        "volume": 0.6,
+        "pitch": 1.4
+      }
+    ]
+  }
+}

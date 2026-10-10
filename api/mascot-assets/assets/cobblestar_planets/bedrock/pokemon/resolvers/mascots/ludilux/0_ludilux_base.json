@@ -1,0 +1,34 @@
+{
+  "species": "cobblestar_planets:ludilux",
+  "order": 0,
+  "variations": [
+    {
+      "aspects": [],
+      "poser": "cobblestar_planets:ludilux",
+      "model": "cobblestar_planets:ludilux.geo",
+      "texture": "cobblestar_planets:textures/pokemon/mascots/ludilux/ludilux.png",
+      "layers": [
+        {
+          "name": "emissive",
+          "emissive": true,
+          "texture": "cobblestar_planets:textures/pokemon/mascots/ludilux/ludilux_glow.png"
+        }
+      ]
+    },
+    {
+      "aspects": [
+        "shiny"
+      ],
+      "poser": "cobblestar_planets:ludilux",
+      "model": "cobblestar_planets:ludilux.geo",
+      "texture": "cobblestar_planets:textures/pokemon/mascots/ludilux/ludilux_shiny.png",
+      "layers": [
+        {
+          "name": "emissive",
+          "emissive": true,
+          "texture": "cobblestar_planets:textures/pokemon/mascots/ludilux/ludilux_glow_shiny.png"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1569 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.astreval.idle": {
+      "animation_length": 8,
+      "loop": true,
+      "bones": {
+        "front_left_leg": {
+          "rotation": [
+            "0.35 * math.sin(query.anim_time * 60)",
+            0,
+            0
+          ]
+        },
+        "front_right_leg": {
+          "rotation": [
+            "0.35 * math.sin(query.anim_time * 60 + 180)",
+            0,
+            0
+          ]
+        },
+        "hind_left_leg": {
+          "rotation": [
+            "0.35 * math.sin(query.anim_time * 60 + 180)",
+            0,
+            0
+          ]
+        },
+        "hind_right_leg": {
+          "rotation": [
+            "0.35 * math.sin(query.anim_time * 60 + 360)",
+            0,
+            0
+          ]
+        },
+        "body": {
+          "scale": [
+            "1 + 0.006 * math.sin(query.anim_time * 90)",
+            "1 + 0.012 * math.sin(query.anim_time * 90)",
+            1
+          ]
+        },
+        "neck": {
+          "rotation": [
+            "1 * math.sin(query.anim_time * 90)",
+            "1.5 * math.sin(query.anim_time * 45)",
+            0
+          ]
+        },
+        "head": {
+          "rotation": [
+            "1.6 * math.sin(query.anim_time * 72)",
+            "3 * math.sin(query.anim_time * 45)",
+            0
+          ]
+        },
+        "left_wing": {
+          "rotation": [
+            0,
+            "1.4 * math.sin(query.anim_time * 60)",
+            "2 * math.sin(query.anim_time * 60)"
+          ]
+        },
+        "right_wing": {
+          "rotation": [
+            0,
+            "-1.4 * math.sin(query.anim_time * 60)",
+            "-2 * math.sin(query.anim_time * 60)"
+          ]
+        },
+        "tail_0": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72)",
+            "4 * math.sin(query.anim_time * 72)",
+            0
+          ]
+        },
+        "tail_1": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 22)",
+            "4 * math.sin(query.anim_time * 72 + 22)",
+            0
+          ]
+        },
+        "tail_2": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 44)",
+            "4 * math.sin(query.anim_time * 72 + 44)",
+            0
+          ]
+        },
+        "tail_3": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 66)",
+            "4 * math.sin(query.anim_time * 72 + 66)",
+            0
+          ]
+        },
+        "tail_4": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 88)",
+            "4 * math.sin(query.anim_time * 72 + 88)",
+            0
+          ]
+        },
+        "tail_fan": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 72 + 65)",
+            "4 * math.sin(query.anim_time * 72 + 65)",
+            0
+          ]
+        },
+        "crest_0": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72)",
+            0,
+            0
+          ]
+        },
+        "crest_1": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 10)",
+            0,
+            0
+          ]
+        },
+        "crest_2": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 20)",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.astreval.walk": {
+      "animation_length": 2,
+      "loop": true,
+      "bones": {
+        "front_left_leg": {
+          "rotation": [
+            "20 * math.sin(query.anim_time * 180)",
+            0,
+            0
+          ]
+        },
+        "front_right_leg": {
+          "rotation": [
+            "20 * math.sin(query.anim_time * 180 + 180)",
+            0,
+            0
+          ]
+        },
+        "hind_left_leg": {
+          "rotation": [
+            "20 * math.sin(query.anim_time * 180 + 180)",
+            0,
+            0
+          ]
+        },
+        "hind_right_leg": {
+          "rotation": [
+            "20 * math.sin(query.anim_time * 180 + 360)",
+            0,
+            0
+          ]
+        },
+        "body": {
+          "position": [
+            0,
+            "0.25 + 0.25 * math.sin(query.anim_time * 360)",
+            0
+          ],
+          "rotation": [
+            0,
+            "1.5 * math.sin(query.anim_time * 180)",
+            "1 * math.sin(query.anim_time * 180)"
+          ]
+        },
+        "neck": {
+          "rotation": [
+            "1 * math.sin(query.anim_time * 90)",
+            "1.5 * math.sin(query.anim_time * 45)",
+            0
+          ]
+        },
+        "head": {
+          "rotation": [
+            "1.6 * math.sin(query.anim_time * 72)",
+            "3 * math.sin(query.anim_time * 45)",
+            0
+          ]
+        },
+        "left_wing": {
+          "rotation": [
+            0,
+            "1.4 * math.sin(query.anim_time * 60)",
+            "2 * math.sin(query.anim_time * 60)"
+          ]
+        },
+        "right_wing": {
+          "rotation": [
+            0,
+            "-1.4 * math.sin(query.anim_time * 60)",
+            "-2 * math.sin(query.anim_time * 60)"
+          ]
+        },
+        "tail_0": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72)",
+            "4 * math.sin(query.anim_time * 72)",
+            0
+          ]
+        },
+        "tail_1": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 22)",
+            "4 * math.sin(query.anim_time * 72 + 22)",
+            0
+          ]
+        },
+        "tail_2": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 44)",
+            "4 * math.sin(query.anim_time * 72 + 44)",
+            0
+          ]
+        },
+        "tail_3": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 66)",
+            "4 * math.sin(query.anim_time * 72 + 66)",
+            0
+          ]
+        },
+        "tail_4": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 88)",
+            "4 * math.sin(query.anim_time * 72 + 88)",
+            0
+          ]
+        },
+        "tail_fan": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 72 + 65)",
+            "4 * math.sin(query.anim_time * 72 + 65)",
+            0
+          ]
+        },
+        "crest_0": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72)",
+            0,
+            0
+          ]
+        },
+        "crest_1": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 10)",
+            0,
+            0
+          ]
+        },
+        "crest_2": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 20)",
+            0,
+            0
+          ]
+        },
+        "front_left_knee": {
+          "rotation": [
+            "12 * math.sin(query.anim_time * 180 + 35)",
+            0,
+            0
+          ]
+        },
+        "front_left_foot": {
+          "rotation": [
+            "-10 * math.sin(query.anim_time * 180 + 35)",
+            0,
+            0
+          ]
+        },
+        "front_right_knee": {
+          "rotation": [
+            "12 * math.sin(query.anim_time * 180 + 215)",
+            0,
+            0
+          ]
+        },
+        "front_right_foot": {
+          "rotation": [
+            "-10 * math.sin(query.anim_time * 180 + 215)",
+            0,
+            0
+          ]
+        },
+        "hind_left_knee": {
+          "rotation": [
+            "12 * math.sin(query.anim_time * 180 + 215)",
+            0,
+            0
+          ]
+        },
+        "hind_left_foot": {
+          "rotation": [
+            "-10 * math.sin(query.anim_time * 180 + 215)",
+            0,
+            0
+          ]
+        },
+        "hind_right_knee": {
+          "rotation": [
+            "12 * math.sin(query.anim_time * 180 + 395)",
+            0,
+            0
+          ]
+        },
+        "hind_right_foot": {
+          "rotation": [
+            "-10 * math.sin(query.anim_time * 180 + 395)",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.astreval.special": {
+      "animation_length": 1.6,
+      "loop": false,
+      "bones": {
+        "left_wing": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".35": [
+              0,
+              10,
+              -72
+            ],
+            ".8": [
+              0,
+              0,
+              25
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "right_wing": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".35": [
+              0,
+              -10,
+              72
+            ],
+            ".8": [
+              0,
+              0,
+              -25
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "body": {
+          "position": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".4": [
+              0,
+              2,
+              0
+            ],
+            ".85": [
+              0,
+              1,
+              -3
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "head": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".45": [
+              -15,
+              0,
+              0
+            ],
+            ".8": [
+              10,
+              0,
+              0
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "neck": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".5": [
+              -10,
+              0,
+              0
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.astreval.physical": {
+      "animation_length": 1.6,
+      "loop": false,
+      "bones": {
+        "left_wing": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".35": [
+              0,
+              10,
+              -72
+            ],
+            ".8": [
+              0,
+              0,
+              25
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "right_wing": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".35": [
+              0,
+              -10,
+              72
+            ],
+            ".8": [
+              0,
+              0,
+              -25
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "body": {
+          "position": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".4": [
+              0,
+              2,
+              0
+            ],
+            ".85": [
+              0,
+              1,
+              -3
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "head": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".45": [
+              -15,
+              0,
+              0
+            ],
+            ".8": [
+              10,
+              0,
+              0
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "neck": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".5": [
+              -10,
+              0,
+              0
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.astreval.blink": {
+      "animation_length": 0.26,
+      "loop": false,
+      "bones": {
+        "left_eye": {
+          "scale": {
+            "0": [
+              1,
+              1,
+              1
+            ],
+            ".10": [
+              1,
+              0.1,
+              1
+            ],
+            ".17": [
+              1,
+              0.1,
+              1
+            ],
+            ".26": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "right_eye": {
+          "scale": {
+            "0": [
+              1,
+              1,
+              1
+            ],
+            ".10": [
+              1,
+              0.1,
+              1
+            ],
+            ".17": [
+              1,
+              0.1,
+              1
+            ],
+            ".26": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      }
+    },
+    "animation.astreval.cry": {
+      "animation_length": 1.25,
+      "loop": false,
+      "bones": {
+        "head": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".45": [
+              -14,
+              0,
+              0
+            ],
+            "1.25": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "mouth": {
+          "scale": {
+            "0": [
+              1,
+              1,
+              1
+            ],
+            ".4": [
+              1,
+              2.4,
+              1
+            ],
+            "1.25": [
+              1,
+              1,
+              1
+            ]
+          }
+        },
+        "body": {
+          "scale": {
+            "0": [
+              1,
+              1,
+              1
+            ],
+            ".5": [
+              1.025,
+              1.025,
+              1.025
+            ],
+            "1.25": [
+              1,
+              1,
+              1
+            ]
+          }
+        }
+      },
+      "sound_effects": {
+        ".38": {
+          "effect": "cobblestar_planets:astreval.cry"
+        }
+      }
+    },
+    "animation.astreval.sleep": {
+      "animation_length": 8,
+      "loop": true,
+      "bones": {
+        "front_left_leg": {
+          "rotation": [
+            "0.35 * math.sin(query.anim_time * 60)",
+            0,
+            0
+          ]
+        },
+        "front_right_leg": {
+          "rotation": [
+            "0.35 * math.sin(query.anim_time * 60 + 180)",
+            0,
+            0
+          ]
+        },
+        "hind_left_leg": {
+          "rotation": [
+            "0.35 * math.sin(query.anim_time * 60 + 180)",
+            0,
+            0
+          ]
+        },
+        "hind_right_leg": {
+          "rotation": [
+            "0.35 * math.sin(query.anim_time * 60 + 360)",
+            0,
+            0
+          ]
+        },
+        "body": {
+          "position": [
+            0,
+            -1,
+            0
+          ],
+          "scale": [
+            1,
+            "1 + 0.007 * math.sin(query.anim_time * 60)",
+            1
+          ]
+        },
+        "neck": {
+          "rotation": [
+            "1 * math.sin(query.anim_time * 90)",
+            "1.5 * math.sin(query.anim_time * 45)",
+            0
+          ]
+        },
+        "head": {
+          "rotation": [
+            18,
+            0,
+            0
+          ]
+        },
+        "left_wing": {
+          "rotation": [
+            0,
+            "1.4 * math.sin(query.anim_time * 60)",
+            "2 * math.sin(query.anim_time * 60)"
+          ]
+        },
+        "right_wing": {
+          "rotation": [
+            0,
+            "-1.4 * math.sin(query.anim_time * 60)",
+            "-2 * math.sin(query.anim_time * 60)"
+          ]
+        },
+        "tail_0": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72)",
+            "4 * math.sin(query.anim_time * 72)",
+            0
+          ]
+        },
+        "tail_1": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 22)",
+            "4 * math.sin(query.anim_time * 72 + 22)",
+            0
+          ]
+        },
+        "tail_2": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 44)",
+            "4 * math.sin(query.anim_time * 72 + 44)",
+            0
+          ]
+        },
+        "tail_3": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 66)",
+            "4 * math.sin(query.anim_time * 72 + 66)",
+            0
+          ]
+        },
+        "tail_4": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 88)",
+            "4 * math.sin(query.anim_time * 72 + 88)",
+            0
+          ]
+        },
+        "tail_fan": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 72 + 65)",
+            "4 * math.sin(query.anim_time * 72 + 65)",
+            0
+          ]
+        },
+        "crest_0": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72)",
+            0,
+            0
+          ]
+        },
+        "crest_1": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 10)",
+            0,
+            0
+          ]
+        },
+        "crest_2": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 20)",
+            0,
+            0
+          ]
+        },
+        "left_eye": {
+          "scale": [
+            1,
+            0.1,
+            1
+          ]
+        },
+        "right_eye": {
+          "scale": [
+            1,
+            0.1,
+            1
+          ]
+        }
+      }
+    },
+    "animation.astreval.hurt": {
+      "animation_length": 0.6,
+      "loop": false,
+      "bones": {
+        "body": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".15": [
+              -7,
+              0,
+              7
+            ],
+            ".4": [
+              3,
+              0,
+              -3
+            ],
+            ".6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "head": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".15": [
+              -12,
+              0,
+              -5
+            ],
+            ".6": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.astreval.faint": {
+      "animation_length": 1.4,
+      "loop": false,
+      "bones": {
+        "body": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".4": [
+              0,
+              0,
+              15
+            ],
+            "1.15": [
+              0,
+              0,
+              75
+            ],
+            "1.4": [
+              0,
+              0,
+              75
+            ]
+          },
+          "position": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            "1.4": [
+              0,
+              -2,
+              0
+            ]
+          }
+        },
+        "head": {
+          "rotation": [
+            12,
+            0,
+            0
+          ]
+        },
+        "left_eye": {
+          "scale": [
+            1,
+            0.1,
+            1
+          ]
+        },
+        "right_eye": {
+          "scale": [
+            1,
+            0.1,
+            1
+          ]
+        }
+      }
+    },
+    "animation.astreval.send_out": {
+      "animation_length": 1,
+      "loop": false,
+      "bones": {
+        "astreval": {
+          "scale": {
+            "0": [
+              0.1,
+              0.1,
+              0.1
+            ],
+            "1": [
+              1,
+              1,
+              1
+            ],
+            ".3": [
+              1.04,
+              0.96,
+              1.04
+            ],
+            ".7": [
+              0.98,
+              1.02,
+              0.98
+            ]
+          }
+        },
+        "body": {
+          "position": {
+            "0": [
+              0,
+              2,
+              0
+            ],
+            "1": [
+              0,
+              0,
+              0
+            ],
+            ".5": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.astreval.wing_stretch": {
+      "animation_length": 1.6,
+      "loop": false,
+      "bones": {
+        "left_wing": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".35": [
+              0,
+              10,
+              -72
+            ],
+            ".8": [
+              0,
+              0,
+              25
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "right_wing": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".35": [
+              0,
+              -10,
+              72
+            ],
+            ".8": [
+              0,
+              0,
+              -25
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "body": {
+          "position": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".4": [
+              0,
+              2,
+              0
+            ],
+            ".85": [
+              0,
+              1,
+              -3
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "head": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".45": [
+              -15,
+              0,
+              0
+            ],
+            ".8": [
+              10,
+              0,
+              0
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "neck": {
+          "rotation": {
+            "0": [
+              0,
+              0,
+              0
+            ],
+            ".5": [
+              -10,
+              0,
+              0
+            ],
+            "1.6": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.astreval.hover": {
+      "animation_length": 4,
+      "loop": true,
+      "bones": {
+        "front_left_leg": {
+          "rotation": [
+            28,
+            0,
+            0
+          ]
+        },
+        "front_right_leg": {
+          "rotation": [
+            28,
+            0,
+            0
+          ]
+        },
+        "hind_left_leg": {
+          "rotation": [
+            28,
+            0,
+            0
+          ]
+        },
+        "hind_right_leg": {
+          "rotation": [
+            28,
+            0,
+            0
+          ]
+        },
+        "body": {
+          "position": [
+            0,
+            "3 + 0.8 * math.sin(query.anim_time * 180)",
+            0
+          ],
+          "rotation": [
+            "2 * math.sin(query.anim_time * 180)",
+            0,
+            0
+          ]
+        },
+        "neck": {
+          "rotation": [
+            "1 * math.sin(query.anim_time * 90)",
+            "1.5 * math.sin(query.anim_time * 45)",
+            0
+          ]
+        },
+        "head": {
+          "rotation": [
+            "1.6 * math.sin(query.anim_time * 72)",
+            "3 * math.sin(query.anim_time * 45)",
+            0
+          ]
+        },
+        "left_wing": {
+          "rotation": [
+            0,
+            8,
+            "-58 + 23 * math.sin(query.anim_time * 180)"
+          ]
+        },
+        "right_wing": {
+          "rotation": [
+            0,
+            -8,
+            "58 + -23 * math.sin(query.anim_time * 180)"
+          ]
+        },
+        "tail_0": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72)",
+            "4 * math.sin(query.anim_time * 72)",
+            0
+          ]
+        },
+        "tail_1": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 22)",
+            "4 * math.sin(query.anim_time * 72 + 22)",
+            0
+          ]
+        },
+        "tail_2": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 44)",
+            "4 * math.sin(query.anim_time * 72 + 44)",
+            0
+          ]
+        },
+        "tail_3": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 66)",
+            "4 * math.sin(query.anim_time * 72 + 66)",
+            0
+          ]
+        },
+        "tail_4": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 88)",
+            "4 * math.sin(query.anim_time * 72 + 88)",
+            0
+          ]
+        },
+        "tail_fan": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 72 + 65)",
+            "4 * math.sin(query.anim_time * 72 + 65)",
+            0
+          ]
+        },
+        "crest_0": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72)",
+            0,
+            0
+          ]
+        },
+        "crest_1": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 10)",
+            0,
+            0
+          ]
+        },
+        "crest_2": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 20)",
+            0,
+            0
+          ]
+        },
+        "left_feather_0": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180)",
+            0,
+            "3 * math.sin(query.anim_time * 180)"
+          ]
+        },
+        "left_feather_1": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 10)",
+            0,
+            "3 * math.sin(query.anim_time * 180 + 12)"
+          ]
+        },
+        "left_feather_2": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 20)",
+            0,
+            "3 * math.sin(query.anim_time * 180 + 24)"
+          ]
+        },
+        "left_feather_3": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 30)",
+            0,
+            "3 * math.sin(query.anim_time * 180 + 36)"
+          ]
+        },
+        "left_feather_4": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 40)",
+            0,
+            "3 * math.sin(query.anim_time * 180 + 48)"
+          ]
+        },
+        "left_feather_5": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 50)",
+            0,
+            "3 * math.sin(query.anim_time * 180 + 60)"
+          ]
+        },
+        "right_feather_0": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180)",
+            0,
+            "-3 * math.sin(query.anim_time * 180)"
+          ]
+        },
+        "right_feather_1": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 10)",
+            0,
+            "-3 * math.sin(query.anim_time * 180 + 12)"
+          ]
+        },
+        "right_feather_2": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 20)",
+            0,
+            "-3 * math.sin(query.anim_time * 180 + 24)"
+          ]
+        },
+        "right_feather_3": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 30)",
+            0,
+            "-3 * math.sin(query.anim_time * 180 + 36)"
+          ]
+        },
+        "right_feather_4": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 40)",
+            0,
+            "-3 * math.sin(query.anim_time * 180 + 48)"
+          ]
+        },
+        "right_feather_5": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 50)",
+            0,
+            "-3 * math.sin(query.anim_time * 180 + 60)"
+          ]
+        }
+      }
+    },
+    "animation.astreval.fly": {
+      "animation_length": 2,
+      "loop": true,
+      "bones": {
+        "front_left_leg": {
+          "rotation": [
+            28,
+            0,
+            0
+          ]
+        },
+        "front_right_leg": {
+          "rotation": [
+            28,
+            0,
+            0
+          ]
+        },
+        "hind_left_leg": {
+          "rotation": [
+            28,
+            0,
+            0
+          ]
+        },
+        "hind_right_leg": {
+          "rotation": [
+            28,
+            0,
+            0
+          ]
+        },
+        "body": {
+          "position": [
+            0,
+            "2 + 0.55 * math.sin(query.anim_time * 360)",
+            0
+          ],
+          "rotation": [
+            -9,
+            0,
+            "2 * math.sin(query.anim_time * 180)"
+          ]
+        },
+        "neck": {
+          "rotation": [
+            "1 * math.sin(query.anim_time * 90)",
+            "1.5 * math.sin(query.anim_time * 45)",
+            0
+          ]
+        },
+        "head": {
+          "rotation": [
+            "1.6 * math.sin(query.anim_time * 72)",
+            "3 * math.sin(query.anim_time * 45)",
+            0
+          ]
+        },
+        "left_wing": {
+          "rotation": [
+            0,
+            8,
+            "-55 + 30 * math.sin(query.anim_time * 360)"
+          ]
+        },
+        "right_wing": {
+          "rotation": [
+            0,
+            -8,
+            "55 + -30 * math.sin(query.anim_time * 360)"
+          ]
+        },
+        "tail_0": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72)",
+            "4 * math.sin(query.anim_time * 72)",
+            0
+          ]
+        },
+        "tail_1": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 22)",
+            "4 * math.sin(query.anim_time * 72 + 22)",
+            0
+          ]
+        },
+        "tail_2": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 44)",
+            "4 * math.sin(query.anim_time * 72 + 44)",
+            0
+          ]
+        },
+        "tail_3": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 66)",
+            "4 * math.sin(query.anim_time * 72 + 66)",
+            0
+          ]
+        },
+        "tail_4": {
+          "rotation": [
+            "2.5 * math.sin(query.anim_time * 72 + 88)",
+            "4 * math.sin(query.anim_time * 72 + 88)",
+            0
+          ]
+        },
+        "tail_fan": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 72 + 65)",
+            "4 * math.sin(query.anim_time * 72 + 65)",
+            0
+          ]
+        },
+        "crest_0": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72)",
+            0,
+            0
+          ]
+        },
+        "crest_1": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 10)",
+            0,
+            0
+          ]
+        },
+        "crest_2": {
+          "rotation": [
+            "2 * math.sin(query.anim_time * 72 + 20)",
+            0,
+            0
+          ]
+        },
+        "left_feather_0": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180)",
+            0,
+            "3 * math.sin(query.anim_time * 180)"
+          ]
+        },
+        "left_feather_1": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 10)",
+            0,
+            "3 * math.sin(query.anim_time * 180 + 12)"
+          ]
+        },
+        "left_feather_2": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 20)",
+            0,
+            "3 * math.sin(query.anim_time * 180 + 24)"
+          ]
+        },
+        "left_feather_3": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 30)",
+            0,
+            "3 * math.sin(query.anim_time * 180 + 36)"
+          ]
+        },
+        "left_feather_4": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 40)",
+            0,
+            "3 * math.sin(query.anim_time * 180 + 48)"
+          ]
+        },
+        "left_feather_5": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 50)",
+            0,
+            "3 * math.sin(query.anim_time * 180 + 60)"
+          ]
+        },
+        "right_feather_0": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180)",
+            0,
+            "-3 * math.sin(query.anim_time * 180)"
+          ]
+        },
+        "right_feather_1": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 10)",
+            0,
+            "-3 * math.sin(query.anim_time * 180 + 12)"
+          ]
+        },
+        "right_feather_2": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 20)",
+            0,
+            "-3 * math.sin(query.anim_time * 180 + 24)"
+          ]
+        },
+        "right_feather_3": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 30)",
+            0,
+            "-3 * math.sin(query.anim_time * 180 + 36)"
+          ]
+        },
+        "right_feather_4": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 40)",
+            0,
+            "-3 * math.sin(query.anim_time * 180 + 48)"
+          ]
+        },
+        "right_feather_5": {
+          "rotation": [
+            "3 * math.sin(query.anim_time * 180 + 50)",
+            0,
+            "-3 * math.sin(query.anim_time * 180 + 60)"
+          ]
+        }
+      }
+    }
+  }
+}
