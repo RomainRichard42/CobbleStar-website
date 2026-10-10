@@ -42,14 +42,14 @@
           "rotation": [
             "3 * math.sin(query.anim_time * 90)",
             0,
-            "-3 * math.sin(query.anim_time * 90)"
+            "-2 * math.sin(query.anim_time * 90)"
           ]
         },
         "right_ear": {
           "rotation": [
             "-3 * math.sin(query.anim_time * 90)",
             0,
-            "3 * math.sin(query.anim_time * 90)"
+            "2 * math.sin(query.anim_time * 90)"
           ]
         },
         "capsule": {
@@ -172,14 +172,14 @@
           "rotation": [
             "3 * math.sin(query.anim_time * 90)",
             0,
-            "-3 * math.sin(query.anim_time * 90)"
+            "-2 * math.sin(query.anim_time * 90)"
           ]
         },
         "right_ear": {
           "rotation": [
             "-3 * math.sin(query.anim_time * 90)",
             0,
-            "3 * math.sin(query.anim_time * 90)"
+            "2 * math.sin(query.anim_time * 90)"
           ]
         },
         "capsule": {
@@ -1093,21 +1093,21 @@
           }
         },
         "mouth": {
-          "scale": {
+          "rotation": {
             "0": [
-              1,
-              1,
-              1
+              0,
+              0,
+              0
             ],
             ".4": [
-              1,
-              2.4,
-              1
+              0,
+              0,
+              0
             ],
             "1.25": [
-              1,
-              1,
-              1
+              0,
+              0,
+              0
             ]
           }
         },
@@ -1178,14 +1178,14 @@
           "rotation": [
             "3 * math.sin(query.anim_time * 90)",
             0,
-            "-3 * math.sin(query.anim_time * 90)"
+            "-2 * math.sin(query.anim_time * 90)"
           ]
         },
         "right_ear": {
           "rotation": [
             "-3 * math.sin(query.anim_time * 90)",
             0,
-            "3 * math.sin(query.anim_time * 90)"
+            "2 * math.sin(query.anim_time * 90)"
           ]
         },
         "capsule": {

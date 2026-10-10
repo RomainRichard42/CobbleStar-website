@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {inflateRawSync} from 'node:zlib';
+import {createHash} from 'node:crypto';
 import {buildStarPack,png} from '../dist/star-assets.js';
 import {appendMascotAssets} from '../dist/mascot-assets.js';
 const root='assets/cobblestar_planets/';
@@ -13,6 +14,14 @@ for(const id of ['astreval','basteros','ludilux'])test(id+': approved native mod
  const animation=json(`bedrock/pokemon/animations/mascots/${id}/${id}.animation.json`).animations;
  const poser=json(`bedrock/pokemon/posers/mascots/${id}/${id}.json`),resolver=json(`bedrock/pokemon/resolvers/mascots/${id}/0_${id}_base.json`);
  const bones=new Set(geo.bones.map(b=>b.name));assert.equal(bones.size,geo.bones.length);assert.equal(poser.rootBone,id);assert.ok(bones.size>=25);
+ const primitives=geo.bones.flatMap(b=>b.cubes);
+ assert.ok(primitives.length<180,'No sliced-ellipsoid regression');
+ assert.ok(primitives.filter(c=>c.size.includes(0)).length>80,'Faceted surfaces/painted details retained');
+ assert.ok(new Set(primitives.map(c=>c.uv.join(','))).size>=45,'Individual unwrapped atlas, not shared material swatches');
+ assert.equal(geo.description.texture_width,256);assert.equal(geo.description.texture_height,256);
+ for(const c of primitives){const [w,h,d]=c.size,[u,v]=c.uv;assert.ok(c.uv.length===2&&c.uv.every(Number.isInteger));assert.ok(u>=0&&v>=0&&u+2*(w+d)<=256&&v+h+d<=256);}
+ const star=geo.bones.find(b=>b.name===(id==='astreval'?'forehead_star':'chest_star'));
+ assert.equal(star.pivot[0],0);assert.equal(star.cubes[0].origin[0]+star.cubes[0].size[0]/2,0);
  for(const a of Object.values(animation))for(const [bone,channels]of Object.entries(a.bones)){
   assert.ok(bones.has(bone),bone);for(const value of Object.values(channels))if(!Array.isArray(value)&&typeof value==='object')for(const time of Object.keys(value))assert.ok(Number(time)<=a.animation_length,time);
  }
@@ -22,6 +31,9 @@ for(const id of ['astreval','basteros','ludilux'])test(id+': approved native mod
  assert.ok(animation[`animation.${id}.walk`]);assert.ok(animation[`animation.${id}.special`]);
  if(id==='astreval'){const wings=animation['animation.astreval.special'].bones;assert.ok(wings.left_wing.rotation['.35'][2]>0);assert.ok(wings.right_wing.rotation['.35'][2]<0);}
  assert.ok(JSON.parse(files.get(root+'lang/fr_fr.json'))['cobblestar_planets.species.'+id+'.name']);assert.ok(JSON.parse(files.get(root+'sounds.json'))[id+'.cry']);
+});
+test('Distinct painted normal/shiny/glow atlases for all three approved mascots',()=>{
+ for(const suffix of ['','_shiny','_glow','_glow_shiny'])assert.equal(new Set(['astreval','basteros','ludilux'].map(id=>createHash('sha256').update(files.get(root+`textures/pokemon/mascots/${id}/${id}${suffix}.png`)).digest('hex'))).size,3);
 });
 test('Mascot append preserves old resources and rejects duplicate overwrites',()=>{
  const map=new Map([[root+'lang/fr_fr.json',Buffer.from('{"existing":"conservé"}')],[root+'sounds.json',Buffer.from('{"old.event":{"sounds":[]}}')]]);
