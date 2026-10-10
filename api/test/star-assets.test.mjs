@@ -241,10 +241,10 @@ test('Shared pack includes both regional starter trios without changing native s
  }
  assert.ok([...files.keys()].every(path=>!path.startsWith('assets/cobblemon/')));
 });
-test('Regional pack ships 30 species including legacy forms and three distinct female rigs',()=>{
+test('Regional pack ships 30 species with separate Asteria amphibians, legacy forms and three distinct female rigs',()=>{
  const files=unpack(buildStarPack([],[]));
  const geometries=[...files.keys()].filter(p=>p.includes('/models/regional/')&&p.endsWith('.geo.json'));
- assert.equal(geometries.length,33);
+ assert.equal(geometries.length,36);
  for(const species of ['torchic','combusken','blaziken']){
   const r=JSON.parse(files.get(`assets/cobblestar_planets/bedrock/pokemon/resolvers/regional/${species}_nebelia.json`));
   const female=r.variations.find(v=>v.aspects.includes('female')&&!v.aspects.includes('shiny'));
