@@ -1,5 +1,11 @@
 # Starters régionaux CobbleStar (Cobblemon 1.8.0)
 
+## Dracaufeu Feu/Électrik et Aligatueur Eau/Acier — refonte d'octobre
+
+Les deux formes d'Astéria reprennent les concepts validés : Dracaufeu sombre aux ailes découpées en éclair, cornes fourchues, cou renforcé, plaques incandescentes et queue conductrice ; Aligatueur pétrole aux plaques d'acier, nageoires dorsales renforcées, branchies, protections d'avant-bras et queue-gouvernail. Leurs articulations et posers officiels sont conservés, notamment le vol de Dracaufeu et la nage d'Aligatueur. Les chromatiques et yeux Alpha sont inclus. L'énergie et la flamme de Dracaufeu utilisent quatre images animées à 10 images/s, dans le format natif du résolveur Cobblemon ; les couches émissives ne sont pas des marques Star.
+
+La livraison est exclusivement dans le pack obligatoire : récupérer cette publication puis redémarrer/déployer l'API. La synchronisation serveur reconstruit le pack partagé, y compris sans publication Star. Aucun nouveau JAR n'est requis pour cette refonte visuelle si les formes régionales sont déjà installées. Elle ne change ni les types, ni les attaques, ni les résultats d'évolution et ne remplace pas les Pokémon ordinaires. Le correctif distinct de conservation des formes face aux addons Mega/ZA reste une modification du mod (6.50.2). Les contrôles de modèles et de pack ne remplacent pas une vérification en jeu avec les shaders utilisés.
+
 ## Lignée fleurie d'Astéria — dessin de Shiroe
 
 Germignon, Macronium et Méganium Plante/Fée utilisent désormais le design crème/pêche/ivoire et rose : grand pétale en cœur et perles roses, bourgeon et collerette de pétales avec cristaux, puis grande fleur et branches fleuries. Les nouveaux volumes restent sur le squelette officiel ; les posers Cobblemon et les identifiants `cobblestar_asteria` sont inchangés. Les Pokémon ordinaires ne sont pas remplacés. Les textures chromatiques lilas/turquoise et la couche yeux Alpha sont incluses.
