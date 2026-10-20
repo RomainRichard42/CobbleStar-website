@@ -121,24 +121,56 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
     const id = s.channels[kind];
     if (!id) return userError(`Salon ${kind} non configuré.`);
     const c = await textChannel(id);
+    // Only the configured ticket archive is repaired. Never broaden access or
+    // rewrite unrelated community channels when game roles are synchronized.
+    if (kind === "tickets") await secureTicketJournal(c, s);
     if (["private", "chat", "moderation", "tickets", "members"].includes(kind)) {
       const allowed = kind === "private" || kind === "chat" ? s.adminRole : s.staffRole;
       if (!allowed) return userError("Rôle autorisé non configuré.");
       // Fail closed: no broad role/member overwrite may grant access to sensitive logs.
       const roles = await c.guild.roles.fetch();
+      const authorizedRoles = new Set([allowed, s.adminRole].filter(Boolean));
       for (const role of roles.values()) {
-        if (!role || role.id === allowed || role.permissions.has(P.Administrator) || role.tags?.botId === client.user!.id) continue;
+        if (!role || authorizedRoles.has(role.id) || role.permissions.has(P.Administrator) || role.tags?.botId === client.user!.id) continue;
         if (c.permissionsFor(role).has(P.ViewChannel)) return userError("Ce journal est visible par un rôle non autorisé. Corrige ses permissions.");
       }
       for (const overwrite of c.permissionOverwrites.cache.values()) {
         if (overwrite.type !== 1 || !overwrite.allow.has(P.ViewChannel) || overwrite.id === client.user!.id) continue;
         const m = await member(c.guild, overwrite.id);
-        if (!isAdmin(m) && !m.roles.cache.has(allowed)) return userError("Un membre non autorisé peut lire ce journal.");
+        if (!isAdmin(m) && ![...authorizedRoles].some(id => m.roles.cache.has(id!))) return userError("Un membre non autorisé peut lire ce journal.");
       }
     }
     const me = await c.guild.members.fetchMe();
     if (!c.permissionsFor(me).has([P.ViewChannel,P.SendMessages,P.AttachFiles])) return userError("Le bot doit pouvoir lire, envoyer et joindre des fichiers dans ce salon.");
     return c;
+  }
+  async function secureTicketJournal(c: TextChannel, s: Settings) {
+    const roles = await c.guild.roles.fetch();
+    if (!s.staffRole || s.staffRole === c.guild.id || !roles.has(s.staffRole)) return userError("Configure d’abord un rôle staff valide.");
+    const allowed = new Set([s.staffRole, s.adminRole].filter((id): id is string => !!id && id !== c.guild.id));
+    const next = new Map<string, {id:string;type:0|1;allow:bigint;deny:bigint}>();
+    for (const o of c.permissionOverwrites.cache.values()) {
+      let authorized = o.id === client.user!.id;
+      if (o.type === 0) authorized ||= allowed.has(o.id) || !!roles.get(o.id)?.permissions.has(P.Administrator);
+      else if (!authorized) {
+        const m = await member(c.guild, o.id).catch(() => null);
+        authorized = !!m && (isAdmin(m) || [...allowed].some(id => m.roles.cache.has(id)));
+      }
+      next.set(o.id, {id:o.id,type:o.type,allow:authorized?o.allow.bitfield:o.allow.bitfield & ~P.ViewChannel,
+        deny:authorized?o.deny.bitfield:o.deny.bitfield | P.ViewChannel});
+    }
+    const grant = (id:string,type:0|1,bits:bigint) => {
+      const o=next.get(id) ?? {id,type,allow:0n,deny:0n};
+      next.set(id,{...o,allow:o.allow|bits,deny:o.deny & ~bits});
+    };
+    const everyone=next.get(c.guild.id) ?? {id:c.guild.id,type:0 as const,allow:0n,deny:0n};
+    next.set(c.guild.id,{...everyone,allow:everyone.allow & ~P.ViewChannel,deny:everyone.deny | P.ViewChannel});
+    for (const id of allowed) if (roles.has(id)) grant(id,0,P.ViewChannel|P.ReadMessageHistory);
+    grant(client.user!.id,1,P.ViewChannel|P.ReadMessageHistory|P.SendMessages|P.AttachFiles);
+    const changed=next.size!==c.permissionOverwrites.cache.size || [...next.values()].some(o=>{
+      const old=c.permissionOverwrites.cache.get(o.id);return !old||old.allow.bitfield!==o.allow||old.deny.bitfield!==o.deny;
+    });
+    if(changed) await c.permissionOverwrites.set([...next.values()],"CobbleStar : journal tickets réservé au staff et aux administrateurs");
   }
   async function privateOverwrites(g: Guild, s: Settings, owner: string, members: string[] = [], closed = false) {
     if (!s.staffRole || !g.roles.cache.has(s.staffRole)) return userError("Configure d’abord le rôle staff.");
@@ -162,7 +194,10 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
   async function createTicket(i: ModalSubmitInteraction, s: Settings) {
     const id = randomUUID(), g = await guild();
     if (!s.categories.reception) return userError("Catégorie réception non configurée.");
-    await destination(s,"tickets");
+    // A broken archive must not prevent a player from contacting support.
+    // Closing/exporting still requires a verified private destination.
+    try { await destination(s,"tickets"); }
+    catch { log.warn("Journal tickets à vérifier ; le ticket sera créé avec ses permissions privées indépendantes."); }
     const subject = plain(i.fields.getTextInputValue("subject"),120), description = plain(i.fields.getTextInputValue("description"),3000);
     // Serialize duplicate clicks/requests per owner through a SQL advisory lock.
     const conn = await pool.getConnection();

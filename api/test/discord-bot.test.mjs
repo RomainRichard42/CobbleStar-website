@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {EventEmitter} from 'node:events';
-import {Collection,Events,ChannelType,PermissionFlagsBits as P} from 'discord.js';
+import {Collection,Events,ChannelType,PermissionFlagsBits as P,PermissionsBitField} from 'discord.js';
 
 test('Ticket workflow with mocked Discord: permissions, claim, moves, members, confirmation and archives',async()=>{
   Object.assign(process.env,{NODE_ENV:'test',PUBLIC_API_URL:'http://localhost:3000',SITE_ORIGIN:'http://localhost:3000',DB_HOST:'127.0.0.1',DB_NAME:'test',DB_USER:'test',DB_PASSWORD:'test',COOKIE_SECRET:'a'.repeat(40),MINECRAFT_SERVER_KEY:'b'.repeat(40),DISCORD_BOT_TOKEN:'fake-never-connect',DISCORD_GUILD_ID:'123456789012345670'});
@@ -16,8 +16,11 @@ test('Ticket workflow with mocked Discord: permissions, claim, moves, members, c
   function channel(id,topic=null) {
     const messages=new Collection();
     const c={id,type:ChannelType.GuildText,guildId:ids.guild,guild,topic,parent:null,overwrites:[],
-      permissionsFor:r=>({has:()=>[ids.staff,ids.admin,ids.bot].includes(r.id)}),
-      permissionOverwrites:{cache:new Collection(),set:async values=>{c.overwrites=values;}},
+      permissionsFor:r=>({has:()=>{
+        if([ids.staff,ids.admin,ids.bot].includes(r.id))return true;
+        return !!c.permissionOverwrites.cache.get(r.id)?.allow.has(P.ViewChannel);
+      }}),
+      permissionOverwrites:{cache:new Collection(),set:async values=>{c.overwrites=values;c.permissionOverwrites.cache=new Collection(values.map(o=>[o.id,{...o,type:o.type??(roles.has(o.id)?0:1),allow:new PermissionsBitField(o.allow??[]),deny:new PermissionsBitField(o.deny??[])}]));}},
       setParent:async parent=>{c.parent=parent;},
       messages:{fetch:async({before}={})=>before?new Collection():new Collection(messages)},
       send:async payload=>{
@@ -78,6 +81,8 @@ test('Ticket workflow with mocked Discord: permissions, claim, moves, members, c
   try {
     stop=await startDiscordBot({info:()=>{},warn:()=>{}},()=>client);
     assert.deepEqual(registered.map(c=>c.name),['csconfig','ticket','evenement','parrainage','parrainage-admin']);
+    const form=await dispatch(ids.owner,'public',null,{customId:'cs:ticket:create'},'button');
+    assert.equal(form.data.custom_id,'cs:ticket:form','existing player panel opens the form');
     const created=await dispatch(ids.owner,'public',null,{subject:'Bug',description:'Une demande'},'modal');
     assert.match(created.content,/Ton ticket/);assert.equal(tickets.size,1);
     const t=[...tickets.values()][0],c=channels.get(t.channel_id);
@@ -94,11 +99,20 @@ test('Ticket workflow with mocked Discord: permissions, claim, moves, members, c
     assert.ok(posts.some(p=>p.channel===ids.archive&&p.payload.files?.[0].name.endsWith('.txt')));
     assert.ok(posts.some(p=>p.channel===ids.archive&&p.payload.content.includes('Résolu et vérifié')));
     assert.ok(c.overwrites.find(o=>o.id===ids.owner).deny.includes(P.SendMessages));assert.ok(channels.has(c.id));
-    const archive=channels.get(ids.archive),permissions=archive.permissionsFor;
-    archive.permissionsFor=()=>({has:()=>true});
-    assert.match((await dispatch(ids.owner,'public',null,{subject:'Autre',description:'Demande suivante'},'modal')).content,/visible par un rôle/);
-    assert.equal(tickets.size,1);archive.permissionsFor=permissions;
-    await dispatch(ids.owner,'public',null,{subject:'Autre',description:'Demande suivante'},'modal');
+    const archive=channels.get(ids.archive);
+    const cosmetic='123456789012345699';roles.set(cosmetic,role(cosmetic));
+    // A synchronized game rank accidentally inherited permission to read the journal.
+    await archive.permissionOverwrites.set([{id:ids.guild,type:0,allow:[P.ViewChannel]},
+      {id:cosmetic,type:0,allow:[P.ViewChannel,P.AddReactions]},
+      {id:ids.outsider,type:1,allow:[P.ViewChannel]}]);
+    const recovered=await dispatch(ids.owner,'public',null,{subject:'Autre',description:'Demande suivante'},'modal');
+    assert.match(recovered.content,/Ton ticket/);assert.equal(tickets.size,2);
+    for(const id of [ids.guild,cosmetic,ids.outsider]){
+      assert.ok(archive.permissionOverwrites.cache.get(id).deny.has(P.ViewChannel));
+      assert.ok(!archive.permissionOverwrites.cache.get(id).allow.has(P.ViewChannel));
+    }
+    assert.ok(archive.permissionOverwrites.cache.get(cosmetic).allow.has(P.AddReactions),'unrelated permissions preserved');
+    assert.ok(archive.permissionOverwrites.cache.get(ids.admin).allow.has(P.ViewChannel));
     const t2=[...tickets.values()][1],c2=channels.get(t2.channel_id);
     assert.match((await dispatch(ids.outsider,c2.id,'forcer-fermeture',{resume:'forgé'})).content,/staff/);
     const send=archive.send;archive.send=async()=>{throw new Error('Discord unavailable');};
@@ -107,5 +121,13 @@ test('Ticket workflow with mocked Discord: permissions, claim, moves, members, c
     assert.ok(c2.overwrites.find(o=>o.id===ids.owner).allow.includes(P.SendMessages));
     archive.send=send;
     await dispatch(ids.helper,c2.id,'forcer-fermeture',{resume:'Résolu'});assert.equal(t2.status,'closed');
+    // Loss of ManageRoles on the archive must not disable private support tickets.
+    archive.permissionOverwrites.cache.clear();
+    const set=archive.permissionOverwrites.set;archive.permissionOverwrites.set=async()=>{throw new Error('Missing Permissions');};
+    assert.match((await dispatch(ids.owner,'public',null,{subject:'Aide',description:'Archive indisponible'},'modal')).content,/Ton ticket/);
+    const t3=[...tickets.values()][2];
+    assert.match((await dispatch(ids.helper,t3.channel_id,'forcer-fermeture',{resume:'Fini'})).content,/non terminée/);
+    assert.notEqual(t3.status,'closed','cannot archive private messages into an unverified destination');
+    archive.permissionOverwrites.set=set;
   }finally{await stop?.();Object.assign(pool,saved);await pool.end();}
 });
