@@ -17,7 +17,7 @@ export function registerDiscordBridge(app: FastifyInstance, authorized: (request
       if (!s.channels[e.kind] || (e.kind === "private" && (!s.privateEnabled || !s.adminRole))) { disabled.push(e.id); continue; }
       if (Math.abs(Date.now() - e.occurredAt) > 24 * 3600_000) { disabled.push(e.id); continue; }
       const stamp = new Date(e.occurredAt).toISOString();
-      await enqueue(e.kind, `[${parsed.data.serverId}] ${stamp}\n${e.text}`, `${parsed.data.serverId}:${e.id}`);
+      await enqueue(e.kind, `[${parsed.data.serverId}] ${stamp}\n${e.text}`, `${parsed.data.serverId}:${e.id}`, e.listing);
       accepted.push(e.id);
     }
     return {accepted, disabled};

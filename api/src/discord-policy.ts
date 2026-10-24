@@ -23,6 +23,16 @@ export const settingsSchema = z.object({
   statusCategory: snowflake.optional(), statusChannel: snowflake.optional(), playersChannel: snowflake.optional(),
 });
 export type Settings = z.infer<typeof settingsSchema>;
+export const gtsListingSchema = z.object({
+  mode: z.enum(["sale", "auction"]),
+  type: z.enum(["pokemon", "item"]),
+  name: z.string().min(1).max(300),
+  seller: z.string().min(1).max(100),
+  count: z.number().int().positive().max(1000000),
+  price: z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER),
+  endsAt: z.number().int().positive().max(8640000000000000).optional(),
+}).strict().refine(v => v.mode !== "auction" || v.endsAt !== undefined, {message: "Auction end is required"});
+export type GtsListing = z.infer<typeof gtsListingSchema>;
 export const bridgeSchema = z.object({
   serverId: z.string().regex(/^[a-zA-Z0-9_-]{1,48}$/),
   events: z.array(z.object({
@@ -30,7 +40,8 @@ export const bridgeSchema = z.object({
     kind: z.enum(["gts", "chat", "private", "minigame"]),
     text: z.string().min(1).max(6000),
     occurredAt: z.number().int().positive(),
-  }).strict()).max(25),
+    listing: gtsListingSchema.optional(),
+  }).strict().refine(e => !e.listing || e.kind === "gts")).max(25),
 }).strict();
 
 export function plain(value: unknown, limit = 1800): string {

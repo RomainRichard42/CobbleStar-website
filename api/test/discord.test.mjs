@@ -58,5 +58,10 @@ test('Authenticated ingest is bounded, idempotent and drops disabled private log
     cfg={...cfg,adminRole:'123456789012345688'};await request([event('two','private')]);assert.equal(inserted.size,2);
     const old=await request([{...event('stale','chat'),occurredAt:now-25*3600_000}]);assert.deepEqual(old.json().disabled,['stale']);
     assert.ok(inserted.has('main:one'));assert.ok(inserted.has('main:two'));
+    cfg={...cfg,channels:{...cfg.channels,gts:'123456789012345690'}};
+    const listing={mode:'auction',type:'pokemon',name:'Piplup',seller:'Alice',count:1,price:100,endsAt:now+3600000};
+    const posted=await request([{...event('sale','gts'),listing}]);
+    assert.equal(posted.statusCode,200);
+    assert.deepEqual(JSON.parse(inserted.get('main:sale')[2]).listing,listing);
   } finally {pool.query=original.query;pool.execute=original.execute;await app.close();await pool.end();}
 });

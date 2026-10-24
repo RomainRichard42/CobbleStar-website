@@ -1,4 +1,5 @@
 import { randomUUID } from "node:crypto";
+import { gtsMessage } from "./discord-gts-message.js";
 import {
   ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, ChannelType, Client,
   Events, GatewayIntentBits, MessageFlags, ModalBuilder, Partials, PermissionFlagsBits as P, Routes,
@@ -505,7 +506,10 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
           if(kind==="private"&&!s.privateEnabled) { await pool.execute("DELETE FROM discord_event_outbox WHERE id=?",[e.id]); continue; }
           const c=await destination(s,kind), body=json<{text:string}>(e.body);
           // One Discord request per event: long messages become plain text attachments.
-          const payload={content:plain(body.text,1900),...(body.text.length>1900?{files:[new AttachmentBuilder(Buffer.from(body.text,"utf8"),{name:"journal.txt"})]}:{}),allowedMentions:noMentions};
+          const payload=kind==="gts" ? gtsMessage(body, {
+            pokemon:c.guild.emojis.cache.find(emoji=>emoji.name==="cs_pokemon" && emoji.available)?.toString(),
+            item:c.guild.emojis.cache.find(emoji=>emoji.name==="cs_item" && emoji.available)?.toString(),
+          }) : {content:plain(body.text,1900),...(body.text.length>1900?{files:[new AttachmentBuilder(Buffer.from(body.text,"utf8"),{name:"journal.txt"})]}:{}),allowedMentions:noMentions};
           if(["gts","minigame"].includes(kind)) await c.send(payload); else await sendLog(c,payload);
           await pool.execute("UPDATE discord_event_outbox SET delivered_at=NOW(),body=? WHERE id=?",[JSON.stringify({text:"Livré"}),e.id]);
         } catch {

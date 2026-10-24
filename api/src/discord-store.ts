@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import type { RowDataPacket } from "mysql2/promise";
 import { pool } from "./db.js";
 import { config } from "./config.js";
-import { settingsSchema, type EventKind, type Settings } from "./discord-policy.js";
+import { settingsSchema, type EventKind, type Settings, type GtsListing } from "./discord-policy.js";
 
 export function json<T>(value: T | string): T { return typeof value === "string" ? JSON.parse(value) as T : value; }
 export async function settings(): Promise<Settings> {
@@ -13,8 +13,8 @@ export async function saveSettings(value: Settings) {
   await pool.execute("INSERT INTO discord_settings (guild_id,settings) VALUES (?,?) ON DUPLICATE KEY UPDATE settings=VALUES(settings)",
     [config.DISCORD_GUILD_ID, JSON.stringify(settingsSchema.parse(value))]);
 }
-export async function enqueue(kind: EventKind, text: string, id: string = randomUUID()) {
-  await pool.execute("INSERT IGNORE INTO discord_event_outbox (id,kind,body) VALUES (?,?,?)", [id, kind, JSON.stringify({text})]);
+export async function enqueue(kind: EventKind, text: string, id: string = randomUUID(), listing?: GtsListing) {
+  await pool.execute("INSERT IGNORE INTO discord_event_outbox (id,kind,body) VALUES (?,?,?)", [id, kind, JSON.stringify({text, ...(listing ? {listing} : {})})]);
 }
 export interface Ticket extends RowDataPacket {
   id: string; owner_id: string; channel_id: string; subject: string; description: string;
