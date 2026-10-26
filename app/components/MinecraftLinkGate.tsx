@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type GateState = "loading" | "signed-out" | "linked" | "code" | "error";
 
@@ -8,6 +8,10 @@ export default function MinecraftLinkGate({ open, onClose, context }: { open: bo
   const [copied, setCopied] = useState(false);
   const [state, setState] = useState<GateState>("loading");
   const [command, setCommand] = useState("");
+  const dialogRef = useRef<HTMLElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const closeRef = useRef(onClose);
+  useEffect(() => { closeRef.current = onClose; }, [onClose]);
 
   useEffect(() => {
     if (!open) return;
@@ -21,16 +25,24 @@ export default function MinecraftLinkGate({ open, onClose, context }: { open: bo
   useEffect(() => {
     if (!open) return;
     const previousOverflow = document.body.style.overflow;
+    triggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    dialogRef.current?.querySelector<HTMLButtonElement>('button')?.focus();
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
+      if (event.key === "Escape") { event.preventDefault(); closeRef.current(); }
+      if (event.key !== "Tab") return;
+      const elements = [...(dialogRef.current?.querySelectorAll<HTMLElement>('a[href],button:not([disabled]),input:not([disabled]),[tabindex="0"]') || [])].filter(el=>el.getClientRects().length);
+      const first = elements[0], last = elements.at(-1);
+      if (event.shiftKey && (document.activeElement === first || !dialogRef.current?.contains(document.activeElement))) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && (document.activeElement === last || !dialogRef.current?.contains(document.activeElement))) { event.preventDefault(); first?.focus(); }
     };
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", closeOnEscape);
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", closeOnEscape);
+      triggerRef.current?.focus({ preventScroll: true });
     };
-  }, [open, onClose]);
+  }, [open]);
 
   async function prepare() {
     try {
@@ -54,8 +66,8 @@ export default function MinecraftLinkGate({ open, onClose, context }: { open: bo
 
   if (!open) return null;
   return <div className="checkout-overlay" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
-    <section className="link-gate-modal" role="dialog" aria-modal="true" aria-labelledby="link-gate-title" aria-describedby="link-gate-description">
-      <button className="checkout-close" type="button" onClick={onClose} aria-label="Fermer la vérification" autoFocus>×</button>
+    <section ref={dialogRef} className="link-gate-modal" role="dialog" aria-modal="true" aria-labelledby="link-gate-title" aria-describedby="link-gate-description">
+      <button className="checkout-close" type="button" onClick={onClose} aria-label="Fermer la vérification">×</button>
       <div className="link-gate-status"><span>PREMIÈRE {context === "achat" ? "RECHARGE" : "PARTICIPATION"}</span><i>{state === "linked" ? "COMPTE LIÉ" : "VÉRIFICATION"}</i></div>
       <h2 id="link-gate-title">Confirme ton compte<br /><em>depuis le serveur.</em></h2>
       <div id="link-gate-description" aria-live="polite">

@@ -14,7 +14,10 @@
   function focusTarget(el){const dest=focusableTarget(el);if(!dest)return;if(!dest.hasAttribute('tabindex'))dest.setAttribute('tabindex','-1');dest.focus({preventScroll:true})}
   function measureSoon(){if(!measureQueued){measureQueued=true;requestAnimationFrame(()=>{measureQueued=false;measure()})}}
   function measure(){
-    headerH=$('.site-header').offsetHeight;stageH=Math.max(400,innerHeight-headerH);snap=stepped&&!reduced.matches;story=motion&&snap&&room.matches&&stageH>=490;root.classList.toggle('snap-layout',snap);
+    snap=stepped&&!reduced.matches;root.classList.toggle('snap-layout',snap);
+    const controls=$('.journey-controls');
+    headerH=$('.site-header').offsetHeight+(getComputedStyle(controls).position==='sticky'?controls.offsetHeight:0);
+    stageH=Math.max(240,innerHeight-headerH);story=motion&&snap&&room.matches&&stageH>=490;
     root.style.setProperty('--stage-header',headerH+'px');root.style.setProperty('--stage-height',stageH+'px');
     heroRange=stageH*1.25;horizontalDistance=stageH*.9;root.style.setProperty('--opening-distance',(heroRange+horizontalDistance*2)+'px');
     root.classList.toggle('story-layout',story);root.classList.toggle('linear-layout',!story);root.classList.toggle('motion-off',!motion);
@@ -25,11 +28,11 @@
     heroTop=Math.max(0,top(runway)-headerH);maxY=Math.max(0,root.scrollHeight-innerHeight);steps=[];
     const add=(y,name,el,extra={})=>{y=Math.max(0,Math.min(maxY,y));const last=steps.at(-1);if(last&&Math.abs(last.y-y)<8&&extra.rail===undefined)return;steps.push({y,name,el,...extra})};
     if(story){add(heroTop,'Accueil',panels[0],{panel:0});add(heroTop+heroRange+horizontalDistance,'Vidéo Cobblemon',panels[1],{panel:1});add(heroTop+heroRange+horizontalDistance*2,'Photos de Cobblemon',panels[2],{panel:2})}
-    else panels.forEach((p,i)=>{const start=Math.max(0,top(p)-headerH),usable=Math.max(240,stageH-50),name=['Accueil','Vidéo Cobblemon','Photos de Cobblemon'][i];add(start,name,p,{panel:i});for(let offset=usable;offset<p.offsetHeight;offset+=usable){const y=start+Math.min(offset,Math.max(0,p.offsetHeight-usable));if(y>start+8)add(y,name,p,{panel:i})}});
+    else panels.forEach((p,i)=>{const start=Math.max(0,top(p)-headerH),usable=Math.max(240,stageH-50),name=['Accueil','Vidéo Cobblemon','Photos de Cobblemon'][i];add(start,name,p,{panel:i});M.readingOffsets(p.offsetHeight,usable).forEach(offset=>add(start+offset,name,p,{panel:i}))});
     for(const section of $$('main>section:not(.opening-runway),body>footer')){
-      const start=Math.max(0,top(section)-headerH),usable=Math.max(320,innerHeight-headerH-40),height=section.offsetHeight,name=section.querySelector('h2')?.textContent.trim()||'CobbleStar';
+      const start=Math.max(0,top(section)-headerH),usable=Math.max(200,stageH-80),height=section.offsetHeight,name=section.querySelector('h2')?.textContent.trim()||'CobbleStar';
       if(section.classList.contains('activity-runway'))railCards.forEach((card,i)=>add(start,['GTS','Pension','Raids','Métiers'][i],card,{rail:Math.min(rail.scrollWidth-rail.clientWidth,Math.max(0,card.offsetLeft-railCards[0].offsetLeft))}));else add(start,name,section);
-      if(height>usable+80){const count=Math.ceil((height-usable)/usable);for(let i=1;i<=count;i++)add(start+Math.min(i*usable,height-usable),name,section)}
+      M.readingOffsets(height,usable).forEach(offset=>add(start+offset,name,section));
     }
     add(maxY,'Bas de page',$('footer'));active=Math.min(active,steps.length-1);lastVisual=-1;draw();
   }
@@ -102,7 +105,7 @@
   $('.motion-button').onclick=()=>{motion=!motion&&!reduced.matches;updatePreferences()};$('.step-mode').onclick=()=>{stepped=!stepped;updatePreferences()};
   addEventListener('message',event=>{if(event.source===parent&&event.data?.type==='cobblestar-motion'&&typeof event.data.enabled==='boolean'){motion=event.data.enabled&&!reduced.matches;updatePreferences(false)}});
   reduced.addEventListener('change',()=>{motion=!reduced.matches;updatePreferences()});room.addEventListener('change',measureSoon);
-  rail.addEventListener('scroll',request,{passive:true});addEventListener('scroll',request,{passive:true});addEventListener('resize',measureSoon,{passive:true});addEventListener('load',measureSoon);
+  rail.addEventListener('scroll',request,{passive:true});addEventListener('scroll',request,{passive:true});addEventListener('resize',measureSoon,{passive:true});addEventListener('load',()=>{measure();if(location.hash){const dest=document.getElementById(location.hash.slice(1));if(dest){const index=steps.findIndex(s=>s.el===dest||s.el.contains(dest));if(index>=0)go(index,{instant:true})}}});
   $$('img').forEach(img=>{if(!img.complete)img.addEventListener('load',measureSoon,{once:true})});$$('.faq details,.preview-tools').forEach(d=>d.addEventListener('toggle',measureSoon));
   if('ResizeObserver' in window)new ResizeObserver(measureSoon).observe($('.site-header'));
   addEventListener('beforeunload',()=>{if(localVideoURL)URL.revokeObjectURL(localVideoURL);photoURLs.forEach(URL.revokeObjectURL)});

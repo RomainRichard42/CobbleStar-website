@@ -57,6 +57,6 @@ test('Astral covers public and player pages while admin keeps its own shell',asy
   for(const path of ['/admin/','/admin/discord/','/wiki/admin/','/actualites/admin/']){
     const {html}=await get(path);assert.ok(!html.includes('class="astral-header site-header"'),path);
   }
-  const home=await get('/');assert.ok(!home.html.includes('local-gameplay'));assert.ok(home.html.includes('/astral/journey.js?v=public-1'));assert.ok(home.html.includes('prefers')||home.html.includes('motion.js'));assert.ok(home.html.includes('Ouverture à venir'));
+  const home=await get('/');assert.ok(!home.html.includes('local-gameplay'));assert.match(home.html,/\/astral\/journey\.js\?v=[a-z0-9-]+/);assert.ok(home.html.includes('prefers')||home.html.includes('motion.js'));assert.ok(home.html.includes('Ouverture à venir'));
   const image=await get('/astral/assets/stars-320.webp');assert.equal(image.response.status,200);assert.match(image.response.headers.get('content-type'),/image\/webp/);
 });

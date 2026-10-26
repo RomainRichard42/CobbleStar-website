@@ -162,6 +162,11 @@ export default function InGameShopPrototype() {
     setSelectedId(product.id);
     setQuantity(1);
     setNotice("");
+    if (window.matchMedia("(max-width: 850px)").matches) requestAnimationFrame(() => {
+      const details = document.getElementById("product-details");
+      details?.scrollIntoView({ block: "start", behavior: "instant" });
+      details?.focus({ preventScroll: true });
+    });
   }
 
   function changeTab(next: "featured" | "catalog" | "new") {
@@ -247,7 +252,7 @@ export default function InGameShopPrototype() {
           </div> : <div className={styles.empty}><span>◇</span><b>Aucune offre dans cette sélection</b><p>Essaie une autre catégorie ou efface ta recherche.</p></div>}
         </section>
 
-        <aside className={styles.details} style={{ "--accent": selected.visual.accent } as React.CSSProperties}>
+        <aside id="product-details" tabIndex={-1} aria-label="Détails de l’offre sélectionnée" className={styles.details} style={{ "--accent": selected.visual.accent } as React.CSSProperties}>
           <div className={styles.detailTop}><span>OFFRE SÉLECTIONNÉE</span><b>{selected.visual.badge || "COBBLESTAR"}</b></div>
           <div className={styles.detailArtwork}><ProductArtwork product={selected} large /><span className={styles.scanLine} /></div>
           <div className={styles.detailCopy}>

@@ -89,3 +89,40 @@ body:has(.astral-header) .vote-board-page{background:#130f22;color:#fff4dc;overf
 @media(max-width:720px){:is(.astral-account-page,.shop-quick-page,.vote-board-page) .faq-section{grid-template-columns:1fr;padding:48px 22px;gap:26px}:is(.astral-public,body:has(.astral-header)) .site-footer{padding:42px 22px 28px}:is(.astral-public,body:has(.astral-header)) .site-footer .site-footer-inner{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 22px}:is(.astral-public,body:has(.astral-header)) .site-footer .footer-column:last-of-type{grid-column:1/-1}:is(.astral-public,body:has(.astral-header)) .site-footer .footer-bottom{display:block}:is(.astral-public,body:has(.astral-header)) .site-footer .footer-bottom span{display:block;margin-bottom:10px}.astral-home .site-footer .astral-display{display:block}.astral-home .site-footer .astral-display p{margin-top:18px}}
 .astral-home.astral-v6 .creation-visual>img{mix-blend-mode:normal;max-width:400px;width:85%;border:1px solid #665072;border-radius:4px;box-shadow:0 16px 40px #0004;filter:brightness(.88)}
 @media(min-width:721px){:is(.astral-public,body:has(.astral-header)) .site-footer{padding-inline:max(36px,calc((100% - 1240px)/2))}:is(.astral-account-page,.shop-quick-page,.vote-board-page) .faq-section{padding-inline:max(36px,calc((100% - 1240px)/2))}}
+
+/* Player audit: readable links, one gutter, and room for keyboard/touch controls. */
+.astral-public .public-prose a:not(.public-button),.astral-public .breadcrumbs a{color:#ddbbea}
+.astral-public .public-prose a:not(.public-button):hover,.astral-public .breadcrumbs a:hover{color:#ffe0a6}
+.astral-public .public-prose,.astral-public .legal-content{min-width:0;overflow-wrap:anywhere}
+.astral-public .public-prose pre{max-width:100%;overflow-x:auto;white-space:pre-wrap}
+.astral-public .table-scroll{max-width:100%;overflow-x:auto}
+.astral-public .legal-content{width:100%}
+.shop-quick-page .shop-quick-shell{width:100%}
+.shop-quick-page :is(.shop-v2-popular,.shop-v2-item>small,.shop-quick-trust>span){font-size:14px}
+:is(.astral-public,body:has(.astral-header)){color-scheme:dark}
+:is(.astral-public,body:has(.astral-header)) :focus-visible{outline-color:#efbf70}
+:is(.astral-public,body:has(.astral-header)) .site-footer .footer-column a{min-height:36px;display:inline-flex;align-items:center}
+body:has(.astral-header) .checkout-overlay{padding:24px;overflow-y:auto;overscroll-behavior:contain}
+body:has(.astral-header) .link-gate-modal{max-height:calc(100dvh - 48px);overflow-y:auto;overscroll-behavior:contain;background:#21172e;border-color:#80608d;color:#fff4dc}
+body:has(.astral-header) .link-gate-modal :is(p,small){color:#d2c5df}
+body:has(.astral-header) .link-command-card code{white-space:normal;overflow-wrap:anywhere}
+.astral-menu nav{overscroll-behavior:contain}
+@media(max-width:720px){
+ .vote-board-page .vote-board-intro{border-left:0;padding-left:0}
+ .vote-board-page .vote-board-intro h1,.astral-account-page [class*="_intro"] h1,.shop-quick-page .shop-quick-header h1{font-size:clamp(42px,12vw,56px);line-height:1.05}
+ .astral-public .public-prose h1{font-size:clamp(38px,10.8vw,56px);overflow-wrap:normal}
+ .shop-quick-page .shop-quick-header p,.vote-board-page .vote-board-intro p{font-size:18px}
+ .shop-quick-page .shop-v2-account{min-width:0}
+ body:has(.astral-header) .checkout-overlay{padding:12px}
+ body:has(.astral-header) :is(.shop-v2-dialog,.link-gate-modal){max-height:calc(100dvh - 24px);padding:28px 20px}
+ .astral-home.astral-v6 .journey-controls{position:sticky;top:76px;bottom:auto;left:auto;right:auto;z-index:90;width:100%;height:52px;margin:0;border:0;border-bottom:1px solid #604768;border-radius:0;padding:4px 16px;justify-content:space-between;background:#171223;box-shadow:none}
+ .astral-home.astral-v6 .journey-controls button{min-height:44px}
+ .astral-home.astral-v6 .cinematic-stage,.js:not(.motion-off) .astral-home.astral-v6 .cinematic-stage{min-height:640px!important}
+ .astral-home.astral-v6 .cinema-intro{margin-top:170px}
+ .astral-home.astral-v6 .cinema-intro h2{font-size:clamp(40px,12vw,54px)!important}
+ .astral-home.astral-v6 .cinema-mascot{top:120px;width:64px}
+ .astral-home.astral-public .site-footer{padding-bottom:28px!important}
+}
+
+:is(.astral-public,body:has(.astral-header)) .site-footer{text-align:left;border-radius:0}
+@media(min-width:721px){.astral-public .public-hero{align-items:center}.astral-public .public-hero>img{aspect-ratio:5/4;max-height:480px}}

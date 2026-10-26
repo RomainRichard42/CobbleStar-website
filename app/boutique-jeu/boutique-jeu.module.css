@@ -90,3 +90,18 @@
 .newBadge,.viewHint,.cardInfo>small,.cardInfo span i,.emblemArt i,.tagArt i,.detailTop span,.detailTop b,.detailCopy>small,.quantity>span,.total>span,.footer,.footer>b{font-size:var(--cs-type-label, 14px)}
 .cardInfo>strong{font-size:var(--cs-type-label, 14px)}.cardInfo span b{font-size:var(--cs-type-label, 14px)}.detailCopy p{font-size:var(--cs-type-label, 14px)}.detailCopy ul{font-size:var(--cs-type-label, 14px)}.buyButton span,.buyButton b,.notice{font-size:var(--cs-type-label, 14px)}
 @media(max-width:520px){.tabs button{font-size:var(--cs-type-label, 14px)}.cart b{font-size:var(--cs-type-label, 14px)}.heroCopy p{font-size:var(--cs-type-label, 14px)}}
+
+/* Small windows keep the catalogue and product details in normal reading order. */
+@media(max-width:850px){
+ .terminal{width:100%;height:auto;min-height:100dvh;grid-template-rows:68px auto auto auto auto}
+ .workspace{display:block;overflow:visible}
+ .catalogue{overflow:visible}
+ .details{position:relative;inset:auto;width:100%;box-shadow:none;border-left:0;border-top:1px solid #6750a3;overflow:visible;scroll-margin-top:16px}
+ .footer{min-height:48px;flex-wrap:wrap;padding:12px;gap:8px;color:#bdb2ce}
+ .footer>b{margin-left:0;color:#bdb2ce}
+ .notice{height:auto;min-height:24px;overflow:visible}
+ .quantity button{width:40px;height:40px}
+ .orderBox{grid-template-columns:1fr}
+ .search input{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){.scanLine{animation:none}}
