@@ -3,15 +3,89 @@
   "objective": "Attirer des joueurs francophones intéressés par Cobblemon et Minecraft Pokémon, puis faciliter leur installation sur CobbleStar.",
   "rankingGuarantee": false,
   "queryMap": [
-    {"page":"/","intent":"Trouver un serveur francophone","queries":["cobblestar","cobblemon fr","serveur cobblemon français","serveur cobblemon francophone"]},
-    {"page":"/minecraft-pokemon/","intent":"Comprendre les Pokémon dans Minecraft et choisir une installation","queries":["minecraft pokemon","pokemon minecraft","cobblemon français"]},
-    {"page":"/rejoindre/","intent":"Se connecter au serveur","queries":["ip cobblestar","rejoindre cobblestar","installer cobblemon serveur fr"]},
-    {"page":"/telecharger/","intent":"Obtenir le launcher officiel","queries":["launcher cobblestar","télécharger cobblestar"]},
-    {"page":"/wiki/","intent":"Comprendre les mécaniques propres au serveur","queries":["wiki cobblestar","pension cobblestar","capture cobblemon cobblestar"]}
+    {
+      "page": "/",
+      "intent": "Trouver un serveur francophone",
+      "queries": [
+        "cobblestar",
+        "cobblemon fr",
+        "serveur cobblemon français",
+        "serveur cobblemon francophone"
+      ]
+    },
+    {
+      "page": "/minecraft-pokemon/",
+      "intent": "Comprendre les Pokémon dans Minecraft et choisir une installation",
+      "queries": [
+        "minecraft pokemon",
+        "pokemon minecraft",
+        "cobblemon français"
+      ]
+    },
+    {
+      "page": "/rejoindre/",
+      "intent": "Se connecter au serveur",
+      "queries": [
+        "ip cobblestar",
+        "rejoindre cobblestar",
+        "installer cobblemon serveur fr"
+      ]
+    },
+    {
+      "page": "/telecharger/",
+      "intent": "Obtenir le launcher officiel",
+      "queries": [
+        "launcher cobblestar",
+        "télécharger cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/",
+      "intent": "Comprendre les mécaniques propres au serveur",
+      "queries": [
+        "wiki cobblestar",
+        "pension cobblestar",
+        "capture cobblemon cobblestar"
+      ]
+    }
   ],
-  "weekly": ["Exécuter scripts/seo-audit.mjs et comparer les rapports.","Consulter Search Console : clics, impressions, CTR, positions par requête et page, couverture et Core Web Vitals lorsqu’il y a assez de données.","Comparer 28 jours aux 28 précédents, signaler l’absence de données plutôt que d’inventer des résultats.","Corriger les erreurs techniques vérifiées ; améliorer un guide existant ou créer une page utile seulement sur un sujet confirmé par le serveur.","Vérifier liens internes, contenu complet dans le HTML, mobile, poids des médias, dates et cohérence des fonctionnalités annoncées."],
-  "monthly": ["Revoir les intentions de recherche et les pages qui reçoivent des impressions sans clics.","Choisir les prochains guides selon les questions de joueurs et les données Search Console.","Contrôler les liens externes utiles et les informations des annuaires sans spam ni achat de liens."],
-  "nextPriorities": ["Valider la propriété Search Console et soumettre le sitemap.","Recueillir les premières données avant de fixer des objectifs de progression chiffrés.","Confronter les anciennes promesses de la page d’accueil aux fonctionnalités réellement actives et à la roadmap.","Ajouter des captures du serveur et des exemples vérifiés aux guides les plus consultés."],
-  "publicationRules": ["Ne pas modifier artificiellement les dates.","Ne pas publier de pages quasi identiques pour des variantes de mots-clés.","Ne pas publier de statistiques, témoignages ou fonctionnalités non vérifiés.","Conserver les URL existantes et prévoir une redirection permanente si une URL change.","Ne pas ajouter de traceur tiers sans décision explicite ; Search Console suffit pour le suivi de recherche initial."],
-  "architecture": "Astro rend le contenu public en HTML via le serveur Fastify existant. Les callbacks ne fournissent que les documents publiés. Les routes Next de compte, boutique, vote et administration sont conservées. Un changement publié dans le CMS apparaît à la requête suivante, hors cache HTTP public de 60 secondes."
+  "weekly": [
+    "Exécuter scripts/seo-audit.mjs et comparer les rapports.",
+    "Consulter Search Console : clics, impressions, CTR, positions par requête et page, couverture et Core Web Vitals lorsqu’il y a assez de données.",
+    "Comparer 28 jours aux 28 précédents, signaler l’absence de données plutôt que d’inventer des résultats.",
+    "Corriger les erreurs techniques vérifiées ; améliorer un guide existant ou créer une page utile seulement sur un sujet confirmé par le serveur.",
+    "Vérifier liens internes, contenu complet dans le HTML, mobile, poids des médias, dates et cohérence des fonctionnalités annoncées."
+  ],
+  "monthly": [
+    "Revoir les intentions de recherche et les pages qui reçoivent des impressions sans clics.",
+    "Choisir les prochains guides selon les questions de joueurs et les données Search Console.",
+    "Contrôler les liens externes utiles et les informations des annuaires sans spam ni achat de liens."
+  ],
+  "nextPriorities": [
+    "Recueillir les premières données avant de fixer des objectifs de progression chiffrés.",
+    "Confronter les anciennes promesses de la page d’accueil aux fonctionnalités réellement actives et à la roadmap.",
+    "Ajouter des captures du serveur et des exemples vérifiés aux guides les plus consultés."
+  ],
+  "publicationRules": [
+    "Ne pas modifier artificiellement les dates.",
+    "Ne pas publier de pages quasi identiques pour des variantes de mots-clés.",
+    "Ne pas publier de statistiques, témoignages ou fonctionnalités non vérifiés.",
+    "Conserver les URL existantes et prévoir une redirection permanente si une URL change.",
+    "Ne pas ajouter de traceur tiers sans décision explicite ; Search Console suffit pour le suivi de recherche initial."
+  ],
+  "architecture": "Astro rend le contenu public en HTML via le serveur Fastify existant. Les callbacks ne fournissent que les documents publiés. Les routes Next de compte, boutique, vote et administration sont conservées. Un changement publié dans le CMS apparaît à la requête suivante, hors cache HTTP public de 60 secondes.",
+  "searchConsole": {
+    "property": "https://cobblestar-mc.fr/",
+    "verifiedAt": "2026-10-26",
+    "method": "HTML meta tag",
+    "sitemap": "https://cobblestar-mc.fr/sitemap.xml",
+    "sitemapStatus": "Success",
+    "discoveredPages": 18,
+    "performanceData": "Processing — no baseline yet",
+    "homeIndexing": {
+      "inspectedAt": "2026-10-26",
+      "status": "URL unknown to Google",
+      "requestStatus": "Indexing requested — priority crawl queue"
+    }
+  }
 }
