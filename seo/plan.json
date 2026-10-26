@@ -212,6 +212,16 @@
       ],
       "status": "Indexing requested — accepted into priority crawl queue",
       "indexed": false
+    },
+    "sitemapResubmittedAt": "2026-10-26T21:20:01.893Z",
+    "sitemapSubmissionResult": "Sitemap submitted successfully",
+    "discoveredPagesNote": "Ancien décompte encore affiché après soumission ; le sitemap servi contient 47 URL.",
+    "wikiIndexing": {
+      "url": "https://cobblestar-mc.fr/wiki/",
+      "inspectedAt": "2026-10-26T21:20:01.894Z",
+      "statusBeforeRequest": "Discovered - currently not indexed",
+      "requestResult": "Indexing requested — URL added to a priority crawl queue",
+      "indexed": false
     }
   },
   "confirmedAvailability": {
@@ -281,6 +291,10 @@
       "exclusion des aperçus"
     ],
     "localAudit": "seo/reports/audit-2026-10-26-refonte-local.json",
-    "fieldPerformance": "Search Console en cours de traitement ; API PageSpeed indisponible (quota HTTP 429), aucun score inventé."
+    "fieldPerformance": "Search Console en cours de traitement ; API PageSpeed indisponible (quota HTTP 429), aucun score inventé.",
+    "productionAudit": "seo/reports/audit-2026-10-26-refonte-production.json",
+    "productionErrors": 0,
+    "productionWarnings": 0,
+    "testsPassed": 17
   }
 }
