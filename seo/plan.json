@@ -118,11 +118,12 @@
     "https://developers.google.com/search/docs/appearance/site-names"
   ],
   "deployment": {
-    "publicRevision": "e0354e3",
+    "publicRevision": "2b36874",
     "verifiedOn": "2026-10-26",
     "build": "Webpack with one prerender worker and 1024 MiB Node heap limit on Kinetic",
-    "ci": "https://github.com/RomainRichard42/CobbleStar-website/actions/runs/40325245474",
-    "status": "success"
+    "ci": "https://github.com/RomainRichard42/CobbleStar-website/actions/runs/40330149640",
+    "status": "success",
+    "report": "seo/reports/home-refonte-live-2026-10-26.json"
   },
   "homepage": {
     "updatedAt": "2026-10-26",
@@ -137,6 +138,19 @@
       "Discord"
     ],
     "mediaManifest": "public-site/src/lib/server-media.ts",
-    "realGameplayMediaAvailable": false
+    "realGameplayMediaAvailable": false,
+    "validation": {
+      "desktop": true,
+      "mobile390": true,
+      "mobileMenu": true,
+      "faq": true,
+      "publicTests": 5,
+      "ci": "success",
+      "livePages": 18,
+      "liveLinks": 64,
+      "liveImages": 12,
+      "errors": 0,
+      "warnings": 0
+    }
   }
 }
