@@ -9,6 +9,7 @@ import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
 import FaqSection from "../components/FaqSection";
 import FaqStructuredData from "../components/FaqStructuredData";
+import shopCatalog from "../../api/shop.catalog.json";
 
 type ShopAccount = {
   minecraft: { username: string | null; uuid: string | null; linked: boolean };
@@ -30,15 +31,9 @@ const starPacks: StarPack[] = [
   { stars: 6500, price: "49,99 €", bonus: "+ 30 % de Stars", tone: "violet" },
 ];
 
-const catalog = [
-  { code: "00", name: "Grades mensuels", description: "Étoilé : 1 000 Stars · Cosmique : 2 200 Stars · Galactique : 3 300 Stars. Achat et renouvellement dans /boutique ; tes commandes F2P restent liées à ta progression.", price: "Un mois · renouvellement manuel", tone: "violet" },
-  { code: "01", name: "Clés Nova, Pulsar et Quasar", description: "Ouvre les caisses du serveur avec des chances publiées, un historique personnel et des garanties visibles.", price: "350 à 950 Stars", tone: "pink" },
-  { code: "02", name: "Effets et accessoires", description: "Retrouve tes particules, titres et apparences dans le Cosmédex, puis active-les ou désactive-les librement.", price: "Dès 300 Stars", tone: "cyan" },
-  { code: "03", name: "Compagnons", description: "Choisis le compagnon qui te suit, donne-lui un nom et change-le depuis ta collection sans nouvel achat.", price: "Catalogue en jeu", tone: "yellow" },
-  { code: "04", name: "Incarnations", description: "Adopte temporairement l’apparence d’un Pokémon compatible tout en conservant le contrôle de ton aventure.", price: "Catalogue en jeu", tone: "violet" },
-  { code: "05", name: "Album et boosters", description: "Complète une collection de 24 cartes illustrées avec des raretés clairement annoncées.", price: "Selon le booster", tone: "cyan" },
-  { code: "06", name: "Pass Dresseur", description: "Déverrouille la seconde voie des 100 paliers saisonniers, y compris ceux déjà atteints.", price: "Paiement unique", tone: "pink" },
-];
+const ranks = shopCatalog.products.filter(item => item.category === "ranks" && !item.testOnly);
+const catalog = shopCatalog.products.filter(item => item.category !== "ranks" && !item.testOnly);
+const categories = [{id:"all",label:"Tout"},{id:"keys",label:"Clés"},{id:"cosmetics",label:"Cosmétiques"},{id:"companions",label:"Compagnons"},{id:"collection",label:"Collection"}];
 
 export default function ShopPage() {
   const packTrigger = useRef<HTMLButtonElement | null>(null);
@@ -51,6 +46,8 @@ export default function ShopPage() {
   const [rechargeBusy, setRechargeBusy] = useState(false);
   const [rechargeComplete, setRechargeComplete] = useState(false);
   const [rechargeMessage, setRechargeMessage] = useState("");
+  const [category, setCategory] = useState("all");
+  const visibleProducts = catalog.filter(item => category === "all" || item.category === category);
 
   useEffect(() => {
     let active = true;
@@ -161,15 +158,16 @@ export default function ShopPage() {
     <SiteHeader />
     <section className="shop-quick-shell" id="contenu" aria-labelledby="shop-title">
       <header className="shop-quick-header">
-        <div><span className="kicker">BOUTIQUE COBBLESTAR</span><h1 id="shop-title">Recharge tes <em>Stars.</em></h1><p>La boutique fait vivre CobbleStar. Choisis un pack. Les Stars rejoindront automatiquement ton compte Minecraft lié.</p></div>
-        <img className="astral-shop-hero-art" src="/astral/assets/stars-640.webp" alt="" width="400" height="226"/><div className="shop-quick-state"><i /><span><b>Paiement unique</b><small>Livraison automatique</small></span></div>
+        <div><span className="kicker">BOUTIQUE COBBLESTAR</span><h1 id="shop-title">Ton aventure.<br/><em>Tes Stars.</em></h1><p>Un grade, un compagnon, une nouvelle apparence. Trouve ce qui te ressemble et soutiens le serveur avec tes Stars.</p><nav className="shop-section-nav" aria-label="Dans la boutique"><a href="#stars">Les Stars</a><a href="#grades">Les grades</a><a href="#catalogue">Le catalogue</a></nav></div>
+        <img className="astral-shop-hero-art" src="/astral/assets/stars-640.webp" alt="" width="400" height="226"/>
       </header>
+      <p className="shop-opening-note"><strong>Ouverture à venir.</strong> Découvre les offres prévues. Les achats en jeu seront accessibles à l’ouverture du serveur.</p>
 
       <div className="shop-quick-account-row">
         <section className="shop-v2-account" aria-label="État de ton compte boutique">
         <div className="shop-v2-player">
           <span className="shop-v2-avatar">{username ? <img src={`https://mc-heads.net/avatar/${encodeURIComponent(username)}/96`} alt={`Tête Minecraft de ${username}`} /> : "?"}</span>
-          <div><small>COMPTE DE LIVRAISON</small><h2>{loading ? "Vérification…" : username || "Aucun joueur connecté"}</h2><p>{loading ? "Nous récupérons ton portefeuille." : linked ? "Compte Minecraft vérifié." : account ? "Liaison Minecraft requise avec /link." : "Connecte-toi avant de finaliser un achat."}</p></div>
+          <div><small>COMPTE DE LIVRAISON</small><h2>{loading ? "Vérification…" : username || (account ? "Minecraft à lier" : "Ton compte joueur")}</h2><p>{loading ? "Nous récupérons ton portefeuille." : linked ? "Compte Minecraft vérifié." : account ? "Discord connecté. Lie Minecraft avec /link." : "Connecte-toi avant de finaliser un achat."}</p></div>
         </div>
         <div className="shop-v2-wallet"><small>MON SOLDE</small><strong><StarsArt />{balance.toLocaleString("fr-FR")} <span>Stars</span></strong><em>{linked ? "Compte Minecraft vérifié" : "Liaison requise avant achat"}</em></div>
         {!loading && !account && <Link className="shop-v2-account-action" href="/compte/">Se connecter <span>→</span></Link>}
@@ -181,7 +179,7 @@ export default function ShopPage() {
 
       <section className="shop-quick-purchase" id="stars" aria-labelledby="shop-packs-title">
       <div className="shop-v2-heading">
-        <div><span className="kicker">1 · CHOISIS UN MONTANT</span><h2 id="shop-packs-title">Quel pack te convient ?</h2></div>
+        <div><h2 id="shop-packs-title">Fais le plein de Stars.</h2></div>
         <p>Montant payé une seule fois. Les bonus sont déjà inclus dans le total affiché.</p>
       </div>
 
@@ -194,14 +192,25 @@ export default function ShopPage() {
           <span className="shop-v2-unit">Stars créditées</span>
           <div className="shop-v2-price"><b>{pack.price}</b><small>Paiement unique</small></div>
           <p>{pack.bonus || "Le format idéal pour découvrir la boutique."}</p>
-          <button type="button" onClick={(event) => { packTrigger.current = event.currentTarget; setSelectedPack(pack); setRechargeMessage(""); }}>Choisir {pack.price} <span>→</span></button>
+          <button type="button" onClick={(event) => { packTrigger.current = event.currentTarget; setSelectedPack(pack); setRechargeMessage(""); setRechargeComplete(false); }}>Choisir {pack.price} <span>→</span></button>
         </article>)}
       </div>
       </section>
 
+      <section className="shop-grades" id="grades" aria-labelledby="grades-title">
+        <div className="shop-section-heading"><div><h2 id="grades-title">Trouve ton étoile.</h2><p>Trois grades, un mois d’aventure. Renouvellement manuel en Stars, sans abonnement automatique.</p></div><img src="/astral/assets/ranks.svg" width="160" height="120" alt="" loading="lazy"/></div>
+        <div className="shop-rank-grid">{ranks.map((rank,index)=><article className={`shop-rank rank-${index}`} key={rank.id}>
+          <div className="rank-symbol" aria-hidden="true">{["✦","✦ ✦","✦ ✦ ✦"][index]}</div><h3>{rank.name.split(" · ")[0]}</h3><p className="rank-duration">Un mois · renouvellement manuel</p>
+          <strong className="shop-star-price"><StarsArt/>{rank.starsPrice.toLocaleString("fr-FR")} <span>Stars / mois</span></strong>
+          <p>{rank.description}</p><details><summary>Tous les avantages</summary><ul>{rank.benefits?.map(benefit=><li key={benefit}>{benefit}</li>)}</ul></details><p className="shop-in-game">À retrouver dans <code>/boutique</code></p>
+        </article>)}</div>
+        <p className="shop-rank-note">Les cadeaux de bienvenue sont réservés au premier achat du grade. Les commandes de progression restent soumises à leurs conditions habituelles.</p>
+      </section>
       <section className="shop-quick-catalog" id="catalogue" aria-labelledby="catalog-title">
-        <div className="shop-v2-catalog-heading"><span className="kicker">2 · UTILISE-LES EN JEU</span><h2 id="catalog-title">Ce que tes Stars débloquent.</h2><p>Collections, services et abonnements mensuels dans /boutique. Consulte les avantages et conditions en jeu avant d’acheter.</p></div>
-        <div className="shop-v2-items">{catalog.map((item) => <article className={`shop-v2-item tone-${item.tone}`} key={item.name}><span aria-hidden="true">{item.code}</span><small>CATALOGUE COBBLESTAR</small><h3>{item.name}</h3><p>{item.description}</p><b>{item.price}</b></article>)}</div>
+        <div className="shop-v2-catalog-heading"><h2 id="catalog-title">À chacun sa collection.</h2><p>Consulte les offres, puis retrouve-les en jeu avec <code>/boutique</code>.</p></div>
+        <div className="shop-filters" role="group" aria-label="Filtrer le catalogue">{categories.map(filter=><button type="button" key={filter.id} aria-pressed={category===filter.id} onClick={()=>setCategory(filter.id)}>{filter.label}</button>)}</div>
+        <p className="shop-results" aria-live="polite">{visibleProducts.length} offres</p>
+        <div className="shop-product-grid">{visibleProducts.map(item=><article className="shop-product" key={item.id}><span className="product-symbol" aria-hidden="true">{item.category==="keys"?"⚿":item.category==="companions"?"✧":item.category==="collection"?"◈":"✦"}</span><span className="product-category">{categories.find(filter=>filter.id===item.category)?.label}</span><h3>{item.name}</h3><p>{item.description}</p><strong className="shop-star-price"><StarsArt/>{item.starsPrice.toLocaleString("fr-FR")} <span>Stars</span></strong></article>)}</div>
       </section>
 
       <aside className="shop-quick-trust"><span>PACK DE STARS : PAIEMENT UNIQUE</span><span>LIVRAISON AUTOMATIQUE</span><span>GRADES : RENOUVELLEMENT MANUEL</span><p>Les Stars sont une monnaie virtuelle sans valeur monétaire réelle et ne peuvent pas être reconverties en argent. Un grade dure un mois ; ses cadeaux sont réservés au premier achat de ce grade.</p></aside>
@@ -215,7 +224,7 @@ export default function ShopPage() {
         <h2 id="shop-dialog-title">{selectedPack.stars.toLocaleString("fr-FR")} <em>Stars</em></h2>
         <div className="shop-v2-dialog-price"><span>Montant unique</span><b>{selectedPack.price}</b></div>
         {selectedPack.bonus && <p className="shop-v2-dialog-bonus">✓ {selectedPack.bonus} incluses dans le total</p>}
-        <div className="shop-v2-dialog-account"><small>DESTINATION</small><b>{username || "Aucun compte connecté"}</b><span>{linked ? "✓ Compte Minecraft lié" : "Compte à préparer avant l’achat"}</span></div>
+        <div className="shop-v2-dialog-account"><small>DESTINATION</small><b>{username || (account ? "Minecraft à lier" : "Aucun compte connecté")}</b><span>{linked ? "✓ Compte Minecraft lié" : "Compte à préparer avant l’achat"}</span></div>
         {!account ? <Link className="shop-v2-dialog-action" href="/compte/">Se connecter pour continuer <span>→</span></Link> : !linked ? <button className="shop-v2-dialog-action" type="button" onClick={() => { setSelectedPack(null); setLinkOpen(true); }}>Lier mon compte Minecraft <span>→</span></button> : testPurchasesEnabled ? <button className={`shop-v2-dialog-action${rechargeComplete ? " is-complete" : ""}`} type="button" onClick={simulateRecharge} disabled={rechargeBusy || rechargeComplete}>{rechargeBusy ? "Validation de la recharge…" : rechargeComplete ? "Stars créditées ✓" : "Valider la recharge"}<span>{rechargeComplete ? "" : "→"}</span></button> : <button className="shop-v2-dialog-action is-disabled" type="button" disabled>Finaliser la recharge</button>}
         {rechargeMessage && <p className="shop-v2-dialog-message" role="status">{rechargeMessage}</p>}
         <p className="shop-v2-dialog-note">Vérifie le montant et le compte Minecraft de destination avant de continuer.</p>

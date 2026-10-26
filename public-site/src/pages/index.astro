@@ -8,10 +8,6 @@ const articles=await (Astro.locals as PublicLocals).getNews().then(n=>publishedN
 const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HOME_FAQ.map(f=>({'@type':'Question',name:f.question,acceptedAnswer:{'@type':'Answer',text:f.answer}}))};
 ---
 <Layout cinematic title="CobbleStar — Serveur Cobblemon FR & Minecraft Pokémon" description="Découvre CobbleStar, serveur Cobblemon français en préparation : deux mondes, capture de Pokémon, quêtes et raids. Rejoins Discord pour suivre l’ouverture." schema={[faqSchema]}>
-<nav class="journey-controls" aria-label="Parcourir la page">
-<button type="button" id="step-prev">← Précédent</button>
-<button type="button" id="step-next">Suivant →</button>
-</nav>
 <main id="contenu">
 <section class="opening-runway" aria-label="Découvrir CobbleStar">
 <div class="opening-viewport">
@@ -294,5 +290,5 @@ const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HO
 </span>
 </div>
 
-<script is:inline src="/astral/motion.js?v=player-audit-2" defer></script><script is:inline src="/astral/journey.js?v=player-audit-2" defer></script><script is:inline src="/astral/player.js?v=public-1" defer></script>
+<script is:inline src="/astral/motion.js?v=player-audit-2" defer></script><script is:inline src="/astral/journey.js?v=player-polish-1" defer></script><script is:inline src="/astral/player.js?v=public-1" defer></script>
 </Layout>

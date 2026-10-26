@@ -58,5 +58,20 @@ test('Astral covers public and player pages while admin keeps its own shell',asy
     const {html}=await get(path);assert.ok(!html.includes('class="astral-header site-header"'),path);
   }
   const home=await get('/');assert.ok(!home.html.includes('local-gameplay'));assert.match(home.html,/\/astral\/journey\.js\?v=[a-z0-9-]+/);assert.ok(home.html.includes('prefers')||home.html.includes('motion.js'));assert.ok(home.html.includes('Ouverture à venir'));
+  assert.ok(!home.html.includes('id="step-prev"'));assert.ok(!home.html.includes('id="step-next"'));
   const image=await get('/astral/assets/stars-320.webp');assert.equal(image.response.status,200);assert.match(image.response.headers.get('content-type'),/image\/webp/);
+});
+
+test('shop publishes game catalogue prices and wiki headings have working outline targets',async()=>{
+  const catalog=JSON.parse(await readFile('api/shop.catalog.json','utf8'));
+  const shop=await get('/boutique/');
+  for(const rank of catalog.products.filter(p=>p.category==='ranks')){
+    assert.ok(shop.html.includes(rank.name.split(' · ')[0]));
+    assert.ok(shop.html.includes(rank.starsPrice.toLocaleString('fr-FR')));
+  }
+  assert.ok(shop.html.includes('Filtrer le catalogue'));
+  const page=await get('/wiki/welcome/');
+  const targets=[...page.html.matchAll(/href="#(section-\d+)"/g)].map(m=>m[1]);
+  assert.ok(targets.length>0);
+  for(const target of targets)assert.ok(page.html.includes(`id="${target}"`),target);
 });

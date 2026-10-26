@@ -5,7 +5,7 @@
   let motion=!reduced.matches,stepped=true,snap=false,story=false,steps=[],active=0,anim=0,animationDestination=0,queued=false,measureQueued=false,busyUntil=0,lastWheel=0,gestureTaken=false,wheelTotal=0,lastAccepted=0;
   const runway=$('.opening-runway'),viewport=$('.opening-viewport'),track=$('.opening-track'),panels=$$('.opening-panel'),stage=panels[0];
   const letters=$$('.cinema-word [data-letter]'),star=$('.morph-star'),starLine=$('.morph-star-line'),starFill=$('.morph-star-fill'),camera=$('.game-camera>img'),shade=$('.camera-shade'),intro=$('.cinema-intro'),mascot=$('.cinema-mascot');
-  const rail=$('.activity-viewport'),railCards=$$('.activity-card'),prev=$('#step-prev'),next=$('#step-next'),status=$('#journey-status'),bar=$('.journey-progress span');
+  const rail=$('.activity-viewport'),railCards=$$('.activity-card'),status=$('#journey-status'),bar=$('.journey-progress span');
   const decorativeScenes=[{section:$('.world-section'),images:$$('.world-photo img'),type:'world'},{section:$('.creation'),images:$$('.creation-visual>img'),type:'creation'},{section:$('.store-section'),images:$$('.store-art img'),type:'store'}];
   let headerH=88,stageH=700,heroTop=0,heroRange=900,horizontalDistance=650,maxY=0,cx=0,cy=0,radius=130,centers=[],lastVisual=-1,lastPanel=-1,lastTrack=-1;
   root.style.scrollBehavior='auto';
@@ -15,8 +15,7 @@
   function measureSoon(){if(!measureQueued){measureQueued=true;requestAnimationFrame(()=>{measureQueued=false;measure()})}}
   function measure(){
     snap=stepped&&!reduced.matches;root.classList.toggle('snap-layout',snap);
-    const controls=$('.journey-controls');
-    headerH=$('.site-header').offsetHeight+(getComputedStyle(controls).position==='sticky'?controls.offsetHeight:0);
+    headerH=$('.site-header').offsetHeight;
     stageH=Math.max(240,innerHeight-headerH);story=motion&&snap&&room.matches&&stageH>=490;
     root.style.setProperty('--stage-header',headerH+'px');root.style.setProperty('--stage-height',stageH+'px');
     heroRange=stageH*1.25;horizontalDistance=stageH*.9;root.style.setProperty('--opening-distance',(heroRange+horizontalDistance*2)+'px');
@@ -38,7 +37,7 @@
   }
   function nearest(){let best=active,d=Infinity;steps.forEach((s,i)=>{const dy=Math.abs(s.y-scrollY),dx=s.rail===undefined?0:Math.abs(s.rail-rail.scrollLeft);const v=dy+(dy<15?dx*.5:0);if(v<d){d=v;best=i}});return best}
   function request(){if(!queued){queued=true;requestAnimationFrame(draw)}}
-  function draw(){queued=false;if(!steps.length)return;if(!anim)active=nearest();$('.journey-controls').setAttribute('aria-label',`Parcourir la page, étape ${active+1} sur ${steps.length}`);prev.disabled=active===0;next.disabled=active===steps.length-1;bar.style.transform=`scaleX(${M.clamp(scrollY/Math.max(1,maxY))})`;if(!story)return;
+  function draw(){queued=false;if(!steps.length)return;if(!anim)active=nearest();root.dataset.journeyStep=String(active+1);root.dataset.journeyTotal=String(steps.length);bar.style.transform=`scaleX(${M.clamp(scrollY/Math.max(1,maxY))})`;if(!story)return;
     for(const scene of decorativeScenes){const q=M.clamp((scrollY+innerHeight-scene.start)/(innerHeight+scene.height));scene.images.forEach((image,i)=>{image.style.transform=scene.type==='world'?`scale(1.12) translateY(${(q-.5)*(i?45:-45)}px)`:scene.type==='creation'?`translateY(${(q-.5)*-45}px) rotate(${(q-.5)*-5}deg)`:`translateY(${(q-.5)*(i%2?-28:28)}px) rotate(${(q-.5)*(i-1)*6}deg)`})}
     const p=M.clamp((scrollY-heroTop)/heroRange),horizontal=Math.max(0,Math.min(2,(scrollY-heroTop-heroRange)/horizontalDistance)),panel=Math.round(horizontal);
     if(Math.abs(horizontal-lastTrack)>.00001){track.style.transform=`translate3d(${-horizontal*viewport.clientWidth}px,0,0)`;lastTrack=horizontal}
@@ -48,9 +47,9 @@
     star.style.opacity=String(s.starOpacity);star.style.transform=`scale(${s.starScale}) rotate(${s.p>.5?(s.p-.5)*32:0}deg)`;starFill.style.opacity=String(s.starFill);starLine.style.strokeDashoffset=String(100*(1-M.phase(s.p,.2,.39)));
     camera.style.transform=`translateY(${s.cameraY}px) scale(${s.cameraScale})`;shade.style.opacity=String(.7+s.shade*.4);intro.style.opacity=String(s.copyOpacity);intro.style.transform=`translateY(${-30*(1-s.copyOpacity)}px)`;intro.inert=s.copyOpacity<.1;mascot.style.opacity=String(s.mascotOpacity);mascot.style.transform=`translateY(${-p*80}px) rotate(${-9+p*30}deg)`;
   }
-  function finish(index,focus){anim=0;busyUntil=0;active=index;draw();if(focus)focusTarget(steps[index]?.el);status.textContent=steps[index]?.name||'';$('.journey-controls').setAttribute('data-settled',String(index+1))}
+  function finish(index,focus){anim=0;busyUntil=0;active=index;draw();if(focus)focusTarget(steps[index]?.el);status.textContent=steps[index]?.name||'';root.dataset.journeySettled=String(index+1)}
   function go(index,options={}){
-    if(!steps.length)return;index=Math.max(0,Math.min(steps.length-1,index));$('.journey-controls').removeAttribute('data-settled');const source=active,target=steps[index],from=scrollY;cancelAnimationFrame(anim);anim=0;active=index;animationDestination=index;
+    if(!steps.length)return;index=Math.max(0,Math.min(steps.length-1,index));delete root.dataset.journeySettled;const source=active,target=steps[index],from=scrollY;cancelAnimationFrame(anim);anim=0;active=index;animationDestination=index;
     const focus=Boolean(options.focus)||panels.some(p=>p.contains(document.activeElement))&&!target.el.contains(document.activeElement);
     const railFrom=rail.scrollLeft,railTo=target.rail??railFrom,railMoves=Math.abs(railTo-railFrom)>2;
     const introSequence=story&&source===0&&index===1&&!options.instant;
@@ -85,7 +84,7 @@
     if(!['ArrowDown','ArrowUp','PageDown','PageUp',' ','Home','End'].includes(event.key))return;event.preventDefault();if(event.repeat)return;
     if(event.key==='Home')go(0,{focus:true});else if(event.key==='End')go(steps.length-1,{focus:true});else move(['ArrowUp','PageUp'].includes(event.key)||event.key===' '&&event.shiftKey?-1:1,true);
   });
-  prev.onclick=()=>move(-1,true);next.onclick=()=>move(1,true);$('#start-journey').onclick=()=>go(1,{focus:true});
+  $('#start-journey').onclick=()=>go(1,{focus:true});
   $$('a[href^="#"]').forEach(link=>link.addEventListener('click',event=>{const dest=document.getElementById(link.hash.slice(1));if(!dest)return;event.preventDefault();let index=steps.findIndex(s=>s.el===dest||s.el.contains(dest));if(index<0){const y=Math.max(0,top(dest)-headerH);index=steps.reduce((best,s,i)=>Math.abs(s.y-y)<Math.abs(steps[best].y-y)?i:best,0)}go(index,{focus:true,instant:link.classList.contains('skip')||link.classList.contains('intro-skip')});if(link.classList.contains('skip'))focusTarget(dest)}));
   rail.addEventListener('focusin',event=>{const card=event.target.closest('.activity-card');if(!snap||!card||anim)return;const index=steps.findIndex(s=>s.el===card);if(index>=0){active=index;rail.scrollTo({left:steps[index].rail,behavior:'auto'});draw()}});
   // Visible native controls and a separate Stop action are kept even for muted autoplay.

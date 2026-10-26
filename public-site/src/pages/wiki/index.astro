@@ -1,17 +1,30 @@
 ---
 import Layout from '../../layouts/PublicLayout.astro';
+import Picture from '../../components/Picture.astro';
 import {publishedWiki,wikiUrl,breadcrumbs,type PublicLocals} from '../../lib/content';
 const wiki=publishedWiki(await (Astro.locals as PublicLocals).getWiki());
+const branches=wiki.branches.filter(b=>wiki.articles.some(a=>a.branchId===b.id));
 ---
 <Layout title="Wiki CobbleStar — Guides Cobblemon en français" description="Les guides officiels du serveur CobbleStar : débuter, capturer des Pokémon, utiliser la pension, progresser et comprendre les activités Cobblemon." schema={[breadcrumbs([{name:'Accueil',path:'/'},{name:'Wiki',path:'/wiki/'}])]}>
-<main id="contenu" class="public-shell"><div class="public-hero"><div><span class="eyebrow">LES GUIDES DU SERVEUR</span><h1>Le wiki<br/>CobbleStar.</h1><p class="lead">{wiki.content.subtitle}</p><p>Les règles ci-dessous concernent CobbleStar. Certaines mécaniques diffèrent d’une installation standard de Cobblemon.</p><a href="/rejoindre/">Première visite ? Commence par rejoindre le serveur →</a></div><img src="/astral/assets/pasturedpokmon.webp" width="900" height="675" alt="Une équipe de Pokémon dans Cobblemon" fetchpriority="high"/></div>
-<label for="guide-search">Rechercher un guide</label><input class="public-search" id="guide-search" type="search" placeholder="Pension, capture, quêtes…"/><p id="search-status" aria-live="polite" class="public-meta">{wiki.articles.length} guides publiés</p>
-<nav class="public-nav" aria-label="Catégories des guides">{wiki.branches.map(b=><a href={`#${b.id}`}>{b.label}</a>)}</nav>
-{wiki.branches.map(b=><section id={b.id} class="public-section" data-guide-section><span class="eyebrow">{b.description}</span><h2>{b.label}</h2><div class="public-grid">{wiki.articles.filter(a=>a.branchId===b.id).map(a=><a class="public-card" href={wikiUrl(a)} data-guide data-search={`${a.title} ${a.summary} ${a.tags.join(' ')}`}><div><small>{a.readingMinutes} min de lecture</small><h3>{a.title}</h3><p>{a.summary}</p><strong>Lire le guide →</strong></div></a>)}</div></section>)}
-{!wiki.articles.length&&<p>Les premiers guides seront publiés ici. Pour une question, retrouve l’équipe sur Discord.</p>}
+<main id="contenu" class="public-shell wiki-library">
+<header class="wiki-library-hero"><div><span class="eyebrow">LE WIKI COBBLESTAR</span><h1>À toi de jouer.</h1><p class="lead">{wiki.content.subtitle}</p><a href="/wiki/welcome/">Tes premiers pas sur le serveur →</a></div><img src="/astral/assets/pasturedpokmon.webp" width="900" height="675" alt="Des Pokémon dans un pâturage de Cobblemon" fetchpriority="high"/></header>
+<div class="wiki-search-box"><label for="guide-search">Quel sujet t’intéresse ?</label><input class="public-search" id="guide-search" type="search" placeholder="Pension, capture, quêtes…" aria-controls="wiki-results"/><p id="search-status" aria-live="polite" class="public-meta">{wiki.articles.length} guides publiés</p></div>
+<div class="wiki-library-layout"><aside class="wiki-category-sidebar"><nav aria-label="Catégories des guides"><strong>Explorer le wiki</strong>{branches.map(b=><a href={`#${b.id}`} data-category={b.id}><span>{b.label}</span><span>{wiki.articles.filter(a=>a.branchId===b.id).length}</span></a>)}</nav><p>Ces guides décrivent les règles de CobbleStar, qui peuvent différer de Cobblemon.</p></aside>
+<div id="wiki-results">{branches.map(b=><section id={b.id} class="public-section wiki-guide-section" data-guide-section><header><h2>{b.label}</h2><p>{b.description}</p></header><div class="public-grid">{wiki.articles.filter(a=>a.branchId===b.id).map(a=><a class="public-card wiki-guide-card" href={wikiUrl(a)} data-guide data-search={`${a.title} ${a.summary} ${a.tags.join(' ')}`}><Picture src={a.hero.asset} alt="" width={600} height={340}/><div><small>{a.readingMinutes} min de lecture</small><h3>{a.title}</h3><p>{a.summary}</p><strong>Ouvrir le guide <span aria-hidden="true">↗</span></strong></div></a>)}</div></section>)}<p id="wiki-empty" class="public-note" hidden={wiki.articles.length>0}>Aucun guide trouvé. Essaie un autre mot, ou retrouve l’équipe sur Discord.</p></div></div>
 </main></Layout>
 <script>
- const input=document.querySelector<HTMLInputElement>('#guide-search');const cards=[...document.querySelectorAll<HTMLElement>('[data-guide]')];
- const normalize=(v:string)=>v.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('fr');
- input?.addEventListener('input',()=>{const q=normalize(input.value.trim());for(const c of cards)c.hidden=!normalize(c.dataset.search??'').includes(q);document.querySelectorAll<HTMLElement>('[data-guide-section]').forEach(s=>s.hidden=![...s.querySelectorAll<HTMLElement>('[data-guide]')].some(c=>!c.hidden));document.getElementById('search-status')!.textContent=`${cards.filter(c=>!c.hidden).length} guide(s) trouvé(s)`;});
+const input=document.querySelector<HTMLInputElement>('#guide-search');
+const cards=[...document.querySelectorAll<HTMLElement>('[data-guide]')];
+const normalize=(v:string)=>v.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('fr');
+input?.addEventListener('input',()=>{
+ const q=normalize(input.value.trim());
+ for(const c of cards)c.hidden=!normalize(c.dataset.search??'').includes(q);
+ document.querySelectorAll<HTMLElement>('[data-guide-section]').forEach(s=>{
+  s.hidden=![...s.querySelectorAll<HTMLElement>('[data-guide]')].some(c=>!c.hidden);
+  document.querySelectorAll<HTMLElement>('[data-category]').forEach(link=>{if(link.dataset.category===s.id)link.hidden=s.hidden;});
+ });
+ const count=cards.filter(c=>!c.hidden).length;
+ document.getElementById('search-status')!.textContent=`${count} guide${count>1?'s':''} trouvé${count>1?'s':''}`;
+ document.getElementById('wiki-empty')!.hidden=count>0;
+});
 </script>
