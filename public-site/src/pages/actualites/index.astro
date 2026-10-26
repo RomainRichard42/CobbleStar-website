@@ -1,0 +1,7 @@
+---
+import Layout from '../../layouts/PublicLayout.astro';
+import Picture from '../../components/Picture.astro';
+import {publishedNews,newsUrl,date,type PublicLocals} from '../../lib/content';
+const news=publishedNews(await (Astro.locals as PublicLocals).getNews());
+---
+<Layout title="Actualités CobbleStar — Serveur, launcher et Cobblemon" description="Les nouveautés officielles de CobbleStar : mises à jour du serveur Minecraft Cobblemon, du launcher et de ses activités."><main id="contenu" class="public-shell"><span class="eyebrow">LE JOURNAL DE L’ÉQUIPE</span><h1>Les nouvelles<br/>de l’aventure.</h1><p class="lead">{news.content.subtitle}</p><div class="public-grid">{news.articles.map(a=><a href={newsUrl(a)} class="public-card"><Picture src={a.image} alt="" width={800} height={450}/><div><small>{a.category} · <time datetime={a.publishedAt}>{date(a.publishedAt)}</time></small><h2>{a.title}</h2><p>{a.excerpt}</p><strong>Lire l’actualité →</strong></div></a>)}</div>{!news.articles.length&&<p>Aucune actualité publiée pour le moment.</p>}<p><a href="/actualites/rss.xml">Suivre le flux RSS</a></p></main></Layout>

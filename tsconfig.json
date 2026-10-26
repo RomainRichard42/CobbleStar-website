@@ -30,6 +30,6 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "api", "scripts", "build"]
+  "exclude": ["node_modules", "api", "scripts", "build", "public-site", "public-astro", ".astro"]
 }
 

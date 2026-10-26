@@ -1,0 +1,45 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import Fastify from '../api/node_modules/fastify/fastify.js';
+import staticFiles from '../api/node_modules/@fastify/static/index.js';
+import helmet from '../api/node_modules/@fastify/helmet/index.js';
+import {readFile} from 'node:fs/promises';
+import {resolve} from 'node:path';
+import {registerPublicSite,isPublicPage} from '../api/dist/public-site.js';
+import {siteSecurity} from '../api/dist/site-security.js';
+let wiki={content:JSON.parse(await readFile('wiki.default.json','utf8')),version:1,updatedAt:null};
+let news={content:JSON.parse(await readFile('news.default.json','utf8')),version:1,updatedAt:null};
+const app=Fastify();await app.register(helmet,siteSecurity);
+registerPublicSite(app,{getWiki:async()=>wiki,getNews:async()=>news});
+app.get('/api/test',async()=>({api:true}));
+await app.register(staticFiles,{root:resolve('out')});
+const base=await app.listen({host:'127.0.0.1',port:0});
+test.after(()=>app.close());
+const get=async path=>{const response=await fetch(base+path,{redirect:'manual'});return {response,html:await response.text()};};
+test('public routing preserves account, shop, admin and API routes',async()=>{
+  for(const p of ['/compte/','/boutique/','/vote/','/api/test','/wiki/admin/','/wiki/admin/access/','/actualites/admin/','/admin/discord/','/_next/static/chunk.js'])assert.equal(isPublicPage(p),false,p);
+  const {response,html}=await get('/api/test');assert.equal(response.status,200);assert.deepEqual(JSON.parse(html),{api:true});
+  for(const p of ['/compte/','/admin/discord/','/wiki/admin/']){const r=await get(p);assert.equal(r.response.status,200,p);assert.match(r.response.headers.get('x-robots-tag'),/noindex/);assert.equal(r.response.headers.get('x-cobblestar-renderer'),null);}
+});
+test('public pages have meaningful HTML, unique metadata and no React runtime',async()=>{
+  const paths=['/','/rejoindre/','/minecraft-pokemon/','/telecharger/','/wiki/','/actualites/','/roadmap/','/confidentialite/',...wiki.content.articles.filter(a=>a.published).map(a=>`/wiki/${a.id}/`),...news.content.articles.filter(a=>a.published).map(a=>`/actualites/${a.slug}/`)];
+  const titles=new Set();
+  for(const path of paths){const {response,html}=await get(path);assert.equal(response.status,200,path+' '+html.slice(0,200));assert.equal(response.headers.get('x-cobblestar-renderer'),'Astro');assert.equal((html.match(/<h1(?:\s|>)/g)||[]).length,1,path);assert.ok(html.includes(`rel="canonical" href="https://cobblestar-mc.fr${path}"`),path);const title=html.match(/<title>(.*?)<\/title>/s)?.[1];assert.ok(title);assert.ok(!titles.has(title),title);titles.add(title);assert.match(html,/<meta name="description" content="[^"]{20,}/);assert.ok(!html.includes('/_next/'),path);assert.match(response.headers.get('content-security-policy'),/script-src/);assert.ok(!html.includes('astro-island'),path);for(const script of html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs))JSON.parse(script[1]);}
+});
+test('publishing immediately creates real article URLs, drafts stay private and text is escaped',async()=>{
+  const original=structuredClone(wiki);
+  const sample=structuredClone(wiki.content.articles[0]);sample.id='test-publication';sample.title='Guide fraîchement publié';sample.blocks=[{kind:'paragraph',text:'Texte nouveau <script>alert(1)</script>'}];
+  wiki.content.articles.push({...sample,published:false});assert.equal((await get('/wiki/test-publication/')).response.status,404);
+  wiki.content.articles.at(-1).published=true;const r=await get('/wiki/test-publication/');assert.equal(r.response.status,200);assert.ok(r.html.includes('Guide fraîchement publié'));assert.ok(r.html.includes('&lt;script&gt;'));assert.ok(!r.html.includes('<script>alert(1)</script>'));
+  wiki.content.branches.find(b=>b.id===sample.branchId).visible=false;assert.equal((await get('/wiki/test-publication/')).response.status,404);wiki=original;
+  const missing=await get('/actualites/does-not-exist/');assert.equal(missing.response.status,404);assert.ok(missing.html.includes('noindex,follow'));
+});
+test('sitemap, RSS and redirects stay canonical without indexing private pages',async()=>{
+  const map=await get('/sitemap.xml');assert.equal(map.response.status,200);assert.ok(map.html.includes('/wiki/'));assert.ok(!map.html.includes('/admin/'));assert.ok(!map.html.includes('/compte/'));assert.ok(!map.html.includes('<lastmod>'));assert.ok(map.html.includes('/actualites/'+news.content.articles[0].slug+'/'));
+  const rss=await get('/actualites/rss.xml');assert.equal(rss.response.status,200);assert.ok(rss.html.includes('<rss version="2.0">'));
+  for(const [from,to] of [['/wiki','/wiki/'],['/wiki/index.html','/wiki/'],['/rejoindre','/rejoindre/']]){const r=await get(from);assert.equal(r.response.status,308);assert.equal(r.response.headers.get('location'),to);}
+  assert.ok((await get('/robots.txt')).html.includes('Sitemap: https://cobblestar-mc.fr/sitemap.xml'));
+  const www=await app.inject({url:'/wiki?source=discord',headers:{host:'www.cobblestar-mc.fr'}});
+  assert.equal(www.statusCode,308);assert.equal(www.headers.location,'https://cobblestar-mc.fr/wiki/?source=discord');
+  const api=await app.inject({url:'/api/test',headers:{host:'www.cobblestar-mc.fr'}});assert.equal(api.statusCode,200);
+});

@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-26T11:56:58.555Z",
+  "url": "https://cobblestar-mc.fr/",
+  "renderer": "Next static before Astro migration",
+  "htmlBytes": 39478,
+  "scriptFiles": 11,
+  "scriptBytes": 691680,
+  "notes": "Uncompressed document and directly referenced script bytes; not Core Web Vitals or real-user measurements."
+}

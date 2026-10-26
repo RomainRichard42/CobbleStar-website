@@ -2,6 +2,9 @@ node_modules/
 .next/
 out/
 deploy/
+public-astro/
+.astro/
+.astro-cache/
 
 api/node_modules/
 api/dist/
@@ -23,3 +26,5 @@ minecraft-mod/run/
 ui-review-*/
 ui-review-game-admin-*.png
 ui-review-pokemon-*.png
+
+public-site/static/media/

@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Espace joueur",
   description: "Connecte ton profil Discord à CobbleStar puis relie-le en toute sécurité à ton joueur Minecraft avec /link.",
   keywords: [...BASE_KEYWORDS, "connexion discord cobblestar", "compte joueur cobblestar", "lien minecraft"],
-  robots: { index: true, follow: true },
+  robots: { index: false, follow: true },
   alternates: { canonical: "/compte/" },
 };
 

@@ -1,0 +1,6 @@
+---
+import Layout from '../layouts/PublicLayout.astro';
+import Picture from '../components/Picture.astro';
+import {stops} from '../lib/roadmap';
+---
+<Layout title="Roadmap CobbleStar — Étapes et projets du serveur" description="Les étapes du serveur CobbleStar : ce qui est disponible et les projets annoncés pour Asteria, Nébélia et les activités communautaires."><main id="contenu" class="public-shell"><span class="eyebrow">LE PARCOURS DU SERVEUR</span><h1>La roadmap<br/>CobbleStar.</h1><p class="lead">Les étapes du projet et les rendez-vous à venir. Les éléments annoncés sans date restent des objectifs, pas des dates de sortie garanties.</p><nav class="public-nav" aria-label="Étapes de la roadmap">{stops.filter(s=>s.kind!=='intro').map(s=><a href={`#${s.id}`}>{s.accent}</a>)}</nav>{stops.map(s=><section id={s.id} class="roadmap-step"><Picture src={s.image} alt="" width={700} height={500}/><div><span class="eyebrow">{s.kicker}</span><h2>{s.title}</h2><p>{s.copy}</p><strong>{s.status}</strong><p class="public-meta">{s.window}</p>{s.milestone&&<p>{s.milestone}</p>}</div></section>)}<a href="/actualites/" class="public-button">Lire les dernières annonces</a></main></Layout>

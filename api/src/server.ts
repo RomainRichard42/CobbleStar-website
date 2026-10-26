@@ -28,6 +28,7 @@ import { registerStarStudio } from "./star-studio.js";
 import { accountIdentity } from "./account-link.js";
 import { registerAccountLink } from "./account-link-routes.js";
 import { siteSecurity } from "./site-security.js";
+import { registerPublicSite } from "./public-site.js";
 
 type UserRow = RowDataPacket & {
   id: string; email: string | null; discord_email: string | null; password_hash: string | null;
@@ -1041,6 +1042,8 @@ app.post("/api/internal/rewards/:id/fail", { config: { rateLimit: { max: 300, ti
   if (result.affectedRows !== 1) return reply.code(409).send({ error: "LEASE_INVALID_OR_EXPIRED" });
   return { released: true };
 });
+
+registerPublicSite(app, { getWiki: () => wikiSlot("published"), getNews: () => newsSlot("published") });
 
 await app.register(staticFiles, {
   root: join(process.cwd(), "site"),

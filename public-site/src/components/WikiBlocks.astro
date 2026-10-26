@@ -1,0 +1,19 @@
+---
+import type {WikiBlock,WikiEntry} from '../../../app/wiki/wiki-types';
+import Picture from './Picture.astro';
+const {blocks=[]}=Astro.props as {blocks:WikiBlock[]};
+const entries=(block:WikiBlock)=>(block.items??[]).filter((i):i is WikiEntry=>typeof i!=='string');
+const strings=(block:WikiBlock)=>(block.items??[]).filter((i):i is string=>typeof i==='string');
+---
+{blocks.map((b,i)=><>
+  {b.kind==='heading'&&<h2 id={`section-${i}`}>{b.text}</h2>}
+  {b.kind==='paragraph'&&<p>{b.text}</p>}
+  {b.kind==='callout'&&<aside class="public-note"><strong>{b.title}</strong><p>{b.text}</p></aside>}
+  {b.kind==='checklist'&&<ul>{strings(b).map(item=><li>{item}</li>)}</ul>}
+  {b.kind==='steps'&&<ol class="steps">{entries(b).map(item=><li class="step"><strong>{item.title}</strong><p>{item.text}</p></li>)}</ol>}
+  {b.kind==='comparison'&&<div class="comparison"><section><h3>{b.leftTitle}</h3><ul>{(b.leftItems??[]).map(item=><li>{item}</li>)}</ul></section><section><h3>{b.rightTitle}</h3><ul>{(b.rightItems??[]).map(item=><li>{item}</li>)}</ul></section></div>}
+  {b.kind==='progress'&&<div><p>{b.from} {b.fromLabel} → {b.to} {b.toLabel}</p><progress max="100" value={Math.min(100,Math.max(0,b.percent??50))} aria-label={`${b.from??''} vers ${b.to??''}`}/></div>}
+  {b.kind==='command'&&<div class="command"><code>{b.command}</code><h3>{b.title}</h3><p>{b.text}</p></div>}
+  {b.kind==='itemGrid'&&<div class="item-grid">{entries(b).map(item=><article>{item.asset&&<Picture src={item.asset} alt="" width={58} height={58}/>}<h3>{item.title}</h3><p>{item.text}</p></article>)}</div>}
+  {b.kind==='faq'&&<div>{entries(b).map(item=><details><summary>{item.title}</summary><p>{item.text}</p></details>)}</div>}
+</>)}

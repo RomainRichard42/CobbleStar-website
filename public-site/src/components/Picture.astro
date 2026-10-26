@@ -1,0 +1,6 @@
+---
+import { safeImage } from '../lib/content';
+const {src,alt='',fill=false,priority=false,width,height, ...attrs}=Astro.props;
+const image=src==='/cobblestar-logo.png'?`/media/cobblestar-logo-${width&&width<=128?128:480}.webp`:safeImage(src);
+---
+<img src={image} alt={alt} width={fill?undefined:width} height={fill?undefined:height} loading={priority?'eager':'lazy'} decoding="async" fetchpriority={priority?'high':undefined} style={fill?'position:absolute;inset:0;width:100%;height:100%;object-fit:cover':undefined} {...attrs}/>

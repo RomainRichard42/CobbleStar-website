@@ -1,0 +1,23 @@
+---
+import '../../../app/globals.css';
+import '../../../app/design-system.css';
+import '../../../app/site-refresh.css';
+import '../styles/public.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import {SITE,jsonLd} from '../lib/content';
+const {title,description,image='/cobblestar-logo.png',schema=[],noindex=false,wide=false}=Astro.props;
+const canonical=SITE+Astro.url.pathname;
+const org={'@context':'https://schema.org','@type':'Organization','@id':SITE+'/#organisation',name:'CobbleStar',url:SITE,logo:SITE+'/cobblestar-logo.png',sameAs:['https://discord.gg/Sd387Ky4M']};
+---
+<!doctype html><html lang="fr"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>{title.includes('CobbleStar')?title:`${title} | CobbleStar`}</title><meta name="description" content={description}/><link rel="canonical" href={canonical}/><meta name="robots" content={noindex?'noindex,follow':'index,follow,max-image-preview:large'}/>
+<meta property="og:type" content="website"/><meta property="og:locale" content="fr_FR"/><meta property="og:site_name" content="CobbleStar"/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><meta property="og:image" content={new URL(image,SITE).href}/><meta name="twitter:card" content="summary_large_image"/>
+<meta name="google-site-verification" content="OfFTRlGZkku9dgLFyS6_6mbJsVBy0xeK-49Sp1RROVY"/>
+<link rel="icon" href="/cobblestar-logo.png"/><link rel="alternate" type="application/rss+xml" title="Actualités CobbleStar" href="/actualites/rss.xml"/>
+<script type="application/ld+json" set:html={jsonLd([org,...schema])}/>
+</head><body class:list={['astro-public',{'public-wide':wide}]}><Header/><slot/><Footer/><span id="copy-status" class="sr-only" aria-live="polite"/>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-server]').forEach(button=>button.addEventListener('click',async()=>{try{await navigator.clipboard.writeText('play.cobblestar-mc.fr');document.getElementById('copy-status')!.textContent='Adresse du serveur copiée.';}catch{document.getElementById('copy-status')!.textContent='Adresse à copier : play.cobblestar-mc.fr';}}));
+</script>
+</body></html>

@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=22"
+    "node": ">=22.23.4"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -15,12 +15,14 @@
     "kinetic": "npm run migrate && npm start"
   },
   "dependencies": {
+    "@astrojs/node": "11.1.9",
     "@fastify/cookie": "^11.0.2",
     "@fastify/cors": "^11.1.0",
     "@fastify/helmet": "^13.0.2",
     "@fastify/rate-limit": "^10.3.0",
     "@fastify/static": "^10.1.2",
     "@node-rs/argon2": "^2.0.2",
+    "astro": "7.4.2",
     "discord.js": "14.27.0",
     "dotenv": "^17.2.1",
     "fastify": "^5.5.0",

@@ -9,6 +9,7 @@ const deployDir = join(projectDir, "deploy");
 const required = [
   "out/index.html",
   "api/dist/server.js",
+  "public-astro/server/entry.mjs",
   "api/migrations/001_initial.sql",
   "api/shop.catalog.json",
   "api/economy.policy.json",
@@ -48,6 +49,7 @@ await Promise.all([
 ]);
 
 await cp(join(projectDir, "out"), join(deployDir, "site"), { recursive: true });
+await cp(join(projectDir, "public-astro"), join(deployDir, "public-astro"), { recursive: true });
 await cp(join(projectDir, "api", "dist"), join(deployDir, "dist"), { recursive: true });
 await cp(join(projectDir, "api", "migrations"), join(deployDir, "migrations"), { recursive: true });
 await cp(join(projectDir, "api", "licenses"), join(deployDir, "licenses"), { recursive: true });

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "./tailwind.css";
 import "./globals.css";
 import "./design-system.css";
 import "./site-refresh.css";

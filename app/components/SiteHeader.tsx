@@ -1,6 +1,6 @@
 "use client";
+/* eslint-disable @next/next/no-html-link-for-pages -- Public destinations use Astro and require document navigation. */
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDownloadUrl } from "./DownloadLauncher";
@@ -90,37 +90,37 @@ export default function SiteHeader() {
           <button type="button" onClick={copyServerAddress}><small>IP DU SERVEUR</small><b>{copied ? "Adresse copiée" : "play.cobblestar-mc.fr"}</b><span>{copied ? "✓" : "⧉"}</span></button>
         </div>
         <header className="nav-wrap">
-          <Link className="brand" href="/" aria-label="CobbleStar — Accueil">
+          <a className="brand" href="/" aria-label="CobbleStar — Accueil">
             <span className="brand-mark"><img src="/cobblestar-logo.png" alt="" /></span>
             <span>Cobble<span>Star</span><small>ASTERIA × NÉBÉLIA</small></span>
-          </Link>
+          </a>
           <nav aria-label="Navigation principale">
-            <Link className={pathname === "/" ? "active" : undefined} aria-current={pathname === "/" ? "page" : undefined} href="/">Accueil</Link>
-            <Link className={pathname.startsWith("/actualites") ? "active" : undefined} aria-current={pathname.startsWith("/actualites") ? "page" : undefined} href="/actualites/">Actualités</Link>
-            <Link className={pathname.startsWith("/boutique") ? "active" : undefined} aria-current={pathname.startsWith("/boutique") ? "page" : undefined} href="/boutique/">Boutique</Link>
-            <Link className={pathname.startsWith("/vote") ? "active" : undefined} aria-current={pathname.startsWith("/vote") ? "page" : undefined} href="/vote/">Votes</Link>
-            <Link className={pathname.startsWith("/roadmap") ? "active" : undefined} aria-current={pathname.startsWith("/roadmap") ? "page" : undefined} href="/roadmap/">Roadmap</Link>
-            <Link className={pathname.startsWith("/wiki") ? "active" : undefined} aria-current={pathname.startsWith("/wiki") ? "page" : undefined} href="/wiki/">Wiki</Link>
+            <a className={pathname === "/" ? "active" : undefined} aria-current={pathname === "/" ? "page" : undefined} href="/">Accueil</a>
+            <a className={pathname.startsWith("/actualites") ? "active" : undefined} aria-current={pathname.startsWith("/actualites") ? "page" : undefined} href="/actualites/">Actualités</a>
+            <a className={pathname.startsWith("/boutique") ? "active" : undefined} aria-current={pathname.startsWith("/boutique") ? "page" : undefined} href="/boutique/">Boutique</a>
+            <a className={pathname.startsWith("/vote") ? "active" : undefined} aria-current={pathname.startsWith("/vote") ? "page" : undefined} href="/vote/">Votes</a>
+            <a className={pathname.startsWith("/roadmap") ? "active" : undefined} aria-current={pathname.startsWith("/roadmap") ? "page" : undefined} href="/roadmap/">Roadmap</a>
+            <a className={pathname.startsWith("/wiki") ? "active" : undefined} aria-current={pathname.startsWith("/wiki") ? "page" : undefined} href="/wiki/">Wiki</a>
           </nav>
           <details className="mobile-menu">
             <summary aria-label="Ouvrir le menu"><span /><span /><span /><small>Menu</small></summary>
             <div>
-              <Link className={pathname === "/" ? "active" : undefined} aria-current={pathname === "/" ? "page" : undefined} href="/">Accueil</Link>
-              <Link className={pathname.startsWith("/actualites") ? "active" : undefined} aria-current={pathname.startsWith("/actualites") ? "page" : undefined} href="/actualites/">Actualités</Link>
-              <Link className={pathname.startsWith("/boutique") ? "active" : undefined} aria-current={pathname.startsWith("/boutique") ? "page" : undefined} href="/boutique/">Boutique</Link>
-              <Link className={pathname.startsWith("/vote") ? "active" : undefined} aria-current={pathname.startsWith("/vote") ? "page" : undefined} href="/vote/">Votes</Link>
-              <Link className={pathname.startsWith("/roadmap") ? "active" : undefined} aria-current={pathname.startsWith("/roadmap") ? "page" : undefined} href="/roadmap/">Roadmap</Link>
-              <Link className={pathname.startsWith("/wiki") ? "active" : undefined} aria-current={pathname.startsWith("/wiki") ? "page" : undefined} href="/wiki/">Wiki</Link>
+              <a className={pathname === "/" ? "active" : undefined} aria-current={pathname === "/" ? "page" : undefined} href="/">Accueil</a>
+              <a className={pathname.startsWith("/actualites") ? "active" : undefined} aria-current={pathname.startsWith("/actualites") ? "page" : undefined} href="/actualites/">Actualités</a>
+              <a className={pathname.startsWith("/boutique") ? "active" : undefined} aria-current={pathname.startsWith("/boutique") ? "page" : undefined} href="/boutique/">Boutique</a>
+              <a className={pathname.startsWith("/vote") ? "active" : undefined} aria-current={pathname.startsWith("/vote") ? "page" : undefined} href="/vote/">Votes</a>
+              <a className={pathname.startsWith("/roadmap") ? "active" : undefined} aria-current={pathname.startsWith("/roadmap") ? "page" : undefined} href="/roadmap/">Roadmap</a>
+              <a className={pathname.startsWith("/wiki") ? "active" : undefined} aria-current={pathname.startsWith("/wiki") ? "page" : undefined} href="/wiki/">Wiki</a>
             </div>
           </details>
           <a className="nav-download" href={downloadUrl} download aria-label="Télécharger le launcher CobbleStar">
             <span>Jouer</span><b aria-hidden="true">↓</b>
           </a>
-          {accountsEnabled && account && <Link className="nav-stars" href="/boutique/" aria-label={`Solde : ${balance.toLocaleString("fr-FR")} Stars`}><span aria-hidden="true">✦</span><b>{balance.toLocaleString("fr-FR")}</b><small>Stars</small></Link>}
-          {accountsEnabled && <Link className={`nav-account${pathname.startsWith("/compte") ? " active" : ""}`} href="/compte/" aria-label={account ? `Compte de ${accountName || "Dresseur"}` : "Connexion Discord à CobbleStar"}>
+          {accountsEnabled && account && <a className="nav-stars" href="/boutique/" aria-label={`Solde : ${balance.toLocaleString("fr-FR")} Stars`}><span aria-hidden="true">✦</span><b>{balance.toLocaleString("fr-FR")}</b><small>Stars</small></a>}
+          {accountsEnabled && <a className={`nav-account${pathname.startsWith("/compte") ? " active" : ""}`} href="/compte/" aria-label={account ? `Compte de ${accountName || "Dresseur"}` : "Connexion Discord à CobbleStar"}>
             <span className="nav-account-copy"><small>{account ? "MON COMPTE" : "ESPACE JOUEUR"}</small><strong>{accountName || "Connexion Discord"}</strong></span>
             <span className="nav-account-avatar"><b aria-hidden="true">{accountName ? accountName.slice(0, 1).toUpperCase() : "♙"}</b>{accountAvatar && <img src={accountAvatar} alt="" onError={(event) => { event.currentTarget.style.display = "none"; }} />}</span>
-          </Link>}
+          </a>}
         </header>
       </div>
     </div>
