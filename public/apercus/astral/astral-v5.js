@@ -26,7 +26,7 @@
     const add=(y,name,el,extra={})=>{y=Math.max(0,Math.min(maxY,y));const last=steps.at(-1);if(last&&Math.abs(last.y-y)<8&&extra.rail===undefined)return;steps.push({y,name,el,...extra})};
     if(story){add(heroTop,'Accueil',panels[0],{panel:0});add(heroTop+heroRange+horizontalDistance,'Vidéo Cobblemon',panels[1],{panel:1});add(heroTop+heroRange+horizontalDistance*2,'Photos de Cobblemon',panels[2],{panel:2})}
     else panels.forEach((p,i)=>{const start=Math.max(0,top(p)-headerH),usable=Math.max(240,stageH-50),name=['Accueil','Vidéo Cobblemon','Photos de Cobblemon'][i];add(start,name,p,{panel:i});for(let offset=usable;offset<p.offsetHeight;offset+=usable){const y=start+Math.min(offset,Math.max(0,p.offsetHeight-usable));if(y>start+8)add(y,name,p,{panel:i})}});
-    for(const section of $('main>section:not(.opening-runway),main>footer')){
+    for(const section of $$('main>section:not(.opening-runway),main>footer')){
       const start=Math.max(0,top(section)-headerH),usable=Math.max(320,innerHeight-headerH-40),height=section.offsetHeight,name=section.querySelector('h2')?.textContent.trim()||'CobbleStar';
       if(section.classList.contains('activity-runway'))railCards.forEach((card,i)=>add(start,['GTS','Pension','Raids','Métiers'][i],card,{rail:Math.min(rail.scrollWidth-rail.clientWidth,Math.max(0,card.offsetLeft-railCards[0].offsetLeft))}));else add(start,name,section);
       if(height>usable+80){const count=Math.ceil((height-usable)/usable);for(let i=1;i<=count;i++)add(start+Math.min(i*usable,height-usable),name,section)}
