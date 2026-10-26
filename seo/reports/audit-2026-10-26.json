@@ -1,0 +1,236 @@
+{
+  "at": "2026-10-26T12:13:40.034Z",
+  "origin": "https://cobblestar-mc.fr",
+  "pages": [
+    {
+      "url": "https://cobblestar-mc.fr/",
+      "status": 200,
+      "title": "CobbleStar — Serveur Cobblemon FR &amp; Minecraft Pokémon",
+      "description": "Rejoins CobbleStar, serveur Cobblemon français sur Minecraft Java 1.21.1. Deux mondes, Pokémon et communauté FR. Launcher, IP et guides pour débuter.",
+      "canonical": "https://cobblestar-mc.fr/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 30345,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/rejoindre/",
+      "status": 200,
+      "title": "Rejoindre CobbleStar — IP, launcher et installation Cobblemon FR",
+      "description": "Comment rejoindre le serveur CobbleStar : Minecraft Java 1.21.1, launcher Windows, installation du modpack et IP play.cobblestar-mc.fr.",
+      "canonical": "https://cobblestar-mc.fr/rejoindre/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 9939,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/minecraft-pokemon/",
+      "status": 200,
+      "title": "Pokémon dans Minecraft : découvrir Cobblemon et CobbleStar FR",
+      "description": "Comprendre Cobblemon, le mod Pokémon pour Minecraft, et découvrir CobbleStar : un serveur français avec launcher, mondes persistants et guides de jeu.",
+      "canonical": "https://cobblestar-mc.fr/minecraft-pokemon/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 9029,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/telecharger/",
+      "status": 200,
+      "title": "Télécharger le launcher CobbleStar — Minecraft Cobblemon FR",
+      "description": "Télécharge le launcher Windows officiel CobbleStar pour installer Java, Fabric et le modpack Minecraft Cobblemon compatible avec le serveur.",
+      "canonical": "https://cobblestar-mc.fr/telecharger/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 7157,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/",
+      "status": 200,
+      "title": "Wiki CobbleStar — Guides Cobblemon en français",
+      "description": "Les guides officiels du serveur CobbleStar : débuter, capturer des Pokémon, utiliser la pension, progresser et comprendre les activités Cobblemon.",
+      "canonical": "https://cobblestar-mc.fr/wiki/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 10011,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/actualites/",
+      "status": 200,
+      "title": "Actualités CobbleStar — Serveur, launcher et Cobblemon",
+      "description": "Les nouveautés officielles de CobbleStar : mises à jour du serveur Minecraft Cobblemon, du launcher et de ses activités.",
+      "canonical": "https://cobblestar-mc.fr/actualites/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 7137,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/roadmap/",
+      "status": 200,
+      "title": "Roadmap CobbleStar — Étapes et projets du serveur",
+      "description": "Les étapes du serveur CobbleStar : ce qui est disponible et les projets annoncés pour Asteria, Nébélia et les activités communautaires.",
+      "canonical": "https://cobblestar-mc.fr/roadmap/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 12233,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/confidentialite/",
+      "status": 200,
+      "title": "Confidentialité | CobbleStar",
+      "description": "Les données utilisées par CobbleStar, leur protection et tes droits.",
+      "canonical": "https://cobblestar-mc.fr/confidentialite/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 12128,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/boutique/",
+      "status": 200,
+      "title": "Boutique | CobbleStar",
+      "description": "Recharge tes Stars et découvre les cosmétiques, services et grades mensuels de CobbleStar.",
+      "canonical": "https://cobblestar-mc.fr/boutique/",
+      "h1": 1,
+      "renderer": "Next static",
+      "htmlBytes": 29537,
+      "scriptFiles": 9,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/vote/",
+      "status": 200,
+      "title": "Votes | CobbleStar",
+      "description": "Soutiens CobbleStar sur les portails de vote et reçois automatiquement tes récompenses en jeu.",
+      "canonical": "https://cobblestar-mc.fr/vote/",
+      "h1": 1,
+      "renderer": "Next static",
+      "htmlBytes": 26081,
+      "scriptFiles": 9,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/welcome/",
+      "status": 200,
+      "title": "Bienvenue sur CobbleStar — Wiki CobbleStar",
+      "description": "Le parcours conseillé pour commencer sans se perdre.",
+      "canonical": "https://cobblestar-mc.fr/wiki/welcome/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 7445,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/capture/",
+      "status": 200,
+      "title": "Capturer son premier Pokémon — Wiki CobbleStar",
+      "description": "Préparer ses Poké Balls, affaiblir la cible et réussir sa capture.",
+      "canonical": "https://cobblestar-mc.fr/wiki/capture/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 7557,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/quests/",
+      "status": 200,
+      "title": "Journal et suivi de quêtes — Wiki CobbleStar",
+      "description": "Distinguer l’histoire, les quêtes secondaires et les missions répétables.",
+      "canonical": "https://cobblestar-mc.fr/wiki/quests/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 7245,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/ranked/",
+      "status": 200,
+      "title": "Combats classés — Wiki CobbleStar",
+      "description": "Solo OU, Double OU et Duo coop : règles, cote et récompenses de saison.",
+      "canonical": "https://cobblestar-mc.fr/wiki/ranked/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 7149,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/daycare/",
+      "status": 200,
+      "title": "Pension et reproduction — Wiki CobbleStar",
+      "description": "Choisir deux parents compatibles, produire un œuf et le faire éclore.",
+      "canonical": "https://cobblestar-mc.fr/wiki/daycare/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 12067,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/actualites/wiki-synchronise/",
+      "status": 200,
+      "title": "Le wiki CobbleStar arrive en jeu | CobbleStar",
+      "description": "Le même contenu est désormais consultable sur le site et directement depuis Minecraft avec /wiki.",
+      "canonical": "https://cobblestar-mc.fr/actualites/wiki-synchronise/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 7938,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/actualites/pension-pokemon/",
+      "status": 200,
+      "title": "La pension Pokémon ouvre ses portes | CobbleStar",
+      "description": "Confie deux Pokémon compatibles, récupère leurs œufs et progresse dans le métier Éleveur.",
+      "canonical": "https://cobblestar-mc.fr/actualites/pension-pokemon/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 8023,
+      "scriptFiles": 1,
+      "errors": []
+    },
+    {
+      "url": "https://cobblestar-mc.fr/actualites/launcher-modpack/",
+      "status": 200,
+      "title": "Le launcher gère maintenant le modpack | CobbleStar",
+      "description": "Java, Fabric et les nouvelles versions du pack sont installés automatiquement avant de jouer.",
+      "canonical": "https://cobblestar-mc.fr/actualites/launcher-modpack/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 8044,
+      "scriptFiles": 1,
+      "errors": []
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "metrics": {
+    "home": {
+      "htmlBytes": 30345,
+      "scriptFiles": 1,
+      "scriptBytes": 1239,
+      "inlineScriptBytes": 347,
+      "totalScriptBytes": 1586
+    }
+  },
+  "notes": [
+    "HTTP checks are not Google rankings or field Core Web Vitals. Search Console is the source for impressions, clicks, queries and index coverage."
+  ]
+}
