@@ -3,10 +3,11 @@ import '../../../app/globals.css';
 import '../../../app/design-system.css';
 import '../../../app/site-refresh.css';
 import '../styles/public.css';
+import '../../../app/astral-public.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import {SITE,jsonLd} from '../lib/content';
-const {title,description,image='/media/cobblestar-logo-480.webp',imageAlt='CobbleStar, serveur Cobblemon francophone',schema=[],noindex=false,wide=false,article=false,publishedAt}=Astro.props;
+const {cinematic=false,title,description,image='/media/cobblestar-logo-480.webp',imageAlt='CobbleStar, serveur Cobblemon francophone',schema=[],noindex=false,wide=false,article=false,publishedAt}=Astro.props;
 const canonical=SITE+Astro.url.pathname;
 const org={'@context':'https://schema.org','@type':'Organization','@id':SITE+'/#organisation',name:'CobbleStar',url:SITE,logo:SITE+'/cobblestar-logo.png',sameAs:['https://discord.gg/Sd387Ky4M']};
 const website={'@context':'https://schema.org','@type':'WebSite','@id':SITE+'/#website',name:'CobbleStar',url:SITE+'/',inLanguage:'fr-FR',publisher:{'@id':SITE+'/#organisation'}};
@@ -18,7 +19,7 @@ const page={'@context':'https://schema.org','@type':'WebPage','@id':canonical+'#
 <meta name="google-site-verification" content="OfFTRlGZkku9dgLFyS6_6mbJsVBy0xeK-49Sp1RROVY"/>
 <link rel="icon" type="image/png" sizes="96x96" href="/media/favicon-96.png"/><link rel="apple-touch-icon" sizes="180x180" href="/media/apple-touch-icon.png"/><meta name="theme-color" content="#080616"/><link rel="alternate" type="application/rss+xml" title="Actualités CobbleStar" href="/actualites/rss.xml"/>
 <script type="application/ld+json" set:html={jsonLd([org,website,page,...schema])}/>
-</head><body class:list={['astro-public',{'public-wide':wide}]}><Header/><slot/><Footer/><span id="copy-status" class="sr-only" aria-live="polite"/>
+</head><body class:list={['astro-public','astral-public',{'public-wide':wide,'astral astral-v4 astral-v5 astral-v6 astral-home':cinematic}]}><Header/><slot/><Footer cinematic={cinematic}/><span id="copy-status" class="sr-only" aria-live="polite"/>
 <script>
   document.querySelectorAll<HTMLButtonElement>('[data-copy-server]').forEach(button=>button.addEventListener('click',async()=>{try{await navigator.clipboard.writeText('play.cobblestar-mc.fr');document.getElementById('copy-status')!.textContent='Adresse du serveur copiée.';}catch{document.getElementById('copy-status')!.textContent='Adresse à copier : play.cobblestar-mc.fr';}}));
 </script>

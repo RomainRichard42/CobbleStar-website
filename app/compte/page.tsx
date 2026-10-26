@@ -1,4 +1,5 @@
 "use client";
+import StarsArt from "../components/StarsArt";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -211,27 +212,27 @@ function AccountPortal() {
   const discordHandle = account?.discord?.username ? `@${account.discord.username}` : "Compte Discord";
   const accountInitial = (account?.discord?.globalName || account?.discord?.username || account?.minecraft.username || "C").slice(0, 1).toUpperCase();
 
-  return <main className={styles.page}>
+  return <main className={`${styles.page} astral-account-page`}>
     <SiteHeader />
     <section className={styles.stage} id="contenu">
       <span className={styles.ambientOne} aria-hidden="true" />
       <span className={styles.ambientTwo} aria-hidden="true" />
 
       <header className={styles.intro}>
-        <div className={styles.eyebrow}><span>05</span><i /> ESPACE JOUEUR</div>
+        <div className={styles.eyebrow}>ESPACE JOUEUR</div>
         <h1>Ton passeport.<br /><em>Toute ton aventure.</em></h1>
         <p>Une seule identité pour ton profil Minecraft, tes Stars, la boutique et les récompenses communautaires.</p>
       </header>
 
       <div className={styles.portal}>
         <aside className={`${styles.passport} ${linked ? styles.passportLinked : ""}`}>
-          <div className={styles.passportBackdrop} aria-hidden="true"><img src="/cobblemon-lakeside.webp" alt="" /><span /></div>
+          <div className={styles.passportBackdrop} aria-hidden="true"><img src="/astral/assets/riding.webp" alt="" /><span /></div>
           <header className={styles.passportHeader}><span>COBBLESTAR</span><b>{account ? (linked ? "ACTIF" : "À RELIER") : "ACCÈS JOUEUR"}</b></header>
 
           <div className={styles.identityVisual}>
             {account?.discord
               ? <div className={`${styles.playerAvatar} ${styles.discordAvatar}`}><span aria-hidden="true">{accountInitial}</span>{account.discord.avatarUrl && <img src={account.discord.avatarUrl} alt={`Avatar Discord de ${discordName}`} onError={(event) => { event.currentTarget.style.display = "none"; }} />}</div>
-              : <img className={styles.brandAvatar} src="/cobblestar-logo.png" alt="Mascotte de CobbleStar" />}
+              : <img className={styles.brandAvatar} src="/media/cobblestar-logo-480.webp" alt="Mascotte de CobbleStar" />}
             <span className={styles.identityOrbit} aria-hidden="true" />
           </div>
 
@@ -269,7 +270,7 @@ function AccountPortal() {
             </header>
 
             <div className={styles.stats}>
-              <article><small>SOLDE DISPONIBLE</small><strong><i>✦</i>{balance.toLocaleString("fr-FR")}</strong><span>Stars</span></article>
+              <article><small>SOLDE DISPONIBLE</small><strong><StarsArt />{balance.toLocaleString("fr-FR")}</strong><span>Stars</span></article>
               <article><small>COMPTE MINECRAFT</small><strong>{linked ? account.minecraft.username || "Vérifié" : "En attente"}</strong><span>{linked ? "Boutique et votes débloqués" : "Termine l’étape 02"}</span></article>
             </div>
 

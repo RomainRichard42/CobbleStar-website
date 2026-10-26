@@ -53,7 +53,8 @@ export default function SiteHeader() {
     window.addEventListener("cobblestar:account-changed", loadAccount);
     window.addEventListener("cobblestar:wallet-changed", loadWallet);
     window.addEventListener("focus", loadWallet);
-    return () => {
+
+  return () => {
       active = false;
       window.clearInterval(interval);
       window.removeEventListener("cobblestar:account-changed", loadAccount);
@@ -63,6 +64,9 @@ export default function SiteHeader() {
   }, []);
 
 
+  const isAdmin=/^\/(admin|wiki\/admin|actualites\/admin)(\/|$)/.test(pathname);
+  const links=[["/roadmap/","Le serveur"],["/wiki/","Wiki"],["/actualites/","Actualités"],["/vote/","Voter"]];
+  if (!isAdmin) return <header className="astral-header site-header"><a className="astral-skip" href="#contenu">Aller au contenu</a><a className="astral-brand" href="/" aria-label="CobbleStar, accueil"><img src="/media/cobblestar-logo-128.webp" alt="" width="56" height="56"/><span>COBBLE<b>STAR</b></span></a><nav className="astral-desktop" aria-label="Navigation principale">{links.map(([href,label])=><a key={href} href={href} aria-current={pathname.startsWith(href)?"page":undefined}>{label}</a>)}<a href="https://discord.gg/Sd387Ky4M">Discord ↗</a></nav><div className="astral-header-actions">{account&&<a className="astral-wallet" href="/boutique/" aria-label={`Solde : ${balance.toLocaleString("fr-FR")} Stars`}><img src="/astral/assets/stars-96.webp" alt="" width="32" height="24"/>{balance.toLocaleString("fr-FR")}</a>}<a className="astral-account" href="/compte/" title={accountName||"Mon compte"}>{accountAvatar&&<img src={accountAvatar} alt="" width="28" height="28"/>}<span>{accountName||"Mon compte"}</span></a><a className="astral-shop" href="/boutique/"><img src="/astral/assets/stars-96.webp" alt="" width="32" height="24"/>Boutique</a><details className="astral-menu" onKeyDown={e=>{if(e.key==="Escape"){e.currentTarget.open=false;e.currentTarget.querySelector("summary")?.focus();}}}><summary>Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Navigation mobile"><a href="/">Accueil</a>{links.map(([href,label])=><a key={href} href={href}>{label}</a>)}<a href="/rejoindre/">Préparer l’ouverture</a><a href="/compte/">Mon compte</a><a href="/boutique/">Boutique</a><a href="https://discord.gg/Sd387Ky4M">Discord ↗</a></nav></details></div></header>;
   return (
     <div className="nav-frame">
       <a className="skip-link" href="#contenu">Aller au contenu</a>

@@ -49,3 +49,14 @@ test('Google site identity and social article metadata match the public document
   assert.match(home.html,/sizes="96x96" href="\/media\/favicon-96.png"/);
   const article=await get('/actualites/'+news.content.articles[0].slug+'/');assert.ok(article.html.includes('property="og:type" content="article"'));assert.ok(article.html.includes('property="article:published_time" content="'+news.content.articles[0].publishedAt+'"'));
 });
+
+test('Astral covers public and player pages while admin keeps its own shell',async()=>{
+  for(const path of ['/','/wiki/','/wiki/welcome/','/actualites/','/rejoindre/','/roadmap/','/minecraft-pokemon/','/telecharger/','/confidentialite/','/boutique/','/compte/','/vote/']){
+    const {response,html}=await get(path);assert.equal(response.status,200,path);assert.match(html,/class="astral-header site-header"/,path);assert.match(html,/\/astral\/assets\/stars-96.webp/,path);
+  }
+  for(const path of ['/admin/','/admin/discord/','/wiki/admin/','/actualites/admin/']){
+    const {html}=await get(path);assert.ok(!html.includes('class="astral-header site-header"'),path);
+  }
+  const home=await get('/');assert.ok(!home.html.includes('local-gameplay'));assert.ok(home.html.includes('/astral/journey.js?v=public-1'));assert.ok(home.html.includes('prefers')||home.html.includes('motion.js'));assert.ok(home.html.includes('Ouverture à venir'));
+  const image=await get('/astral/assets/stars-320.webp');assert.equal(image.response.status,200);assert.match(image.response.headers.get('content-type'),/image\/webp/);
+});

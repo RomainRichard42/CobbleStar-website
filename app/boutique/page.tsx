@@ -1,7 +1,8 @@
 "use client";
+import StarsArt from "../components/StarsArt";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SHOP_FAQ } from "../lib/faq";
 import MinecraftLinkGate from "../components/MinecraftLinkGate";
 import SiteFooter from "../components/SiteFooter";
@@ -40,6 +41,7 @@ const catalog = [
 ];
 
 export default function ShopPage() {
+  const packTrigger = useRef<HTMLButtonElement | null>(null);
   const [account, setAccount] = useState<ShopAccount | null>(null);
   const [balance, setBalance] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -103,13 +105,21 @@ export default function ShopPage() {
 
   useEffect(() => {
     if (!selectedPack) return;
-    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setSelectedPack(null); };
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedPack(null);
+      if (event.key !== "Tab") return;
+      const controls = [...document.querySelectorAll<HTMLElement>('.shop-v2-dialog button:not(:disabled), .shop-v2-dialog a[href]')];
+      const first = controls[0], last = controls.at(-1);
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+    };
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", closeOnEscape);
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", closeOnEscape);
+      packTrigger.current?.focus({ preventScroll: true });
     };
   }, [selectedPack]);
 
@@ -151,8 +161,8 @@ export default function ShopPage() {
     <SiteHeader />
     <section className="shop-quick-shell" id="contenu" aria-labelledby="shop-title">
       <header className="shop-quick-header">
-        <div><span className="kicker">BOUTIQUE COBBLESTAR</span><h1 id="shop-title">Recharge tes <em>Stars.</em></h1><p>Choisis un pack. Les Stars rejoindront automatiquement ton compte Minecraft lié.</p></div>
-        <div className="shop-quick-state"><i /><span><b>Paiement unique</b><small>Livraison automatique</small></span></div>
+        <div><span className="kicker">BOUTIQUE COBBLESTAR</span><h1 id="shop-title">Recharge tes <em>Stars.</em></h1><p>La boutique fait vivre CobbleStar. Choisis un pack. Les Stars rejoindront automatiquement ton compte Minecraft lié.</p></div>
+        <img className="astral-shop-hero-art" src="/astral/assets/stars-640.webp" alt="" width="400" height="226"/><div className="shop-quick-state"><i /><span><b>Paiement unique</b><small>Livraison automatique</small></span></div>
       </header>
 
       <div className="shop-quick-account-row">
@@ -161,7 +171,7 @@ export default function ShopPage() {
           <span className="shop-v2-avatar">{username ? <img src={`https://mc-heads.net/avatar/${encodeURIComponent(username)}/96`} alt={`Tête Minecraft de ${username}`} /> : "?"}</span>
           <div><small>COMPTE DE LIVRAISON</small><h2>{loading ? "Vérification…" : username || "Aucun joueur connecté"}</h2><p>{loading ? "Nous récupérons ton portefeuille." : linked ? "Compte Minecraft vérifié." : account ? "Liaison Minecraft requise avec /link." : "Connecte-toi avant de finaliser un achat."}</p></div>
         </div>
-        <div className="shop-v2-wallet"><small>MON SOLDE</small><strong>{balance.toLocaleString("fr-FR")} <span>Stars</span></strong><em>{linked ? "Compte Minecraft vérifié" : "Liaison requise avant achat"}</em></div>
+        <div className="shop-v2-wallet"><small>MON SOLDE</small><strong><StarsArt />{balance.toLocaleString("fr-FR")} <span>Stars</span></strong><em>{linked ? "Compte Minecraft vérifié" : "Liaison requise avant achat"}</em></div>
         {!loading && !account && <Link className="shop-v2-account-action" href="/compte/">Se connecter <span>→</span></Link>}
         {!loading && account && !linked && <button className="shop-v2-account-action" type="button" onClick={() => setLinkOpen(true)}>Lier mon compte Minecraft <span>→</span></button>}
         {!loading && linked && <span className="shop-v2-ready">✓ Portefeuille prêt à recevoir tes Stars</span>}
@@ -177,14 +187,14 @@ export default function ShopPage() {
 
       <div className="shop-v2-packs">
         {starPacks.map((pack) => <article className={`shop-v2-pack tone-${pack.tone}${pack.popular ? " is-popular" : ""}`} key={pack.stars}>
-          {pack.popular && <span className="shop-v2-popular">LE PLUS CHOISI</span>}
-          <div className="shop-v2-star" aria-hidden="true">✦</div>
+          {pack.popular && <span className="shop-v2-popular">+ 20 % DE STARS</span>}
+          <div className="shop-v2-star"><StarsArt large /></div>
           <small>STARS CRÉDITÉES</small>
           <strong>{pack.stars.toLocaleString("fr-FR")}</strong>
           <span className="shop-v2-unit">Stars créditées</span>
           <div className="shop-v2-price"><b>{pack.price}</b><small>Paiement unique</small></div>
           <p>{pack.bonus || "Le format idéal pour découvrir la boutique."}</p>
-          <button type="button" onClick={() => { setSelectedPack(pack); setRechargeMessage(""); }}>Choisir {pack.price} <span>→</span></button>
+          <button type="button" onClick={(event) => { packTrigger.current = event.currentTarget; setSelectedPack(pack); setRechargeMessage(""); }}>Choisir {pack.price} <span>→</span></button>
         </article>)}
       </div>
       </section>
@@ -201,7 +211,7 @@ export default function ShopPage() {
       <section className="shop-v2-dialog" role="dialog" aria-modal="true" aria-labelledby="shop-dialog-title">
         <button className="shop-v2-dialog-close" type="button" onClick={() => setSelectedPack(null)} aria-label="Fermer le récapitulatif" autoFocus>×</button>
         <span className="kicker">RÉCAPITULATIF DU PACK</span>
-        <div className="shop-v2-dialog-star" aria-hidden="true">✦</div>
+        <div className="shop-v2-dialog-star"><StarsArt large /></div>
         <h2 id="shop-dialog-title">{selectedPack.stars.toLocaleString("fr-FR")} <em>Stars</em></h2>
         <div className="shop-v2-dialog-price"><span>Montant unique</span><b>{selectedPack.price}</b></div>
         {selectedPack.bonus && <p className="shop-v2-dialog-bonus">✓ {selectedPack.bonus} incluses dans le total</p>}

@@ -1,4 +1,5 @@
 "use client";
+import StarsArt from "../components/StarsArt";
 
 import { useEffect, useMemo, useState } from "react";
 import catalogFile from "../../api/shop.catalog.json";
@@ -186,7 +187,7 @@ export default function InGameShopPrototype() {
 
   if (!selected) return null;
 
-  return <main className={styles.viewport}>
+  return <main className={`${styles.viewport} astral-game-shop`}>
     <div className={styles.ambientOne} />
     <div className={styles.ambientTwo} />
     <section className={styles.terminal} aria-label="Prototype de la boutique en jeu CobbleStar">
@@ -196,7 +197,7 @@ export default function InGameShopPrototype() {
           <div><small>STARWATCH // SERVICE 04</small><strong>COBBLESTAR</strong><span>BOUTIQUE EN JEU</span></div>
         </div>
         <div className={styles.headerActions}>
-          <button className={styles.wallet} type="button" onClick={() => embedded ? sendMinecraftAction("RECHARGE") : setNotice("Recharge les Stars depuis le site CobbleStar, puis dépense-les ici.")}><span>✦</span><div><small>MON SOLDE</small><b>{formatStars(balance)} STARS</b></div><i>+</i></button>
+          <button className={styles.wallet} type="button" onClick={() => embedded ? sendMinecraftAction("RECHARGE") : setNotice("Recharge les Stars depuis le site CobbleStar, puis dépense-les ici.")}><StarsArt /><div><small>MON SOLDE</small><b>{formatStars(balance)} STARS</b></div><i>+</i></button>
           <button className={styles.profile} type="button" aria-label="Profil de démonstration"><span>LH</span><i /></button>
           <button className={styles.close} type="button" aria-label="Fermer la boutique" onClick={() => embedded ? sendMinecraftAction("CLOSE") : window.history.back()}>×</button>
         </div>
@@ -241,7 +242,7 @@ export default function InGameShopPrototype() {
                 <ProductArtwork product={product} />
                 <span className={styles.viewHint}>APERÇU <b>↗</b></span>
               </div>
-              <div className={styles.cardInfo}><small>{product.visual.badge || product.category}</small><strong>{product.name}</strong><span><b>✦ {formatStars(product.starsPrice)}</b><i>{product.itemCount > 1 ? `PACK ×${product.itemCount}` : "UNITÉ"}</i></span></div>
+              <div className={styles.cardInfo}><small>{product.visual.badge || product.category}</small><strong>{product.name}</strong><span><b><StarsArt /> {formatStars(product.starsPrice)}</b><i>{product.itemCount > 1 ? `PACK ×${product.itemCount}` : "UNITÉ"}</i></span></div>
             </button>)}
           </div> : <div className={styles.empty}><span>◇</span><b>Aucune offre dans cette sélection</b><p>Essaie une autre catégorie ou efface ta recherche.</p></div>}
         </section>
@@ -257,7 +258,7 @@ export default function InGameShopPrototype() {
           </div>
           <div className={styles.orderBox}>
             <div className={styles.quantity}><span>QUANTITÉ</span><div><button type="button" onClick={() => setQuantity((value) => Math.max(1, value - 1))}>−</button><b>{quantity}</b><button type="button" onClick={() => setQuantity((value) => Math.min(8, value + 1))}>+</button></div></div>
-            <div className={styles.total}><span>TOTAL</span><b>✦ {formatStars(total)}</b></div>
+            <div className={styles.total}><span>TOTAL</span><b><StarsArt /> {formatStars(total)}</b></div>
           </div>
           <button className={`${styles.buyButton} ${!canAfford ? styles.missing : ""}`} type="button" onClick={previewPurchase}>
             <span>{canAfford ? "ACHETER MAINTENANT" : `IL MANQUE ${formatStars(total - balance)} STARS`}</span><b>{canAfford ? `✦ ${formatStars(total)}` : "+ RECHARGER"}</b>

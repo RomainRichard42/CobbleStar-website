@@ -10,6 +10,7 @@ export default function MotionDirector() {
   const progressRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
+    if (!/^\/(admin|wiki\/admin|actualites\/admin)(\/|$)/.test(pathname)) return;
     const root = document.documentElement;
     const body = document.body;
     const layer = layerRef.current, cursor = cursorRef.current, progress = progressRef.current;

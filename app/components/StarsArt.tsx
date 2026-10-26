@@ -1,0 +1,1 @@
+export default function StarsArt({large=false}:{large?:boolean}) { return <img className={large?"stars-art stars-art-large":"stars-art"} src={large?"/astral/assets/stars-320.webp":"/astral/assets/stars-96.webp"} alt="" aria-hidden="true" width={large?320:32} height={large?180:24}/>; }

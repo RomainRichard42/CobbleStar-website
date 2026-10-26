@@ -5,6 +5,7 @@ import "./design-system.css";
 import "./site-refresh.css";
 import "./atlas-public.css";
 import "./motion-system.css";
+import "./astral-public.css";
 import { BASE_KEYWORDS, SITE_NAME, SITE_URL } from "@/app/lib/seo";
 import StructuredData from "@/app/components/StructuredData";
 import MotionDirector from "@/app/components/MotionDirector";
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     default: `${SITE_NAME} — Serveur Minecraft Cobblemon 1.21.1`,
   },
   description:
-    "CobbleStar est un serveur Minecraft Cobblemon 1.21.1 en français. Rejoins le launcher, la boutique, le programme de vote et une aventure communautaire complète.",
+    "CobbleStar est un serveur Minecraft Cobblemon 1.21.1 en français. Découvre les mondes, les guides et la boutique. Ouverture publique à venir.",
   keywords: BASE_KEYWORDS,
   authors: [{ name: "CobbleStar" }],
   openGraph: {

@@ -45,16 +45,16 @@ export default function VotePage() {
     <SiteHeader />
     <section className="vote-board-hero" id="contenu">
       <div className="vote-board-intro">
-        <span className="kicker">MISSION COMMUNAUTAIRE · SAISON 01</span>
+        <span className="kicker">SOUTENIR COBBLESTAR</span>
         <h1>Un vote.<br /><em>Un serveur plus visible.</em></h1>
-        <p>Quelques secondes pour soutenir CobbleStar. Ta récompense sera attribuée automatiquement au compte Minecraft lié.</p>
+        <p>Les votes aideront de nouveaux dresseurs à découvrir CobbleStar. Les portails et les récompenses seront activés à l’ouverture.</p>
       </div>
-      <div className="vote-board-art" aria-hidden="true"><img src="/cobblemon-team.webp" alt="" /><span>OBJECTIF COMMUN</span><b>04</b></div>
+      <div className="vote-board-art" aria-hidden="true"><img src="/astral/assets/riding.webp" alt="" /><span>LA COMMUNAUTÉ FAIT LA DIFFÉRENCE</span></div>
     </section>
 
     <section className="vote-board-layout" aria-labelledby="vote-dashboard-title">
       <aside className="vote-board-sidebar">
-        <div className="vote-launch-note" role="status"><span>RÉCOMPENSES AUTOMATIQUES</span><div><b>Lie ton compte une seule fois.</b><p>Chaque vote validé est associé à ton joueur et livré directement en jeu.</p></div></div>
+        <div className="vote-launch-note" role="status"><span>OUVERTURE À VENIR</span><div><b>Le vote se prépare.</b><p>Les liens seront disponibles ici dès leur activation par l’équipe.</p></div></div>
 
         <div className="vote-profile-card">
         <div className="vote-profile-main">
@@ -67,7 +67,7 @@ export default function VotePage() {
         {!loading && linked && <span className="vote-profile-confirmed">✓ Aucune autre vérification ne sera demandée</span>}
         </div>
 
-        <section className="vote-how" aria-labelledby="vote-how-title"><div><span className="kicker">MODE D’EMPLOI</span><h2 id="vote-how-title">Trois gestes.<br /><em>Zéro attente en jeu.</em></h2></div><ol><li><span>1</span><div><b>Lie ton compte</b><p>La commande <code>/link</code> confirme ton UUID.</p></div></li><li><span>2</span><div><b>Choisis un portail</b><p>Chaque partenaire possède son propre délai.</p></div></li><li><span>3</span><div><b>Récupère ta récompense</b><p>Le serveur la livre au bon joueur.</p></div></li></ol></section>
+        <section className="vote-how" aria-labelledby="vote-how-title"><div><span className="kicker">MODE D’EMPLOI</span><h2 id="vote-how-title">Trois gestes.<br /><em>Une aventure commune.</em></h2></div><ol><li><span>1</span><div><b>Lie ton compte</b><p>La commande <code>/link</code> confirme ton UUID.</p></div></li><li><span>2</span><div><b>Choisis un portail</b><p>Chaque partenaire possède son propre délai.</p></div></li><li><span>3</span><div><b>Récupère ta récompense</b><p>Le serveur la livre au bon joueur.</p></div></li></ol></section>
       </aside>
 
       <div className="vote-board-main">
@@ -77,9 +77,9 @@ export default function VotePage() {
 
         <div className="vote-sites vote-sites-readable">
         {voteSites.map((site, index) => <article className={`vote-site tone-${site.tone}`} key={site.name}>
-          <header><span>PORTAIL {String(index + 1).padStart(2, "0")}</span><small>RÉCOMPENSE AUTO</small></header>
+          <header><span>PORTAIL {String(index + 1).padStart(2, "0")}</span><small>À L’OUVERTURE</small></header>
           <div className="vote-site-copy"><h3>{site.name}</h3><p><span>Récompense</span><b>{site.reward}</b></p><p><span>Prochain vote</span><b>{site.interval}</b></p></div>
-          <div className="vote-action"><span>Vote comptabilisé automatiquement</span></div>
+          <div className="vote-action"><span>Portail en préparation</span></div>
         </article>)}
         </div>
       </div>
