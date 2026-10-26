@@ -45,11 +45,11 @@
     star.style.opacity=String(s.starOpacity);star.style.transform=`scale(${s.starScale}) rotate(${s.p>.5?(s.p-.5)*32:0}deg)`;starFill.style.opacity=String(s.starFill);starLine.style.strokeDashoffset=String(100*(1-M.phase(s.p,.2,.39)));
     camera.style.transform=`translateY(${s.cameraY}px) scale(${s.cameraScale})`;shade.style.opacity=String(.7+s.shade*.4);intro.style.opacity=String(s.copyOpacity);intro.style.transform=`translateY(${-30*(1-s.copyOpacity)}px)`;intro.inert=s.copyOpacity<.1;mascot.style.opacity=String(s.mascotOpacity);mascot.style.transform=`translateY(${-p*80}px) rotate(${-9+p*30}deg)`;
   }
-  function finish(index,focus){anim=0;active=index;draw();if(focus)focusTarget(steps[index]?.el);status.textContent=steps[index]?.name||'';$('.journey-controls').setAttribute('data-settled',String(index+1))}
+  function finish(index,focus){anim=0;busyUntil=0;active=index;draw();if(focus)focusTarget(steps[index]?.el);status.textContent=steps[index]?.name||'';$('.journey-controls').setAttribute('data-settled',String(index+1))}
   function go(index,options={}){
     if(!steps.length)return;index=Math.max(0,Math.min(steps.length-1,index));$('.journey-controls').removeAttribute('data-settled');const source=active,target=steps[index],from=scrollY;cancelAnimationFrame(anim);anim=0;active=index;animationDestination=index;
     const focus=Boolean(options.focus)||panels.some(p=>p.contains(document.activeElement))&&!target.el.contains(document.activeElement);
-    const railFrom=rail.scrollLeft,railTo=target.rail??(target.el.closest('.activity-runway')?railFrom:railFrom),railMoves=Math.abs(railTo-railFrom)>2;
+    const railFrom=rail.scrollLeft,railTo=target.rail??railFrom,railMoves=Math.abs(railTo-railFrom)>2;
     const introSequence=story&&source===0&&index===1&&!options.instant;
     const duration=options.instant||!motion?0:introSequence?2550:650;busyUntil=performance.now()+duration+90;
     if(!duration||(Math.abs(target.y-from)<2&&!railMoves)){rail.scrollTo({left:railTo,behavior:'instant'});window.scrollTo(0,target.y);finish(index,focus);return}
