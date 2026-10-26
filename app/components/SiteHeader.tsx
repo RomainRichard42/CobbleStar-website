@@ -79,7 +79,7 @@ export default function SiteHeader() {
           <nav aria-label="Navigation principale">
             <a className={pathname === "/" ? "active" : undefined} aria-current={pathname === "/" ? "page" : undefined} href="/">Accueil</a>
             <a className={pathname.startsWith("/actualites") ? "active" : undefined} aria-current={pathname.startsWith("/actualites") ? "page" : undefined} href="/actualites/">Actualités</a>
-            <a href="/#aventures">Découvrir</a>
+            <a className={pathname.startsWith("/boutique") ? "nav-shop active" : "nav-shop"} aria-current={pathname.startsWith("/boutique") ? "page" : undefined} href="/boutique/">Boutique</a>
             <a href="/#premiers-pas">Premiers pas</a>
             <a className={pathname.startsWith("/roadmap") ? "active" : undefined} aria-current={pathname.startsWith("/roadmap") ? "page" : undefined} href="/roadmap/">Roadmap</a>
             <a className={pathname.startsWith("/wiki") ? "active" : undefined} aria-current={pathname.startsWith("/wiki") ? "page" : undefined} href="/wiki/">Wiki</a>
@@ -89,7 +89,7 @@ export default function SiteHeader() {
             <div>
               <a className={pathname === "/" ? "active" : undefined} aria-current={pathname === "/" ? "page" : undefined} href="/">Accueil</a>
               <a className={pathname.startsWith("/actualites") ? "active" : undefined} aria-current={pathname.startsWith("/actualites") ? "page" : undefined} href="/actualites/">Actualités</a>
-              <a href="/#aventures">Découvrir</a>
+              <a className={pathname.startsWith("/boutique") ? "nav-shop active" : "nav-shop"} aria-current={pathname.startsWith("/boutique") ? "page" : undefined} href="/boutique/">Boutique</a>
               <a href="/#premiers-pas">Premiers pas</a>
               <a className={pathname.startsWith("/roadmap") ? "active" : undefined} aria-current={pathname.startsWith("/roadmap") ? "page" : undefined} href="/roadmap/">Roadmap</a>
               <a className={pathname.startsWith("/wiki") ? "active" : undefined} aria-current={pathname.startsWith("/wiki") ? "page" : undefined} href="/wiki/">Wiki</a>
