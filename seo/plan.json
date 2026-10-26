@@ -88,6 +88,15 @@
       "status": "Page is indexed — URL is on Google",
       "evidence": "Search Console URL Inspection",
       "ranking": "Not yet measured; indexation is not a ranking guarantee"
+    },
+    "priorityRequests": {
+      "date": "2026-10-26",
+      "pages": [
+        "/minecraft-pokemon/",
+        "/rejoindre/"
+      ],
+      "status": "Indexing requested — accepted into priority crawl queue",
+      "indexed": false
     }
   },
   "confirmedAvailability": {
@@ -101,5 +110,16 @@
       "quêtes",
       "Battle Pass"
     ]
+  },
+  "referenceDocs": [
+    "https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl",
+    "https://developers.google.com/search/docs/appearance/site-names"
+  ],
+  "deployment": {
+    "publicRevision": "e0354e3",
+    "verifiedOn": "2026-10-26",
+    "build": "Webpack with one prerender worker and 1024 MiB Node heap limit on Kinetic",
+    "ci": "https://github.com/RomainRichard42/CobbleStar-website/actions/runs/40325245474",
+    "status": "success"
   }
 }

@@ -22,7 +22,13 @@ try{
   for(const script of html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs))try{JSON.parse(script[1]);}catch{report.errors.push(url+': Invalid structured JSON');}
   for(const link of html.matchAll(/<a[^>]*href="([^"]+)"/g)){
     const href=decode(link[1]);if(/^javascript:|^data:/i.test(href))report.errors.push(url+': Unsafe link scheme');
-    const target=new URL(href,url);if(target.origin===canonicalOrigin&&!/^\/(api|internal|auth)(\/|$)/.test(target.pathname))links.set(target.pathname+target.hash,url);
+    const target=new URL(href,url);
+    // Cloudflare replaces public mailto links with this JS-decoded placeholder, not a document URL.
+    // The browser restores mailto:; requesting the placeholder as a page produces an expected 404.
+    if(target.origin===canonicalOrigin&&target.pathname==='/cdn-cgi/l/email-protection'){
+      report.metrics.cloudflareEmailLinks=(report.metrics.cloudflareEmailLinks||0)+1;continue;
+    }
+    if(target.origin===canonicalOrigin&&!/^\/(api|internal|auth)(\/|$)/.test(target.pathname))links.set(target.pathname+target.hash,url);
   }
   for(const match of html.matchAll(/<img\b[^>]*>/g)){
     const tag=match[0],src=tag.match(/\bsrc="([^"]+)"/)?.[1];

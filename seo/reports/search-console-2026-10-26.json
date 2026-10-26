@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-26",
+  "property": "https://cobblestar-mc.fr/",
+  "homepage": {
+    "status": "URL is on Google — Page is indexed",
+    "source": "Search Console URL Inspection",
+    "screenshot": "seo-google-accueil-indexe-2026-10-26.png"
+  },
+  "requests": {
+    "date": "2026-10-26",
+    "pages": [
+      "/minecraft-pokemon/",
+      "/rejoindre/"
+    ],
+    "status": "Indexing requested — accepted into priority crawl queue",
+    "indexed": false
+  },
+  "searchObservation": {
+    "query": "cobblestar-mc.fr",
+    "exactSpelling": true,
+    "personalized": true,
+    "homepageCitedInGoogleAIOverview": true,
+    "homepageSeenInTraditionalWebResults": false,
+    "note": "Single observation in the signed-in browser. No ranking conclusion for cobblemon fr or minecraft pokemon; do not equate an AI overview citation with an organic position."
+  },
+  "sitemap": {
+    "status": "Success",
+    "discoveredPages": 18
+  },
+  "deployment": {
+    "publicRevision": "e0354e3",
+    "verifiedOn": "2026-10-26",
+    "build": "Webpack with one prerender worker and 1024 MiB Node heap limit on Kinetic",
+    "ci": "https://github.com/RomainRichard42/CobbleStar-website/actions/runs/40325245474",
+    "status": "success"
+  }
+}
