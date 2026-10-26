@@ -1,5 +1,10 @@
 @font-face{font-family:Barlow;src:url('assets/barlow-condensed-800.ttf') format('truetype');font-weight:800;font-display:swap}
 body.astral-v6{--cream:#fff4dc;--gold:#efbf70;--ink:#130f22;background:var(--ink);color:var(--cream)}
+.snap-layout .gameplay-player:not(.controls-active) #video-host{pointer-events:none}
+.astral-v6 .gameplay-section .panel-heading h2{margin-right:auto}
+.linear-layout.snap-layout .journey-controls{display:flex}
+.snap-layout .activity-viewport{scroll-behavior:auto!important}
+@media(max-width:720px){.linear-layout.snap-layout .journey-controls{right:12px;bottom:12px}.linear-layout.snap-layout .journey-controls button{padding:9px 11px}.snap-layout .astral-v6 footer{padding-bottom:120px}}
 .astral-v6 [tabindex="-1"]:focus:not(:focus-visible){outline:none}
 .story-layout .astral-v6 .video-meta{padding-right:260px}
 .astral-v6 h1,.astral-v6 h2,.astral-v6 h3,.astral-v6 .world-word{font-family:Barlow,'Arial Narrow',sans-serif;font-weight:800;letter-spacing:.005em}
