@@ -1,0 +1,82 @@
+@font-face{font-family:Barlow;src:url('assets/barlow-condensed-800.ttf') format('truetype');font-weight:800;font-display:swap}
+body.astral-v6{--cream:#fff4dc;--gold:#efbf70;--ink:#130f22;background:var(--ink);color:var(--cream)}
+.astral-v6 h1,.astral-v6 h2,.astral-v6 h3,.astral-v6 .world-word{font-family:Barlow,'Arial Narrow',sans-serif;font-weight:800;letter-spacing:.005em}
+.astral-v6 h2{font-size:clamp(2.75rem,5.5vw,5.75rem)!important;line-height:.99;text-wrap:balance}
+.astral-v6 h2>span{color:#c2a8ed}.astral-v6 p{max-width:58ch}
+.astral-v6 .site-header{min-height:88px;height:auto;padding:12px 3%;gap:30px;background:#171223;border-bottom:1px solid #654b70;box-shadow:0 6px 24px #08061030;flex-wrap:nowrap}
+.astral-v6 .brand{gap:10px;margin-right:auto;flex-shrink:0}
+.astral-v6 .brand>span{font-family:Barlow,sans-serif;font-size:1.65rem;letter-spacing:.03em}
+.astral-v6 .brand img{width:50px;height:50px;filter:none}
+.astral-v6 .site-header nav{gap:26px;font-size:1rem;font-weight:600;white-space:nowrap}
+.astral-v6 .site-header nav a{position:relative;min-height:48px;line-height:1.2}
+.astral-v6 .site-header nav a:hover{color:#f3ca85}
+.astral-v6 .site-header nav a:after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:currentColor;transform:scaleX(0);transition:transform .2s}
+.astral-v6 .site-header nav a:hover:after{transform:scaleX(1)}
+.header-actions{display:flex;align-items:center;gap:18px}.account-link{font-size:1rem;min-height:48px;display:inline-flex;align-items:center;padding:0 16px;border-left:1px solid #695073;white-space:nowrap}
+.astral-v6 .btn{border-radius:3px;box-shadow:0 4px 0 #9e6736;gap:14px;font-weight:750;border-width:1px}
+.astral-v6 .nav-shop{padding:12px 22px!important;font-weight:800;white-space:nowrap;box-shadow:0 4px 0 #815126}
+.mobile-navigation{display:none}.mobile-navigation summary{cursor:pointer;min-height:48px;padding:12px;list-style:none;font-weight:600}.mobile-navigation summary::-webkit-details-marker{display:none}.mobile-navigation summary span{margin-left:10px}
+.astral-v6 .cinematic-stage{background:#130f22}
+.astral-v6 .game-camera{background:#2f2233}
+.astral-v6 .game-camera>img{object-position:65% 52%;filter:saturate(.85);transform-origin:66% 50%}
+.astral-v6 .camera-shade{background:linear-gradient(90deg,#140f22ed 0%,#140f22b8 30%,#140f2220 65%,#140f2215),linear-gradient(0deg,#140f22d9,transparent 45%,#140f2255 100%)}
+.astral-v6 .cinema-word{font-family:Barlow,sans-serif!important;top:4%!important;left:5%;right:5%;font-size:clamp(5rem,14.4vw,14rem)!important;letter-spacing:.005em;justify-content:space-between;line-height:1;color:#fff4dc;text-shadow:0 3px 0 #402b47,0 10px 40px #160d2999}
+.astral-v6 .cinema-word>span:nth-child(n+7){color:#f4c779}
+.astral-v6 .cinema-intro,.story-layout .astral-v6 .cinema-intro{left:6%;bottom:9%;padding:0;max-width:520px;background:none;border:0;border-radius:0}
+.astral-v6 .cinema-intro h2,.story-layout .astral-v6 .cinema-intro h2{font-size:clamp(3rem,5.4vw,5.5rem)!important;line-height:.96;letter-spacing:0}
+.astral-v6 .cinema-intro p{max-width:43ch;margin:20px 0 25px!important;color:#fff4dc!important;text-shadow:0 2px 15px #130f22}
+.astral-v6 .cinema-intro .opening-status{font-size:1rem!important;color:#f4ca85!important;line-height:1.4!important;margin:0 0 16px!important;font-weight:600}
+.opening-status>span{margin-right:7px}.astral-v6 .cinema-actions{gap:24px}
+.astral-v6 .cinema-mascot,.story-layout .astral-v6 .cinema-mascot{width:120px;right:4%;bottom:5%;top:auto;filter:drop-shadow(0 6px 14px #100a22aa)}
+.astral-v6 .panel-heading h2{font-family:Barlow,sans-serif;font-size:clamp(2.5rem,4vw,4rem)!important}
+.astral-v6 .gameplay-section{background:#171223}.astral-v6 .gameplay-player{border:1px solid #695371;border-radius:8px;box-shadow:none}
+.astral-v6 .in-game-gallery{background:#21172f}.astral-v6 .photo-wall{gap:16px}.astral-v6 .photo-wall figure{border-radius:5px;overflow:hidden;border:1px solid #9b7e9b40}
+.astral-v6 .photo-wall figcaption{background:linear-gradient(transparent,#140e23ed);padding:40px 24px 22px;font-family:Barlow,sans-serif;font-size:1.7rem;letter-spacing:.02em;color:#fff4dc}
+.astral-v6 .world-section{padding:110px 6% 100px;background:#eee7d9;color:#24182c;position:relative}
+.astral-v6 .section-head{display:grid;grid-template-columns:1.3fr 1fr;align-items:end;gap:40px;margin-bottom:60px}
+.astral-v6 .section-head h2>span{color:#755477}.astral-v6 .section-head>p:last-child{color:#524358;max-width:40ch;margin:0}
+.astral-v6 .world-pair{gap:30px;align-items:start;grid-template-columns:1.1fr 1fr}
+.astral-v6 .world-card{height:530px;border:0!important;border-radius:4px!important;box-shadow:none;background:#1b172a;overflow:hidden;position:relative}
+.astral-v6 .world-n{margin-top:80px;height:530px}.astral-v6 .world-photo{position:absolute;inset:0!important}.astral-v6 .world-photo:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#140f22fa,transparent 70%)}
+.astral-v6 .world-photo img{width:100%;height:100%;object-fit:cover;opacity:1;filter:none}
+.astral-v6 .world-word{left:32px;bottom:78px;font-size:clamp(3rem,6.5vw,6rem);color:#fff4dc;text-shadow:none;z-index:2}
+.astral-v6 .world-bottom{left:32px;right:30px;bottom:20px;z-index:2;color:#fff4dc;justify-content:space-between}
+.astral-v6 .world-bottom a{font-weight:600;text-decoration:none;gap:12px}.astral-v6 .world-bottom a:hover{text-decoration:underline}
+.astral-v6 .activity-runway{background:#20152b}.astral-v6 .activity-sticky{padding:85px 0 60px}.astral-v6 .activity-heading{display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:end;margin-bottom:45px}
+.astral-v6 .activity-heading>p:last-child{max-width:40ch;font-size:1.125rem!important;margin:0;color:#decfe1}
+.astral-v6 .activity-viewport{padding-bottom:25px;scrollbar-width:thin;scrollbar-color:#bea0c7 #20152b}
+.astral-v6 .activity-track{gap:24px;transform:none!important}
+.astral-v6 .activity-card,.js:not(.motion-off) .astral-v6 .activity-card{width:min(740px,84vw);min-height:490px;height:490px!important;border:1px solid #79587a;border-radius:5px;box-shadow:none;overflow:hidden;background:#1a1124}
+.astral-v6 .activity-card>img{opacity:1;object-position:right center;width:100%;height:100%}
+.astral-v6 .activity-card:after{background:linear-gradient(0deg,#160f24fa 0%,#160f24c9 38%,#160f2410 80%)}
+.astral-v6 .activity-content{position:absolute;bottom:0;left:0;max-width:620px;padding:32px!important;z-index:2}
+.astral-v6 .activity-content h3{font-size:3.2rem!important;margin:0 0 14px}.astral-v6 .activity-content p{max-width:46ch!important;margin:0}
+.astral-v6 .activity-content>a{margin-top:18px;color:#f2c782}.astral-v6 .activity-progress{display:none}
+.astral-v6 .store-section{padding:110px 6% 35px;background:#130f22;position:relative}
+.astral-v6 .store-head{gap:70px;align-items:end}.astral-v6 .store-head h2>span{color:#efbf70}.astral-v6 .store-head>div:last-child{max-width:410px}
+.astral-v6 .store-cards{margin-top:60px;gap:24px;align-items:stretch}
+.astral-v6 .store-card{border-radius:4px;border:1px solid #6c5377;background:#241a31;box-shadow:none;position:relative}
+.astral-v6 .store-card:nth-child(2){margin-top:0;background:#30203b;border-color:#bc91c4}
+.astral-v6 .store-card:hover{transform:translateY(-7px)}.astral-v6 .store-art{height:265px;background:#1b1427;border-bottom:1px solid #654c6b}
+.astral-v6 .store-art img{object-fit:contain;padding:20px}.astral-v6 .store-description{padding:30px;border:0}
+.astral-v6 .store-description h3{font-size:2.65rem!important}.astral-v6 .store-description p{min-height:60px;margin:14px 0 24px}
+.astral-v6 .store-description>b{border-top:1px solid #74577a;padding-top:16px;display:flex;justify-content:space-between;color:#f3ca85}
+.astral-v6 .shop-strip{font-size:1rem;color:#cbb9d2;letter-spacing:.02em}
+.astral-v6 .creation{background:#b9a3d7;color:#21152d;border:0;min-height:640px;grid-template-columns:1fr 1fr}
+.astral-v6 .creation-copy{padding:80px 12% 80px 8%}.astral-v6 .creation-copy h2>span{color:#513360}
+.astral-v6 .creation-copy p{color:#34233e!important}.astral-v6 .creation-visual{padding:60px 30px}.astral-v6 .creation-backword{font-family:Barlow,sans-serif;font-size:20vw;top:70px;left:8%;color:#d5c3e8;transform:rotate(-9deg);line-height:1}
+.astral-v6 .creation-visual>img{mix-blend-mode:multiply;width:100%;max-width:650px;image-rendering:auto}
+.astral-v6 .join-section{background:#efbf70;color:#24182c;gap:80px;padding:100px 6%;grid-template-columns:1.1fr 1fr;position:relative}
+.astral-v6 .join-copy h2>span{color:#644050}.astral-v6 .join-steps h3{font-family:Barlow,sans-serif;font-size:2rem!important}
+.astral-v6 .join-steps article{border-color:#a67e4f;padding:24px 0}.astral-v6 .join-steps article>b{font-family:Barlow,sans-serif;color:#674054;font-size:2.5rem}
+.astral-v6 .join-section p{color:#493440!important}.astral-v6 .faq{max-width:none;padding:100px 12%;display:grid;grid-template-columns:1fr 1.2fr;column-gap:80px}
+.astral-v6 .faq h2{font-size:3.5rem!important;grid-row:1/4}.astral-v6 .faq details{border-color:#604768;grid-column:2;padding:18px 0}.astral-v6 .faq summary{font-size:1.125rem;font-weight:600}
+.astral-v6 footer{padding:50px 6% 110px;background:#0f0c19;border-top:1px solid #58415f}.footer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:30px;gap:20px}
+.astral-v6 footer .display-settings{margin:0}.astral-v6 footer .display-settings>div{top:auto;bottom:100%;z-index:50}.astral-v6 footer p{max-width:90ch;color:#c9bace}.astral-v6 footer p a{text-decoration:underline;text-underline-offset:4px}
+.astral-v6 .journey-controls{border-color:#6e5379;background:#171223ee;box-shadow:0 8px 30px #08051155;border-radius:4px;bottom:18px;right:22px}.astral-v6 .journey-controls button{border:0;background:transparent;min-height:44px}.astral-v6 .journey-controls button:hover{background:#42304d}
+@media(max-width:1250px){.astral-v6 .site-header{gap:16px;padding-inline:24px}.astral-v6 .site-header nav{gap:19px}.astral-v6 .brand>span{font-size:1.4rem}.header-actions{gap:10px}.account-link{padding-inline:12px}.astral-v6 .cinema-intro{max-width:470px}.astral-v6 .cinema-intro h2{font-size:4rem!important}}
+@media(max-width:1080px){.astral-v6 .site-header .desktop-nav,.account-link{display:none}.mobile-navigation{display:block}.astral-v6 .site-header{min-height:80px}.astral-v6 .mobile-navigation nav{position:absolute;left:16px;right:16px;top:calc(100% + 8px);padding:22px;background:#21172e;border:1px solid #9d7baa;box-shadow:0 20px 50px #080511a8;display:grid!important;grid-template-columns:1fr 1fr;gap:8px 24px;max-height:calc(100dvh - 130px);overflow:auto}.astral-v6 .mobile-navigation nav a{display:flex;padding:12px;border-bottom:1px solid #5d4568}.astral-v6 .store-cards{grid-template-columns:repeat(3,1fr)}.astral-v6 .store-card{display:block}.astral-v6 .store-art{height:210px;min-height:0}.astral-v6 .store-description{padding:23px}.astral-v6 .store-description p{min-height:90px}.astral-v6 .creation{grid-template-columns:1fr 1fr}.astral-v6 .creation-visual{max-height:none}.astral-v6 .creation-copy{padding:60px 30px}.astral-v6 .world-card,.astral-v6 .world-n{height:460px}.astral-v6 .world-pair{grid-template-columns:1fr 1fr}.astral-v6 .world-word{left:22px}.astral-v6 .world-bottom{left:22px}}
+@media(min-width:721px) and (max-height:800px){.story-layout .astral-v6 .cinema-word{font-size:11.7vw!important;top:3%!important}.story-layout .astral-v6 .cinema-intro{bottom:7%;max-width:480px}.story-layout .astral-v6 .cinema-intro h2{font-size:3.5rem!important}.story-layout .astral-v6 .cinema-intro p{margin:14px 0 18px!important}.story-layout .astral-v6 .cinema-intro .opening-status{margin:0 0 12px!important}.story-layout .astral-v6 .cinema-mascot{width:90px}}
+@media(max-width:720px){.astral-v6 .site-header{padding:10px 16px;min-height:78px;gap:8px}.astral-v6 .brand>span{font-size:1.2rem!important}.astral-v6 .brand img{width:36px!important;height:36px}.astral-v6 .header-actions{gap:8px}.astral-v6 .site-header .btn{padding:10px 13px!important;gap:8px}.astral-v6 .nav-shop>span{display:none}.mobile-navigation summary{padding:10px 6px;font-size:1rem}.mobile-navigation summary span{margin-left:4px}.astral-v6 .cinematic-stage,.js:not(.motion-off) .astral-v6 .cinematic-stage{height:auto!important;min-height:760px!important}.astral-v6 .cinema-word{position:relative!important;top:auto!important;padding:38px 20px 0;font-size:12.5vw!important;left:auto;right:auto}.astral-v6 .game-camera>img{object-position:61% 10%}.astral-v6 .camera-shade{background:linear-gradient(0deg,#130f22 5%,#130f22df 38%,transparent 85%)}.astral-v6 .cinema-intro{position:relative;left:auto;bottom:auto;margin:260px 24px 40px;padding:0;max-width:none}.astral-v6 .cinema-intro h2{font-size:3.5rem!important}.astral-v6 .cinema-intro p{max-width:42ch}.astral-v6 .cinema-mascot{top:155px;right:18px;width:80px}.astral-v6 .cinema-actions{gap:18px}.astral-v6 .gameplay-section,.astral-v6 .in-game-gallery{padding:55px 24px}.astral-v6 .panel-heading h2{font-size:2.7rem!important}.astral-v6 .photo-wall figure,.astral-v6 .photo-wall .photo-main{height:330px}.astral-v6 .world-section{padding:70px 24px}.astral-v6 .section-head{display:block;margin-bottom:36px}.astral-v6 .section-head>p:last-child{margin-top:24px}.astral-v6 .world-pair{grid-template-columns:1fr;gap:24px}.astral-v6 .world-n{margin-top:0}.astral-v6 .world-card,.astral-v6 .world-n{height:420px}.astral-v6 .world-word{font-size:4rem;left:24px}.astral-v6 .world-bottom{left:24px}.astral-v6 .activity-sticky{padding:65px 0 35px}.astral-v6 .activity-heading{display:block;margin-bottom:30px}.astral-v6 .activity-heading>p:last-child{margin-top:24px}.astral-v6 .activity-card,.js:not(.motion-off) .astral-v6 .activity-card{height:470px!important;min-height:470px;width:86vw}.astral-v6 .activity-content{padding:25px!important}.astral-v6 .activity-content h3{font-size:3rem!important}.astral-v6 .store-section{padding:70px 24px 20px}.astral-v6 .store-cards{grid-template-columns:1fr;gap:24px;margin-top:40px}.astral-v6 .store-art{height:240px}.astral-v6 .store-description p{min-height:0}.astral-v6 .store-head{display:block}.astral-v6 .store-head>div:last-child{margin-top:28px}.astral-v6 .creation{grid-template-columns:1fr;min-height:0}.astral-v6 .creation-visual{min-height:350px;max-height:420px}.astral-v6 .creation-backword{font-size:60vw;top:20px}.astral-v6 .creation-copy{padding:15px 24px 65px}.astral-v6 .creation-copy h2{font-size:3rem!important}.astral-v6 .join-section{grid-template-columns:1fr;padding:70px 24px;gap:40px}.astral-v6 .faq{display:block;padding:65px 24px}.astral-v6 .faq h2{font-size:2.6rem!important}.astral-v6 footer{padding:40px 24px}.astral-v6 .footer-top{flex-wrap:wrap}.astral-v6 footer .display-settings>div{right:0;max-width:calc(100vw - 48px)}}
+@media(max-width:380px){.astral-v6 .brand img{display:none}.astral-v6 .brand>span{font-size:1.15rem!important}.astral-v6 .site-header{padding-inline:12px}.astral-v6 .cinema-intro{margin-top:225px}.astral-v6 .cinema-intro .opening-status{font-size:1rem!important}}
+@media(prefers-reduced-motion:reduce){.astral-v6 *, .astral-v6 *:before,.astral-v6 *:after{transition:none!important;animation:none!important}.astral-v6 .store-card:hover{transform:none}}

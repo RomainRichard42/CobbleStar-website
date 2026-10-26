@@ -4,7 +4,9 @@ export const siteSecurity = {
     directives: {
       scriptSrc: ["'self'", "'unsafe-inline'"],
       connectSrc: ["'self'", "https://pokeapi.co"],
-      imgSrc: ["'self'", "data:", "https://mc-heads.net", "https://cdn.discordapp.com", "https://raw.githubusercontent.com/PokeAPI/sprites/"],
+      imgSrc: ["'self'", "data:", "blob:", "https://mc-heads.net", "https://cdn.discordapp.com", "https://raw.githubusercontent.com/PokeAPI/sprites/"],
+      frameSrc: ["'self'", "https://www.youtube-nocookie.com"],
+      mediaSrc: ["'self'", "blob:"],
     },
   },
 };
