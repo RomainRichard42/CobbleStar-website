@@ -9,7 +9,8 @@ const npm = process.platform === "win32" ? "npm.cmd" : "npm";
 function run(args) {
   const result = spawnSync(npm, args, {
     cwd: root,
-    stdio: "inherit"
+    stdio: "inherit",
+    env: { ...process.env, NODE_OPTIONS: `${process.env.NODE_OPTIONS || ''} --max-old-space-size=1024`.trim(), NEXT_TELEMETRY_DISABLED: '1', ASTRO_TELEMETRY_DISABLED: '1' }
   });
 
   if (result.status !== 0) {

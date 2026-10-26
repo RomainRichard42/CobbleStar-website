@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   poweredByHeader: false,
   compress: true,
+  // Kinetic has 2 GiB: bound prerender workers and Webpack peak memory.
+  experimental: { cpus: 1, webpackBuildWorker: true, webpackMemoryOptimizations: true },
 };
 
 export default nextConfig;

@@ -8,8 +8,8 @@
   "scripts": {
     "dev": "next dev",
     "preview:admin": "node scripts/local-admin-preview.mjs",
-    "build": "next build && node scripts/optimize-public-assets.mjs && astro build && node scripts/compose-public-site.mjs",
-    "build:site": "next build && node scripts/optimize-public-assets.mjs && astro build && node scripts/compose-public-site.mjs",
+    "build": "next build --webpack && node scripts/optimize-public-assets.mjs && astro build && node scripts/compose-public-site.mjs",
+    "build:site": "next build --webpack && node scripts/optimize-public-assets.mjs && astro build && node scripts/compose-public-site.mjs",
     "build:api": "npm --prefix api run build",
     "package:kinetic": "node scripts/package-kinetic.mjs",
     "ci": "npm run lint && npm run build:site && npm --prefix api test && npm run test:public && npm run package:kinetic",
