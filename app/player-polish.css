@@ -63,7 +63,7 @@ body:has(.astral-header) :is(.vote-profile-action,.vote-site-action,.astral-acco
 .astral-public .wiki-search-box .public-search{width:100%;border-radius:16px;padding:17px 20px;background:#21172e}
 .wiki-library-layout,.wiki-reading-grid{display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;align-items:start}
 .wiki-category-sidebar,.wiki-toc{position:sticky;top:115px;max-height:calc(100dvh - 140px);overflow:auto;padding:0 10px 12px 0;text-align:left}
-.wiki-category-sidebar nav,.wiki-toc nav{display:flex;flex-direction:column;gap:8px}
+.wiki-category-sidebar nav,.wiki-toc nav{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:8px;text-align:left}
 .wiki-category-sidebar strong,.wiki-toc strong{font-size:18px;color:#fff4dc;margin-bottom:12px}
 .astral-public .wiki-category-sidebar a,.astral-public .wiki-toc nav a{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;min-height:46px;border-radius:12px;text-decoration:none;color:#d7c4e7;font-size:16px;line-height:1.5;background:#21172e}
 .astral-public :is(.wiki-category-sidebar,.wiki-toc) nav a:hover{background:#362343;color:#fff4dc}
@@ -76,6 +76,8 @@ body:has(.astral-header) :is(.vote-profile-action,.vote-site-action,.astral-acco
 .astral-public .wiki-guide-card>div{padding:24px;display:flex;flex-direction:column;flex:1}
 .astral-public .wiki-guide-card h3{font-size:29px}.astral-public .wiki-guide-card p{line-height:1.7;margin-bottom:22px}
 .astral-public .wiki-guide-card strong{margin-top:auto;display:flex;justify-content:space-between}
+.astral-public .wiki-guide-card:only-child{grid-column:1/-1;flex-direction:row}
+.astral-public .wiki-guide-card:only-child>img{width:40%;height:auto;max-height:320px;align-self:stretch}
 .astral-public .wiki-reading{max-width:1240px}.wiki-reading .breadcrumbs{display:flex;flex-wrap:wrap;align-items:center;margin-bottom:38px}
 .astral-public .wiki-reading .breadcrumbs a{color:#dcc3ed}
 .wiki-article-header{max-width:900px}.astral-public .wiki-article-header h1{font-size:clamp(46px,5.4vw,72px);text-wrap:balance}
@@ -119,6 +121,7 @@ body:has(.astral-header) :is(.vote-profile-action,.vote-site-action,.astral-acco
  .wiki-category-sidebar{position:static;max-height:none;padding:0}.wiki-category-sidebar nav{flex-direction:row;flex-wrap:wrap;gap:8px}.wiki-category-sidebar strong{width:100%;margin-bottom:4px}
  .astral-public .wiki-category-sidebar a{font-size:15px;padding:10px 13px}.astral-public .wiki-category-sidebar p{margin:16px 0 0}
  .astral-public .wiki-guide-section .public-grid{grid-template-columns:1fr}.astral-public .wiki-guide-card>img{height:180px}
+ .astral-public .wiki-guide-card:only-child{flex-direction:column}.astral-public .wiki-guide-card:only-child>img{width:100%;height:180px}
  .wiki-toc{display:none}.wiki-toc-mobile{display:block}.wiki-toc-mobile nav{display:flex;flex-direction:column;gap:6px;margin-top:14px}.wiki-toc-mobile a{padding:8px 0;min-height:44px}
  .astral-public .wiki-reading .wiki-toc-mobile{padding:16px 20px;background:#21172e;border:1px solid #51405d;border-radius:14px;margin-bottom:32px}
  .wiki-reading .breadcrumbs{margin-bottom:26px}.astral-public .wiki-article-header h1{font-size:clamp(40px,11vw,56px)}
