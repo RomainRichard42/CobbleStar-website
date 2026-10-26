@@ -145,6 +145,7 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
     }
     const me = await c.guild.members.fetchMe();
     if (!c.permissionsFor(me).has([P.ViewChannel,P.SendMessages,P.AttachFiles])) return userError("Le bot doit pouvoir lire, envoyer et joindre des fichiers dans ce salon.");
+    if (kind === "gts" && !c.permissionsFor(me).has(P.EmbedLinks)) return userError("Autorise Intégrer des liens au bot dans le salon GTS pour afficher les annonces.");
     return c;
   }
   async function secureTicketJournal(c: TextChannel, s: Settings) {

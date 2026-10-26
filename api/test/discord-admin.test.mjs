@@ -94,3 +94,21 @@ test('unconfirmed Discord response is marked unknown and is not automatically re
   audits.clear();const add=member.roles.add;member.roles.add=async()=>{throw new Error('Discord unavailable');};const a=app(),payload=roleBody();const send=()=>a.inject({method:'PUT',url:`/api/admin/discord/members/${memberId}/role`,headers,payload});
   assert.equal((await send()).statusCode,502);assert.equal(audits.get(payload.requestId).status,'unknown');assert.equal((await send()).statusCode,409);member.roles.add=add;await a.close();
 });
+
+test('GTS channels remain listed with missing permissions and become selectable after the bot is allowed',async()=>{
+  stored=structuredClone(base);const id='1556587842745143318';
+  let permissions=new PermissionsBitField([P.ViewChannel,P.AttachFiles,P.EmbedLinks]);
+  channels.set(id,{id,name:'🎯gts',type:ChannelType.GuildText,parentId:null,permissionsFor:()=>permissions});
+  Object.assign(guild,{name:'Test',memberCount:2,iconURL:()=>null,client:{ws:{ping:20}}});
+  me.user={username:'Test bot'};
+  const a=app();const overview=()=>a.inject({url:'/api/admin/discord',headers});
+  let r=await overview();assert.equal(r.statusCode,200,r.body);let channel=r.json().live.channels[0];
+  assert.equal(channel.id,id);assert.equal(channel.canSendGts,false);assert.deepEqual(channel.missingPermissions,['Envoyer des messages']);
+  const save=()=>a.inject({method:'PUT',url:'/api/admin/discord/settings',headers,payload:{...settingsBody(),publicChannels:{gts:id,minigame:null}}});
+  r=await save();assert.equal(r.statusCode,400);assert.match(r.json().message,/existe/);
+  permissions=new PermissionsBitField([P.ViewChannel,P.SendMessages,P.AttachFiles]);
+  r=await save();assert.equal(r.statusCode,400);assert.match(r.json().message,/Intégrer des liens/);
+  permissions.add(P.EmbedLinks);r=await overview();channel=r.json().live.channels[0];assert.equal(channel.canSendGts,true);assert.deepEqual(channel.missingPermissions,[]);assert.equal(channel.missingGtsEmbed,false);
+  r=await save();assert.equal(r.statusCode,200,r.body);assert.equal(stored.channels.gts,id);
+  channels.clear();stored=structuredClone(base);await a.close();
+});

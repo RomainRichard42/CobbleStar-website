@@ -80,6 +80,9 @@ export function registerDiscordAdmin(app: FastifyInstance, auth: Auth, currentCl
           channels: [...channels.values()].filter(c => c !== null).map(c => ({
             id: c.id, name: c.name, type: c.type, parentId: c.parentId,
             canSend: c.type === ChannelType.GuildText && !!c.permissionsFor(me)?.has([P.ViewChannel, P.SendMessages, P.AttachFiles]),
+            canSendGts: c.type === ChannelType.GuildText && !!c.permissionsFor(me)?.has([P.ViewChannel, P.SendMessages, P.AttachFiles, P.EmbedLinks]),
+            missingPermissions: [[P.ViewChannel, "Voir le salon"], [P.SendMessages, "Envoyer des messages"], [P.AttachFiles, "Joindre des fichiers"]].filter(([flag]) => !c.permissionsFor(me)?.has(flag as bigint)).map(([, label]) => label),
+            missingGtsEmbed: !c.permissionsFor(me)?.has(P.EmbedLinks),
             canManage: !!c.permissionsFor(me)?.has(P.ManageChannels),
           })).sort((a, b) => a.name.localeCompare(b.name)),
         };
@@ -122,7 +125,10 @@ export function registerDiscordAdmin(app: FastifyInstance, auth: Auth, currentCl
         const id = input.publicChannels[kind];
         if (!id) { delete next.channels[kind]; continue; }
         const channel = channels.get(id);
-        if (!channel || channel.type !== ChannelType.GuildText || !channel.permissionsFor(me)?.has([P.ViewChannel, P.SendMessages, P.AttachFiles])) return fail(400, "Le bot doit pouvoir voir le salon, écrire et joindre des fichiers.");
+        if (!channel) return fail(400, "Le salon sélectionné est supprimé ou inaccessible au bot. Vérifie ses permissions dans Discord.");
+        if (channel.type !== ChannelType.GuildText) return fail(400, "Choisis un salon textuel pour les publications.");
+        if (!channel.permissionsFor(me)?.has([P.ViewChannel, P.SendMessages, P.AttachFiles])) return fail(400, `Le salon #${channel.name} existe, mais le bot doit pouvoir le voir, envoyer des messages et joindre des fichiers.`);
+        if (kind === "gts" && !channel.permissionsFor(me)?.has(P.EmbedLinks)) return fail(400, `Autorise « Intégrer des liens » au bot dans #${channel.name} pour afficher les annonces GTS.`);
         next.channels[kind] = id;
       }
       if (next.statusEnabled) {
