@@ -2,216 +2,49 @@
 import Layout from '../layouts/PublicLayout.astro';
 import Image from '../components/Picture.astro';
 import styles from '../../../app/maquettes/site-atlas/site-atlas.module.css';
-import {DISCORD,newsUrl,publishedNews,type PublicLocals} from '../lib/content';
+import '../styles/home.css';
+import {DISCORD,newsUrl,publishedNews,date,type PublicLocals} from '../lib/content';
 import {HOME_FAQ} from '../lib/faqs';
-
+import {serverMedia} from '../lib/server-media';
 const articles=await (Astro.locals as PublicLocals).getNews().then(n=>publishedNews(n).articles.slice(0,3)).catch(()=>[]);
-const adventures = [
-  {
-    number: "01",
-    label: "Explorer",
-    title: "Deux mondes, une aventure sans rails.",
-    description: "Traverse Asteria et Nébélia, découvre leurs biomes et suis les apparitions légendaires sans itinéraire imposé.",
-    image: "/cobblemon-lakeside.webp",
-    tone: "sky",
-  },
-  {
-    number: "02",
-    label: "Progresser",
-    title: "Ton parcours te ressemble.",
-    description: "Quêtes, six métiers, arbres de compétences et Battle Pass récompensent ce que tu aimes vraiment faire.",
-    image: "/cobblemon-berries.webp",
-    tone: "orange",
-  },
-  {
-    number: "03",
-    label: "Découvrir",
-    title: "Le monde se lit entre les lignes.",
-    description: "Explore les lieux, écoute les personnages et rassemble les fragments d’un lore qui relie Asteria et Nébélia.",
-    image: "/cobblemon-ocean.webp",
-    tone: "violet",
-  },
-  {
-    number: "04",
-    label: "Jouer ensemble",
-    title: "Les rencontres font le serveur.",
-    description: "Forme ton équipe pour les raids, échange sur le GTS et développe ton club sans jamais perdre ta progression.",
-    image: "/cobblemon-team.webp",
-    tone: "teal",
-  },
-] as const;
-
-const chapters = {
-  exploration: {
-    index: "CHAPITRE 01",
-    eyebrow: "Exploration libre",
-    title: "Asteria au lever du jour. Nébélia quand l’appel de l’inconnu se fait sentir.",
-    copy: "Deux mondes persistants, chacun avec son Overworld, son Nether et son End. Pas de décor jetable : tu construis, tu explores et tu reviens exactement là où ton histoire continue.",
-    image: "/cobblemon-desert.webp",
-    facts: ["Frontières de 40 000 × 40 000", "Téléportations aléatoires sécurisées", "Événements légendaires localisés"],
-  },
-  progression: {
-    index: "CHAPITRE 02",
-    eyebrow: "Progression personnelle",
-    title: "Un métier, une spécialité, cent niveaux pour la maîtriser.",
-    copy: "Mineur, Bûcheron, Pêcheur, Herboriste, Ranger ou Éleveur : chaque activité apporte ses propres bonus. Les quêtes et le Battle Pass complètent ton parcours sans dicter ta façon de jouer.",
-    image: "/cobblemon-berries.webp",
-    facts: ["6 métiers actifs", "Arbres de compétences", "100 paliers saisonniers"],
-  },
-  lore: {
-    index: "CHAPITRE 03",
-    eyebrow: "Lore vivant",
-    title: "Une histoire à découvrir dans le monde, pas dans un pavé de texte.",
-    copy: "Asteria et Nébélia partagent des traces, des personnages et des mystères. Le lore se dévoile par les quêtes, les lieux et les événements, avec des fragments que la communauté peut relier ensemble.",
-    image: "/cobblemon-ocean.webp",
-    facts: ["Deux mondes liés", "Personnages et lieux mémorables", "Mystères communautaires"],
-  },
-  communaute: {
-    index: "CHAPITRE 04",
-    eyebrow: "Économie et entraide",
-    title: "Une économie de joueurs, pas une boutique qui joue à leur place.",
-    copy: "Le GTS, PokéSell et les raids créent une économie vivante. La boutique finance le projet avec des objets cosmétiques et des probabilités publiques, sans vendre la victoire.",
-    image: "/cobblemon-shop.webp",
-    facts: ["GTS avec analyse du marché", "Raids instanciés de 1 à 5", "Boutique sans pay-to-win"],
-  },
-} as const;
-
-const fieldNotes = [
-  { code: "RAID", title: "Quatre vagues, puis le boss", copy: "Des arènes temporaires pour 1 à 5 joueurs, avec retour exact à ton point de départ." },
-  { code: "MARCHÉ", title: "Une économie qui respire", copy: "GTS, historique des prix et PokéSell avec une valeur qui évolue selon l’offre réelle." },
-  { code: "PENSION", title: "Élever sans perdre ses repères", copy: "Confie deux Pokémon au PNJ de la pension et accélère les cycles avec le métier Éleveur." },
-  { code: "CAISSES", title: "Du hasard, mais transparent", copy: "Vote, Nova, Pulsar et Quasar affichent leurs chances, leur historique et leurs garanties." },
-  { code: "HUD", title: "Les légendaires de ta zone", copy: "Conditions locales et prochain événement restent visibles sans polluer ton chat." },
-  { code: "PROFIL", title: "Une identité de dresseur", copy: "Carte de profil, double tag, cosmétiques persistants et compagnon renommable." },
-] as const;
-
-
+const features=[
+ {number:'01',title:'Explorer et construire',copy:'Asteria et Nébélia sont les deux mondes de CobbleStar. Explore leurs biomes, rencontre des Pokémon et installe ton foyer.',tag:'À ton rythme',href:'/roadmap/#lancement',link:'Découvrir les mondes'},
+ {number:'02',title:'Faire grandir ton équipe',copy:'Capture des Pokémon, découvre la pension et avance dans les quêtes. Les métiers accompagnent tes activités préférées.',tag:'Une progression personnelle',href:'/wiki/capture/',link:'Comprendre la capture'},
+ {number:'03',title:'Partager l’aventure',copy:'Retrouve d’autres dresseurs pour les raids et les échanges. Le GTS est le marché où les joueurs proposent leurs Pokémon et leurs objets.',tag:'Seul ou avec la communauté',href:'/roadmap/',link:'Voir les activités'}
+];
 ---
-<Layout title="CobbleStar — Serveur Cobblemon FR & Minecraft Pokémon" description="Découvre CobbleStar, serveur Cobblemon français en préparation sur Minecraft Java 1.21.1. Deux mondes, Pokémon et communauté FR. Suis l’ouverture sur Discord."><main id="contenu" class={styles.atlas}>      <section class={`${styles.hero} astro-home-hero`}>
-        <div class={styles.heroCopy}>
-          <div class={styles.overline}><span>OUVERTURE À VENIR</span><i />MINECRAFT 1.21.1</div>
-          <h1>Ton serveur<br/><em>Cobblemon FR.</em><br/>Ton aventure.</h1>
-          <p>
-            CobbleStar prépare une aventure Minecraft Pokémon francophone sur Java 1.21.1, entre Asteria et Nébélia. Le serveur n’est pas encore ouvert au public : rejoins notre Discord pour suivre les annonces d’ouverture.
-          </p>
-          <div class={styles.heroActions}>
-            <a class={styles.primaryButton} href={DISCORD}>Rejoindre Discord <span>↗</span></a>
-            <a class={styles.addressButton} href="#aventures"><span><small>LE PROJET</small><strong>Découvrir le serveur</strong></span><b>↓</b></a>
-          </div>
-          <div class={styles.heroProof}>
-            <span><b>01</b> Minecraft Java 1.21.1</span>
-            <span><b>02</b> Communauté francophone</span>
-            <span><b>03</b> Lore à découvrir en jeu</span>
-          </div>
-        </div>
-
-          <div class={styles.heroVisual}>
-            <div class={styles.heroPhoto}>
-              <div class={styles.heroWorld}><Image src="/cobblemon-lakeside.webp" alt="Paysage d’Asteria" fill priority sizes="(max-width: 900px) 92vw, 25vw" /><span>Asteria</span></div>
-              <div class={styles.heroWorld}><Image src="/cobblemon-desert.webp" alt="Paysage de Nébélia" fill priority sizes="(max-width: 900px) 92vw, 25vw" /><span>Nébélia</span></div>
-            </div>
-          <div class={styles.heroLogo}>
-            <Image src="/cobblestar-logo.png" alt="Dragonite, mascotte de CobbleStar" width={430} height={430} priority />
-          </div>
-          <div class={styles.postcard}>
-            <small>DEUX MONDES · UN MÊME RÉCIT</small>
-            <strong>Asteria + Nébélia</strong>
-            <span>Exploration libre · Lore vivant</span>
-          </div>
-          <span class={styles.heroStamp}>FR<br />1.21</span>
-        </div>
-      </section>
-
-      <div class={styles.ticker} aria-hidden="true">
-        <span>ASTERIA + NÉBÉLIA</span><i>✦</i><span>LORE À DÉCOUVRIR</span><i>✦</i><span>COMMUNAUTÉ FRANCOPHONE</span><i>✦</i><span>SANS PAY-TO-WIN</span>
-      </div>
-
-      <section class={styles.adventureSection} id="aventures">
-        <div class={styles.sectionIntro}>
-          <div><small>CHOISIS TON AVENTURE</small><h2>Tout commence par<br />ce que tu aimes.</h2></div>
-          <p>Pas de liste interminable de fonctionnalités. Voici quatre façons d’entrer dans CobbleStar — et tu peux passer de l’une à l’autre quand tu veux.</p>
-        </div>
-        <div class={styles.adventureGrid}>
-          {adventures.map((item) => (
-            <article class={`${styles.adventureCard} ${styles[item.tone]}`}>
-              <div class={styles.cardPhoto}><Image src={item.image} alt="" fill sizes="(max-width: 700px) 92vw, (max-width: 1100px) 45vw, 23vw" /></div>
-              <div class={styles.cardTop}><span>{item.number}</span><small>{item.label}</small></div>
-              <div class={styles.cardBody}><h3>{item.title}</h3><p>{item.description}</p></div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section class={styles.worldSection} id="mondes">
-        <div class={styles.worldMap}>
-          <div class={styles.worldImage}><Image src="/cobblemon-desert.webp" alt="Paysage chaud d’Asteria" fill sizes="(max-width: 900px) 100vw, 55vw" /></div>
-          <div class={styles.worldImage}><Image src="/cobblemon-ocean.webp" alt="Paysage côtier de Nébélia" fill sizes="(max-width: 900px) 100vw, 45vw" /></div>
-          <span class={styles.mapRoute} />
-          <div class={styles.worldLabelA}><small>MONDE 01</small><strong>Asteria</strong><span>Les terres du premier départ</span></div>
-          <div class={styles.worldLabelB}><small>MONDE 02</small><strong>Nébélia</strong><span>L’horizon des explorateurs</span></div>
-          <div class={styles.worldSeal}><Image src="/cobblestar-logo.png" alt="" width={94} height={94} /></div>
-        </div>
-        <div class={styles.worldCopy}>
-          <small>L’ATLAS COBBLESTAR</small>
-          <h2>Deux mondes.<br />Six dimensions.<br /><em>Une seule histoire.</em></h2>
-          <p>Chaque monde conserve ses constructions et ses repères. Voyage entre leurs dimensions, installe ton foyer, puis reviens reprendre ton aventure exactement où tu l’avais laissée.</p>
-          <div class={styles.worldFacts}>
-            <span><b>40k</b><small>blocs par frontière</small></span>
-            <span><b>6</b><small>dimensions persistantes</small></span>
-            <span><b>∞</b><small>façons d’explorer</small></span>
-          </div>
-        </div>
-      </section>
-
-<section class={styles.journalSection}><div class={styles.sectionIntro}><div><small>À TON RYTHME</small><h2>Un serveur Cobblemon français<br/>pour écrire ton aventure.</h2></div><p>Explore les activités de CobbleStar et retrouve leurs règles dans le wiki.</p></div>{Object.values(chapters).map(chapter=><details class="home-chapter"><summary>{chapter.eyebrow}</summary><div class={styles.chapterPanel}><div class={styles.chapterImage}><Image src={chapter.image} alt="" fill/><span>{chapter.index}</span></div><div class={styles.chapterCopy}><h3>{chapter.title}</h3><p>{chapter.copy}</p><ul>{chapter.facts.map(fact=><li>{fact}</li>)}</ul><a href="/wiki/">Lire les guides →</a></div></div></details>)}</section>
-      <section class={styles.fieldSection}>
-        <div class={styles.fieldHeading}>
-          <div><small>NOTES DE TERRAIN</small><h2>Et tout ce qui<br />relie l’aventure.</h2></div>
-          <p>Les grands mondes donnent envie de partir. Ces systèmes donnent une raison de revenir, d’échanger et de construire une progression qui reste la tienne.</p>
-        </div>
-        <div class={styles.fieldGrid}>
-          {fieldNotes.map((note, index) => (
-            <article>
-              <div><span>{String(index + 1).padStart(2, "0")}</span><small>{note.code}</small></div>
-              <h3>{note.title}</h3>
-              <p>{note.copy}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section class={styles.newsSection}>
-        <div class={styles.newsTitle}><small>DERNIÈRES NOUVELLES</small><h2>Depuis le carnet<br />de l’équipe.</h2><a href="/actualites/">Toutes les actualités →</a></div>
-        <div class={styles.newsGrid}>
-          {articles.map((article, index) => (
-            <a href={newsUrl(article)} class={styles.newsCard}>
-              <div class={styles.newsImage}><Image src={article.image} alt="" fill sizes="(max-width: 700px) 92vw, 30vw" /></div>
-              <div class={styles.newsBody}>
-                <div><span>{article.category}</span><time datetime={article.publishedAt}>{new Intl.DateTimeFormat("fr-FR", { day: "2-digit", month: "short", year: "numeric" }).format(new Date(article.publishedAt))}</time></div>
-                <h3>{article.title}</h3>
-                <p>{article.excerpt}</p>
-                <b>Lire la note <span>↗</span></b>
-              </div>
-              <span class={styles.newsIndex}>0{index + 1}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section class={styles.faqSection} id="faq">
-        <div class={styles.faqHeading}><small>AVANT LE DÉPART</small><h2>Les réponses<br />essentielles.</h2><p>Les informations utiles pour rejoindre CobbleStar sans mauvaise surprise.</p></div>
-        <div class={styles.faqList}>{HOME_FAQ.map((item, index) => <details><summary><span>{String(index + 1).padStart(2, "0")}</span><b>{item.question}</b><i>+</i></summary><p>{item.answer}</p></details>)}</div>
-      </section>
-
-      <section class={styles.finalCta}>
-        <div class={styles.finalCloud}><Image src="/cobblestar-logo.png" alt="Dragonite sur son nuage" width={370} height={370} /></div>
-        <div>
-          <small>LE PROCHAIN DÉPART EST LE TIEN</small>
-          <h2>Prêt à écrire<br />la suite ?</h2>
-          <p>Le téléchargement du launcher sera proposé à l’ouverture. En attendant, retrouve la communauté et les annonces sur Discord.</p>
-          <a href={DISCORD}>Suivre l’ouverture sur Discord <span>↗</span></a>
-        </div>
-      </section>
-
-<section class="public-shell"><h2>Découvrir Pokémon dans Minecraft</h2><p>Cobblemon apporte les Pokémon à Minecraft. CobbleStar est le serveur francophone où partager cette aventure : consulte le guide du mod, prépare ton installation, puis découvre nos règles en jeu.</p><div class="public-actions"><a class="public-button" href="/minecraft-pokemon/">Comprendre Cobblemon</a><a class="public-button secondary" href="/rejoindre/">Préparer l’ouverture</a><a class="public-button secondary" href="/wiki/">Les guides du serveur</a></div></section></main></Layout>
-<style>.home-chapter{border-bottom:1px solid #392b49;padding:18px 0}.home-chapter summary{font-size:23px;font-weight:700;cursor:pointer;padding:12px 0}.home-chapter[open] summary{color:#f0b95e}</style>
+<Layout title="CobbleStar — Serveur Cobblemon FR & Minecraft Pokémon" description="Découvre CobbleStar, serveur Cobblemon français en préparation : deux mondes, capture de Pokémon, quêtes et raids. Rejoins Discord pour suivre l’ouverture.">
+<main id="contenu" class={styles.atlas}>
+<section class={[styles.hero,'astro-home-hero home-welcome'].join(' ')} aria-labelledby="home-title">
+ <div class={styles.heroCopy}>
+  <div class={styles.overline}><span>OUVERTURE À VENIR</span><i/>JAVA 1.21.1</div>
+  <h1 id="home-title">Ton serveur<br/><em>Cobblemon FR.</em><br/>Ton aventure.</h1>
+  <p>Capture des Pokémon, construis ton foyer et pars à l’aventure avec une communauté francophone.</p>
+  <p class="home-opening">Le serveur prépare son ouverture publique. La date et le launcher seront annoncés sur Discord et sur ce site.</p>
+  <div class={styles.heroActions}><a class={styles.primaryButton} href={DISCORD}>Rejoindre Discord <span aria-hidden="true">↗</span></a><a class={styles.addressButton} href="#aventures"><span><small>LE PROJET</small><strong>Découvrir CobbleStar</strong></span><b aria-hidden="true">↓</b></a></div>
+  <p class="home-discord-hint">Annonces d’ouverture · Échanges entre joueurs · Aide de l’équipe</p>
+ </div>
+ <div class={styles.heroVisual}>
+  <div class={styles.heroPhoto}><div class={styles.heroWorld}><Image src="/cobblemon-lakeside.webp" alt="Illustration de l’univers Cobblemon au bord de l’eau" fill priority/><span>Univers Cobblemon</span></div><div class={styles.heroWorld}><Image src="/cobblemon-desert.webp" alt="Illustration de l’univers Cobblemon dans le désert" fill/><span>Illustration</span></div></div>
+  <div class={styles.heroLogo}><Image src="/cobblestar-logo.png" alt="Dracolosse, mascotte de CobbleStar" width={430} height={430} priority/></div>
+  <div class={styles.postcard}><small>DEUX MONDES À DÉCOUVRIR</small><strong>Asteria + Nébélia</strong><span>Explorer · Capturer · Construire</span></div>
+  <p class="home-visual-note">Visuels d’illustration — pas des captures du serveur.</p>
+ </div>
+</section>
+<section class="home-section" id="aventures" aria-labelledby="adventures-title">
+ <div class="home-section-heading"><span class="eyebrow">CE QUI T’ATTEND À L’OUVERTURE</span><h2 id="adventures-title">Trois façons de vivre CobbleStar.</h2><p>Tu peux commencer seul, puis rencontrer des joueurs au fil de tes activités.</p></div>
+ <div class="home-three">{features.map(f=><article class="home-feature"><span class="home-number">{f.number}</span><small>{f.tag}</small><h3>{f.title}</h3><p>{f.copy}</p><a href={f.href}>{f.link} <span aria-hidden="true">→</span></a></article>)}</div>
+</section>
+<section class="home-section home-glimpse" id="apercu" aria-labelledby="glimpse-title">
+ <div class="home-section-heading"><span class="eyebrow">L’UNIVERS DU PROJET</span><h2 id="glimpse-title">Des Pokémon. Des rencontres. Ton histoire.</h2><p>{serverMedia.length?'Un aperçu du serveur en jeu, pendant sa préparation.':'Ces images illustrent l’univers Cobblemon. Les captures et vidéos de CobbleStar seront ajoutées ici lorsqu’elles seront disponibles.'}</p></div>
+ <div class="home-media-grid">{serverMedia.length?serverMedia.map(media=><figure>{media.kind==='video'?<video controls playsinline muted preload="none" poster={media.poster} aria-label={media.title}><source src={media.src} type={media.src.endsWith('.webm')?'video/webm':'video/mp4'}/>Ton navigateur ne peut pas lire cette vidéo.</video>:<Image src={media.src} alt={media.title} width={900} height={506}/>}<figcaption><b>{media.title}</b><span>{media.caption}</span></figcaption></figure>):<><figure><Image src="/cobblemon-team.webp" alt="Illustration de Pokémon dans l’univers Cobblemon" width={900} height={506}/><figcaption><b>Rencontrer et collectionner</b><span>Illustration Cobblemon · aucune scène du serveur présentée ici.</span></figcaption></figure><figure><Image src="/cobblemon-berries.webp" alt="Illustration de l’exploration dans Cobblemon" width={900} height={506}/><figcaption><b>Explorer à ton rythme</b><span>Illustration Cobblemon · les lieux de CobbleStar restent à découvrir.</span></figcaption></figure></>}</div>
+</section>
+<section class="home-section" id="premiers-pas" aria-labelledby="first-title">
+ <div class="home-section-heading"><span class="eyebrow">NOUVEAU JOUEUR</span><h2 id="first-title">Tes premiers pas, à l’ouverture.</h2><p>Pas besoin de connaître toutes les commandes pour commencer.</p></div>
+ <ol class="home-three home-steps"><li><span class="home-number">01</span><h3>Prépare ton jeu</h3><p>Il te faudra Minecraft Java sur ton compte Microsoft. Le launcher Windows installera le pack compatible lorsqu’il sera disponible.</p><a href="/rejoindre/">Voir les prérequis →</a></li><li><span class="home-number">02</span><h3>Trouve tes repères</h3><p>Une fois connecté, ouvre <code>/menu</code> pour les activités et ton journal de quêtes pour les objectifs. <code>/wiki</code> donne accès aux guides.</p><a href="/wiki/welcome/">Lire le guide de départ →</a></li><li><span class="home-number">03</span><h3>Pars à la rencontre des Pokémon</h3><p>Prépare tes Poké Balls et découvre la capture. Tu pourras ensuite poursuivre les quêtes, explorer ou retrouver d’autres joueurs.</p><a href="/wiki/capture/">Préparer ta première capture →</a></li></ol>
+</section>
+<section class="home-section home-trust" aria-labelledby="trust-title"><div><span class="eyebrow">AVANT DE NOUS REJOINDRE</span><h2 id="trust-title">Des repères clairs.</h2><p>Les systèmes sont préparés, mais le serveur reste fermé au public jusqu’à l’annonce de l’équipe.</p></div><div><h3>Gratuit et payant</h3><p>Le launcher et le modpack seront gratuits. Une licence Minecraft Java reste nécessaire. La boutique présente séparément les Stars, cosmétiques, clés et grades avec leurs conditions.</p><h3>Règles et aide</h3><p>Le wiki explique les règles des activités. Pour les règles de communauté et les questions à l’équipe, retrouve-nous sur Discord.</p><div class="home-text-links"><a href="/wiki/">Consulter les guides →</a><a href={DISCORD}>Contacter l’équipe sur Discord ↗</a></div></div></section>
+{articles.length>0&&<section class="home-section" aria-labelledby="news-title"><div class="home-section-heading"><span class="eyebrow">LE JOURNAL DU DÉVELOPPEMENT</span><h2 id="news-title">Les nouvelles de l’équipe.</h2><p>Des aperçus des systèmes en préparation. Une annonce de développement ne signifie pas que le serveur est ouvert.</p></div><div class="home-three home-news">{articles.map(article=><a class="home-news-card" href={newsUrl(article)}><small>{article.category} · <time datetime={article.publishedAt}>{date(article.publishedAt)}</time></small><h3>{article.title}</h3><p>{article.excerpt}</p><b>Lire la note →</b></a>)}</div><a class="home-more" href="/actualites/">Toutes les actualités →</a></section>}
+<section class="home-section home-faq" id="faq" aria-labelledby="faq-title"><div class="home-section-heading"><span class="eyebrow">LES QUESTIONS AVANT LE DÉPART</span><h2 id="faq-title">Ce qu’il faut savoir.</h2></div>{HOME_FAQ.map(item=><details><summary>{item.question}</summary><p>{item.answer}</p></details>)}</section>
+<section class="home-section home-join" aria-labelledby="join-title"><Image src="/cobblestar-logo.png" alt="" width={180} height={180}/><div><span class="eyebrow">REJOINS LA COMMUNAUTÉ</span><h2 id="join-title">L’aventure commence par une rencontre.</h2><p>Discute avec les futurs joueurs, pose tes questions et suis les annonces officielles d’ouverture.</p><a class="public-button" href={DISCORD}>Rejoindre le Discord CobbleStar ↗</a><a class="home-secondary" href="/minecraft-pokemon/">Découvrir Cobblemon et Minecraft Pokémon →</a></div></section>
+</main></Layout>

@@ -1,8 +1,8 @@
 ---
 import {DISCORD} from '../lib/content';
 const path = Astro.url.pathname;
-const links=[['/','Accueil'],['/actualites/','Actualités'],['/boutique/','Boutique'],['/vote/','Votes'],['/roadmap/','Roadmap'],['/wiki/','Wiki']];
-const active=(href:string)=>href==='/'?path==='/':path.startsWith(href);
+const links=[['/','Accueil'],['/#aventures','Découvrir'],['/#premiers-pas','Premiers pas'],['/actualites/','Actualités'],['/wiki/','Wiki']];
+const active=(href:string)=>href==='/'?path==='/':!href.includes('#')&&path.startsWith(href);
 ---
 <div class="nav-frame">
   <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -11,9 +11,9 @@ const active=(href:string)=>href==='/'?path==='/':path.startsWith(href);
     <header class="nav-wrap">
       <a class="brand" href="/" aria-label="CobbleStar — Accueil"><span class="brand-mark"><img src="/media/cobblestar-logo-128.webp" alt="" width="54" height="54"/></span><span>Cobble<span>Star</span><small>ASTERIA × NÉBÉLIA</small></span></a>
       <nav aria-label="Navigation principale">{links.map(([href,label])=><a href={href} class={active(href)?'active':undefined} aria-current={active(href)?'page':undefined}>{label}</a>)}</nav>
-      <details class="mobile-menu"><summary aria-label="Ouvrir le menu"><span/><span/><span/><small>Menu</small></summary><div>{links.map(([href,label])=><a href={href} aria-current={active(href)?'page':undefined}>{label}</a>)}</div></details>
+      <details class="mobile-menu"><summary aria-label="Ouvrir le menu"><span/><span/><span/><small>Menu</small></summary><div>{links.map(([href,label])=><a href={href} aria-current={active(href)?'page':undefined}>{label}</a>)}<a href={DISCORD}>Rejoindre Discord ↗</a><a href="/roadmap/">Activités et ouverture</a></div></details>
       <a class="nav-download" href={DISCORD}><span>Discord</span><b>↗</b></a>
-      <a class="nav-account" href="/compte/"><span class="nav-account-copy"><small>ESPACE JOUEUR</small><strong>Mon compte</strong></span><span class="nav-account-avatar"><b>♙</b></span></a>
+      <a class="nav-account" href="/compte/" aria-label="Mon compte CobbleStar"><span class="nav-account-copy"><small>ESPACE JOUEUR</small><strong>Mon compte</strong></span><span class="nav-account-avatar"><b>♙</b></span></a>
     </header>
   </div>
 </div>

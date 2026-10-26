@@ -1,30 +1,13 @@
 "use client";
 /* eslint-disable @next/next/no-html-link-for-pages -- Public destinations use Astro and require document navigation. */
 
-import { useState } from "react";
+
 
 
 export default function SiteFooter() {
 
-  const [copied, setCopied] = useState(false);
 
-  async function copyAddress() {
-    const address = "play.cobblestar-mc.fr";
-    try {
-      await navigator.clipboard.writeText(address);
-    } catch {
-      const input = document.createElement("textarea");
-      input.value = address;
-      input.style.position = "fixed";
-      input.style.opacity = "0";
-      document.body.appendChild(input);
-      input.select();
-      document.execCommand("copy");
-      input.remove();
-    }
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 1600);
-  }
+
 
   return (
     <footer className="site-footer">
@@ -32,7 +15,7 @@ export default function SiteFooter() {
         <div className="footer-brand">
           <a className="brand" href="/"><span className="brand-mark"><img src="/media/cobblestar-logo-128.webp" alt="" width="54" height="54" loading="lazy" /></span><span>Cobble<span>Star</span></span></a>
           <p>Une aventure Cobblemon francophone pensée pour explorer, collectionner et progresser ensemble.</p>
-          <button className="footer-server" type="button" onClick={copyAddress}><span className="status-dot" /><small>{copied ? "Adresse copiée ✓" : "play.cobblestar-mc.fr"}</small></button>
+          <p className="footer-server">Ouverture à venir</p>
         </div>
         <nav className="footer-column" aria-label="Découvrir CobbleStar"><b>Découvrir</b><a href="/actualites/">Actualités</a><a href="/roadmap/">Roadmap</a><a href="/wiki/">Wiki du serveur</a><a href="/vote/">Soutenir le serveur</a></nav>
         <nav className="footer-column" aria-label="Espace joueur"><b>Espace joueur</b><a href="/compte/">Mon compte</a><a href="/boutique/">Boutique</a><a href="/rejoindre/">Préparer l’ouverture</a></nav>

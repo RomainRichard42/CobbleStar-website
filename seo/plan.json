@@ -63,9 +63,9 @@
     "Contrôler les liens externes utiles et les informations des annuaires sans spam ni achat de liens."
   ],
   "nextPriorities": [
-    "Recueillir les premières données avant de fixer des objectifs de progression chiffrés.",
-    "Ajouter des captures du serveur et des exemples vérifiés aux guides les plus consultés.",
-    "Renforcer les guides des métiers, du GTS et des raids à partir de leurs règles en jeu vérifiées ; publier dans le CMS pour conserver une seule source de contenu."
+    "Ajouter de vraies captures du spawn, des raids et de la pension, puis une vidéo de gameplay fournie ou capturée sur une instance accessible. Le propriétaire confirme ne pas avoir ces médias au 26 octobre 2026.",
+    "Vérifier que le statut de préouverture et le téléchargement désactivé restent cohérents avant toute modification.",
+    "Recueillir les premières données Search Console et les questions des joueurs avant de choisir les prochains guides."
   ],
   "publicationRules": [
     "Ne pas modifier artificiellement les dates.",
@@ -123,5 +123,20 @@
     "build": "Webpack with one prerender worker and 1024 MiB Node heap limit on Kinetic",
     "ci": "https://github.com/RomainRichard42/CobbleStar-website/actions/runs/40325245474",
     "status": "success"
+  },
+  "homepage": {
+    "updatedAt": "2026-10-26",
+    "structure": [
+      "présentation",
+      "trois points forts",
+      "illustrations identifiées, puis médias réels lorsqu’ils seront disponibles",
+      "premiers pas",
+      "gratuit/payant et aide",
+      "actualités",
+      "FAQ",
+      "Discord"
+    ],
+    "mediaManifest": "public-site/src/lib/server-media.ts",
+    "realGameplayMediaAvailable": false
   }
 }

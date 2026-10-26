@@ -12,7 +12,7 @@ type HeaderAccount = {
 };
 
 export default function SiteHeader() {
-  const [copied, setCopied] = useState(false);
+
   const [account, setAccount] = useState<HeaderAccount | null>(null);
   const [balance, setBalance] = useState(0);
   const pathname = usePathname();
@@ -62,32 +62,14 @@ export default function SiteHeader() {
     };
   }, []);
 
-  async function copyServerAddress() {
-    const address = "play.cobblestar-mc.fr";
-    setCopied(true);
-    try {
-      if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
-      await navigator.clipboard.writeText(address);
-    } catch {
-      const input = document.createElement("textarea");
-      input.value = address;
-      input.style.position = "fixed";
-      input.style.opacity = "0";
-      document.body.appendChild(input);
-      input.select();
-      document.execCommand("copy");
-      input.remove();
-    }
-    window.setTimeout(() => setCopied(false), 1600);
-  }
 
   return (
     <div className="nav-frame">
       <a className="skip-link" href="#contenu">Aller au contenu</a>
       <div className="nav-stack">
         <div className="nav-utility">
-          <div><span className="status-dot" /><b><span className="nav-status-full">Ouverture à venir</span><span className="nav-status-short">Ouverture à venir</span></b></div>
-          <button type="button" onClick={copyServerAddress}><small>IP DU SERVEUR</small><b>{copied ? "Adresse copiée" : "play.cobblestar-mc.fr"}</b><span>{copied ? "✓" : "⧉"}</span></button>
+          <div><b><span className="nav-status-full">Ouverture à venir</span><span className="nav-status-short">Ouverture à venir</span></b></div>
+          <span>Prépare ton arrivée sur CobbleStar</span>
         </div>
         <header className="nav-wrap">
           <a className="brand" href="/" aria-label="CobbleStar — Accueil">
@@ -97,8 +79,8 @@ export default function SiteHeader() {
           <nav aria-label="Navigation principale">
             <a className={pathname === "/" ? "active" : undefined} aria-current={pathname === "/" ? "page" : undefined} href="/">Accueil</a>
             <a className={pathname.startsWith("/actualites") ? "active" : undefined} aria-current={pathname.startsWith("/actualites") ? "page" : undefined} href="/actualites/">Actualités</a>
-            <a className={pathname.startsWith("/boutique") ? "active" : undefined} aria-current={pathname.startsWith("/boutique") ? "page" : undefined} href="/boutique/">Boutique</a>
-            <a className={pathname.startsWith("/vote") ? "active" : undefined} aria-current={pathname.startsWith("/vote") ? "page" : undefined} href="/vote/">Votes</a>
+            <a href="/#aventures">Découvrir</a>
+            <a href="/#premiers-pas">Premiers pas</a>
             <a className={pathname.startsWith("/roadmap") ? "active" : undefined} aria-current={pathname.startsWith("/roadmap") ? "page" : undefined} href="/roadmap/">Roadmap</a>
             <a className={pathname.startsWith("/wiki") ? "active" : undefined} aria-current={pathname.startsWith("/wiki") ? "page" : undefined} href="/wiki/">Wiki</a>
           </nav>
@@ -107,14 +89,15 @@ export default function SiteHeader() {
             <div>
               <a className={pathname === "/" ? "active" : undefined} aria-current={pathname === "/" ? "page" : undefined} href="/">Accueil</a>
               <a className={pathname.startsWith("/actualites") ? "active" : undefined} aria-current={pathname.startsWith("/actualites") ? "page" : undefined} href="/actualites/">Actualités</a>
-              <a className={pathname.startsWith("/boutique") ? "active" : undefined} aria-current={pathname.startsWith("/boutique") ? "page" : undefined} href="/boutique/">Boutique</a>
-              <a className={pathname.startsWith("/vote") ? "active" : undefined} aria-current={pathname.startsWith("/vote") ? "page" : undefined} href="/vote/">Votes</a>
+              <a href="/#aventures">Découvrir</a>
+              <a href="/#premiers-pas">Premiers pas</a>
               <a className={pathname.startsWith("/roadmap") ? "active" : undefined} aria-current={pathname.startsWith("/roadmap") ? "page" : undefined} href="/roadmap/">Roadmap</a>
               <a className={pathname.startsWith("/wiki") ? "active" : undefined} aria-current={pathname.startsWith("/wiki") ? "page" : undefined} href="/wiki/">Wiki</a>
+              <a href="https://discord.gg/Sd387Ky4M">Rejoindre Discord ↗</a>
             </div>
           </details>
           <a className="nav-download" href="https://discord.gg/Sd387Ky4M" aria-label="Rejoindre le Discord CobbleStar">
-            <span>Discord</span><b aria-hidden="true">↓</b>
+            <span>Discord</span><b aria-hidden="true">↗</b>
           </a>
           {accountsEnabled && account && <a className="nav-stars" href="/boutique/" aria-label={`Solde : ${balance.toLocaleString("fr-FR")} Stars`}><span aria-hidden="true">✦</span><b>{balance.toLocaleString("fr-FR")}</b><small>Stars</small></a>}
           {accountsEnabled && <a className={`nav-account${pathname.startsWith("/compte") ? " active" : ""}`} href="/compte/" aria-label={account ? `Compte de ${accountName || "Dresseur"}` : "Connexion Discord à CobbleStar"}>
