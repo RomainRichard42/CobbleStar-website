@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { useDownloadUrl } from "@/app/components/DownloadLauncher";
+
 import SiteFooter from "@/app/components/SiteFooter";
 import SiteHeader from "@/app/components/SiteHeader";
 import { HOME_FAQ } from "@/app/lib/faq";
@@ -112,7 +112,7 @@ const fieldNotes = [
 ] as const;
 
 export function AtlasLanding({ home = false }: { home?: boolean }) {
-  const downloadUrl = useDownloadUrl();
+  const downloadUrl = "https://discord.gg/Sd387Ky4M";
   const [copied, setCopied] = useState(false);
   const [activeChapter, setActiveChapter] = useState<ChapterKey>("exploration");
   const chapter = chapters[activeChapter];
@@ -148,7 +148,7 @@ export function AtlasLanding({ home = false }: { home?: boolean }) {
         </details>
 
         <a className={styles.headerCta} href={downloadUrl}>
-          <span>Télécharger</span>
+          <span>Discord</span>
           <b aria-hidden="true">↓</b>
         </a>
       </header>}
@@ -162,7 +162,7 @@ export function AtlasLanding({ home = false }: { home?: boolean }) {
             qui se raconte à travers les lieux, les quêtes et les joueurs.
           </p>
           <div className={styles.heroActions}>
-            <a className={styles.primaryButton} href={downloadUrl}>Installer le launcher <span>↗</span></a>
+            <a className={styles.primaryButton} href={downloadUrl}>Rejoindre Discord <span>↗</span></a>
             <button className={styles.addressButton} type="button" onClick={copyAddress}>
               <span><small>ADRESSE DU SERVEUR</small><strong>{SERVER_ADDRESS}</strong></span>
               <b>{copied ? "Copié !" : "Copier"}</b>
@@ -323,7 +323,7 @@ export function AtlasLanding({ home = false }: { home?: boolean }) {
           <small>LE PROCHAIN DÉPART EST LE TIEN</small>
           <h2>Prêt à écrire<br />la suite ?</h2>
           <p>Le launcher installe Java, Fabric et le modpack automatiquement. Tu n’as plus qu’à choisir ton premier monde.</p>
-          <a href={downloadUrl}>Télécharger pour Windows <span>↓</span></a>
+          <a href={downloadUrl}>Suivre l’ouverture sur Discord <span>↗</span></a>
         </div>
       </section>
 

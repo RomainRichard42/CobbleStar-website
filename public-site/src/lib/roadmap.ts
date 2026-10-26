@@ -1,6 +1,6 @@
 // Availability confirmed by the server owner on 2026-10-26. Keep existing anchors.
 export const stops = [
-  {id:'fondations',title:'Site, launcher et modpack',copy:'Le launcher prépare Minecraft Java 1.21.1, Fabric et le pack CobbleStar. Le site rassemble les téléchargements, le compte joueur et les guides.',image:'/cobblemon-lakeside.webp',path:'/rejoindre/',link:'Installer et rejoindre'},
+  {id:'fondations',title:'Site, launcher et modpack',copy:'Le launcher prépare Minecraft Java 1.21.1, Fabric et le pack CobbleStar. Le site rassemble les informations d’ouverture, le compte joueur et les guides. Le téléchargement sera proposé à l’ouverture publique.',image:'/cobblemon-lakeside.webp',path:'/rejoindre/',link:'Préparer son arrivée'},
   {id:'lancement',title:'Asteria et Nébélia',copy:'Les deux mondes du serveur sont ouverts à l’exploration et à la construction. Choisis ton point de départ et retrouve les repères de l’aventure dans le wiki.',image:'/cobblemon-desert.webp',path:'/wiki/',link:'Découvrir les guides'},
   {id:'recit',title:'Quêtes et Battle Pass',copy:'Les quêtes et le Battle Pass sont disponibles en jeu. Consulte les objectifs proposés dans les interfaces du serveur pour suivre ta progression.',image:'/cobblemon-ocean.webp',path:'/wiki/',link:'Comprendre la progression'},
   {id:'progression',title:'Métiers',copy:'Les métiers font partie des activités ouvertes aux joueurs. Tu peux progresser dans tes activités et retrouver les explications du serveur avec /wiki.',image:'/cobblemon-berries.webp',path:'/wiki/',link:'Consulter le wiki'},

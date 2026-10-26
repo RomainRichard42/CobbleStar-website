@@ -2,9 +2,9 @@
 import Layout from '../layouts/PublicLayout.astro';
 import Image from '../components/Picture.astro';
 import styles from '../../../app/maquettes/site-atlas/site-atlas.module.css';
-import {DOWNLOAD,SERVER,newsUrl,publishedNews,type PublicLocals} from '../lib/content';
+import {DISCORD,newsUrl,publishedNews,type PublicLocals} from '../lib/content';
 import {HOME_FAQ} from '../lib/faqs';
-const downloadUrl=DOWNLOAD,SERVER_ADDRESS=SERVER;
+
 const articles=await (Astro.locals as PublicLocals).getNews().then(n=>publishedNews(n).articles.slice(0,3)).catch(()=>[]);
 const adventures = [
   {
@@ -87,23 +87,20 @@ const fieldNotes = [
 
 
 ---
-<Layout title="CobbleStar — Serveur Cobblemon FR & Minecraft Pokémon" description="Rejoins CobbleStar, serveur Cobblemon français sur Minecraft Java 1.21.1. Deux mondes, Pokémon et communauté FR. Launcher, IP et guides pour débuter."><main id="contenu" class={styles.atlas}>      <section class={`${styles.hero} astro-home-hero`}>
+<Layout title="CobbleStar — Serveur Cobblemon FR & Minecraft Pokémon" description="Découvre CobbleStar, serveur Cobblemon français en préparation sur Minecraft Java 1.21.1. Deux mondes, Pokémon et communauté FR. Suis l’ouverture sur Discord."><main id="contenu" class={styles.atlas}>      <section class={`${styles.hero} astro-home-hero`}>
         <div class={styles.heroCopy}>
-          <div class={styles.overline}><span>SAISON 01</span><i />MINECRAFT 1.21.1</div>
+          <div class={styles.overline}><span>OUVERTURE À VENIR</span><i />MINECRAFT 1.21.1</div>
           <h1>Ton serveur<br/><em>Cobblemon FR.</em><br/>Ton aventure.</h1>
           <p>
-            Rejoins CobbleStar, un serveur Minecraft Pokémon francophone en version Java 1.21.1. Explore Asteria et Nébélia, construis ton foyer et partage ton aventure avec les autres dresseurs.
+            CobbleStar prépare une aventure Minecraft Pokémon francophone sur Java 1.21.1, entre Asteria et Nébélia. Le serveur n’est pas encore ouvert au public : rejoins notre Discord pour suivre les annonces d’ouverture.
           </p>
           <div class={styles.heroActions}>
-            <a class={styles.primaryButton} href={downloadUrl}>Installer le launcher <span>↗</span></a>
-            <button class={styles.addressButton} type="button" data-copy-server>
-              <span><small>ADRESSE DU SERVEUR</small><strong>{SERVER_ADDRESS}</strong></span>
-              <b>Copier</b>
-            </button>
+            <a class={styles.primaryButton} href={DISCORD}>Rejoindre Discord <span>↗</span></a>
+            <a class={styles.addressButton} href="#aventures"><span><small>LE PROJET</small><strong>Découvrir le serveur</strong></span><b>↓</b></a>
           </div>
           <div class={styles.heroProof}>
-            <span><b>01</b> Launcher automatique</span>
-            <span><b>02</b> Aucune installation manuelle</span>
+            <span><b>01</b> Minecraft Java 1.21.1</span>
+            <span><b>02</b> Communauté francophone</span>
             <span><b>03</b> Lore à découvrir en jeu</span>
           </div>
         </div>
@@ -211,10 +208,10 @@ const fieldNotes = [
         <div>
           <small>LE PROCHAIN DÉPART EST LE TIEN</small>
           <h2>Prêt à écrire<br />la suite ?</h2>
-          <p>Le launcher installe Java, Fabric et le modpack automatiquement. Tu n’as plus qu’à choisir ton premier monde.</p>
-          <a href={downloadUrl}>Télécharger pour Windows <span>↓</span></a>
+          <p>Le téléchargement du launcher sera proposé à l’ouverture. En attendant, retrouve la communauté et les annonces sur Discord.</p>
+          <a href={DISCORD}>Suivre l’ouverture sur Discord <span>↗</span></a>
         </div>
       </section>
 
-<section class="public-shell"><h2>Découvrir Pokémon dans Minecraft</h2><p>Cobblemon apporte les Pokémon à Minecraft. CobbleStar est le serveur francophone où partager cette aventure : consulte le guide du mod, prépare ton installation, puis découvre nos règles en jeu.</p><div class="public-actions"><a class="public-button" href="/minecraft-pokemon/">Comprendre Cobblemon</a><a class="public-button secondary" href="/rejoindre/">Rejoindre le serveur</a><a class="public-button secondary" href="/wiki/">Les guides du serveur</a></div></section></main></Layout>
+<section class="public-shell"><h2>Découvrir Pokémon dans Minecraft</h2><p>Cobblemon apporte les Pokémon à Minecraft. CobbleStar est le serveur francophone où partager cette aventure : consulte le guide du mod, prépare ton installation, puis découvre nos règles en jeu.</p><div class="public-actions"><a class="public-button" href="/minecraft-pokemon/">Comprendre Cobblemon</a><a class="public-button secondary" href="/rejoindre/">Préparer l’ouverture</a><a class="public-button secondary" href="/wiki/">Les guides du serveur</a></div></section></main></Layout>
 <style>.home-chapter{border-bottom:1px solid #392b49;padding:18px 0}.home-chapter summary{font-size:23px;font-weight:700;cursor:pointer;padding:12px 0}.home-chapter[open] summary{color:#f0b95e}</style>

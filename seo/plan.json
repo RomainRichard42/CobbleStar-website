@@ -109,7 +109,9 @@
       "pension",
       "quêtes",
       "Battle Pass"
-    ]
+    ],
+    "publicServerOpen": false,
+    "note": "Systèmes préparés, mais serveur non ouvert au public. Précision du propriétaire le 26 octobre 2026. Téléchargements retirés jusqu’à ouverture."
   },
   "referenceDocs": [
     "https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl",

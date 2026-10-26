@@ -1,4 +1,5 @@
 ---
+import {DISCORD} from '../lib/content';
 const path = Astro.url.pathname;
 const links=[['/','Accueil'],['/actualites/','Actualités'],['/boutique/','Boutique'],['/vote/','Votes'],['/roadmap/','Roadmap'],['/wiki/','Wiki']];
 const active=(href:string)=>href==='/'?path==='/':path.startsWith(href);
@@ -6,13 +7,15 @@ const active=(href:string)=>href==='/'?path==='/':path.startsWith(href);
 <div class="nav-frame">
   <a class="skip-link" href="#contenu">Aller au contenu</a>
   <div class="nav-stack">
-    <div class="nav-utility"><div><b><span class="public-status-long">Serveur Cobblemon francophone · Minecraft Java 1.21.1</span><span class="public-status-short">Cobblemon FR</span></b></div><button type="button" data-copy-server><small>IP DU SERVEUR</small><b>play.cobblestar-mc.fr</b><span>⧉</span></button></div>
+    <div class="nav-utility"><div><b><span class="public-status-long">Ouverture à venir · Minecraft Java 1.21.1</span><span class="public-status-short">Ouverture à venir</span></b></div><span class="opening-detail">Le serveur n’est pas encore ouvert au public</span></div>
     <header class="nav-wrap">
       <a class="brand" href="/" aria-label="CobbleStar — Accueil"><span class="brand-mark"><img src="/media/cobblestar-logo-128.webp" alt="" width="54" height="54"/></span><span>Cobble<span>Star</span><small>ASTERIA × NÉBÉLIA</small></span></a>
       <nav aria-label="Navigation principale">{links.map(([href,label])=><a href={href} class={active(href)?'active':undefined} aria-current={active(href)?'page':undefined}>{label}</a>)}</nav>
       <details class="mobile-menu"><summary aria-label="Ouvrir le menu"><span/><span/><span/><small>Menu</small></summary><div>{links.map(([href,label])=><a href={href} aria-current={active(href)?'page':undefined}>{label}</a>)}</div></details>
-      <a class="nav-download" href="/rejoindre/"><span>Jouer</span><b>↗</b></a>
+      <a class="nav-download" href={DISCORD}><span>Discord</span><b>↗</b></a>
       <a class="nav-account" href="/compte/"><span class="nav-account-copy"><small>ESPACE JOUEUR</small><strong>Mon compte</strong></span><span class="nav-account-avatar"><b>♙</b></span></a>
     </header>
   </div>
 </div>
+
+<style>@media(max-width:700px){.opening-detail{display:none}}</style>

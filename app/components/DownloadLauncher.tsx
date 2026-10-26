@@ -11,7 +11,6 @@ export const LAUNCHER_RELEASES_URL = `https://github.com/${REPO}/releases/latest
 // toujours directement le fichier, même si l'API GitHub est indisponible.
 export const FALLBACK_VERSION = "0.5.1";
 export const FALLBACK_SIZE_MB = 100;
-const FALLBACK_DOWNLOAD_URL = `https://github.com/${REPO}/releases/download/v${FALLBACK_VERSION}/CobbleStar-Launcher-${FALLBACK_VERSION}-win-x64.exe`;
 
 export type LauncherRelease = { version: string; downloadUrl: string; sizeMb: number };
 
@@ -53,8 +52,7 @@ export function useLatestRelease() {
   return release;
 }
 
-// Toujours un lien direct vers le fichier .exe — jamais une page GitHub.
+// Public downloads are paused until the server opens. Keep old views on the information page.
 export function useDownloadUrl() {
-  const release = useLatestRelease();
-  return release?.downloadUrl || FALLBACK_DOWNLOAD_URL;
+  return "/telecharger/";
 }

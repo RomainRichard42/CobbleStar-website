@@ -3,7 +3,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useDownloadUrl } from "./DownloadLauncher";
+
 
 const accountsEnabled = true;
 type HeaderAccount = {
@@ -19,7 +19,7 @@ export default function SiteHeader() {
   const minecraftUsername = account?.minecraft?.username || null;
   const accountName = minecraftUsername || account?.discord?.globalName || account?.discord?.username || null;
   const accountAvatar = account?.discord?.avatarUrl || (minecraftUsername ? `https://mc-heads.net/avatar/${encodeURIComponent(minecraftUsername)}/64` : null);
-  const downloadUrl = useDownloadUrl();
+
 
   useEffect(() => {
     let active = true;
@@ -86,7 +86,7 @@ export default function SiteHeader() {
       <a className="skip-link" href="#contenu">Aller au contenu</a>
       <div className="nav-stack">
         <div className="nav-utility">
-          <div><span className="status-dot" /><b><span className="nav-status-full">Serveur francophone en ligne</span><span className="nav-status-short">En ligne</span></b></div>
+          <div><span className="status-dot" /><b><span className="nav-status-full">Ouverture à venir</span><span className="nav-status-short">Ouverture à venir</span></b></div>
           <button type="button" onClick={copyServerAddress}><small>IP DU SERVEUR</small><b>{copied ? "Adresse copiée" : "play.cobblestar-mc.fr"}</b><span>{copied ? "✓" : "⧉"}</span></button>
         </div>
         <header className="nav-wrap">
@@ -113,8 +113,8 @@ export default function SiteHeader() {
               <a className={pathname.startsWith("/wiki") ? "active" : undefined} aria-current={pathname.startsWith("/wiki") ? "page" : undefined} href="/wiki/">Wiki</a>
             </div>
           </details>
-          <a className="nav-download" href={downloadUrl} download aria-label="Télécharger le launcher CobbleStar">
-            <span>Jouer</span><b aria-hidden="true">↓</b>
+          <a className="nav-download" href="https://discord.gg/Sd387Ky4M" aria-label="Rejoindre le Discord CobbleStar">
+            <span>Discord</span><b aria-hidden="true">↓</b>
           </a>
           {accountsEnabled && account && <a className="nav-stars" href="/boutique/" aria-label={`Solde : ${balance.toLocaleString("fr-FR")} Stars`}><span aria-hidden="true">✦</span><b>{balance.toLocaleString("fr-FR")}</b><small>Stars</small></a>}
           {accountsEnabled && <a className={`nav-account${pathname.startsWith("/compte") ? " active" : ""}`} href="/compte/" aria-label={account ? `Compte de ${accountName || "Dresseur"}` : "Connexion Discord à CobbleStar"}>
