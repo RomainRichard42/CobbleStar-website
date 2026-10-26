@@ -125,3 +125,5 @@ body.astral-v6{--cream:#fff4dc;--gold:#efbf70;--ink:#130f22;background:var(--ink
 .story-layout .astral-v6 .activity-heading h2{font-size:3rem!important}
 .story-layout .astral-v6 .activity-card{height:max(340px,calc(var(--stage-height) - 210px))!important;min-height:max(340px,calc(var(--stage-height) - 210px))!important}
 @media(prefers-reduced-motion:reduce){.astral-v6 *, .astral-v6 *:before,.astral-v6 *:after{transition:none!important;animation:none!important}.astral-v6 .store-card:hover{transform:none}}
+/* Reserve intrinsic image space while keeping artwork proportional at every viewport. */
+.astral-home.astral-v6 .cinema-mascot,.astral-home.astral-v6 .creation-visual>img{height:auto}

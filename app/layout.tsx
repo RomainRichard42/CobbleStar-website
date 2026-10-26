@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     siteName: SITE_NAME,
     title: "CobbleStar — Serveur Minecraft Cobblemon",
     description:
-      "Serveur Minecraft Cobblemon francophone. Launcher, boutique et vote directement liés à ton compte joueur.",
+      "Serveur Minecraft Cobblemon francophone. Guides, boutique et communauté ; ouverture publique à venir.",
     images: [
       {
         url: "/media/cobblestar-logo-480.webp",

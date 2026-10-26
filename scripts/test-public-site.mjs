@@ -35,7 +35,7 @@ test('publishing immediately creates real article URLs, drafts stay private and 
   const missing=await get('/actualites/does-not-exist/');assert.equal(missing.response.status,404);assert.ok(missing.html.includes('noindex,follow'));
 });
 test('sitemap, RSS and redirects stay canonical without indexing private pages',async()=>{
-  const map=await get('/sitemap.xml');assert.equal(map.response.status,200);assert.ok(map.html.includes('/wiki/'));assert.ok(!map.html.includes('/admin/'));assert.ok(!map.html.includes('<loc>https://cobblestar-mc.fr/compte/</loc>'));assert.ok(map.html.includes('/rejoindre/</loc><lastmod>2026-10-26</lastmod>'));assert.ok(!/<url><loc>[^<]+\/wiki\/[^<]*<\/loc><lastmod>/.test(map.html));assert.ok(map.html.includes('/actualites/'+news.content.articles[0].slug+'/'));
+  const map=await get('/sitemap.xml');assert.equal(map.response.status,200);assert.ok(map.html.includes('/wiki/'));assert.ok(!map.html.includes('/admin/'));assert.ok(!map.html.includes('<loc>https://cobblestar-mc.fr/compte/</loc>'));assert.ok(map.html.includes('/rejoindre/</loc><lastmod>2026-10-26</lastmod>'));for(const article of wiki.content.articles){if(article.modifiedAt)assert.ok(map.html.includes('/wiki/'+article.id+'/</loc><lastmod>'+article.modifiedAt+'</lastmod>'));}assert.ok(map.html.includes('/actualites/'+news.content.articles[0].slug+'/'));
   const rss=await get('/actualites/rss.xml');assert.equal(rss.response.status,200);assert.ok(rss.html.includes('<rss version="2.0">'));
   for(const [from,to] of [['/wiki','/wiki/'],['/wiki/index.html','/wiki/'],['/rejoindre','/rejoindre/']]){const r=await get(from);assert.equal(r.response.status,308);assert.equal(r.response.headers.get('location'),to);}
   assert.ok((await get('/robots.txt')).html.includes('Sitemap: https://cobblestar-mc.fr/sitemap.xml'));
@@ -88,4 +88,18 @@ test('every published guide is indexed, linked and has valid outline and related
   }
   assert.match(library.html,/data-search="[^"]*\/pension/);
   assert.match(library.html,/data-search="[^"]*stock est plein/);
+});
+
+test('article dates and social previews describe the exact published page',async()=>{
+ const a=wiki.content.articles.find(a=>a.modifiedAt), page=await get('/wiki/'+a.id+'/');
+ const schema=[...page.html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].flatMap(m=>JSON.parse(m[1]));
+ const article=schema.find(x=>x['@type']==='Article');assert.equal(article.dateModified,a.modifiedAt);assert.equal(article.author.url,'https://cobblestar-mc.fr/');assert.ok(page.html.includes('datetime="'+a.modifiedAt+'"'));assert.ok(page.html.includes('property="article:modified_time" content="'+a.modifiedAt+'"'));
+ for(const path of ['/boutique/','/vote/']){const {html}=await get(path);assert.ok(html.includes('property="og:url" content="https://cobblestar-mc.fr'+path+'"'));assert.match(html,/<meta name="twitter:title" content="[^"]+/);}
+ const library=await get('/wiki/');const list=[...library.html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].flatMap(m=>JSON.parse(m[1])).find(x=>x['@type']==='ItemList');assert.equal(list.numberOfItems,wiki.content.articles.filter(a=>a.published).length);
+ const original=structuredClone(wiki);delete wiki.content.articles[0].modifiedAt;wiki.updatedAt='2099-01-01T00:00:00Z';const old=await get('/wiki/'+wiki.content.articles[0].id+'/');assert.ok(!old.html.includes('2099-01-01'));wiki=original;
+});
+test('previews stay excluded and static player pages canonicalize without touching API',async()=>{
+ const preview=await get('/apercus/astral/');assert.match(preview.response.headers.get('x-robots-tag'),/noindex/);
+ for(const path of ['/boutique','/vote','/boutique/index.html']){const r=await app.inject({url:path+'?source=discord',headers:{host:'www.cobblestar-mc.fr'}});assert.equal(r.statusCode,308);assert.equal(r.headers.location,'https://cobblestar-mc.fr'+(path.startsWith('/boutique')?'/boutique/':'/vote/')+'?source=discord');}
+ for(const path of ['/boutique/','/vote/'])assert.equal((await get(path)).response.headers.get('x-cobblestar-renderer'),null);
 });

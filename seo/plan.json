@@ -41,11 +41,125 @@
     },
     {
       "page": "/wiki/",
-      "intent": "Comprendre les mécaniques propres au serveur",
+      "intent": "Trouver les guides des systèmes CobbleStar",
       "queries": [
         "wiki cobblestar",
+        "guides cobblemon français"
+      ]
+    },
+    {
+      "page": "/wiki/daycare/",
+      "intent": "Compatibilité, cycle de production, héritage, stockage et éclosion : le fonctionnement de la pension native CobbleStar.",
+      "queries": [
         "pension cobblestar",
-        "capture cobblemon cobblestar"
+        "reproduction cobblemon cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/metiers/",
+      "intent": "Choisir ses activités, gagner de l’expérience, récupérer ses paliers et préparer sa spécialisation.",
+      "queries": [
+        "métiers cobblestar",
+        "jobs cobblemon cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/talents/",
+      "intent": "Lire les prérequis, choisir une branche et investir ses vingt points de métier sans se disperser.",
+      "queries": [
+        "talents métiers cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/gts/",
+      "intent": "Comparer une offre, fixer un prix et gérer les annonces expirées sans perdre le fil de ses ventes.",
+      "queries": [
+        "gts cobblestar",
+        "vendre pokemon cobblemon cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/raids/",
+      "intent": "Former un groupe, traverser les quatre vagues et comprendre le combat collectif avant la récompense.",
+      "queries": [
+        "raids cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/epreuves/",
+      "intent": "Préparer une équipe, résoudre les mécanismes et vaincre chaque Capitaine avant la Ligue.",
+      "queries": [
+        "épreuves badges cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/ligue/",
+      "intent": "Préparer une équipe verrouillée, gérer les cinq rencontres et savoir ce qu’une interruption remet à zéro.",
+      "queries": [
+        "ligue cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/ranked/",
+      "intent": "Choisir son format auprès du responsable, chercher un adversaire et comprendre les conditions du combat classé.",
+      "queries": [
+        "ranked cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/pokepark/",
+      "intent": "Préparer une équipe, lancer une expédition et jouer à plusieurs dans les régions du PokéPark.",
+      "queries": [
+        "pokepark cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/battlepass/",
+      "intent": "Comprendre les cent paliers, les deux pistes et les actions reconnues avant la fin de saison.",
+      "queries": [
+        "battle pass cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/grades/",
+      "intent": "Passer de Recrue à sa voie finale, distinguer prérequis et achat, et utiliser les avantages débloqués.",
+      "queries": [
+        "grades gratuits cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/clubs/",
+      "intent": "Inviter ses partenaires, gérer les chunks, utiliser la banque et développer une base commune.",
+      "queries": [
+        "club claim cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/album/",
+      "intent": "Ouvrir un booster, organiser les séries et déplacer ses cartes physiques sans confondre exemplaire et illustration.",
+      "queries": [
+        "cartes boosters cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/galerie/",
+      "intent": "Faire noter un exemplaire, fabriquer les supports et organiser une collection visible par les visiteurs.",
+      "queries": [
+        "certification sga cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/cosmedex/",
+      "intent": "Retrouver ses apparences, activer une collection et distinguer les compagnons décoratifs des Pokémon de combat.",
+      "queries": [
+        "cosmedex cobblestar"
+      ]
+    },
+    {
+      "page": "/wiki/pokemon-star/",
+      "intent": "Comprendre les apparences Star, leur conservation et leur différence avec les shiny et les cosmétiques.",
+      "queries": [
+        "pokemon star cobblestar"
       ]
     }
   ],
@@ -55,7 +169,8 @@
     "Comparer 28 jours aux 28 précédents, signaler l’absence de données plutôt que d’inventer des résultats.",
     "Corriger les erreurs techniques vérifiées ; améliorer un guide existant ou créer une page utile seulement sur un sujet confirmé par le serveur.",
     "Vérifier liens internes, contenu complet dans le HTML, mobile, poids des médias, dates et cohérence des fonctionnalités annoncées.",
-    "Contrôler les liens internes, les ancres, les images et les statuts HTTP avec le rapport étendu ; mettre à jour public-site/src/lib/revisions.ts uniquement après modification réelle des pages concernées."
+    "Contrôler les liens internes, les ancres, les images et les statuts HTTP avec le rapport étendu ; mettre à jour public-site/src/lib/revisions.ts uniquement après modification réelle des pages concernées.",
+    "Contrôler les 34 guides, leurs dates individuelles et les aperçus de partage ; vérifier que les maquettes /apercus/ restent noindex. Les dates modifiedAt sont gérées à la publication et ne doivent pas être rafraîchies sans changement de contenu."
   ],
   "monthly": [
     "Revoir les intentions de recherche et les pages qui reçoivent des impressions sans clics.",
@@ -152,5 +267,20 @@
       "errors": 0,
       "warnings": 0
     }
+  },
+  "postRedesign": {
+    "date": "2026-10-26",
+    "indexedCandidates": 47,
+    "wikiGuides": 34,
+    "checks": [
+      "47 pages publiques",
+      "310 liens internes et ancres",
+      "22 images",
+      "dates par article",
+      "redirections des pages boutique et vote",
+      "exclusion des aperçus"
+    ],
+    "localAudit": "seo/reports/audit-2026-10-26-refonte-local.json",
+    "fieldPerformance": "Search Console en cours de traitement ; API PageSpeed indisponible (quota HTTP 429), aucun score inventé."
   }
 }

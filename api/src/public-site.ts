@@ -13,14 +13,16 @@ export function registerPublicSite(app: FastifyInstance, content: {getWiki:()=>P
   const renderer = () => render ? Promise.resolve(render) : loaded ??= import(pathToFileURL(resolve(process.cwd(),'public-astro/server/entry.mjs')).href).then(module=>module.handler as Handler).catch(error=>{loaded=undefined;throw error;});
   app.addHook('onRequest',async(request,reply)=>{
     const path=request.url.split('?')[0]!;
-    if (/^\/(?:maquettes|admin|compte|boutique-jeu|roadmap-carte)(?:\/|$)|^\/(?:wiki|actualites)\/admin(?:\/|$)/.test(path)) reply.header('X-Robots-Tag','noindex, nofollow');
+    if (/^\/(?:apercus|maquettes|admin|compte|boutique-jeu|roadmap-carte)(?:\/|$)|^\/(?:wiki|actualites)\/admin(?:\/|$)/.test(path)) reply.header('X-Robots-Tag','noindex, nofollow');
     if (!['GET','HEAD'].includes(request.method)) return;
     const normalized=path.replace(/\/index\.html$/, '/') || '/';
-    if(!isPublicPage(normalized))return;
+    const nextPublic=/^\/(?:boutique|vote)\/?$/.test(normalized);
+    if(!isPublicPage(normalized)&&!nextPublic)return;
     const canonical=/\.(?:txt|xml)$/.test(normalized)||normalized.endsWith('/')?normalized:normalized+'/';
     const query=request.url.includes('?')?'?'+request.url.split('?').slice(1).join('?'):'';
     if(request.hostname.toLowerCase()==='www.cobblestar-mc.fr')return reply.code(308).redirect('https://cobblestar-mc.fr'+canonical+query);
     if(path!==canonical)return reply.code(308).redirect(canonical+query);
+    if(nextPublic)return;
     const handler=await renderer();
     reply.header('Cache-Control',path.startsWith('/telecharger/windows')?'no-store':'public, max-age=60');
     reply.header('X-CobbleStar-Renderer','Astro');

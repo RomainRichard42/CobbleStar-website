@@ -210,7 +210,8 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "compte",
@@ -313,7 +314,8 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "deplacements",
@@ -448,7 +450,8 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "capture",
@@ -572,7 +575,8 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "starters",
@@ -668,7 +672,8 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "daycare",
@@ -842,7 +847,8 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "pokemon-star",
@@ -947,12 +953,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "commandes",
       "branchId": "start",
-      "title": "Les commandes utiles au quotidien",
+      "title": "Commandes CobbleStar : menus et déplacements",
       "summary": "Retrouver les menus, voyager, gérer son équipe et choisir la bonne commande sans chercher dans le chat.",
       "tags": [
         "commandes",
@@ -1074,12 +1081,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "legendaries",
       "branchId": "pokemon",
-      "title": "Préparer une chasse aux légendaires",
+      "title": "Légendaires : préparer sa chasse sur CobbleStar",
       "summary": "Lire les conditions du HUD, préparer son équipe de capture et comprendre les limites du suivi des apparitions.",
       "tags": [
         "légendaires",
@@ -1173,12 +1181,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "quests",
       "branchId": "progression",
-      "title": "Quêtes : du premier objectif aux récompenses",
+      "title": "Quêtes : objectifs, journal et récompenses",
       "summary": "Accepter, suivre et terminer les quêtes d’histoire, secondaires et périodiques sans manquer une étape.",
       "tags": [
         "quêtes",
@@ -1300,12 +1309,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "metiers",
       "branchId": "progression",
-      "title": "Les six métiers et leur progression",
+      "title": "Métiers : les six professions et leurs niveaux",
       "summary": "Choisir ses activités, gagner de l’expérience, récupérer ses paliers et préparer sa spécialisation.",
       "tags": [
         "métiers",
@@ -1436,12 +1446,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "talents",
       "branchId": "progression",
-      "title": "Construire son arbre de talents",
+      "title": "Talents : choisir sa spécialisation de métier",
       "summary": "Lire les prérequis, choisir une branche et investir ses vingt points de métier sans se disperser.",
       "tags": [
         "skilltree",
@@ -1575,7 +1586,8 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "grades",
@@ -1717,12 +1729,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "battlepass",
       "branchId": "progression",
-      "title": "Battle Pass : progresser et tout récupérer",
+      "title": "Battle Pass : paliers et récompenses de saison",
       "summary": "Comprendre les cent paliers, les deux pistes et les actions reconnues avant la fin de saison.",
       "tags": [
         "battlepass",
@@ -1851,12 +1864,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "mondes",
       "branchId": "exploration",
-      "title": "Astéria, Nébélia et les mondes à explorer",
+      "title": "Astéria et Nébélia : explorer les mondes",
       "summary": "Choisir une destination, préparer son expédition et conserver des repères entre les dimensions.",
       "tags": [
         "Astéria",
@@ -1957,12 +1971,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "pokepark",
       "branchId": "exploration",
-      "title": "PokéPark : explorer avec ses Résonants",
+      "title": "PokéPark : Résonants et expéditions en groupe",
       "summary": "Préparer une équipe, lancer une expédition et jouer à plusieurs dans les régions du PokéPark.",
       "tags": [
         "PokéPark",
@@ -2092,12 +2107,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "raids",
       "branchId": "combat",
-      "title": "Raids : préparer l’expédition et vaincre le Totem",
+      "title": "Raids : préparer son équipe et vaincre le Totem",
       "summary": "Former un groupe, traverser les quatre vagues et comprendre le combat collectif avant la récompense.",
       "tags": [
         "raid",
@@ -2215,12 +2231,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "epreuves",
       "branchId": "combat",
-      "title": "Les huit épreuves et leurs badges",
+      "title": "Épreuves : obtenir les huit badges",
       "summary": "Préparer une équipe, résoudre les mécanismes et vaincre chaque Capitaine avant la Ligue.",
       "tags": [
         "épreuves",
@@ -2336,12 +2353,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "ligue",
       "branchId": "combat",
-      "title": "Réussir sa tentative de Ligue",
+      "title": "Ligue : équipe, combats et tentative",
       "summary": "Préparer une équipe verrouillée, gérer les cinq rencontres et savoir ce qu’une interruption remet à zéro.",
       "tags": [
         "Ligue",
@@ -2456,12 +2474,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "ranked",
       "branchId": "combat",
-      "title": "Ranked : préparer son équipe et entrer en classement",
+      "title": "Ranked : équipe, formats et classement",
       "summary": "Choisir son format auprès du responsable, chercher un adversaire et comprendre les conditions du combat classé.",
       "tags": [
         "ranked",
@@ -2591,12 +2610,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "monnaies",
       "branchId": "economy",
-      "title": "Cobblecoins, Stars et PCO : quelle monnaie utiliser ?",
+      "title": "Cobblecoins, Stars et PCO : guide des monnaies",
       "summary": "Distinguer les soldes, payer un joueur et vérifier le coût réel avant une transaction.",
       "tags": [
         "monnaie",
@@ -2726,12 +2746,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "gts",
       "branchId": "economy",
-      "title": "GTS : acheter, vendre et récupérer ses annonces",
+      "title": "GTS : acheter et vendre Pokémon et objets",
       "summary": "Comparer une offre, fixer un prix et gérer les annonces expirées sans perdre le fil de ses ventes.",
       "tags": [
         "GTS",
@@ -2865,7 +2886,8 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "pokesell",
@@ -2986,7 +3008,8 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "boutique",
@@ -3127,12 +3150,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "votes",
       "branchId": "economy",
-      "title": "Voter : validation, récompenses et classement",
+      "title": "Votes : validation et récompenses",
       "summary": "Relier son compte, suivre les délais des sites de vote et retrouver une récompense en attente.",
       "tags": [
         "vote",
@@ -3234,12 +3258,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "clubs",
       "branchId": "community",
-      "title": "Créer un club et protéger son territoire",
+      "title": "Clubs : membres, territoire et banque",
       "summary": "Inviter ses partenaires, gérer les chunks, utiliser la banque et développer une base commune.",
       "tags": [
         "club",
@@ -3366,12 +3391,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "organisations",
       "branchId": "community",
-      "title": "Organisations : fédérer plusieurs clubs",
+      "title": "Organisations : réunir plusieurs clubs",
       "summary": "Comprendre la différence avec un club, préparer une candidature et rejoindre un quartier général.",
       "tags": [
         "organisation",
@@ -3482,12 +3508,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "parrainage",
       "branchId": "community",
-      "title": "Parrainage : inviter un ami et débloquer ses étapes",
+      "title": "Parrainage : inviter un ami et suivre les paliers",
       "summary": "Créer le bon lien avant la première connexion et suivre les récompenses du parrain comme du filleul.",
       "tags": [
         "parrainage",
@@ -3638,12 +3665,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "tags",
       "branchId": "community",
-      "title": "Choisir ses tags et afficher son identité",
+      "title": "Tags : personnaliser son identité",
       "summary": "Sélectionner les tags débloqués, comprendre leur affichage et conserver une identité lisible.",
       "tags": [
         "tags",
@@ -3741,12 +3769,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "carte-dresseur",
       "branchId": "community",
-      "title": "Personnaliser sa carte de dresseur",
+      "title": "Carte de dresseur : profil et confidentialité",
       "summary": "Présenter son équipe et sa collection, puis choisir les informations visibles par les autres joueurs.",
       "tags": [
         "carte",
@@ -3851,7 +3880,8 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "album",
@@ -3976,7 +4006,8 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "galerie",
@@ -4114,12 +4145,13 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "caisses",
       "branchId": "collection",
-      "title": "Machines à jetons : Vote, Nova, Pulsar et Quasar",
+      "title": "Jetons : machines Vote, Nova, Pulsar et Quasar",
       "summary": "Consulter les lots, utiliser le bon jeton et comprendre la roulette et les garanties affichées.",
       "tags": [
         "caisses",
@@ -4249,7 +4281,8 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     },
     {
       "id": "cosmedex",
@@ -4382,7 +4415,8 @@
             }
           ]
         }
-      ]
+      ],
+      "modifiedAt": "2026-10-26T21:09:02.331Z"
     }
   ]
 }

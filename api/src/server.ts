@@ -112,6 +112,7 @@ const wikiDocumentBody = z.object({
     title: z.string().trim().min(1).max(96), summary: z.string().trim().max(300),
     tags: z.array(z.string().trim().min(1).max(48)).max(24), readingMinutes: z.number().int().min(1).max(120),
     order: z.number().int().min(0).max(999), published: z.boolean(),
+    modifiedAt: z.string().datetime({offset:true}).optional(),
     hero: z.object({
       asset: z.string().max(240),
       alt: z.string().max(160),
@@ -577,7 +578,9 @@ app.post("/api/wiki/admin/publish", { config: { rateLimit: { max: 10, timeWindow
   if (!parsed.success) return reply.code(409).send({ error: "INVALID_DRAFT" });
   const published = await wikiSlot("published");
   const version = published.version + 1;
-  await pool.execute(`INSERT INTO wiki_documents(slot,content_json,version,updated_by) VALUES('published',?,?,?) ON DUPLICATE KEY UPDATE content_json=VALUES(content_json),version=VALUES(version),updated_by=VALUES(updated_by)`, [JSON.stringify(parsed.data), version, account.id]);
+  const {stampWikiPublication} = await import('./wiki-publication.js');
+  const content = {...parsed.data, articles:stampWikiPublication(parsed.data,published.content,new Date().toISOString())};
+  await pool.execute(`INSERT INTO wiki_documents(slot,content_json,version,updated_by) VALUES('published',?,?,?) ON DUPLICATE KEY UPDATE content_json=VALUES(content_json),version=VALUES(version),updated_by=VALUES(updated_by)`, [JSON.stringify(content), version, account.id]);
   return { published: true, version };
 });
 
