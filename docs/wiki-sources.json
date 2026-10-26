@@ -1,0 +1,138 @@
+{
+  "welcome": [
+    "mod:src/main/java/fr/cobblestar/planets/CobbleStarPlanets.java",
+    "mod:src/client/java/fr/cobblestar/planets/client/QuestJournalKey.java",
+    "site:app/compte/page.tsx"
+  ],
+  "compte": [
+    "site:app/compte/page.tsx",
+    "site:INSTALLATION-LINK.md",
+    "site:app/boutique/page.tsx"
+  ],
+  "deplacements": [
+    "mod:src/main/java/fr/cobblestar/planets/essentials/EssentialsService.java",
+    "mod:src/main/java/fr/cobblestar/planets/clubs/ClubService.java"
+  ],
+  "capture": [
+    "mod:src/main/java/fr/cobblestar/planets/daycare/NativePension.java",
+    "mod:src/main/java/fr/cobblestar/planets/pokesell/PokeSellService.java",
+    "mod:docs/ranked-natural-levels-6.39.28.md"
+  ],
+  "starters": [
+    "mod:src/main/resources/data/cobblestar_planets/starters/12_asteria.json",
+    "mod:src/main/resources/data/cobblestar_planets/starters/13_nebelia.json"
+  ],
+  "daycare": [
+    "mod:src/main/java/fr/cobblestar/planets/daycare/NativePension.java",
+    "mod:src/main/java/fr/cobblestar/planets/daycare/NativeBreeding.java",
+    "mod:src/main/java/fr/cobblestar/planets/daycare/BreedingRules.java",
+    "mod:src/main/java/fr/cobblestar/planets/daycare/DaycareService.java"
+  ],
+  "pokemon-star": [
+    "mod:docs/pokemon-star-6.39.35.md",
+    "mod:src/main/java/fr/cobblestar/planets/daycare/NativeBreeding.java"
+  ],
+  "commandes": [
+    "mod:src/main/java/fr/cobblestar/planets/essentials/EssentialsService.java",
+    "mod:src/main/java/fr/cobblestar/planets/ranked/RankedService.java"
+  ],
+  "legendaries": [
+    "mod:CobbleStar-HUD-1.1.2-source/README.md"
+  ],
+  "quests": [
+    "mod:src/main/java/fr/cobblestar/planets/quests/QuestService.java",
+    "site:docs/quest-studio.md"
+  ],
+  "metiers": [
+    "mod:Job & skilltree/README.md",
+    "mod:Job & skilltree/src/main/java/fr/cobblestar/professions/config/JobsConfig.java"
+  ],
+  "talents": [
+    "mod:Job & skilltree/README.md",
+    "mod:Job & skilltree/src/main/java/fr/cobblestar/professions/config/JobsConfig.java"
+  ],
+  "grades": [
+    "mod:docs/grades-gratuits.md",
+    "mod:src/main/java/fr/cobblestar/planets/grades/GradeRules.java"
+  ],
+  "battlepass": [
+    "mod:Battlepass/README.md"
+  ],
+  "mondes": [
+    "mod:src/main/java/fr/cobblestar/planets/CobbleStarPlanets.java",
+    "mod:src/main/java/fr/cobblestar/planets/essentials/EssentialsService.java"
+  ],
+  "pokepark": [
+    "mod:docs/pokepark-monde-ouvert-6.18.0.md",
+    "mod:docs/pokepark-equipe-6.17.0.md"
+  ],
+  "raids": [
+    "mod:docs/raids-natifs-1.8-6.19.9.md",
+    "mod:docs/raid-balance-6.20.2.md"
+  ],
+  "epreuves": [
+    "mod:docs/epreuves-ligue-6.26.0.md",
+    "mod:src/main/java/fr/cobblestar/planets/arenas/ArenaCommands.java"
+  ],
+  "ligue": [
+    "mod:docs/epreuves-ligue-6.26.0.md"
+  ],
+  "ranked": [
+    "mod:src/main/java/fr/cobblestar/planets/ranked/RankedService.java",
+    "mod:docs/ranked-natural-levels-6.39.28.md",
+    "mod:docs/ranked-background-search-6.39.27.md"
+  ],
+  "monnaies": [
+    "mod:economy/README.md",
+    "site:app/compte/page.tsx"
+  ],
+  "gts": [
+    "mod:CobbleStar-GTS-0.10.0-source/README.md"
+  ],
+  "pokesell": [
+    "mod:src/main/java/fr/cobblestar/planets/pokesell/PokeSellService.java"
+  ],
+  "boutique": [
+    "site:api/shop.catalog.json",
+    "site:app/compte/page.tsx",
+    "mod:src/main/java/fr/cobblestar/planets/grades/PaidGradeService.java"
+  ],
+  "votes": [
+    "site:README.md",
+    "mod:src/main/java/fr/cobblestar/planets/grades/GradeRules.java"
+  ],
+  "clubs": [
+    "mod:src/main/java/fr/cobblestar/planets/clubs/ClubService.java",
+    "mod:README.md"
+  ],
+  "organisations": [
+    "mod:README.md",
+    "mod:src/main/java/fr/cobblestar/planets/clubs/ClubService.java"
+  ],
+  "parrainage": [
+    "mod:docs/parrainage-alliance.md"
+  ],
+  "tags": [
+    "mod:docs/grades-gratuits.md"
+  ],
+  "carte-dresseur": [
+    "mod:src/client/java/fr/cobblestar/planets/client/TrainerCardClient.java",
+    "mod:src/main/java/fr/cobblestar/planets/academy/AcademyService.java"
+  ],
+  "album": [
+    "mod:src/main/java/fr/cobblestar/planets/academy/CardCatalog.java",
+    "mod:docs/galerie-sga.md",
+    "mod:README.md"
+  ],
+  "galerie": [
+    "mod:docs/galerie-sga.md"
+  ],
+  "caisses": [
+    "mod:docs/gashapon-roulette-6.39.21.md",
+    "mod:docs/gashapon-6.39.0.md"
+  ],
+  "cosmedex": [
+    "mod:README.md",
+    "mod:src/main/java/fr/cobblestar/planets/academy/AcademyService.java"
+  ]
+}

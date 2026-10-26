@@ -1,121 +1,4388 @@
 {
   "schemaVersion": 1,
   "title": "Wiki officiel CobbleStar",
-  "subtitle": "Tout comprendre, sans connaître les commandes techniques.",
+  "subtitle": "Prépare ton équipe, trouve ta spécialité et découvre chaque système du serveur. Des guides pas à pas, du premier Pokémon à la Ligue.",
   "branches": [
-    { "id": "start", "label": "Bien débuter", "description": "Les bases du serveur", "icon": "✦", "accent": "cyan", "order": 0, "visible": true },
-    { "id": "pokemon", "label": "Pokémon", "description": "Capture, pension et élevage", "icon": "◉", "accent": "pink", "order": 1, "visible": true },
-    { "id": "exploration", "label": "Exploration", "description": "Mondes, raids et découvertes", "icon": "⌖", "accent": "violet", "order": 2, "visible": true },
-    { "id": "progression", "label": "Progression", "description": "Quêtes, métiers et talents", "icon": "◆", "accent": "mint", "order": 3, "visible": true },
-    { "id": "activities", "label": "Activités", "description": "Classé, caisses et économie", "icon": "⚔", "accent": "gold", "order": 4, "visible": true }
+    {
+      "id": "start",
+      "label": "Bien débuter",
+      "description": "Compte, premiers pas, voyages et commandes utiles.",
+      "icon": "✦",
+      "accent": "cyan",
+      "order": 0,
+      "visible": true
+    },
+    {
+      "id": "pokemon",
+      "label": "Pokémon & élevage",
+      "description": "Capture, starters, pension, apparences Star et légendaires.",
+      "icon": "◉",
+      "accent": "pink",
+      "order": 1,
+      "visible": true
+    },
+    {
+      "id": "progression",
+      "label": "Progression",
+      "description": "Quêtes, six métiers, talents, grades et Battle Pass.",
+      "icon": "◆",
+      "accent": "mint",
+      "order": 2,
+      "visible": true
+    },
+    {
+      "id": "exploration",
+      "label": "Mondes & PokéPark",
+      "description": "Explorer les planètes et préparer ses expéditions.",
+      "icon": "⌖",
+      "accent": "violet",
+      "order": 3,
+      "visible": true
+    },
+    {
+      "id": "combat",
+      "label": "Combats & défis",
+      "description": "Raids, huit épreuves, Ligue et compétition Ranked.",
+      "icon": "⚔",
+      "accent": "gold",
+      "order": 4,
+      "visible": true
+    },
+    {
+      "id": "economy",
+      "label": "Économie & boutique",
+      "description": "Monnaies, GTS, revente, Stars et récompenses de vote.",
+      "icon": "✧",
+      "accent": "gold",
+      "order": 5,
+      "visible": true
+    },
+    {
+      "id": "community",
+      "label": "Vie du serveur",
+      "description": "Clubs, organisations, parrainage et identité de dresseur.",
+      "icon": "◎",
+      "accent": "cyan",
+      "order": 6,
+      "visible": true
+    },
+    {
+      "id": "collection",
+      "label": "Collections",
+      "description": "Cartes, certification SGA, galeries, machines et Cosmédex.",
+      "icon": "◇",
+      "accent": "pink",
+      "order": 7,
+      "visible": true
+    }
   ],
   "articles": [
     {
       "id": "welcome",
       "branchId": "start",
-      "title": "Bienvenue sur CobbleStar",
-      "summary": "Le parcours conseillé pour commencer sans se perdre.",
-      "tags": ["débuter", "spawn", "menu", "nouveau"],
+      "title": "Bien commencer sur CobbleStar",
+      "summary": "Un parcours concret pour préparer ton compte, choisir ton équipe, te repérer et lancer tes premières activités.",
+      "tags": [
+        "débuter",
+        "spawn",
+        "menu",
+        "nouveau",
+        "StarWatch"
+      ],
       "readingMinutes": 3,
       "order": 0,
       "published": true,
-      "hero": { "asset": "/cobblemon-team.webp", "alt": "Une équipe Cobblemon", "species": "eevee", "icon": "/mockups/daycare/poke_ball.png" },
+      "hero": {
+        "asset": "/astral/assets/riding.webp",
+        "alt": "Illustration Cobblemon du guide : Bien commencer sur CobbleStar"
+      },
       "blocks": [
-        { "kind": "heading", "text": "Tes trois premiers repères" },
-        { "kind": "checklist", "items": ["Ouvre /menu pour retrouver toutes les activités.", "Utilise J pour consulter ton journal de quêtes.", "Reviens dans ce wiki avec /wiki dès que tu as un doute."] },
-        { "kind": "callout", "tone": "cyan", "title": "À RETENIR", "text": "Le parcours conseille un ordre de lecture, mais aucun article n’est bloqué." }
+        {
+          "kind": "heading",
+          "text": "Avant ta première connexion"
+        },
+        {
+          "kind": "paragraph",
+          "text": "CobbleStar est un serveur Minecraft Java avec Cobblemon et des systèmes propres au serveur. Son ouverture publique est encore à venir. Prépare ton compte et suis les annonces officielles : le téléchargement du launcher sera proposé lorsque l’équipe ouvrira l’accès."
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Utilise le modpack et la version annoncés par CobbleStar. Un profil Cobblemon différent peut ne pas afficher les menus du serveur.",
+            "Rejoins le Discord officiel pour connaître l’ouverture, les maintenances et les événements.",
+            "Ne partage jamais ton mot de passe Microsoft ou Discord. La liaison au site passe par une commande personnelle."
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Tes trente premières minutes"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Prends tes repères au spawn",
+              "text": "Lis l’accueil et repère les PNJ. Le spawn rassemble les services ; ce n’est pas l’endroit où poser une base au hasard."
+            },
+            {
+              "title": "Ouvre la StarWatch",
+              "text": "Tape /menu. C’est ton point de départ pour les activités, la progression et les services. Une touche peut aussi être configurée dans les contrôles Minecraft."
+            },
+            {
+              "title": "Découvre ton équipe",
+              "text": "Observe les types, attaques et talents de tes Pokémon. Conserve un partenaire capable de combattre avant de déposer des Pokémon au PC ou à la pension."
+            },
+            {
+              "title": "Lance un objectif",
+              "text": "Ouvre le journal avec J ou /quetes. Accepte une quête disponible, lis ses objectifs et active son suivi."
+            },
+            {
+              "title": "Choisis une activité utile",
+              "text": "Active un métier correspondant à ce que tu vas réellement faire : miner, récolter, pêcher, explorer ou élever. Un métier inactif ne progresse pas comme un métier actif."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Installe-toi sans perdre ton chemin"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Utilise le menu des mondes ou /asteria et /nebelia pour partir explorer. Ces commandes cherchent une destination sûre ; elles ne servent pas à revenir à ta maison. Une fois un emplacement choisi, enregistre un home et vérifie les territoires des clubs avant de construire."
+        },
+        {
+          "kind": "command",
+          "command": "/sethome base",
+          "title": "Mémoriser ton point de retour",
+          "text": "Place-toi à un endroit sûr, puis utilise /home base pour y revenir. Le nombre de homes dépend de tes avantages."
+        },
+        {
+          "kind": "heading",
+          "text": "Choisis ton premier objectif"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Explorer et collectionner",
+              "text": "Capture de nouvelles espèces, consulte le HUD des légendaires et commence un album de cartes."
+            },
+            {
+              "title": "Progresser avec une équipe",
+              "text": "Prépare les Épreuves, découvre les raids puis la Ligue. Les niveaux réels et la composition de ton équipe comptent."
+            },
+            {
+              "title": "Construire avec des amis",
+              "text": "Rejoins un club, protège votre terrain et participe à sa banque et à sa progression."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Les confusions à éviter"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Cobblecoins et Stars sont deux monnaies différentes. Les grades de progression se paient en Cobblecoins ; les offres premium utilisent des Stars.",
+            "Un compagnon cosmétique n’est pas un Pokémon de combat.",
+            "Un objectif terminé n’est pas toujours une récompense récupérée : retourne dans le journal ou le menu concerné."
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Si quelque chose ne s’ouvre pas"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Une commande me renvoie vers un PNJ",
+              "text": "C’est normal pour certains services, notamment le Ranked. Va parler au responsable indiqué au lieu d’essayer une commande administrateur."
+            },
+            {
+              "title": "La touche J ne fonctionne pas",
+              "text": "Vérifie les conflits dans Options → Contrôles. /quetes reste un accès direct au journal."
+            },
+            {
+              "title": "Je veux reprendre plus tard",
+              "text": "Tes progressions sont enregistrées. Quitte proprement les activités instanciées avant de te déconnecter ; certaines tentatives de combat, comme la Ligue, ne se reprennent pas au milieu."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compte",
+      "branchId": "start",
+      "title": "Lier Discord, Minecraft et le site",
+      "summary": "Associe le bon personnage à ton compte pour retrouver tes Stars, les votes et les services du site.",
+      "tags": [
+        "compte",
+        "discord",
+        "link",
+        "liaison",
+        "connexion",
+        "portefeuille"
+      ],
+      "readingMinutes": 3,
+      "order": 1,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/riding.webp",
+        "alt": "Illustration Cobblemon du guide : Lier Discord, Minecraft et le site"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Ce que la liaison permet"
+        },
+        {
+          "kind": "paragraph",
+          "text": "La connexion Discord identifie ton compte sur le site. La liaison Minecraft prouve quel personnage doit recevoir les services et les récompenses. Être connecté à Discord ne signifie donc pas encore que Minecraft est lié. Le site distingue ces deux étapes."
+        },
+        {
+          "kind": "heading",
+          "text": "Effectuer la liaison"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Connecte-toi sur le site",
+              "text": "Ouvre Mon compte et connecte-toi avec le compte Discord que tu souhaites conserver pour CobbleStar. Vérifie le nom affiché."
+            },
+            {
+              "title": "Prépare la commande",
+              "text": "Lis les informations de liaison et valide le consentement demandé. Clique sur le bouton qui génère ta commande /link."
+            },
+            {
+              "title": "Utilise ton personnage Minecraft",
+              "text": "Connecte-toi avec le compte Minecraft à associer et colle la commande complète dans le chat du serveur. Le code est personnel et temporaire."
+            },
+            {
+              "title": "Vérifie le résultat",
+              "text": "Reviens dans Mon compte. Le pseudo Minecraft et l’état de liaison doivent être confirmés avant de préparer un achat ou un vote."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Le bon compte de livraison"
+        },
+        {
+          "kind": "paragraph",
+          "text": "La boutique indique le personnage lié et le portefeuille Stars. Avant chaque recharge, vérifie ce nom et le montant. Un pseudo ressemblant au tien ou un ancien compte Discord ne suffit pas : la liaison doit correspondre au personnage utilisé sur le serveur."
+        },
+        {
+          "kind": "callout",
+          "title": "Code personnel",
+          "text": "Ne poste pas ta commande /link dans un salon Discord, un ticket public ou un stream. Utilise-la uniquement dans le chat Minecraft du serveur.",
+          "tone": "gold"
+        },
+        {
+          "kind": "heading",
+          "text": "Changer de compte"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Si tu changes de Discord, utilise les options de récupération ou de changement de liaison lorsqu’elles sont disponibles sur ton compte. Une liaison déjà utilisée peut nécessiter une vérification. Ne crée pas plusieurs achats pour essayer de déplacer un solde : le staff doit examiner le compte concerné."
+        },
+        {
+          "kind": "heading",
+          "text": "Résoudre les problèmes courants"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "La commande a expiré",
+              "text": "Génère une nouvelle commande depuis Mon compte, puis utilise uniquement la plus récente."
+            },
+            {
+              "title": "Discord est connecté mais Minecraft est à lier",
+              "text": "Termine l’étape dans le jeu. La connexion au site seule ne prouve pas que tu possèdes le personnage."
+            },
+            {
+              "title": "Le launcher n’est pas disponible",
+              "text": "Le serveur prépare son ouverture. Tu peux préparer ta connexion Discord, mais la commande doit être exécutée sur le serveur quand ton compte dispose d’un accès."
+            },
+            {
+              "title": "Mon solde n’apparaît pas immédiatement",
+              "text": "Actualise après la validation de la liaison. Si le problème persiste, transmets ton pseudo et l’heure au staff, sans mot de passe ni code /link."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deplacements",
+      "branchId": "start",
+      "title": "Se déplacer et retrouver sa base",
+      "summary": "Spawn, homes, warps, demandes de téléportation et point de ralliement du club.",
+      "tags": [
+        "home",
+        "spawn",
+        "warp",
+        "tpa",
+        "back",
+        "tpaccept",
+        "base"
+      ],
+      "readingMinutes": 3,
+      "order": 2,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/riding.webp",
+        "alt": "Illustration Cobblemon du guide : Se déplacer et retrouver sa base"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Choisir le bon déplacement"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Spawn",
+              "text": "Le point de retour central et ses services. /spawn ne désigne pas ta maison."
+            },
+            {
+              "title": "Home",
+              "text": "Un emplacement personnel que tu enregistres toi-même. Plusieurs noms permettent de distinguer tes lieux."
+            },
+            {
+              "title": "Warp",
+              "text": "Une destination publique créée par le serveur. Utilise la liste disponible, sans inventer un nom."
+            },
+            {
+              "title": "Club",
+              "text": "Le point de ralliement partagé de ton club, placé par un responsable dans son territoire."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Créer et utiliser un home"
+        },
+        {
+          "kind": "command",
+          "command": "/sethome base",
+          "title": "Enregistrer ta base",
+          "text": "Place-toi sur un sol stable, hors d’un danger immédiat. Le nom base est un exemple ; choisis un nom facile à retenir."
+        },
+        {
+          "kind": "command",
+          "command": "/home base",
+          "title": "Revenir à ta base",
+          "text": "Utilise exactement le nom enregistré. /homes affiche tes emplacements et /delhome base supprime celui qui ne te sert plus."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le nombre de homes autorisés dépend de ta progression et de tes avantages. Si la limite est atteinte, gère tes emplacements existants au lieu de multiplier les noms. Vérifie toujours la destination lorsque tu remplaces un home."
+        },
+        {
+          "kind": "heading",
+          "text": "Rejoindre les services publics"
+        },
+        {
+          "kind": "command",
+          "command": "/spawn",
+          "title": "Retourner au centre du serveur",
+          "text": "Pratique pour retrouver les services et reprendre une activité depuis un lieu connu."
+        },
+        {
+          "kind": "command",
+          "command": "/warps",
+          "title": "Afficher les destinations",
+          "text": "Rejoins ensuite une destination avec /warp suivi de son nom. Les lieux ouverts dépendent du serveur."
+        },
+        {
+          "kind": "heading",
+          "text": "Retrouver un autre joueur"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Demande à le rejoindre",
+              "text": "/tpa Pseudo envoie une demande pour aller vers ce joueur. Vérifie le pseudo avant de valider."
+            },
+            {
+              "title": "Propose de le faire venir",
+              "text": "/tpahere Pseudo demande au joueur de venir à toi. Préviens-le si le lieu présente un danger."
+            },
+            {
+              "title": "Accepte ou refuse",
+              "text": "Le destinataire utilise /tpaccept ou /tpdeny. Une demande n’est pas une téléportation forcée."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Le retour et les activités"
+        },
+        {
+          "kind": "paragraph",
+          "text": "/back est un avantage soumis à déblocage, notamment dans les grades de progression. Les déplacements et changements d’équipe peuvent être bloqués pendant un combat ou une activité instanciée. Utilise la sortie proposée par l’activité plutôt qu’une succession de commandes."
+        },
+        {
+          "kind": "heading",
+          "text": "En cas de refus"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Le home du club a disparu",
+              "text": "Libérer le territoire qui contient le point de ralliement le supprime. Un chef ou officier doit replacer /club sethome dans un terrain du club."
+            },
+            {
+              "title": "Ma téléportation vers une planète échoue",
+              "text": "La recherche d’une zone sûre peut échouer ou la destination peut être indisponible. Attends le message final, puis réessaie ; inutile de répéter la commande en boucle."
+            },
+            {
+              "title": "Je n’ai plus accès à /back",
+              "text": "Consulte ton grade et tes permissions. Ce n’est pas une commande universellement disponible dès l’arrivée."
+            }
+          ]
+        }
       ]
     },
     {
       "id": "capture",
       "branchId": "pokemon",
-      "title": "Capturer son premier Pokémon",
-      "summary": "Préparer ses Poké Balls, affaiblir la cible et réussir sa capture.",
-      "tags": ["capture", "poké ball", "équipe", "pc"],
-      "readingMinutes": 4,
+      "title": "Capturer et organiser ses Pokémon",
+      "summary": "Prépare tes captures, vérifie les caractéristiques de tes partenaires et garde une équipe utilisable.",
+      "tags": [
+        "capture",
+        "Poké Ball",
+        "PC",
+        "équipe",
+        "IV",
+        "EV",
+        "shiny"
+      ],
+      "readingMinutes": 3,
       "order": 0,
       "published": true,
-      "hero": { "asset": "/cobblemon-lakeside.webp", "alt": "Pokémon au bord d’un lac", "species": "pikachu", "icon": "/mockups/daycare/poke_ball.png" },
+      "hero": {
+        "asset": "/astral/assets/pasturedpokmon.webp",
+        "alt": "Illustration Cobblemon du guide : Capturer et organiser ses Pokémon"
+      },
       "blocks": [
-        { "kind": "heading", "text": "Avant le lancer" },
-        { "kind": "checklist", "items": ["Garde une Poké Ball adaptée dans ton inventaire.", "Affaiblis le Pokémon sans le mettre K.O.", "Les altérations de statut améliorent tes chances."] },
-        { "kind": "callout", "tone": "gold", "title": "CONSEIL", "text": "Une équipe complète part automatiquement dans ton PC." }
+        {
+          "kind": "heading",
+          "text": "Préparer une sortie de capture"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Emporte plusieurs Poké Balls et de quoi soigner ton équipe.",
+            "Conserve un partenaire capable d’affaiblir une cible sans la mettre K.O. trop vite.",
+            "Prévois de la place dans tes stockages pour ne pas interrompre une sortie au mauvais moment.",
+            "Repère un point de retour et surveille les conditions du biome si tu recherches une espèce précise."
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Réussir la capture"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Observe la cible",
+              "text": "Vérifie son espèce, sa forme et son niveau. Un Pokémon de décoration, un Totem de raid ou un compagnon cosmétique n’est pas une cible de capture ordinaire."
+            },
+            {
+              "title": "Prépare le combat",
+              "text": "Choisis un partenaire adapté. Affaiblir un Pokémon et utiliser une altération de statut appropriée peut faciliter sa capture ; évite de le mettre K.O."
+            },
+            {
+              "title": "Utilise une Ball adaptée",
+              "text": "Choisis selon la situation et les propriétés de la Ball. Aucun résultat ordinaire n’est assuré simplement parce que tu as utilisé une Ball coûteuse."
+            },
+            {
+              "title": "Contrôle le Pokémon obtenu",
+              "text": "Après la capture, consulte sa fiche et range-le selon son rôle : exploration, combat, reproduction ou collection."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Lire une fiche Pokémon"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Niveau et types",
+              "text": "Le niveau décrit sa progression ; les types déterminent une partie des forces et faiblesses. Le Ranked conserve les niveaux réels."
+            },
+            {
+              "title": "Nature et talent",
+              "text": "Ils orientent le rôle du Pokémon. Deux membres de la même espèce ne sont pas nécessairement interchangeables."
+            },
+            {
+              "title": "IV et EV",
+              "text": "Les IV font partie des caractéristiques individuelles ; les EV reflètent l’entraînement. Dans le GTS, vérifie chaque statistique plutôt que le seul total."
+            },
+            {
+              "title": "Forme et objet tenu",
+              "text": "Ils peuvent changer le fonctionnement ou l’intérêt d’un Pokémon. Retire un objet précieux avant une vente PokéSell."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Organiser l’équipe et le PC"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Sépare tes Pokémon de combat, tes futurs parents et tes exemplaires de collection dans des boîtes identifiables. Vérifie les doublons un par un : un shiny, une forme régionale ou de bons IV peuvent justifier de conserver un exemplaire même si son niveau est bas. La pension refuse de te laisser sans partenaire de combat lorsque tu y déposes le dernier membre disponible."
+        },
+        {
+          "kind": "heading",
+          "text": "Ne pas confondre les collections"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Un Pokémon Star reste un vrai Pokémon avec une apparence particulière. Une incarnation du Cosmédex habille visuellement ton personnage. Une carte d’album est un objet de collection. Un Poké-Résonant appartient à la progression séparée de PokéPark. Ces quatre systèmes ne se remplacent pas."
+        },
+        {
+          "kind": "heading",
+          "text": "Questions fréquentes"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Un œuf peut-il combattre ?",
+              "text": "Non. Les œufs de la pension doivent éclore avant de pouvoir être envoyés ou utilisés au combat."
+            },
+            {
+              "title": "Puis-je capturer le boss visible d’un raid ?",
+              "text": "Le Totem central n’est pas une capture sauvage ordinaire. Termine le raid et suis les éventuelles étapes de capture prévues par le mode."
+            },
+            {
+              "title": "Dois-je vendre tous mes doublons ?",
+              "text": "Compare d’abord leurs natures, talents, formes et statistiques. Une vente PokéSell retire définitivement l’exemplaire sélectionné."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "starters",
+      "branchId": "pokemon",
+      "title": "Les starters d’Astéria et de Nébélia",
+      "summary": "Découvre les deux sélections régionales et choisis un partenaire selon son rôle dans ton aventure.",
+      "tags": [
+        "starter",
+        "Astéria",
+        "Nébélia",
+        "Germignon",
+        "Salamèche",
+        "Gobou",
+        "Poussacha",
+        "Flamiaou",
+        "Tiplouf"
+      ],
+      "readingMinutes": 3,
+      "order": 1,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/pasturedpokmon.webp",
+        "alt": "Illustration Cobblemon du guide : Les starters d’Astéria et de Nébélia"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Les deux sélections régionales"
+        },
+        {
+          "kind": "paragraph",
+          "text": "CobbleStar possède deux catégories régionales dans la sélection des starters. Astéria propose Germignon, Salamèche et Gobou ; Nébélia propose Poussacha, Flamiaou et Tiplouf. Les définitions régionales prévoient un départ au niveau 10. Consulte la fiche du Pokémon présenté pour connaître sa forme et ses propriétés effectives."
+        },
+        {
+          "kind": "heading",
+          "text": "Choisir sans regret"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Regarde la forme proposée",
+              "text": "Le nom de l’espèce ne suffit pas à décrire une variante CobbleStar. Observe le Pokémon et les informations disponibles dans la sélection."
+            },
+            {
+              "title": "Choisis ton style de départ",
+              "text": "Préfères-tu explorer, préparer les premiers combats ou construire ensuite une équipe autour d’un favori ? Le starter est un point de départ, pas une équipe complète."
+            },
+            {
+              "title": "Confirme seulement quand tu as choisi",
+              "text": "La sélection ne doit pas être traitée comme un distributeur de Pokémon. Il n’existe pas ici de commande joueur permettant de réclamer les six starters régionaux gratuitement."
+            },
+            {
+              "title": "Complète progressivement ton équipe",
+              "text": "Cherche des partenaires qui couvrent les faiblesses de ton starter et apportent d’autres rôles."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Forme régionale, shiny et Star"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Ces notions sont distinctes. Une forme régionale appartient à la définition du Pokémon ; shiny décrit une variation chromatique ; Star correspond au système d’apparences publié par CobbleStar. Choisir un starter régional ne promet ni shiny ni Star."
+        },
+        {
+          "kind": "heading",
+          "text": "Faire évoluer ton partenaire"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Lis les conditions d’évolution de sa forme dans le jeu et garde les objets requis si nécessaire. Ne déduis pas les conditions d’une illustration ou d’un guide destiné à une autre version du mod. Avant un projet de reproduction, vérifie aussi que la lignée dispose de partenaires compatibles."
+        },
+        {
+          "kind": "heading",
+          "text": "En cas de problème"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Une forme ne s’affiche pas correctement",
+              "text": "Vérifie que le pack serveur a été accepté et que le client utilise le modpack demandé. Signale l’espèce et la forme concernées au staff."
+            },
+            {
+              "title": "Puis-je utiliser les commandes de test de starter ?",
+              "text": "Non : ces commandes sont réservées aux tests et à l’administration. Le parcours joueur passe par la sélection prévue."
+            },
+            {
+              "title": "Mon starter m’oblige-t-il à rester sur une planète ?",
+              "text": "Les déplacements vers les mondes se font par le menu et les commandes de voyage. Ne confonds pas la catégorie du starter avec un choix de destination."
+            }
+          ]
+        }
       ]
     },
     {
       "id": "daycare",
       "branchId": "pokemon",
       "title": "Pension et reproduction",
-      "summary": "Choisir deux parents compatibles, produire un œuf et le faire éclore.",
-      "tags": ["pension", "œuf", "oeuf", "breed", "hatch", "éleveur", "métamorph", "IV"],
-      "readingMinutes": 8,
-      "order": 1,
+      "summary": "Compatibilité, cycle de production, héritage, stockage et éclosion : le fonctionnement de la pension native CobbleStar.",
+      "tags": [
+        "pension",
+        "œuf",
+        "oeuf",
+        "breed",
+        "hatch",
+        "Éleveur",
+        "Métamorph",
+        "IV",
+        "reproduction"
+      ],
+      "readingMinutes": 4,
+      "order": 2,
       "published": true,
-      "hero": { "asset": "/mockups/daycare/pc_base.png", "alt": "Pension Pokémon", "species": "ditto", "icon": "/mockups/daycare/pokemon_egg.png" },
+      "hero": {
+        "asset": "/astral/assets/pasturedpokmon.webp",
+        "alt": "Illustration Cobblemon du guide : Pension et reproduction"
+      },
       "blocks": [
-        { "kind": "heading", "text": "Avant de commencer" },
-        { "kind": "paragraph", "text": "La pension se trouve dans le bâtiment des Éleveurs. Parle au PNJ du comptoir : le bloc de pâturage sert uniquement à ressortir les Pokémon visibles." },
-        { "kind": "steps", "items": [
-          { "title": "Deux parents", "text": "Choisis-les depuis ton équipe ou ton PC." },
-          { "title": "Une paire compatible", "text": "Le second choix est filtré après le premier." },
-          { "title": "Une place libre", "text": "L’œuf attend à la pension, puis rejoint l’équipe ou le PC." }
-        ] },
-        { "kind": "callout", "tone": "gold", "title": "IMPORTANT", "text": "Les parents quittent temporairement ton équipe ou ton PC. Ils restent propres à ton compte et réapparaissent lorsque tu les reprends à la pension." },
-        { "kind": "heading", "text": "Quels Pokémon vont ensemble ?" },
-        { "kind": "paragraph", "text": "Le serveur vérifie les règles de reproduction de DayCare+. Une fois le premier parent choisi, l’interface ne propose que les partenaires valides." },
-        { "kind": "comparison", "leftTitle": "COMPATIBLES", "leftItems": ["Même groupe d’Œuf et sexes compatibles.", "Un Pokémon reproductible avec Métamorph.", "Deux formes capables de produire une descendance."], "rightTitle": "INCOMPATIBLES", "rightItems": ["Aucun groupe d’Œuf commun.", "Un œuf utilisé comme parent.", "Une espèce marquée non reproductible."] },
-        { "kind": "callout", "tone": "mint", "title": "1 ŒUF GARANTI APRÈS LE CYCLE", "text": "Le compteur démarre uniquement lorsque deux parents compatibles sont confiés. Changer la paire démarre un nouveau cycle." },
-        { "kind": "heading", "text": "Temps de production" },
-        { "kind": "progress", "from": "60 min", "fromLabel": "Temps de base", "to": "15 min", "toLabel": "Meilleure amélioration", "percent": 75 },
-        { "kind": "paragraph", "text": "Le métier Éleveur réduit progressivement la durée. Le dernier talent de la branche fixe le cycle à 15 minutes et débloque la reproduction à distance." },
-        { "kind": "command", "command": "/breed 1 2", "title": "Produire depuis l’équipe", "text": "Les nombres correspondent aux slots des parents. L’œuf va dans l’équipe, ou dans le PC si elle est pleine." },
-        { "kind": "heading", "text": "Transmettre les bonnes statistiques" },
-        { "kind": "paragraph", "text": "Donne l’objet au parent avant de le confier. L’objet reste affiché sur sa fiche dans la pension." },
-        { "kind": "itemGrid", "items": [
-          { "asset": "/mockups/daycare/destiny_knot.png", "title": "NŒUD DESTIN", "text": "Transmet 5 IV pris entre les deux parents au lieu de 3." },
-          { "asset": "/mockups/daycare/everstone.png", "title": "PIERRE STASE", "text": "Le parent transmet sa nature au Pokémon qui naîtra." },
-          { "asset": "/mockups/daycare/daycare_spark.png", "title": "OBJET POUVOIR", "text": "Force la transmission de l’IV lié : PV, Attaque, Défense, etc." }
-        ] },
-        { "kind": "callout", "tone": "pink", "title": "HERBE MIROIR", "text": "Elle permet au parent d’apprendre des capacités Œuf depuis son partenaire lorsque les conditions de DayCare+ sont réunies." },
-        { "kind": "heading", "text": "Récupérer et faire éclore l’œuf" },
-        { "kind": "steps", "items": [
-          { "title": "Œuf prêt", "text": "Récupère-le auprès du PNJ." },
-          { "title": "Dans l’équipe", "text": "Le compteur baisse lorsque tu marches." },
-          { "title": "Éclosion", "text": "Le vrai Pokémon remplace automatiquement l’œuf." }
-        ] },
-        { "kind": "checklist", "items": ["Un œuf stocké dans le PC ne progresse pas : place-le dans ton équipe.", "Le nombre de pas restant est affiché sous son sprite.", "Un œuf ne peut ni combattre, ni être envoyé avec R.", "Le bonus d’éclosion du métier Éleveur accélère chaque pas."] },
-        { "kind": "command", "command": "/hatch 4", "title": "Éclore le slot 4", "text": "Disponible uniquement avec l’amélioration correspondante du métier Éleveur." },
-        { "kind": "heading", "text": "Questions fréquentes" },
-        { "kind": "faq", "items": [
-          { "title": "Le temps avance sans parents ?", "text": "Non. Aucun cycle n’existe tant que deux parents compatibles ne sont pas enregistrés." },
-          { "title": "Peut-on perdre ses parents ?", "text": "Non. Ils sont liés à ta pension personnelle et retournent dans tes stockages lorsque tu les reprends." },
-          { "title": "Pourquoi aucun partenaire n’apparaît ?", "text": "Ton premier Pokémon n’a peut-être aucun partenaire compatible dans ton équipe ou ton PC." }
-        ] }
+        {
+          "kind": "heading",
+          "text": "Accéder à la pension"
+        },
+        {
+          "kind": "command",
+          "command": "/pension",
+          "title": "Ouvrir ta pension",
+          "text": "Le PNJ de pension peut également proposer ce service. Le pâturage ordinaire n’est pas l’interface de gestion de la reproduction CobbleStar."
+        },
+        {
+          "kind": "paragraph",
+          "text": "La pension native gère deux parents et un stock de six œufs. Les parents confiés quittent temporairement ton équipe ou ton PC et restent attachés à ta pension personnelle. Termine ton combat et rappelle les Pokémon sortis avant de les déplacer."
+        },
+        {
+          "kind": "heading",
+          "text": "Confier deux parents"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Prépare les parents",
+              "text": "Retire-les des activités qui verrouillent l’équipe et rappelle ceux qui sont sortis. Garde au moins un Pokémon capable de combattre dans ton équipe."
+            },
+            {
+              "title": "Choisis le premier parent",
+              "text": "Ouvre la gestion du couple et sélectionne un Pokémon disponible dans l’équipe ou le PC."
+            },
+            {
+              "title": "Ajoute un partenaire compatible",
+              "text": "La sélection filtre les candidats. Deux Pokémon de sexes opposés doivent partager un groupe d’Œuf ; Métamorph peut accompagner un partenaire reproductible. Deux Métamorph ne forment pas une paire valide."
+            },
+            {
+              "title": "Vérifie le compte à rebours",
+              "text": "Le cycle commence avec la paire compatible. Changer ou retirer un parent redémarre le cycle ; attends donc l’œuf si tu ne souhaites pas perdre cette attente."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Durée et stockage"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le cycle de base est de 60 minutes. Les bonus du métier Éleveur peuvent le réduire, jusqu’à un minimum de 15 minutes avec le talent final prévu. Le compteur de la pension indique la durée effective. La production s’arrête lorsque les six places d’œufs sont occupées."
+        },
+        {
+          "kind": "callout",
+          "title": "L’absence ne remplit pas automatiquement la pension",
+          "text": "Au retour, le système traite au maximum une production arrivée à échéance, puis démarre un nouveau cycle. Une longue déconnexion ne rejoue pas tous les cycles manqués.",
+          "tone": "gold"
+        },
+        {
+          "kind": "heading",
+          "text": "Transmettre les caractéristiques"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "IV et Nœud Destin",
+              "text": "Sans cet objet, trois statistiques héritent d’un IV de l’un des deux parents. Si au moins un parent tient un Nœud Destin, cinq statistiques héritent ainsi. Cela ne garantit pas cinq IV parfaits : il faut que les parents les possèdent."
+            },
+            {
+              "title": "Nature et Pierre Stase",
+              "text": "Le parent qui tient une Pierre Stase peut transmettre sa nature. Si les deux en tiennent une, le parent transmetteur est choisi parmi eux."
+            },
+            {
+              "title": "Talents",
+              "text": "Le talent est sélectionné dans les possibilités légales de l’espèce enfant. Une transmission favorable n’est pas une garantie systématique."
+            },
+            {
+              "title": "Capacités Œuf",
+              "text": "Les capacités Œuf légales de l’enfant, connues par l’un des parents, sont prioritaires lors de la création de ses attaques."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "La reproduction suit les règles natives de CobbleStar. Les anciens conseils concernant l’Herbe Miroir ou les objets Pouvoir de DayCare+ ne décrivent pas des bonus pris en charge par ce moteur. Une apparence Star, une transformation cosmétique ou un statut spécial ne se transmet pas automatiquement comme une nature."
+        },
+        {
+          "kind": "heading",
+          "text": "Récupérer et faire éclore"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Libère un emplacement",
+              "text": "Récupère un œuf dans l’équipe, ou utilise la récupération vers le PC pour plusieurs œufs. Si tes stockages sont pleins, libère une place avant de recommencer."
+            },
+            {
+              "title": "Place l’œuf dans ton équipe",
+              "text": "Un œuf conservé dans le PC n’avance pas vers l’éclosion. Le nombre de pas restant est affiché dans l’interface."
+            },
+            {
+              "title": "Marche avec lui",
+              "text": "La progression dépend de tes déplacements et des bonus d’éclosion applicables. Le Pokémon remplace ensuite l’œuf."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Les commandes débloquées par progression"
+        },
+        {
+          "kind": "command",
+          "command": "/breed 1 2",
+          "title": "Reproduction depuis deux slots",
+          "text": "Les nombres désignent deux membres de ton équipe. Cette action demande le talent Éleveur correspondant et reste soumise à son délai ; elle ne contourne pas les règles de compatibilité."
+        },
+        {
+          "kind": "command",
+          "command": "/hatch 4",
+          "title": "Faire éclore l’œuf d’un slot",
+          "text": "L’exemple vise le quatrième membre. Cette commande est soumise au déblocage du métier ; les avantages des grades utilisent leurs propres boutons et commandes /grades."
+        },
+        {
+          "kind": "heading",
+          "text": "Résoudre les blocages"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Aucun partenaire n’est proposé",
+              "text": "Vérifie les groupes d’Œuf, les sexes, la présence de Métamorph et la disponibilité des Pokémon. Les œufs et les espèces non reproductibles sont exclus."
+            },
+            {
+              "title": "Je ne peux pas confier mon dernier Pokémon",
+              "text": "La pension exige que tu conserves un partenaire de combat dans l’équipe. Prépare d’abord un remplaçant."
+            },
+            {
+              "title": "Mon parent est sorti de sa Ball",
+              "text": "Rappelle-le avant de le confier. Un Pokémon attaché à un pâturage ou déjà sorti peut être indisponible."
+            },
+            {
+              "title": "Le stock est plein",
+              "text": "Récupère les œufs. La capacité est de six dans le système actuel ; attendre davantage ne débloque pas des places supplémentaires."
+            },
+            {
+              "title": "Puis-je reprendre mes parents ?",
+              "text": "Oui, depuis la gestion du couple, avec une place disponible dans l’équipe ou le PC. Le cycle en cours est alors réinitialisé."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pokemon-star",
+      "branchId": "pokemon",
+      "title": "Reconnaître les Pokémon Star",
+      "summary": "Comprendre les apparences Star, leur conservation et leur différence avec les shiny et les cosmétiques.",
+      "tags": [
+        "Star",
+        "shiny",
+        "forme",
+        "apparence",
+        "évolution",
+        "pack"
+      ],
+      "readingMinutes": 3,
+      "order": 3,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/pasturedpokmon.webp",
+        "alt": "Illustration Cobblemon du guide : Reconnaître les Pokémon Star"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Une apparence propre à CobbleStar"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les Pokémon Star possèdent une apparence spéciale publiée pour leur espèce. Ils restent de vrais Pokémon : ils peuvent être capturés, conservés dans l’équipe et rangés au PC. Le système Star ne leur ajoute pas automatiquement de niveau, d’IV ou de statistiques de combat."
+        },
+        {
+          "kind": "heading",
+          "text": "Rencontrer un Star"
+        },
+        {
+          "kind": "paragraph",
+          "text": "L’apparition sauvage dépend des espèces dont la variante a été publiée et des réglages du serveur. Toutes les espèces ne disposent donc pas nécessairement d’une apparence Star. Sortir un Pokémon de sa Ball, revenir dans un chunk ou ouvrir son PC ne permet pas de relancer son apparition en Star."
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Recherche d’abord les conditions normales d’apparition de l’espèce.",
+            "Vérifie la forme affichée sur sa fiche au lieu de te fier à une simple lumière de shader.",
+            "Le pack serveur doit être chargé pour voir correctement les apparences publiées."
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Star et shiny sont distincts"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Un Pokémon peut conserver une propriété shiny tout en portant l’apparence Star. Lorsque les deux sont présentes, le rendu Star est prioritaire. Les bonus chromatiques individuels ne doivent pas être interprétés comme une garantie de rencontre Star."
+        },
+        {
+          "kind": "heading",
+          "text": "Capture, stockage et évolution"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Capture le Pokémon normalement",
+              "text": "S’il s’agit d’une rencontre sauvage capturable, utilise les règles de capture habituelles."
+            },
+            {
+              "title": "Vérifie sa fiche",
+              "text": "Contrôle espèce, forme, niveau et autres caractéristiques avant un échange. Un nom personnalisé n’est pas une preuve d’apparence Star."
+            },
+            {
+              "title": "Anticipe son évolution",
+              "text": "L’aspect Star est conservé, mais la forme évoluée doit disposer d’un modèle publié pour afficher son visuel Star. Sinon, son apparence habituelle peut servir de remplacement."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Ne pas confondre avec le Cosmédex"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Une incarnation change l’apparence du joueur ; un compagnon suit le joueur sans devenir un membre de combat. Ces déblocages se gèrent dans le Cosmédex. Ils ne transforment pas un Pokémon ordinaire du PC en Pokémon Star."
+        },
+        {
+          "kind": "heading",
+          "text": "Questions fréquentes"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Un Star est-il plus puissant ?",
+              "text": "Le système d’apparence Star ne modifie pas les statistiques. Compare les caractéristiques réelles comme pour tout autre Pokémon."
+            },
+            {
+              "title": "L’élevage garantit-il un bébé Star ?",
+              "text": "Non. Ne considère pas l’apparence Star comme une propriété automatiquement transmise par la pension."
+            },
+            {
+              "title": "Je vois un Pokémon ordinaire après l’évolution",
+              "text": "La variante de l’espèce évoluée peut ne pas être publiée. Vérifie la fiche et signale le cas au staff plutôt que d’essayer de recréer le Pokémon."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "commandes",
+      "branchId": "start",
+      "title": "Les commandes utiles au quotidien",
+      "summary": "Retrouver les menus, voyager, gérer son équipe et choisir la bonne commande sans chercher dans le chat.",
+      "tags": [
+        "commandes",
+        "menu",
+        "aide",
+        "raccourcis",
+        "touches"
+      ],
+      "readingMinutes": 3,
+      "order": 3,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/riding.webp",
+        "alt": "Illustration Cobblemon du guide : Les commandes utiles au quotidien"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Commencer par les menus"
+        },
+        {
+          "kind": "paragraph",
+          "text": "La plupart des systèmes disposent d’une interface qui présente les options réellement accessibles à ton personnage. Utilise-la pour vérifier une condition, un prix ou un délai avant de valider. Une commande n’accorde pas un avantage que ton compte n’a pas débloqué."
+        },
+        {
+          "kind": "command",
+          "command": "/menu",
+          "title": "Le point de départ",
+          "text": "Retrouve les activités du serveur et ta progression. Les touches associées aux menus se modifient dans les contrôles Minecraft."
+        },
+        {
+          "kind": "command",
+          "command": "/wiki",
+          "title": "Les guides en jeu",
+          "text": "Consulte les explications du serveur. Sur le site, la recherche du wiki accepte aussi les noms de commandes."
+        },
+        {
+          "kind": "command",
+          "command": "/quetes",
+          "title": "Le journal de quêtes",
+          "text": "La touche J ouvre également le journal avec les réglages habituels. Accepte une quête avant de réaliser ses objectifs."
+        },
+        {
+          "kind": "heading",
+          "text": "Voyager et retrouver sa base"
+        },
+        {
+          "kind": "command",
+          "command": "/spawn",
+          "title": "Revenir au point central",
+          "text": "Pour repartir vers les services du serveur."
+        },
+        {
+          "kind": "command",
+          "command": "/sethome maison",
+          "title": "Enregistrer une destination",
+          "text": "Remplace maison par un nom court. Le nombre de homes dépend de tes avantages."
+        },
+        {
+          "kind": "command",
+          "command": "/home maison",
+          "title": "Revenir à une destination",
+          "text": "Utilise /homes pour consulter les points enregistrés."
+        },
+        {
+          "kind": "command",
+          "command": "/tpa Pseudo",
+          "title": "Demander à rejoindre un joueur",
+          "text": "Le destinataire accepte avec /tpaccept ou refuse avec /tpdeny. Vérifie bien le nom avant d’accepter une demande."
+        },
+        {
+          "kind": "heading",
+          "text": "Ouvrir un système"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Pokémon",
+              "text": "/pension pour les parents et les œufs ; /gts pour les annonces ; /pokesell pour la revente de Pokémon du PC."
+            },
+            {
+              "title": "Progression",
+              "text": "/job, /skilltree, /grades et /battlepass ouvrent chacun leur progression."
+            },
+            {
+              "title": "Aventure",
+              "text": "/epreuves, /ligue et /pokepark ouvrent les activités correspondantes. Le Ranked se lance auprès de son responsable."
+            },
+            {
+              "title": "Collection",
+              "text": "/album, /sga, /crates et /cosmetique permettent de gérer cartes, certification, machines et apparences."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Une commande ne répond pas comme prévu ?"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Lis le message complet : permission, délai, activité en cours et manque de place sont des causes différentes.",
+            "Sors d’un combat avant une action qui change ton équipe.",
+            "Ne saisis pas les chevrons d’un exemple : remplace les paramètres par tes valeurs.",
+            "Une touche occupée par un autre mod peut se réattribuer dans les contrôles."
+          ]
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Où sont les commandes du staff ?",
+              "text": "Ce wiki est destiné aux joueurs. Les commandes de création de récompenses, de simulation et de gestion du serveur ne font pas partie du parcours public."
+            },
+            {
+              "title": "Pourquoi /ranked ne lance pas une recherche ?",
+              "text": "Cette commande t’oriente vers le responsable de l’arène Ranked. Le choix du format et l’inscription se font dans son interface."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "legendaries",
+      "branchId": "pokemon",
+      "title": "Préparer une chasse aux légendaires",
+      "summary": "Lire les conditions du HUD, préparer son équipe de capture et comprendre les limites du suivi des apparitions.",
+      "tags": [
+        "légendaires",
+        "HUD",
+        "biome",
+        "météo",
+        "Insert",
+        "apparition"
+      ],
+      "readingMinutes": 3,
+      "order": 4,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/pasturedpokmon.webp",
+        "alt": "Illustration Cobblemon du guide : Préparer une chasse aux légendaires"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Des conditions, pas une adresse garantie"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le suivi des légendaires rassemble des informations utiles sur ta zone : biome, heure, météo, altitude et parfois phase lunaire. Les conditions proviennent des règles d’apparition chargées sur le serveur. Une espèce visible dans le tableau n’est pas nécessairement déjà présente près de toi."
+        },
+        {
+          "kind": "heading",
+          "text": "Lire le suivi"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Affiche le HUD",
+              "text": "La touche Insert active ou masque le suivi avec les réglages habituels. En cas de conflit, retrouve son raccourci dans les contrôles."
+            },
+            {
+              "title": "Observe ta situation",
+              "text": "Compare les conditions de ta zone avec celles des espèces recherchées. Un changement de biome ou de météo peut modifier la sélection."
+            },
+            {
+              "title": "Distingue condition et tirage",
+              "text": "Une condition remplie permet une apparition éventuelle. Un décompte ou une probabilité affichés ne constituent pas une promesse de rencontre."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Préparer une équipe de capture"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Prévois suffisamment de Poké Balls adaptées et de quoi soigner ton équipe.",
+            "Utilise un partenaire capable d’affaiblir la cible sans la mettre K.O.",
+            "Prépare une capacité de statut compatible avec la cible ; immunités et talents peuvent empêcher son effet.",
+            "Vérifie que tu peux stocker le Pokémon capturé.",
+            "Évite de déclencher une autre activité lorsque tu surveilles une fenêtre de rencontre."
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Explorer efficacement"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Choisis d’abord une espèce et ses conditions plutôt que de courir entre des biomes sans objectif. Observe l’environnement autour de toi et garde des repères de retour. Le HUD est une aide de lecture, pas un radar donnant les coordonnées exactes de chaque Pokémon."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les règles peuvent évoluer avec les données du serveur. Les horaires ou les pourcentages trouvés sur un guide d’un autre serveur ne remplacent pas les conditions affichées sur CobbleStar."
+        },
+        {
+          "kind": "heading",
+          "text": "Questions fréquentes"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Le HUD a disparu",
+              "text": "Vérifie sa touche d’affichage et l’état de F1, qui masque les interfaces. Contrôle aussi les conflits de raccourcis."
+            },
+            {
+              "title": "Toutes les conditions sont vertes, mais rien n’apparaît",
+              "text": "Une apparition reste soumise au tirage et aux règles du serveur. Attendre ne garantit pas le résultat au prochain décompte."
+            },
+            {
+              "title": "Un légendaire est-il forcément Star ou shiny ?",
+              "text": "Non. La rareté de l’espèce, le caractère chromatique et l’apparence Star sont des propriétés distinctes."
+            }
+          ]
+        }
       ]
     },
     {
       "id": "quests",
       "branchId": "progression",
-      "title": "Journal et suivi de quêtes",
-      "summary": "Distinguer l’histoire, les quêtes secondaires et les missions répétables.",
-      "tags": ["quête", "journal", "chapitre", "mission"],
-      "readingMinutes": 4,
+      "title": "Quêtes : du premier objectif aux récompenses",
+      "summary": "Accepter, suivre et terminer les quêtes d’histoire, secondaires et périodiques sans manquer une étape.",
+      "tags": [
+        "quêtes",
+        "quetes",
+        "journal",
+        "J",
+        "PNJ",
+        "quotidienne",
+        "hebdomadaire"
+      ],
+      "readingMinutes": 3,
       "order": 0,
       "published": true,
-      "hero": { "asset": "/cobblemon-shop.webp", "alt": "Aventure CobbleStar", "species": "eevee", "icon": "/mockups/daycare/love_ball.png" },
-      "blocks": [{ "kind": "callout", "tone": "cyan", "title": "RACCOURCI", "text": "Appuie sur J pour ouvrir directement ton journal de quêtes." }]
+      "hero": {
+        "asset": "/astral/assets/berries.webp",
+        "alt": "Illustration Cobblemon du guide : Quêtes : du premier objectif aux récompenses"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Ouvrir son journal"
+        },
+        {
+          "kind": "command",
+          "command": "/quetes",
+          "title": "Toutes tes quêtes",
+          "text": "La touche J ouvre également le journal avec les réglages habituels. Les catégories séparent l’histoire, les quêtes secondaires et les rotations quotidiennes, hebdomadaires ou mensuelles."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Chaque fiche indique les conditions, les objectifs, l’avancement et les récompenses. Les chapitres d’histoire se débloquent dans l’ordre prévu ; une quête visible mais verrouillée peut attendre un prérequis ou la récupération d’une récompense précédente."
+        },
+        {
+          "kind": "heading",
+          "text": "Le parcours d’une quête"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Rencontre le donneur de quête",
+              "text": "Consulte la fiche et son point de départ. Certaines quêtes commencent auprès d’un PNJ, d’autres sont proposées directement dans le journal."
+            },
+            {
+              "title": "Accepte la mission",
+              "text": "Ne pars pas accomplir les actions avant son activation : elles ne sont pas toutes comptabilisées rétroactivement."
+            },
+            {
+              "title": "Suis le bon objectif",
+              "text": "Choisis la quête suivie pour afficher ses indications sur le HUD. Lis l’espèce, l’objet, la quantité et la zone demandés."
+            },
+            {
+              "title": "Valide puis récupère",
+              "text": "Une quête terminée n’est pas toujours une récompense déjà encaissée. Ouvre la fiche, choisis une récompense si nécessaire et confirme sa récupération."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Comprendre les objectifs"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Une quête peut demander plusieurs étapes successives. Une étape ultérieure attend alors la précédente, même si tu réalises déjà son action. D’autres objectifs sont facultatifs ou proposent plusieurs alternatives : suis les indications de la fiche plutôt que de supposer que toutes les lignes sont obligatoires."
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Capture et combat",
+              "text": "Vérifie l’espèce, la forme ou la catégorie demandée. Capturer et mettre K.O. ne valident pas la même action."
+            },
+            {
+              "title": "Livraison et collecte",
+              "text": "Lis si la quête demande d’obtenir un objet ou de le remettre. Garde les objets nécessaires jusqu’à validation."
+            },
+            {
+              "title": "Exploration et dialogue",
+              "text": "Atteins la zone ou parle au PNJ concerné ; la présence dans une autre dimension peut empêcher la validation."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Les quêtes qui se renouvellent"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les rotations quotidiennes, hebdomadaires et mensuelles dépendent du calendrier et de l’heure de réinitialisation du serveur. Consulte le temps restant dans le journal avant de commencer un long objectif. Une nouvelle période peut remplacer la mission disponible : termine et récupère tes récompenses avant l’échéance."
+        },
+        {
+          "kind": "heading",
+          "text": "Avant de signaler un blocage"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Vérifie que la quête est acceptée, pas seulement consultable.",
+            "Contrôle l’ordre des objectifs et les prérequis du chapitre.",
+            "Libère de la place pour les objets de récompense.",
+            "Retourne au donneur de quête si la fiche demande de lui parler.",
+            "Note le titre de la quête et l’objectif exact pour que le staff retrouve le problème."
+          ]
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "J’ai fait l’action avant de prendre la quête",
+              "text": "Certaines statistiques peuvent être relues, mais ce n’est pas une règle générale. Accepte la mission avant de commencer."
+            },
+            {
+              "title": "La suite de l’histoire reste verrouillée",
+              "text": "Récupère les récompenses des étapes précédentes et vérifie les autres conditions indiquées."
+            },
+            {
+              "title": "Puis-je suivre toutes les quêtes à l’écran ?",
+              "text": "Le suivi sert à mettre en avant une quête. Change la sélection dans le journal pour adapter le HUD à ton activité."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "metiers",
+      "branchId": "progression",
+      "title": "Les six métiers et leur progression",
+      "summary": "Choisir ses activités, gagner de l’expérience, récupérer ses paliers et préparer sa spécialisation.",
+      "tags": [
+        "métiers",
+        "job",
+        "mineur",
+        "bûcheron",
+        "pêcheur",
+        "herboriste",
+        "ranger",
+        "éleveur"
+      ],
+      "readingMinutes": 3,
+      "order": 1,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/berries.webp",
+        "alt": "Illustration Cobblemon du guide : Les six métiers et leur progression"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Choisir un métier qui suit ton jeu"
+        },
+        {
+          "kind": "command",
+          "command": "/job",
+          "title": "Ouvrir les métiers",
+          "text": "Consulte les métiers disponibles, leurs niveaux, les emplacements actifs et les récompenses de progression."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Un métier progresse grâce à ses actions reconnues lorsque ses conditions sont remplies. Il peut aussi rapporter des Cobblecoins. Commence par les activités que tu pratiques réellement : une spécialisation utile tous les jours vaut davantage qu’un bonus que tu n’utilises jamais."
+        },
+        {
+          "kind": "heading",
+          "text": "Les six professions"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Mineur",
+              "text": "Extraction de minerais naturels, dont les ressources Cobblemon prises en charge. Reposer puis casser du minerai ne constitue pas une boucle de progression normale."
+            },
+            {
+              "title": "Bûcheron",
+              "text": "Récolte du bois et actions de plantation prévues par le métier. Les talents orientent ensuite la coupe ou le renouvellement des arbres."
+            },
+            {
+              "title": "Pêcheur",
+              "text": "Captures réalisées avec la Poké Rod et progression liée à la pêche Pokémon. Une autre action portant le mot pêche n’est pas forcément reconnue."
+            },
+            {
+              "title": "Herboriste",
+              "text": "Récoltes mûres, baies et Noigrumes. Récolter trop tôt peut ne pas répondre aux conditions de l’action."
+            },
+            {
+              "title": "Ranger",
+              "text": "Captures et exploration, avec des objectifs liés aux espèces et aux biomes."
+            },
+            {
+              "title": "Éleveur",
+              "text": "Production et éclosion d’œufs. La compatibilité des parents reste celle de la pension."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Activer, changer et reprendre"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Observe tes emplacements",
+              "text": "Le nombre de métiers actifs dépend des réglages du serveur. Le menu affiche ce que ton personnage peut utiliser."
+            },
+            {
+              "title": "Active ton choix",
+              "text": "Utilise la fiche du métier ou /job activate avec son identifiant. Si tous les emplacements sont pris, choisis le métier à remplacer."
+            },
+            {
+              "title": "Réalise une action admissible",
+              "text": "Teste une action du métier et observe ta progression. Les gains ne se déclenchent pas pour toutes les variantes d’un même bloc ou objet."
+            },
+            {
+              "title": "Reviens chercher tes paliers",
+              "text": "Les récompenses de niveau se récupèrent depuis la fiche. Pense à vérifier leur disponibilité régulièrement."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Désactiver un métier ne supprime pas sa progression enregistrée. Tu peux reprendre plus tard ; il faut cependant vérifier quel métier est actif avant une longue session de récolte."
+        },
+        {
+          "kind": "heading",
+          "text": "Niveaux et points de talent"
+        },
+        {
+          "kind": "paragraph",
+          "text": "La progression va jusqu’au niveau 100. Le parcours normal accorde un point de talent tous les cinq niveaux, soit vingt points. Ces points servent dans l’arbre du métier concerné, pas dans une réserve universelle pour toutes les professions."
+        },
+        {
+          "kind": "command",
+          "command": "/skilltree",
+          "title": "Préparer sa spécialisation",
+          "text": "Ouvre les arbres pour comparer les prérequis et les effets avant d’investir."
+        },
+        {
+          "kind": "heading",
+          "text": "Pourquoi les gains peuvent ralentir"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les actions, les plafonds horaires et les bonus sont configurables. Une action répétée au-delà d’un plafond, un bloc posé artificiellement ou une récolte non mûre peut ne plus produire le gain attendu. Les montants sont calculés par le serveur : n’utilise pas un taux ancien comme une garantie de revenu."
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Agriculteur et cuisinier sont-ils deux métiers supplémentaires ?",
+              "text": "Le parcours actif décrit ici comporte six métiers. Les récoltes concernées relèvent de l’Herboriste ; les anciennes entrées désactivées ne sont pas des professions à débloquer."
+            },
+            {
+              "title": "Changer de métier efface-t-il mon niveau ?",
+              "text": "Non, la progression est conservée. Vérifie simplement les conditions d’activation et les emplacements disponibles."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "talents",
+      "branchId": "progression",
+      "title": "Construire son arbre de talents",
+      "summary": "Lire les prérequis, choisir une branche et investir ses vingt points de métier sans se disperser.",
+      "tags": [
+        "skilltree",
+        "talents",
+        "spécialisation",
+        "points",
+        "breed",
+        "hatch"
+      ],
+      "readingMinutes": 3,
+      "order": 2,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/berries.webp",
+        "alt": "Illustration Cobblemon du guide : Construire son arbre de talents"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Une spécialisation par métier"
+        },
+        {
+          "kind": "command",
+          "command": "/skilltree",
+          "title": "Consulter les arbres",
+          "text": "Choisis le métier à examiner. Déplace la vue, zoome avec la molette ou les boutons, puis utilise le recentrage si tu perds ta branche."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Chaque arbre possède cinq talents communs, puis trois branches exclusives de quinze talents. Le parcours normal de vingt points permet de terminer le tronc commun et une spécialisation. Il ne permet pas de compléter les trois branches simultanément."
+        },
+        {
+          "kind": "heading",
+          "text": "Lire un talent avant de l’acheter"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Son coût en points : les nœuds du parcours demandent un point chacun.",
+            "Le niveau du métier nécessaire pour le débloquer.",
+            "Les talents précédents à acheter et la branche choisie.",
+            "Son effet exact : un pourcentage, un délai et une chance de déclenchement ne sont pas équivalents."
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Choisir selon son objectif"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Mineur",
+              "text": "Compare le rendement d’extraction, les améliorations de vitesse et la voie tournée vers les revenus et l’outil."
+            },
+            {
+              "title": "Bûcheron",
+              "text": "Choisis entre rendement, abattage et sylviculture selon que tu veux plus de bois, une coupe plus efficace ou développer les plantations."
+            },
+            {
+              "title": "Pêcheur",
+              "text": "Compare les effets sur les rencontres, les trésors et l’utilisation des appâts ou de la canne."
+            },
+            {
+              "title": "Herboriste",
+              "text": "Spécialise les cultures que tu exploites réellement : Noigrumes, baies ou menthes selon les branches proposées."
+            },
+            {
+              "title": "Ranger",
+              "text": "Les branches favorisent la capture, l’exploration ou la recherche de rencontres plus rares."
+            },
+            {
+              "title": "Éleveur",
+              "text": "Les bonus peuvent réduire le temps d’incubation ou débloquer des actions d’élevage soumises à un délai."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Investir dans le bon ordre"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Définis ton activité principale",
+              "text": "Choisis un objectif concret : récolter des Noigrumes, explorer ou préparer des œufs, par exemple."
+            },
+            {
+              "title": "Lis la branche jusqu’au bout",
+              "text": "Un talent éloigné peut avoir plusieurs prérequis. Vérifie le chemin complet avant de dépenser tes premiers points."
+            },
+            {
+              "title": "Termine le tronc commun",
+              "text": "Débloque les prérequis qui donnent accès aux spécialisations."
+            },
+            {
+              "title": "Vérifie l’effet en situation",
+              "text": "Active le bon métier et réalise une action valide. Un bonus conditionnel ne se déclenche pas sur chaque action."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Talents et commandes spéciales"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les commandes /breed et /hatch ne sont pas des raccourcis gratuits accessibles dès l’arrivée. Elles demandent leurs talents et respectent leurs délais. Les avantages de grade qui ressemblent à ces actions suivent un autre déblocage et utilisent les commandes du menu des grades."
+        },
+        {
+          "kind": "heading",
+          "text": "Éviter une erreur de branche"
+        },
+        {
+          "kind": "callout",
+          "title": "Un choix engage ta progression",
+          "text": "Il n’existe pas de commande publique de réinitialisation libre à utiliser dans ce parcours. Lis les effets avant confirmation ; en cas de mauvaise manipulation, contacte le staff sans supposer qu’un remboursement est automatique.",
+          "tone": "gold"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Puis-je déplacer les points vers un autre métier ?",
+              "text": "Les points appartiennent au métier concerné. Faire progresser un autre métier ouvre son propre parcours."
+            },
+            {
+              "title": "Le bonus ne semble pas fonctionner",
+              "text": "Vérifie le métier actif, les conditions de l’action et l’éventuel délai. Le détail du talent fait foi pour son effet actuel."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "grades",
+      "branchId": "progression",
+      "title": "Grades gratuits : conditions et avantages",
+      "summary": "Passer de Recrue à sa voie finale, distinguer prérequis et achat, et utiliser les avantages débloqués.",
+      "tags": [
+        "grades",
+        "Recrue",
+        "Éclaireur",
+        "Aventurier",
+        "Prodige",
+        "Vétéran",
+        "Gardien",
+        "Élite",
+        "Mercenaire",
+        "homes"
+      ],
+      "readingMinutes": 3,
+      "order": 3,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/berries.webp",
+        "alt": "Illustration Cobblemon du guide : Grades gratuits : conditions et avantages"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Un parcours lié à ton personnage"
+        },
+        {
+          "kind": "command",
+          "command": "/grades",
+          "title": "Consulter le prochain grade",
+          "text": "Le menu présente ton rang, les conditions du suivant, son prix en Cobblecoins et les avantages associés."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le parcours suit Recrue, Éclaireur, Aventurier, Prodige, Vétéran puis Gardien. La dernière étape propose deux voies exclusives : Élite ou Mercenaire. Les grades gratuits de progression sont distincts des abonnements Étoilé, Cosmique et Galactique de la boutique."
+        },
+        {
+          "kind": "heading",
+          "text": "Débloquer puis acheter"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Lis tous les prérequis",
+              "text": "La progression peut regarder les votes cumulés, le temps de jeu, les activités de club, les badges, la Ligue, le Ranked ou la collection."
+            },
+            {
+              "title": "Réalise les conditions manquantes",
+              "text": "Une condition affichée à zéro n’est pas nécessairement liée à la session en cours. Consulte son intitulé et son compteur."
+            },
+            {
+              "title": "Prépare les Cobblecoins",
+              "text": "Atteindre les objectifs ne paie pas automatiquement le grade. Le prix exact est affiché avant confirmation."
+            },
+            {
+              "title": "Confirme le passage",
+              "text": "Reviens vérifier ton grade et les nouveaux avantages. Si l’achat est indisponible, n’enchaîne pas les clics : lis la raison indiquée."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Ce qui évolue avec les rangs"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Homes",
+              "text": "Le parcours prévoit 3 homes aux deux premiers rangs, 5 aux deux suivants, 10 pour Vétéran et Gardien, puis 25 sur la voie finale. D’autres avantages peuvent modifier ta capacité effective."
+            },
+            {
+              "title": "Retour et utilitaires",
+              "text": "Éclaireur ouvre le retour /back ; les rangs suivants ajoutent des outils comme la réparation, l’éclosion ou le soin selon leurs conditions."
+            },
+            {
+              "title": "Annonces GTS",
+              "text": "Les paliers ajoutent des emplacements de vente. Vérifie la capacité totale affichée dans le GTS, qui tient compte de ton profil."
+            },
+            {
+              "title": "Tags",
+              "text": "Les tags obtenus rejoignent ta collection. Tu peux choisir ceux à afficher depuis /tags."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Utiliser les pouvoirs de grade"
+        },
+        {
+          "kind": "command",
+          "command": "/grades repair",
+          "title": "Réparer l’objet tenu",
+          "text": "Déblocage requis ; le système vérifie l’objet endommagé et le délai, conservé après déconnexion."
+        },
+        {
+          "kind": "command",
+          "command": "/grades hatch",
+          "title": "Éclosion liée au grade",
+          "text": "Le système parcourt ton équipe et agit sur le premier œuf éligible. Vérifie les conditions et le délai avant de lancer cette action."
+        },
+        {
+          "kind": "command",
+          "command": "/grades pokeheal",
+          "title": "Soigner son équipe",
+          "text": "Le grade correspondant doit être acquis. Les restrictions de combat restent applicables."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les avantages plus avancés, comme hatch_all et pc, se consultent depuis le même menu. Une équipe verrouillée pour une activité peut empêcher une modification même si tu possèdes normalement la commande."
+        },
+        {
+          "kind": "heading",
+          "text": "Conditions non disponibles"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les prix et certaines conditions dépendent de la configuration du serveur. Si une condition demande un contenu encore absent du catalogue ou qu’un achat est désactivé, le grade ne peut pas être forcé par une commande joueur. Transmets le nom du grade et la condition exacte au staff."
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Le rang final donne-t-il les deux voies ?",
+              "text": "Non. Élite et Mercenaire sont un choix exclusif ; compare les deux fiches avant de confirmer."
+            },
+            {
+              "title": "Un grade gratuit est-il payé en Stars ?",
+              "text": "Non, son achat de progression utilise des Cobblecoins. Les offres de boutique sont un système séparé."
+            },
+            {
+              "title": "La réparation revient-elle en se reconnectant ?",
+              "text": "Non. Les délais sont enregistrés ; une reconnexion ne les efface pas."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "battlepass",
+      "branchId": "progression",
+      "title": "Battle Pass : progresser et tout récupérer",
+      "summary": "Comprendre les cent paliers, les deux pistes et les actions reconnues avant la fin de saison.",
+      "tags": [
+        "battlepass",
+        "pass",
+        "saison",
+        "premium",
+        "XP",
+        "paliers"
+      ],
+      "readingMinutes": 3,
+      "order": 4,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/berries.webp",
+        "alt": "Illustration Cobblemon du guide : Battle Pass : progresser et tout récupérer"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Deux pistes sur la même progression"
+        },
+        {
+          "kind": "command",
+          "command": "/battlepass",
+          "title": "Ouvrir la saison",
+          "text": "Consulte l’expérience, les paliers atteints, les récompenses récupérables et le temps restant."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le Battle Pass comporte cent paliers et deux pistes : gratuite et premium. Les deux suivent la même expérience. Acheter l’accès premium débloque sa piste pour la saison concernée ; cela ne termine pas automatiquement les cent paliers."
+        },
+        {
+          "kind": "heading",
+          "text": "Gagner de l’expérience en jouant"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Pokémon",
+              "text": "Captures, nouvelles espèces, shiny, évolutions, éclosions et restauration de fossiles font partie des événements pris en charge."
+            },
+            {
+              "title": "Aventure",
+              "text": "Exploration de biomes, victoires de raid et combats admissibles contribuent au parcours. Une même victoire de raid ne donne pas un gain multiplié par les participants."
+            },
+            {
+              "title": "Activité et ressources",
+              "text": "Le temps de jeu actif, la connexion quotidienne et certaines actions de récolte ou de combat Minecraft sont reconnus selon les règles de la saison."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les sources ont leurs conditions et parfois leurs plafonds. Les combats entre joueurs ne doivent pas être traités comme une source automatique de progression. Reposer un minerai pour le casser ou rester absent devant le jeu ne constitue pas une méthode fiable pour avancer."
+        },
+        {
+          "kind": "heading",
+          "text": "Récupérer une récompense"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Atteins le palier",
+              "text": "Regarde la jauge et le seuil de la saison. Les réglages d’expérience peuvent évoluer."
+            },
+            {
+              "title": "Ouvre la bonne piste",
+              "text": "Un palier atteint peut avoir une récompense gratuite et une récompense premium distinctes."
+            },
+            {
+              "title": "Libère de la place",
+              "text": "Prépare ton inventaire pour les objets avant la récupération."
+            },
+            {
+              "title": "Vérifie le statut reçu",
+              "text": "Une récompense marquée comme récupérable n’est pas encore forcément dans ton inventaire ou ton portefeuille."
+            }
+          ]
+        },
+        {
+          "kind": "command",
+          "command": "/battlepass claim all",
+          "title": "Récupérer les récompenses accessibles",
+          "text": "Le serveur vérifie les paliers, les pistes autorisées et les récompenses déjà prises."
+        },
+        {
+          "kind": "command",
+          "command": "/battlepass progress",
+          "title": "Consulter sa progression",
+          "text": "Pour retrouver rapidement l’état de la saison."
+        },
+        {
+          "kind": "heading",
+          "text": "Prendre le premium en cours de saison"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les paliers déjà atteints peuvent donner accès à leurs récompenses premium lorsque la piste est débloquée pour cette même saison. Tu n’as pas à regagner toute l’expérience correspondante. Vérifie néanmoins le temps restant avant l’achat : un accès de saison n’est pas une promesse d’accès à toutes les saisons futures."
+        },
+        {
+          "kind": "heading",
+          "text": "La fin de saison"
+        },
+        {
+          "kind": "callout",
+          "title": "Récupère avant l’échéance",
+          "text": "Une nouvelle saison renouvelle la progression. Termine tes récupérations avant la date affichée ; ne compte pas sur un report automatique de récompenses non réclamées.",
+          "tone": "gold"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Combien de jours dure une saison ?",
+              "text": "Le calendrier et les seuils sont configurables. Le temps restant affiché dans le Battle Pass est la référence."
+            },
+            {
+              "title": "Une action n’a rien ajouté",
+              "text": "Vérifie qu’elle appartient aux sources admises et qu’un plafond ou une condition ne la bloque pas. Répéter le même événement ne doit pas créer de récompenses en double."
+            },
+            {
+              "title": "Le premium augmente-t-il directement mon niveau ?",
+              "text": "L’accès à la piste et la progression en expérience sont deux choses différentes. Lis le contenu exact de l’offre avant confirmation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mondes",
+      "branchId": "exploration",
+      "title": "Astéria, Nébélia et les mondes à explorer",
+      "summary": "Choisir une destination, préparer son expédition et conserver des repères entre les dimensions.",
+      "tags": [
+        "Astéria",
+        "Nébélia",
+        "planètes",
+        "Nether",
+        "End",
+        "monde",
+        "exploration"
+      ],
+      "readingMinutes": 3,
+      "order": 0,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/lushtower.webp",
+        "alt": "Illustration Cobblemon du guide : Astéria, Nébélia et les mondes à explorer"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Deux planètes, plusieurs destinations"
+        },
+        {
+          "kind": "command",
+          "command": "/planetes",
+          "title": "Ouvrir les destinations",
+          "text": "Le menu présente les mondes d’Astéria et de Nébélia, avec leurs dimensions de surface, du Nether et de l’End."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Changer de planète sert à explorer d’autres environnements. Cela ne remplace pas la préparation nécessaire aux dangers du Nether ou de l’End. Les règles de construction et les zones protégées continuent de s’appliquer dans la destination."
+        },
+        {
+          "kind": "heading",
+          "text": "Préparer une sortie"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Emporte nourriture, outils, soins et Poké Balls en quantité adaptée.",
+            "Garde un point de retour connu avant de partir longtemps.",
+            "Prévois de la place dans ton inventaire et ton stockage Pokémon.",
+            "Lis les conditions du biome et de la météo si tu recherches une espèce précise.",
+            "Ne transporte pas toute ta réserve de ressources rares pour une première reconnaissance."
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Atteindre puis repérer sa zone"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Choisis le monde",
+              "text": "Utilise /planetes, ou les accès /asteria et /nebelia. Vérifie le nom de la destination avant de confirmer."
+            },
+            {
+              "title": "Laisse la recherche de position se terminer",
+              "text": "Une téléportation aléatoire cherche un emplacement adapté. Si elle échoue, réessaie plus tard au lieu de supposer que le monde est définitivement fermé."
+            },
+            {
+              "title": "Observe les protections",
+              "text": "Avant de construire, vérifie les règles locales et la présence d’un territoire de club."
+            },
+            {
+              "title": "Enregistre un repère",
+              "text": "Un home peut servir à retrouver ta base dans la limite de tes emplacements. Une nouvelle téléportation aléatoire ne te ramènera pas automatiquement au même endroit."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Explorer avec plusieurs objectifs"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les sorties peuvent faire avancer la découverte de biomes, le métier de Ranger et certaines quêtes. Accepte les missions avant le départ et active le métier que tu veux faire progresser. Les conditions d’un objectif restent précises : visiter une dimension différente de celle demandée ne valide pas forcément la quête."
+        },
+        {
+          "kind": "heading",
+          "text": "Conserver ses constructions"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les mondes sont des dimensions persistantes ; leur accès n’est pas un système de nouvelle carte créée à chaque voyage. Pour une base commune, consulte les protections de club et assure-toi que l’emplacement est autorisé. Les annonces du serveur restent la référence pour toute maintenance ou opération exceptionnelle sur un monde."
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "/planetes remplace-t-il /home ?",
+              "text": "Non. Le premier sert à choisir une destination d’exploration, le second à revenir à un point enregistré."
+            },
+            {
+              "title": "Je ne peux pas poser un bloc",
+              "text": "Tu peux être dans une zone protégée ou un territoire sur lequel tu n’as pas les droits nécessaires. N’essaie pas de contourner la protection."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pokepark",
+      "branchId": "exploration",
+      "title": "PokéPark : explorer avec ses Résonants",
+      "summary": "Préparer une équipe, lancer une expédition et jouer à plusieurs dans les régions du PokéPark.",
+      "tags": [
+        "PokéPark",
+        "Résonants",
+        "groupe",
+        "expédition",
+        "invocation",
+        "coopération"
+      ],
+      "readingMinutes": 3,
+      "order": 1,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/lushtower.webp",
+        "alt": "Illustration Cobblemon du guide : PokéPark : explorer avec ses Résonants"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Une aventure avec son propre effectif"
+        },
+        {
+          "kind": "command",
+          "command": "/pokepark",
+          "title": "Ouvrir le PokéPark",
+          "text": "Retrouve les accès à l’expédition, aux Résonants et à la préparation d’équipe."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le PokéPark utilise ses propres Résonants. Ce ne sont pas simplement les six Pokémon de ton équipe habituelle envoyés dans un autre monde. Ton effectif, sa préparation et les ressources de cette aventure se gèrent dans ses menus."
+        },
+        {
+          "kind": "heading",
+          "text": "Préparer jusqu’à quatre Résonants"
+        },
+        {
+          "kind": "command",
+          "command": "/pokepark equipe",
+          "title": "Composer son équipe",
+          "text": "La préparation se fait en dehors de l’expédition. Choisis des partenaires complémentaires et vérifie leurs capacités."
+        },
+        {
+          "kind": "command",
+          "command": "/pokepark resonants",
+          "title": "Consulter sa collection",
+          "text": "Lis les fiches et les possibilités de progression. Les invocations et ascensions affichent leurs ressources et conditions avant validation."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Ne lance pas une invocation uniquement sur le nom d’une rareté : regarde son coût, les résultats possibles et les informations présentées. Une ressource du PokéPark n’est pas automatiquement interchangeable avec les monnaies du reste du serveur."
+        },
+        {
+          "kind": "heading",
+          "text": "Entrer et explorer"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Vérifie l’accès",
+              "text": "Consulte les conditions et les éventuels passes dans le menu."
+            },
+            {
+              "title": "Lance ou reprends l’expédition",
+              "text": "/pokepark reprendre permet de retrouver une aventure enregistrée lorsque la reprise est disponible."
+            },
+            {
+              "title": "Explore les régions",
+              "text": "Les trois régions ouvertes et la zone du Gardien combinent exploration et mécanismes. Lis les indications des lieux pour avancer."
+            },
+            {
+              "title": "Adapte ton Résonant actif",
+              "text": "Utilise le bon partenaire pour la situation et surveille ses points de vie, capacités et délais."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Les contrôles à connaître"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Avec les raccourcis habituels, 1 à 4 changent de Résonant actif ; G, H et V utilisent les capacités spéciales et P ouvre le menu associé. Les touches peuvent être réattribuées : consulte tes contrôles si un autre mod occupe déjà un raccourci. Les attaques automatiques ne dispensent pas de gérer le placement et les capacités."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Un Résonant K.O. reste indisponible jusqu’à ce que les règles de l’aventure permettent de le soigner. Les points de vie, boucliers et délais appartiennent à chaque partenaire ; changer de personnage ne doit pas être pris pour un soin gratuit."
+        },
+        {
+          "kind": "heading",
+          "text": "Jouer jusqu’à quatre"
+        },
+        {
+          "kind": "command",
+          "command": "/pokepark groupe inviter Pseudo",
+          "title": "Inviter un partenaire",
+          "text": "L’invitation rejoint l’expédition du propriétaire. Chaque invité utilise sa propre équipe de Résonants."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le monde de l’expédition est rattaché à son propriétaire et reste enregistré. Si l’hôte quitte, la visite commune se termine ; si un invité part, il ne ferme pas l’aventure de l’hôte. Prévenez-vous avant un départ pour ne pas interrompre un objectif collectif."
+        },
+        {
+          "kind": "command",
+          "command": "/pokepark quitter",
+          "title": "Sortir de l’aventure",
+          "text": "Utilise la sortie prévue par le système. /pokepark statut permet de vérifier ta situation."
+        },
+        {
+          "kind": "heading",
+          "text": "Questions fréquentes"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Puis-je changer toute mon équipe au milieu de la zone ?",
+              "text": "La composition se prépare en dehors de l’expédition. Organise ton effectif avant le départ."
+            },
+            {
+              "title": "Mes Pokémon du PC sont-ils devenus des Résonants ?",
+              "text": "Non. Les deux collections sont distinctes. Consulte la collection PokéPark pour savoir quels partenaires tu possèdes."
+            },
+            {
+              "title": "La carte disparaît-elle après une session ?",
+              "text": "Le monde du propriétaire et sa progression sont persistants. Une visite de groupe n’attribue pas automatiquement le monde de l’hôte à chaque invité."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "raids",
+      "branchId": "combat",
+      "title": "Raids : préparer l’expédition et vaincre le Totem",
+      "summary": "Former un groupe, traverser les quatre vagues et comprendre le combat collectif avant la récompense.",
+      "tags": [
+        "raid",
+        "Totem",
+        "expédition",
+        "coop",
+        "boss",
+        "bouclier"
+      ],
+      "readingMinutes": 3,
+      "order": 0,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/battle.webp",
+        "alt": "Illustration Cobblemon du guide : Raids : préparer l’expédition et vaincre le Totem"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Rejoindre le centre des expéditions"
+        },
+        {
+          "kind": "command",
+          "command": "/warp raid",
+          "title": "Accéder au départ",
+          "text": "L’accès Raids de la StarWatch et le guide du centre des expéditions orientent vers la préparation. Parle au PNJ pour consulter les choix disponibles."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Un raid réunit de un à cinq participants autour de quatre vagues puis d’un Totem. Consulte le niveau de difficulté, les conditions d’entrée et les limites quotidiennes avant de réunir le groupe. Les réglages et les avantages de compte peuvent modifier ce qui t’est accessible."
+        },
+        {
+          "kind": "heading",
+          "text": "Préparer le groupe"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Compose une équipe adaptée aux types et aux niveaux indiqués.",
+            "Prépare tes soins et vérifie ce qui est autorisé pendant l’activité.",
+            "Garde une place pour les récompenses et une éventuelle capture finale.",
+            "Décidez qui conduit le groupe et assurez-vous que chacun est disponible jusqu’au bout.",
+            "Ne confirme pas ton état prêt si tu modifies encore ton équipe."
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Du lobby aux quatre vagues"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Choisis et invite",
+              "text": "Utilise les contrôles du lobby pour réunir les participants. Vérifie que chacun a rejoint la bonne expédition."
+            },
+            {
+              "title": "Confirme la préparation",
+              "text": "Les participants valident leur disponibilité avant le lancement."
+            },
+            {
+              "title": "Rejoins ton emplacement",
+              "text": "Suis les indications de placement et les passages ouverts entre les salles."
+            },
+            {
+              "title": "Termine chaque vague",
+              "text": "La progression est collective ; attends la validation de la vague avant de chercher l’accès suivant."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Comprendre les points de vie partagés"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Chaque participant mène son combat, mais la rencontre utilise une réserve de points de vie collective. Les dégâts contribuent à la même progression : le raid n’est pas une série de boss indépendants dont chaque joueur doit vider sa propre copie."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le Totem peut entrer dans une phase de bouclier vers la moitié de ses points de vie. Observez les indications de phase et coordonnez-vous. Un joueur mis K.O. n’implique pas forcément la défaite immédiate si ses partenaires peuvent terminer ; si tout le groupe tombe, l’expédition échoue."
+        },
+        {
+          "kind": "heading",
+          "text": "Victoire et capture"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les récompenses demandent une victoire réelle. Selon la rencontre, une capture privée peut être proposée ensuite. Cette possibilité n’est ni une garantie de légendaire ni une promesse de capture réussie. Vérifie les choix présentés avant de quitter la zone."
+        },
+        {
+          "kind": "heading",
+          "text": "Sorties et interruptions"
+        },
+        {
+          "kind": "callout",
+          "title": "Prévois une session complète",
+          "text": "Le départ ou la déconnexion de l’hôte peut mettre fin au raid. Une entrée consommée et une récompense de victoire sont deux états différents : abandonner ne doit pas être considéré comme une manière d’encaisser le résultat.",
+          "tone": "gold"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Puis-je jouer seul ?",
+              "text": "Les raids acceptent un à cinq participants, dans les conditions de difficulté et d’entrée proposées. Prépare ton équipe en conséquence."
+            },
+            {
+              "title": "Une ancienne commande de file ne fonctionne plus",
+              "text": "Le parcours joueur passe par le centre des expéditions et son interface. Utilise ce départ pour obtenir les règles actuelles."
+            },
+            {
+              "title": "Où voir mes entrées restantes ?",
+              "text": "Dans les informations de l’activité. Évite de déduire ta limite d’un ancien guide ou du quota d’un autre joueur."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "epreuves",
+      "branchId": "combat",
+      "title": "Les huit épreuves et leurs badges",
+      "summary": "Préparer une équipe, résoudre les mécanismes et vaincre chaque Capitaine avant la Ligue.",
+      "tags": [
+        "épreuves",
+        "badges",
+        "Insecte",
+        "Plante",
+        "Eau",
+        "Glace",
+        "Roche",
+        "Feu",
+        "Vol",
+        "Psy",
+        "Capitaine"
+      ],
+      "readingMinutes": 3,
+      "order": 1,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/battle.webp",
+        "alt": "Illustration Cobblemon du guide : Les huit épreuves et leurs badges"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Consulter son parcours"
+        },
+        {
+          "kind": "command",
+          "command": "/epreuves",
+          "title": "Ouvrir les épreuves",
+          "text": "La commande s’écrit au pluriel. Le menu présente les destinations et ton avancement."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le parcours comprend huit types : Insecte, Plante, Eau, Glace, Roche, Feu, Vol et Psy. Les rencontres mêlent environnement, mécanismes et combats. Un badge ne s’obtient pas simplement en entrant dans la zone."
+        },
+        {
+          "kind": "heading",
+          "text": "Préparer la bonne équipe"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Lis les niveaux et les règles de l’épreuve sélectionnée.",
+            "Prévois plusieurs réponses au type principal ; un seul attaquant fragile peut tomber avant la fin.",
+            "Contrôle capacités, objets tenus et soins disponibles.",
+            "Garde une équipe utilisable sans devoir changer constamment de Pokémon au PC."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Une faiblesse de type est une piste de préparation, pas une victoire automatique : les capacités, talents, objets et doubles types des adversaires comptent aussi. Prends le temps de regarder les informations du combat."
+        },
+        {
+          "kind": "heading",
+          "text": "Le déroulement d’une épreuve"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Entre par le parcours prévu",
+              "text": "Utilise le menu et les indications de la zone pour rejoindre le départ."
+            },
+            {
+              "title": "Affronte les dresseurs",
+              "text": "Deux rencontres de dresseurs jalonnent le parcours prévu. Les étapes suivantes attendent leur validation."
+            },
+            {
+              "title": "Résous les mécanismes",
+              "text": "Observe l’environnement et les indices du HUD. Une porte fermée peut signaler une étape inachevée, pas un problème de téléportation."
+            },
+            {
+              "title": "Vaincs le Totem puis le Capitaine",
+              "text": "Le Capitaine valide le badge. Battre un ennemi précédent ne termine pas encore l’épreuve."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Reprendre sa progression"
+        },
+        {
+          "kind": "paragraph",
+          "text": "L’avancement des étapes est enregistré. Consulte le menu après une interruption pour retrouver la situation de ton personnage. Si un accès reste fermé, vérifie d’abord le dernier objectif validé et les indications de la zone plutôt que d’utiliser un ancien itinéraire trouvé ailleurs."
+        },
+        {
+          "kind": "heading",
+          "text": "Préparer la Ligue"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les huit badges constituent le passage vers la Ligue. Profite des dernières épreuves pour stabiliser ton équipe et apprendre à gérer plusieurs combats. La Ligue ajoute une contrainte importante : l’équipe engagée reste verrouillée pendant la tentative."
+        },
+        {
+          "kind": "heading",
+          "text": "Questions fréquentes"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Pourquoi je n’ai pas reçu le badge après le Totem ?",
+              "text": "Le badge est lié à la victoire contre le Capitaine. Termine les étapes encore indiquées."
+            },
+            {
+              "title": "Une destination n’est pas disponible",
+              "text": "L’accès dépend des conditions du personnage et de la disponibilité de l’instance. Lis le message du menu ; si toutes les conditions sont remplies, transmets-le au staff."
+            },
+            {
+              "title": "/arene ou /epreuve ne fonctionne pas",
+              "text": "Le parcours actuel utilise /epreuves et /ligue. Les anciennes commandes trouvées dans des messages historiques ne sont pas la référence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ligue",
+      "branchId": "combat",
+      "title": "Réussir sa tentative de Ligue",
+      "summary": "Préparer une équipe verrouillée, gérer les cinq rencontres et savoir ce qu’une interruption remet à zéro.",
+      "tags": [
+        "Ligue",
+        "Maître",
+        "Spectre",
+        "Dragon",
+        "Fée",
+        "Acier",
+        "équipe verrouillée"
+      ],
+      "readingMinutes": 3,
+      "order": 2,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/battle.webp",
+        "alt": "Illustration Cobblemon du guide : Réussir sa tentative de Ligue"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "L’accès après les huit badges"
+        },
+        {
+          "kind": "command",
+          "command": "/ligue",
+          "title": "Consulter la Ligue",
+          "text": "Vérifie ton accès et les règles avant de lancer la tentative. Les huit badges du parcours des épreuves sont nécessaires."
+        },
+        {
+          "kind": "paragraph",
+          "text": "La Ligue enchaîne cinq rencontres : Spectre, Dragon, Fée, Acier, puis le Maître. Elle demande une équipe préparée pour toute la série, pas uniquement pour le premier combat. Consulte les niveaux et les restrictions affichés avant de t’engager."
+        },
+        {
+          "kind": "heading",
+          "text": "Préparer les six places"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Vérifie que tous les membres souhaités sont dans l’équipe avant le départ.",
+            "Contrôle les capacités, objets tenus, niveaux et points de vie.",
+            "Prévois des réponses à plusieurs types, avec des solutions de remplacement si un membre tombe.",
+            "Lis les restrictions sur les objets et les soins ; ne compte pas sur une récupération automatique entre les salles.",
+            "Choisis un moment où tu peux aller au bout sans quitter le serveur."
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Ce que signifie équipe verrouillée"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le système enregistre les Pokémon engagés dans la tentative. Leur identité compte : remplacer un membre par un autre exemplaire de la même espèce n’est pas équivalent. Le PC, la pension et les transferts ne servent pas à reconstruire l’équipe entre deux salles."
+        },
+        {
+          "kind": "callout",
+          "title": "Prépare avant de confirmer",
+          "text": "Un avantage de grade ou une commande habituelle ne contourne pas le verrouillage de la Ligue. Termine tes changements d’équipe avant le départ.",
+          "tone": "gold"
+        },
+        {
+          "kind": "heading",
+          "text": "Gérer l’enchaînement"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Observe chaque rencontre",
+              "text": "Adapte tes décisions au combat réel plutôt qu’au seul nom du type adverse."
+            },
+            {
+              "title": "Préserve tes ressources",
+              "text": "Garde des solutions pour les salles suivantes. Une victoire très coûteuse peut rendre la suite difficile."
+            },
+            {
+              "title": "Suis la sortie de salle",
+              "text": "Attends la validation de la rencontre et emprunte le passage indiqué."
+            },
+            {
+              "title": "Termine face au Maître",
+              "text": "La tentative n’est pas gagnée avant la dernière rencontre. Vérifie ensuite les résultats et récompenses proposés."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Défaite, abandon ou déconnexion"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Une défaite, un abandon, une déconnexion ou un redémarrage peut réinitialiser la tentative en cours. Tes badges acquis et ton palmarès ne deviennent pas pour autant ceux d’un nouveau personnage. Il faut distinguer la série de combats actuelle de la progression durable de ton compte."
+        },
+        {
+          "kind": "heading",
+          "text": "Questions fréquentes"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Puis-je continuer après avoir changé un membre au PC ?",
+              "text": "L’équipe est verrouillée pendant la tentative. Prépare la composition avant de commencer."
+            },
+            {
+              "title": "Est-ce que tous mes badges disparaissent si je perds ?",
+              "text": "Non. C’est la tentative de Ligue qui recommence, pas tout le parcours des épreuves."
+            },
+            {
+              "title": "Un pouvoir de soin de grade est bloqué",
+              "text": "Les restrictions de l’activité peuvent primer sur les avantages habituels. Lis le message avant de réessayer."
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "ranked",
-      "branchId": "activities",
-      "title": "Combats classés",
-      "summary": "Solo OU, Double OU et Duo coop : règles, cote et récompenses de saison.",
-      "tags": ["ranked", "classement", "OU", "duo", "double"],
-      "readingMinutes": 6,
+      "branchId": "combat",
+      "title": "Ranked : préparer son équipe et entrer en classement",
+      "summary": "Choisir son format auprès du responsable, chercher un adversaire et comprendre les conditions du combat classé.",
+      "tags": [
+        "ranked",
+        "classé",
+        "OU",
+        "solo",
+        "double",
+        "duo",
+        "classement",
+        "saison"
+      ],
+      "readingMinutes": 3,
+      "order": 3,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/battle.webp",
+        "alt": "Illustration Cobblemon du guide : Ranked : préparer son équipe et entrer en classement"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Lancer le Ranked au bon endroit"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Parle au responsable de l’arène Ranked pour ouvrir l’interface. Elle réunit les formats, la recherche, le classement et les récompenses. La commande /ranked sert à t’orienter vers ce responsable ; elle ne remplace pas le parcours du PNJ."
+        },
+        {
+          "kind": "heading",
+          "text": "Choisir son format"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Solo OU",
+              "text": "Prépare une équipe complète pour les combats du format solo. Lis les restrictions de composition avant de confirmer."
+            },
+            {
+              "title": "Double OU",
+              "text": "Le positionnement et les interactions entre partenaires changent la préparation. Une équipe solo n’est pas automatiquement adaptée."
+            },
+            {
+              "title": "Duo coopératif",
+              "text": "Coordonne la composition et la disponibilité avec ton partenaire avant de rejoindre la recherche."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Préparer ses vrais Pokémon"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le Ranked utilise les Pokémon que tu possèdes et conserve leurs niveaux réels. Il ne remonte pas automatiquement toute l’équipe au niveau 100. Entraîne donc tes membres avant de lancer la recherche et contrôle capacités, objets tenus, talents et répartition des rôles."
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Vérifie le nombre de Pokémon demandé par ton format.",
+            "Lis les raisons de refus de composition : elles permettent de corriger l’équipe avant la recherche.",
+            "Rappelle les Pokémon sortis si une action le demande.",
+            "Termine les échanges, soins et modifications avant la validation."
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Chercher puis accepter le combat"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Inscris-toi depuis l’interface",
+              "text": "Sélectionne le format et valide une équipe admissible."
+            },
+            {
+              "title": "Continue à te déplacer",
+              "text": "La recherche fonctionne en arrière-plan et un indicateur permet de suivre son état."
+            },
+            {
+              "title": "Reste disponible",
+              "text": "Un autre combat en cours peut empêcher de lancer immédiatement la rencontre. Évite de commencer une activité longue pendant l’attente."
+            },
+            {
+              "title": "Confirme la rencontre",
+              "text": "Lis l’écran de confrontation et sélectionne tes Pokémon de départ lorsque le format le demande."
+            }
+          ]
+        },
+        {
+          "kind": "command",
+          "command": "/ranked leave",
+          "title": "Quitter la recherche",
+          "text": "Annule ta recherche. En duo, préviens ton partenaire : la file commune est concernée."
+        },
+        {
+          "kind": "heading",
+          "text": "Lire le classement"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les divisions vont de Bronze à Argent, Or, Platine, Diamant, Maître et Star. Les placements et les résultats de saison suivent les règles du format. Le tableau distingue ton classement et les récompenses accessibles : un rang atteint n’implique pas que tout a déjà été récupéré."
+        },
+        {
+          "kind": "heading",
+          "text": "Récompenses et saison"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Consulte les récompenses de palier, de première atteinte ou de saison directement dans le menu. Les conditions et les lots peuvent changer. Avant une fin de saison, vérifie ce qui est à réclamer et le calendrier annoncé."
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Pourquoi mon Pokémon est-il resté à son niveau ?",
+              "text": "Le Ranked conserve les niveaux naturels. Il faut entraîner son équipe avant de participer."
+            },
+            {
+              "title": "Une commande /ranked queue trouvée ailleurs est refusée",
+              "text": "Le parcours public d’inscription passe par le responsable et son interface. Les commandes techniques ne sont pas nécessaires."
+            },
+            {
+              "title": "Puis-je changer mon équipe pendant la rencontre ?",
+              "text": "Les contrôles de composition protègent le match. Prépare tes changements avant de t’inscrire de nouveau."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "monnaies",
+      "branchId": "economy",
+      "title": "Cobblecoins, Stars et PCO : quelle monnaie utiliser ?",
+      "summary": "Distinguer les soldes, payer un joueur et vérifier le coût réel avant une transaction.",
+      "tags": [
+        "monnaie",
+        "argent",
+        "Cobblecoins",
+        "Stars",
+        "PCO",
+        "solde",
+        "balance",
+        "pay"
+      ],
+      "readingMinutes": 3,
       "order": 0,
       "published": true,
-      "hero": { "asset": "/cobblemon-desert.webp", "alt": "Combat Pokémon", "species": "lucario", "icon": "/mockups/daycare/daycare_spark.png" },
-      "blocks": [{ "kind": "paragraph", "text": "Consulte l’onglet Règles avant de lancer la recherche : chaque mode contrôle ton équipe automatiquement." }]
+      "hero": {
+        "asset": "/astral/assets/shipwreckcove.webp",
+        "alt": "Illustration Cobblemon du guide : Cobblecoins, Stars et PCO : quelle monnaie utiliser ?"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Trois soldes distincts"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Cobblecoins",
+              "text": "La monnaie de l’économie en jeu : échanges entre joueurs, GTS, achats de progression et services qui affichent ce coût."
+            },
+            {
+              "title": "Stars",
+              "text": "Le solde utilisé par la boutique du site pour ses offres. Il est associé au compte lié et ne remplace pas automatiquement les Cobblecoins."
+            },
+            {
+              "title": "PCO",
+              "text": "Une réserve séparée pour les services et récompenses qui demandent explicitement des PCO. Vérifie le libellé du prix avant de valider."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Un nombre identique ne représente pas la même somme d’une monnaie à l’autre. Aucun taux de conversion universel n’est à supposer : utilise uniquement les opérations proposées par les interfaces."
+        },
+        {
+          "kind": "heading",
+          "text": "Consulter et transférer"
+        },
+        {
+          "kind": "command",
+          "command": "/bal",
+          "title": "Voir ses Cobblecoins",
+          "text": "/balance permet également de consulter ce solde."
+        },
+        {
+          "kind": "command",
+          "command": "/pco",
+          "title": "Voir ses PCO",
+          "text": "Ne confonds pas ce résultat avec le portefeuille de la boutique."
+        },
+        {
+          "kind": "command",
+          "command": "/pay Pseudo 100",
+          "title": "Payer un joueur en Cobblecoins",
+          "text": "Remplace le pseudo et le montant par ta transaction. Vérifie le destinataire avant l’envoi : ce paiement ne constitue pas une vente sécurisée à lui seul."
+        },
+        {
+          "kind": "heading",
+          "text": "Gagner et dépenser en jeu"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les métiers actifs, les quêtes et les activités récompensées peuvent apporter des Cobblecoins selon leurs règles. Le GTS permet de vendre à d’autres joueurs, tandis que PokéSell propose une revente directe de Pokémon du PC. Ces deux parcours ont des prix, des conditions et des conséquences différents."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les boutiques de PNJ peuvent acheter ou vendre certains objets. Lis le sens de l’opération, la quantité, la monnaie et les limites. Un objet acheté dans une boutique n’est pas forcément racheté par tous les autres PNJ."
+        },
+        {
+          "kind": "heading",
+          "text": "Vérifier une transaction"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Identifie la monnaie",
+              "text": "Lis son nom et son icône, pas seulement le chiffre."
+            },
+            {
+              "title": "Contrôle la quantité",
+              "text": "Vérifie si le prix concerne une unité, un lot ou l’annonce complète."
+            },
+            {
+              "title": "Regarde les frais",
+              "text": "Le GTS peut appliquer une commission au vendeur. Le montant encaissé peut être inférieur au prix payé."
+            },
+            {
+              "title": "Relis le résultat",
+              "text": "Vérifie le nouveau solde et la livraison avant de tenter une seconde opération."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "En cas d’écart"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Note l’heure, le service utilisé, le montant et le destinataire.",
+            "Consulte l’historique ou le statut de l’opération lorsqu’il existe.",
+            "Ne renvoie pas le même paiement simplement parce qu’un affichage tarde à se rafraîchir.",
+            "Pour la boutique, vérifie le compte Minecraft lié avant de demander une nouvelle livraison."
+          ]
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Le portefeuille Stars est vide mais /bal affiche de l’argent",
+              "text": "Ce sont deux monnaies distinctes. Le solde Cobblecoins ne se transforme pas automatiquement en Stars."
+            },
+            {
+              "title": "La banque de mon club est-elle mon solde ?",
+              "text": "Non. Les fonds du club appartiennent à sa gestion collective et suivent ses permissions."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gts",
+      "branchId": "economy",
+      "title": "GTS : acheter, vendre et récupérer ses annonces",
+      "summary": "Comparer une offre, fixer un prix et gérer les annonces expirées sans perdre le fil de ses ventes.",
+      "tags": [
+        "GTS",
+        "marché",
+        "annonce",
+        "vente",
+        "commission",
+        "prix",
+        "Pokémon",
+        "objets"
+      ],
+      "readingMinutes": 3,
+      "order": 1,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/shipwreckcove.webp",
+        "alt": "Illustration Cobblemon du guide : GTS : acheter, vendre et récupérer ses annonces"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Un marché à prix fixe"
+        },
+        {
+          "kind": "command",
+          "command": "/gts",
+          "title": "Ouvrir le marché",
+          "text": "Parcours les annonces, recherche une espèce ou un objet, puis consulte le détail avant d’acheter."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le parcours décrit ici concerne des ventes à prix fixe de Pokémon et d’objets. Ne considère pas une annonce comme une enchère : le système actuel documenté ne propose pas de surenchère à utiliser dans ce guide."
+        },
+        {
+          "kind": "heading",
+          "text": "Comparer un Pokémon"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Vérifie espèce, forme et caractère shiny : le nom personnalisé ne suffit pas.",
+            "Compare niveau, nature, talent, IV et EV avec ton besoin.",
+            "Lis le prix total et les informations de l’annonce.",
+            "Observe l’historique de prix et son nombre de ventes avant d’interpréter une médiane.",
+            "Ne déduis pas la valeur d’un Pokémon uniquement d’un nom rare ou d’un visuel."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "La recherche et les filtres facilitent la sélection. Ctrl+F place la recherche au premier plan ; les contrôles de page permettent de parcourir les résultats. Sur les aperçus compatibles, maintenir Maj affiche des détails supplémentaires."
+        },
+        {
+          "kind": "heading",
+          "text": "Acheter en toute connaissance"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Ouvre la fiche complète",
+              "text": "Vérifie le bien exact, son vendeur et son prix."
+            },
+            {
+              "title": "Lis la confirmation",
+              "text": "Le récapitulatif présente le coût et l’impact sur ton portefeuille."
+            },
+            {
+              "title": "Prépare la réception",
+              "text": "Garde la place nécessaire pour l’objet ou le Pokémon."
+            },
+            {
+              "title": "Confirme une seule fois",
+              "text": "Attends le résultat du serveur avant de recommencer une opération."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Mettre en vente"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Pour un objet, prépare l’objet à vendre en main et choisis la quantité. Pour un Pokémon, sélectionne le bon membre de l’équipe. La confirmation doit correspondre à ce que tu veux réellement céder : relis toujours la fiche avant le dépôt."
+        },
+        {
+          "kind": "command",
+          "command": "/gts sell item 16 500",
+          "title": "Exemple de lot",
+          "text": "L’exemple prépare une vente de seize objets pour le prix saisi. Relis le récapitulatif pour confirmer la quantité et le montant total."
+        },
+        {
+          "kind": "command",
+          "command": "/gts sell pokemon 2 1000",
+          "title": "Exemple de Pokémon",
+          "text": "Le nombre 2 désigne le deuxième slot de l’équipe. Vérifie le Pokémon présenté avant de poursuivre."
+        },
+        {
+          "kind": "paragraph",
+          "text": "La durée et les emplacements d’annonce sont limités par la configuration et tes avantages. Les grades peuvent augmenter la capacité. La commission éventuelle est prélevée côté vendeur : compare le prix affiché et le montant qui te reviendra."
+        },
+        {
+          "kind": "heading",
+          "text": "Suivre ses ventes et les expirations"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Reviens dans Mes ventes pour consulter les annonces actives, vendues ou expirées. Une annonce expirée doit être récupérée ; elle peut continuer à occuper un emplacement tant que son bien n’a pas été repris. Libère de la place avant cette récupération."
+        },
+        {
+          "kind": "heading",
+          "text": "Choisir un prix raisonnable"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Compare des biens comparables : forme, caractéristiques et quantité modifient la valeur. Une médiane calculée sur peu de transactions est fragile. Le marché ne garantit ni une vente rapide ni la possibilité de revendre plus cher."
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Je ne peux plus créer d’annonce",
+              "text": "Vérifie ta limite et les annonces expirées non récupérées."
+            },
+            {
+              "title": "Pourquoi ai-je reçu moins que le prix affiché ?",
+              "text": "Une commission peut s’appliquer selon les réglages et tes avantages. Consulte les frais présentés par le marché."
+            },
+            {
+              "title": "Le prix a disparu avant mon achat",
+              "text": "Une annonce peut avoir été vendue, retirée ou expirée. Rafraîchis la recherche et vérifie de nouveau avant confirmation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pokesell",
+      "branchId": "economy",
+      "title": "PokéSell : revendre les Pokémon de son PC",
+      "summary": "Préparer une sélection, comprendre les estimations et confirmer une vente définitive en Cobblecoins.",
+      "tags": [
+        "PokéSell",
+        "pokesell",
+        "PC",
+        "revente",
+        "estimation",
+        "lot"
+      ],
+      "readingMinutes": 3,
+      "order": 2,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/shipwreckcove.webp",
+        "alt": "Illustration Cobblemon du guide : PokéSell : revendre les Pokémon de son PC"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Une revente directe"
+        },
+        {
+          "kind": "command",
+          "command": "/pokesell",
+          "title": "Ouvrir la sélection",
+          "text": "Le système propose les Pokémon de ton PC admissibles à la revente. Il ne crée pas une annonce destinée à un autre joueur."
+        },
+        {
+          "kind": "callout",
+          "title": "Une vente retire le Pokémon",
+          "text": "Après confirmation réussie, les Pokémon vendus quittent définitivement ta collection et tu reçois les Cobblecoins correspondants. Vérifie la sélection avant de valider.",
+          "tone": "gold"
+        },
+        {
+          "kind": "heading",
+          "text": "Préparer le PC"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Sépare les Pokémon que tu souhaites conserver de ceux destinés à la revente.",
+            "Vérifie les formes, shiny, IV, talents et éventuels souvenirs importants.",
+            "Retire les objets tenus : un Pokémon qui porte un objet peut être refusé.",
+            "Ne compte pas vendre un œuf ou un Pokémon déclaré non échangeable.",
+            "Commence par une petite sélection pour bien lire le parcours de confirmation."
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Lire une estimation"
+        },
+        {
+          "kind": "command",
+          "command": "/pokesell prices",
+          "title": "Consulter les prix",
+          "text": "Les estimations dépendent du marché et des caractéristiques du Pokémon."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le calcul peut tenir compte de l’espèce, du niveau, des IV, de la rareté et de l’activité récente de revente. Une estimation vue auparavant n’est pas une garantie permanente. Le serveur revalide les Pokémon et les conditions au moment de la transaction."
+        },
+        {
+          "kind": "heading",
+          "text": "Vendre un lot"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Sélectionne les Pokémon",
+              "text": "Le système accepte une sélection allant jusqu’à 120 Pokémon. Utilise cette capacité seulement après avoir vérifié les filtres et chaque groupe choisi."
+            },
+            {
+              "title": "Relis le détail",
+              "text": "Contrôle le nombre de Pokémon et le total annoncé. Retire toute sélection douteuse."
+            },
+            {
+              "title": "Confirme la vente",
+              "text": "Valide uniquement lorsque tu acceptes leur retrait définitif."
+            },
+            {
+              "title": "Vérifie le résultat",
+              "text": "Contrôle le solde et le PC avant de recommencer un autre lot."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "PokéSell ou GTS ?"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Choisis le GTS si tu souhaites proposer un Pokémon à d’autres joueurs à ton prix, en acceptant d’attendre et de gérer une annonce. PokéSell convient à une revente immédiate au prix proposé. Un bon Pokémon de combat ou une forme recherchée peut mériter une comparaison avant la vente directe."
+        },
+        {
+          "kind": "heading",
+          "text": "Questions fréquentes"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Pourquoi un Pokémon n’est-il pas proposé ?",
+              "text": "Vérifie qu’il est dans le PC, sans objet tenu et admissible à la vente. Les œufs et les Pokémon protégés ne sont pas des biens revendables ordinaires."
+            },
+            {
+              "title": "Puis-je annuler après confirmation ?",
+              "text": "La vente est définitive. Ne la traite pas comme un dépôt temporaire ou une annonce que tu pourrais simplement retirer."
+            },
+            {
+              "title": "L’estimation a changé",
+              "text": "Les prix sont dynamiques. Le montant validé au moment de l’opération est la référence."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "boutique",
+      "branchId": "economy",
+      "title": "Boutique : Stars, grades et livraison",
+      "summary": "Préparer son compte, comparer les offres et vérifier une livraison sans confondre abonnement et progression.",
+      "tags": [
+        "boutique",
+        "Stars",
+        "Étoilé",
+        "Cosmique",
+        "Galactique",
+        "premium",
+        "livraison"
+      ],
+      "readingMinutes": 3,
+      "order": 3,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/shipwreckcove.webp",
+        "alt": "Illustration Cobblemon du guide : Boutique : Stars, grades et livraison"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Le bon compte avant toute commande"
+        },
+        {
+          "kind": "paragraph",
+          "text": "La boutique utilise les Stars et le compte Minecraft associé à ton profil du site. Connecte-toi avec Discord, puis vérifie la liaison Minecraft dans ton compte. Une commande /link sert à confirmer cette association lorsqu’elle est demandée : ne partage pas ton code de liaison."
+        },
+        {
+          "kind": "callout",
+          "title": "Avant l’ouverture publique",
+          "text": "La présence du catalogue ne signifie pas que le serveur ou le launcher sont déjà ouverts. Vérifie le statut annoncé et la disponibilité réelle d’une offre avant de prévoir son utilisation en jeu.",
+          "tone": "gold"
+        },
+        {
+          "kind": "heading",
+          "text": "La boutique directement en jeu"
+        },
+        {
+          "kind": "command",
+          "command": "/boutique",
+          "title": "Consulter le catalogue Stars",
+          "text": "Le menu utilise le même portefeuille Stars associé à ton personnage. Vérifie le produit, la quantité et le solde avant confirmation ; ce n’est pas une boutique en PCO."
+        },
+        {
+          "kind": "heading",
+          "text": "Comparer les offres"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Grades premium",
+              "text": "Étoilé, Cosmique et Galactique sont des offres à durée limitée, distinctes des grades gratuits de progression. Compare les avantages et la durée sur leur fiche actuelle."
+            },
+            {
+              "title": "Battle Pass",
+              "text": "L’accès premium concerne la piste et la saison indiquées. Il ne remplace pas l’expérience à gagner pour atteindre les paliers."
+            },
+            {
+              "title": "Jetons de machines",
+              "text": "Les jetons correspondent à une machine précise. Consulte son contenu et ses probabilités avant de choisir un lot."
+            },
+            {
+              "title": "Personnalisations",
+              "text": "Certaines créations comme un logo ou un tag demandent un échange avec le staff via le parcours annoncé après achat. Elles ne sont pas nécessairement livrées instantanément comme un objet."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Comprendre un grade à durée limitée"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les offres de grade du catalogue sont prévues pour un mois avec renouvellement manuel. Lis la durée et le contenu affichés lors de ton achat. L’expiration retire les avantages actifs de l’offre ; elle ne doit pas être confondue avec l’effacement de ton personnage ou de toute sa progression."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Des avantages peuvent augmenter les homes, les emplacements PC, les accès à certaines commandes ou les quotas d’activité. Leurs restrictions restent importantes : un pouvoir habituel peut être bloqué pendant un combat ou une équipe verrouillée."
+        },
+        {
+          "kind": "heading",
+          "text": "Passer du catalogue à la réception"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Vérifie ton identité",
+              "text": "Relis le pseudo et la liaison Minecraft dans ton compte."
+            },
+            {
+              "title": "Choisis l’offre exacte",
+              "text": "Compare quantité, durée, monnaie et conditions ; les prix actuels de la boutique font foi."
+            },
+            {
+              "title": "Relis le récapitulatif",
+              "text": "Ne confirme pas une offre différente de celle prévue."
+            },
+            {
+              "title": "Consulte le résultat",
+              "text": "Regarde le statut de la commande et les éventuelles consignes de connexion ou de place à libérer en jeu."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Une livraison semble manquer"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Vérifie le compte et le personnage associés à la commande.",
+            "Consulte le statut et l’historique avant de repayer.",
+            "Connecte-toi au serveur lorsque la livraison en jeu le demande.",
+            "Libère de la place si la récompense est un objet.",
+            "Pour le support, indique la référence de commande et le produit, sans communiquer de mot de passe ni de code de connexion."
+          ]
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Les Stars sont-elles mes Cobblecoins ?",
+              "text": "Non, les deux soldes servent à des parcours différents."
+            },
+            {
+              "title": "Un grade premium termine-t-il les grades gratuits ?",
+              "text": "Non. Le parcours de progression conserve ses propres conditions et achats en Cobblecoins."
+            },
+            {
+              "title": "Le renouvellement est-il automatique ?",
+              "text": "Le catalogue de grades utilise un renouvellement manuel. Vérifie toujours les conditions de l’offre présentée avant validation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "votes",
+      "branchId": "economy",
+      "title": "Voter : validation, récompenses et classement",
+      "summary": "Relier son compte, suivre les délais des sites de vote et retrouver une récompense en attente.",
+      "tags": [
+        "vote",
+        "votes",
+        "clé",
+        "récompense",
+        "classement",
+        "quotidien"
+      ],
+      "readingMinutes": 3,
+      "order": 4,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/shipwreckcove.webp",
+        "alt": "Illustration Cobblemon du guide : Voter : validation, récompenses et classement"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Préparer son identité"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Ouvre la page Voter du site en étant connecté au bon compte. Vérifie la liaison Minecraft : elle permet d’associer les validations et les récompenses à ton personnage. Le vote suit les règles du site externe concerné, en plus du suivi CobbleStar."
+        },
+        {
+          "kind": "heading",
+          "text": "Effectuer un vote"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Choisis un site disponible",
+              "text": "Consulte les boutons et leurs délais. Chaque plateforme possède son propre rythme de vote."
+            },
+            {
+              "title": "Termine la procédure externe",
+              "text": "Suis les étapes demandées par la plateforme. Ouvrir son lien ne suffit pas à prouver qu’un vote a été validé."
+            },
+            {
+              "title": "Reviens vérifier le statut",
+              "text": "Le serveur attend la confirmation de la plateforme. Le résultat peut arriver après ton retour sur le site."
+            },
+            {
+              "title": "Récupère en jeu",
+              "text": "Lorsque la récompense est en attente, connecte le personnage lié et garde de la place si un objet doit être remis."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Comprendre les récompenses"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les votes validés peuvent attribuer des clés de la machine Vote selon les règles de récompense affichées. Un clic sur un bouton, un rafraîchissement de page ou une deuxième ouverture du lien ne constitue pas un vote supplémentaire. Consulte le statut avant de relancer la procédure."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Une clé Vote s’utilise dans la machine correspondante. Son résultat est distinct de la validation du vote : avoir une clé n’impose pas un lot particulier. Le guide des caisses explique l’aperçu des récompenses et les ouvertures."
+        },
+        {
+          "kind": "heading",
+          "text": "Classement et progression durable"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le classement mensuel se renouvelle au début du mois selon le calendrier du service. Les votes cumulés peuvent aussi servir aux conditions de progression, notamment aux grades. La remise à zéro du classement mensuel ne signifie donc pas que tout ton historique de votes disparaît."
+        },
+        {
+          "kind": "heading",
+          "text": "Résoudre une validation absente"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Vérifie que tu as terminé la procédure sur la plateforme externe.",
+            "Contrôle le délai propre au site : un bouton ouvert trop tôt ne crée pas un nouveau vote.",
+            "Assure-toi que ton compte Minecraft est correctement lié.",
+            "Note le site de vote et l’heure de l’action pour le support.",
+            "Évite de répéter une opération payante : voter et acheter en boutique sont deux parcours distincts."
+          ]
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "J’ai ouvert le lien mais rien reçu",
+              "text": "L’ouverture seule ne valide pas le vote. Il faut la confirmation de la plateforme."
+            },
+            {
+              "title": "Puis-je voter de nouveau en actualisant ?",
+              "text": "Non. Chaque plateforme impose son délai et le serveur évite les récompenses en double."
+            },
+            {
+              "title": "Mon total mensuel a baissé au changement de mois",
+              "text": "Le classement repart pour une nouvelle période. Les compteurs durables de progression ne se lisent pas comme ce classement."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clubs",
+      "branchId": "community",
+      "title": "Créer un club et protéger son territoire",
+      "summary": "Inviter ses partenaires, gérer les chunks, utiliser la banque et développer une base commune.",
+      "tags": [
+        "club",
+        "claim",
+        "territoire",
+        "banque",
+        "salaire",
+        "protection",
+        "groupe"
+      ],
+      "readingMinutes": 3,
+      "order": 0,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/riding.webp",
+        "alt": "Illustration Cobblemon du guide : Créer un club et protéger son territoire"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Organiser un groupe durable"
+        },
+        {
+          "kind": "command",
+          "command": "/club",
+          "title": "Ouvrir la gestion du club",
+          "text": "Consulte les membres, les permissions, la progression, le territoire et la banque."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Un club sert à construire et progresser ensemble. Ses rôles déterminent qui peut inviter, administrer le territoire ou utiliser les fonds communs. Avant de confier des responsabilités, définissez ensemble les usages de la banque et les zones partagées."
+        },
+        {
+          "kind": "heading",
+          "text": "Créer et inviter"
+        },
+        {
+          "kind": "command",
+          "command": "/club create Nom",
+          "title": "Créer son club",
+          "text": "Vérifie le nom et les conditions affichées avant validation."
+        },
+        {
+          "kind": "command",
+          "command": "/club invite Pseudo",
+          "title": "Inviter un membre",
+          "text": "Le joueur doit accepter l’invitation ; l’envoyer ne le déplace pas automatiquement dans votre base."
+        },
+        {
+          "kind": "paragraph",
+          "text": "La capacité du club et certaines extensions dépendent de sa progression et des achats collectifs. Si une invitation échoue, vérifie les permissions, les places disponibles et l’appartenance actuelle du joueur."
+        },
+        {
+          "kind": "heading",
+          "text": "Protéger la base par chunks"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Choisis une zone autorisée",
+              "text": "Les zones du serveur et les territoires d’autres clubs ne deviennent pas libres simplement parce qu’un membre s’y trouve."
+            },
+            {
+              "title": "Pose le premier claim",
+              "text": "/club claim revendique le chunk courant si les conditions sont remplies."
+            },
+            {
+              "title": "Étends sans laisser de trou",
+              "text": "Les nouvelles parcelles doivent rejoindre le territoire selon la règle de continuité. Surveille votre capacité."
+            },
+            {
+              "title": "Installe le point de retour",
+              "text": "/club sethome enregistre le retour sur un chunk appartenant au club ; /club home permet de le rejoindre."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Retirer le claim qui porte le point de retour peut supprimer ce repère. Vérifie les constructions et les besoins des membres avant /club unclaim. La carte peut aider à lire les limites, mais les protections ne dépendent pas uniquement de son affichage."
+        },
+        {
+          "kind": "heading",
+          "text": "La banque collective"
+        },
+        {
+          "kind": "command",
+          "command": "/club deposit 1000",
+          "title": "Déposer des Cobblecoins",
+          "text": "Le montant quitte ton portefeuille pour la banque du club. Ce n’est pas un coffre personnel récupérable librement par chaque membre."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les responsables autorisés peuvent financer les améliorations, effectuer des paiements et configurer des salaires. Vérifiez le bénéficiaire et le montant avant chaque opération. Un salaire récurrent n’est pas la même chose qu’un versement unique ; un montant nul sert à désactiver un salaire."
+        },
+        {
+          "kind": "heading",
+          "text": "Développer le club"
+        },
+        {
+          "kind": "paragraph",
+          "text": "La présence active, les membres, le territoire et les contributions peuvent participer à sa progression. Les améliorations proposées concernent notamment la capacité, l’expérience et l’économie commune. Consultez le prix, le niveau requis et l’effet réel avant de dépenser la banque."
+        },
+        {
+          "kind": "heading",
+          "text": "Départ et dissolution"
+        },
+        {
+          "kind": "callout",
+          "title": "Vérifie ce qui appartient au groupe",
+          "text": "Quitter ou dissoudre un club affecte une organisation collective. Prévenez les membres, vérifiez les droits sur les constructions et l’utilisation des fonds avant de confirmer une action destructive.",
+          "tone": "gold"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "La carte ne montre pas le bon territoire",
+              "text": "Vérifie d’abord les informations du club et les protections effectives. Les intégrations de carte peuvent nécessiter une actualisation."
+            },
+            {
+              "title": "Tous les membres peuvent-ils payer depuis la banque ?",
+              "text": "Non, cela dépend de leurs permissions. Un dépôt ne donne pas automatiquement des droits de gestion."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "organisations",
+      "branchId": "community",
+      "title": "Organisations : fédérer plusieurs clubs",
+      "summary": "Comprendre la différence avec un club, préparer une candidature et rejoindre un quartier général.",
+      "tags": [
+        "organisation",
+        "alliance",
+        "clubs",
+        "QG",
+        "candidature"
+      ],
+      "readingMinutes": 3,
+      "order": 1,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/riding.webp",
+        "alt": "Illustration Cobblemon du guide : Organisations : fédérer plusieurs clubs"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Un projet au-dessus des clubs"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Une organisation regroupe des clubs autour d’un projet commun. Elle ne remplace pas la gestion quotidienne de chaque club, ses membres et ses territoires. Son accès dépend de l’ouverture du système et de la validation du projet par le staff."
+        },
+        {
+          "kind": "callout",
+          "title": "Un accès qui dépend des candidatures",
+          "text": "Le système peut être désactivé ou limité à un nombre d’organisations. Si aucune candidature n’est ouverte, ce guide ne signifie pas qu’une organisation peut être créée librement par une commande.",
+          "tone": "gold"
+        },
+        {
+          "kind": "heading",
+          "text": "Préparer un projet"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Définissez un objectif compréhensible pour les clubs participants.",
+            "Choisissez les personnes qui représenteront chaque club.",
+            "Préparez les règles de coopération, d’accueil et de départ.",
+            "Distinguez le quartier général commun des bases et banques propres aux clubs.",
+            "Consultez les annonces du serveur pour les conditions de candidature."
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Consulter son organisation"
+        },
+        {
+          "kind": "command",
+          "command": "/organisation",
+          "title": "Ouvrir le menu",
+          "text": "Consulte l’appartenance, les informations et les actions accessibles à ton rôle."
+        },
+        {
+          "kind": "command",
+          "command": "/organisation qg",
+          "title": "Rejoindre le quartier général",
+          "text": "L’accès demande une organisation et un point de destination configuré."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les invitations de clubs et leur acceptation passent par les responsables concernés. Rejoindre un club ne suffit pas à créer une nouvelle organisation, et inviter une personne à un club n’est pas une invitation de tout le club dans une fédération."
+        },
+        {
+          "kind": "heading",
+          "text": "Faire vivre la coopération"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Clarifiez les responsabilités",
+              "text": "Décidez qui prépare les événements et qui peut annoncer au nom du groupe."
+            },
+            {
+              "title": "Utilisez les outils autorisés",
+              "text": "Les actions d’invitation, d’annonce et de départ suivent les permissions de l’organisation."
+            },
+            {
+              "title": "Gardez les clubs informés",
+              "text": "Un changement de projet ou un départ peut affecter plusieurs équipes."
+            },
+            {
+              "title": "Relisez les accès",
+              "text": "Un quartier général commun ne doit pas être considéré comme un droit automatique sur toutes les constructions des clubs."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Questions fréquentes"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Pourquoi le menu n’autorise-t-il pas la création ?",
+              "text": "Le système dépend de son activation, des places et de l’approbation du staff. Les conditions actuelles doivent être annoncées."
+            },
+            {
+              "title": "Une organisation remplace-t-elle mon club ?",
+              "text": "Non. Le club reste l’unité de membres et de territoire ; l’organisation relie plusieurs clubs."
+            },
+            {
+              "title": "Où trouver le QG ?",
+              "text": "Utilise /organisation qg lorsque la destination et ton accès sont disponibles. N’utilise pas des coordonnées anciennes comme preuve d’un accès actuel."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "parrainage",
+      "branchId": "community",
+      "title": "Parrainage : inviter un ami et débloquer ses étapes",
+      "summary": "Créer le bon lien avant la première connexion et suivre les récompenses du parrain comme du filleul.",
+      "tags": [
+        "parrainage",
+        "ami",
+        "Discord",
+        "Alliance",
+        "Dracolosse",
+        "temps actif"
+      ],
+      "readingMinutes": 3,
+      "order": 2,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/riding.webp",
+        "alt": "Illustration Cobblemon du guide : Parrainage : inviter un ami et débloquer ses étapes"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "L’invitation doit précéder l’arrivée"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le parrainage commence sur Discord, avant la première connexion Minecraft du filleul. Les deux joueurs doivent disposer des liaisons de compte nécessaires. Inviter après coup un joueur déjà installé ne crée pas automatiquement un nouveau parrainage valide."
+        },
+        {
+          "kind": "command",
+          "command": "/parrainage lien",
+          "title": "Sur Discord : créer son invitation",
+          "text": "Utilise la commande du bot pour obtenir le lien suivi. Fais utiliser ce lien au nouvel arrivant avant sa première connexion en jeu."
+        },
+        {
+          "kind": "command",
+          "command": "/parrainage statut",
+          "title": "Sur Discord : suivre la relation",
+          "text": "Consulte les validations et la progression associées à ton compte."
+        },
+        {
+          "kind": "heading",
+          "text": "Valider un filleul"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Préparez les comptes",
+              "text": "Vérifiez chacun la liaison Discord et Minecraft."
+            },
+            {
+              "title": "Utilisez le lien du parrain",
+              "text": "Le nouvel arrivant rejoint par le parcours prévu, avant sa première session Minecraft."
+            },
+            {
+              "title": "Jouez réellement",
+              "text": "La validation du filleul demande cinq heures de jeu actif."
+            },
+            {
+              "title": "Consultez les paliers",
+              "text": "Le parrain et le filleul disposent de récompenses différentes ; regardez vos propres états."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le suivi exclut les périodes hors ligne et le mode spectateur. L’inactivité prolongée cesse de compter : laisser le jeu ouvert sans jouer n’est pas une méthode de validation du temps actif."
+        },
+        {
+          "kind": "heading",
+          "text": "Les paliers du parrain"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "1 filleul validé",
+              "text": "Une clé Vote."
+            },
+            {
+              "title": "2 filleuls validés",
+              "text": "Deux clés Vote pour ce palier."
+            },
+            {
+              "title": "3 filleuls validés",
+              "text": "Trois clés Vote pour ce palier."
+            },
+            {
+              "title": "4 filleuls validés",
+              "text": "Cinq clés Vote et le déblocage de l’apparence Alliance de Dracolosse."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les paliers de clés se cumulent, soit onze clés pour les quatre premières étapes prévues. Le déblocage Alliance est une apparence à appliquer à un Dracolosse éligible : il ne donne pas automatiquement un nouveau Pokémon."
+        },
+        {
+          "kind": "heading",
+          "text": "Les étapes du filleul"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le parcours prévu récompense une, trois, cinq et dix heures actives : Super Balls, Bonbons Exp., Hyper Balls, Cobblecoins puis une clé Pulsar font partie de ces étapes. Consulte le statut pour le détail disponible et la récupération. Le filleul n’obtient pas l’apparence Alliance simplement en terminant son propre temps de jeu."
+        },
+        {
+          "kind": "heading",
+          "text": "Récupérer et appliquer son apparence"
+        },
+        {
+          "kind": "command",
+          "command": "/parrainage",
+          "title": "En jeu : consulter le suivi",
+          "text": "Vérifie les récompenses disponibles et les étapes."
+        },
+        {
+          "kind": "command",
+          "command": "/parrainage recuperer",
+          "title": "Reprendre une livraison en attente",
+          "text": "Libère de la place dans ton inventaire avant de récupérer les objets."
+        },
+        {
+          "kind": "command",
+          "command": "/parrainage skin 1",
+          "title": "Appliquer Alliance au premier slot",
+          "text": "Le Pokémon doit être un Dracolosse éligible et rappelé dans sa Ball. L’apparence ne se cumule pas avec Star."
+        },
+        {
+          "kind": "paragraph",
+          "text": "La commande /parrainage retirer 1 retire l’apparence du premier slot. Les propriétés de combat et le caractère shiny sont distincts du visuel Alliance."
+        },
+        {
+          "kind": "heading",
+          "text": "Questions fréquentes"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Mon ami jouait déjà avant mon lien",
+              "text": "Le parcours demande une invitation antérieure à la première connexion Minecraft. Une relation rétroactive n’est pas garantie."
+            },
+            {
+              "title": "Le temps ne monte pas pendant mon absence",
+              "text": "Seul le temps actif admissible compte."
+            },
+            {
+              "title": "Une invitation est attribuée de façon ambiguë",
+              "text": "Transmets les informations au staff. Ne recrée pas des comptes pour contourner la validation."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tags",
+      "branchId": "community",
+      "title": "Choisir ses tags et afficher son identité",
+      "summary": "Sélectionner les tags débloqués, comprendre leur affichage et conserver une identité lisible.",
+      "tags": [
+        "tags",
+        "pseudo",
+        "chat",
+        "tab",
+        "Recrue",
+        "identité"
+      ],
+      "readingMinutes": 3,
+      "order": 3,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/riding.webp",
+        "alt": "Illustration Cobblemon du guide : Choisir ses tags et afficher son identité"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Ouvrir sa collection"
+        },
+        {
+          "kind": "command",
+          "command": "/tags",
+          "title": "Choisir ses tags",
+          "text": "Le menu Mes tags, accessible également depuis les grades, réunit les tags que ton personnage possède."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Un tag présente une partie de ton identité : grade obtenu, parcours ou personnalisation disponible. Il ne suffit pas d’écrire le nom d’un tag pour le débloquer. La collection montre les possibilités réellement acquises."
+        },
+        {
+          "kind": "heading",
+          "text": "Composer son affichage"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Consulte les tags possédés",
+              "text": "Distingue les entrées disponibles des éléments verrouillés."
+            },
+            {
+              "title": "Choisis un ou deux tags",
+              "text": "Le parcours actuel demande au moins un tag et en autorise deux. Recrue sert de référence minimale."
+            },
+            {
+              "title": "Vérifie l’ordre",
+              "text": "Le premier tag compte particulièrement pour les vues qui n’en affichent qu’un."
+            },
+            {
+              "title": "Enregistre la sélection",
+              "text": "Contrôle ensuite ton affichage dans les espaces concernés. Fermer sans sauvegarder ne doit pas être confondu avec une validation."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Chat, tête et liste des joueurs"
+        },
+        {
+          "kind": "paragraph",
+          "text": "L’affichage du chat et au-dessus du personnage peut présenter deux tags. La liste des joueurs privilégie le premier. Si tu ne retrouves pas exactement la même composition dans les trois endroits, vérifie cette différence avant de penser que ton deuxième tag a disparu."
+        },
+        {
+          "kind": "heading",
+          "text": "Conserver les tags de progression"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les tags obtenus au fil des grades restent dans ta collection. Tu peux donc préférer un ancien intitulé sans perdre pour autant les avantages de ton grade actuel. L’affichage et les droits de progression ne sont pas la même information."
+        },
+        {
+          "kind": "paragraph",
+          "text": "La voie finale des grades reste un choix entre Élite et Mercenaire. Posséder une voie ne débloque pas automatiquement le tag de l’autre. Pour une personnalisation, suis le parcours annoncé dans l’offre et les consignes du staff."
+        },
+        {
+          "kind": "heading",
+          "text": "Questions fréquentes"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Puis-je ne rien afficher ?",
+              "text": "Le parcours actuel impose un ou deux tags, avec Recrue comme base minimale. Les anciennes options sans tag ne décrivent plus ce fonctionnement."
+            },
+            {
+              "title": "Mon ancien tag est encore sélectionnable",
+              "text": "C’est normal : les tags débloqués restent dans ta collection."
+            },
+            {
+              "title": "Changer de tag change-t-il mon grade ?",
+              "text": "Non. Le tag choisi représente ton affichage ; les avantages dépendent de ta progression et de tes droits réels."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carte-dresseur",
+      "branchId": "community",
+      "title": "Personnaliser sa carte de dresseur",
+      "summary": "Présenter son équipe et sa collection, puis choisir les informations visibles par les autres joueurs.",
+      "tags": [
+        "carte",
+        "dresseur",
+        "profil",
+        "confidentialité",
+        "collection",
+        "succès"
+      ],
+      "readingMinutes": 3,
+      "order": 4,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/riding.webp",
+        "alt": "Illustration Cobblemon du guide : Personnaliser sa carte de dresseur"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Une présentation de ton personnage"
+        },
+        {
+          "kind": "paragraph",
+          "text": "La carte de dresseur rassemble les informations de ton profil et les éléments de collection que tu souhaites mettre en avant. Elle permet aux autres joueurs de découvrir ton parcours sans leur donner accès à la gestion de ton inventaire ou de ton compte."
+        },
+        {
+          "kind": "heading",
+          "text": "Ouvrir sa carte"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Passe par le menu du serveur",
+              "text": "Retrouve la carte ou le profil de dresseur dans /menu."
+            },
+            {
+              "title": "Consulte les rubriques",
+              "text": "Regarde l’équipe, la collection, les succès et les statistiques proposés."
+            },
+            {
+              "title": "Prépare ta présentation",
+              "text": "Sélectionne les éléments favoris et les options disponibles."
+            },
+            {
+              "title": "Vérifie la visibilité",
+              "text": "Relis les réglages de partage avant de présenter ton profil aux autres."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Regarder la carte d’un joueur"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Vise le joueur puis utilise le raccourci de carte de dresseur. Avec un clavier AZERTY et le réglage habituel, il correspond à la touche ². Si rien ne s’ouvre, retrouve l’action dans les contrôles Minecraft : la disposition du clavier ou un autre mod peut changer la touche utilisable."
+        },
+        {
+          "kind": "heading",
+          "text": "Choisir ce que tu montres"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Vérifie la visibilité de ton équipe si tu prépares une composition que tu ne veux pas exposer.",
+            "Choisis les cartes favorites que tu veux présenter.",
+            "Relis les options concernant la collection et les statistiques.",
+            "Contrôle le résultat après modification plutôt que de supposer que tous les onglets ont la même visibilité."
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Un profil consultable n’est pas une autorisation de transférer un Pokémon, d’ouvrir ton PC ou de prendre une carte physique. Les échanges et ventes utilisent leurs interfaces dédiées."
+        },
+        {
+          "kind": "heading",
+          "text": "Carte de dresseur et cartes de collection"
+        },
+        {
+          "kind": "paragraph",
+          "text": "La carte de dresseur est ton profil. Les cartes physiques de l’album sont des objets de collection que tu peux exposer, retirer ou faire certifier. Afficher une carte favorite sur ton profil ne fabrique pas une nouvelle copie physique."
+        },
+        {
+          "kind": "heading",
+          "text": "Questions fréquentes"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Je ne vois pas toute l’équipe d’un autre joueur",
+              "text": "Le profil respecte les options de visibilité de son propriétaire."
+            },
+            {
+              "title": "La touche ² ne fait rien",
+              "text": "Vérifie le raccourci et les conflits dans les contrôles. Le nom de l’action est plus fiable que la touche sur un autre clavier."
+            },
+            {
+              "title": "Afficher ma collection permet-il de me la prendre ?",
+              "text": "Non. La consultation du profil est séparée des opérations de gestion et de transfert."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "album",
+      "branchId": "collection",
+      "title": "Cartes et boosters : compléter son album",
+      "summary": "Ouvrir un booster, organiser les séries et déplacer ses cartes physiques sans confondre exemplaire et illustration.",
+      "tags": [
+        "album",
+        "booster",
+        "carte",
+        "Astéria",
+        "Nébélia",
+        "rareté",
+        "collection"
+      ],
+      "readingMinutes": 3,
+      "order": 0,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/pasturedpokmon.webp",
+        "alt": "Illustration Cobblemon du guide : Cartes et boosters : compléter son album"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Une collection par séries"
+        },
+        {
+          "kind": "command",
+          "command": "/album",
+          "title": "Ouvrir son album",
+          "text": "Consulte les séries et les cartes que tu possèdes. Le catalogue de base documenté contient vingt-quatre cartes réparties entre Astéria et Nébélia ; les séries visibles en jeu font foi si le catalogue s’enrichit."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les cartes ont leurs propres raretés et exemplaires. Une carte Star est un objet de collection : elle ne transforme pas un Pokémon de ton équipe en Pokémon Star et ne constitue pas une capture."
+        },
+        {
+          "kind": "heading",
+          "text": "Ouvrir un booster"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Prépare une place",
+              "text": "Garde de la place dans l’inventaire avant d’utiliser un booster."
+            },
+            {
+              "title": "Utilise le booster physique",
+              "text": "Le clic droit lance son ouverture. Le système réserve le résultat côté serveur."
+            },
+            {
+              "title": "Laisse la révélation se terminer",
+              "text": "La carte se révèle automatiquement ; il n’est pas nécessaire de cliquer au bon moment pour améliorer sa rareté."
+            },
+            {
+              "title": "Vérifie l’exemplaire obtenu",
+              "text": "Le booster donne une carte physique. Consulte-la et organise ensuite ton stockage."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Résultat et interruptions"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Fermer l’animation ne relance pas le tirage. La révélation visuelle présente un résultat déjà déterminé. Une ouverture en attente peut être reprise après reconnexion ; si l’inventaire se remplit pendant le parcours, le système prévoit une solution de stockage dans l’album plutôt qu’une nouvelle tentative de tirage."
+        },
+        {
+          "kind": "heading",
+          "text": "Raretés et doublons"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les niveaux de rareté servent à classer la collection. Un doublon reste un autre exemplaire, pas une garantie de progression vers la carte qui te manque. Vérifie les informations du booster ou de la collection pour connaître ses possibilités actuelles ; les probabilités d’une machine à jetons ne sont pas celles d’un booster."
+        },
+        {
+          "kind": "heading",
+          "text": "Retirer et exposer une carte"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Sélectionne le bon exemplaire",
+              "text": "Compare les informations, notamment une certification déjà présente."
+            },
+            {
+              "title": "Prépare une place physique",
+              "text": "Libère un emplacement avant de retirer une carte de l’album."
+            },
+            {
+              "title": "Conserve son identité",
+              "text": "Le transfert préserve l’exemplaire et sa certification. Il ne crée pas un second objet identique en parallèle."
+            },
+            {
+              "title": "Choisis sa destination",
+              "text": "Garde-la en inventaire, présente-la dans un meuble ou utilise la certification SGA."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Questions fréquentes"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Une carte certifiée perd-elle sa note au retrait ?",
+              "text": "L’identité et les données de certification suivent l’exemplaire. Vérifie que tu manipules la bonne copie."
+            },
+            {
+              "title": "Puis-je améliorer le tirage en fermant le booster ?",
+              "text": "Non. Le résultat est réservé par le serveur avant la fin de l’animation."
+            },
+            {
+              "title": "Pourquoi une condition de progression demande une série absente ?",
+              "text": "Le catalogue et les conditions peuvent être configurés séparément. Signale la condition au staff ; ne suppose pas qu’une série invisible se débloque en achetant au hasard."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "galerie",
+      "branchId": "collection",
+      "title": "SGA et galerie : certifier et exposer ses cartes",
+      "summary": "Faire noter un exemplaire, fabriquer les supports et organiser une collection visible par les visiteurs.",
+      "tags": [
+        "SGA",
+        "certification",
+        "vitrine",
+        "meuble",
+        "galerie",
+        "stand",
+        "cadre"
+      ],
+      "readingMinutes": 3,
+      "order": 1,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/pasturedpokmon.webp",
+        "alt": "Illustration Cobblemon du guide : SGA et galerie : certifier et exposer ses cartes"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Ce que la certification apporte"
+        },
+        {
+          "kind": "paragraph",
+          "text": "La certification SGA ajoute à un exemplaire de carte une note, des sous-notes et un numéro de série. Elle décrit cette copie ; elle ne change pas sa rareté et ne garantit pas un prix de revente. Deux cartes portant la même illustration restent des exemplaires distincts."
+        },
+        {
+          "kind": "heading",
+          "text": "Faire certifier une carte"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Prends la carte physique",
+              "text": "Retire le bon exemplaire de l’album et tiens-le en main."
+            },
+            {
+              "title": "Ouvre la certification",
+              "text": "Utilise /sga ou la station prévue."
+            },
+            {
+              "title": "Lis les conditions",
+              "text": "Vérifie le coût en Cobblecoins présenté et l’exemplaire sélectionné. Le tarif est configurable."
+            },
+            {
+              "title": "Confirme puis contrôle",
+              "text": "Consulte la note et le numéro de série obtenus avant de ranger ou d’exposer la carte."
+            }
+          ]
+        },
+        {
+          "kind": "command",
+          "command": "/sga",
+          "title": "Certifier l’exemplaire tenu",
+          "text": "La sélection porte sur l’objet physique, pas simplement sur une illustration vue dans l’album."
+        },
+        {
+          "kind": "heading",
+          "text": "Choisir un support"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Stand : une carte",
+              "text": "Recette du catalogue : trois planches, un bâton et un lingot de fer."
+            },
+            {
+              "title": "Vitrine : trois cartes",
+              "text": "Trois planches, cinq blocs de verre et un lingot de fer."
+            },
+            {
+              "title": "Cadre : une carte",
+              "text": "Cinq bâtons, deux vitres, un cuir et un lingot de fer."
+            },
+            {
+              "title": "Meuble : seize cartes",
+              "text": "Trois planches, trois blocs de verre, deux lingots de fer et un coffre. Prévois deux blocs de largeur, trois de hauteur et un de profondeur."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Consulte la recette en jeu pour la disposition exacte des ingrédients et les variantes acceptées. Un bloc de verre et une vitre ne sont pas le même ingrédient."
+        },
+        {
+          "kind": "heading",
+          "text": "Installer sa galerie"
+        },
+        {
+          "kind": "checklist",
+          "items": [
+            "Choisis un emplacement sur lequel tu as les droits de construction.",
+            "Libère tout le volume nécessaire au grand meuble, pas uniquement le bloc visé.",
+            "Dépose les exemplaires que tu veux montrer et contrôle chaque emplacement.",
+            "Garde une organisation par série, rareté ou certification pour rendre la visite lisible."
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Propriété et déplacement"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le propriétaire gère les cartes exposées ; les visiteurs consultent la collection sans pouvoir la modifier librement. Les droits de construction et de protection du lieu restent à vérifier. Déplacer un meuble ne doit pas servir à dupliquer ses cartes."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Lorsqu’un support est cassé selon les règles du système, ses cartes physiques sont restituées. Prépare de la place et vérifie les objets récupérés avant de reconstruire ailleurs. Une carte déplacée conserve son identité et sa certification."
+        },
+        {
+          "kind": "heading",
+          "text": "Décors et hologrammes"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Certains espaces de galerie peuvent comporter des présentations de logos ou de Pokémon. Un modèle décoratif n’est pas un Pokémon sauvage à capturer. Les visiteurs utilisent les fonctions de consultation ; la création des décors techniques relève de l’équipe du serveur."
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Une bonne note augmente-t-elle la rareté ?",
+              "text": "Non. La rareté de la carte et sa certification sont deux informations différentes."
+            },
+            {
+              "title": "Peut-on modifier ma vitrine en la visitant ?",
+              "text": "La gestion appartient au propriétaire et aux personnes autorisées. Les visiteurs ordinaires consultent les cartes."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "caisses",
+      "branchId": "collection",
+      "title": "Machines à jetons : Vote, Nova, Pulsar et Quasar",
+      "summary": "Consulter les lots, utiliser le bon jeton et comprendre la roulette et les garanties affichées.",
+      "tags": [
+        "caisses",
+        "crates",
+        "clés",
+        "gashapon",
+        "Vote",
+        "Nova",
+        "Pulsar",
+        "Quasar",
+        "probabilités"
+      ],
+      "readingMinutes": 3,
+      "order": 2,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/pasturedpokmon.webp",
+        "alt": "Illustration Cobblemon du guide : Machines à jetons : Vote, Nova, Pulsar et Quasar"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Quatre machines et leurs jetons"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Vote — Dracolosse",
+              "text": "Utilise les clés ou jetons Vote obtenus dans les parcours correspondants."
+            },
+            {
+              "title": "Nova — Gobou",
+              "text": "Demande un jeton Nova."
+            },
+            {
+              "title": "Pulsar — Ectoplasma",
+              "text": "Demande un jeton Pulsar."
+            },
+            {
+              "title": "Quasar — Arceus",
+              "text": "Demande un jeton Quasar."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les anciens textes peuvent parler de caisses ou de clés ; l’interface visuelle utilise aussi le terme machine ou gashapon. Ces noms désignent le même parcours d’ouverture, pas plusieurs lots automatiquement cumulés."
+        },
+        {
+          "kind": "heading",
+          "text": "Voir avant d’ouvrir"
+        },
+        {
+          "kind": "command",
+          "command": "/crates",
+          "title": "Consulter les machines",
+          "text": "Retrouve les choix et leurs informations. /cles permet de consulter les accès aux clés."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le clic gauche sur une machine présente son aperçu sans consommer de jeton. Lis les récompenses, les probabilités et les garanties avant d’ouvrir. Les réglages actuels sont affichés par le serveur ; une image ancienne de la boutique ne remplace pas cet aperçu."
+        },
+        {
+          "kind": "heading",
+          "text": "Lancer une ouverture"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Vérifie le type du jeton",
+              "text": "Un jeton Nova ne remplace pas automatiquement un Pulsar ou un Quasar."
+            },
+            {
+              "title": "Prépare la réception",
+              "text": "Garde de la place pour les récompenses qui prennent la forme d’objets."
+            },
+            {
+              "title": "Utilise la machine",
+              "text": "Le clic droit consomme un jeton correspondant et lance l’animation. Le menu propose aussi son parcours d’ouverture."
+            },
+            {
+              "title": "Attends le résultat",
+              "text": "Ne lance pas plusieurs actions en pensant accélérer la remise du lot. Une ouverture déjà en cours suit son propre état."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Ce que montre la roulette"
+        },
+        {
+          "kind": "paragraph",
+          "text": "La roulette met en scène un résultat tiré par le serveur. La position d’un lot voisin, la vitesse du défilement et le moment où tu fermes l’écran n’augmentent pas tes chances. Une seconde animation à l’intérieur d’une rareté n’est pas un nouveau tirage contrôlé par ton clic."
+        },
+        {
+          "kind": "paragraph",
+          "text": "La probabilité finale d’un lot peut combiner celle de sa rareté et son poids parmi les lots de cette rareté. Deux lots visibles n’ont donc pas nécessairement la même chance. Lis les probabilités présentées au lieu de compter simplement les cases de l’animation."
+        },
+        {
+          "kind": "heading",
+          "text": "Garanties et compteurs"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Certaines machines disposent de garanties après un nombre d’ouvertures. Consulte leur compteur et la rareté concernée : une garantie de catégorie ne promet pas forcément le lot précis que tu recherches. Les seuils et les récompenses sont configurables."
+        },
+        {
+          "kind": "heading",
+          "text": "Questions fréquentes"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Fermer avec Échap annule-t-il la dépense ?",
+              "text": "Non. Fermer l’affichage ne doit pas être considéré comme une annulation ou un remboursement de l’ouverture déjà engagée."
+            },
+            {
+              "title": "Le lot a failli tomber à côté",
+              "text": "Les cases voisines sont une présentation visuelle. Elles ne prouvent pas qu’un autre clic aurait donné ce lot."
+            },
+            {
+              "title": "Une récompense manque après une interruption",
+              "text": "Vérifie le résultat et tes stockages, puis donne au staff l’heure et la machine utilisée. N’achète pas une autre ouverture pour tenter de récupérer la première."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cosmedex",
+      "branchId": "collection",
+      "title": "Cosmédex : effets, accessoires et compagnons",
+      "summary": "Retrouver ses apparences, activer une collection et distinguer les compagnons décoratifs des Pokémon de combat.",
+      "tags": [
+        "Cosmédex",
+        "cosmetique",
+        "accessoire",
+        "effet",
+        "incarnation",
+        "compagnon",
+        "apparence"
+      ],
+      "readingMinutes": 3,
+      "order": 3,
+      "published": true,
+      "hero": {
+        "asset": "/astral/assets/pasturedpokmon.webp",
+        "alt": "Illustration Cobblemon du guide : Cosmédex : effets, accessoires et compagnons"
+      },
+      "blocks": [
+        {
+          "kind": "heading",
+          "text": "Ouvrir son dressing"
+        },
+        {
+          "kind": "command",
+          "command": "/cosmetique",
+          "title": "Consulter le Cosmédex",
+          "text": "Retrouve les éléments possédés, les catégories et les informations de déblocage."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Le Cosmédex gère les apparences du joueur et ses accompagnements visuels. Il complète la collection Pokémon sans remplacer le PC, la pension ou les équipes de combat. Un élément verrouillé reste consultable pour comprendre comment il s’obtient."
+        },
+        {
+          "kind": "heading",
+          "text": "Les catégories"
+        },
+        {
+          "kind": "itemGrid",
+          "items": [
+            {
+              "title": "Effets",
+              "text": "Des effets visuels autour du personnage, selon les collections débloquées."
+            },
+            {
+              "title": "Accessoires",
+              "text": "Des éléments portés par le joueur."
+            },
+            {
+              "title": "Incarnations",
+              "text": "Des apparences qui modifient la présentation du personnage."
+            },
+            {
+              "title": "Compagnons",
+              "text": "Des compagnons visuels qui suivent le joueur et peuvent disposer d’options de nom."
+            }
+          ]
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les emplacements limitent les éléments actifs dans chaque catégorie. Activer une nouvelle apparence dans un emplacement occupé remplace celle qui s’y trouvait ; posséder plusieurs éléments ne signifie pas qu’ils sont tous affichés simultanément."
+        },
+        {
+          "kind": "heading",
+          "text": "Composer son apparence"
+        },
+        {
+          "kind": "steps",
+          "items": [
+            {
+              "title": "Filtre la collection",
+              "text": "Choisis la catégorie et, si disponible, les éléments possédés pour retrouver rapidement tes déblocages."
+            },
+            {
+              "title": "Ouvre une fiche",
+              "text": "Lis sa condition d’accès et son statut."
+            },
+            {
+              "title": "Active l’élément",
+              "text": "Vérifie quel emplacement il utilise et ce qu’il remplace."
+            },
+            {
+              "title": "Observe le résultat",
+              "text": "Contrôle l’apparence en jeu puis ajuste ou désactive depuis le menu."
+            }
+          ]
+        },
+        {
+          "kind": "heading",
+          "text": "Compagnon ou Pokémon ?"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Un compagnon du Cosmédex est décoratif : il ne remplace pas un membre de ton équipe, ne combat pas à ta place et n’est pas un Pokémon sauvage à capturer. Son invulnérabilité visuelle ne donne pas une protection de combat à ton personnage."
+        },
+        {
+          "kind": "paragraph",
+          "text": "Une incarnation change l’apparence du joueur ; un Pokémon Star reste un véritable Pokémon de collection et de combat. Pour une apparence Alliance de Dracolosse, consulte le guide du parrainage plutôt que de chercher à transformer un compagnon en Pokémon du PC."
+        },
+        {
+          "kind": "heading",
+          "text": "Déblocages et durée"
+        },
+        {
+          "kind": "paragraph",
+          "text": "Les collections peuvent provenir de plusieurs parcours et avantages. Lis la condition de chaque élément : une apparence liée à un avantage actif ne doit pas être supposée utilisable indéfiniment après son expiration. Les éléments possédés et les droits actuellement actifs sont deux informations à vérifier."
+        },
+        {
+          "kind": "heading",
+          "text": "Questions fréquentes"
+        },
+        {
+          "kind": "faq",
+          "items": [
+            {
+              "title": "Le cosmétique augmente-t-il mes statistiques ?",
+              "text": "Les éléments de ce système sont visuels. Ils ne doivent pas être interprétés comme un bonus d’IV, de dégâts ou de défense."
+            },
+            {
+              "title": "Je ne vois pas correctement une apparence",
+              "text": "Vérifie le chargement du pack serveur et que l’élément est réellement actif."
+            },
+            {
+              "title": "Puis-je garder mon compagnon et changer mon effet ?",
+              "text": "Les catégories utilisent des emplacements distincts. Vérifie ceux indiqués dans le menu pour composer ta sélection."
+            }
+          ]
+        }
+      ]
     }
   ]
 }

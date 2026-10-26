@@ -35,7 +35,7 @@ test('publishing immediately creates real article URLs, drafts stay private and 
   const missing=await get('/actualites/does-not-exist/');assert.equal(missing.response.status,404);assert.ok(missing.html.includes('noindex,follow'));
 });
 test('sitemap, RSS and redirects stay canonical without indexing private pages',async()=>{
-  const map=await get('/sitemap.xml');assert.equal(map.response.status,200);assert.ok(map.html.includes('/wiki/'));assert.ok(!map.html.includes('/admin/'));assert.ok(!map.html.includes('/compte/'));assert.ok(map.html.includes('/rejoindre/</loc><lastmod>2026-10-26</lastmod>'));assert.ok(!/<url><loc>[^<]+\/wiki\/[^<]*<\/loc><lastmod>/.test(map.html));assert.ok(map.html.includes('/actualites/'+news.content.articles[0].slug+'/'));
+  const map=await get('/sitemap.xml');assert.equal(map.response.status,200);assert.ok(map.html.includes('/wiki/'));assert.ok(!map.html.includes('/admin/'));assert.ok(!map.html.includes('<loc>https://cobblestar-mc.fr/compte/</loc>'));assert.ok(map.html.includes('/rejoindre/</loc><lastmod>2026-10-26</lastmod>'));assert.ok(!/<url><loc>[^<]+\/wiki\/[^<]*<\/loc><lastmod>/.test(map.html));assert.ok(map.html.includes('/actualites/'+news.content.articles[0].slug+'/'));
   const rss=await get('/actualites/rss.xml');assert.equal(rss.response.status,200);assert.ok(rss.html.includes('<rss version="2.0">'));
   for(const [from,to] of [['/wiki','/wiki/'],['/wiki/index.html','/wiki/'],['/rejoindre','/rejoindre/']]){const r=await get(from);assert.equal(r.response.status,308);assert.equal(r.response.headers.get('location'),to);}
   assert.ok((await get('/robots.txt')).html.includes('Sitemap: https://cobblestar-mc.fr/sitemap.xml'));
@@ -74,4 +74,18 @@ test('shop publishes game catalogue prices and wiki headings have working outlin
   const targets=[...page.html.matchAll(/href="#(section-\d+)"/g)].map(m=>m[1]);
   assert.ok(targets.length>0);
   for(const target of targets)assert.ok(page.html.includes(`id="${target}"`),target);
+});
+
+test('every published guide is indexed, linked and has valid outline and related targets',async()=>{
+  const library=await get('/wiki/'), sitemap=await get('/sitemap.xml');
+  const paths=new Set(wiki.content.articles.filter(a=>a.published).map(a=>`/wiki/${a.id}/`));
+  for(const path of paths){
+    assert.ok(library.html.includes(`href="${path}"`),path);
+    assert.ok(sitemap.html.includes(`https://cobblestar-mc.fr${path}</loc>`),path);
+    const {html}=await get(path);
+    for(const [,target] of html.matchAll(/href="#(section-\d+)"/g))assert.ok(html.includes(`id="${target}"`),path+'#'+target);
+    for(const [,link] of html.matchAll(/href="(\/wiki\/[^/#"]+\/)"/g))assert.ok(paths.has(link),path+' → '+link);
+  }
+  assert.match(library.html,/data-search="[^"]*\/pension/);
+  assert.match(library.html,/data-search="[^"]*stock est plein/);
 });

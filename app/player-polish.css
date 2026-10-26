@@ -1,17 +1,17 @@
 /* Public player surfaces only. Administrative layouts do not opt into this theme. */
-:is(.astral-public,body:has(.astral-header)) :is(.btn,.public-button,.astral-shop,.astral-menu summary,.shop-v2-account-action,.shop-v2-pack button,.shop-v2-dialog-action,.motion-button,.text-button,.display-settings button,.link-gate-modal button){border-radius:999px}
+:is(.astral-public,body:has(.astral-header)) :is(.btn,.public-button,.astral-shop,.astral-menu summary,.shop-v2-account-action,.shop-v2-pack button,.shop-v2-dialog-action,.motion-button,.text-button,.display-settings button,.link-gate-modal button){border-radius:10px}
 :is(.astral-public,body:has(.astral-header)) :is(.public-nav a,.astral-menu nav a){border-radius:12px}
 :is(.astral-public,body:has(.astral-header)) .astral-menu nav{border-radius:18px}
 :is(.astral-public,body:has(.astral-header)) :is(.public-card,.astral-news-card){border-radius:18px;overflow:hidden}
-.astral-home.astral-v6 :is(.btn,.text-button,.motion-button){border-radius:999px}
-body:has(.astral-header) :is(.vote-profile-action,.vote-site-action,.astral-account-page button,.astral-account-page [class*="primaryAction"],.astral-account-page [class*="discordAction"]){border-radius:999px}
+.astral-home.astral-v6 :is(.btn,.text-button,.motion-button){border-radius:10px}
+body:has(.astral-header) :is(.vote-profile-action,.vote-site-action,.astral-account-page button,.astral-account-page [class*="primaryAction"],.astral-account-page [class*="discordAction"]){border-radius:10px}
 .astral-home.astral-public .site-footer{padding-bottom:35px!important}
 /* Boutique: three clear destinations and prices drawn from the game catalogue. */
 .shop-quick-page .shop-quick-header{grid-template-columns:1.3fr .7fr;border:0;padding:0;margin-bottom:30px;gap:20px}
 .shop-quick-page .shop-quick-header h1{font-size:clamp(48px,5.8vw,78px);margin:16px 0 24px}
 .shop-quick-page .astral-shop-hero-art{height:310px;transform:rotate(-7deg)}
 .shop-section-nav,.shop-filters{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
-.shop-section-nav a,.shop-filters button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 20px;border:1px solid #786187;border-radius:999px;background:#241a33;color:#f8eadc;font-size:16px;font-weight:600;text-decoration:none;cursor:pointer}
+.shop-section-nav a,.shop-filters button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:10px 20px;border:1px solid #786187;border-radius:10px;background:#241a33;color:#f8eadc;font-size:16px;font-weight:600;text-decoration:none;cursor:pointer}
 .shop-section-nav a:first-child,.shop-filters button[aria-pressed=true]{background:#efbf70;color:#21172e;border-color:#efbf70}
 .shop-section-nav a:hover,.shop-filters button:hover{border-color:#efbf70}
 .shop-quick-page .shop-opening-note{border-left:3px solid #efbf70;padding:14px 20px;background:#21182d;border-radius:0 14px 14px 0;color:#d9cde3;font-size:16px;line-height:1.7;margin-bottom:28px}
@@ -25,8 +25,8 @@ body:has(.astral-header) :is(.vote-profile-action,.vote-site-action,.astral-acco
 .shop-quick-page .shop-v2-pack.is-popular{border-color:#efbf70;background:#302133}
 .shop-quick-page .shop-v2-star{height:86px;margin:4px auto 10px}
 .shop-quick-page .shop-v2-pack>strong{font-size:42px}
-.shop-quick-page .shop-v2-popular{border-radius:999px;font-size:14px;padding:6px 10px}
-.shop-quick-page .shop-v2-pack button{min-height:48px;font-size:16px;border-radius:999px}
+.shop-quick-page .shop-v2-popular{border-radius:10px;font-size:14px;padding:6px 10px}
+.shop-quick-page .shop-v2-pack button{min-height:48px;font-size:16px;border-radius:10px}
 .shop-quick-page .shop-v2-pack>p{font-size:15px;min-height:48px}
 .shop-quick-page :is(.shop-grades,.shop-quick-catalog){margin:80px 0 0;padding:0;border:0}
 .shop-section-heading{display:flex;justify-content:space-between;align-items:center;gap:30px;margin-bottom:30px}
@@ -129,3 +129,21 @@ body:has(.astral-header) :is(.vote-profile-action,.vote-site-action,.astral-acco
  .astral-public .wiki-body .comparison{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){.astral-public .public-card{transition:none}.astral-public .public-card:hover{transform:none}}
+/* Reading routes stay ordinary scrolling, with comfortable touch targets. */
+.astral-public .wiki-journeys{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:0 0 42px}
+.wiki-journeys>article{min-width:0;padding:24px;border:1px solid #574363;border-radius:16px;background:#21172e}
+.astral-public .wiki-journeys h2{font-size:28px;line-height:1.2;margin:0 0 10px;color:#ffda9b}
+.astral-public .wiki-journeys p{font-size:16px;color:#d6c5e2;margin:0 0 14px}
+.wiki-journeys ol{margin:0;padding-left:22px;color:#d3b6eb}
+.astral-public .wiki-journeys a{display:inline-block;padding:10px 0;min-height:44px;color:#f3e5fc;font-size:16px;text-underline-offset:4px}
+.astral-public .wiki-body :is(h2,h3){scroll-margin-top:125px}
+.astral-public .wiki-body .item-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.astral-public .wiki-body .item-grid article{min-width:0}
+.astral-public .wiki-body .item-grid h3{margin-top:0;font-size:24px}
+.astral-public .wiki-body .item-grid p{margin-bottom:0}
+@media(max-width:720px){.astral-public .wiki-journeys,.astral-public .wiki-body .item-grid{grid-template-columns:1fr}.wiki-journeys>article{padding:22px}.astral-public .wiki-body :is(h2,h3){scroll-margin-top:100px}}
+.astral-public .wiki-path-picker{margin:0 0 34px;border:1px solid #574363;border-radius:12px;background:#21172e;padding:0 22px}
+.astral-public .wiki-path-picker>summary{padding:18px 0;min-height:52px;font-size:17px;color:#ffda9b;cursor:pointer}
+.astral-public .wiki-path-picker .wiki-journeys{margin:8px 0 22px}
+.astral-public .wiki-path-picker .wiki-journeys>article{background:#191222}
+.wiki-search-box{margin-bottom:22px}

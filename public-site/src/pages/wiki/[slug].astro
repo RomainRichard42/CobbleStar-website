@@ -2,11 +2,12 @@
 import Layout from '../../layouts/PublicLayout.astro';
 import Blocks from '../../components/WikiBlocks.astro';
 import Picture from '../../components/Picture.astro';
+import {relatedGuides} from '../../lib/wiki-navigation';
 import {publishedWiki,wikiUrl,breadcrumbs,SITE,safeImage,type PublicLocals} from '../../lib/content';
 const wiki=publishedWiki(await (Astro.locals as PublicLocals).getWiki());
 const article=wiki.articles.find(a=>a.id===Astro.params.slug);
 if(!article)Astro.response.status=404;
-const related=article?wiki.articles.filter(a=>a.branchId===article.branchId&&a.id!==article.id).slice(0,4):[];
+const related=article?relatedGuides(article,wiki.articles):[];
 const crumbs=[{name:'Accueil',path:'/'},{name:'Wiki',path:'/wiki/'},...(article?[{name:article.title,path:wikiUrl(article)}]:[])];
 const schema=article?[breadcrumbs(crumbs),{'@context':'https://schema.org','@type':'Article',headline:article.title,description:article.summary,image:[new URL(safeImage(article.hero.asset),SITE).href],inLanguage:'fr-FR',mainEntityOfPage:SITE+wikiUrl(article),author:{'@type':'Organization',name:'Équipe CobbleStar'},publisher:{'@id':SITE+'/#organisation'}}]:[];
 ---
@@ -16,3 +17,8 @@ const schema=article?[breadcrumbs(crumbs),{'@context':'https://schema.org','@typ
 <div class="wiki-reading-grid"><aside class="wiki-toc"><nav aria-label="Sommaire"><strong>Dans ce guide</strong>{article.blocks.map((b,i)=>b.kind==='heading'&&<a href={`#section-${i}`}>{b.text}</a>)}</nav><a href="/wiki/">← Tous les guides</a></aside><article class="public-prose wiki-body"><details class="wiki-toc-mobile"><summary>Dans ce guide</summary><nav aria-label="Sommaire mobile">{article.blocks.map((b,i)=>b.kind==='heading'&&<a href={`#section-${i}`}>{b.text}</a>)}</nav></details><Blocks blocks={article.blocks}/>
 <aside class="article-bottom"><h2>Continuer ton aventure</h2><ul>{related.map(a=><li><a href={wikiUrl(a)}>{a.title}</a></li>)}<li><a href="/wiki/">Tous les guides</a></li><li><a href="/rejoindre/">Préparer son arrivée sur CobbleStar</a></li></ul></aside></article></div></>:<><h1>Ce guide n’est pas disponible.</h1><p>Il a peut-être été retiré ou son adresse est incorrecte.</p><a href="/wiki/" class="public-button">Consulter le wiki</a></>}
 </main></Layout>
+<script>
+document.querySelectorAll<HTMLAnchorElement>('.wiki-toc-mobile a').forEach(link=>link.addEventListener('click',()=>{
+  const details=link.closest('details');if(details)details.open=false;
+}));
+</script>
