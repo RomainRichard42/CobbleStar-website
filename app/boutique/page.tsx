@@ -7,7 +7,6 @@ import { SHOP_FAQ } from "../lib/faq";
 import MinecraftLinkGate from "../components/MinecraftLinkGate";
 import SiteFooter from "../components/SiteFooter";
 import SiteHeader from "../components/SiteHeader";
-import FaqSection from "../components/FaqSection";
 import FaqStructuredData from "../components/FaqStructuredData";
 import shopCatalog from "../../api/shop.catalog.json";
 
@@ -34,6 +33,13 @@ const starPacks: StarPack[] = [
 const ranks = shopCatalog.products.filter(item => item.category === "ranks" && !item.testOnly);
 const catalog = shopCatalog.products.filter(item => item.category !== "ranks" && !item.testOnly);
 const categories = [{id:"all",label:"Tout"},{id:"keys",label:"Clés"},{id:"cosmetics",label:"Cosmétiques"},{id:"companions",label:"Compagnons"},{id:"collection",label:"Collection"}];
+const shopTabs = [{ id: "grades", label: "Grades" }, { id: "stars", label: "Stars" }, { id: "catalogue", label: "Autres offres" }] as const;
+type ShopTab = typeof shopTabs[number]["id"];
+const rankPresentation = [
+  { tags: ["etoile"], highlights: ["25 homes · 5 boîtes PC supplémentaires", "Cosmétiques Étoilés et accès au warp EVs", "+10 % d’XP Battle Pass et métiers"] },
+  { tags: ["cosmiquea", "cosmiqueb"], highlights: ["Étoilé inclus · /fly et 50 homes", "GTS sans taxe · 5 raids par jour", "+20 % d’XP au total · 10 boîtes PC supplémentaires"] },
+  { tags: ["galactiquea", "galactiqueb"], highlights: ["Cosmique inclus · homes illimités", "/enderchest, /pc et /pokeheal", "Les trois collections de cosmétiques"] },
+];
 
 export default function ShopPage() {
   const packTrigger = useRef<HTMLButtonElement | null>(null);
@@ -46,8 +52,30 @@ export default function ShopPage() {
   const [rechargeBusy, setRechargeBusy] = useState(false);
   const [rechargeComplete, setRechargeComplete] = useState(false);
   const [rechargeMessage, setRechargeMessage] = useState("");
-  const [category, setCategory] = useState("all");
+  const [category, setCategory] = useState("keys");
+  const [activeTab, setActiveTab] = useState<ShopTab>("grades");
   const visibleProducts = catalog.filter(item => category === "all" || item.category === category);
+
+  useEffect(() => {
+    let scrollFrame = 0;
+    const syncHash = () => {
+      const tab = shopTabs.find(item => `#${item.id}` === window.location.hash);
+      if (tab) {
+        setActiveTab(tab.id);
+        cancelAnimationFrame(scrollFrame);
+        scrollFrame = requestAnimationFrame(() => { scrollFrame = requestAnimationFrame(() => document.getElementById("store-navigation")?.scrollIntoView({ block: "start", behavior: "instant" })); });
+      }
+    };
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+    return () => { window.removeEventListener("hashchange", syncHash); cancelAnimationFrame(scrollFrame); };
+  }, []);
+
+  function selectTab(tab: ShopTab, focus = false) {
+    setActiveTab(tab);
+    window.history.replaceState(null, "", `#${tab}`);
+    if (focus) document.getElementById(`tab-${tab}`)?.focus();
+  }
 
   useEffect(() => {
     let active = true;
@@ -154,66 +182,52 @@ export default function ShopPage() {
     }
   }
 
-  return <main className="shop-quick-page">
+  return <main className="shop-quick-page shop-compact">
     <SiteHeader />
     <section className="shop-quick-shell" id="contenu" aria-labelledby="shop-title">
-      <header className="shop-quick-header">
-        <div><span className="kicker">BOUTIQUE COBBLESTAR</span><h1 id="shop-title">Ton aventure.<br/><em>Tes Stars.</em></h1><p>Un grade, un compagnon, une nouvelle apparence. Trouve ce qui te ressemble et soutiens le serveur avec tes Stars.</p><nav className="shop-section-nav" aria-label="Dans la boutique"><a href="#stars">Les Stars</a><a href="#grades">Les grades</a><a href="#catalogue">Le catalogue</a></nav></div>
-        <img className="astral-shop-hero-art" src="/astral/assets/stars-640.webp" alt="" width="400" height="226"/>
+      <header className="store-intro">
+        <div><span className="kicker">BOUTIQUE COBBLESTAR</span><h1 id="shop-title">Choisis <em>ton grade.</em></h1><p>Les tags du serveur, des avantages en jeu et une façon de soutenir CobbleStar.</p></div>
+        <img src="/astral/assets/stars-640.webp" alt="" width="400" height="226" />
       </header>
-      <p className="shop-opening-note"><strong>Ouverture à venir.</strong> Découvre les offres prévues. Les achats en jeu seront accessibles à l’ouverture du serveur.</p>
-
-      <div className="shop-quick-account-row">
-        <section className="shop-v2-account" aria-label="État de ton compte boutique">
-        <div className="shop-v2-player">
-          <span className="shop-v2-avatar">{username ? <img src={`https://mc-heads.net/avatar/${encodeURIComponent(username)}/96`} alt={`Tête Minecraft de ${username}`} /> : "?"}</span>
-          <div><small>COMPTE DE LIVRAISON</small><h2>{loading ? "Vérification…" : username || (account ? "Minecraft à lier" : "Ton compte joueur")}</h2><p>{loading ? "Nous récupérons ton portefeuille." : linked ? "Compte Minecraft vérifié." : account ? "Discord connecté. Lie Minecraft avec /link." : "Connecte-toi avant de finaliser un achat."}</p></div>
+      <p className="store-opening"><strong>Ouverture à venir.</strong> Les offres en jeu seront accessibles à l’ouverture du serveur.</p>
+      <div className="store-toolbar" id="store-navigation">
+        <div className="store-tabs" role="tablist" aria-label="Dans la boutique">{shopTabs.map((tab,index)=><button key={tab.id} id={`tab-${tab.id}`} type="button" role="tab" aria-selected={activeTab===tab.id} aria-controls={tab.id} tabIndex={activeTab===tab.id?0:-1} onClick={()=>selectTab(tab.id)} onKeyDown={event=>{
+          const next = event.key === "ArrowRight" ? (index+1)%shopTabs.length : event.key === "ArrowLeft" ? (index+shopTabs.length-1)%shopTabs.length : event.key === "Home" ? 0 : event.key === "End" ? shopTabs.length-1 : -1;
+          if(next>=0){event.preventDefault();selectTab(shopTabs[next].id,true);}
+        }}>{tab.label}</button>)}</div>
+        <div className="store-account" aria-label="Ton compte boutique">
+          {loading ? <span>Chargement du compte…</span> : !account ? <Link href="/compte/">Se connecter →</Link> : <><span>{username || "Minecraft à lier"}</span><strong><StarsArt />{balance.toLocaleString("fr-FR")} Stars</strong>{!linked && <button type="button" onClick={()=>setLinkOpen(true)}>Lier Minecraft</button>}</>}
         </div>
-        <div className="shop-v2-wallet"><small>MON SOLDE</small><strong><StarsArt />{balance.toLocaleString("fr-FR")} <span>Stars</span></strong><em>{linked ? "Compte Minecraft vérifié" : "Liaison requise avant achat"}</em></div>
-        {!loading && !account && <Link className="shop-v2-account-action" href="/compte/">Se connecter <span>→</span></Link>}
-        {!loading && account && !linked && <button className="shop-v2-account-action" type="button" onClick={() => setLinkOpen(true)}>Lier mon compte Minecraft <span>→</span></button>}
-        {!loading && linked && <span className="shop-v2-ready">✓ Portefeuille prêt à recevoir tes Stars</span>}
-        </section>
-        <img src="/media/cobblestar-logo-480.webp" alt="" aria-hidden="true" />
       </div>
-
-      <section className="shop-quick-purchase" id="stars" aria-labelledby="shop-packs-title">
-      <div className="shop-v2-heading">
-        <div><h2 id="shop-packs-title">Fais le plein de Stars.</h2></div>
-        <p>Montant payé une seule fois. Les bonus sont déjà inclus dans le total affiché.</p>
-      </div>
-
-      <div className="shop-v2-packs">
-        {starPacks.map((pack) => <article className={`shop-v2-pack tone-${pack.tone}${pack.popular ? " is-popular" : ""}`} key={pack.stars}>
-          {pack.popular && <span className="shop-v2-popular">+ 20 % DE STARS</span>}
-          <div className="shop-v2-star"><StarsArt large /></div>
-          <small>STARS CRÉDITÉES</small>
-          <strong>{pack.stars.toLocaleString("fr-FR")}</strong>
-          <span className="shop-v2-unit">Stars créditées</span>
-          <div className="shop-v2-price"><b>{pack.price}</b><small>Paiement unique</small></div>
-          <p>{pack.bonus || "Le format idéal pour découvrir la boutique."}</p>
-          <button type="button" onClick={(event) => { packTrigger.current = event.currentTarget; setSelectedPack(pack); setRechargeMessage(""); setRechargeComplete(false); }}>Choisir {pack.price} <span>→</span></button>
-        </article>)}
-      </div>
+      <section id="grades" role="tabpanel" aria-labelledby="tab-grades" tabIndex={0} hidden={activeTab!=="grades"} className="store-panel">
+        <div className="store-panel-heading"><h2>Les grades du serveur</h2><p>Un mois · renouvellement manuel · sans abonnement</p></div>
+        <div className="store-ranks">{ranks.map((rank,index)=>{
+          const presentation = rankPresentation[index];
+          return <article className={`store-rank store-rank-${index}`} key={rank.id}>
+            <div className="store-tag-stage"><img src={`/shop/ranks/${presentation.tags[0]}.png`} alt={`Tag ${rank.name.split(" · ")[0]} en jeu`} />{presentation.tags[1] && <img className="store-tag-variant" src={`/shop/ranks/${presentation.tags[1]}.png`} alt="Seconde variante incluse" />}</div>
+            <div className="store-rank-body"><h3>{rank.name.split(" · ")[0]}</h3><strong className="shop-star-price"><StarsArt/>{rank.starsPrice.toLocaleString("fr-FR")} <span>Stars / mois</span></strong>
+            <ul className="store-highlights">{presentation.highlights.map(text=><li key={text}>{text}</li>)}</ul>
+            <details><summary>Tous les avantages</summary><ul>{rank.benefits?.map(benefit=><li key={benefit}>{benefit}</li>)}</ul></details>
+            <button className="store-action" type="button" onClick={()=>selectTab("stars",true)}>Voir les packs de Stars <span aria-hidden="true">→</span></button>
+            </div>
+          </article>;
+        })}</div>
+        <p className="store-caption">Achat et renouvellement dans <code>/boutique</code> en jeu. Cadeaux réservés au premier achat de chaque grade ; conditions détaillées dans les avantages.</p>
       </section>
-
-      <section className="shop-grades" id="grades" aria-labelledby="grades-title">
-        <div className="shop-section-heading"><div><h2 id="grades-title">Trouve ton étoile.</h2><p>Trois grades, un mois d’aventure. Renouvellement manuel en Stars, sans abonnement automatique.</p></div><img src="/astral/assets/ranks.svg" width="160" height="120" alt="" loading="lazy"/></div>
-        <div className="shop-rank-grid">{ranks.map((rank,index)=><article className={`shop-rank rank-${index}`} key={rank.id}>
-          <div className="rank-symbol" aria-hidden="true">{["✦","✦ ✦","✦ ✦ ✦"][index]}</div><h3>{rank.name.split(" · ")[0]}</h3><p className="rank-duration">Un mois · renouvellement manuel</p>
-          <strong className="shop-star-price"><StarsArt/>{rank.starsPrice.toLocaleString("fr-FR")} <span>Stars / mois</span></strong>
-          <p>{rank.description}</p><details><summary>Tous les avantages</summary><ul>{rank.benefits?.map(benefit=><li key={benefit}>{benefit}</li>)}</ul></details><p className="shop-in-game">À retrouver dans <code>/boutique</code></p>
+      <section id="stars" role="tabpanel" aria-labelledby="tab-stars" tabIndex={0} hidden={activeTab!=="stars"} className="store-panel">
+        <div className="store-panel-heading"><h2>Choisis tes Stars.</h2><p>Paiement unique. Bonus déjà inclus dans les totaux.</p></div>
+        <div className="store-packs">{starPacks.map(pack=><article className="store-pack" key={pack.stars}>
+          <StarsArt large /><h3>{pack.stars.toLocaleString("fr-FR")} <span>Stars</span></h3><p>{pack.bonus || "Pack découverte"}</p><button className="store-action" type="button" onClick={event=>{packTrigger.current=event.currentTarget;setSelectedPack(pack);setRechargeMessage("");setRechargeComplete(false);}} aria-label={`Choisir ${pack.stars.toLocaleString("fr-FR")} Stars pour ${pack.price}`}>{pack.price} <span aria-hidden="true">→</span></button>
         </article>)}</div>
-        <p className="shop-rank-note">Les cadeaux de bienvenue sont réservés au premier achat du grade. Les commandes de progression restent soumises à leurs conditions habituelles.</p>
+        <p className="store-caption">Les Stars sont une monnaie virtuelle, non convertible en argent. Un compte Minecraft lié est nécessaire pour recevoir ta recharge.</p>
       </section>
-      <section className="shop-quick-catalog" id="catalogue" aria-labelledby="catalog-title">
-        <div className="shop-v2-catalog-heading"><h2 id="catalog-title">À chacun sa collection.</h2><p>Consulte les offres, puis retrouve-les en jeu avec <code>/boutique</code>.</p></div>
+      <section id="catalogue" role="tabpanel" aria-labelledby="tab-catalogue" tabIndex={0} hidden={activeTab!=="catalogue"} className="store-panel">
+        <div className="store-panel-heading"><h2>Complète ta collection.</h2><p>À retrouver dans <code>/boutique</code> en jeu.</p></div>
         <div className="shop-filters" role="group" aria-label="Filtrer le catalogue">{categories.map(filter=><button type="button" key={filter.id} aria-pressed={category===filter.id} onClick={()=>setCategory(filter.id)}>{filter.label}</button>)}</div>
-        <p className="shop-results" aria-live="polite">{visibleProducts.length} offres</p>
-        <div className="shop-product-grid">{visibleProducts.map(item=><article className="shop-product" key={item.id}><span className="product-symbol" aria-hidden="true">{item.category==="keys"?"⚿":item.category==="companions"?"✧":item.category==="collection"?"◈":"✦"}</span><span className="product-category">{categories.find(filter=>filter.id===item.category)?.label}</span><h3>{item.name}</h3><p>{item.description}</p><strong className="shop-star-price"><StarsArt/>{item.starsPrice.toLocaleString("fr-FR")} <span>Stars</span></strong></article>)}</div>
+        <p className="store-caption" aria-live="polite">{visibleProducts.length} offres</p>
+        <div className="store-products">{catalog.map(item=><article className="store-product" hidden={category!=="all" && item.category!==category} key={item.id}><h3>{item.name}</h3><p>{item.description}</p><strong className="shop-star-price"><StarsArt/>{item.starsPrice.toLocaleString("fr-FR")} <span>Stars</span></strong></article>)}</div>
       </section>
-
-      <aside className="shop-quick-trust"><span>PACK DE STARS : PAIEMENT UNIQUE</span><span>LIVRAISON AUTOMATIQUE</span><span>GRADES : RENOUVELLEMENT MANUEL</span><p>Les Stars sont une monnaie virtuelle sans valeur monétaire réelle et ne peuvent pas être reconverties en argent. Un grade dure un mois ; ses cadeaux sont réservés au premier achat de ce grade.</p></aside>
+      <details className="store-help"><summary>Comment acheter ? Comptes, Stars et renouvellement</summary><div>{SHOP_FAQ.map(entry=><section key={entry.question}><h2>{entry.question}</h2><p>{entry.answer}</p></section>)}</div></details>
     </section>
 
     {selectedPack && <div className="shop-v2-overlay" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setSelectedPack(null); }}>
@@ -232,7 +246,6 @@ export default function ShopPage() {
     </div>}
 
     <MinecraftLinkGate open={linkOpen} onClose={() => setLinkOpen(false)} context="achat" />
-    <FaqSection title="Questions sur la boutique" id="faq-boutique" items={SHOP_FAQ} />
     <FaqStructuredData faqItems={SHOP_FAQ} pageUrl="/boutique/" />
     <SiteFooter />
   </main>;
