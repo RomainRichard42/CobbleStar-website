@@ -1,4 +1,5 @@
 import { randomUUID } from "node:crypto";
+import { exposeDiscordClient, releaseDiscordClient } from "./discord-runtime.js";
 import { gtsMessage } from "./discord-gts-message.js";
 import {
   ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, ChannelType, Client,
@@ -92,6 +93,7 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
   async function stop() {
     if (stopped) return;
     stopped = true;
+    releaseDiscordClient(client);
     if (timer) clearInterval(timer);
     client.destroy();
     try { await lock.query("SELECT RELEASE_LOCK(?)", [lockName]); } finally { lock.release(); }
@@ -541,6 +543,7 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
     await referrals.campaign(g.id);
     await snapshotInvites(g);
     timer=setInterval(()=>safe(tick),5000);
+    exposeDiscordClient(client);
     log.info("Bot CobbleStar connecté ; commandes /ticket, /csconfig et /evenement disponibles.");
     return stop;
   } catch(error) { await stop(); throw error; }

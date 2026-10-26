@@ -4,6 +4,7 @@ import { createServer } from "node:http";
 import { readFile, realpath, stat } from "node:fs/promises";
 import { resolve, extname, sep, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { discordPreview, discordMembersPreview } from "./discord-preview-data.mjs";
 
 const root = await realpath(resolve(dirname(fileURLToPath(import.meta.url)), "../out"));
 const port = Number(process.argv[2] ?? 3001);
@@ -37,7 +38,7 @@ const noticeScript = `
 const notice = document.createElement('aside');
 notice.setAttribute('role','note');
 notice.style.cssText='position:sticky;top:0;z-index:2147483647;background:#f4cf72;color:#100b23;padding:14px 20px;font:600 15px/1.5 Arial,sans-serif;text-align:center;';
-notice.textContent='APERÇU LOCAL — données fictives, compteurs à zéro. Aucun serveur connecté. Modifications en jeu désactivées.';
+notice.textContent='APERÇU LOCAL — données fictives. Aucun serveur connecté. Toutes les modifications sont désactivées.';
 document.body.prepend(notice);
 document.title='[APERÇU LOCAL] '+document.title;
 `;
@@ -55,6 +56,8 @@ const server = createServer(async (request, response) => {
     const pathname = decodeURIComponent(url.pathname);
     const route = pathname.replace(/\/+$/, "");
     if (route === "/api/admin/stats") return json(200, dashboard);
+    if (route === "/api/admin/discord") return json(200, discordPreview);
+    if (route === "/api/admin/discord/members") return json(200, discordMembersPreview);
     if (route === "/api/admin/game/players") {
       const query = (url.searchParams.get("q") ?? "").toLowerCase();
       const found = !query || demoProfile.username.toLowerCase().includes(query) || uuid.includes(query);

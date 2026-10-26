@@ -21,6 +21,7 @@ import { getEconomyPolicy } from "./economy-policy.js";
 import { activateSubscription, canPurchaseTier, lockedSubscription, paidTiers, type PaidTier } from "./paid-subscriptions.js";
 import { findVoteSite, getVoteSites, playerVoteUrl } from "./votes.js";
 import { canReadGame, registerGameAdmin } from "./game-admin.js";
+import { registerDiscordAdmin } from "./discord-admin.js";
 import { registerQuestStudio } from "./quest-studio.js";
 import { registerArenaStudio } from "./arena-studio.js";
 import { registerStarStudio } from "./star-studio.js";
@@ -398,6 +399,7 @@ app.get("/api/me", { preHandler: requireAccount }, async (request, reply) => {
 
 registerDiscordBridge(app, request => serverKeyMatches(serverKeyFrom(request)));
 registerGameAdmin(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
+registerDiscordAdmin(app, { session: loadSession });
 registerQuestStudio(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerArenaStudio(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerStarStudio(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
