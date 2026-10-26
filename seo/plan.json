@@ -54,7 +54,8 @@
     "Consulter Search Console : clics, impressions, CTR, positions par requête et page, couverture et Core Web Vitals lorsqu’il y a assez de données.",
     "Comparer 28 jours aux 28 précédents, signaler l’absence de données plutôt que d’inventer des résultats.",
     "Corriger les erreurs techniques vérifiées ; améliorer un guide existant ou créer une page utile seulement sur un sujet confirmé par le serveur.",
-    "Vérifier liens internes, contenu complet dans le HTML, mobile, poids des médias, dates et cohérence des fonctionnalités annoncées."
+    "Vérifier liens internes, contenu complet dans le HTML, mobile, poids des médias, dates et cohérence des fonctionnalités annoncées.",
+    "Contrôler les liens internes, les ancres, les images et les statuts HTTP avec le rapport étendu ; mettre à jour public-site/src/lib/revisions.ts uniquement après modification réelle des pages concernées."
   ],
   "monthly": [
     "Revoir les intentions de recherche et les pages qui reçoivent des impressions sans clics.",
@@ -63,8 +64,8 @@
   ],
   "nextPriorities": [
     "Recueillir les premières données avant de fixer des objectifs de progression chiffrés.",
-    "Confronter les anciennes promesses de la page d’accueil aux fonctionnalités réellement actives et à la roadmap.",
-    "Ajouter des captures du serveur et des exemples vérifiés aux guides les plus consultés."
+    "Ajouter des captures du serveur et des exemples vérifiés aux guides les plus consultés.",
+    "Renforcer les guides des métiers, du GTS et des raids à partir de leurs règles en jeu vérifiées ; publier dans le CMS pour conserver une seule source de contenu."
   ],
   "publicationRules": [
     "Ne pas modifier artificiellement les dates.",
@@ -84,8 +85,21 @@
     "performanceData": "Processing — no baseline yet",
     "homeIndexing": {
       "inspectedAt": "2026-10-26",
-      "status": "URL unknown to Google",
-      "requestStatus": "Indexing requested — priority crawl queue"
+      "status": "Page is indexed — URL is on Google",
+      "evidence": "Search Console URL Inspection",
+      "ranking": "Not yet measured; indexation is not a ranking guarantee"
     }
+  },
+  "confirmedAvailability": {
+    "date": "2026-10-26",
+    "source": "Server owner confirmation",
+    "features": [
+      "métiers",
+      "raids",
+      "GTS",
+      "pension",
+      "quêtes",
+      "Battle Pass"
+    ]
   }
 }

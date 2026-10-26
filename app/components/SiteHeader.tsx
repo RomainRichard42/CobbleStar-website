@@ -91,7 +91,7 @@ export default function SiteHeader() {
         </div>
         <header className="nav-wrap">
           <a className="brand" href="/" aria-label="CobbleStar — Accueil">
-            <span className="brand-mark"><img src="/cobblestar-logo.png" alt="" /></span>
+            <span className="brand-mark"><img src="/media/cobblestar-logo-128.webp" alt="" width="54" height="54" /></span>
             <span>Cobble<span>Star</span><small>ASTERIA × NÉBÉLIA</small></span>
           </a>
           <nav aria-label="Navigation principale">

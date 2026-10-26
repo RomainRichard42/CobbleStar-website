@@ -166,7 +166,7 @@ export default function ShopPage() {
         {!loading && account && !linked && <button className="shop-v2-account-action" type="button" onClick={() => setLinkOpen(true)}>Lier mon compte Minecraft <span>→</span></button>}
         {!loading && linked && <span className="shop-v2-ready">✓ Portefeuille prêt à recevoir tes Stars</span>}
         </section>
-        <img src="/cobblestar-logo.png" alt="" aria-hidden="true" />
+        <img src="/media/cobblestar-logo-480.webp" alt="" aria-hidden="true" />
       </div>
 
       <section className="shop-quick-purchase" id="stars" aria-labelledby="shop-packs-title">

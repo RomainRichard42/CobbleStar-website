@@ -29,21 +29,19 @@ export const metadata: Metadata = {
       "Serveur Minecraft Cobblemon francophone. Launcher, boutique et vote directement liés à ton compte joueur.",
     images: [
       {
-        url: "/cobblestar-logo.png",
-        width: 1024,
-        height: 1024,
+        url: "/media/cobblestar-logo-480.webp",
+        width: 480,
+        height: 480,
         alt: "Mascotte Dragonite de CobbleStar sur un nuage",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    site: "@cobblestar_mc",
-    creator: "@cobblestar_mc",
     title: "CobbleStar",
     description:
       "Serveur Minecraft Cobblemon 1.21.1 en français. Lance, vote, personnalise et progresse.",
-    images: ["/cobblestar-logo.png"],
+    images: ["/media/cobblestar-logo-480.webp"],
   },
   robots: {
     index: true,
@@ -60,9 +58,9 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   icons: {
-    icon: [{ url: "/cobblestar-logo.png", sizes: "any" }],
-    shortcut: "/cobblestar-logo.png",
-    apple: "/cobblestar-logo.png",
+    icon: [{ url: "/media/favicon-96.png", sizes: "96x96", type: "image/png" }],
+    shortcut: "/media/favicon-96.png",
+    apple: "/media/apple-touch-icon.png",
   },
 };
 

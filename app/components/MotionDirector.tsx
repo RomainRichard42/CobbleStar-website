@@ -127,5 +127,5 @@ export default function MotionDirector() {
     };
   }, [pathname]);
 
-  return <div ref={layerRef} className="site-motion-layer" aria-hidden="true"><span ref={cursorRef} className="site-brand-cursor"><img src="/cobblestar-logo.png" alt="" width={42} height={42} decoding="async" /></span><span ref={progressRef} className="site-scroll-progress" /></div>;
+  return <div ref={layerRef} className="site-motion-layer" aria-hidden="true"><span ref={cursorRef} className="site-brand-cursor"><img src="/media/cobblestar-logo-128.webp" alt="" width={42} height={42} decoding="async" /></span><span ref={progressRef} className="site-scroll-progress" /></div>;
 }

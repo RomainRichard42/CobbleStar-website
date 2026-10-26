@@ -13,9 +13,8 @@ export const BASE_KEYWORDS = [
   "Minecraft 1.21.1",
   "modpack Cobblemon",
   "launcher CobbleStar",
-  "guildes Cobblestone",
   "saison Cobblemon",
   "pokémon Minecraft",
 ];
 
-export const OG_IMAGE = "/cobblestar-logo.png";
+export const OG_IMAGE = "/media/cobblestar-logo-480.webp";

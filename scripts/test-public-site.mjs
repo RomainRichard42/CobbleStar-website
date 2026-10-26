@@ -35,11 +35,17 @@ test('publishing immediately creates real article URLs, drafts stay private and 
   const missing=await get('/actualites/does-not-exist/');assert.equal(missing.response.status,404);assert.ok(missing.html.includes('noindex,follow'));
 });
 test('sitemap, RSS and redirects stay canonical without indexing private pages',async()=>{
-  const map=await get('/sitemap.xml');assert.equal(map.response.status,200);assert.ok(map.html.includes('/wiki/'));assert.ok(!map.html.includes('/admin/'));assert.ok(!map.html.includes('/compte/'));assert.ok(!map.html.includes('<lastmod>'));assert.ok(map.html.includes('/actualites/'+news.content.articles[0].slug+'/'));
+  const map=await get('/sitemap.xml');assert.equal(map.response.status,200);assert.ok(map.html.includes('/wiki/'));assert.ok(!map.html.includes('/admin/'));assert.ok(!map.html.includes('/compte/'));assert.ok(map.html.includes('/rejoindre/</loc><lastmod>2026-10-26</lastmod>'));assert.ok(!/<url><loc>[^<]+\/wiki\/[^<]*<\/loc><lastmod>/.test(map.html));assert.ok(map.html.includes('/actualites/'+news.content.articles[0].slug+'/'));
   const rss=await get('/actualites/rss.xml');assert.equal(rss.response.status,200);assert.ok(rss.html.includes('<rss version="2.0">'));
   for(const [from,to] of [['/wiki','/wiki/'],['/wiki/index.html','/wiki/'],['/rejoindre','/rejoindre/']]){const r=await get(from);assert.equal(r.response.status,308);assert.equal(r.response.headers.get('location'),to);}
   assert.ok((await get('/robots.txt')).html.includes('Sitemap: https://cobblestar-mc.fr/sitemap.xml'));
   const www=await app.inject({url:'/wiki?source=discord',headers:{host:'www.cobblestar-mc.fr'}});
   assert.equal(www.statusCode,308);assert.equal(www.headers.location,'https://cobblestar-mc.fr/wiki/?source=discord');
   const api=await app.inject({url:'/api/test',headers:{host:'www.cobblestar-mc.fr'}});assert.equal(api.statusCode,200);
+});
+test('Google site identity and social article metadata match the public document',async()=>{
+  const home=await get('/');const data=[...home.html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].flatMap(m=>JSON.parse(m[1]));
+  const websites=data.filter(d=>d['@type']==='WebSite');assert.equal(websites.length,1);assert.equal(websites[0].name,'CobbleStar');assert.equal(websites[0].url,'https://cobblestar-mc.fr/');
+  assert.match(home.html,/sizes="96x96" href="\/media\/favicon-96.png"/);
+  const article=await get('/actualites/'+news.content.articles[0].slug+'/');assert.ok(article.html.includes('property="og:type" content="article"'));assert.ok(article.html.includes('property="article:published_time" content="'+news.content.articles[0].publishedAt+'"'));
 });
