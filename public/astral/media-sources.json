@@ -39,5 +39,18 @@
       "stars-640.webp"
     ],
     "processing": "Recadrage des marges transparentes, redimensionnement et compression WebP. Illustration inchangée."
+  },
+  {
+    "title": "Stars CobbleStar — contour épais",
+    "name": "stars-coins-v3.png",
+    "source": "Image fournie par CobbleStar le 27 octobre 2026",
+    "derivatives": [
+      "stars-96-v3.webp",
+      "stars-320-v3.webp",
+      "stars-640-v3.webp",
+      "stars-button-v3.webp"
+    ],
+    "processing": "Source PNG conservée à l’identique. Marges transparentes retirées et déclinaisons WebP optimisées, dessin inchangé.",
+    "usage": "Monnaie Stars : menu, portefeuille, compte joueur, boutique, boutique en jeu, accueil et aperçu social."
   }
 ]

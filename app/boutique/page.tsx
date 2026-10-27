@@ -188,7 +188,7 @@ export default function ShopPage() {
     <section className="shop-quick-shell" id="contenu" aria-labelledby="shop-title">
       <header className="store-intro">
         <div><span className="kicker">BOUTIQUE COBBLESTAR</span><h1 id="shop-title">Choisis <em>ton grade.</em></h1><p>Les tags du serveur, des avantages en jeu et une façon de soutenir CobbleStar.</p></div>
-        <img src="/astral/assets/stars-640.webp" alt="" width="400" height="226" />
+        <img src="/astral/assets/stars-640-v3.webp" alt="" width="400" height="226" />
       </header>
       <p className="store-opening"><strong>Ouverture à venir.</strong> Les offres en jeu seront accessibles à l’ouverture du serveur.</p>
       <div className="store-toolbar" id="store-navigation">

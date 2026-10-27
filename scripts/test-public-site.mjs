@@ -77,14 +77,14 @@ test('Google site identity and social article metadata match the public document
 
 test('Astral covers public and player pages while admin keeps its own shell',async()=>{
   for(const path of ['/','/wiki/','/wiki/welcome/','/actualites/','/rejoindre/','/roadmap/','/minecraft-pokemon/','/telecharger/','/confidentialite/','/boutique/','/compte/','/vote/']){
-    const {response,html}=await get(path);assert.equal(response.status,200,path);assert.match(html,/class="astral-header site-header"/,path);assert.match(html,/\/astral\/assets\/stars-button.webp/,path);
+    const {response,html}=await get(path);assert.equal(response.status,200,path);assert.match(html,/class="astral-header site-header"/,path);assert.match(html,/\/astral\/assets\/stars-button-v3.webp/,path);
   }
   for(const path of ['/admin/','/admin/discord/','/wiki/admin/','/actualites/admin/']){
     const {html}=await get(path);assert.ok(!html.includes('class="astral-header site-header"'),path);
   }
   const home=await get('/');assert.ok(!home.html.includes('local-gameplay'));assert.match(home.html,/\/astral\/journey\.js\?v=[a-z0-9-]+/);assert.ok(home.html.includes('prefers')||home.html.includes('motion.js'));assert.ok(home.html.includes('Ouverture à venir'));
   assert.ok(!home.html.includes('id="step-prev"'));assert.ok(!home.html.includes('id="step-next"'));
-  const image=await get('/astral/assets/stars-320.webp');assert.equal(image.response.status,200);assert.match(image.response.headers.get('content-type'),/image\/webp/);
+  const image=await get('/astral/assets/stars-320-v3.webp');assert.equal(image.response.status,200);assert.match(image.response.headers.get('content-type'),/image\/webp/);
 });
 
 test('shop publishes game catalogue prices and wiki headings have working outline targets',async()=>{
