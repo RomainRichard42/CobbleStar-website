@@ -12,7 +12,7 @@ test('public dex exposes only published Star and compatible native species',asyn
  assert.ok(entries.some(e=>e.id==='native-pikachu'));assert.ok(!entries.some(e=>e.species==='cobblestar_egg'));assert.equal(entries.find(e=>e.species==='missing_template').assetUrl,'');assert.equal(await dex.asset('native-missing_template'),null);
  assert.ok(entries.some(e=>e.id==='star-dragonite-base'));assert.ok(!JSON.stringify(entries).includes('private'));
  assert.equal(await dex.asset('star-unpublished-base'),null);assert.equal(await dex.asset('star-dragonite-ash'),null);assert.equal(await dex.asset('../../.env'),null);assert.equal(await dex.asset('native-unlisted'),null);
- assert.deepEqual(Object.keys(await dex.asset('star-dragonite-base')).sort(),['model','species','texture']);
+ assert.deepEqual(Object.keys(await dex.asset('star-dragonite-base')).sort(),['model','motion','species','texture']);
  const normal=await dex.asset('native-pikachu');assert.equal(normal.species,'pikachu');assert.ok(normal.model['minecraft:geometry'][0].bones.length);
  const app=Fastify();registerPublicDex(app,dex);const response=await app.inject('/api/pokedex/star-unpublished-base/asset');assert.equal(response.statusCode,404);assert.equal(response.headers['cache-control'],'no-store');await app.close();
 });

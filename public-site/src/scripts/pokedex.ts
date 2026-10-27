@@ -15,18 +15,32 @@ const library=()=>import('./dex-renderer');
 const assets=new Map<string,PreviewAsset>();
 async function asset(url:string){if(assets.has(url))return assets.get(url)!;const response=await fetch(url,{signal:AbortSignal.timeout(20000)});if(!response.ok)throw new Error('Aperçu indisponible. Réessaie dans un instant.');const data=await response.json() as {asset:PreviewAsset};if(assets.size>=24)assets.delete(assets.keys().next().value!);assets.set(url,data.asset);return data.asset;}
 let queue=Promise.resolve();
-const observer=new IntersectionObserver(entries=>{for(const entry of entries){if(!entry.isIntersecting)continue;const card=entry.target as HTMLElement;if(card.hidden||card.dataset.rendered||!card.dataset.asset)continue;observer.unobserve(card);queue=queue.then(async()=>{
- if(card.hidden){observer.observe(card);return;}
+const visible=new Set<HTMLElement>(),loading=new Set<HTMLElement>();
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+let paused=reduced.matches,dead=false,lastFrame=0,elapsed=0,previous=0;
+const pauses=[document.getElementById('dex-pause')!,document.getElementById('dex-view-pause')!];
+function updatePause(){for(const pause of pauses){pause.setAttribute('aria-pressed',String(paused));pause.textContent=paused?'Reprendre les animations':'Mettre les animations en pause';}}
+pauses.forEach(pause=>pause.addEventListener('click',()=>{paused=!paused;updatePause();}));
+reduced.addEventListener('change',()=>{paused=reduced.matches;updatePause();});updatePause();
+function paint(card:HTMLElement,time:number){const canvas=card.querySelector('canvas');if(!canvas||!thumb?.show(card.dataset.asset!,time))return;const ctx=canvas.getContext('2d')!;ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(thumb.canvas,0,0);}
+const observer=new IntersectionObserver(entries=>{for(const entry of entries){const card=entry.target as HTMLElement;if(!entry.isIntersecting){visible.delete(card);continue;}visible.add(card);if(card.hidden||loading.has(card)||!card.dataset.asset||thumb?.has(card.dataset.asset))continue;loading.add(card);queue=queue.then(async()=>{
+ if(card.hidden){loading.delete(card);return;}
  const portrait=card.querySelector('.dex-portrait')!;
- try{thumb??=(await library()).createDexRenderer();thumb.resize(320,256);await thumb.set(await asset(card.dataset.asset!));const canvas=document.createElement('canvas');canvas.width=320;canvas.height=256;canvas.setAttribute('aria-hidden','true');canvas.getContext('2d')!.drawImage(thumb.canvas,0,0);portrait.replaceChildren(canvas);card.dataset.rendered='true';}
+ try{thumb??=(await library()).createDexRenderer();thumb.resize(320,256);await thumb.set(await asset(card.dataset.asset!),card.dataset.asset);const canvas=document.createElement('canvas');canvas.width=320;canvas.height=256;canvas.setAttribute('aria-hidden','true');portrait.replaceChildren(canvas);card.dataset.rendered='true';paint(card,elapsed);}
  catch{portrait.textContent='Aperçu indisponible';}
+ finally{loading.delete(card);}
  });}}, {rootMargin:'150px'});
+function animate(now:number){if(dead)return;const delta=previous?Math.min((now-previous)/1000,.1):0;previous=now;
+ if(!paused&&!document.hidden){elapsed+=delta;if(now-lastFrame>=1000/(dialog.open?30:12)){lastFrame=now;if(dialog.open)viewer?.tick(elapsed);else for(const c of visible)if(!c.hidden&&!loading.has(c))paint(c,elapsed);}}
+ requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
 function filter(){
  const terms=normalize(search.value).trim().split(/\s+/).filter(Boolean);
  const matches=cards.filter(c=>(category==='all'||c.dataset.collection===category)&&terms.every(t=>normalize([c.dataset.name,c.dataset.species,c.dataset.collection,c.dataset.form].join(' ')).includes(t)));
  matches.sort((a,b)=>{const prefix=sort.value==='collection'?(a.dataset.collection||'').localeCompare(b.dataset.collection||'','fr'):0;return prefix||(a.dataset.name||'').localeCompare(b.dataset.name||'','fr')||(a.dataset.form||'').localeCompare(b.dataset.form||'','fr');});
- for(const c of cards){c.hidden=true;observer.unobserve(c);}
- for(const [i,c] of matches.entries()){grid.append(c);c.hidden=i>=limit;if(!c.hidden&&!c.dataset.rendered)observer.observe(c);}
+ visible.clear();for(const c of cards){c.hidden=true;observer.unobserve(c);}
+ for(const [i,c] of matches.entries()){grid.append(c);c.hidden=i>=limit;if(!c.hidden)observer.observe(c);}
  status.textContent=`${matches.length} apparence${matches.length>1?'s':''} · ${Math.min(limit,matches.length)} affichée${Math.min(limit,matches.length)>1?'s':''}`;
  more.hidden=matches.length<=limit;document.getElementById('dex-empty')!.hidden=matches.length>0;
 }
@@ -48,6 +62,6 @@ dialog.addEventListener('close',()=>{opening++;viewer?.dispose();viewer=undefine
 dialog.querySelectorAll<HTMLButtonElement>('[data-turn]').forEach(b=>b.addEventListener('click',()=>viewer?.turn(Number(b.dataset.turn)*Math.PI/6)));
 dialog.querySelectorAll<HTMLButtonElement>('[data-zoom]').forEach(b=>b.addEventListener('click',()=>viewer?.zoom(Number(b.dataset.zoom))));
 document.getElementById('dex-reset')!.addEventListener('click',()=>viewer?.reset());
-window.addEventListener('pagehide',()=>{observer.disconnect();resize.disconnect();thumb?.dispose();viewer?.dispose();thumb=viewer=undefined;});
-window.addEventListener('pageshow',event=>{if(event.persisted){resize.observe(host);filter();}});
+window.addEventListener('pagehide',()=>{dead=true;observer.disconnect();resize.disconnect();thumb?.dispose();viewer?.dispose();thumb=viewer=undefined;});
+window.addEventListener('pageshow',event=>{if(event.persisted){dead=false;previous=0;requestAnimationFrame(animate);resize.observe(host);filter();}});
 filter();

@@ -56,6 +56,7 @@ await cp(join(projectDir, "api", "migrations"), join(deployDir, "migrations"), {
 await cp(join(projectDir, "api", "licenses"), join(deployDir, "licenses"), { recursive: true });
 await cp(join(projectDir, "api", "star-templates"), join(deployDir, "star-templates"), { recursive: true });
 await cp(join(projectDir, "api", "dex-native"), join(deployDir, "dex-native"), { recursive: true });
+await cp(join(projectDir, "api", "dex-runtime"), join(deployDir, "dex-runtime"), { recursive: true });
 await cp(join(projectDir, "api", "dex.catalog.json"), join(deployDir, "dex.catalog.json"));
 await cp(join(projectDir, "api", "star-layers"), join(deployDir, "star-layers"), { recursive: true });
 await cp(join(projectDir, "api", "star-effects"), join(deployDir, "star-effects"), { recursive: true });

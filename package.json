@@ -15,12 +15,13 @@
     "ci": "npm run lint && npm run build:site && npm --prefix api test && npm run test:public && npm run package:kinetic",
     "lint": "eslint app",
     "dev:public": "astro dev --host 127.0.0.1",
-    "test:public": "node --test scripts/test-public-site.mjs",
+    "test:public": "node --test scripts/test-public-site.mjs scripts/test-dex-motion.mjs",
     "audit:seo": "node scripts/seo-audit.mjs"
   },
   "dependencies": {
     "@astrojs/node": "11.1.9",
     "astro": "7.4.2",
+    "molang": "2.0.1",
     "next": "16.4.3",
     "react": "19.2.6",
     "react-dom": "19.2.6",
