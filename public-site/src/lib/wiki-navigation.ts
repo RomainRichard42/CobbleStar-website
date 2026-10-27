@@ -15,7 +15,7 @@ const connections: Record<string,string[]> = {
   legendaries:['capture','mondes','pokemon-star'], quests:['metiers','battlepass','epreuves'],
   metiers:['talents','monnaies','daycare','quests'], talents:['metiers','daycare','grades'],
   grades:['votes','epreuves','album','tags'], battlepass:['quests','raids','boutique'],
-  mondes:['deplacements','clubs','legendaries','pokepark'], pokepark:['mondes','raids','quests'],
+  mondes:['deplacements','clubs','legendaries'],
   raids:['capture','battlepass','epreuves'], epreuves:['ligue','grades','capture'],
   ligue:['epreuves','daycare','ranked'], ranked:['daycare','ligue','grades'],
   monnaies:['gts','pokesell','metiers','boutique'], gts:['pokesell','monnaies','grades','daycare'],

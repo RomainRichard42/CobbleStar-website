@@ -7,7 +7,7 @@ const wiki=publishedWiki(await (Astro.locals as PublicLocals).getWiki());
 const guideList={'@context':'https://schema.org','@type':'ItemList',name:'Guides du serveur CobbleStar',numberOfItems:wiki.articles.length,itemListElement:wiki.articles.map((a,i)=>({'@type':'ListItem',position:i+1,name:a.title,url:SITE+wikiUrl(a)}))};
 const branches=wiki.branches.filter(b=>wiki.articles.some(a=>a.branchId===b.id));
 ---
-<Layout pageType="CollectionPage" title="Wiki CobbleStar — Guides Cobblemon en français" description="Guides Cobblemon du serveur CobbleStar : pension, métiers, GTS, raids, Ligue, PokéPark et collections. Étapes, commandes et réponses aux questions." schema={[breadcrumbs([{name:'Accueil',path:'/'},{name:'Wiki',path:'/wiki/'}]),guideList]}>
+<Layout pageType="CollectionPage" title="Wiki CobbleStar — Guides Cobblemon en français" description="Guides Cobblemon du serveur CobbleStar : pension, métiers, GTS, raids, Ligue et collections. Étapes, commandes et réponses aux questions." schema={[breadcrumbs([{name:'Accueil',path:'/'},{name:'Wiki',path:'/wiki/'}]),guideList]}>
 <main id="contenu" class="public-shell wiki-library">
 <header class="wiki-library-hero"><div><span class="eyebrow">LE WIKI COBBLESTAR</span><h1>Le wiki CobbleStar.</h1><p class="lead">{wiki.content.subtitle}</p><a href="/wiki/welcome/">Tes premiers pas sur le serveur →</a></div><img src="/astral/assets/pasturedpokmon.webp" width="900" height="675" alt="Des Pokémon dans un pâturage de Cobblemon" fetchpriority="high"/></header>
 

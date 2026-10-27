@@ -5,22 +5,45 @@
   "queryMap": [
     {
       "page": "/",
-      "intent": "Trouver un serveur francophone",
+      "intent": "Choisir un serveur Cobblemon francophone et découvrir CobbleStar avant son ouverture.",
       "queries": [
         "cobblestar",
-        "cobblemon fr",
+        "serveur cobblemon",
         "serveur cobblemon français",
-        "serveur cobblemon francophone"
-      ]
+        "serveur cobblemon fr",
+        "cobblemon fr"
+      ],
+      "priority": "P1",
+      "competition": "Forte, estimation qualitative : pages de serveurs et annuaires spécialisés observés.",
+      "successMetric": "Impressions et clics non liés à la marque ; visites des pages de découverte et de préparation."
     },
     {
       "page": "/minecraft-pokemon/",
-      "intent": "Comprendre les Pokémon dans Minecraft et choisir une installation",
+      "intent": "Comprendre comment jouer à Pokémon dans Minecraft, choisir entre solo et serveur, puis identifier le bon pack.",
       "queries": [
         "minecraft pokemon",
         "pokemon minecraft",
-        "cobblemon français"
-      ]
+        "mod pokemon minecraft",
+        "cobblemon français",
+        "jouer pokemon minecraft"
+      ],
+      "priority": "P1",
+      "competition": "Forte, estimation qualitative : projets officiels, médias, serveurs et tutoriels.",
+      "successMetric": "Impressions informationnelles et clics vers installation ou rejoindre."
+    },
+    {
+      "page": "/installer-cobblemon/",
+      "intent": "Installer le modpack officiel en solo et résoudre les erreurs, sans le confondre avec le pack CobbleStar.",
+      "queries": [
+        "installer cobblemon",
+        "comment installer cobblemon",
+        "modpack cobblemon",
+        "cobblemon java",
+        "cobblemon ne se lance pas"
+      ],
+      "priority": "P1",
+      "competition": "Forte ; requêtes précises à confirmer dans Search Console.",
+      "successMetric": "Requêtes longue traîne et clics vers les pages serveur."
     },
     {
       "page": "/rejoindre/",
@@ -107,13 +130,6 @@
       ]
     },
     {
-      "page": "/wiki/pokepark/",
-      "intent": "Préparer une équipe, lancer une expédition et jouer à plusieurs dans les régions du PokéPark.",
-      "queries": [
-        "pokepark cobblestar"
-      ]
-    },
-    {
       "page": "/wiki/battlepass/",
       "intent": "Comprendre les cent paliers, les deux pistes et les actions reconnues avant la fin de saison.",
       "queries": [
@@ -170,7 +186,9 @@
     "Corriger les erreurs techniques vérifiées ; améliorer un guide existant ou créer une page utile seulement sur un sujet confirmé par le serveur.",
     "Vérifier liens internes, contenu complet dans le HTML, mobile, poids des médias, dates et cohérence des fonctionnalités annoncées.",
     "Contrôler les liens internes, les ancres, les images et les statuts HTTP avec le rapport étendu ; mettre à jour public-site/src/lib/revisions.ts uniquement après modification réelle des pages concernées.",
-    "Contrôler les 34 guides, leurs dates individuelles et les aperçus de partage ; vérifier que les maquettes /apercus/ restent noindex. Les dates modifiedAt sont gérées à la publication et ne doivent pas être rafraîchies sans changement de contenu."
+    "Contrôler les guides réellement publiés, leurs dates individuelles et les aperçus de partage ; vérifier que les maquettes /apercus/ restent noindex. Les dates modifiedAt sont gérées à la publication et ne doivent pas être rafraîchies sans changement de contenu.",
+    "Vérifier l’absence de PokéPark dans les pages, le sitemap et /api/wiki tant que le propriétaire n’a pas confirmé son ouverture.",
+    "Vérifier si plusieurs URL se partagent la même requête ; consolider le contenu avant de créer une nouvelle page."
   ],
   "monthly": [
     "Revoir les intentions de recherche et les pages qui reçoivent des impressions sans clics.",
@@ -187,7 +205,8 @@
     "Ne pas publier de pages quasi identiques pour des variantes de mots-clés.",
     "Ne pas publier de statistiques, témoignages ou fonctionnalités non vérifiés.",
     "Conserver les URL existantes et prévoir une redirection permanente si une URL change.",
-    "Ne pas ajouter de traceur tiers sans décision explicite ; Search Console suffit pour le suivi de recherche initial."
+    "Ne pas ajouter de traceur tiers sans décision explicite ; Search Console suffit pour le suivi de recherche initial.",
+    "Une activité retirée n’est pas redirigée vers un sujet différent pour conserver artificiellement son trafic : retour 404 et retrait du sitemap."
   ],
   "architecture": "Astro rend le contenu public en HTML via le serveur Fastify existant. Les callbacks ne fournissent que les documents publiés. Les routes Next de compte, boutique, vote et administration sont conservées. Un changement publié dans le CMS apparaît à la requête suivante, hors cache HTTP public de 60 secondes.",
   "searchConsole": {
@@ -236,11 +255,18 @@
       "Battle Pass"
     ],
     "publicServerOpen": false,
-    "note": "Systèmes préparés, mais serveur non ouvert au public. Précision du propriétaire le 26 octobre 2026. Téléchargements retirés jusqu’à ouverture."
+    "note": "Systèmes préparés, mais serveur non ouvert au public. Précision du propriétaire le 26 octobre 2026. Téléchargements retirés jusqu’à ouverture.",
+    "excludedPublicSystems": [
+      "PokéPark"
+    ],
+    "confirmedOn": "2026-10-27"
   },
   "referenceDocs": [
     "https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl",
-    "https://developers.google.com/search/docs/appearance/site-names"
+    "https://developers.google.com/search/docs/appearance/site-names",
+    "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+    "https://developers.google.com/search/docs/crawling-indexing/special-tags",
+    "https://developers.google.com/crawling/docs/troubleshooting/http-status-codes"
   ],
   "deployment": {
     "publicRevision": "2b36874",
@@ -296,5 +322,65 @@
     "productionErrors": 0,
     "productionWarnings": 0,
     "testsPassed": 17
+  },
+  "keywordResearch": {
+    "date": "2026-10-27",
+    "method": "Analyse qualitative des résultats web et lecture des pages publiques concurrentes ; aucune mesure de volume, difficulté chiffrée ou rang Google localisé.",
+    "searches": [
+      "serveur cobblemon français",
+      "minecraft pokemon serveur français",
+      "installer cobblemon"
+    ],
+    "volumeDataAvailable": false,
+    "competitors": [
+      {
+        "url": "https://pokeisland.fr/",
+        "observation": "Présentation de serveur et contenus éducatifs sur Pokémon dans Minecraft.",
+        "action": "Renforcer la page de découverte et une vraie aide à l’installation."
+      },
+      {
+        "url": "https://pokeblock.fr/",
+        "observation": "Parcours rejoindre, wiki et identité visuelle fortement mis en avant.",
+        "action": "Conserver une DA propre et relier les intentions installation, découverte et systèmes."
+      },
+      {
+        "url": "https://discord.com/servers/tropimon-1087053502561390694",
+        "observation": "Positionnement communautaire et fonctionnalités spécifiques annoncées.",
+        "action": "Documenter les systèmes propres à CobbleStar sans copier les promesses concurrentes."
+      }
+    ],
+    "excludedTargets": [
+      "Minecraft seul et Pokémon seul : trop larges pour servir de priorité au lancement.",
+      "Variantes FR/français/francophone en pages séparées : même intention, risque de duplication.",
+      "Meilleur serveur, gratuit ou sans pay-to-win : ne pas promettre ce qui n’est pas démontré."
+    ],
+    "measurement": "Search Console : France, recherche Web, 28 jours comparés à 28 jours, requêtes de marque et hors marque séparées ; segmenter mobile et ordinateur."
+  },
+  "currentReview": {
+    "date": "2026-10-27",
+    "status": "validated_locally_pending_deployment",
+    "baseline": {
+      "pages": 47,
+      "guides": 34,
+      "links": 307,
+      "images": 27,
+      "errors": 0,
+      "warnings": 0
+    },
+    "searchConsole": "Non consultée ce jour : contrôle du navigateur bloqué. Ne pas extrapoler les chiffres précédents.",
+    "pageSpeed": "API mobile HTTP 429 le 27 octobre ; aucun score ou Core Web Vitals obtenu.",
+    "deployment": "À confirmer après redémarrage Kinetic ; ne pas considérer le push comme une mise en ligne.",
+    "localValidation": {
+      "pages": 47,
+      "guides": 33,
+      "links": 306,
+      "images": 27,
+      "maxClickDepth": 2,
+      "errors": 0,
+      "warnings": 0,
+      "testsPassed": 18,
+      "report": "seo/reports/audit-2026-10-27-after-local.json",
+      "visualMobile": "Non vérifié dans cette session : automatisation Firefox bloquée. Mise en page existante réutilisée."
+    }
   }
 }

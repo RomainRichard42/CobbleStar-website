@@ -39,3 +39,8 @@ Avant déploiement, `/api/wiki` renvoyait `version: 1`, `updatedAt: null` et cin
 - Validation des identifiants, anciens liens, médias locaux et exemples de commandes.
 - Inspection navigateur de la recherche multi-mots, des FAQ et des sommaires ; vues mobiles de 360 et 390 px.
 - Les boutons publics gardent une forme rectangulaire avec des coins de 10 px selon la correction demandée.
+
+
+## Correction de disponibilité du 27 octobre 2026
+
+Le propriétaire confirme que PokéPark n’est pas disponible et ne doit pas être présenté. Le wiki courant contient désormais 33 guides. La catégorie devient « Mondes & exploration » et les mentions dans la capture et les commandes sont corrigées. Le filtre de disponibilité protège également le rendu Astro, l’API publique et le wiki en jeu contre une ancienne publication en base. Les brouillons enregistrés ne sont pas écrasés. Tests de non-régression dans `api/test/wiki-availability.test.mjs` et `scripts/test-public-site.mjs`.

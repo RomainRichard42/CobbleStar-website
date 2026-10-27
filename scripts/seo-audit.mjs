@@ -16,6 +16,10 @@ try{
   const {response,html}=await fetchPage(origin+expected.pathname);const title=html.match(/<title>(.*?)<\/title>/s)?.[1]||'';const description=html.match(/<meta name="description" content="([^"]*)"/)?.[1]||'';const canonical=html.match(/<link rel="canonical" href="([^"]*)"/)?.[1]||'';const h1=(html.match(/<h1(?:\s|>)/g)||[]).length;
   documents.set(expected.pathname,{response,html});
   const errors=[];if(response.status!==200)errors.push('HTTP '+response.status);if(!title)errors.push('Missing title');if(!description)errors.push('Missing description');if(canonical!==url)errors.push('Wrong canonical: '+canonical);if(h1!==1)errors.push('H1 count: '+h1);if(/<meta name="robots" content="[^"]*noindex/.test(html)||/noindex/.test(response.headers.get('x-robots-tag')||''))errors.push('Sitemap page is noindex');
+  if(!/<html[^>]*lang="fr(?:-FR)?"/.test(html))errors.push('Missing French document language');
+  if(!/<meta name="viewport"/.test(html))errors.push('Missing mobile viewport');
+  if(/pok[eé][\s-]?(?:park|parc)/i.test(html))errors.push('Unavailable activity still advertised');
+  if((html.match(/<link rel="canonical"/g)||[]).length!==1)errors.push('Canonical count is not one');
   if(titles.has(title))errors.push('Duplicate title with '+titles.get(title));titles.set(title,url);if(descriptions.has(description))report.warnings.push('Duplicate description: '+url);descriptions.set(description,url);
   const scripts=[...new Set([...html.matchAll(/<script[^>]*src="([^"]+)"/g)].map(m=>m[1]))];
   const ogUrl=html.match(/<meta property="og:url" content="([^"]*)"/)?.[1]||'';
@@ -84,7 +88,16 @@ try{
  report.metrics.crawlerHttpStatus=bot.status;
  const robots=await fetchPage(origin+'/robots.txt');if(!robots.html.includes(canonicalOrigin+'/sitemap.xml'))report.errors.push('Missing sitemap in robots.txt');
  for(const path of ['/admin/discord/','/compte/','/maquettes/site-atlas/','/apercus/astral/']){const r=await fetchPage(origin+path);if(!/noindex/.test(r.response.headers.get('x-robots-tag')||''))report.errors.push(path+': missing exclusion header');}
- for(const path of ['/wiki/not-a-published-guide/','/actualites/not-a-published-article/'])if((await fetchPage(origin+path)).response.status!==404)report.errors.push(path+': missing real 404');
+ for(const path of ['/wiki/not-a-published-guide/','/actualites/not-a-published-article/','/seo-url-inexistante/','/wiki/pokepark/'])if((await fetchPage(origin+path)).response.status!==404)report.errors.push(path+': missing real 404');
+ if(urls.some(url=>url.includes('/wiki/pokepark/')))report.errors.push('Unavailable guide remains in sitemap');
+ if(!urls.includes(canonicalOrigin+'/installer-cobblemon/'))report.errors.push('Installation guide missing from sitemap');
+ const publicWiki=await fetchPage(origin+'/api/wiki');
+ if(publicWiki.response.status!==200)report.errors.push('Public wiki API: HTTP '+publicWiki.response.status);
+ else if(/pok[eé][\s-]?(?:park|parc)/i.test(publicWiki.html))report.errors.push('Unavailable activity remains in public wiki API');
+ for(const [from,to] of [['/installer-cobblemon','/installer-cobblemon/'],['/minecraft-pokemon/index.html','/minecraft-pokemon/'],['/boutique','/boutique/']]){
+  const r=await fetch(origin+from,{redirect:'manual',signal:AbortSignal.timeout(15000)});
+  if(![301,308].includes(r.status)||new URL(r.headers.get('location')||'',origin).pathname!==to)report.errors.push('Invalid permanent redirect: '+from);
+ }
 }catch(error){report.errors.push(String(error.message||error));}
 const output=process.env.SEO_REPORT||`seo/reports/audit-${new Date().toISOString().slice(0,10)}.json`;
 await mkdir(dirname(resolve(output)),{recursive:true});await writeFile(output,JSON.stringify(report,null,2)+'\n');

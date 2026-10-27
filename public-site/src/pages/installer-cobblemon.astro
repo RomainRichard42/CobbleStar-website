@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/PublicLayout.astro';
+import {breadcrumbs,SITE} from '../lib/content';
+const title='Installer Cobblemon : modpack, versions et dépannage';
+const description='Installe Cobblemon sur Minecraft Java avec le modpack officiel : choix des versions, première partie, connexion à un serveur et solutions aux erreurs courantes.';
+const schema={'@context':'https://schema.org','@type':'Article',headline:title,description,inLanguage:'fr-FR',datePublished:'2026-10-27',dateModified:'2026-10-27',mainEntityOfPage:SITE+'/installer-cobblemon/',author:{'@id':SITE+'/#organisation'},publisher:{'@id':SITE+'/#organisation'}};
+---
+<Layout title={title} description={description} article publishedAt="2026-10-27" modifiedAt="2026-10-27" schema={[breadcrumbs([{name:'Accueil',path:'/'},{name:'Pokémon dans Minecraft',path:'/minecraft-pokemon/'},{name:'Installer Cobblemon',path:'/installer-cobblemon/'}]),schema]}>
+<main id="contenu" class="public-shell"><article class="public-prose">
+<span class="eyebrow">GUIDE D’INSTALLATION</span><h1>Comment installer Cobblemon sur Minecraft Java ?</h1>
+<p class="lead">Pour découvrir les Pokémon dans Minecraft, commence par un profil de jeu dédié et un modpack compatible. Ce guide t’aide à installer le pack officiel pour jouer en solo, puis à comprendre ce qui change lorsque tu rejoins un serveur.</p>
+<p class="public-meta">Équipe CobbleStar · Vérifié le <time datetime="2026-10-27">27 octobre 2026</time> à partir des ressources officielles.</p>
+<nav class="public-nav" aria-label="Sommaire du guide"><a href="#prerequis">Prérequis</a><a href="#installation">Installation</a><a href="#serveur">Multijoueur</a><a href="#erreurs">Dépannage</a></nav>
+
+<h2 id="prerequis">Avant de télécharger : Java, pack et versions</h2>
+<p>Il te faut <strong>Minecraft Java Edition sur ordinateur</strong> et un compte qui possède le jeu. Le pack Fabric présenté ici ne fonctionne pas sur Minecraft Bedrock, sur console ou dans l’application Minecraft mobile. Si tu ne sais pas quelle édition tu utilises, vérifie son nom dans ton launcher avant de télécharger des fichiers.</p>
+<p>Un modpack réunit les mods et les réglages d’une installation. Pour débuter, le <a href="https://modrinth.com/modpack/cobblemon-fabric">Cobblemon Official Modpack [Fabric]</a>, publié par Cobbled Studios, évite de composer soi-même cet ensemble. Vérifie le nom du projet et son auteur : tous les packs contenant « Cobblemon » ne sont pas le pack officiel.</p>
+<p>La bonne version est celle du pack choisi, ou celle exigée par ton serveur. <strong>Ne remplace pas individuellement les mods par leur dernière version.</strong> Minecraft, le chargeur de mods et les dépendances doivent être compatibles. La fiche du pack donne les versions prises en charge ; garde-la comme référence.</p>
+
+<h2 id="installation">Installer le modpack avec Modrinth App</h2>
+<p>La méthode ci-dessous utilise <a href="https://modrinth.com/app">Modrinth App</a>. Le <a href="https://support.modrinth.com/en/articles/8802250-modpacks-on-modrinth">guide de Modrinth</a> détaille aussi les autres outils compatibles. Les libellés des menus peuvent varier selon la langue et la version de l’application.</p>
+<ol class="steps">
+<li class="step"><h3>Installer l’application adaptée à ton ordinateur</h3><p>Récupère Modrinth App sur son site officiel et choisis ton système d’exploitation. Une fois l’application ouverte, utilise son parcours de connexion Minecraft avec le compte Microsoft qui possède Java Edition.</p></li>
+<li class="step"><h3>Trouver le bon pack</h3><p>Dans le catalogue de l’application, recherche « Cobblemon Official Modpack [Fabric] ». Compare l’auteur et la fiche avec le lien officiel ci-dessus. Pour un serveur précis, arrête-toi ici et récupère d’abord ses instructions : il peut demander un autre pack.</p></li>
+<li class="step"><h3>Créer une installation séparée</h3><p>Lance l’installation du pack et laisse le téléchargement se terminer. Utilise ce profil dédié à Cobblemon, sans y copier les mods d’une autre partie. N’installe pas un second exemplaire du mod dans le même dossier.</p></li>
+<li class="step"><h3>Lancer une première partie solo</h3><p>Ouvre le profil que tu viens d’installer. Pour vérifier qu’il démarre correctement, crée un monde de test avant d’ajouter des shaders, des packs de ressources ou des mods supplémentaires. Tu pourras ainsi identifier plus facilement l’origine d’un problème ultérieur.</p></li>
+<li class="step"><h3>Garder une configuration identifiable</h3><p>Note le nom et la version du pack. Avant une mise à jour importante ou l’ajout de mods, sauvegarde les mondes auxquels tu tiens. Si tu joues avec des amis, assurez-vous d’utiliser la même configuration demandée par votre serveur.</p></li>
+</ol>
+
+<h2>Et si je veux installer les fichiers manuellement ?</h2>
+<p>Cette méthode demande de suivre les dépendances du mod et du chargeur choisi. La <a href="https://docs.fabricmc.net/players/installing-mods">documentation de Fabric</a> explique comment placer les fichiers <code>.jar</code> dans le dossier <code>mods</code>. Utilise le dossier du profil concerné : une instance créée par un gestionnaire de packs peut avoir son propre répertoire.</p>
+<p>Ne mélange pas des fichiers destinés à Fabric avec ceux d’un autre chargeur. Si le jeu signale une dépendance manquante, relève son nom et la version demandée au lieu de télécharger un ensemble de fichiers au hasard. Pour une première installation, revenir à un profil neuf du pack est souvent plus simple que réparer un dossier déjà mélangé.</p>
+
+<h2 id="serveur">Le pack officiel suffit-il pour rejoindre un serveur Cobblemon ?</h2>
+<p>Pas systématiquement. Un serveur peut ajouter des interfaces, des objets et des mécaniques qui demandent des fichiers supplémentaires côté joueur. Le pack de ton ami peut donc fonctionner en solo sans être compatible avec le serveur que tu veux rejoindre.</p>
+<ul><li>Récupère l’adresse et le pack depuis les pages officielles du serveur.</li><li>Vérifie la version de Minecraft, le chargeur et la version du pack.</li><li>Lance ce profil, puis ajoute l’adresse dans le menu Multijoueur.</li><li>En cas de refus, conserve le message exact et vérifie si le serveur est ouvert ou en maintenance.</li></ul>
+<aside class="public-note"><p><strong>Pour CobbleStar :</strong> le serveur n’est pas encore ouvert au public et son launcher n’est pas disponible. Sa configuration repose sur Minecraft Java 1.21.1 et Fabric. Le pack officiel de Cobblemon ne remplace pas le pack CobbleStar. Consulte <a href="/rejoindre/">les prérequis et les étapes de connexion à l’ouverture</a>.</p></aside>
+
+<h2 id="erreurs">Résoudre les problèmes les plus courants</h2>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Erreurs d’installation Cobblemon"><table class="public-table"><caption>Identifier l’étape qui bloque</caption><thead><tr><th scope="col">Symptôme</th><th scope="col">Vérification utile</th></tr></thead><tbody>
+<tr><th scope="row">Minecraft démarre sans Cobblemon</th><td>Vérifie que tu lances le profil du pack, et non ton installation habituelle de Minecraft. Compare le nom du profil dans le gestionnaire.</td></tr>
+<tr><th scope="row">Mod incompatible ou dépendance manquante</th><td>Lis les noms et versions indiqués dans l’erreur. Réinstalle le pack dans un profil séparé si tu as mélangé plusieurs versions.</td></tr>
+<tr><th scope="row">Le jeu ferme avant le menu</th><td>Teste le pack sans tes ajouts personnels. Garde le journal d’erreur et précise si le problème apparaît aussi avec une installation neuve.</td></tr>
+<tr><th scope="row">Le solo fonctionne, le serveur refuse la connexion</th><td>Compare les versions avec celles du serveur. L’adresse IP seule ne rend pas deux packs compatibles.</td></tr>
+<tr><th scope="row">La session Minecraft est refusée</th><td>Reconnecte ton compte Microsoft dans le launcher. Un compte Discord ou Modrinth ne remplace pas la possession de Minecraft Java.</td></tr>
+<tr><th scope="row">Le jeu manque de fluidité</th><td>Commence sans shaders et réduis la distance d’affichage. Consulte les recommandations du pack avant de modifier la mémoire : elles dépendent de son contenu et de ton ordinateur.</td></tr>
+</tbody></table></div>
+<p>Pour demander de l’aide, fournis le nom du pack, sa version, ton système et le message d’erreur. Précise si le problème survient au lancement, dans un monde solo ou à la connexion. Ces informations permettent de distinguer un souci d’installation d’un serveur indisponible.</p>
+
+<h2>Après l’installation</h2><p>Pour comprendre ce que le mod ajoute au jeu, lis <a href="/minecraft-pokemon/">notre présentation de Pokémon dans Minecraft</a>. Si tu cherches ensuite un <a href="/">serveur Cobblemon français</a>, découvre CobbleStar et ses <a href="/roadmap/">activités préparées pour l’ouverture</a>. Les règles particulières de notre pension, du GTS ou des raids sont expliquées dans le <a href="/wiki/">wiki CobbleStar</a>.</p>
+<h2>Ressources de référence</h2><ul><li><a href="https://modrinth.com/modpack/cobblemon-fabric">Pack officiel de Cobblemon sur Modrinth</a></li><li><a href="https://support.modrinth.com/en/articles/8802250-modpacks-on-modrinth">Installer un modpack avec Modrinth</a></li><li><a href="https://docs.fabricmc.net/players/installing-mods">Installer des mods Fabric</a></li><li><a href="https://cobblemon.com/en">Projet officiel Cobblemon</a></li></ul>
+</article></main></Layout>

@@ -4,7 +4,7 @@ import type { FastifyInstance } from 'fastify';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 
 export function isPublicPage(path: string) {
-  if (['/','/wiki','/actualites','/rejoindre','/minecraft-pokemon','/telecharger','/telecharger/windows','/roadmap','/confidentialite','/robots.txt','/sitemap.xml','/actualites/rss.xml'].includes(path.replace(/\/$/,'') || '/')) return true;
+  if (['/','/wiki','/actualites','/rejoindre','/minecraft-pokemon','/installer-cobblemon','/telecharger','/telecharger/windows','/roadmap','/confidentialite','/robots.txt','/sitemap.xml','/actualites/rss.xml'].includes(path.replace(/\/$/,'') || '/')) return true;
   return /^\/(wiki|actualites)\/(?!admin(?:\/|$))[a-z0-9_-]+\/?$/.test(path);
 }
 type Handler = (req: IncomingMessage, res: ServerResponse, next: (error?: Error) => void, locals: Record<string, unknown>) => Promise<void>;

@@ -29,6 +29,7 @@ import { accountIdentity } from "./account-link.js";
 import { registerAccountLink } from "./account-link-routes.js";
 import { siteSecurity } from "./site-security.js";
 import { registerPublicSite } from "./public-site.js";
+import { availableWiki } from "./wiki-availability.js";
 
 type UserRow = RowDataPacket & {
   id: string; email: string | null; discord_email: string | null; password_hash: string | null;
@@ -191,9 +192,12 @@ async function wikiSlot(slot: "draft" | "published") {
   const [rows] = await pool.execute<(RowDataPacket & { content_json: unknown; version: number; updated_at: Date })[]>(
     `SELECT content_json,version,updated_at FROM wiki_documents WHERE slot=? LIMIT 1`, [slot]);
   const row = rows[0];
-  if (!row) return { content: await defaultWiki(), version: 1, updatedAt: null };
+  if (!row) {
+    const content = await defaultWiki();
+    return { content: slot === "published" ? availableWiki(content) : content, version: 1, updatedAt: null };
+  }
   const content = typeof row.content_json === "string" ? JSON.parse(row.content_json) : row.content_json;
-  return { content, version: row.version, updatedAt: row.updated_at };
+  return { content: slot === "published" ? availableWiki(content) : content, version: row.version, updatedAt: row.updated_at };
 }
 
 async function defaultNews() {

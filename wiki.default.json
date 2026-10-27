@@ -32,7 +32,7 @@
     },
     {
       "id": "exploration",
-      "label": "Mondes & PokéPark",
+      "label": "Mondes & exploration",
       "description": "Explorer les planètes et préparer ses expéditions.",
       "icon": "⌖",
       "accent": "violet",
@@ -552,7 +552,7 @@
         },
         {
           "kind": "paragraph",
-          "text": "Un Pokémon Star reste un vrai Pokémon avec une apparence particulière. Une incarnation du Cosmédex habille visuellement ton personnage. Une carte d’album est un objet de collection. Un Poké-Résonant appartient à la progression séparée de PokéPark. Ces quatre systèmes ne se remplacent pas."
+          "text": "Un Pokémon Star reste un vrai Pokémon avec une apparence particulière. Une incarnation du Cosmédex habille visuellement ton personnage. Une carte d’album est un objet de collection. Ces trois systèmes ne se remplacent pas."
         },
         {
           "kind": "heading",
@@ -576,7 +576,7 @@
           ]
         }
       ],
-      "modifiedAt": "2026-10-26T21:09:02.331Z"
+      "modifiedAt": "2026-10-27"
     },
     {
       "id": "starters",
@@ -1047,7 +1047,7 @@
             },
             {
               "title": "Aventure",
-              "text": "/epreuves, /ligue et /pokepark ouvrent les activités correspondantes. Le Ranked se lance auprès de son responsable."
+              "text": "/epreuves et /ligue ouvrent les activités correspondantes. Le Ranked se lance auprès de son responsable."
             },
             {
               "title": "Collection",
@@ -1082,7 +1082,7 @@
           ]
         }
       ],
-      "modifiedAt": "2026-10-26T21:09:02.331Z"
+      "modifiedAt": "2026-10-27"
     },
     {
       "id": "legendaries",
@@ -1968,142 +1968,6 @@
             {
               "title": "Je ne peux pas poser un bloc",
               "text": "Tu peux être dans une zone protégée ou un territoire sur lequel tu n’as pas les droits nécessaires. N’essaie pas de contourner la protection."
-            }
-          ]
-        }
-      ],
-      "modifiedAt": "2026-10-26T21:09:02.331Z"
-    },
-    {
-      "id": "pokepark",
-      "branchId": "exploration",
-      "title": "PokéPark : Résonants et expéditions en groupe",
-      "summary": "Préparer une équipe, lancer une expédition et jouer à plusieurs dans les régions du PokéPark.",
-      "tags": [
-        "PokéPark",
-        "Résonants",
-        "groupe",
-        "expédition",
-        "invocation",
-        "coopération"
-      ],
-      "readingMinutes": 3,
-      "order": 1,
-      "published": true,
-      "hero": {
-        "asset": "/astral/assets/lushtower.webp",
-        "alt": "Illustration Cobblemon du guide : PokéPark : explorer avec ses Résonants"
-      },
-      "blocks": [
-        {
-          "kind": "heading",
-          "text": "Une aventure avec son propre effectif"
-        },
-        {
-          "kind": "command",
-          "command": "/pokepark",
-          "title": "Ouvrir le PokéPark",
-          "text": "Retrouve les accès à l’expédition, aux Résonants et à la préparation d’équipe."
-        },
-        {
-          "kind": "paragraph",
-          "text": "Le PokéPark utilise ses propres Résonants. Ce ne sont pas simplement les six Pokémon de ton équipe habituelle envoyés dans un autre monde. Ton effectif, sa préparation et les ressources de cette aventure se gèrent dans ses menus."
-        },
-        {
-          "kind": "heading",
-          "text": "Préparer jusqu’à quatre Résonants"
-        },
-        {
-          "kind": "command",
-          "command": "/pokepark equipe",
-          "title": "Composer son équipe",
-          "text": "La préparation se fait en dehors de l’expédition. Choisis des partenaires complémentaires et vérifie leurs capacités."
-        },
-        {
-          "kind": "command",
-          "command": "/pokepark resonants",
-          "title": "Consulter sa collection",
-          "text": "Lis les fiches et les possibilités de progression. Les invocations et ascensions affichent leurs ressources et conditions avant validation."
-        },
-        {
-          "kind": "paragraph",
-          "text": "Ne lance pas une invocation uniquement sur le nom d’une rareté : regarde son coût, les résultats possibles et les informations présentées. Une ressource du PokéPark n’est pas automatiquement interchangeable avec les monnaies du reste du serveur."
-        },
-        {
-          "kind": "heading",
-          "text": "Entrer et explorer"
-        },
-        {
-          "kind": "steps",
-          "items": [
-            {
-              "title": "Vérifie l’accès",
-              "text": "Consulte les conditions et les éventuels passes dans le menu."
-            },
-            {
-              "title": "Lance ou reprends l’expédition",
-              "text": "/pokepark reprendre permet de retrouver une aventure enregistrée lorsque la reprise est disponible."
-            },
-            {
-              "title": "Explore les régions",
-              "text": "Les trois régions ouvertes et la zone du Gardien combinent exploration et mécanismes. Lis les indications des lieux pour avancer."
-            },
-            {
-              "title": "Adapte ton Résonant actif",
-              "text": "Utilise le bon partenaire pour la situation et surveille ses points de vie, capacités et délais."
-            }
-          ]
-        },
-        {
-          "kind": "heading",
-          "text": "Les contrôles à connaître"
-        },
-        {
-          "kind": "paragraph",
-          "text": "Avec les raccourcis habituels, 1 à 4 changent de Résonant actif ; G, H et V utilisent les capacités spéciales et P ouvre le menu associé. Les touches peuvent être réattribuées : consulte tes contrôles si un autre mod occupe déjà un raccourci. Les attaques automatiques ne dispensent pas de gérer le placement et les capacités."
-        },
-        {
-          "kind": "paragraph",
-          "text": "Un Résonant K.O. reste indisponible jusqu’à ce que les règles de l’aventure permettent de le soigner. Les points de vie, boucliers et délais appartiennent à chaque partenaire ; changer de personnage ne doit pas être pris pour un soin gratuit."
-        },
-        {
-          "kind": "heading",
-          "text": "Jouer jusqu’à quatre"
-        },
-        {
-          "kind": "command",
-          "command": "/pokepark groupe inviter Pseudo",
-          "title": "Inviter un partenaire",
-          "text": "L’invitation rejoint l’expédition du propriétaire. Chaque invité utilise sa propre équipe de Résonants."
-        },
-        {
-          "kind": "paragraph",
-          "text": "Le monde de l’expédition est rattaché à son propriétaire et reste enregistré. Si l’hôte quitte, la visite commune se termine ; si un invité part, il ne ferme pas l’aventure de l’hôte. Prévenez-vous avant un départ pour ne pas interrompre un objectif collectif."
-        },
-        {
-          "kind": "command",
-          "command": "/pokepark quitter",
-          "title": "Sortir de l’aventure",
-          "text": "Utilise la sortie prévue par le système. /pokepark statut permet de vérifier ta situation."
-        },
-        {
-          "kind": "heading",
-          "text": "Questions fréquentes"
-        },
-        {
-          "kind": "faq",
-          "items": [
-            {
-              "title": "Puis-je changer toute mon équipe au milieu de la zone ?",
-              "text": "La composition se prépare en dehors de l’expédition. Organise ton effectif avant le départ."
-            },
-            {
-              "title": "Mes Pokémon du PC sont-ils devenus des Résonants ?",
-              "text": "Non. Les deux collections sont distinctes. Consulte la collection PokéPark pour savoir quels partenaires tu possèdes."
-            },
-            {
-              "title": "La carte disparaît-elle après une session ?",
-              "text": "Le monde du propriétaire et sa progression sont persistants. Une visite de groupe n’attribue pas automatiquement le monde de l’hôte à chaque invité."
             }
           ]
         }

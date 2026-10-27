@@ -36,3 +36,40 @@ Références :
 - https://developers.google.com/search/docs/appearance/title-link
 
 Confirmation finale Search Console : la demande d'indexation de `/wiki/` a été acceptée (« URL added to a priority crawl queue »). L'état avant demande était « Discovered - currently not indexed ». Le tableau des sitemaps indique encore 18 pages découvertes, malgré les 47 URL effectivement servies et le nouvel envoi accepté. Ces deux nombres décrivent des états différents ; ne pas les présenter comme 47 pages déjà indexées.
+
+
+## Revue des mots-clés et disponibilités — 27 octobre 2026
+
+### Travail réalisé dans cette révision
+
+- Répartition des intentions : l’accueil cible la recherche d’un serveur Cobblemon français ; `/minecraft-pokemon/` répond à la découverte du mod et au choix solo/serveur ; `/installer-cobblemon/` explique l’installation du pack officiel, les versions, le multijoueur et le dépannage. `/rejoindre/` garde le parcours spécifique à CobbleStar.
+- Analyse qualitative des pages publiques PokeIsland, Poké Block et Tropimon ; références et décisions dans `seo/plan.json`. Aucun volume de recherche, score de difficulté ou rang Google n’a été inventé. Les mots « Minecraft » et « Pokémon » seuls ne constituent pas une priorité de lancement.
+- Titre et introduction de l’accueil ajustés ; page Minecraft Pokémon enrichie de critères concrets pour choisir un serveur et de liens vers les systèmes correspondants. Les critères de boutique renvoient aux vraies conditions, sans promesse « sans pay-to-win ».
+- Guide d’installation original avec étapes, tableau de dépannage, sources primaires et distinction explicite entre pack officiel, pack CobbleStar et serveur encore fermé. Pas de faux téléchargement du launcher.
+- Liens contextuels depuis la page de découverte et l’accueil, lien permanent dans le pied de page Astro. Nouvelle URL intégrée au routage, au sitemap, à la canonicalisation et aux données structurées Article/BreadcrumbList. Dates éditoriales réelles transmises au schéma WebPage.
+- PokéPark retiré du document wiki par défaut, de la catégorie, de la description du wiki, des commandes, des liens associés et du plan de mots-clés. Une politique de disponibilité corrige aussi les anciennes publications CMS au moment de leur lecture publique, sans modifier les brouillons conservés. L’ancienne URL renvoie 404 et sort du sitemap : pas de redirection vers un sujet sans rapport.
+- Audit étendu : langue du document, viewport, canonical unique, absence de l’activité indisponible dans le HTML et l’API publique, 404 de l’ancien guide et redirections des pages principales.
+
+### Vérifications et limites
+
+Avant changements en production : 47 pages, 307 liens/ancres, 27 images, aucune erreur ou alerte dans l’audit technique existant. Après changements en local : 47 pages (dont 33 guides), 306 liens/ancres, 27 images, profondeur maximale de deux clics, aucune erreur ni alerte. Le total de pages reste stable : un guide retiré, une page d’installation ajoutée.
+
+Build API et Next/Astro réussis ; 18 tests réussis, dont une ancienne publication CMS contenant l’activité retirée. Les premiers tests avaient été lancés avant la fin du build Astro ; ils ont été relancés après sa fin et passent tous.
+
+Search Console n’a pas pu être consultée ce jour : navigateur intégré indisponible, puis contrôle Firefox bloqué par l’outil. L’API PageSpeed a répondu HTTP 429. Aucun classement, clic, impression, score Lighthouse ou Core Web Vitals n’est donc annoncé pour cette intervention. Le rendu mobile n’a pas été inspecté visuellement dans cette session ; les composants de lecture existants sont réutilisés.
+
+État à la rédaction : changements vérifiés localement, déploiement Kinetic encore à effectuer. Le push du code ne prouve pas sa mise en ligne. Après redémarrage, relancer `scripts/seo-audit.mjs`, vérifier `/wiki/pokepark/` en 404 et `/installer-cobblemon/` en 200.
+
+### Suivi utile
+
+Le contrôle hebdomadaire déjà configuré utilisera l’audit renforcé. Consulter ensuite Search Console sur 28 jours comparés aux 28 précédents, France, Web, en séparant marque/hors marque et mobile/ordinateur. Prioriser les pages qui ont des impressions mais peu de clics, puis les requêtes auxquelles une page existante répond imparfaitement. Éviter de créer plusieurs pages presque identiques pour « FR », « français » et « francophone ».
+
+Pour aller plus loin : vraies captures et gameplay du serveur, réponses aux questions réelles des joueurs, liens communautaires pertinents et informations d’ouverture exactes. Pas d’achat de liens ni de publication dans des annuaires sans instruction explicite.
+
+Sources primaires supplémentaires :
+- https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+- https://developers.google.com/search/docs/crawling-indexing/special-tags
+- https://developers.google.com/crawling/docs/troubleshooting/http-status-codes
+- https://modrinth.com/modpack/cobblemon-fabric
+- https://support.modrinth.com/en/articles/8802250-modpacks-on-modrinth
+- https://docs.fabricmc.net/players/installing-mods

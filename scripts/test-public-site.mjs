@@ -22,7 +22,7 @@ test('public routing preserves account, shop, admin and API routes',async()=>{
   for(const p of ['/compte/','/admin/discord/','/wiki/admin/']){const r=await get(p);assert.equal(r.response.status,200,p);assert.match(r.response.headers.get('x-robots-tag'),/noindex/);assert.equal(r.response.headers.get('x-cobblestar-renderer'),null);}
 });
 test('public pages have meaningful HTML, unique metadata and no React runtime',async()=>{
-  const paths=['/','/rejoindre/','/minecraft-pokemon/','/telecharger/','/wiki/','/actualites/','/roadmap/','/confidentialite/',...wiki.content.articles.filter(a=>a.published).map(a=>`/wiki/${a.id}/`),...news.content.articles.filter(a=>a.published).map(a=>`/actualites/${a.slug}/`)];
+  const paths=['/','/rejoindre/','/minecraft-pokemon/','/installer-cobblemon/','/telecharger/','/wiki/','/actualites/','/roadmap/','/confidentialite/',...wiki.content.articles.filter(a=>a.published).map(a=>`/wiki/${a.id}/`),...news.content.articles.filter(a=>a.published).map(a=>`/actualites/${a.slug}/`)];
   const titles=new Set();
   for(const path of paths){const {response,html}=await get(path);assert.equal(response.status,200,path+' '+html.slice(0,200));assert.equal(response.headers.get('x-cobblestar-renderer'),'Astro');assert.equal((html.match(/<h1(?:\s|>)/g)||[]).length,1,path);assert.ok(html.includes(`rel="canonical" href="https://cobblestar-mc.fr${path}"`),path);const title=html.match(/<title>(.*?)<\/title>/s)?.[1];assert.ok(title);assert.ok(!titles.has(title),title);titles.add(title);assert.match(html,/<meta name="description" content="[^"]{20,}/);assert.ok(!html.includes('/_next/'),path);assert.match(response.headers.get('content-security-policy'),/script-src/);assert.ok(!html.includes('astro-island'),path);for(const script of html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs))JSON.parse(script[1]);}
 });
@@ -33,6 +33,23 @@ test('publishing immediately creates real article URLs, drafts stay private and 
   wiki.content.articles.at(-1).published=true;const r=await get('/wiki/test-publication/');assert.equal(r.response.status,200);assert.ok(r.html.includes('Guide fraîchement publié'));assert.ok(r.html.includes('&lt;script&gt;'));assert.ok(!r.html.includes('<script>alert(1)</script>'));
   wiki.content.branches.find(b=>b.id===sample.branchId).visible=false;assert.equal((await get('/wiki/test-publication/')).response.status,404);wiki=original;
   const missing=await get('/actualites/does-not-exist/');assert.equal(missing.response.status,404);assert.ok(missing.html.includes('noindex,follow'));
+});
+
+test('unavailable activity stays absent even when an older CMS document advertises it',async()=>{
+ const previous=structuredClone(wiki);
+ try {
+  wiki.content.articles.push({...structuredClone(wiki.content.articles[0]),id:'pokepark',title:'PokéPark',published:true});
+  const library=await get('/wiki/'),map=await get('/sitemap.xml'),retired=await get('/wiki/pokepark/');
+  assert.doesNotMatch(library.html,/pok[eé][ -]?park/i);
+  assert.doesNotMatch(map.html,/pokepark/);
+  assert.equal(retired.response.status,404);
+  assert.match(retired.html,/noindex,follow/);
+  const install=await get('/installer-cobblemon/');
+  assert.equal(install.response.status,200);
+  assert.match(install.html,/Minecraft Java/);
+  assert.match(install.html,/modrinth.com\/modpack\/cobblemon-fabric/);
+  assert.match(install.html,/n’est pas encore ouvert/);
+ } finally { wiki=previous; }
 });
 test('sitemap, RSS and redirects stay canonical without indexing private pages',async()=>{
   const map=await get('/sitemap.xml');assert.equal(map.response.status,200);assert.ok(map.html.includes('/wiki/'));assert.ok(!map.html.includes('/admin/'));assert.ok(!map.html.includes('<loc>https://cobblestar-mc.fr/compte/</loc>'));assert.ok(map.html.includes('/rejoindre/</loc><lastmod>2026-10-26</lastmod>'));for(const article of wiki.content.articles){if(article.modifiedAt)assert.ok(map.html.includes('/wiki/'+article.id+'/</loc><lastmod>'+article.modifiedAt+'</lastmod>'));}assert.ok(map.html.includes('/actualites/'+news.content.articles[0].slug+'/'));

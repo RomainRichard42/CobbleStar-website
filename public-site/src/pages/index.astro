@@ -7,7 +7,7 @@ import {HOME_FAQ} from '../lib/faqs';
 const articles=await (Astro.locals as PublicLocals).getNews().then(n=>publishedNews(n).articles.slice(0,3)).catch(()=>[]);
 const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HOME_FAQ.map(f=>({'@type':'Question',name:f.question,acceptedAnswer:{'@type':'Answer',text:f.answer}}))};
 ---
-<Layout cinematic title="CobbleStar — Serveur Cobblemon FR & Minecraft Pokémon" description="Découvre CobbleStar, serveur Cobblemon français en préparation : deux mondes, capture de Pokémon, quêtes et raids. Rejoins Discord pour suivre l’ouverture." schema={[faqSchema]}>
+<Layout cinematic title="Serveur Cobblemon français (FR) — CobbleStar" description="Découvre CobbleStar, serveur Cobblemon français en préparation : deux mondes, capture de Pokémon, quêtes et raids. Rejoins Discord pour suivre l’ouverture." schema={[faqSchema]}>
 <main id="contenu">
 <section class="opening-runway" aria-label="Découvrir CobbleStar">
 <div class="opening-viewport">
@@ -43,7 +43,7 @@ const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HO
 <p class="opening-status">
 <span aria-hidden="true">✦</span> Serveur Cobblemon FR · Ouverture à venir</p>
 <h2>Ton équipe.<br>Ton aventure.</h2>
-<p>Capture tes premiers Pokémon, construis ton chez-toi et retrouve les autres dresseurs sur Asteria et Nébélia.</p>
+<p>Un serveur Minecraft Pokémon en préparation : capture, construction et aventure entre dresseurs sur Asteria et Nébélia.</p>
 <div class="cinema-actions">
 <button type="button" class="btn gold" id="start-journey">Découvrir le serveur <span aria-hidden="true">→</span>
 </button>
@@ -282,7 +282,7 @@ const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HO
 </article>
 </div>
 </section>
-<section class="astral-news" aria-labelledby="news-title"><div class="section-head"><h2 id="news-title">Le journal<br/><span>de CobbleStar.</span></h2><a class="btn gold" href="/actualites/">Toutes les actualités →</a></div><div class="astral-news-grid">{articles.map(a=><a href={newsUrl(a)} class="astral-news-card"><Picture src={a.image} alt="" width={700} height={400}/><div><time datetime={a.publishedAt}>{date(a.publishedAt)}</time><h3>{a.title}</h3><p>{a.excerpt}</p><b>Lire l’actualité →</b></div></a>)}</div>{!articles.length&&<p>Les prochaines nouvelles du serveur seront publiées ici.</p>}</section><section class="faq"><h2>Avant de nous rejoindre.</h2>{HOME_FAQ.map(f=><details><summary>{f.question}</summary><p>{f.answer}</p></details>)}<a href="/minecraft-pokemon/">Découvrir Pokémon dans Minecraft →</a></section></main>
+<section class="astral-news" aria-labelledby="news-title"><div class="section-head"><h2 id="news-title">Le journal<br/><span>de CobbleStar.</span></h2><a class="btn gold" href="/actualites/">Toutes les actualités →</a></div><div class="astral-news-grid">{articles.map(a=><a href={newsUrl(a)} class="astral-news-card"><Picture src={a.image} alt="" width={700} height={400}/><div><time datetime={a.publishedAt}>{date(a.publishedAt)}</time><h3>{a.title}</h3><p>{a.excerpt}</p><b>Lire l’actualité →</b></div></a>)}</div>{!articles.length&&<p>Les prochaines nouvelles du serveur seront publiées ici.</p>}</section><section class="faq"><h2>Avant de nous rejoindre.</h2>{HOME_FAQ.map(f=><details><summary>{f.question}</summary><p>{f.answer}</p></details>)}<a href="/minecraft-pokemon/">Découvrir Pokémon dans Minecraft →</a><br/><a href="/installer-cobblemon/">Installer Cobblemon pour une première partie solo →</a></section></main>
 <p id="journey-status" class="sr-only" role="status" aria-atomic="true">
 </p>
 <div class="journey-progress" aria-hidden="true">
