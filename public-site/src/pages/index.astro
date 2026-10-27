@@ -2,6 +2,7 @@
 import Layout from '../layouts/PublicLayout.astro';
 import Picture from '../components/Picture.astro';
 import '../styles/astral-home.css';
+import '../styles/home-pokemon.css';
 import {newsUrl,publishedNews,date,type PublicLocals} from '../lib/content';
 import {HOME_FAQ} from '../lib/faqs';
 const articles=await (Astro.locals as PublicLocals).getNews().then(n=>publishedNews(n).articles.slice(0,3)).catch(()=>[]);
@@ -205,8 +206,10 @@ const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HO
 
 </a>
 <a class="store-card" href="/boutique/">
-<div class="store-art">
-<img src="/astral/assets/ranks.svg" alt="Illustration de la catégorie Les grades" loading="lazy" width="360" height="280">
+<div class="store-art store-ranks" role="img" aria-label="Les tags des grades Étoilé, Cosmique et Galactique">
+<img src="/shop/ranks/etoile.png" alt="" loading="lazy">
+<img src="/shop/ranks/cosmiquea.png" alt="" loading="lazy">
+<img src="/shop/ranks/galactiquea.png" alt="" loading="lazy">
 </div>
 <div class="store-description">
 <h3>Les grades</h3>
@@ -217,7 +220,7 @@ const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HO
 </a>
 <a class="store-card" href="/boutique/">
 <div class="store-art">
-<img src="/astral/assets/cosmetics.svg" alt="Illustration de la catégorie Le Cosmédex" loading="lazy" width="360" height="280">
+<img class="store-motisma" src="/astral/assets/motisma-pokedex.png" alt="Pokédex Motisma" loading="lazy" width="516" height="516">
 </div>
 <div class="store-description">
 <h3>Le Cosmédex</h3>
@@ -234,9 +237,13 @@ const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HO
 </div>
 </section>
 <section class="creation" id="creations">
-<div class="creation-visual">
+<div class="creation-visual creation-model">
 <span class="creation-backword" aria-hidden="true">STAR</span>
-<img src="/astral/assets/dragonite-star.png" alt="Aperçu du modèle Dracolosse Star présent dans les ressources du projet" loading="lazy" width="1200" height="1100">
+<div class="creation-orbit" aria-hidden="true"></div>
+<div id="home-dragonite" role="img" aria-label="Dracolosse Star, modèle du serveur animé au défilement">
+<img id="dragonite-poster" src="/astral/assets/dragonite-star-posed.png" alt="" loading="lazy" width="900" height="900">
+</div>
+<button type="button" id="dragonite-pause" class="text-button" aria-pressed="false" hidden>Mettre Dracolosse en pause</button>
 </div>
 <div class="creation-copy">
 <h2>Tu le reconnaîtras<br>
@@ -291,4 +298,5 @@ const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HO
 </div>
 
 <script is:inline src="/astral/motion.js?v=player-audit-2" defer></script><script is:inline src="/astral/journey.js?v=player-polish-1" defer></script><script is:inline src="/astral/player.js?v=public-1" defer></script>
+<script>import '../scripts/home-dragonite';</script>
 </Layout>

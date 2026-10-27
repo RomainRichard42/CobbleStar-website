@@ -2,6 +2,7 @@ import type {FastifyInstance} from 'fastify';
 import {readFileSync} from 'node:fs';
 import {inflateRawSync} from 'node:zlib';
 import {ashStarPreview,type StarModel} from './star-assets.js';
+import {dexInfo} from './dex-info.js';
 
 export type DexEntry={id:string;species:string;name:string;collection:string;form:string;assetUrl:string};
 type Bundled=Omit<DexEntry,'assetUrl'>&{model:string;texture:string;emissive?:string};
@@ -42,9 +43,15 @@ export function createPublicDex(source:DexSource){
   // Explicit projection: no drafts, authors, player data or upload metadata.
   return {species:published.species,model:published.model,texture:published.texture,...(published.emissive?{emissive:published.emissive}:{} ),motion};
  };
- return {list,asset};
+ const info=async(id:string)=>{const entry=(await list()).find(e=>e.id===id);return entry?dexInfo(entry):null;};
+ return {list,asset,info};
 }
 export function registerPublicDex(app:FastifyInstance,dex:ReturnType<typeof createPublicDex>){
+ app.get('/api/pokedex/:id/info',{config:{rateLimit:{max:120,timeWindow:'1 minute'}}},async(r,reply)=>{
+  const info=await dex.info((r.params as {id:string}).id);
+  if(!info)return reply.header('Cache-Control','no-store').code(404).send({error:'FORM_NOT_PUBLISHED'});
+  return reply.header('Cache-Control','public,max-age=300').send({info});
+ });
  app.get('/api/pokedex',async(_r,reply)=>reply.header('Cache-Control','public,max-age=60').send({entries:await dex.list()}));
  app.get('/api/pokedex/:id/asset',{config:{rateLimit:{max:180,timeWindow:'1 minute'}}},async(r,reply)=>{
   const {id}=r.params as {id:string};

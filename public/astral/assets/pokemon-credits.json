@@ -1,0 +1,21 @@
+{
+  "motisma": {
+    "file": "motisma-pokedex.png",
+    "source": "https://archives.bulbagarden.net/wiki/File:0479Rotom-Pok%C3%A9dex.png",
+    "description": "Official Pokémon Sun and Moon Rotom Pokédex artwork; unmodified source PNG.",
+    "copyright": "The Pokémon Company / Nintendo / Game Freak"
+  },
+  "dragonite": {
+    "file": "dragonite-star-posed.png",
+    "description": "Code-rendered published CobbleStar model with native Cobblemon idle pose.",
+    "generator": "scripts/render-home-dragonite.mjs"
+  },
+  "ranks": {
+    "files": [
+      "/shop/ranks/etoile.png",
+      "/shop/ranks/cosmiquea.png",
+      "/shop/ranks/galactiquea.png"
+    ],
+    "description": "Original CobbleStar PNG files, displayed together without modification."
+  }
+}

@@ -51,6 +51,7 @@ export function createDexRenderer(interactive=false){
    cache.set(key,item);show(key);
   },
   tick(time:number){if(current){current.animate(time);for(const f of current.frames)f.material.map=f.textures[Math.floor(time*f.fps)%f.textures.length];render();}},
+  orbit(angle:number){const distance=camera.position.length();camera.position.set(-.4,.18,-1).normalize().multiplyScalar(distance).applyAxisAngle(new T.Vector3(0,1,0),angle);camera.lookAt(0,0,0);},
   resize(w:number,h:number){if(closed)return;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();frame();},
   turn(amount:number){camera.position.applyAxisAngle(new T.Vector3(0,1,0),amount);camera.lookAt(0,0,0);controls?.update();render();},
   zoom(factor:number){camera.position.setLength(T.MathUtils.clamp(camera.position.length()*factor,radius*1.1,radius*10));controls?.update();render();},

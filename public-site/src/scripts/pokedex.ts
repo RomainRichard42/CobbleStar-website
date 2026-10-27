@@ -1,3 +1,4 @@
+import {loadDetails,clearDetails} from './dex-details';
 import type {PreviewAsset} from './bedrock-model';
 type Renderer=ReturnType<typeof import('./dex-renderer').createDexRenderer>;
 const cards=[...document.querySelectorAll<HTMLElement>('[data-dex]')];
@@ -10,7 +11,8 @@ const dialog=document.getElementById('dex-dialog') as HTMLDialogElement;
 const host=document.getElementById('dex-viewer')!;
 const viewStatus=document.getElementById('dex-view-status')!;
 const normalize=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-let category='all',limit=24,thumb:Renderer|undefined,viewer:Renderer|undefined,opening=0,trigger:HTMLElement|null=null,oldOverflow='';
+const query=new URLSearchParams(location.search);search.value=query.get('pokemon')||'';
+let category=query.get('collection')||'all',limit=24,thumb:Renderer|undefined,viewer:Renderer|undefined,opening=0,trigger:HTMLElement|null=null,oldOverflow='';
 const library=()=>import('./dex-renderer');
 const assets=new Map<string,PreviewAsset>();
 async function asset(url:string){if(assets.has(url))return assets.get(url)!;const response=await fetch(url,{signal:AbortSignal.timeout(20000)});if(!response.ok)throw new Error('Aperçu indisponible. Réessaie dans un instant.');const data=await response.json() as {asset:PreviewAsset};if(assets.size>=24)assets.delete(assets.keys().next().value!);assets.set(url,data.asset);return data.asset;}
@@ -49,7 +51,7 @@ document.querySelectorAll<HTMLButtonElement>('[data-filter]').forEach(button=>bu
 more.addEventListener('click',()=>{const previous=limit;limit+=24;filter();grid.querySelectorAll<HTMLElement>('[data-dex]:not([hidden])')[previous]?.querySelector<HTMLButtonElement>('button')?.focus({preventScroll:true});});
 const resize=new ResizeObserver(()=>viewer?.resize(Math.max(host.clientWidth,1),Math.max(host.clientHeight,1)));resize.observe(host);
 async function open(card:HTMLElement){
- trigger=card.querySelector('button');const ticket=++opening;
+ trigger=card.querySelector('button');const ticket=++opening;void loadDetails(card.dataset.id!);
  document.getElementById('dex-title')!.textContent=card.dataset.name!;document.getElementById('dex-subtitle')!.textContent=card.dataset.collection+' · '+card.dataset.form;host.setAttribute('aria-label',`Modèle 3D : ${card.dataset.name}, ${card.dataset.form}`);
  oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';dialog.showModal();viewStatus.textContent='Chargement du modèle…';
  try{const [module,data]=await Promise.all([library(),asset(card.dataset.asset!)]);if(ticket!==opening)return;viewer=module.createDexRenderer(true);host.replaceChildren(viewer.canvas);viewer.resize(Math.max(host.clientWidth,1),Math.max(host.clientHeight,1));await viewer.set(data);if(ticket===opening)viewStatus.textContent='';}
@@ -58,10 +60,12 @@ async function open(card:HTMLElement){
 cards.forEach(c=>c.querySelector('button')!.addEventListener('click',()=>void open(c)));
 dialog.querySelector('.dex-close')!.addEventListener('click',()=>dialog.close());
 dialog.addEventListener('click',e=>{if(e.target===dialog){const b=dialog.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)dialog.close();}});
-dialog.addEventListener('close',()=>{opening++;viewer?.dispose();viewer=undefined;document.body.style.overflow=oldOverflow;trigger?.focus({preventScroll:true});});
+dialog.addEventListener('close',()=>{opening++;clearDetails();viewer?.dispose();viewer=undefined;document.body.style.overflow=oldOverflow;trigger?.focus({preventScroll:true});});
 dialog.querySelectorAll<HTMLButtonElement>('[data-turn]').forEach(b=>b.addEventListener('click',()=>viewer?.turn(Number(b.dataset.turn)*Math.PI/6)));
 dialog.querySelectorAll<HTMLButtonElement>('[data-zoom]').forEach(b=>b.addEventListener('click',()=>viewer?.zoom(Number(b.dataset.zoom))));
 document.getElementById('dex-reset')!.addEventListener('click',()=>viewer?.reset());
 window.addEventListener('pagehide',()=>{dead=true;observer.disconnect();resize.disconnect();thumb?.dispose();viewer?.dispose();thumb=viewer=undefined;});
 window.addEventListener('pageshow',event=>{if(event.persisted){dead=false;previous=0;requestAnimationFrame(animate);resize.observe(host);filter();}});
 filter();
+
+document.querySelectorAll<HTMLElement>('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===category)));

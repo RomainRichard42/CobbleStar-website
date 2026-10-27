@@ -12,7 +12,7 @@ const rows=new Map(dexRuntimeIndex.map(r=>[r.species,r]));
 // Prefer the official model in this isolated preview; production checks server metadata.
 for(const r of dexRuntimeIndex)if(!r.source)rows.set(r.species,r);
 const nativeAsset=async s=>runtimeAsset(rows.get(s));
-const dex=createPublicDex({list:async()=>[],asset:async()=>null,names:async()=>new Map([...rows].map(([s,r])=>[s,r.name])),nativeSpecies:async()=>published.entries.filter(e=>e.collection==='Classiques').map(e=>({species:e.species,preview:rows.has(e.species)})),nativeKit:async()=>{throw Error('unused');},nativeAsset,motion:async(id,s)=>formMotion(id)??(await nativeAsset(s)).motion});
+const dex=createPublicDex({list:async()=>published.entries.filter(e=>e.collection==='Star'&&e.id.endsWith('-base')).map(e=>({species:e.species,revision:1,hasAsh:published.entries.some(a=>a.id==='star-'+e.species+'-ash')})),asset:async s=>{const r=await fetch('https://cobblestar-mc.fr/api/pokedex/star-'+s+'-base/asset');return r.ok?(await r.json()).asset:null;},names:async()=>new Map([...rows].map(([s,r])=>[s,r.name])),nativeSpecies:async()=>published.entries.filter(e=>e.collection==='Classiques').map(e=>({species:e.species,preview:rows.has(e.species)})),nativeKit:async()=>{throw Error('unused');},nativeAsset,motion:async(id,s)=>formMotion(id)??(await nativeAsset(s)).motion});
 const app=Fastify();await app.register(helmet,siteSecurity);
 registerPublicDex(app,dex);
 const content=async kind=>fetch('https://cobblestar-mc.fr/api/'+kind).then(r=>r.json());
