@@ -11,7 +11,7 @@ test('regional forms use their server types, learnset and evolution, not vanilla
  assert.deepEqual(normal.types,['fire']);assert.deepEqual(regional.types,['fire','electric']);assert.ok(regional.moves.some(m=>m.id==='thundershock'&&m.method==='10'));assert.ok(regional.evolutions[0].form.includes('asteria'));assert.equal(regional.spawns.length,0);
 });
 test('legendary overrides disable vanilla spawns and expose real event conditions',async()=>{
- const moltres=await dexInfo(entry('moltres'));assert.equal(moltres.spawns.length,1);assert.equal(moltres.spawns[0].kind,'Événement légendaire CobbleStar');assert.equal(moltres.spawns[0].level,'70');assert.ok(moltres.spawns[0].conditions.some(c=>c.value==='Jour'));assert.ok(moltres.spawns[0].conditions.some(c=>c.value==='Temps clair'));assert.equal((await dexInfo(entry('dialga'))).spawns.length,0);
+ const moltres=await dexInfo(entry('moltres'));assert.equal(moltres.spawns.length,1);assert.equal(moltres.spawns[0].kind,'Événement légendaire CobbleStar');assert.equal(moltres.spawns[0].level,'70');assert.ok(moltres.spawns[0].exclusions.some(c=>c.label==='Zone protégée du spawn'));assert.ok(moltres.spawns[0].exclusions.some(c=>c.value.includes('battle zone')));assert.ok(moltres.spawns[0].conditions.some(c=>c.value==='Jour'));assert.ok(moltres.spawns[0].conditions.some(c=>c.value==='Temps clair'));assert.equal((await dexInfo(entry('dialga'))).spawns.length,0);
 });
 test('cosmetic Star and admin-only creations do not promise wild acquisition',async()=>{
  assert.equal((await dexInfo(entry('dragonite','star-dragonite-base','Star'))).spawns.length,0);assert.match((await dexInfo(entry('allodus','allodus-custom-base','Créations CobbleStar'))).acquisition,/administration/);
