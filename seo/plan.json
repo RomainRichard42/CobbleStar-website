@@ -406,5 +406,23 @@
       "installer cobblemon",
       "pokédex cobblemon français"
     ]
+  },
+  "latestPublishedSeo": {
+    "date": "2026-10-27",
+    "implementationCommit": "fcebd58",
+    "speciesPages": 1014,
+    "totalSitemapUrls": 1062,
+    "appearanceCount": 1114,
+    "canonicalStrategy": "Une URL par espèce ; les apparences utilisent ?forme= avec canonical vers la fiche de l’espèce.",
+    "audit": "seo/reports/audit-fiches-production-2026-10-27.json",
+    "ci": "https://github.com/RomainRichard42/CobbleStar-website/actions/runs/40526093732",
+    "ciResult": "success",
+    "googleIndexing": {
+      "url": "https://cobblestar-mc.fr/wiki/pokedex/eevee/",
+      "requestedOn": "2026-10-27",
+      "status": "Indexing requested — priority crawl queue",
+      "indexed": false
+    },
+    "shopIcon": "Image fournie, bouton visible sur ordinateur et mobile ; WebP 6718 octets."
   }
 }
