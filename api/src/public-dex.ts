@@ -16,7 +16,7 @@ export function createPublicDex(source:DexSource){
   if(cached&&Date.now()<cached.until)return cached.entries;
   return pending??=(async()=>{
    const [rows,names,native]=await Promise.all([source.list(),source.names(),source.nativeSpecies()]);
-   const entries=[...rows.flatMap(row=>['base',...(row.hasAsh&&row.species==='greninja'?['ash']:[])].map(form=>({id:`star-${row.species}-${form}`,species:row.species,name:names.get(row.species)||row.species,collection:'Star',form:form==='ash'?'Sachanobi Star':'Star',assetUrl:url(`star-${row.species}-${form}`)+`?v=${row.revision}`}))),...shipped,...native.map(({species,preview})=>({id:`native-${species}`,species,name:names.get(species)||species,collection:'Classiques',form:'Classique',assetUrl:preview?url(`native-${species}`):''}))];
+   const entries=[...rows.flatMap(row=>['base',...(row.hasAsh&&row.species==='greninja'?['ash']:[])].map(form=>({id:`star-${row.species}-${form}`,species:row.species,name:names.get(row.species)||row.species,collection:'Star',form:form==='ash'?'Sachanobi Star':'Star',assetUrl:url(`star-${row.species}-${form}`)+`?v=${row.revision}`}))),...shipped,...native.filter(n=>n.species!=='cobblestar_egg').map(({species,preview})=>({id:`native-${species}`,species,name:names.get(species)||species,collection:'Classiques',form:'Classique',assetUrl:preview?url(`native-${species}`):''}))];
    cached={until:Date.now()+60_000,entries};return entries;
   })().finally(()=>{pending=undefined;});
  };

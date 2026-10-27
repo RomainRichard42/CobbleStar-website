@@ -6,10 +6,10 @@ import {createPublicDex,registerPublicDex} from '../dist/public-dex.js';
 import {nativeStarKit} from '../dist/star-library.js';
 const files=new URL('../../public/downloads/pokemon-star/dragonite/',import.meta.url);
 const published={species:'dragonite',model:JSON.parse(readFileSync(new URL('dragonite.geo.json',files))),texture:readFileSync(new URL('dragonite.png',files)).toString('base64')};
-const source={list:async()=>[{species:'dragonite',revision:2,hasAsh:false}],asset:async s=>s==='dragonite'?{...published,actor_id:'private',draft_json:'secret'}:null,names:async()=>new Map([['dragonite','Dracolosse'],['pikachu','Pikachu']]),nativeSpecies:async()=>[{species:'pikachu',preview:true},{species:'missing_template',preview:false}],nativeKit:nativeStarKit};
+const source={list:async()=>[{species:'dragonite',revision:2,hasAsh:false}],asset:async s=>s==='dragonite'?{...published,actor_id:'private',draft_json:'secret'}:null,names:async()=>new Map([['dragonite','Dracolosse'],['pikachu','Pikachu']]),nativeSpecies:async()=>[{species:'pikachu',preview:true},{species:'missing_template',preview:false},{species:'cobblestar_egg',preview:false}],nativeKit:nativeStarKit};
 test('public dex exposes only published Star and compatible native species',async()=>{
  const dex=createPublicDex(source),entries=await dex.list();
- assert.ok(entries.some(e=>e.id==='native-pikachu'));assert.equal(entries.find(e=>e.species==='missing_template').assetUrl,'');assert.equal(await dex.asset('native-missing_template'),null);
+ assert.ok(entries.some(e=>e.id==='native-pikachu'));assert.ok(!entries.some(e=>e.species==='cobblestar_egg'));assert.equal(entries.find(e=>e.species==='missing_template').assetUrl,'');assert.equal(await dex.asset('native-missing_template'),null);
  assert.ok(entries.some(e=>e.id==='star-dragonite-base'));assert.ok(!JSON.stringify(entries).includes('private'));
  assert.equal(await dex.asset('star-unpublished-base'),null);assert.equal(await dex.asset('star-dragonite-ash'),null);assert.equal(await dex.asset('../../.env'),null);assert.equal(await dex.asset('native-unlisted'),null);
  assert.deepEqual(Object.keys(await dex.asset('star-dragonite-base')).sort(),['model','species','texture']);
