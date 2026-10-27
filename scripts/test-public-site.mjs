@@ -10,8 +10,9 @@ import {registerPublicSite,isPublicPage} from '../api/dist/public-site.js';
 import {siteSecurity} from '../api/dist/site-security.js';
 let wiki={content:JSON.parse(await readFile('wiki.default.json','utf8')),version:1,updatedAt:null};
 let news={content:JSON.parse(await readFile('news.default.json','utf8')),version:1,updatedAt:null};
+let dexEntries=[{id:'native-pikachu',species:'pikachu',name:'Pikachu',collection:'Classiques',form:'Classique',assetUrl:'/api/pokedex/native-pikachu/asset'}];
 const app=Fastify();await app.register(helmet,siteSecurity);
-registerPublicSite(app,{getWiki:async()=>wiki,getNews:async()=>news,getDexInfo:async(id)=>dexInfo({id,species:'pikachu',name:'Pikachu',collection:'Classiques',form:'Classique'}),getDex:async()=>[{id:'native-pikachu',species:'pikachu',name:'Pikachu',collection:'Classiques',form:'Classique',assetUrl:'/api/pokedex/native-pikachu/asset'}]});
+registerPublicSite(app,{getWiki:async()=>wiki,getNews:async()=>news,getDexInfo:async(id)=>dexInfo({id,species:'pikachu',name:'Pikachu',collection:'Classiques',form:'Classique'}),getDex:async()=>dexEntries});
 app.get('/api/test',async()=>({api:true}));
 await app.register(staticFiles,{root:resolve('out')});
 const base=await app.listen({host:'127.0.0.1',port:0});
@@ -149,3 +150,21 @@ test('previews stay excluded and static player pages canonicalize without touchi
   assert.doesNotMatch(html,/<details class="dex-move"[^>]*hidden/);
   assert.doesNotMatch(html,/<meta name="robots" content="noindex/);
  });
+
+test('species navigation links canonical neighbours once per species, including catalogue boundaries',async()=>{
+ const original=dexEntries;
+ try{
+  const entry=(species,name,collection='Classiques')=>({id:(collection==='Classiques'?'native-':'star-')+species,species,name,collection,form:'Classique',assetUrl:''});
+  dexEntries=[entry('raichu','Raichu'),entry('pikachu','Pikachu','Star'),entry('bulbasaur','Bulbizarre'),entry('pikachu','Pikachu')];
+  const {html}=await get('/wiki/pokedex/pikachu/');
+  const nav=html.match(/<nav class="pokemon-neighbours"[\s\S]*?<\/nav>/)[0];
+  assert.match(nav,/href="\/wiki\/pokedex\/bulbasaur\/"/);
+  assert.match(nav,/href="\/wiki\/pokedex\/raichu\/"/);
+  assert.doesNotMatch(nav,/forme=|href="\/wiki\/pokedex\/pikachu\/"/);
+  assert.equal((nav.match(/data-pokemon-neighbour/g)||[]).length,2);
+  assert.match(html,/<form id="pokemon-jump" action="\/wiki\/pokedex\/" method="get"/);
+  assert.match(html,/name="pokemon"/);
+  const first=await get('/wiki/pokedex/bulbasaur/'),last=await get('/wiki/pokedex/raichu/');
+  assert.match(first.html,/Début du Pokédex/);assert.match(last.html,/Fin du Pokédex/);
+ }finally{dexEntries=original;}
+});

@@ -19,6 +19,13 @@ if(failed){Astro.response.status=503;Astro.response.headers.set('Cache-Control',
 else if(!selected){Astro.response.status=404;Astro.response.headers.set('Cache-Control','no-store');}
 const forms=entries.filter(e=>e.species===selected?.species);
 const primary=defaultAppearance(forms);
+// Match the public catalogue's French alphabetical order, with one link per species.
+const speciesGroups=new Map<string,typeof entries>();
+for(const entry of entries){const group=speciesGroups.get(entry.species)??[];group.push(entry);speciesGroups.set(entry.species,group);}
+const neighbours=[...speciesGroups.values()].map(defaultAppearance).sort((a,b)=>a.name.localeCompare(b.name,'fr')||a.species.localeCompare(b.species));
+const currentIndex=neighbours.findIndex(e=>e.species===selected?.species);
+const previous=currentIndex>0?neighbours[currentIndex-1]:null;
+const next=currentIndex>=0?neighbours[currentIndex+1]:null;
 const name=primary?.name??'Pokémon introuvable';
 const title=selected?`${name} dans Cobblemon : évolution, localisation et stats`:'Pokémon introuvable';
 const description=selected?`Consulte la fiche de ${name} sur CobbleStar : types, talents, statistiques, évolutions, attaques et conditions d’apparition issues des packs du serveur.`:'Cette fiche Pokémon n’est pas disponible.';
@@ -46,6 +53,20 @@ function evolutionLink(species:string){
  <div class="dex-types">{info.types.map((t:string)=><span class="dex-type" data-type={t}>{typeNames[t]||t}</span>)}</div>
  <p>{info.description}</p>
  <dl class="dex-facts"><dt>N° Pokédex</dt><dd>{info.number}</dd><dt>Taille</dt><dd>{info.height} m</dd><dt>Poids</dt><dd>{info.weight} kg</dd><dt>Apparence</dt><dd>{selected.form}</dd></dl>
+
+ <div class="pokemon-browser">
+  <nav class="pokemon-neighbours" aria-label="Changer de Pokémon, ordre alphabétique">
+   {previous?<a href={dexPath(previous.species)} data-pokemon-neighbour><span>← Précédent</span><strong>{previous.name}</strong></a>:<span class="pokemon-boundary">Début du Pokédex</span>}
+   <a class="pokemon-catalogue" href="/wiki/pokedex/">Tout le Pokédex</a>
+   {next?<a href={dexPath(next.species)} data-pokemon-neighbour><span>Suivant →</span><strong>{next.name}</strong></a>:<span class="pokemon-boundary">Fin du Pokédex</span>}
+  </nav>
+  <form id="pokemon-jump" action="/wiki/pokedex/" method="get" role="search" aria-label="Chercher une fiche Pokémon">
+   <label for="pokemon-jump-input">Aller à un autre Pokémon</label>
+   <div class="pokemon-jump-field"><input id="pokemon-jump-input" name="pokemon" type="search" placeholder="Nom français ou anglais…" autocomplete="off" maxlength="80" aria-controls="pokemon-jump-results"/><button type="submit">Rechercher</button></div>
+   <p id="pokemon-jump-status" role="status" hidden></p>
+   <ul id="pokemon-jump-results" aria-label="Fiches Pokémon trouvées" hidden></ul>
+  </form>
+ </div>
  <nav class="pokemon-sections" aria-label="Rubriques de la fiche"><a href="#apercu">Aperçu</a><a href="#evolutions">Évolutions</a><a href="#localisation">Où le trouver</a><a href="#attaques">Attaques</a></nav>
  <div id="apercu" data-pokemon-panel>
  <section id="talents"><h2>Talents de ce Pokémon</h2>{info.abilities.map((a:any)=><div><h3>{a.name}{a.hidden?' · Talent caché':''}</h3><p>{a.description||'Talent défini par le pack du serveur.'}</p></div>)}</section>

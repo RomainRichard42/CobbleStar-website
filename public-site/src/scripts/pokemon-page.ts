@@ -1,5 +1,53 @@
 import type {createDexRenderer} from './dex-renderer';
 const norm=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const panelHash=()=>['#apercu','#evolutions','#localisation','#attaques'].includes(location.hash)?location.hash:['#stats','#talents'].includes(location.hash)?'#apercu':'';
+const retainPanel=()=>document.querySelectorAll<HTMLAnchorElement>('[data-pokemon-neighbour],#pokemon-jump-results a').forEach(link=>{link.hash=panelHash();});
+const jump=document.querySelector<HTMLFormElement>('#pokemon-jump');
+if(jump){
+ const field=document.getElementById('pokemon-jump-input') as HTMLInputElement;
+ const results=document.getElementById('pokemon-jump-results')!;
+ const status=document.getElementById('pokemon-jump-status')!;
+ type Choice={species:string;name:string;collection:string};
+ let catalogue:Promise<Choice[]>|undefined,timer:ReturnType<typeof setTimeout>,revision=0;
+ const current=location.pathname.split('/').filter(Boolean).at(-1);
+ function getCatalogue(){
+  return catalogue??=fetch('/api/pokedex',{signal:AbortSignal.timeout(10000)}).then(async response=>{
+   if(!response.ok)throw Error('Catalogue indisponible');
+   const {entries}=await response.json() as {entries:Choice[]};
+   const unique=new Map<string,Choice>();
+   for(const entry of entries)if(!unique.has(entry.species)||entry.collection==='Classiques')unique.set(entry.species,entry);
+   return [...unique.values()].filter(e=>e.species!==current).sort((a,b)=>a.name.localeCompare(b.name,'fr')||a.species.localeCompare(b.species));
+  }).catch(error=>{catalogue=undefined;throw error;});
+ }
+ field.addEventListener('input',()=>{
+  clearTimeout(timer);const version=++revision;const query=norm(field.value.trim());
+  results.replaceChildren();results.hidden=true;status.hidden=query.length===0;
+  if(query.length<2){status.textContent=query?'Saisis au moins deux lettres.':'';return;}
+  status.textContent='Recherche…';
+  timer=setTimeout(async()=>{
+   try{
+    const catalogue=await getCatalogue();if(version!==revision)return;
+    const matches=catalogue.filter(e=>norm(e.name+' '+e.species).includes(query));
+    matches.sort((a,b)=>Number(norm(b.name)===query||norm(b.species)===query)-Number(norm(a.name)===query||norm(a.species)===query));
+    for(const entry of matches.slice(0,6)){
+     const item=document.createElement('li'),link=document.createElement('a');
+     link.href='/wiki/pokedex/'+encodeURIComponent(entry.species)+'/'+panelHash();link.textContent=entry.name+' →';
+     item.append(link);results.append(item);
+    }
+    results.hidden=!matches.length;
+    status.textContent=matches.length>6?'6 fiches sur '+matches.length+' résultats. Précise le nom ou lance la recherche complète.':matches.length?matches.length+(matches.length===1?' fiche trouvée.':' fiches trouvées.'):'Aucun autre Pokémon trouvé. Essaie son nom français ou anglais.';
+   }catch{if(version===revision)status.textContent='Suggestions indisponibles. Le bouton Rechercher ouvre le Pokédex.';}
+  },180);
+ });
+ field.addEventListener('keydown',event=>{
+  if(event.key==='ArrowDown'&&!results.hidden){event.preventDefault();results.querySelector('a')?.focus();}
+  if(event.key==='Escape'){++revision;clearTimeout(timer);results.hidden=true;status.hidden=true;}
+ });
+ results.addEventListener('keydown',event=>{
+  if(event.key==='Escape'){results.hidden=true;status.hidden=true;field.focus();}
+ });
+ // The normal GET form remains a useful fallback without JavaScript or if the API is unavailable.
+}
 // The complete document is server-rendered. Only enhance it after JavaScript starts.
 const tabNav=document.querySelector<HTMLElement>('.pokemon-sections');
 if(tabNav){
@@ -18,7 +66,8 @@ if(tabNav){
  tabNav.setAttribute('role','tablist');
  function activate(index:number,updateHash=false){
   tabs.forEach((tab,i)=>{tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1;panels[i].hidden=i!==index;});
-  if(updateHash)history.pushState(null,'','#'+panels[index].id);
+  if(updateHash&&location.hash!=='#'+panels[index].id)history.pushState(null,'','#'+panels[index].id);
+  retainPanel();
  }
  function fromHash(scroll=false){
   let id:string;try{id=decodeURIComponent(location.hash.slice(1));}catch{return;}
