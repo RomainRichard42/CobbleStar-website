@@ -423,6 +423,29 @@
       "status": "Indexing requested — priority crawl queue",
       "indexed": false
     },
-    "shopIcon": "Image fournie, bouton visible sur ordinateur et mobile ; WebP 6718 octets."
+    "shopIcon": "Image fournie, bouton visible sur ordinateur et mobile ; WebP 6718 octets.",
+    "pokemonPresentation": {
+      "date": "2026-10-27",
+      "implementationCommit": "af81067",
+      "audit": "seo/reports/audit-onglets-production-2026-10-27.json",
+      "tabs": [
+        "Aperçu",
+        "Évolutions",
+        "Où le trouver",
+        "Attaques"
+      ],
+      "seo": "Toutes les données restent dans le HTML serveur, rubriques accessibles sans JavaScript, canonical et liens conservés.",
+      "validation": {
+        "publicTests": 14,
+        "pagesAudited": 1062,
+        "errors": 0,
+        "warnings": 0,
+        "mobileWidth": 390,
+        "keyboard": true,
+        "directAnchors": true,
+        "attackSearch": true,
+        "progressiveMoves": 12
+      }
+    }
   }
 }
