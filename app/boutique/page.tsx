@@ -222,7 +222,7 @@ export default function ShopPage() {
           const item=catalog.find(p=>p.id===(tokenPack?`pack_${id}_4`:`key_${id}`))!;
           const single=catalog.find(p=>p.id===`key_${id}`)!;
           return <article className={`store-token store-token-${id}`} key={id}>
-            <img src={`/shop/tokens/${id}.svg`} alt={`Jeton ${id} du serveur CobbleStar`} width="400" height="400"/>
+            <img src={`/shop/tokens/${id}.png`} alt={`Jeton ${id} du serveur CobbleStar`} width="400" height="400"/>
             <div><h3>{id[0].toUpperCase()+id.slice(1)} {tokenPack&&<span>×4</span>}</h3><p>{tokenPack?'4 jetons pour 4 ouvertures':'1 jeton pour 1 ouverture'}</p>
             <strong className="shop-star-price"><StarsArt/>{item.starsPrice.toLocaleString('fr-FR')} <span>Stars</span></strong>
             <p className="store-token-saving">{tokenPack?`${(single.starsPrice*4-item.starsPrice).toLocaleString('fr-FR')} Stars économisées`:'Utilisable dans la machine du même nom'}</p>

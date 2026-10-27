@@ -1,6 +1,7 @@
 import {readFileSync,writeFileSync,readdirSync,mkdirSync,existsSync} from 'node:fs';
 import {join,basename,relative} from 'node:path';
 import {inflateRawSync} from 'node:zlib';
+import {renderToken} from './render-token.mjs';
 const root=process.cwd(), api=join(root,'api');
 const walk=p=>readdirSync(p,{withFileTypes:true}).flatMap(e=>e.isDirectory()?walk(join(p,e.name)):[join(p,e.name)]);
 const json=p=>JSON.parse(readFileSync(p,'utf8'));
@@ -39,15 +40,12 @@ for(const pack of packs){
 writeFileSync(join(api,'dex.catalog.json'),JSON.stringify({version:1,entries},null,2)+'\n');
 console.log(`Exported ${entries.length} CobbleStar forms from bundled resolvers.`);
 
-// Orthographic vector renders of the game's actual octagonal token meshes.
+// Depth-tested renders of the game's actual octagonal token meshes.
 const mod=process.argv[2];
 if(mod){
  mkdirSync(join(root,'public/shop/tokens'),{recursive:true});
  for(const id of ['nova','pulsar','quasar','vote']){
   const mesh=json(join(mod,'src/main/resources/assets/cobblestar_planets/models/cosmic/key_'+id+'.json'));
-  const project=([x,y,z])=>{x-=8;y-=8;z-=7.5;return [200+(x*.95+z*.31)*21,200-(y*.98-z*.16)*21,z*.94-x*.30+y*.15];};
-  const faces=mesh.faces.map(f=>({f,p:f.p.map(project)})).sort((a,b)=>b.p.reduce((s,p)=>s+p[2],0)-a.p.reduce((s,p)=>s+p[2],0));
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400"><title>Jeton ${id}</title>${faces.map(({f,p})=>`<polygon points="${p.map(v=>v.slice(0,2).map(n=>n.toFixed(2)).join(',')).join(' ')}" fill="#${mesh.palette[f.material].toString(16).padStart(6,'0')}"/>`).join('')}</svg>`;
-  writeFileSync(join(root,'public/shop/tokens',id+'.svg'),svg);
+  writeFileSync(join(root,'public/shop/tokens',id+'.png'),await renderToken(mesh));
  }
 }
