@@ -135,3 +135,17 @@ test('previews stay excluded and static player pages canonicalize without touchi
  const slash=await get('/wiki/pokedex/pikachu');assert.equal(slash.response.status,308);
  const list=await get('/wiki/pokedex/');assert.ok(list.html.includes('href="/wiki/pokedex/pikachu/"'));const map=await get('/sitemap.xml');assert.ok(map.html.includes('<loc>https://cobblestar-mc.fr/wiki/pokedex/pikachu/</loc>'));assert.ok(!map.html.includes('?forme='));
  });
+
+ test('Pokemon tabs preserve complete crawlable panels and anchor navigation without JavaScript',async()=>{
+  const {html}=await get('/wiki/pokedex/pikachu/');
+  for(const id of ['apercu','evolutions','localisation','attaques']){
+   assert.ok(html.includes('href="#'+id+'"'));
+   const panel=html.match(new RegExp('<(?:div|section) id="'+id+'"[^>]*>'));
+   assert.ok(panel,id);assert.match(panel[0],/data-pokemon-panel/);assert.doesNotMatch(panel[0],/hidden/);
+  }
+  assert.match(html,/id="talents"/);assert.match(html,/id="stats"/);
+  assert.match(html,/Raichu/);assert.match(html,/Tonnerre/);
+  assert.match(html,/id="pokemon-more-moves"[^>]*hidden/);
+  assert.doesNotMatch(html,/<details class="dex-move"[^>]*hidden/);
+  assert.doesNotMatch(html,/<meta name="robots" content="noindex/);
+ });
