@@ -9,7 +9,7 @@ const documents=new Map(),links=new Map(),images=new Map();
 try{
  const map=await fetchPage(origin+'/sitemap.xml');if(map.response.status!==200)throw new Error('Sitemap HTTP '+map.response.status);
  const urls=[...map.html.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>decode(m[1]));if(!urls.length)throw new Error('Empty sitemap');
- if(urls.length>250)throw new Error('Sitemap page limit (250) reached');
+ if(urls.length>5000)throw new Error('Sitemap page limit (5000) reached');
  const titles=new Map(),descriptions=new Map();
  for(const url of urls){
   const expected=new URL(url);if(expected.origin!==canonicalOrigin)throw new Error('Unexpected sitemap origin');
@@ -48,7 +48,7 @@ try{
  }
  report.linkChecks=[];report.imageChecks=[];
  const linkedPages=new Set([...links.keys()].map(path=>new URL(path,canonicalOrigin).pathname));
- if(linkedPages.size>250||links.size>2000||images.size>150)throw new Error('Audit limit reached (250 documents / 2000 anchors / 150 images)');
+ if(linkedPages.size>5000||links.size>20000||images.size>150)throw new Error('Audit limit reached (5000 documents / 20000 anchors / 150 images)');
  for(const [path,source] of links){
    const target=new URL(path,canonicalOrigin),key=target.pathname;
    let doc=documents.get(key);if(!doc){doc=await fetchPage(origin+key);documents.set(key,doc);}

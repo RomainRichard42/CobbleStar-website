@@ -1,3 +1,4 @@
+import type {DexEntry} from '../../../api/src/public-dex';
 import type { WikiEnvelope, WikiArticle } from '../../../app/wiki/wiki-types';
 import type { NewsEnvelope } from '../../../app/actualites/news-types';
 import {availableWiki} from '../../../api/src/wiki-availability';
@@ -6,7 +7,7 @@ export const SITE = 'https://cobblestar-mc.fr';
 export const SERVER = 'play.cobblestar-mc.fr';
 export const DISCORD = 'https://discord.gg/Sd387Ky4M';
 export const DOWNLOAD = '/telecharger/';
-export type PublicLocals = { getWiki: () => Promise<WikiEnvelope>; getNews: () => Promise<NewsEnvelope> };
+export type PublicLocals = { getWiki: () => Promise<WikiEnvelope>; getNews: () => Promise<NewsEnvelope>; getDex:()=>Promise<DexEntry[]>; getDexInfo:(id:string)=>Promise<any> };
 export function publishedWiki(envelope: WikiEnvelope) {
   envelope = {...envelope, content:availableWiki(envelope.content)};
   const branches = envelope.content.branches.filter(b => b.visible).sort((a,b) => a.order-b.order);

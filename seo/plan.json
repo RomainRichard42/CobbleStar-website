@@ -382,5 +382,29 @@
       "report": "seo/reports/audit-2026-10-27-after-local.json",
       "visualMobile": "Non vérifié dans cette session : automatisation Firefox bloquée. Mise en page existante réutilisée."
     }
+  },
+  "recurringAudit": {
+    "automationId": "suivi-seo-cobblestar",
+    "time": "09:00",
+    "timezone": "Europe/Paris",
+    "daily": true,
+    "monday": "Audit approfondi et 5 à 10 actions priorisées",
+    "localExecution": "Ordinateur allumé et application ouverte",
+    "latestReport": "seo/reports/suivi-quotidien-2026-10-27.json",
+    "latestTechnicalReport": "seo/reports/audit-2026-10-27T14-28-05.112Z.json",
+    "updatedAt": "2026-10-27T14:32:20.141Z"
+  },
+  "latestKeywordResearch": {
+    "report": "seo/reports/mots-cles-google-2026-10-27.json",
+    "checkedAt": "2026-10-27T14:37:41.158Z",
+    "source": "Google consulté directement dans le navigateur",
+    "queries": [
+      "cobblestar",
+      "cobblemon fr",
+      "serveur cobblemon français",
+      "minecraft pokemon",
+      "installer cobblemon",
+      "pokédex cobblemon français"
+    ]
   }
 }

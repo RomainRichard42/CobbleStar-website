@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-27",
+  "site": "https://cobblestar-mc.fr",
+  "technicalReport": "seo/reports/audit-2026-10-27T14-28-05.112Z.json",
+  "schedule": {
+    "automationId": "suivi-seo-cobblestar",
+    "time": "09:00",
+    "timezone": "Europe/Paris",
+    "daily": true,
+    "monday": "Audit approfondi et 5 à 10 actions priorisées",
+    "localExecution": "Ordinateur allumé et application ouverte"
+  },
+  "technical": {
+    "pages": 48,
+    "errors": [],
+    "warnings": [],
+    "metrics": {
+      "home": {
+        "htmlBytes": 23625,
+        "scriptFiles": 5,
+        "scriptBytes": 23934,
+        "inlineScriptBytes": 700,
+        "totalScriptBytes": 24634
+      },
+      "cloudflareEmailLinks": 50,
+      "checkedLinks": 309,
+      "checkedImages": 29,
+      "checkedDocuments": 50,
+      "maxClickDepth": 2,
+      "crawlerHttpStatus": 200
+    },
+    "comparison": "Aucune régression détectée par les contrôles automatiques par rapport au rapport dex-production du 27 octobre à 09:59 UTC."
+  },
+  "searchConsole": {
+    "checkedOn": "2026-10-27",
+    "property": "https://cobblestar-mc.fr/",
+    "source": "Interface Search Console, session connectée",
+    "performance": {
+      "selectedPeriod": "3 mois",
+      "availableChartStart": "2026-10-25",
+      "availableChartEnd": "2026-10-25",
+      "lastUpdate": "3,5 heures avant consultation",
+      "clicks": 0,
+      "impressions": 0,
+      "queries": [],
+      "averagePosition": null,
+      "note": "Aucune impression : la position 0 affichée ne représente pas un classement réel."
+    },
+    "indexing": "Rapport en cours de traitement",
+    "sitemap": {
+      "status": "Success",
+      "lastRead": "2026-10-26",
+      "discoveredUrls": 47,
+      "currentPublishedUrls": 48,
+      "previousObservedDiscoveredUrls": 18,
+      "note": "URL découvertes ne signifie pas URL indexées ; Google doit encore relire la version à 48 URL."
+    },
+    "coreWebVitals": "Aucune donnée mobile ou ordinateur disponible dans la vue d’ensemble"
+  },
+  "actions": [
+    {
+      "priority": "P1",
+      "page": "/wiki/pokedex/",
+      "action": "Mesurer le coût mobile du Pokédex puis réduire le HTML initial si nécessaire en conservant des liens explorables et le contenu utile.",
+      "evidence": "898848 octets de HTML non compressé, page la plus volumineuse du site.",
+      "effort": "Moyen",
+      "success": "Comparaison avant/après des octets transférés et des mesures de chargement mobile ; aucune perte de contenu accessible."
+    },
+    {
+      "priority": "P1",
+      "page": "/sitemap.xml et pages prioritaires",
+      "action": "Suivre la prochaine lecture du sitemap et inspecter les URL prioritaires dès que les données d’indexation sont disponibles.",
+      "evidence": "Sitemap accepté, 47 URL découvertes sur 48 publiées ; indexation en traitement.",
+      "effort": "Faible",
+      "success": "Relevé daté des URL découvertes et des motifs d’exclusion réels ; aucune demande répétitive sans changement."
+    },
+    {
+      "priority": "P2",
+      "page": "/minecraft-pokemon/, /installer-cobblemon/, /",
+      "action": "Réévaluer les intentions généralistes et les titres avec les premières requêtes observées ; prévoir des captures authentiques du serveur dès qu’elles existent.",
+      "evidence": "Aucune requête disponible dans Search Console ; pas encore de base chiffrée pour optimiser le CTR.",
+      "effort": "Moyen",
+      "success": "Requêtes marque/hors marque suivies et modifications justifiées par les données ou un manque de contenu vérifié."
+    }
+  ],
+  "limits": [
+    "Contrôles HTTP et HTML, pas une garantie de classement Google.",
+    "Pas de nouveau test visuel mobile ni de mesure Lighthouse lors de ce passage.",
+    "Le poids HTML ne représente pas le poids transféré compressé ni l’ensemble des médias et modules 3D.",
+    "Aucune modification du site ni publication pendant cet audit."
+  ]
+}

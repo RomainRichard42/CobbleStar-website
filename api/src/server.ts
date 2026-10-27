@@ -1055,7 +1055,7 @@ app.post("/api/internal/rewards/:id/fail", { config: { rateLimit: { max: 300, ti
 });
 
 registerPublicDex(app, publicDex);
-registerPublicSite(app, { getWiki: () => wikiSlot("published"), getNews: () => newsSlot("published"), getDex: publicDex.list });
+registerPublicSite(app, { getWiki: () => wikiSlot("published"), getNews: () => newsSlot("published"), getDex: publicDex.list, getDexInfo: publicDex.info });
 
 await app.register(staticFiles, {
   root: join(process.cwd(), "site"),

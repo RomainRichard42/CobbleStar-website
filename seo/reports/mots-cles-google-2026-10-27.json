@@ -1,0 +1,112 @@
+{
+  "checkedAt": "2026-10-27T14:37:41.158Z",
+  "method": {
+    "source": "Google consulté directement dans le navigateur",
+    "language": "fr",
+    "country": "fr",
+    "personalization": "pws=0 ; Google affiche les résultats non personnalisés",
+    "scope": "Première page de chaque recherche, ordinateur",
+    "limitations": "Observation ponctuelle dépendant du lieu et du moment ; pas un suivi universel de positions. Aucun volume de recherches ni indice de difficulté mesuré."
+  },
+  "entries": [
+    {
+      "keyword": "cobblestar",
+      "visibility": "Accueil premier résultat naturel observé ; /rejoindre/ également en première page",
+      "observedRank": 1,
+      "target": "/",
+      "competitors": [
+        "https://modrinth.com/project/390OOH2p",
+        "https://minecraft-server-list.com/server/515371/"
+      ],
+      "priority": "P1",
+      "action": "Consolider la marque CobbleStar et sa distinction des homonymes : serveur Cobblemon français, liens officiels cohérents."
+    },
+    {
+      "keyword": "cobblemon fr",
+      "visibility": "Domaine non observé sur la première page consultée",
+      "observedRank": null,
+      "target": "/",
+      "competitors": [
+        "https://cobblemoon.fr/",
+        "https://cobblemon-ultra.fr/",
+        "https://tropimon.fr/",
+        "https://pixelax.fr/"
+      ],
+      "priority": "P1",
+      "action": "Renforcer la présentation du serveur, les preuves visuelles authentiques et les liens externes pertinents à l’ouverture."
+    },
+    {
+      "keyword": "serveur cobblemon français",
+      "visibility": "Domaine non observé sur la première page consultée",
+      "observedRank": null,
+      "target": "/",
+      "competitors": [
+        "https://pokeisland.fr/discover/",
+        "https://tropimon.fr/",
+        "https://cobblemon-ultra.fr/",
+        "https://cobblemoon.fr/"
+      ],
+      "priority": "P1",
+      "action": "Concentrer cette intention sur l’accueil ; conserver une présentation honnête de la préouverture."
+    },
+    {
+      "keyword": "minecraft pokemon",
+      "visibility": "Domaine non observé sur la première page consultée",
+      "observedRank": null,
+      "target": "/minecraft-pokemon/",
+      "competitors": [
+        "https://minecraft.fr/cobblemon-mod-pokemon-minecraft/",
+        "https://pokeisland.fr/",
+        "https://pixelmongo.fr/news/pixelmonvscobblemon"
+      ],
+      "priority": "P2",
+      "action": "Renforcer le guide de découverte et les questions de débutants ; intention large comprenant vidéos et autres mods."
+    },
+    {
+      "keyword": "installer cobblemon",
+      "visibility": "Domaine non observé sur la première page consultée",
+      "observedRank": null,
+      "target": "/installer-cobblemon/",
+      "competitors": [
+        "https://pokelegends.fr/blog/comment-installer-cobblemon",
+        "https://pixelmongo.fr/news/cobblemon-launcher-installation",
+        "https://cobblemon.com/"
+      ],
+      "priority": "P1",
+      "action": "Développer un parcours illustré et le dépannage précis, en distinguant le mod public du launcher serveur encore indisponible."
+    },
+    {
+      "keyword": "pokédex cobblemon français",
+      "visibility": "Domaine non observé sur la première page consultée",
+      "observedRank": null,
+      "target": "/wiki/pokedex/",
+      "competitors": [
+        "https://cobbledex.info/fr/all-mons",
+        "https://pixelmongo.fr/wiki/mecaniques-cobblemon/cobblemon-pokedex-guide",
+        "https://wiki.cobblemoon.fr/cobblemon/pokedex"
+      ],
+      "priority": "P1",
+      "action": "Étudier des fiches Pokémon ayant chacune une URL indexable et des informations serveur utiles ; éviter les pages répétitives sans valeur."
+    }
+  ],
+  "searchConsole": {
+    "checkedOn": "2026-10-27",
+    "availableDataDate": "2026-10-25",
+    "clicks": 0,
+    "impressions": 0,
+    "queries": [],
+    "note": "Les données ne couvrent pas encore les changements récents. L’absence de requêtes ne contredit pas l’apparition constatée sur Google."
+  },
+  "additionalFindings": [
+    "L’aperçu IA de la recherche cobblestar cite des homonymes et ne présente pas clairement notre serveur.",
+    "Google affiche encore des titres et extraits différents des balises actuelles ; attendre les prochaines explorations et surveiller, sans conclure à un défaut de balisage."
+  ],
+  "nextKeywordCandidates": [
+    "serveur minecraft pokemon français",
+    "comment jouer à cobblemon",
+    "cobblemon java ou bedrock",
+    "cobblemon évolution évoli",
+    "où trouver riolu cobblemon"
+  ],
+  "candidateNote": "Pistes éditoriales à tester, pas des requêtes mesurées ni un volume garanti."
+}

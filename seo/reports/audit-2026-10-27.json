@@ -1,0 +1,2155 @@
+{
+  "at": "2026-10-27T14:28:05.112Z",
+  "origin": "https://cobblestar-mc.fr",
+  "pages": [
+    {
+      "url": "https://cobblestar-mc.fr/",
+      "status": 200,
+      "title": "Serveur Cobblemon français (FR) — CobbleStar",
+      "description": "Découvre CobbleStar, serveur Cobblemon français en préparation : deux mondes, capture de Pokémon, quêtes et raids. Rejoins Discord pour suivre l’ouverture.",
+      "canonical": "https://cobblestar-mc.fr/",
+      "ogUrl": "https://cobblestar-mc.fr/",
+      "lastmod": "2026-10-27",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 23625,
+      "scriptFiles": 5,
+      "errors": [],
+      "clickDepth": 0
+    },
+    {
+      "url": "https://cobblestar-mc.fr/rejoindre/",
+      "status": 200,
+      "title": "Rejoindre CobbleStar — Préparer l’ouverture du serveur",
+      "description": "CobbleStar n’est pas encore ouvert au public. Retrouve les prérequis Minecraft Java et les étapes à suivre lorsque le launcher sera disponible.",
+      "canonical": "https://cobblestar-mc.fr/rejoindre/",
+      "ogUrl": "https://cobblestar-mc.fr/rejoindre/",
+      "lastmod": "2026-10-26",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 15619,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/minecraft-pokemon/",
+      "status": 200,
+      "title": "Minecraft Pokémon : jouer avec Cobblemon en français | CobbleStar",
+      "description": "Découvre Cobblemon, le mod Pokémon pour Minecraft Java : installation, jeu solo, choix d’un serveur français et présentation des systèmes CobbleStar.",
+      "canonical": "https://cobblestar-mc.fr/minecraft-pokemon/",
+      "ogUrl": "https://cobblestar-mc.fr/minecraft-pokemon/",
+      "lastmod": "2026-10-27",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 16874,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/installer-cobblemon/",
+      "status": 200,
+      "title": "Installer Cobblemon : modpack, versions et dépannage | CobbleStar",
+      "description": "Installe Cobblemon sur Minecraft Java avec le modpack officiel : choix des versions, première partie, connexion à un serveur et solutions aux erreurs courantes.",
+      "canonical": "https://cobblestar-mc.fr/installer-cobblemon/",
+      "ogUrl": "https://cobblestar-mc.fr/installer-cobblemon/",
+      "lastmod": "2026-10-27",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 16892,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/telecharger/",
+      "status": 200,
+      "title": "Launcher CobbleStar — Téléchargement à l’ouverture",
+      "description": "Le launcher CobbleStar sera disponible à l’ouverture du serveur. Découvre son fonctionnement et suis les annonces officielles sur Discord.",
+      "canonical": "https://cobblestar-mc.fr/telecharger/",
+      "ogUrl": "https://cobblestar-mc.fr/telecharger/",
+      "lastmod": "2026-10-26",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 8232,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/",
+      "status": 200,
+      "title": "Wiki CobbleStar — Guides Cobblemon en français",
+      "description": "Guides Cobblemon du serveur CobbleStar : pension, métiers, GTS, raids, Ligue et collections. Étapes, commandes et réponses aux questions.",
+      "canonical": "https://cobblestar-mc.fr/wiki/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/",
+      "lastmod": "2026-10-27",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 133976,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/pokedex/",
+      "status": 200,
+      "title": "Pokédex CobbleStar — Pokémon, Star et formes du serveur",
+      "description": "Explore le Pokédex visuel de CobbleStar : Pokémon classiques, versions Star publiées et formes d’Astéria et Nébélia. Types, évolutions, statistiques, attaques et lieux d’apparition.",
+      "canonical": "https://cobblestar-mc.fr/wiki/pokedex/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/pokedex/",
+      "lastmod": "2026-10-27",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 898848,
+      "scriptFiles": 2,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/actualites/",
+      "status": 200,
+      "title": "Actualités CobbleStar — Serveur, launcher et Cobblemon",
+      "description": "Les nouveautés officielles de CobbleStar : mises à jour du serveur Minecraft Cobblemon, du launcher et de ses activités.",
+      "canonical": "https://cobblestar-mc.fr/actualites/",
+      "ogUrl": "https://cobblestar-mc.fr/actualites/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 9139,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/roadmap/",
+      "status": 200,
+      "title": "Roadmap CobbleStar — Activités et préparation de l’ouverture",
+      "description": "Découvre les métiers, raids, GTS, pension, quêtes et Battle Pass de CobbleStar. Le serveur prépare son ouverture publique ; suis les prochaines annonces.",
+      "canonical": "https://cobblestar-mc.fr/roadmap/",
+      "ogUrl": "https://cobblestar-mc.fr/roadmap/",
+      "lastmod": "2026-10-26",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 12860,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/confidentialite/",
+      "status": 200,
+      "title": "Confidentialité | CobbleStar",
+      "description": "Les données utilisées par CobbleStar, leur protection et tes droits.",
+      "canonical": "https://cobblestar-mc.fr/confidentialite/",
+      "ogUrl": "https://cobblestar-mc.fr/confidentialite/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 13419,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/boutique/",
+      "status": 200,
+      "title": "Boutique : Stars, grades et cosmétiques | CobbleStar",
+      "description": "Découvre la boutique CobbleStar : Stars, grades Étoilé, Cosmique et Galactique, Battle Pass et jetons. Consulte les prix et les conditions de chaque offre.",
+      "canonical": "https://cobblestar-mc.fr/boutique/",
+      "ogUrl": "https://cobblestar-mc.fr/boutique/",
+      "lastmod": "2026-10-27",
+      "h1": 1,
+      "renderer": "Next static",
+      "htmlBytes": 33942,
+      "scriptFiles": 11,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/vote/",
+      "status": 200,
+      "title": "Voter pour CobbleStar : récompenses et classement | CobbleStar",
+      "description": "Soutiens le serveur Cobblemon CobbleStar : retrouve les sites de vote, leurs délais, tes validations et les récompenses associées à ton compte Minecraft.",
+      "canonical": "https://cobblestar-mc.fr/vote/",
+      "ogUrl": "https://cobblestar-mc.fr/vote/",
+      "lastmod": "2026-10-26",
+      "h1": 1,
+      "renderer": "Next static",
+      "htmlBytes": 21558,
+      "scriptFiles": 11,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/welcome/",
+      "status": 200,
+      "title": "Bien commencer sur CobbleStar",
+      "description": "Un parcours concret pour préparer ton compte, choisir ton équipe, te repérer et lancer tes premières activités.",
+      "canonical": "https://cobblestar-mc.fr/wiki/welcome/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/welcome/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14911,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/capture/",
+      "status": 200,
+      "title": "Capturer et organiser ses Pokémon — CobbleStar",
+      "description": "Prépare tes captures, vérifie les caractéristiques de tes partenaires et garde une équipe utilisable.",
+      "canonical": "https://cobblestar-mc.fr/wiki/capture/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/capture/",
+      "lastmod": "2026-10-27",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14384,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/quests/",
+      "status": 200,
+      "title": "Quêtes : objectifs, journal et récompenses — CobbleStar",
+      "description": "Accepter, suivre et terminer les quêtes d’histoire, secondaires et périodiques sans manquer une étape.",
+      "canonical": "https://cobblestar-mc.fr/wiki/quests/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/quests/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14725,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/mondes/",
+      "status": 200,
+      "title": "Astéria et Nébélia : explorer les mondes — CobbleStar",
+      "description": "Choisir une destination, préparer son expédition et conserver des repères entre les dimensions.",
+      "canonical": "https://cobblestar-mc.fr/wiki/mondes/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/mondes/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 13875,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/raids/",
+      "status": 200,
+      "title": "Raids : préparer son équipe et vaincre le Totem — CobbleStar",
+      "description": "Former un groupe, traverser les quatre vagues et comprendre le combat collectif avant la récompense.",
+      "canonical": "https://cobblestar-mc.fr/wiki/raids/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/raids/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14692,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/monnaies/",
+      "status": 200,
+      "title": "Cobblecoins, Stars et PCO : guide des monnaies — CobbleStar",
+      "description": "Distinguer les soldes, payer un joueur et vérifier le coût réel avant une transaction.",
+      "canonical": "https://cobblestar-mc.fr/wiki/monnaies/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/monnaies/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14255,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/clubs/",
+      "status": 200,
+      "title": "Clubs : membres, territoire et banque — CobbleStar",
+      "description": "Inviter ses partenaires, gérer les chunks, utiliser la banque et développer une base commune.",
+      "canonical": "https://cobblestar-mc.fr/wiki/clubs/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/clubs/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14612,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/album/",
+      "status": 200,
+      "title": "Cartes et boosters : compléter son album — CobbleStar",
+      "description": "Ouvrir un booster, organiser les séries et déplacer ses cartes physiques sans confondre exemplaire et illustration.",
+      "canonical": "https://cobblestar-mc.fr/wiki/album/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/album/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14436,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/compte/",
+      "status": 200,
+      "title": "Lier Discord, Minecraft et le site — CobbleStar",
+      "description": "Associe le bon personnage à ton compte pour retrouver tes Stars, les votes et les services du site.",
+      "canonical": "https://cobblestar-mc.fr/wiki/compte/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/compte/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 13620,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/starters/",
+      "status": 200,
+      "title": "Les starters d’Astéria et de Nébélia — CobbleStar",
+      "description": "Découvre les deux sélections régionales et choisis un partenaire selon son rôle dans ton aventure.",
+      "canonical": "https://cobblestar-mc.fr/wiki/starters/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/starters/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 13627,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/metiers/",
+      "status": 200,
+      "title": "Métiers : les six professions et leurs niveaux — CobbleStar",
+      "description": "Choisir ses activités, gagner de l’expérience, récupérer ses paliers et préparer sa spécialisation.",
+      "canonical": "https://cobblestar-mc.fr/wiki/metiers/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/metiers/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14905,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/epreuves/",
+      "status": 200,
+      "title": "Épreuves : obtenir les huit badges — CobbleStar",
+      "description": "Préparer une équipe, résoudre les mécanismes et vaincre chaque Capitaine avant la Ligue.",
+      "canonical": "https://cobblestar-mc.fr/wiki/epreuves/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/epreuves/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 13966,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/gts/",
+      "status": 200,
+      "title": "GTS : acheter et vendre Pokémon et objets — CobbleStar",
+      "description": "Comparer une offre, fixer un prix et gérer les annonces expirées sans perdre le fil de ses ventes.",
+      "canonical": "https://cobblestar-mc.fr/wiki/gts/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/gts/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14850,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/organisations/",
+      "status": 200,
+      "title": "Organisations : réunir plusieurs clubs — CobbleStar",
+      "description": "Comprendre la différence avec un club, préparer une candidature et rejoindre un quartier général.",
+      "canonical": "https://cobblestar-mc.fr/wiki/organisations/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/organisations/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 13910,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/galerie/",
+      "status": 200,
+      "title": "SGA et galerie : certifier et exposer ses cartes — CobbleStar",
+      "description": "Faire noter un exemplaire, fabriquer les supports et organiser une collection visible par les visiteurs.",
+      "canonical": "https://cobblestar-mc.fr/wiki/galerie/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/galerie/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14614,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/deplacements/",
+      "status": 200,
+      "title": "Se déplacer et retrouver sa base — CobbleStar",
+      "description": "Spawn, homes, warps, demandes de téléportation et point de ralliement du club.",
+      "canonical": "https://cobblestar-mc.fr/wiki/deplacements/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/deplacements/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14016,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/daycare/",
+      "status": 200,
+      "title": "Pension et reproduction — CobbleStar",
+      "description": "Compatibilité, cycle de production, héritage, stockage et éclosion : le fonctionnement de la pension native CobbleStar.",
+      "canonical": "https://cobblestar-mc.fr/wiki/daycare/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/daycare/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 16766,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/talents/",
+      "status": 200,
+      "title": "Talents : choisir sa spécialisation de métier — CobbleStar",
+      "description": "Lire les prérequis, choisir une branche et investir ses vingt points de métier sans se disperser.",
+      "canonical": "https://cobblestar-mc.fr/wiki/talents/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/talents/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14769,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/ligue/",
+      "status": 200,
+      "title": "Ligue : équipe, combats et tentative — CobbleStar",
+      "description": "Préparer une équipe verrouillée, gérer les cinq rencontres et savoir ce qu’une interruption remet à zéro.",
+      "canonical": "https://cobblestar-mc.fr/wiki/ligue/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/ligue/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14226,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/pokesell/",
+      "status": 200,
+      "title": "PokéSell : revendre les Pokémon de son PC — CobbleStar",
+      "description": "Préparer une sélection, comprendre les estimations et confirmer une vente définitive en Cobblecoins.",
+      "canonical": "https://cobblestar-mc.fr/wiki/pokesell/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/pokesell/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14045,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/parrainage/",
+      "status": 200,
+      "title": "Parrainage : inviter un ami et suivre les paliers — CobbleStar",
+      "description": "Créer le bon lien avant la première connexion et suivre les récompenses du parrain comme du filleul.",
+      "canonical": "https://cobblestar-mc.fr/wiki/parrainage/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/parrainage/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 15019,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/caisses/",
+      "status": 200,
+      "title": "Jetons : machines Vote, Nova, Pulsar et Quasar — CobbleStar",
+      "description": "Consulter les lots, utiliser le bon jeton et comprendre la roulette et les garanties affichées.",
+      "canonical": "https://cobblestar-mc.fr/wiki/caisses/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/caisses/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14467,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/pokemon-star/",
+      "status": 200,
+      "title": "Reconnaître les Pokémon Star — CobbleStar",
+      "description": "Comprendre les apparences Star, leur conservation et leur différence avec les shiny et les cosmétiques.",
+      "canonical": "https://cobblestar-mc.fr/wiki/pokemon-star/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/pokemon-star/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 13895,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/commandes/",
+      "status": 200,
+      "title": "Commandes CobbleStar : menus et déplacements",
+      "description": "Retrouver les menus, voyager, gérer son équipe et choisir la bonne commande sans chercher dans le chat.",
+      "canonical": "https://cobblestar-mc.fr/wiki/commandes/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/commandes/",
+      "lastmod": "2026-10-27",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 13799,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/grades/",
+      "status": 200,
+      "title": "Grades gratuits : conditions et avantages — CobbleStar",
+      "description": "Passer de Recrue à sa voie finale, distinguer prérequis et achat, et utiliser les avantages débloqués.",
+      "canonical": "https://cobblestar-mc.fr/wiki/grades/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/grades/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14791,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/ranked/",
+      "status": 200,
+      "title": "Ranked : équipe, formats et classement — CobbleStar",
+      "description": "Choisir son format auprès du responsable, chercher un adversaire et comprendre les conditions du combat classé.",
+      "canonical": "https://cobblestar-mc.fr/wiki/ranked/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/ranked/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14635,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/boutique/",
+      "status": 200,
+      "title": "Boutique : Stars, grades et livraison — CobbleStar",
+      "description": "Préparer son compte, comparer les offres et vérifier une livraison sans confondre abonnement et progression.",
+      "canonical": "https://cobblestar-mc.fr/wiki/boutique/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/boutique/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 15173,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/tags/",
+      "status": 200,
+      "title": "Tags : personnaliser son identité — CobbleStar",
+      "description": "Sélectionner les tags débloqués, comprendre leur affichage et conserver une identité lisible.",
+      "canonical": "https://cobblestar-mc.fr/wiki/tags/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/tags/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 13374,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/cosmedex/",
+      "status": 200,
+      "title": "Cosmédex : effets, accessoires et compagnons — CobbleStar",
+      "description": "Retrouver ses apparences, activer une collection et distinguer les compagnons décoratifs des Pokémon de combat.",
+      "canonical": "https://cobblestar-mc.fr/wiki/cosmedex/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/cosmedex/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14447,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/legendaries/",
+      "status": 200,
+      "title": "Légendaires : préparer sa chasse sur CobbleStar",
+      "description": "Lire les conditions du HUD, préparer son équipe de capture et comprendre les limites du suivi des apparitions.",
+      "canonical": "https://cobblestar-mc.fr/wiki/legendaries/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/legendaries/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 13654,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/battlepass/",
+      "status": 200,
+      "title": "Battle Pass : paliers et récompenses de saison — CobbleStar",
+      "description": "Comprendre les cent paliers, les deux pistes et les actions reconnues avant la fin de saison.",
+      "canonical": "https://cobblestar-mc.fr/wiki/battlepass/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/battlepass/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 14777,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/votes/",
+      "status": 200,
+      "title": "Votes : validation et récompenses — CobbleStar",
+      "description": "Relier son compte, suivre les délais des sites de vote et retrouver une récompense en attente.",
+      "canonical": "https://cobblestar-mc.fr/wiki/votes/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/votes/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 13839,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/carte-dresseur/",
+      "status": 200,
+      "title": "Carte de dresseur : profil et confidentialité — CobbleStar",
+      "description": "Présenter son équipe et sa collection, puis choisir les informations visibles par les autres joueurs.",
+      "canonical": "https://cobblestar-mc.fr/wiki/carte-dresseur/",
+      "ogUrl": "https://cobblestar-mc.fr/wiki/carte-dresseur/",
+      "lastmod": "2026-10-26T21:09:02.331Z",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 13792,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 2
+    },
+    {
+      "url": "https://cobblestar-mc.fr/actualites/wiki-synchronise/",
+      "status": 200,
+      "title": "Dans les coulisses : le wiki relié au jeu | CobbleStar",
+      "description": "Les guides sont déjà consultables sur le site. Leur accès avec /wiki fait partie des systèmes préparés pour l’ouverture.",
+      "canonical": "https://cobblestar-mc.fr/actualites/wiki-synchronise/",
+      "ogUrl": "https://cobblestar-mc.fr/actualites/wiki-synchronise/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 10139,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/actualites/pension-pokemon/",
+      "status": 200,
+      "title": "Aperçu de la pension Pokémon | CobbleStar",
+      "description": "Découvre le système d’élevage préparé pour CobbleStar : parents compatibles, œufs et progression du métier Éleveur.",
+      "canonical": "https://cobblestar-mc.fr/actualites/pension-pokemon/",
+      "ogUrl": "https://cobblestar-mc.fr/actualites/pension-pokemon/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 10120,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    },
+    {
+      "url": "https://cobblestar-mc.fr/actualites/launcher-modpack/",
+      "status": 200,
+      "title": "Le launcher se prépare pour l’ouverture | CobbleStar",
+      "description": "Java, Fabric et modpack : un aperçu de l’installation prévue. Le téléchargement sera disponible à l’ouverture publique.",
+      "canonical": "https://cobblestar-mc.fr/actualites/launcher-modpack/",
+      "ogUrl": "https://cobblestar-mc.fr/actualites/launcher-modpack/",
+      "h1": 1,
+      "renderer": "Astro",
+      "htmlBytes": 10159,
+      "scriptFiles": 1,
+      "errors": [],
+      "clickDepth": 1
+    }
+  ],
+  "errors": [],
+  "warnings": [],
+  "metrics": {
+    "home": {
+      "htmlBytes": 23625,
+      "scriptFiles": 5,
+      "scriptBytes": 23934,
+      "inlineScriptBytes": 700,
+      "totalScriptBytes": 24634
+    },
+    "cloudflareEmailLinks": 50,
+    "checkedLinks": 309,
+    "checkedImages": 29,
+    "checkedDocuments": 50,
+    "maxClickDepth": 2,
+    "crawlerHttpStatus": 200
+  },
+  "notes": [
+    "HTTP checks are not Google rankings or field Core Web Vitals. Search Console is the source for impressions, clicks, queries and index coverage."
+  ],
+  "linkChecks": [
+    {
+      "path": "/#mondes",
+      "status": 200
+    },
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/roadmap/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/",
+      "status": 200
+    },
+    {
+      "path": "/actualites/",
+      "status": 200
+    },
+    {
+      "path": "/vote/",
+      "status": 200
+    },
+    {
+      "path": "/compte/",
+      "status": 200
+    },
+    {
+      "path": "/boutique/",
+      "status": 200
+    },
+    {
+      "path": "/rejoindre/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/mondes/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/gts/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/daycare/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/raids/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/metiers/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokemon-star/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/welcome/",
+      "status": 200
+    },
+    {
+      "path": "/actualites/wiki-synchronise/",
+      "status": 200
+    },
+    {
+      "path": "/actualites/pension-pokemon/",
+      "status": 200
+    },
+    {
+      "path": "/actualites/launcher-modpack/",
+      "status": 200
+    },
+    {
+      "path": "/minecraft-pokemon/",
+      "status": 200
+    },
+    {
+      "path": "/installer-cobblemon/",
+      "status": 200
+    },
+    {
+      "path": "/confidentialite/",
+      "status": 200
+    },
+    {
+      "path": "/rejoindre/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/capture/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/quests/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/battlepass/",
+      "status": 200
+    },
+    {
+      "path": "/minecraft-pokemon/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/telecharger/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/clubs/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ranked/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/grades/",
+      "status": 200
+    },
+    {
+      "path": "/boutique/#grades",
+      "status": 200
+    },
+    {
+      "path": "/installer-cobblemon/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/installer-cobblemon/#prerequis",
+      "status": 200
+    },
+    {
+      "path": "/installer-cobblemon/#installation",
+      "status": 200
+    },
+    {
+      "path": "/installer-cobblemon/#serveur",
+      "status": 200
+    },
+    {
+      "path": "/installer-cobblemon/#erreurs",
+      "status": 200
+    },
+    {
+      "path": "/telecharger/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokedex/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/compte/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/talents/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/monnaies/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/album/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/galerie/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/cosmedex/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/#start",
+      "status": 200
+    },
+    {
+      "path": "/wiki/#pokemon",
+      "status": 200
+    },
+    {
+      "path": "/wiki/#progression",
+      "status": 200
+    },
+    {
+      "path": "/wiki/#exploration",
+      "status": 200
+    },
+    {
+      "path": "/wiki/#combat",
+      "status": 200
+    },
+    {
+      "path": "/wiki/#economy",
+      "status": 200
+    },
+    {
+      "path": "/wiki/#community",
+      "status": 200
+    },
+    {
+      "path": "/wiki/#collection",
+      "status": 200
+    },
+    {
+      "path": "/wiki/deplacements/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/commandes/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/starters/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/legendaries/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/epreuves/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ligue/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokesell/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/boutique/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/votes/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/organisations/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/parrainage/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/tags/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/carte-dresseur/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/caisses/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokedex/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/boutique/#jetons",
+      "status": 200
+    },
+    {
+      "path": "/actualites/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/actualites/rss.xml",
+      "status": 200
+    },
+    {
+      "path": "/roadmap/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/roadmap/#fondations",
+      "status": 200
+    },
+    {
+      "path": "/roadmap/#lancement",
+      "status": 200
+    },
+    {
+      "path": "/roadmap/#recit",
+      "status": 200
+    },
+    {
+      "path": "/roadmap/#progression",
+      "status": 200
+    },
+    {
+      "path": "/roadmap/#economie",
+      "status": 200
+    },
+    {
+      "path": "/roadmap/#raids",
+      "status": 200
+    },
+    {
+      "path": "/roadmap/#pension",
+      "status": 200
+    },
+    {
+      "path": "/roadmap/#prochainement",
+      "status": 200
+    },
+    {
+      "path": "/confidentialite/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/confidentialite/#donnees",
+      "status": 200
+    },
+    {
+      "path": "/confidentialite/#cookies",
+      "status": 200
+    },
+    {
+      "path": "/confidentialite/#partage",
+      "status": 200
+    },
+    {
+      "path": "/confidentialite/#droits",
+      "status": 200
+    },
+    {
+      "path": "/boutique/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/vote/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/welcome/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/welcome/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/welcome/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/welcome/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/welcome/#section-8",
+      "status": 200
+    },
+    {
+      "path": "/wiki/welcome/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/welcome/#section-12",
+      "status": 200
+    },
+    {
+      "path": "/wiki/capture/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/capture/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/capture/#section-2",
+      "status": 200
+    },
+    {
+      "path": "/wiki/capture/#section-4",
+      "status": 200
+    },
+    {
+      "path": "/wiki/capture/#section-6",
+      "status": 200
+    },
+    {
+      "path": "/wiki/capture/#section-8",
+      "status": 200
+    },
+    {
+      "path": "/wiki/capture/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/quests/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/quests/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/quests/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/quests/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/quests/#section-8",
+      "status": 200
+    },
+    {
+      "path": "/wiki/quests/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/mondes/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/mondes/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/mondes/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/mondes/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/mondes/#section-7",
+      "status": 200
+    },
+    {
+      "path": "/wiki/mondes/#section-9",
+      "status": 200
+    },
+    {
+      "path": "/wiki/raids/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/raids/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/raids/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/raids/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/raids/#section-7",
+      "status": 200
+    },
+    {
+      "path": "/wiki/raids/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/raids/#section-12",
+      "status": 200
+    },
+    {
+      "path": "/wiki/monnaies/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/monnaies/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/monnaies/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/monnaies/#section-7",
+      "status": 200
+    },
+    {
+      "path": "/wiki/monnaies/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/monnaies/#section-12",
+      "status": 200
+    },
+    {
+      "path": "/wiki/clubs/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/clubs/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/clubs/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/clubs/#section-7",
+      "status": 200
+    },
+    {
+      "path": "/wiki/clubs/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/clubs/#section-13",
+      "status": 200
+    },
+    {
+      "path": "/wiki/clubs/#section-15",
+      "status": 200
+    },
+    {
+      "path": "/wiki/album/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/album/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/album/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/album/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/album/#section-7",
+      "status": 200
+    },
+    {
+      "path": "/wiki/album/#section-9",
+      "status": 200
+    },
+    {
+      "path": "/wiki/album/#section-11",
+      "status": 200
+    },
+    {
+      "path": "/wiki/compte/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/compte/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/compte/#section-2",
+      "status": 200
+    },
+    {
+      "path": "/wiki/compte/#section-4",
+      "status": 200
+    },
+    {
+      "path": "/wiki/compte/#section-7",
+      "status": 200
+    },
+    {
+      "path": "/wiki/compte/#section-9",
+      "status": 200
+    },
+    {
+      "path": "/wiki/starters/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/starters/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/starters/#section-2",
+      "status": 200
+    },
+    {
+      "path": "/wiki/starters/#section-4",
+      "status": 200
+    },
+    {
+      "path": "/wiki/starters/#section-6",
+      "status": 200
+    },
+    {
+      "path": "/wiki/starters/#section-8",
+      "status": 200
+    },
+    {
+      "path": "/wiki/metiers/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/metiers/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/metiers/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/metiers/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/metiers/#section-8",
+      "status": 200
+    },
+    {
+      "path": "/wiki/metiers/#section-11",
+      "status": 200
+    },
+    {
+      "path": "/wiki/epreuves/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/epreuves/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/epreuves/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/epreuves/#section-6",
+      "status": 200
+    },
+    {
+      "path": "/wiki/epreuves/#section-8",
+      "status": 200
+    },
+    {
+      "path": "/wiki/epreuves/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/epreuves/#section-12",
+      "status": 200
+    },
+    {
+      "path": "/wiki/gts/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/gts/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/gts/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/gts/#section-6",
+      "status": 200
+    },
+    {
+      "path": "/wiki/gts/#section-8",
+      "status": 200
+    },
+    {
+      "path": "/wiki/gts/#section-13",
+      "status": 200
+    },
+    {
+      "path": "/wiki/gts/#section-15",
+      "status": 200
+    },
+    {
+      "path": "/wiki/organisations/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/organisations/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/organisations/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/organisations/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/organisations/#section-9",
+      "status": 200
+    },
+    {
+      "path": "/wiki/organisations/#section-11",
+      "status": 200
+    },
+    {
+      "path": "/wiki/galerie/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/galerie/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/galerie/#section-2",
+      "status": 200
+    },
+    {
+      "path": "/wiki/galerie/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/galerie/#section-8",
+      "status": 200
+    },
+    {
+      "path": "/wiki/galerie/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/galerie/#section-13",
+      "status": 200
+    },
+    {
+      "path": "/wiki/deplacements/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/deplacements/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/deplacements/#section-2",
+      "status": 200
+    },
+    {
+      "path": "/wiki/deplacements/#section-6",
+      "status": 200
+    },
+    {
+      "path": "/wiki/deplacements/#section-9",
+      "status": 200
+    },
+    {
+      "path": "/wiki/deplacements/#section-11",
+      "status": 200
+    },
+    {
+      "path": "/wiki/deplacements/#section-13",
+      "status": 200
+    },
+    {
+      "path": "/wiki/daycare/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/daycare/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/daycare/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/daycare/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/daycare/#section-8",
+      "status": 200
+    },
+    {
+      "path": "/wiki/daycare/#section-11",
+      "status": 200
+    },
+    {
+      "path": "/wiki/daycare/#section-13",
+      "status": 200
+    },
+    {
+      "path": "/wiki/daycare/#section-16",
+      "status": 200
+    },
+    {
+      "path": "/wiki/talents/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/talents/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/talents/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/talents/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/talents/#section-7",
+      "status": 200
+    },
+    {
+      "path": "/wiki/talents/#section-9",
+      "status": 200
+    },
+    {
+      "path": "/wiki/talents/#section-11",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ligue/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ligue/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ligue/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ligue/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ligue/#section-8",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ligue/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ligue/#section-12",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokesell/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokesell/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokesell/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokesell/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokesell/#section-8",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokesell/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokesell/#section-12",
+      "status": 200
+    },
+    {
+      "path": "/wiki/parrainage/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/parrainage/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/parrainage/#section-4",
+      "status": 200
+    },
+    {
+      "path": "/wiki/parrainage/#section-7",
+      "status": 200
+    },
+    {
+      "path": "/wiki/parrainage/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/parrainage/#section-12",
+      "status": 200
+    },
+    {
+      "path": "/wiki/parrainage/#section-17",
+      "status": 200
+    },
+    {
+      "path": "/wiki/caisses/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/caisses/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/caisses/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/caisses/#section-6",
+      "status": 200
+    },
+    {
+      "path": "/wiki/caisses/#section-8",
+      "status": 200
+    },
+    {
+      "path": "/wiki/caisses/#section-11",
+      "status": 200
+    },
+    {
+      "path": "/wiki/caisses/#section-13",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokemon-star/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokemon-star/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokemon-star/#section-2",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokemon-star/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokemon-star/#section-7",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokemon-star/#section-9",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokemon-star/#section-11",
+      "status": 200
+    },
+    {
+      "path": "/wiki/commandes/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/commandes/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/commandes/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/commandes/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/commandes/#section-12",
+      "status": 200
+    },
+    {
+      "path": "/wiki/grades/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/grades/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/grades/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/grades/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/grades/#section-7",
+      "status": 200
+    },
+    {
+      "path": "/wiki/grades/#section-12",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ranked/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ranked/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ranked/#section-2",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ranked/#section-4",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ranked/#section-7",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ranked/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/ranked/#section-12",
+      "status": 200
+    },
+    {
+      "path": "/wiki/boutique/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/boutique/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/boutique/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/boutique/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/boutique/#section-7",
+      "status": 200
+    },
+    {
+      "path": "/wiki/boutique/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/boutique/#section-12",
+      "status": 200
+    },
+    {
+      "path": "/wiki/tags/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/tags/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/tags/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/tags/#section-5",
+      "status": 200
+    },
+    {
+      "path": "/wiki/tags/#section-7",
+      "status": 200
+    },
+    {
+      "path": "/wiki/tags/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/cosmedex/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/cosmedex/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/cosmedex/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/cosmedex/#section-6",
+      "status": 200
+    },
+    {
+      "path": "/wiki/cosmedex/#section-8",
+      "status": 200
+    },
+    {
+      "path": "/wiki/cosmedex/#section-11",
+      "status": 200
+    },
+    {
+      "path": "/wiki/cosmedex/#section-13",
+      "status": 200
+    },
+    {
+      "path": "/wiki/legendaries/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/legendaries/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/legendaries/#section-2",
+      "status": 200
+    },
+    {
+      "path": "/wiki/legendaries/#section-4",
+      "status": 200
+    },
+    {
+      "path": "/wiki/legendaries/#section-6",
+      "status": 200
+    },
+    {
+      "path": "/wiki/legendaries/#section-9",
+      "status": 200
+    },
+    {
+      "path": "/wiki/battlepass/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/battlepass/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/battlepass/#section-3",
+      "status": 200
+    },
+    {
+      "path": "/wiki/battlepass/#section-6",
+      "status": 200
+    },
+    {
+      "path": "/wiki/battlepass/#section-10",
+      "status": 200
+    },
+    {
+      "path": "/wiki/battlepass/#section-12",
+      "status": 200
+    },
+    {
+      "path": "/wiki/votes/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/votes/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/votes/#section-2",
+      "status": 200
+    },
+    {
+      "path": "/wiki/votes/#section-4",
+      "status": 200
+    },
+    {
+      "path": "/wiki/votes/#section-7",
+      "status": 200
+    },
+    {
+      "path": "/wiki/votes/#section-9",
+      "status": 200
+    },
+    {
+      "path": "/wiki/carte-dresseur/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/wiki/carte-dresseur/#section-0",
+      "status": 200
+    },
+    {
+      "path": "/wiki/carte-dresseur/#section-2",
+      "status": 200
+    },
+    {
+      "path": "/wiki/carte-dresseur/#section-4",
+      "status": 200
+    },
+    {
+      "path": "/wiki/carte-dresseur/#section-6",
+      "status": 200
+    },
+    {
+      "path": "/wiki/carte-dresseur/#section-9",
+      "status": 200
+    },
+    {
+      "path": "/wiki/carte-dresseur/#section-11",
+      "status": 200
+    },
+    {
+      "path": "/actualites/wiki-synchronise/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/actualites/pension-pokemon/#contenu",
+      "status": 200
+    },
+    {
+      "path": "/actualites/launcher-modpack/#contenu",
+      "status": 200
+    }
+  ],
+  "imageChecks": [
+    {
+      "path": "/media/cobblestar-logo-128.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 7628
+    },
+    {
+      "path": "/astral/assets/stars-96.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 2818
+    },
+    {
+      "path": "/astral/assets/charizard.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 65354
+    },
+    {
+      "path": "/astral/assets/logo.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 37552
+    },
+    {
+      "path": "/astral/assets/battle.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 181418
+    },
+    {
+      "path": "/astral/assets/riding.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 27814
+    },
+    {
+      "path": "/astral/assets/lushtower.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 157628
+    },
+    {
+      "path": "/astral/assets/pasturedpokmon.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 208282
+    },
+    {
+      "path": "/astral/assets/shipwreckcove.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 58972
+    },
+    {
+      "path": "/astral/assets/berries.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 133540
+    },
+    {
+      "path": "/astral/assets/stars-640.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 23326
+    },
+    {
+      "path": "/shop/ranks/etoile.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 1560
+    },
+    {
+      "path": "/shop/ranks/cosmiquea.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 1683
+    },
+    {
+      "path": "/shop/ranks/galactiquea.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 1641
+    },
+    {
+      "path": "/astral/assets/motisma-pokedex.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 153360
+    },
+    {
+      "path": "/astral/assets/dragonite-star-posed.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 169437
+    },
+    {
+      "path": "/cobblemon-team.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 101870
+    },
+    {
+      "path": "/cobblemon-lakeside.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 34464
+    },
+    {
+      "path": "/cobblemon-desert.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 42516
+    },
+    {
+      "path": "/media/cobblestar-logo-480.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 37552
+    },
+    {
+      "path": "/cobblemon-ocean.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 30760
+    },
+    {
+      "path": "/cobblemon-berries.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 133540
+    },
+    {
+      "path": "/cobblemon-shop.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 59904
+    },
+    {
+      "path": "/shop/ranks/cosmiqueb.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 1706
+    },
+    {
+      "path": "/shop/ranks/galactiqueb.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 1712
+    },
+    {
+      "path": "/shop/tokens/nova.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 9163
+    },
+    {
+      "path": "/shop/tokens/pulsar.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 14703
+    },
+    {
+      "path": "/shop/tokens/quasar.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 13550
+    },
+    {
+      "path": "/astral/assets/stars-320.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 10710
+    }
+  ]
+}

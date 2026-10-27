@@ -8,7 +8,7 @@ import {siteSecurity} from '../api/dist/site-security.js';
 const app=Fastify();
 await app.register(helmet,siteSecurity);
 const load=async kind=>process.argv.includes('--live-content')?fetch(`https://cobblestar-mc.fr/api/${kind}`,{signal:AbortSignal.timeout(10000)}).then(r=>{if(!r.ok)throw new Error('Published content unavailable');return r.json();}):{content:JSON.parse(await readFile(`${kind}.default.json`,'utf8')),version:1,updatedAt:null};
-registerPublicSite(app,{getWiki:()=>load('wiki'),getNews:()=>load('news')});
+registerPublicSite(app,{getWiki:()=>load('wiki'),getNews:()=>load('news'),getDex:()=>fetch('https://cobblestar-mc.fr/api/pokedex').then(r=>r.json()).then(d=>d.entries),getDexInfo:id=>fetch('https://cobblestar-mc.fr/api/pokedex/'+encodeURIComponent(id)+'/info').then(r=>r.json()).then(d=>d.info)});
 app.get('/__mobile-review',async(req,reply)=>{const path=['/','/wiki/','/rejoindre/'].includes(req.query.path)?req.query.path:'/';return reply.type('text/html').send('<!doctype html><html><head><meta charset="utf-8"/><meta name="robots" content="noindex"/><title>Contrôle mobile — 390 px</title></head><body style="margin:0;background:#20202a;display:flex;justify-content:center"><iframe title="Aperçu mobile 390 pixels" src="'+path+'" width="390" height="844" style="border:0"></iframe></body></html>')});
 await app.register(staticFiles,{root:resolve('out')});
 await app.listen({host:'127.0.0.1',port:8792});

@@ -16,7 +16,8 @@ const dex=createPublicDex({list:async()=>published.entries.filter(e=>e.collectio
 const app=Fastify();await app.register(helmet,siteSecurity);
 registerPublicDex(app,dex);
 const content=async kind=>fetch('https://cobblestar-mc.fr/api/'+kind).then(r=>r.json());
-registerPublicSite(app,{getWiki:()=>content('wiki'),getNews:()=>content('news'),getDex:dex.list});
+app.get('/api/wiki',()=>content('wiki'));
+registerPublicSite(app,{getWiki:()=>content('wiki'),getNews:()=>content('news'),getDex:dex.list,getDexInfo:dex.info});
 await app.register(staticFiles,{root:resolve('out')});
 await app.listen({host:'127.0.0.1',port:8794});
 console.log('Pokédex preview: http://127.0.0.1:8794/wiki/pokedex/');

@@ -1,3 +1,4 @@
+import {dexInfo} from '../api/dist/dex-info.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import Fastify from '../api/node_modules/fastify/fastify.js';
@@ -10,7 +11,7 @@ import {siteSecurity} from '../api/dist/site-security.js';
 let wiki={content:JSON.parse(await readFile('wiki.default.json','utf8')),version:1,updatedAt:null};
 let news={content:JSON.parse(await readFile('news.default.json','utf8')),version:1,updatedAt:null};
 const app=Fastify();await app.register(helmet,siteSecurity);
-registerPublicSite(app,{getWiki:async()=>wiki,getNews:async()=>news,getDex:async()=>[{id:'native-pikachu',species:'pikachu',name:'Pikachu',collection:'Classiques',form:'Classique',assetUrl:'/api/pokedex/native-pikachu/asset'}]});
+registerPublicSite(app,{getWiki:async()=>wiki,getNews:async()=>news,getDexInfo:async(id)=>dexInfo({id,species:'pikachu',name:'Pikachu',collection:'Classiques',form:'Classique'}),getDex:async()=>[{id:'native-pikachu',species:'pikachu',name:'Pikachu',collection:'Classiques',form:'Classique',assetUrl:'/api/pokedex/native-pikachu/asset'}]});
 app.get('/api/test',async()=>({api:true}));
 await app.register(staticFiles,{root:resolve('out')});
 const base=await app.listen({host:'127.0.0.1',port:0});
@@ -75,7 +76,7 @@ test('Google site identity and social article metadata match the public document
 
 test('Astral covers public and player pages while admin keeps its own shell',async()=>{
   for(const path of ['/','/wiki/','/wiki/welcome/','/actualites/','/rejoindre/','/roadmap/','/minecraft-pokemon/','/telecharger/','/confidentialite/','/boutique/','/compte/','/vote/']){
-    const {response,html}=await get(path);assert.equal(response.status,200,path);assert.match(html,/class="astral-header site-header"/,path);assert.match(html,/\/astral\/assets\/stars-96.webp/,path);
+    const {response,html}=await get(path);assert.equal(response.status,200,path);assert.match(html,/class="astral-header site-header"/,path);assert.match(html,/\/astral\/assets\/stars-button.webp/,path);
   }
   for(const path of ['/admin/','/admin/discord/','/wiki/admin/','/actualites/admin/']){
     const {html}=await get(path);assert.ok(!html.includes('class="astral-header site-header"'),path);
@@ -126,3 +127,11 @@ test('previews stay excluded and static player pages canonicalize without touchi
  for(const path of ['/boutique','/vote','/boutique/index.html']){const r=await app.inject({url:path+'?source=discord',headers:{host:'www.cobblestar-mc.fr'}});assert.equal(r.statusCode,308);assert.equal(r.headers.location,'https://cobblestar-mc.fr'+(path.startsWith('/boutique')?'/boutique/':'/vote/')+'?source=discord');}
  for(const path of ['/boutique/','/vote/'])assert.equal((await get(path)).response.headers.get('x-cobblestar-renderer'),null);
 });
+
+ test('species pages expose real information without JavaScript and canonicalise appearances',async()=>{
+ const page=await get('/wiki/pokedex/pikachu/');assert.equal(page.response.status,200);assert.ok(page.html.includes('>Pikachu</h1>'));for(const id of ['stats','evolutions','localisation','attaques'])assert.ok(page.html.includes('id="'+id+'"'));assert.match(page.html,/Raichu/);assert.match(page.html,/Tonnerre/);assert.match(page.html,/Électrik/);assert.ok(page.html.includes('rel="canonical" href="https://cobblestar-mc.fr/wiki/pokedex/pikachu/"'));
+ const missing=await get('/wiki/pokedex/not-published/');assert.equal(missing.response.status,404);assert.match(missing.html,/noindex/);
+ const variant=await get('/wiki/pokedex/pikachu/?forme=private-draft');assert.equal(variant.response.status,302);assert.equal(variant.response.headers.get('location'),'/wiki/pokedex/pikachu/');
+ const slash=await get('/wiki/pokedex/pikachu');assert.equal(slash.response.status,308);
+ const list=await get('/wiki/pokedex/');assert.ok(list.html.includes('href="/wiki/pokedex/pikachu/"'));const map=await get('/sitemap.xml');assert.ok(map.html.includes('<loc>https://cobblestar-mc.fr/wiki/pokedex/pikachu/</loc>'));assert.ok(!map.html.includes('?forme='));
+ });

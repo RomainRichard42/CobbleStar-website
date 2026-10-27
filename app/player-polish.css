@@ -215,3 +215,8 @@ body:has(.astral-header) :is(.vote-profile-action,.vote-site-action,.astral-acco
 .astral-public .wiki-path-picker .wiki-journeys{margin:8px 0 22px}
 .astral-public .wiki-path-picker .wiki-journeys>article{background:#191222}
 .wiki-search-box{margin-bottom:22px}
+
+/* Dedicated outlined Stars artwork supplied for the shop button. */
+.astral-header .astral-shop img{width:44px;height:34px;object-fit:contain;flex:0 0 44px;max-width:none}.astral-header .astral-shop{gap:9px}@media(max-width:480px){.astral-header .astral-shop img{width:38px;height:30px;flex-basis:38px}}
+
+.astral-header .astral-shop img{display:block!important}@media(max-width:480px){.astral-header{gap:8px;padding-inline:12px}.astral-header .astral-brand{gap:6px}.astral-header .astral-brand>img{width:28px;height:28px}.astral-header .astral-brand>span{font-size:16px}.astral-header .astral-header-actions{gap:6px}.astral-header .astral-shop{padding-inline:9px;gap:5px}.astral-header .astral-shop img{width:32px;height:28px;flex-basis:32px}}
