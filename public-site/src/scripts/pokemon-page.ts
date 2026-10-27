@@ -1,7 +1,7 @@
 import type {createDexRenderer} from './dex-renderer';
 const norm=(s:string)=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 const input=document.querySelector<HTMLInputElement>('#pokemon-move-search');
-if(input){input.parentElement!.hidden=false;const moves=[...document.querySelectorAll<HTMLElement>('#pokemon-moves details')];input.addEventListener('input',()=>{let count=0;for(const move of moves){move.hidden=!norm(move.dataset.search||'').includes(norm(input.value));if(!move.hidden)count++;}document.getElementById('pokemon-move-count')!.textContent=count+' entrées d’apprentissage';});}
+if(input){input.parentElement!.hidden=false;const moves=[...document.querySelectorAll<HTMLElement>('#pokemon-moves details')];input.addEventListener('input',()=>{let count=0;for(const move of moves){move.hidden=!norm(move.dataset.search||'').includes(norm(input.value));if(!move.hidden)count++;}document.getElementById('pokemon-move-count')!.textContent=count+(count===1?' entrée d’apprentissage':' entrées d’apprentissage');});}
 const host=document.getElementById('pokemon-model'),pause=document.getElementById('pokemon-pause') as HTMLButtonElement;
 if(host?.dataset.asset){
  let renderer:ReturnType<typeof createDexRenderer>|undefined,dead=false,visible=true,time=0,previous=0,paused=matchMedia('(prefers-reduced-motion: reduce)').matches;
