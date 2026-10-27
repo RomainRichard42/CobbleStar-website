@@ -446,6 +446,27 @@
         "attackSearch": true,
         "progressiveMoves": 12
       }
+    },
+    "pokemonNavigation": {
+      "date": "2026-10-27",
+      "implementationCommit": "3eff099",
+      "audit": "seo/reports/audit-navigation-production-2026-10-27.json",
+      "features": [
+        "Liens précédent/suivant en ordre alphabétique français, une entrée par espèce",
+        "Recherche française/anglaise sans accents, chargée à la demande",
+        "Conservation de la rubrique lors du changement de fiche",
+        "Liens HTML indexables et formulaire de recherche fonctionnel sans JavaScript"
+      ],
+      "validation": {
+        "publicTests": 15,
+        "pagesAudited": 1062,
+        "errors": 0,
+        "warnings": 0,
+        "internalLinksChecked": 6393,
+        "mobileWidth": 390,
+        "keyboard": true,
+        "publishedNavigation": true
+      }
     }
   }
 }
