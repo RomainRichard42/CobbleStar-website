@@ -39,3 +39,17 @@ L'exporteur lit le JAR officiel donné explicitement, ses résolveurs de base, s
 Build API et export statique du site ; lint ciblé ; tests des droits, des révisions publié/brouillon, du contenu ZIP et de la validation des assets. Export validé pour les 884 kits. Contrôle navigateur local avec données de démonstration et véritable modèle Dracolosse Star : affichage 3D, recherche Gobou, téléchargement du ZIP correct, absence du preset, desktop et mobile sans débordement horizontal. Pas de modification de la base de production pendant ces contrôles.
 
 Documentation de rendu utilisée : [Three.js BoxGeometry](https://threejs.org/docs/pages/BoxGeometry.html), [OrbitControls](https://threejs.org/docs/pages/OrbitControls.html).
+
+## Pokédex public — 27 octobre 2026
+
+`/wiki/pokedex/` est une page Astro liée depuis le wiki, la boutique et le sitemap. Elle reçoit uniquement les espèces du catalogue serveur, les variantes Star publiées (avec Sachanobi si configuré) et 83 apparences CobbleStar exportées des résolveurs livrés : Astéria, Nébélia, Éclipse, Alliance et créations. Les brouillons et les auteurs ne passent jamais par les routes publiques. Les espèces d’addons sans kit compatible restent nommées, avec un état « Visuel en préparation » ; aucun modèle générique ne remplace silencieusement leur apparence.
+
+Le catalogue classique présente le modèle de base des espèces du serveur, pas toutes les transformations du jeu. Les chromatiques des variantes CobbleStar sont exportés. Les yeux Alpha et objets tenus ne sont pas comptés comme nouvelles fiches. Les rendus sont en pose fixe ; cette vue n’est pas une simulation des animations et effets du client Minecraft. La présence au catalogue ne garantit ni une capture ni un choix de starter disponible.
+
+Recherche française sans accents, filtres de collection, tri, affichage progressif par 24, portraits calculés avec un seul contexte WebGL réutilisé. Le détail possède un deuxième contexte temporaire, des boutons de rotation/zoom, fermeture Échap et retour du focus. Les modèles sont chargés au passage à l’écran, sans boucle d’animation permanente. Les données publiées sont actualisées sous une minute.
+
+Actualiser le manifeste depuis les assets embarqués : `node scripts/export-public-collections.mjs ../CobbleStar-mod`. Cet export génère également les SVG des jetons depuis leurs véritables faces et palettes du mod. Nova/Pulsar/Quasar disposent d’un onglet boutique, à l’unité et par quatre ; prix et identifiants de livraison conservés. Vote reste un jeton de récompense, sans nouveau prix inventé.
+
+Console : les succès HTTP sont regroupés dans un bilan par minute ; réponses 4xx/5xx et requêtes de cinq secondes ou plus restent visibles. Les routes journalisées sont des modèles sans query string, corps ni identifiants de joueurs. La fréquence des synchronisations n’est pas modifiée. Le chargement de `economy.policy.json` est relatif au module, compatible avec le démarrage Kinetic depuis la racine du dépôt (ancienne cause de 503).
+
+Validation : build Next/Astro/API, contrôles TypeScript du rendu, tests des routes et de la non-divulgation des brouillons, chargement de toutes les formes embarquées, tests du résumé de logs et du démarrage économique depuis la racine. Contrôle navigateur desktop/mobile à 390 px : recherche Dracolosse, détail Éclipse, rotation/zoom, Échap, retour du focus, montants des lots et absence de débordement horizontal.

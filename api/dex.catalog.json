@@ -1,0 +1,794 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "bayleef-asteria-base",
+      "species": "bayleef",
+      "name": "Macronium",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/bayleef_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/bayleef_asteria.png"
+    },
+    {
+      "id": "bayleef-asteria-shiny",
+      "species": "bayleef",
+      "name": "Macronium",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/bayleef_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/bayleef_asteria_shiny.png"
+    },
+    {
+      "id": "blaziken-nebelia-base",
+      "species": "blaziken",
+      "name": "Braségali",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/blaziken_nebelia_male.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/blaziken_nebelia_male.png"
+    },
+    {
+      "id": "blaziken-nebelia-shiny",
+      "species": "blaziken",
+      "name": "Braségali",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/blaziken_nebelia_male.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/blaziken_nebelia_male_shiny.png"
+    },
+    {
+      "id": "blaziken-nebelia-base-female",
+      "species": "blaziken",
+      "name": "Braségali",
+      "collection": "Nébélia",
+      "form": "Classique · Femelle",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/blaziken_nebelia_female.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/blaziken_nebelia_female.png"
+    },
+    {
+      "id": "blaziken-nebelia-shiny-female",
+      "species": "blaziken",
+      "name": "Braségali",
+      "collection": "Nébélia",
+      "form": "Chromatique · Femelle",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/blaziken_nebelia_female.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/blaziken_nebelia_female_shiny.png"
+    },
+    {
+      "id": "charizard-asteria-base",
+      "species": "charizard",
+      "name": "Dracaufeu",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/charizard_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/charizard_asteria.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/charizard_asteria_glow.png"
+    },
+    {
+      "id": "charizard-asteria-shiny",
+      "species": "charizard",
+      "name": "Dracaufeu",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/charizard_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/charizard_asteria_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/charizard_asteria_glow_shiny.png"
+    },
+    {
+      "id": "charmander-asteria-base",
+      "species": "charmander",
+      "name": "Salamèche",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/charmander_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/charmander_asteria.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/charmander_asteria_glow.png"
+    },
+    {
+      "id": "charmander-asteria-shiny",
+      "species": "charmander",
+      "name": "Salamèche",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/charmander_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/charmander_asteria_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/charmander_asteria_glow_shiny.png"
+    },
+    {
+      "id": "charmeleon-asteria-base",
+      "species": "charmeleon",
+      "name": "Reptincel",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/charmeleon_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/charmeleon_asteria.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/charmeleon_asteria_glow.png"
+    },
+    {
+      "id": "charmeleon-asteria-shiny",
+      "species": "charmeleon",
+      "name": "Reptincel",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/charmeleon_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/charmeleon_asteria_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/charmeleon_asteria_glow_shiny.png"
+    },
+    {
+      "id": "chikorita-asteria-base",
+      "species": "chikorita",
+      "name": "Germignon",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/chikorita_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/chikorita_asteria.png"
+    },
+    {
+      "id": "chikorita-asteria-shiny",
+      "species": "chikorita",
+      "name": "Germignon",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/chikorita_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/chikorita_asteria_shiny.png"
+    },
+    {
+      "id": "combusken-nebelia-base",
+      "species": "combusken",
+      "name": "Galifeu",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/combusken_nebelia_male.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/combusken_nebelia_male.png"
+    },
+    {
+      "id": "combusken-nebelia-shiny",
+      "species": "combusken",
+      "name": "Galifeu",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/combusken_nebelia_male.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/combusken_nebelia_male_shiny.png"
+    },
+    {
+      "id": "combusken-nebelia-base-female",
+      "species": "combusken",
+      "name": "Galifeu",
+      "collection": "Nébélia",
+      "form": "Classique · Femelle",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/combusken_nebelia_female.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/combusken_nebelia_female.png"
+    },
+    {
+      "id": "combusken-nebelia-shiny-female",
+      "species": "combusken",
+      "name": "Galifeu",
+      "collection": "Nébélia",
+      "form": "Chromatique · Femelle",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/combusken_nebelia_female.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/combusken_nebelia_female_shiny.png"
+    },
+    {
+      "id": "croconaw-asteria-base",
+      "species": "croconaw",
+      "name": "Crocrodil",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/croconaw_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/croconaw_asteria.png"
+    },
+    {
+      "id": "croconaw-asteria-shiny",
+      "species": "croconaw",
+      "name": "Crocrodil",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/croconaw_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/croconaw_asteria_shiny.png"
+    },
+    {
+      "id": "cyndaquil-asteria-base",
+      "species": "cyndaquil",
+      "name": "Héricendre",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/cyndaquil_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/cyndaquil_asteria.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/cyndaquil_asteria_glow.png"
+    },
+    {
+      "id": "cyndaquil-asteria-shiny",
+      "species": "cyndaquil",
+      "name": "Héricendre",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/cyndaquil_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/cyndaquil_asteria_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/cyndaquil_asteria_glow_shiny.png"
+    },
+    {
+      "id": "empoleon-nebelia-base",
+      "species": "empoleon",
+      "name": "Pingoléon",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/empoleon_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/empoleon_nebelia.png"
+    },
+    {
+      "id": "empoleon-nebelia-shiny",
+      "species": "empoleon",
+      "name": "Pingoléon",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/empoleon_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/empoleon_nebelia_shiny.png"
+    },
+    {
+      "id": "feraligatr-asteria-base",
+      "species": "feraligatr",
+      "name": "Aligatueur",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/feraligatr_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/feraligatr_asteria.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/feraligatr_asteria_glow.png"
+    },
+    {
+      "id": "feraligatr-asteria-shiny",
+      "species": "feraligatr",
+      "name": "Aligatueur",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/feraligatr_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/feraligatr_asteria_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/feraligatr_asteria_glow_shiny.png"
+    },
+    {
+      "id": "floragato-nebelia-base",
+      "species": "floragato",
+      "name": "Matourgeon",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/floragato_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/floragato_nebelia.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/floragato_nebelia_glow.png"
+    },
+    {
+      "id": "floragato-nebelia-shiny",
+      "species": "floragato",
+      "name": "Matourgeon",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/floragato_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/floragato_nebelia_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/floragato_nebelia_glow_shiny.png"
+    },
+    {
+      "id": "grovyle-nebelia-base",
+      "species": "grovyle",
+      "name": "Massko",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/grovyle_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/grovyle_nebelia.png"
+    },
+    {
+      "id": "grovyle-nebelia-shiny",
+      "species": "grovyle",
+      "name": "Massko",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/grovyle_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/grovyle_nebelia_shiny.png"
+    },
+    {
+      "id": "incineroar-nebelia-base",
+      "species": "incineroar",
+      "name": "Félinferno",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/incineroar_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/incineroar_nebelia.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/incineroar_nebelia_glow.png"
+    },
+    {
+      "id": "incineroar-nebelia-shiny",
+      "species": "incineroar",
+      "name": "Félinferno",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/incineroar_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/incineroar_nebelia_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/incineroar_nebelia_glow_shiny.png"
+    },
+    {
+      "id": "litten-nebelia-base",
+      "species": "litten",
+      "name": "Flamiaou",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/litten_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/litten_nebelia.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/litten_nebelia_glow.png"
+    },
+    {
+      "id": "litten-nebelia-shiny",
+      "species": "litten",
+      "name": "Flamiaou",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/litten_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/litten_nebelia_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/litten_nebelia_glow_shiny.png"
+    },
+    {
+      "id": "marshtomp-asteria-base",
+      "species": "marshtomp",
+      "name": "Flobio",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/marshtomp_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/marshtomp_asteria.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/marshtomp_asteria_glow.png"
+    },
+    {
+      "id": "marshtomp-asteria-shiny",
+      "species": "marshtomp",
+      "name": "Flobio",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/marshtomp_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/marshtomp_asteria_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/marshtomp_asteria_glow_shiny.png"
+    },
+    {
+      "id": "marshtomp-nebelia-base",
+      "species": "marshtomp",
+      "name": "Flobio",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/marshtomp_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/marshtomp_nebelia.png"
+    },
+    {
+      "id": "marshtomp-nebelia-shiny",
+      "species": "marshtomp",
+      "name": "Flobio",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/marshtomp_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/marshtomp_nebelia_shiny.png"
+    },
+    {
+      "id": "meganium-asteria-base",
+      "species": "meganium",
+      "name": "Méganium",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/meganium_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/meganium_asteria.png"
+    },
+    {
+      "id": "meganium-asteria-shiny",
+      "species": "meganium",
+      "name": "Méganium",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/meganium_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/meganium_asteria_shiny.png"
+    },
+    {
+      "id": "meowscarada-nebelia-base",
+      "species": "meowscarada",
+      "name": "Miascarade",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/meowscarada_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/meowscarada_nebelia.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/meowscarada_nebelia_glow.png"
+    },
+    {
+      "id": "meowscarada-nebelia-shiny",
+      "species": "meowscarada",
+      "name": "Miascarade",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/meowscarada_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/meowscarada_nebelia_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/meowscarada_nebelia_glow_shiny.png"
+    },
+    {
+      "id": "mudkip-asteria-base",
+      "species": "mudkip",
+      "name": "Gobou",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/mudkip_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/mudkip_asteria.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/mudkip_asteria_glow.png"
+    },
+    {
+      "id": "mudkip-asteria-shiny",
+      "species": "mudkip",
+      "name": "Gobou",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/mudkip_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/mudkip_asteria_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/mudkip_asteria_glow_shiny.png"
+    },
+    {
+      "id": "mudkip-nebelia-base",
+      "species": "mudkip",
+      "name": "Gobou",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/mudkip_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/mudkip_nebelia.png"
+    },
+    {
+      "id": "mudkip-nebelia-shiny",
+      "species": "mudkip",
+      "name": "Gobou",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/mudkip_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/mudkip_nebelia_shiny.png"
+    },
+    {
+      "id": "piplup-nebelia-base",
+      "species": "piplup",
+      "name": "Tiplouf",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/piplup_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/piplup_nebelia.png"
+    },
+    {
+      "id": "piplup-nebelia-shiny",
+      "species": "piplup",
+      "name": "Tiplouf",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/piplup_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/piplup_nebelia_shiny.png"
+    },
+    {
+      "id": "prinplup-nebelia-base",
+      "species": "prinplup",
+      "name": "Prinplouf",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/prinplup_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/prinplup_nebelia.png"
+    },
+    {
+      "id": "prinplup-nebelia-shiny",
+      "species": "prinplup",
+      "name": "Prinplouf",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/prinplup_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/prinplup_nebelia_shiny.png"
+    },
+    {
+      "id": "quilava-asteria-base",
+      "species": "quilava",
+      "name": "Feurisson",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/quilava_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/quilava_asteria.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/quilava_asteria_glow.png"
+    },
+    {
+      "id": "quilava-asteria-shiny",
+      "species": "quilava",
+      "name": "Feurisson",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/quilava_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/quilava_asteria_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/quilava_asteria_glow_shiny.png"
+    },
+    {
+      "id": "sceptile-nebelia-base",
+      "species": "sceptile",
+      "name": "Jungko",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/sceptile_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/sceptile_nebelia.png"
+    },
+    {
+      "id": "sceptile-nebelia-shiny",
+      "species": "sceptile",
+      "name": "Jungko",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/sceptile_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/sceptile_nebelia_shiny.png"
+    },
+    {
+      "id": "sprigatito-nebelia-base",
+      "species": "sprigatito",
+      "name": "Poussacha",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/sprigatito_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/sprigatito_nebelia.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/sprigatito_nebelia_glow.png"
+    },
+    {
+      "id": "sprigatito-nebelia-shiny",
+      "species": "sprigatito",
+      "name": "Poussacha",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/sprigatito_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/sprigatito_nebelia_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/sprigatito_nebelia_glow_shiny.png"
+    },
+    {
+      "id": "swampert-asteria-base",
+      "species": "swampert",
+      "name": "Laggron",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/swampert_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/swampert_asteria.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/swampert_asteria_glow.png"
+    },
+    {
+      "id": "swampert-asteria-shiny",
+      "species": "swampert",
+      "name": "Laggron",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/swampert_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/swampert_asteria_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/swampert_asteria_glow_shiny.png"
+    },
+    {
+      "id": "swampert-nebelia-base",
+      "species": "swampert",
+      "name": "Laggron",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/swampert_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/swampert_nebelia.png"
+    },
+    {
+      "id": "swampert-nebelia-shiny",
+      "species": "swampert",
+      "name": "Laggron",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/swampert_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/swampert_nebelia_shiny.png"
+    },
+    {
+      "id": "torchic-nebelia-base",
+      "species": "torchic",
+      "name": "Poussifeu",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/torchic_nebelia_male.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/torchic_nebelia_male.png"
+    },
+    {
+      "id": "torchic-nebelia-shiny",
+      "species": "torchic",
+      "name": "Poussifeu",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/torchic_nebelia_male.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/torchic_nebelia_male_shiny.png"
+    },
+    {
+      "id": "torchic-nebelia-base-female",
+      "species": "torchic",
+      "name": "Poussifeu",
+      "collection": "Nébélia",
+      "form": "Classique · Femelle",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/torchic_nebelia_female.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/torchic_nebelia_female.png"
+    },
+    {
+      "id": "torchic-nebelia-shiny-female",
+      "species": "torchic",
+      "name": "Poussifeu",
+      "collection": "Nébélia",
+      "form": "Chromatique · Femelle",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/torchic_nebelia_female.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/torchic_nebelia_female_shiny.png"
+    },
+    {
+      "id": "torracat-nebelia-base",
+      "species": "torracat",
+      "name": "Matoufeu",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/torracat_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/torracat_nebelia.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/torracat_nebelia_glow.png"
+    },
+    {
+      "id": "torracat-nebelia-shiny",
+      "species": "torracat",
+      "name": "Matoufeu",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/torracat_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/torracat_nebelia_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/torracat_nebelia_glow_shiny.png"
+    },
+    {
+      "id": "totodile-asteria-base",
+      "species": "totodile",
+      "name": "Kaiminus",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/totodile_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/totodile_asteria.png"
+    },
+    {
+      "id": "totodile-asteria-shiny",
+      "species": "totodile",
+      "name": "Kaiminus",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/totodile_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/totodile_asteria_shiny.png"
+    },
+    {
+      "id": "treecko-nebelia-base",
+      "species": "treecko",
+      "name": "Arcko",
+      "collection": "Nébélia",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/treecko_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/treecko_nebelia.png"
+    },
+    {
+      "id": "treecko-nebelia-shiny",
+      "species": "treecko",
+      "name": "Arcko",
+      "collection": "Nébélia",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/treecko_nebelia.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/treecko_nebelia_shiny.png"
+    },
+    {
+      "id": "typhlosion-asteria-base",
+      "species": "typhlosion",
+      "name": "Typhlosion",
+      "collection": "Astéria",
+      "form": "Classique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/typhlosion_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/typhlosion_asteria.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/typhlosion_asteria_glow.png"
+    },
+    {
+      "id": "typhlosion-asteria-shiny",
+      "species": "typhlosion",
+      "name": "Typhlosion",
+      "collection": "Astéria",
+      "form": "Chromatique",
+      "model": "regional-starters/assets/cobblestar_planets/bedrock/pokemon/models/regional/typhlosion_asteria.geo.json",
+      "texture": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/typhlosion_asteria_shiny.png",
+      "emissive": "regional-starters/assets/cobblestar_planets/textures/pokemon/regional/typhlosion_asteria_glow_shiny.png"
+    },
+    {
+      "id": "dragonite-eclipse-base",
+      "species": "dragonite",
+      "name": "Dracolosse",
+      "collection": "Éclipse",
+      "form": "Classique",
+      "model": "event-pokemon-assets/assets/cobblestar_planets/bedrock/pokemon/models/events/dragonite_eclipse.geo.json",
+      "texture": "event-pokemon-assets/assets/cobblestar_planets/textures/pokemon/events/dragonite_eclipse.png",
+      "emissive": "event-pokemon-assets/assets/cobblestar_planets/textures/pokemon/events/dragonite_eclipse_glow.png"
+    },
+    {
+      "id": "dragonite-eclipse-shiny",
+      "species": "dragonite",
+      "name": "Dracolosse",
+      "collection": "Éclipse",
+      "form": "Chromatique",
+      "model": "event-pokemon-assets/assets/cobblestar_planets/bedrock/pokemon/models/events/dragonite_eclipse.geo.json",
+      "texture": "event-pokemon-assets/assets/cobblestar_planets/textures/pokemon/events/dragonite_eclipse_shiny.png",
+      "emissive": "event-pokemon-assets/assets/cobblestar_planets/textures/pokemon/events/dragonite_eclipse_glow_shiny.png"
+    },
+    {
+      "id": "astreval-custom-base",
+      "species": "astreval",
+      "name": "Astreval",
+      "collection": "Créations CobbleStar",
+      "form": "Classique",
+      "model": "mascot-assets/assets/cobblestar_planets/bedrock/pokemon/models/mascots/astreval/astreval.geo.json",
+      "texture": "mascot-assets/assets/cobblestar_planets/textures/pokemon/mascots/astreval/astreval.png",
+      "emissive": "mascot-assets/assets/cobblestar_planets/textures/pokemon/mascots/astreval/astreval_glow.png"
+    },
+    {
+      "id": "astreval-custom-shiny",
+      "species": "astreval",
+      "name": "Astreval",
+      "collection": "Créations CobbleStar",
+      "form": "Chromatique",
+      "model": "mascot-assets/assets/cobblestar_planets/bedrock/pokemon/models/mascots/astreval/astreval.geo.json",
+      "texture": "mascot-assets/assets/cobblestar_planets/textures/pokemon/mascots/astreval/astreval_shiny.png",
+      "emissive": "mascot-assets/assets/cobblestar_planets/textures/pokemon/mascots/astreval/astreval_glow_shiny.png"
+    },
+    {
+      "id": "basteros-custom-base",
+      "species": "basteros",
+      "name": "Bastéros",
+      "collection": "Créations CobbleStar",
+      "form": "Classique",
+      "model": "mascot-assets/assets/cobblestar_planets/bedrock/pokemon/models/mascots/basteros/basteros.geo.json",
+      "texture": "mascot-assets/assets/cobblestar_planets/textures/pokemon/mascots/basteros/basteros.png",
+      "emissive": "mascot-assets/assets/cobblestar_planets/textures/pokemon/mascots/basteros/basteros_glow.png"
+    },
+    {
+      "id": "basteros-custom-shiny",
+      "species": "basteros",
+      "name": "Bastéros",
+      "collection": "Créations CobbleStar",
+      "form": "Chromatique",
+      "model": "mascot-assets/assets/cobblestar_planets/bedrock/pokemon/models/mascots/basteros/basteros.geo.json",
+      "texture": "mascot-assets/assets/cobblestar_planets/textures/pokemon/mascots/basteros/basteros_shiny.png",
+      "emissive": "mascot-assets/assets/cobblestar_planets/textures/pokemon/mascots/basteros/basteros_glow_shiny.png"
+    },
+    {
+      "id": "ludilux-custom-base",
+      "species": "ludilux",
+      "name": "Ludilux",
+      "collection": "Créations CobbleStar",
+      "form": "Classique",
+      "model": "mascot-assets/assets/cobblestar_planets/bedrock/pokemon/models/mascots/ludilux/ludilux.geo.json",
+      "texture": "mascot-assets/assets/cobblestar_planets/textures/pokemon/mascots/ludilux/ludilux.png",
+      "emissive": "mascot-assets/assets/cobblestar_planets/textures/pokemon/mascots/ludilux/ludilux_glow.png"
+    },
+    {
+      "id": "ludilux-custom-shiny",
+      "species": "ludilux",
+      "name": "Ludilux",
+      "collection": "Créations CobbleStar",
+      "form": "Chromatique",
+      "model": "mascot-assets/assets/cobblestar_planets/bedrock/pokemon/models/mascots/ludilux/ludilux.geo.json",
+      "texture": "mascot-assets/assets/cobblestar_planets/textures/pokemon/mascots/ludilux/ludilux_shiny.png",
+      "emissive": "mascot-assets/assets/cobblestar_planets/textures/pokemon/mascots/ludilux/ludilux_glow_shiny.png"
+    },
+    {
+      "id": "dragonite-alliance-base",
+      "species": "dragonite",
+      "name": "Dracolosse",
+      "collection": "Alliance",
+      "form": "Classique",
+      "model": "dex-native/dragonite.geo.json",
+      "texture": "referral-cosmetics/assets/cobblestar_planets/textures/pokemon/referral/dragonite_alliance.png",
+      "emissive": "referral-cosmetics/assets/cobblestar_planets/textures/pokemon/referral/dragonite_alliance_glow.png"
+    },
+    {
+      "id": "allodus-custom-base",
+      "species": "allodus",
+      "name": "Allodus",
+      "collection": "Créations CobbleStar",
+      "form": "Classique",
+      "model": "allodus-assets/assets/cobblestar_planets/bedrock/pokemon/models/allodus/allodus.geo.json",
+      "texture": "allodus-assets/assets/cobblestar_planets/textures/pokemon/allodus/allodus.png",
+      "emissive": "allodus-assets/assets/cobblestar_planets/textures/pokemon/allodus/allodus_glow.png"
+    },
+    {
+      "id": "patapouf-custom-base",
+      "species": "patapouf",
+      "name": "Patapouf",
+      "collection": "Créations CobbleStar",
+      "form": "Classique",
+      "model": "patapouf-assets/assets/cobblestar_planets/bedrock/pokemon/models/patapouf/patapouf.geo.json",
+      "texture": "patapouf-assets/assets/cobblestar_planets/textures/pokemon/patapouf/patapouf.png"
+    }
+  ]
+}

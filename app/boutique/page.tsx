@@ -32,8 +32,8 @@ const starPacks: StarPack[] = [
 
 const ranks = shopCatalog.products.filter(item => item.category === "ranks" && !item.testOnly);
 const catalog = shopCatalog.products.filter(item => item.category !== "ranks" && !item.testOnly);
-const categories = [{id:"all",label:"Tout"},{id:"keys",label:"Clés"},{id:"cosmetics",label:"Cosmétiques"},{id:"companions",label:"Compagnons"},{id:"collection",label:"Collection"}];
-const shopTabs = [{ id: "grades", label: "Grades" }, { id: "stars", label: "Stars" }, { id: "catalogue", label: "Autres offres" }] as const;
+const categories = [{id:"all",label:"Tout"},{id:"cosmetics",label:"Cosmétiques"},{id:"companions",label:"Compagnons"},{id:"collection",label:"Collection"}];
+const shopTabs = [{ id: "grades", label: "Grades" }, { id: "jetons", label: "Jetons" }, { id: "stars", label: "Stars" }, { id: "catalogue", label: "Autres offres" }] as const;
 type ShopTab = typeof shopTabs[number]["id"];
 const rankPresentation = [
   { tags: ["etoile"], highlights: ["25 homes · 5 boîtes PC supplémentaires", "Cosmétiques Étoilés et accès au warp EVs", "+10 % d’XP Battle Pass et métiers"] },
@@ -52,9 +52,10 @@ export default function ShopPage() {
   const [rechargeBusy, setRechargeBusy] = useState(false);
   const [rechargeComplete, setRechargeComplete] = useState(false);
   const [rechargeMessage, setRechargeMessage] = useState("");
-  const [category, setCategory] = useState("keys");
+  const [category, setCategory] = useState("all");
+  const [tokenPack, setTokenPack] = useState(false);
   const [activeTab, setActiveTab] = useState<ShopTab>("grades");
-  const visibleProducts = catalog.filter(item => category === "all" || item.category === category);
+  const visibleProducts = catalog.filter(item => item.category !== 'keys' && (category === "all" || item.category === category));
 
   useEffect(() => {
     let scrollFrame = 0;
@@ -214,6 +215,22 @@ export default function ShopPage() {
         })}</div>
         <p className="store-caption">Achat et renouvellement dans <code>/boutique</code> en jeu. Cadeaux réservés au premier achat de chaque grade ; conditions détaillées dans les avantages.</p>
       </section>
+      <section id="jetons" role="tabpanel" aria-labelledby="tab-jetons" tabIndex={0} hidden={activeTab!=="jetons"} className="store-panel">
+        <div className="store-panel-heading"><h2>Un jeton. Une ouverture.</h2><p>Nova, Pulsar ou Quasar : choisis ta machine.</p></div>
+        <div className="shop-filters" role="group" aria-label="Quantité de jetons"><button type="button" aria-pressed={!tokenPack} onClick={()=>setTokenPack(false)}>À l’unité</button><button type="button" aria-pressed={tokenPack} onClick={()=>setTokenPack(true)}>Lots de 4</button></div>
+        <div className="store-token-grid">{['nova','pulsar','quasar'].map(id=>{
+          const item=catalog.find(p=>p.id===(tokenPack?`pack_${id}_4`:`key_${id}`))!;
+          const single=catalog.find(p=>p.id===`key_${id}`)!;
+          return <article className={`store-token store-token-${id}`} key={id}>
+            <img src={`/shop/tokens/${id}.svg`} alt={`Jeton ${id} du serveur CobbleStar`} width="400" height="400"/>
+            <div><h3>{id[0].toUpperCase()+id.slice(1)} {tokenPack&&<span>×4</span>}</h3><p>{tokenPack?'4 jetons pour 4 ouvertures':'1 jeton pour 1 ouverture'}</p>
+            <strong className="shop-star-price"><StarsArt/>{item.starsPrice.toLocaleString('fr-FR')} <span>Stars</span></strong>
+            <p className="store-token-saving">{tokenPack?`${(single.starsPrice*4-item.starsPrice).toLocaleString('fr-FR')} Stars économisées`:'Utilisable dans la machine du même nom'}</p>
+            <a href="/wiki/caisses/">Contenu et fonctionnement des machines →</a></div>
+          </article>;
+        })}</div>
+        <div className="store-token-note"><p>Les jetons correspondent aux anciennes clés. Une ouverture donne un lot aléatoire : consulte le contenu et les probabilités dans <code>/crates</code> en jeu.</p><p><strong>Jeton Vote :</strong> obtenu grâce aux votes et récompenses du serveur. <Link href="/vote/">Voir les votes →</Link></p><button type="button" className="store-action" onClick={()=>selectTab('stars',true)}>Voir les packs de Stars →</button></div>
+      </section>
       <section id="stars" role="tabpanel" aria-labelledby="tab-stars" tabIndex={0} hidden={activeTab!=="stars"} className="store-panel">
         <div className="store-panel-heading"><h2>Choisis tes Stars.</h2><p>Paiement unique. Bonus déjà inclus dans les totaux.</p></div>
         <div className="store-packs">{starPacks.map(pack=><article className="store-pack" key={pack.stars}>
@@ -225,7 +242,8 @@ export default function ShopPage() {
         <div className="store-panel-heading"><h2>Complète ta collection.</h2><p>À retrouver dans <code>/boutique</code> en jeu.</p></div>
         <div className="shop-filters" role="group" aria-label="Filtrer le catalogue">{categories.map(filter=><button type="button" key={filter.id} aria-pressed={category===filter.id} onClick={()=>setCategory(filter.id)}>{filter.label}</button>)}</div>
         <p className="store-caption" aria-live="polite">{visibleProducts.length} offres</p>
-        <div className="store-products">{catalog.map(item=><article className="store-product" hidden={category!=="all" && item.category!==category} key={item.id}><h3>{item.name}</h3><p>{item.description}</p><strong className="shop-star-price"><StarsArt/>{item.starsPrice.toLocaleString("fr-FR")} <span>Stars</span></strong></article>)}</div>
+        <div className="store-products">{catalog.filter(item=>item.category!=='keys').map(item=><article className="store-product" hidden={category!=="all" && item.category!==category} key={item.id}><h3>{item.name}</h3><p>{item.description}</p><strong className="shop-star-price"><StarsArt/>{item.starsPrice.toLocaleString("fr-FR")} <span>Stars</span></strong></article>)}</div>
+        <p className="store-caption"><Link href="/wiki/pokedex/">Découvrir les Pokémon Star et les formes CobbleStar →</Link></p>
       </section>
       <details className="store-help"><summary>Comment acheter ? Comptes, Stars et renouvellement</summary><div>{SHOP_FAQ.map(entry=><section key={entry.question}><h2>{entry.question}</h2><p>{entry.answer}</p></section>)}</div></details>
     </section>

@@ -19,6 +19,7 @@ const required = [
   "api/package.json",
   "api/package-lock.json",
   "api/star-templates/index.json",
+  "api/dex.catalog.json",
   "api/star-effects/manifest.json",
   "api/rank-tags/manifest.json",
   "api/regional-starters/manifest.json",
@@ -54,6 +55,8 @@ await cp(join(projectDir, "api", "dist"), join(deployDir, "dist"), { recursive: 
 await cp(join(projectDir, "api", "migrations"), join(deployDir, "migrations"), { recursive: true });
 await cp(join(projectDir, "api", "licenses"), join(deployDir, "licenses"), { recursive: true });
 await cp(join(projectDir, "api", "star-templates"), join(deployDir, "star-templates"), { recursive: true });
+await cp(join(projectDir, "api", "dex-native"), join(deployDir, "dex-native"), { recursive: true });
+await cp(join(projectDir, "api", "dex.catalog.json"), join(deployDir, "dex.catalog.json"));
 await cp(join(projectDir, "api", "star-layers"), join(deployDir, "star-layers"), { recursive: true });
 await cp(join(projectDir, "api", "star-effects"), join(deployDir, "star-effects"), { recursive: true });
 await cp(join(projectDir, "api", "rank-tags"), join(deployDir, "rank-tags"), { recursive: true });

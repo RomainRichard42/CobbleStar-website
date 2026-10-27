@@ -95,43 +95,43 @@
       "visual": { "accent": "#E38DBD", "badge": "CLUB ENTIER", "previewTexture": "cobblestar_planets:textures/gui/shop/chat_tag_market.png" }
     },
     {
-      "id": "key_nova", "name": "Clé Nova",
-      "description": "Ouvre une caisse Nova au spawn CobbleStar.",
+      "id": "key_nova", "name": "Jeton Nova",
+      "description": "Ouvre une machine Nova au spawn CobbleStar.",
       "starsPrice": 350, "itemId": "cobblestar_planets:key_nova", "itemCount": 1,
       "testOnly": false, "category": "keys", "featured": true, "isNew": false,
       "visual": { "accent": "#9B8CFF", "badge": "NOVA", "previewTexture": "cobblestar_planets:textures/gui/shop/key_nova_market.png" }
     },
     {
-      "id": "key_pulsar", "name": "Clé Pulsar",
-      "description": "Ouvre une caisse Pulsar et son catalogue exclusif.",
+      "id": "key_pulsar", "name": "Jeton Pulsar",
+      "description": "Ouvre une machine Pulsar et son catalogue exclusif.",
       "starsPrice": 650, "itemId": "cobblestar_planets:key_pulsar", "itemCount": 1,
       "testOnly": false, "category": "keys", "featured": true, "isNew": false,
       "visual": { "accent": "#79DCE8", "badge": "PULSAR", "previewTexture": "cobblestar_planets:textures/gui/shop/key_pulsar_market.png" }
     },
     {
-      "id": "key_quasar", "name": "Clé Quasar",
-      "description": "La clé premium des récompenses Quasar.",
+      "id": "key_quasar", "name": "Jeton Quasar",
+      "description": "Un jeton pour une ouverture de la machine Quasar.",
       "starsPrice": 950, "itemId": "cobblestar_planets:key_quasar", "itemCount": 1,
       "testOnly": false, "category": "keys", "featured": true, "isNew": true,
       "visual": { "accent": "#E8C979", "badge": "QUASAR", "previewTexture": "cobblestar_planets:textures/gui/shop/key_quasar_market.png" }
     },
     {
-      "id": "pack_nova_4", "name": "Pack Nova ×4",
-      "description": "Quatre clés Nova avec 200 Stars économisées.",
+      "id": "pack_nova_4", "name": "Jetons Nova ×4",
+      "description": "Quatre jetons Nova avec 200 Stars économisées.",
       "starsPrice": 1200, "itemId": "cobblestar_planets:key_nova", "itemCount": 4,
       "testOnly": false, "category": "keys", "featured": false, "isNew": true,
       "visual": { "accent": "#9B8CFF", "badge": "PACK ×4", "previewTexture": "cobblestar_planets:textures/gui/shop/key_nova_market.png" }
     },
     {
-      "id": "pack_pulsar_4", "name": "Pack Pulsar ×4",
-      "description": "Quatre clés Pulsar avec 400 Stars économisées.",
+      "id": "pack_pulsar_4", "name": "Jetons Pulsar ×4",
+      "description": "Quatre jetons Pulsar avec 400 Stars économisées.",
       "starsPrice": 2200, "itemId": "cobblestar_planets:key_pulsar", "itemCount": 4,
       "testOnly": false, "category": "keys", "featured": false, "isNew": true,
       "visual": { "accent": "#79DCE8", "badge": "PACK ×4", "previewTexture": "cobblestar_planets:textures/gui/shop/key_pulsar_market.png" }
     },
     {
-      "id": "pack_quasar_4", "name": "Pack Quasar ×4",
-      "description": "Quatre clés Quasar avec 600 Stars économisées.",
+      "id": "pack_quasar_4", "name": "Jetons Quasar ×4",
+      "description": "Quatre jetons Quasar avec 600 Stars économisées.",
       "starsPrice": 3200, "itemId": "cobblestar_planets:key_quasar", "itemCount": 4,
       "testOnly": false, "category": "keys", "featured": false, "isNew": true,
       "visual": { "accent": "#E8C979", "badge": "PACK ×4", "previewTexture": "cobblestar_planets:textures/gui/shop/key_quasar_market.png" }

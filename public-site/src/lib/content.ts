@@ -23,4 +23,4 @@ export const xml = (value: unknown) => String(value).replace(/[&<>"']/g, c => ({
 export const safeImage = (src: string | undefined) => src && (/^\/(?!\/)/.test(src) || src.startsWith('https://raw.githubusercontent.com/PokeAPI/sprites/')) ? src : '/cobblemon-team.webp';
 export const date = (value: string) => new Intl.DateTimeFormat('fr-FR',{dateStyle:'long',timeZone:'Europe/Paris'}).format(new Date(value));
 export const breadcrumbs = (items: {name:string;path:string}[]) => ({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:items.map((item,i)=>({'@type':'ListItem',position:i+1,name:item.name,item:SITE+item.path}))});
-export const staticPages = ['/', '/rejoindre/', '/minecraft-pokemon/', '/installer-cobblemon/', '/telecharger/', '/wiki/', '/actualites/', '/roadmap/', '/confidentialite/', '/boutique/', '/vote/'];
+export const staticPages = ['/', '/rejoindre/', '/minecraft-pokemon/', '/installer-cobblemon/', '/telecharger/', '/wiki/', '/wiki/pokedex/', '/actualites/', '/roadmap/', '/confidentialite/', '/boutique/', '/vote/'];

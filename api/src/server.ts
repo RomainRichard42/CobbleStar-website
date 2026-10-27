@@ -1,6 +1,6 @@
 import { randomInt, randomUUID, timingSafeEqual } from "node:crypto";
 import { registerVoteProgress } from "./vote-progress.js";
-import Fastify, { FastifyReply, FastifyRequest } from "fastify";
+import Fastify, { FastifyReply, FastifyRequest, LogController } from "fastify";
 import cookie from "@fastify/cookie";
 import cors from "@fastify/cors";
 import helmet from "@fastify/helmet";
@@ -30,6 +30,9 @@ import { registerAccountLink } from "./account-link-routes.js";
 import { siteSecurity } from "./site-security.js";
 import { registerPublicSite } from "./public-site.js";
 import { availableWiki } from "./wiki-availability.js";
+import { registerRequestLogging } from "./request-logging.js";
+import { publicDex } from './dex-data.js';
+import { registerPublicDex } from './public-dex.js';
 
 type UserRow = RowDataPacket & {
   id: string; email: string | null; discord_email: string | null; password_hash: string | null;
@@ -43,7 +46,8 @@ declare module "fastify" {
   interface FastifyRequest { account?: UserRow }
 }
 
-const app = Fastify({ logger: { redact: ["req.headers.authorization", "req.headers.cookie", "body.password"] }, trustProxy: true });
+const app = Fastify({ logController: new LogController({ disableRequestLogging: true }), logger: { redact: ["req.headers.authorization", "req.headers.cookie", "req.headers.x-cobblestar-server-key", "body.password"] }, trustProxy: true });
+registerRequestLogging(app);
 await app.register(helmet, siteSecurity);
 await app.register(cookie, { secret: config.COOKIE_SECRET });
 await app.register(cors, { origin: config.SITE_ORIGIN, credentials: true, methods: ["GET", "POST", "PUT", "DELETE"] });
@@ -1050,7 +1054,8 @@ app.post("/api/internal/rewards/:id/fail", { config: { rateLimit: { max: 300, ti
   return { released: true };
 });
 
-registerPublicSite(app, { getWiki: () => wikiSlot("published"), getNews: () => newsSlot("published") });
+registerPublicDex(app, publicDex);
+registerPublicSite(app, { getWiki: () => wikiSlot("published"), getNews: () => newsSlot("published"), getDex: publicDex.list });
 
 await app.register(staticFiles, {
   root: join(process.cwd(), "site"),

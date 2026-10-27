@@ -10,7 +10,7 @@ import {siteSecurity} from '../api/dist/site-security.js';
 let wiki={content:JSON.parse(await readFile('wiki.default.json','utf8')),version:1,updatedAt:null};
 let news={content:JSON.parse(await readFile('news.default.json','utf8')),version:1,updatedAt:null};
 const app=Fastify();await app.register(helmet,siteSecurity);
-registerPublicSite(app,{getWiki:async()=>wiki,getNews:async()=>news});
+registerPublicSite(app,{getWiki:async()=>wiki,getNews:async()=>news,getDex:async()=>[{id:'native-pikachu',species:'pikachu',name:'Pikachu',collection:'Classiques',form:'Classique',assetUrl:'/api/pokedex/native-pikachu/asset'}]});
 app.get('/api/test',async()=>({api:true}));
 await app.register(staticFiles,{root:resolve('out')});
 const base=await app.listen({host:'127.0.0.1',port:0});
@@ -20,6 +20,12 @@ test('public routing preserves account, shop, admin and API routes',async()=>{
   for(const p of ['/compte/','/boutique/','/vote/','/api/test','/wiki/admin/','/wiki/admin/access/','/actualites/admin/','/admin/discord/','/_next/static/chunk.js'])assert.equal(isPublicPage(p),false,p);
   const {response,html}=await get('/api/test');assert.equal(response.status,200);assert.deepEqual(JSON.parse(html),{api:true});
   for(const p of ['/compte/','/admin/discord/','/wiki/admin/']){const r=await get(p);assert.equal(r.response.status,200,p);assert.match(r.response.headers.get('x-robots-tag'),/noindex/);assert.equal(r.response.headers.get('x-cobblestar-renderer'),null);}
+});
+
+test('Pokédex renders public names in Astro and stays discoverable from the wiki and sitemap',async()=>{
+ const page=await get('/wiki/pokedex/');assert.equal(page.response.status,200);assert.match(page.html,/Pikachu/);assert.match(page.html,/data-asset="\/api\/pokedex\/native-pikachu\/asset"/);assert.match(page.html,/id="dex-dialog"/);assert.match(page.html,/rel="canonical" href="https:\/\/cobblestar-mc.fr\/wiki\/pokedex\/"/);assert.ok(!(page.response.headers.get('x-robots-tag')||'').includes('noindex'));
+ assert.match((await get('/wiki/')).html,/href="\/wiki\/pokedex\/"/);assert.match((await get('/sitemap.xml')).html,/<loc>https:\/\/cobblestar-mc.fr\/wiki\/pokedex\/<\/loc>/);
+ const shop=await get('/boutique/');assert.match(shop.html,/id="tab-jetons"/);for(const token of ['nova','pulsar','quasar']){assert.match(shop.html,new RegExp('/shop/tokens/'+token+'\\.svg'));assert.equal((await get('/shop/tokens/'+token+'.svg')).response.status,200);}assert.match(shop.html,/href="\/wiki\/caisses\/"/);
 });
 test('public pages have meaningful HTML, unique metadata and no React runtime',async()=>{
   const paths=['/','/rejoindre/','/minecraft-pokemon/','/installer-cobblemon/','/telecharger/','/wiki/','/actualites/','/roadmap/','/confidentialite/',...wiki.content.articles.filter(a=>a.published).map(a=>`/wiki/${a.id}/`),...news.content.articles.filter(a=>a.published).map(a=>`/actualites/${a.slug}/`)];

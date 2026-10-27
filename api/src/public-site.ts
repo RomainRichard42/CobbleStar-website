@@ -8,7 +8,7 @@ export function isPublicPage(path: string) {
   return /^\/(wiki|actualites)\/(?!admin(?:\/|$))[a-z0-9_-]+\/?$/.test(path);
 }
 type Handler = (req: IncomingMessage, res: ServerResponse, next: (error?: Error) => void, locals: Record<string, unknown>) => Promise<void>;
-export function registerPublicSite(app: FastifyInstance, content: {getWiki:()=>Promise<unknown>;getNews:()=>Promise<unknown>}, render?: Handler) {
+export function registerPublicSite(app: FastifyInstance, content: {getWiki:()=>Promise<unknown>;getNews:()=>Promise<unknown>;getDex?:()=>Promise<unknown>}, render?: Handler) {
   let loaded: Promise<Handler> | undefined;
   const renderer = () => render ? Promise.resolve(render) : loaded ??= import(pathToFileURL(resolve(process.cwd(),'public-astro/server/entry.mjs')).href).then(module=>module.handler as Handler).catch(error=>{loaded=undefined;throw error;});
   app.addHook('onRequest',async(request,reply)=>{

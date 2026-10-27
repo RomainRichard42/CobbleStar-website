@@ -23,6 +23,7 @@ test("price bridge is read-only, authenticated, and rejects a malformed catalogu
     assert.equal(response.json().values["grades.gardien"],1_200_000);
     assert.equal((await app.inject({url,method:"POST",headers,payload:{balance:1_000_000}})).statusCode,404);
     process.chdir(directory);writeFileSync("economy.policy.json",'{"version":1,"values":{}}');
+    process.env.ECONOMY_POLICY_PATH=join(directory,'economy.policy.json');
     assert.equal((await app.inject({url,headers})).statusCode,503);
-  } finally {process.chdir(original);pool.execute=execute;await app.close();await pool.end();rmSync(directory,{recursive:true,force:true});}
+  } finally {delete process.env.ECONOMY_POLICY_PATH;process.chdir(original);pool.execute=execute;await app.close();await pool.end();rmSync(directory,{recursive:true,force:true});}
 });

@@ -1,5 +1,4 @@
 import { readFileSync } from "node:fs";
-import { join } from "node:path";
 import { z } from "zod";
 
 const amount = z.number().int().min(0).max(1_000_000_000);
@@ -22,5 +21,5 @@ export const economyPolicySchema = z.object({
   }
 });
 export function getEconomyPolicy() {
-  return economyPolicySchema.parse(JSON.parse(readFileSync(join(process.cwd(), "economy.policy.json"), "utf8")));
+  return economyPolicySchema.parse(JSON.parse(readFileSync(process.env.ECONOMY_POLICY_PATH || new URL("../economy.policy.json", import.meta.url), "utf8")));
 }

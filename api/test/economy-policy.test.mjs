@@ -2,6 +2,14 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {economyPolicySchema, getEconomyPolicy} from "../dist/economy-policy.js";
+import {spawnSync} from 'node:child_process';
+import {fileURLToPath} from 'node:url';
+
+test('policy loads when Kinetic starts from the repository root',()=>{
+ const module=new URL('../dist/economy-policy.js',import.meta.url).href;
+ const result=spawnSync(process.execPath,['--input-type=module','-e',`import {getEconomyPolicy} from ${JSON.stringify(module)};console.log(getEconomyPolicy().version);`],{cwd:fileURLToPath(new URL('../../',import.meta.url)),encoding:'utf8'});
+ assert.equal(result.status,0,result.stderr);assert.equal(result.stdout.trim(),'1');
+});
 
 test("economy catalogue: progressive grades, complete jobs and safe buybacks", () => {
   const p=getEconomyPolicy();
