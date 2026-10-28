@@ -1,0 +1,134 @@
+{
+  "date": "2026-10-28",
+  "site": "https://cobblestar-mc.fr",
+  "execution": "Audit quotidien déclenché manuellement à la demande de Romain ; automatisation vérifiée ACTIVE, 09:00 Europe/Paris. Cause du déclenchement manqué non déterminée.",
+  "technicalReport": "seo/reports/audit-2026-10-28.json",
+  "postPublicationReport": "seo/reports/controle-publication-2026-10-28.json",
+  "technical": {
+    "pages": 1062,
+    "errors": [],
+    "warnings": [],
+    "metrics": {
+      "home": {
+        "htmlBytes": 24381,
+        "scriptFiles": 5,
+        "scriptBytes": 23934,
+        "inlineScriptBytes": 700,
+        "totalScriptBytes": 24634
+      },
+      "cloudflareEmailLinks": 1064,
+      "checkedLinks": 6393,
+      "checkedImages": 30,
+      "checkedDocuments": 1064,
+      "maxClickDepth": 2,
+      "crawlerHttpStatus": 200
+    },
+    "comparison": {
+      "reference": "seo/reports/audit-navigation-production-2026-10-27.json",
+      "pagesDelta": 0,
+      "linksDelta": 0,
+      "imagesDelta": 0,
+      "metadataChanges": 0,
+      "homeHtmlBytesDelta": 6
+    },
+    "largestHtml": {
+      "page": "/wiki/pokedex/",
+      "beforeBytes": 1033442,
+      "afterBytes": 1036179,
+      "meaning": "Octets HTML décompressés ; pas une mesure du transfert réseau ni des Core Web Vitals."
+    }
+  },
+  "searchConsole": {
+    "checkedOn": "2026-10-28",
+    "property": "https://cobblestar-mc.fr/",
+    "performance": {
+      "selectedPeriod": "3 mois",
+      "availableChartStart": "2026-10-25",
+      "availableChartEnd": "2026-10-26",
+      "lastUpdateDisplayed": "3.5 hours ago",
+      "clicks": 0,
+      "impressions": 0,
+      "queries": [],
+      "averagePosition": null,
+      "ctr": null,
+      "note": "Avec zéro impression, les valeurs 0 de CTR et position affichées ne sont pas des mesures de classement exploitables."
+    },
+    "indexingReport": "Processing data, please check again in a day or so",
+    "coreWebVitals": "Aucune donnée mobile ni ordinateur disponible",
+    "sitemap": {
+      "lastRead": "2026-10-26",
+      "discoveredUrls": 47,
+      "currentPublishedUrls": 1062,
+      "status": "Success",
+      "resubmittedOn": "2026-10-28",
+      "confirmation": "Sitemap submitted successfully",
+      "reason": "Le sitemap avait été soumis avant la publication des 1014 fiches ; Google affichait toujours les anciennes 47 URL.",
+      "note": "Soumission confirmée ; nouvelle lecture et indexation globale non encore confirmées."
+    },
+    "inspection": {
+      "url": "https://cobblestar-mc.fr/wiki/pokedex/eevee/",
+      "indexed": true,
+      "status": "URL is on Google — Page is indexed",
+      "lastCrawlDisplayed": "Oct 27, 2026, 4:02:03 PM",
+      "crawler": "Googlebot smartphone",
+      "crawlAllowed": true,
+      "fetch": "Successful",
+      "indexingAllowed": true,
+      "userCanonical": "https://cobblestar-mc.fr/wiki/pokedex/eevee/",
+      "googleCanonical": "Inspected URL",
+      "breadcrumbs": "1 valid item",
+      "difference": "Non indexée au contrôle du 27 octobre, désormais indexée ; aucune nouvelle demande d’indexation répétée pour cette fiche."
+    }
+  },
+  "published": {
+    "commit": "40e34c7",
+    "page": "/wiki/pokedex/#lire-les-fiches",
+    "change": "Aide repliable : recherche français/anglais, navigation entre fiches, lecture des conditions d’apparition, formes, attaques et statistiques.",
+    "status": "Mis en ligne et contrôlé en HTTP puis dans le navigateur",
+    "testsPassed": 15,
+    "mobile": {
+      "width": 390,
+      "overflow": false,
+      "nativeDetails": true
+    },
+    "seo": "Contenu présent dans le HTML serveur, sans nouveau JavaScript ni changement de canonical."
+  },
+  "actions": [
+    {
+      "priority": "P1",
+      "page": "/wiki/pokedex/",
+      "action": "Mesurer le chargement sur mobile puis réduire le HTML initial du catalogue tout en gardant des liens explorables vers toutes les espèces.",
+      "evidence": "Environ 1 Mo de HTML décompressé ; principale page volumineuse.",
+      "effort": "Moyen",
+      "success": "Comparatif avant/après des octets transférés et du chargement ; aucune fiche orpheline."
+    },
+    {
+      "priority": "P1",
+      "page": "/sitemap.xml et fiches Pokémon",
+      "action": "Vérifier la prochaine lecture du sitemap resoumis et l’évolution de la couverture dans Search Console.",
+      "evidence": "47 URL découvertes affichées ; 1062 URL servies. Évoli indexé, état global encore en traitement.",
+      "effort": "Faible",
+      "success": "Nouvelle date de lecture et relevé des pages indexées/exclues réelles."
+    },
+    {
+      "priority": "P2",
+      "page": "/minecraft-pokemon/, /installer-cobblemon/, /",
+      "action": "Suivre les premières requêtes généralistes et leur CTR avant de modifier les titres ; compléter les guides à partir des recherches réellement observées.",
+      "evidence": "Aucune impression ni requête disponible sur les données des 25–26 octobre.",
+      "effort": "Moyen",
+      "success": "Premières impressions marque/hors marque documentées ; changements justifiés par un manque précis."
+    }
+  ],
+  "limits": [
+    "Audit HTTP/HTML, sans garantie de classement.",
+    "Aucune mesure Lighthouse ni donnée terrain Core Web Vitals disponible lors de ce passage.",
+    "L’indexation d’Évoli ne confirme pas celle des 1013 autres espèces.",
+    "Contrôle complet avant publication, tests et vérification ciblée des quatre pages après publication."
+  ],
+  "proofs": [
+    "outputs/seo/search-console-2026-10-28.png",
+    "outputs/seo/sitemap-soumis-2026-10-28.png",
+    "outputs/seo/evoli-indexe-2026-10-28.png",
+    "outputs/seo/aide-pokedex-publiee-2026-10-28.png"
+  ]
+}

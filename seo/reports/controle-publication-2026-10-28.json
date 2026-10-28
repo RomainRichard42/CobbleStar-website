@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-28T10:29:46.879Z",
+  "commit": "40e34c7",
+  "checks": [
+    {
+      "path": "/wiki/pokedex/",
+      "status": 200,
+      "canonical": "https://cobblestar-mc.fr/wiki/pokedex/",
+      "h1": 1,
+      "htmlBytes": 1036179,
+      "help": true,
+      "summaries": 4,
+      "helpAnchor": true
+    },
+    {
+      "path": "/wiki/pokedex/eevee/",
+      "status": 200,
+      "canonical": "https://cobblestar-mc.fr/wiki/pokedex/eevee/",
+      "h1": 1,
+      "htmlBytes": 66419
+    },
+    {
+      "path": "/boutique/",
+      "status": 200,
+      "canonical": "https://cobblestar-mc.fr/boutique/",
+      "h1": 1,
+      "htmlBytes": 34108
+    },
+    {
+      "path": "/installer-cobblemon/",
+      "status": 200,
+      "canonical": "https://cobblestar-mc.fr/installer-cobblemon/",
+      "h1": 1,
+      "htmlBytes": 18206
+    }
+  ]
+}

@@ -390,9 +390,9 @@
     "daily": true,
     "monday": "Audit approfondi et 5 à 10 actions priorisées",
     "localExecution": "Ordinateur allumé et application ouverte",
-    "latestReport": "seo/reports/suivi-quotidien-2026-10-27.json",
-    "latestTechnicalReport": "seo/reports/audit-2026-10-27T14-28-05.112Z.json",
-    "updatedAt": "2026-10-27T14:32:20.141Z"
+    "latestReport": "seo/reports/suivi-quotidien-2026-10-28.json",
+    "latestTechnicalReport": "seo/reports/audit-2026-10-28.json",
+    "updatedAt": "2026-10-28T10:30:49.495Z"
   },
   "latestKeywordResearch": {
     "report": "seo/reports/mots-cles-google-2026-10-27.json",
@@ -420,8 +420,10 @@
     "googleIndexing": {
       "url": "https://cobblestar-mc.fr/wiki/pokedex/eevee/",
       "requestedOn": "2026-10-27",
-      "status": "Indexing requested — priority crawl queue",
-      "indexed": false
+      "status": "URL is on Google — Page is indexed",
+      "indexed": true,
+      "checkedOn": "2026-10-28",
+      "lastCrawlDisplayed": "Oct 27, 2026, 4:02:03 PM"
     },
     "shopIcon": "Image fournie, bouton visible sur ordinateur et mobile ; WebP 6718 octets.",
     "pokemonPresentation": {
@@ -467,6 +469,12 @@
         "keyboard": true,
         "publishedNavigation": true
       }
+    },
+    "readingGuide": {
+      "date": "2026-10-28",
+      "commit": "40e34c7",
+      "page": "/wiki/pokedex/#lire-les-fiches",
+      "report": "seo/reports/suivi-quotidien-2026-10-28.json"
     }
   }
 }
