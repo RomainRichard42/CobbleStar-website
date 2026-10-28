@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 
 
 import AccountLink from './AccountLink';
+import MobileMenu from './MobileMenu';
+import { observePlayer, starsLabel } from '../lib/player-session';
 import type { AvatarAccount } from '../lib/account-avatar';
 
 const accountsEnabled = true;
@@ -14,59 +16,19 @@ type HeaderAccount = AvatarAccount;
 export default function SiteHeader() {
 
   const [account, setAccount] = useState<HeaderAccount | null>(null);
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState<number | null>(null);
   const pathname = usePathname();
   const minecraftUsername = account?.minecraft?.username || null;
   const accountName = minecraftUsername || account?.discord?.globalName || account?.discord?.username || null;
   const accountAvatar = account?.discord?.avatarUrl || (minecraftUsername ? `https://mc-heads.net/avatar/${encodeURIComponent(minecraftUsername)}/64` : null);
 
 
-  useEffect(() => {
-    let active = true;
-    let signedIn = false;
-    async function loadWallet() {
-      if (!signedIn) return;
-      try {
-        const response = await fetch("/api/wallet", { credentials: "include" });
-        if (!response.ok) throw new Error("Wallet unavailable");
-        const data = await response.json() as { balance: number };
-        if (active) setBalance(data.balance);
-      } catch {
-        // Une indisponibilité temporaire du portefeuille ne déconnecte pas le joueur.
-      }
-    }
-    async function loadAccount() {
-      try {
-        const response = await fetch("/api/me", { credentials: "include" });
-        if (!response.ok) throw new Error("Signed out");
-        const data = await response.json() as { user: HeaderAccount };
-        signedIn = true;
-        if (active) setAccount(data.user);
-        await loadWallet();
-      } catch {
-        signedIn = false;
-        if (active) { setAccount(null); setBalance(0); }
-      }
-    }
-    void loadAccount();
-    const interval = window.setInterval(loadWallet, 5000);
-    window.addEventListener("cobblestar:account-changed", loadAccount);
-    window.addEventListener("cobblestar:wallet-changed", loadWallet);
-    window.addEventListener("focus", loadWallet);
-
-  return () => {
-      active = false;
-      window.clearInterval(interval);
-      window.removeEventListener("cobblestar:account-changed", loadAccount);
-      window.removeEventListener("cobblestar:wallet-changed", loadWallet);
-      window.removeEventListener("focus", loadWallet);
-    };
-  }, []);
+  useEffect(() => observePlayer((user, stars) => { setAccount(user); setBalance(stars); }), []);
 
 
   const isAdmin=/^\/(admin|wiki\/admin|actualites\/admin)(\/|$)/.test(pathname);
   const links=[["/roadmap/","Le serveur"],["/wiki/","Wiki"],["/actualites/","Actualités"],["/vote/","Voter"]];
-  if (!isAdmin) return <header className="astral-header site-header"><a className="astral-skip" href="#contenu">Aller au contenu</a><a className="astral-brand" href="/" aria-label="CobbleStar, accueil"><img src="/media/cobblestar-logo-128.webp" alt="" width="56" height="56"/><span>COBBLE<b>STAR</b></span></a><nav className="astral-desktop" aria-label="Navigation principale">{links.map(([href,label])=><a key={href} href={href} aria-current={pathname.startsWith(href)?"page":undefined}>{label}</a>)}<a href="https://discord.gg/Sd387Ky4M">Discord ↗</a></nav><div className="astral-header-actions">{account&&<a className="astral-wallet" href="/boutique/" aria-label={`Solde : ${balance.toLocaleString("fr-FR")} Stars`}><img src="/astral/assets/stars-96-v3.webp" alt="" width="32" height="24"/>{balance.toLocaleString("fr-FR")}</a>}<AccountLink account={account}/><a className="astral-shop" href="/boutique/"><img src="/astral/assets/stars-button-v3.webp" alt="" width="44" height="34"/>Boutique</a><details className="astral-menu" onKeyDown={e=>{if(e.key==="Escape"){e.currentTarget.open=false;e.currentTarget.querySelector("summary")?.focus();}}}><summary>Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Navigation mobile"><a href="/">Accueil</a>{links.map(([href,label])=><a key={href} href={href}>{label}</a>)}<a href="/rejoindre/">Préparer l’ouverture</a><AccountLink account={account} mobile/><a href="/boutique/">Boutique</a><a href="https://discord.gg/Sd387Ky4M">Discord ↗</a></nav></details></div></header>;
+  if (!isAdmin) return <header className="astral-header site-header"><a className="astral-skip" href="#contenu">Aller au contenu</a><a className="astral-brand" href="/" aria-label="CobbleStar, accueil"><img src="/media/cobblestar-logo-128.webp" alt="" width="56" height="56"/><span>COBBLE<b>STAR</b></span></a><nav className="astral-desktop" aria-label="Navigation principale">{links.map(([href,label])=><a key={href} href={href} aria-current={pathname.startsWith(href)?"page":undefined}>{label}</a>)}<a href="https://discord.gg/Sd387Ky4M">Discord ↗</a></nav><div className="astral-header-actions"><AccountLink account={account} balance={balance}/><a className="astral-shop" href="/boutique/"><img src="/astral/assets/stars-button-v3.webp" alt="" width="44" height="34"/>Boutique</a><MobileMenu account={account} balance={balance} pathname={pathname}/></div></header>;
   return (
     <div className="nav-frame">
       <a className="skip-link" href="#contenu">Aller au contenu</a>
@@ -103,7 +65,7 @@ export default function SiteHeader() {
           <a className="nav-download" href="https://discord.gg/Sd387Ky4M" aria-label="Rejoindre le Discord CobbleStar">
             <span>Discord</span><b aria-hidden="true">↗</b>
           </a>
-          {accountsEnabled && account && <a className="nav-stars" href="/boutique/" aria-label={`Solde : ${balance.toLocaleString("fr-FR")} Stars`}><span aria-hidden="true">✦</span><b>{balance.toLocaleString("fr-FR")}</b><small>Stars</small></a>}
+          {accountsEnabled && account && <a className="nav-stars" href="/boutique/" aria-label={`Solde : ${starsLabel(balance)} Stars`}><span aria-hidden="true">✦</span><b>{starsLabel(balance)}</b><small>Stars</small></a>}
           {accountsEnabled && <a className={`nav-account${pathname.startsWith("/compte") ? " active" : ""}`} href="/compte/" aria-label={account ? `Compte de ${accountName || "Dresseur"}` : "Connexion Discord à CobbleStar"}>
             <span className="nav-account-copy"><small>{account ? "MON COMPTE" : "ESPACE JOUEUR"}</small><strong>{accountName || "Connexion Discord"}</strong></span>
             <span className="nav-account-avatar"><b aria-hidden="true">{accountName ? accountName.slice(0, 1).toUpperCase() : "♙"}</b>{accountAvatar && <img src={accountAvatar} alt="" onError={(event) => { event.currentTarget.style.display = "none"; }} />}</span>

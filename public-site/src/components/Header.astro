@@ -1,52 +1,65 @@
 ---
+import PlayerProfile from './PlayerProfile.astro';
+import {mobileLinks} from '../../../app/lib/mobile-navigation';
 const pathname=Astro.url.pathname;
 const links=[['/roadmap/','Le serveur'],['/wiki/','Wiki'],['/actualites/','Actualités'],['/vote/','Voter']];
 ---
-<header class="astral-header site-header"><a class="astral-skip skip" href={pathname==='/'?'#mondes':'#contenu'}>Aller au contenu</a><a class="astral-brand" href="/" aria-label="CobbleStar, accueil"><img src="/media/cobblestar-logo-128.webp" alt="" width="56" height="56"/><span>COBBLE<b>STAR</b></span></a><nav class="astral-desktop" aria-label="Navigation principale">{links.map(([href,label])=><a href={href} aria-current={pathname.startsWith(href)?'page':undefined}>{label}</a>)}<a href="https://discord.gg/Sd387Ky4M">Discord ↗</a></nav><div class="astral-header-actions"><a class="astral-account" data-account-link href="/compte/"><span class="account-avatar" aria-hidden="true" hidden><img alt="" width="32" height="32" referrerpolicy="no-referrer" hidden/><b hidden></b></span><span>Mon compte</span></a><a class="astral-shop" href="/boutique/" aria-current={pathname.startsWith('/boutique/')?'page':undefined}><img src="/astral/assets/stars-button-v3.webp" alt="" width="44" height="34"/>Boutique</a><details class="astral-menu"><summary>Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Navigation mobile"><a href="/">Accueil</a>{links.map(([href,label])=><a href={href} aria-current={pathname.startsWith(href)?'page':undefined}>{label}</a>)}<a href="/rejoindre/">Préparer l’ouverture</a><a class="account-menu-link" data-account-link href="/compte/"><span class="account-avatar" aria-hidden="true" hidden><img alt="" width="32" height="32" referrerpolicy="no-referrer" hidden/><b hidden></b></span><span>Mon compte</span></a><a href="/boutique/">Boutique</a><a href="https://discord.gg/Sd387Ky4M">Discord ↗</a></nav></details></div></header>
+<header class="astral-header site-header">
+  <a class="astral-skip skip" href={pathname==='/'?'#mondes':'#contenu'}>Aller au contenu</a>
+  <a class="astral-brand" href="/" aria-label="CobbleStar, accueil"><img src="/media/cobblestar-logo-128.webp" alt="" width="56" height="56"/><span>COBBLE<b>STAR</b></span></a>
+  <nav class="astral-desktop" aria-label="Navigation principale">{links.map(([href,label])=><a href={href} aria-current={pathname.startsWith(href)?'page':undefined}>{label}</a>)}<a href="https://discord.gg/Sd387Ky4M">Discord ↗</a></nav>
+  <div class="astral-header-actions">
+    <PlayerProfile/>
+    <a class="astral-shop" href="/boutique/" aria-current={pathname.startsWith('/boutique/')?'page':undefined}><img src="/astral/assets/stars-button-v3.webp" alt="" width="44" height="34"/>Boutique</a>
+    <details class="astral-menu player-menu">
+      <summary>Menu <span class="menu-glyph" aria-hidden="true"><i></i><i></i></span></summary>
+      <button class="menu-backdrop" data-menu-close tabindex="-1" aria-label="Fermer le menu"></button>
+      <nav class="player-menu-panel" aria-label="Navigation mobile">
+        <div class="menu-heading"><a href="/">COBBLE<span>STAR</span><small>Retour à l’accueil ↗</small></a><button type="button" data-menu-close aria-label="Fermer le menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button></div>
+        <PlayerProfile mobile/>
+        <a class="menu-shop-card" href="/boutique/"><img src="/astral/assets/stars-button-v3.webp" alt="" width="96" height="72"/><span><strong>Boutique</strong><small>Stars · Grades · Cosmédex</small></span><b aria-hidden="true">↗</b></a>
+        <div class="menu-destinations">{mobileLinks.map(link=><a href={link.href} aria-current={pathname===link.href?'page':undefined}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={link.icon}/></svg><strong>{link.title}</strong><small>{link.detail}</small></a>)}</div>
+        <a class="menu-discord" href="https://discord.gg/Sd387Ky4M"><span>Rejoindre le Discord</span><b aria-hidden="true">↗</b></a>
+        <p class="menu-opening"><span aria-hidden="true"/>Ouverture à venir</p>
+      </nav>
+    </details>
+  </div>
+</header>
 <script>
 import { accountAppearance, type AvatarAccount } from '../../../app/lib/account-avatar';
-let accountRequest = 0;
-function showAccount(account: AvatarAccount | null) {
+import { observePlayer, starsLabel } from '../../../app/lib/player-session';
+import { bindMobileMenu } from '../../../app/lib/mobile-navigation';
+let displayedAccount: AvatarAccount | null | undefined;
+function showAccount(account: AvatarAccount | null, balance: number | null) {
   const { name, initial, images } = accountAppearance(account);
+  document.querySelectorAll<HTMLAnchorElement>('[data-player-balance]').forEach(link => {
+    link.hidden = !account;
+    link.querySelector('[data-stars-value]')!.textContent = starsLabel(balance);
+    link.setAttribute('aria-label', balance === null ? 'Solde de Stars indisponible — Boutique' : `Solde : ${starsLabel(balance)} Stars — Boutique`);
+  });
+  if (account === displayedAccount) return;
+  displayedAccount = account;
   document.querySelectorAll<HTMLAnchorElement>('[data-account-link]').forEach(link => {
     const avatar = link.querySelector<HTMLElement>('.account-avatar')!;
     const image = avatar.querySelector<HTMLImageElement>('img')!;
     const fallback = avatar.querySelector<HTMLElement>('b')!;
-    image.onerror = null;
-    image.removeAttribute('src');
-    image.hidden = true;
-    fallback.hidden = true;
+    link.querySelector('[data-player-name]')!.textContent = account ? name : 'Mon compte';
+    link.querySelector('[data-player-caption]')!.textContent = account ? 'Mon compte' : 'Connexion Discord';
+    image.onerror = null; image.removeAttribute('src'); image.hidden = true; fallback.hidden = true;
     avatar.hidden = !account;
     link.setAttribute('aria-label', account ? `Mon compte — ${name}` : 'Mon compte');
     if (!account) { link.removeAttribute('title'); return; }
-    link.title = name;
-    fallback.textContent = initial;
+    link.title = name; fallback.textContent = initial;
     let index = 0;
     const nextImage = () => {
       const source = images[index++];
       if (!source) { image.hidden = true; fallback.hidden = false; image.onerror = null; return; }
-      image.dataset.kind = source.kind;
-      image.src = source.url;
-      image.hidden = false;
+      image.dataset.kind = source.kind; image.src = source.url; image.hidden = false;
     };
-    image.onerror = nextImage;
-    nextImage();
+    image.onerror = nextImage; nextImage();
   });
 }
-async function loadAccount() {
-  const request = ++accountRequest;
-  try {
-    const response = await fetch('/api/me', { credentials: 'include', cache: 'no-store' });
-    const data = response.ok ? await response.json() : null;
-    if (request === accountRequest) showAccount(data?.user ?? null);
-  } catch { if (request === accountRequest) showAccount(null); }
-}
-void loadAccount();
-window.addEventListener('cobblestar:account-changed', loadAccount);
-window.addEventListener('focus', loadAccount);
-window.addEventListener('pageshow', event => { if (event.persisted) void loadAccount(); });
-const menu=document.querySelector<HTMLDetailsElement>('.astral-menu');
-menu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.open=false}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu?.open){menu.open=false;menu.querySelector('summary')?.focus()}});
-document.addEventListener('click',e=>{if(menu?.open&&e.target instanceof Node&&!menu.contains(e.target))menu.open=false});
+observePlayer(showAccount);
+const menu=document.querySelector<HTMLDetailsElement>('.player-menu');
+if(menu) bindMobileMenu(menu);
 </script>

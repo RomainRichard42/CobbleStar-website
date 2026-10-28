@@ -104,12 +104,14 @@ test('shop publishes game catalogue prices and wiki headings have working outlin
 test('every published guide is indexed, linked and has valid outline and related targets',async()=>{
   const library=await get('/wiki/'), sitemap=await get('/sitemap.xml');
   const paths=new Set(wiki.content.articles.filter(a=>a.published).map(a=>`/wiki/${a.id}/`));
+  const destinations=new Set([...paths,'/wiki/pokedex/']);
+  assert.equal((await get('/wiki/pokedex/')).response.status,200);
   for(const path of paths){
     assert.ok(library.html.includes(`href="${path}"`),path);
     assert.ok(sitemap.html.includes(`https://cobblestar-mc.fr${path}</loc>`),path);
     const {html}=await get(path);
     for(const [,target] of html.matchAll(/href="#(section-\d+)"/g))assert.ok(html.includes(`id="${target}"`),path+'#'+target);
-    for(const [,link] of html.matchAll(/href="(\/wiki\/[^/#"]+\/)"/g))assert.ok(paths.has(link),path+' → '+link);
+    for(const [,link] of html.matchAll(/href="(\/wiki\/[^/#"]+\/)"/g))assert.ok(destinations.has(link),path+' → '+link);
   }
   assert.match(library.html,/data-search="[^"]*\/pension/);
   assert.match(library.html,/data-search="[^"]*stock est plein/);

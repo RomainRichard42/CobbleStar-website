@@ -7,6 +7,7 @@ import "./atlas-public.css";
 import "./motion-system.css";
 import "./astral-public.css";
 import "./player-polish.css";
+import "./player-navigation.css";
 import { BASE_KEYWORDS, SITE_NAME, SITE_URL } from "@/app/lib/seo";
 import StructuredData from "@/app/components/StructuredData";
 import MotionDirector from "@/app/components/MotionDirector";
