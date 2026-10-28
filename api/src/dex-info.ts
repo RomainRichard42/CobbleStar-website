@@ -16,7 +16,7 @@ export async function dexInfo(entry:DexEntry){
  if(!data)return null;
  const cosmetic=entry.collection==='Star'||entry.collection==='Alliance';
  return {...data,checkedAt:manifest.checkedAt,collection:entry.collection,appearance:entry.form,
-  ...(cosmetic?{spawns:[],acquisition:'Cette apparence est une collection CobbleStar. Elle ne s’obtient pas par une rencontre sauvage classique. Consulte les collections et les machines à jetons pour les offres publiées.',baseLocationId:'native-'+entry.species}:{}),
+  ...(cosmetic?{spawns:[],acquisition:'Cette apparence fait partie des collections CobbleStar. Consulte les collections et les machines à jetons pour connaître les moyens de l’obtenir.',baseLocationId:'native-'+entry.species}:{}),
   ...(data.labels.includes('admin_only')?{spawns:[],acquisition:'Création réservée à l’administration. Elle ne fait pas partie des Pokémon capturables par les joueurs.'}:{}),
-  locationNote:'Conditions extraites des packs installés, vérifiées le '+manifest.checkedAt.split('-').reverse().join('/')+'. Les apparitions placées manuellement et les événements temporaires ne sont pas recensés ici. Les catégories de rareté ne sont pas des pourcentages de capture.'};
+  locationNote:'Conditions de rencontre mises à jour le '+manifest.checkedAt.split('-').reverse().join('/')+'. Les rencontres d’événement ne sont pas toutes répertoriées ici. La rareté indique la fréquence des rencontres, pas les chances de réussir une capture.'};
 }

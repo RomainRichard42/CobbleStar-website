@@ -28,7 +28,7 @@ const previous=currentIndex>0?neighbours[currentIndex-1]:null;
 const next=currentIndex>=0?neighbours[currentIndex+1]:null;
 const name=primary?.name??'Pokémon introuvable';
 const title=selected?`${name} dans Cobblemon : évolution, localisation et stats`:'Pokémon introuvable';
-const description=selected?`Consulte la fiche de ${name} sur CobbleStar : types, talents, statistiques, évolutions, attaques et conditions d’apparition issues des packs du serveur.`:'Cette fiche Pokémon n’est pas disponible.';
+const description=selected?`Consulte la fiche de ${name} sur CobbleStar : types, talents, statistiques, évolutions, attaques et lieux et conditions de rencontre sur le serveur.`:'Cette fiche Pokémon n’est pas disponible.';
 function evolutionLink(species:string){
  const choices=entries.filter(e=>e.species===species);
  const choice=info?.regional?choices.find(e=>e.collection===selected.collection):defaultAppearance(choices);
@@ -39,15 +39,15 @@ function evolutionLink(species:string){
 <main id="contenu" class="public-shell pokemon-page">
  <nav aria-label="Fil d’Ariane" class="pokemon-breadcrumb"><a href="/wiki/">Wiki</a><span aria-hidden="true">/</span><a href="/wiki/pokedex/">Pokédex</a><span aria-hidden="true">/</span><span>{name}</span></nav>
  <h1>{selected?name:'Pokémon introuvable'}</h1>
- {!info?<p role="alert">{failed?'La fiche est temporairement indisponible. Réessaie dans quelques instants.':'Ce Pokémon ne figure pas dans le catalogue publié.'} <a href="/wiki/pokedex/">Retourner au Pokédex</a></p>:<>
- <p class="lead">Types, évolutions et localisation : {name} dans la configuration Cobblemon de notre serveur.</p>
+ {!info?<p role="alert">{failed?'La fiche est temporairement indisponible. Réessaie dans quelques instants.':'Cette fiche Pokémon n’est pas disponible.'} <a href="/wiki/pokedex/">Retourner au Pokédex</a></p>:<>
+ <p class="lead">Types, évolutions et localisation : découvre {name} sur CobbleStar.</p>
  <div class="pokemon-layout">
  <aside class="pokemon-visual">
   <div id="pokemon-model" data-asset={selected.assetUrl} role="img" aria-label={selected.name+' — '+selected.form}><p>Modèle 3D de {selected.name}</p></div>
   <p id="pokemon-model-status" role="status"></p>
   <div id="pokemon-controls" class="public-actions" hidden><button class="public-button secondary" data-pokemon-turn="-0.4" aria-label="Tourner le Pokémon à gauche">↶</button><button class="public-button secondary" data-pokemon-turn="0.4" aria-label="Tourner le Pokémon à droite">↷</button><button class="public-button secondary" id="pokemon-pause" aria-pressed="false">Mettre en pause</button></div>
   <h2>Formes et collections</h2><ul class="pokemon-forms">{forms.map(e=><li><a aria-current={e.id===selected.id?'true':undefined} href={dexPath(e.species)+(e.id===primary.id?'':'?forme='+encodeURIComponent(e.id))}>{e.collection} · {e.form}</a></li>)}</ul>
-  <p>Le serveur prépare son ouverture. Cette fiche décrit les fichiers installés ; elle ne garantit pas une rencontre ni la disponibilité de toutes les apparences.</p>
+  <p>CobbleStar prépare son ouverture. En attendant, compare les formes et prépare ton équipe.</p>
  </aside>
  <article class="pokemon-content">
  <div class="dex-types">{info.types.map((t:string)=><span class="dex-type" data-type={t}>{typeNames[t]||t}</span>)}</div>
@@ -69,25 +69,25 @@ function evolutionLink(species:string){
  </div>
  <nav class="pokemon-sections" aria-label="Rubriques de la fiche"><a href="#apercu">Aperçu</a><a href="#evolutions">Évolutions</a><a href="#localisation">Où le trouver</a><a href="#attaques">Attaques</a></nav>
  <div id="apercu" data-pokemon-panel>
- <section id="talents"><h2>Talents de ce Pokémon</h2>{info.abilities.map((a:any)=><div><h3>{a.name}{a.hidden?' · Talent caché':''}</h3><p>{a.description||'Talent défini par le pack du serveur.'}</p></div>)}</section>
+ <section id="talents"><h2>Talents de ce Pokémon</h2>{info.abilities.map((a:any)=><div><h3>{a.name}{a.hidden?' · Talent caché':''}</h3><p>{a.description||'Description de ce talent indisponible.'}</p></div>)}</section>
  <section id="stats"><h2>Statistiques de base</h2><p>Ces valeurs dépendent de la forme sélectionnée. En combat, elles varient aussi selon le niveau, la nature, les IV et les EV.</p>
  {Object.entries(info.stats).map(([key,value])=><div class="dex-stat"><span>{statNames[key]||key}</span><strong>{String(value)}</strong><span class="dex-stat-track" aria-hidden="true"><span style={'width:'+Math.min(Number(value)/255*100,100)+'%'}></span></span></div>)}
  <p>Total : <strong>{Object.values(info.stats).reduce((a:number,b:any)=>a+Number(b),0)}</strong>. Taux de capture de base : {info.catchRate} / 255. Ce n’est pas un pourcentage de réussite.</p></section>
  </div>
  <section id="evolutions" data-pokemon-panel><h2>Comment faire évoluer {name} ?</h2>
  {info.preEvolution&&<p>Évolue de : {evolutionLink(info.preEvolution.species)?<a href={evolutionLink(info.preEvolution.species)!}>{info.preEvolution.name}</a>:<strong>{info.preEvolution.name}</strong>}.</p>}
- {!info.evolutions.length&&<p>Cette forme ne possède aucune évolution configurée dans les fichiers du serveur.</p>}
+ {!info.evolutions.length&&<p>Aucune évolution n’est répertoriée pour cette forme.</p>}
  <div class="pokemon-evolutions">{info.evolutions.map((e:any)=><article class="dex-info-card"><h3>{evolutionLink(e.species)?<a href={evolutionLink(e.species)!}>{e.name}</a>:e.name}</h3><p>{e.method}</p>{e.form&&<p>Forme : {e.form.includes('asteria')?'Astéria':e.form.includes('nebelia')?'Nébélia':e.form}</p>}<ul>{e.conditions.map((c:string)=><li>{c}</li>)}{e.consumeHeldItem&&<li>L’objet tenu est consommé.</li>}</ul></article>)}</div>
  {selected.collection==='Star'&&<p>Ces conditions décrivent l’espèce. Elles ne garantissent pas qu’une apparence Star existe pour son évolution.</p>}</section>
  <section id="localisation" data-pokemon-panel><h2>Où trouver {name} sur CobbleStar ?</h2>
  {info.acquisition&&<p>{info.acquisition}</p>}
  {info.baseLocationId&&<p><a href={dexPath(selected.species)+'#localisation'}>Voir les conditions de l’espèce classique</a>.</p>}
- {!info.spawns.length&&!info.acquisition&&<p>Aucune apparition sauvage recensée pour cette forme dans les packs analysés. Les évolutions et les annonces du serveur peuvent indiquer d’autres moyens d’obtention.</p>}
- {info.spawns.map((s:any)=><details class="dex-location"><summary>{s.kind}{s.level?' · Niv. '+s.level:''}{s.rarity?' · '+s.rarity:''}</summary><p>{s.position}</p>{s.properties&&<p>Variante : {s.properties}</p>}<dl>{s.conditions.map((c:any)=><><dt>{c.label}</dt><dd>{c.value}</dd></>)}{s.exclusions.length>0&&<><dt>Conditions exclues</dt>{s.exclusions.map((c:any)=><dd>{c.label} : {c.value}</dd>)}</>}</dl>{s.modifiers.map((m:any)=><p>Poids de sélection × {m.factor} si {m.conditions.map((c:any)=>c.label+' : '+c.value).join(' ; ')}</p>)}<p class="dex-source">Source : {s.source}</p></details>)}
+ {!info.spawns.length&&!info.acquisition&&<p>Aucun lieu de rencontre sauvage n’est répertorié pour cette forme. Consulte ses évolutions et les annonces du serveur pour les autres moyens de l’obtenir.</p>}
+ {info.spawns.map((s:any)=><details class="dex-location"><summary>{s.kind}{s.level?' · Niv. '+s.level:''}{s.rarity?' · '+s.rarity:''}</summary><p>{s.position}</p>{s.properties&&<p>Variante : {s.properties}</p>}<dl>{s.conditions.map((c:any)=><><dt>{c.label}</dt><dd>{c.value}</dd></>)}{s.exclusions.length>0&&<><dt>Conditions exclues</dt>{s.exclusions.map((c:any)=><dd>{c.label} : {c.value}</dd>)}</>}</dl>{s.modifiers.map((m:any)=><p>Poids de sélection × {m.factor} si {m.conditions.map((c:any)=>c.label+' : '+c.value).join(' ; ')}</p>)}</details>)}
  <p class="dex-info-note">{info.locationNote}</p><a href="/wiki/capture/">Préparer une capture</a></section>
  <section id="attaques" data-pokemon-panel><h2>Attaques et apprentissage</h2><p>{info.moves.length} entrées d’apprentissage pour cette forme. Une même capacité peut être apprise de plusieurs façons. Les CT et méthodes spéciales dépendent des moyens disponibles sur le serveur.</p>
  <label class="pokemon-move-filter" hidden>Rechercher une attaque<input id="pokemon-move-search" type="search" placeholder="Nom, type ou méthode…" aria-controls="pokemon-moves"/></label><p id="pokemon-move-count" role="status"></p>
- <div id="pokemon-moves">{info.moves.map((m:any)=><details class="dex-move" data-search={[m.name,typeNames[(m.type||'').toLowerCase()]||m.type,moveMethod(m.method)].join(' ')}><summary><strong>{m.name}</strong><span>{moveMethod(m.method)}</span></summary><div class="dex-move-meta">{m.type&&<span class="dex-type" data-type={m.type.toLowerCase()}>{typeNames[m.type.toLowerCase()]||m.type}</span>}<span>{{Physical:'Physique',Special:'Spéciale',Status:'Statut'}[m.category]||m.category}</span><span>Puissance : {m.basePower||'—'}</span><span>Précision : {typeof m.accuracy==='number'?m.accuracy+' %':'—'}</span><span>PP : {m.pp??'—'}</span></div><p>{m.description||'Description non fournie dans les fichiers du serveur.'}</p></details>)}</div><button id="pokemon-more-moves" class="public-button secondary" type="button" aria-controls="pokemon-moves" hidden>Afficher plus d’attaques</button></section>
+ <div id="pokemon-moves">{info.moves.map((m:any)=><details class="dex-move" data-search={[m.name,typeNames[(m.type||'').toLowerCase()]||m.type,moveMethod(m.method)].join(' ')}><summary><strong>{m.name}</strong><span>{moveMethod(m.method)}</span></summary><div class="dex-move-meta">{m.type&&<span class="dex-type" data-type={m.type.toLowerCase()}>{typeNames[m.type.toLowerCase()]||m.type}</span>}<span>{{Physical:'Physique',Special:'Spéciale',Status:'Statut'}[m.category]||m.category}</span><span>Puissance : {m.basePower||'—'}</span><span>Précision : {typeof m.accuracy==='number'?m.accuracy+' %':'—'}</span><span>PP : {m.pp??'—'}</span></div><p>{m.description||'Description de cette attaque indisponible.'}</p></details>)}</div><button id="pokemon-more-moves" class="public-button secondary" type="button" aria-controls="pokemon-moves" hidden>Afficher plus d’attaques</button></section>
  <section><h2>Continuer ton aventure</h2><p><a href="/wiki/pokedex/">Tous les Pokémon et leurs formes</a> · <a href="/wiki/daycare/">Élevage et pension</a> · <a href="/installer-cobblemon/">Installer Cobblemon</a> · <a href="/rejoindre/">Préparer l’ouverture de CobbleStar</a></p></section>
  </article></div></>}
 </main></Layout>
