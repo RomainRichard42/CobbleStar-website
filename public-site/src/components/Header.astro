@@ -2,8 +2,49 @@
 const pathname=Astro.url.pathname;
 const links=[['/roadmap/','Le serveur'],['/wiki/','Wiki'],['/actualites/','Actualités'],['/vote/','Voter']];
 ---
-<header class="astral-header site-header"><a class="astral-skip skip" href={pathname==='/'?'#mondes':'#contenu'}>Aller au contenu</a><a class="astral-brand" href="/" aria-label="CobbleStar, accueil"><img src="/media/cobblestar-logo-128.webp" alt="" width="56" height="56"/><span>COBBLE<b>STAR</b></span></a><nav class="astral-desktop" aria-label="Navigation principale">{links.map(([href,label])=><a href={href} aria-current={pathname.startsWith(href)?'page':undefined}>{label}</a>)}<a href="https://discord.gg/Sd387Ky4M">Discord ↗</a></nav><div class="astral-header-actions"><a class="astral-account" href="/compte/">Mon compte</a><a class="astral-shop" href="/boutique/" aria-current={pathname.startsWith('/boutique/')?'page':undefined}><img src="/astral/assets/stars-button-v3.webp" alt="" width="44" height="34"/>Boutique</a><details class="astral-menu"><summary>Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Navigation mobile"><a href="/">Accueil</a>{links.map(([href,label])=><a href={href} aria-current={pathname.startsWith(href)?'page':undefined}>{label}</a>)}<a href="/rejoindre/">Préparer l’ouverture</a><a href="/compte/">Mon compte</a><a href="/boutique/">Boutique</a><a href="https://discord.gg/Sd387Ky4M">Discord ↗</a></nav></details></div></header>
+<header class="astral-header site-header"><a class="astral-skip skip" href={pathname==='/'?'#mondes':'#contenu'}>Aller au contenu</a><a class="astral-brand" href="/" aria-label="CobbleStar, accueil"><img src="/media/cobblestar-logo-128.webp" alt="" width="56" height="56"/><span>COBBLE<b>STAR</b></span></a><nav class="astral-desktop" aria-label="Navigation principale">{links.map(([href,label])=><a href={href} aria-current={pathname.startsWith(href)?'page':undefined}>{label}</a>)}<a href="https://discord.gg/Sd387Ky4M">Discord ↗</a></nav><div class="astral-header-actions"><a class="astral-account" data-account-link href="/compte/"><span class="account-avatar" aria-hidden="true" hidden><img alt="" width="32" height="32" referrerpolicy="no-referrer" hidden/><b hidden></b></span><span>Mon compte</span></a><a class="astral-shop" href="/boutique/" aria-current={pathname.startsWith('/boutique/')?'page':undefined}><img src="/astral/assets/stars-button-v3.webp" alt="" width="44" height="34"/>Boutique</a><details class="astral-menu"><summary>Menu <span aria-hidden="true">☰</span></summary><nav aria-label="Navigation mobile"><a href="/">Accueil</a>{links.map(([href,label])=><a href={href} aria-current={pathname.startsWith(href)?'page':undefined}>{label}</a>)}<a href="/rejoindre/">Préparer l’ouverture</a><a class="account-menu-link" data-account-link href="/compte/"><span class="account-avatar" aria-hidden="true" hidden><img alt="" width="32" height="32" referrerpolicy="no-referrer" hidden/><b hidden></b></span><span>Mon compte</span></a><a href="/boutique/">Boutique</a><a href="https://discord.gg/Sd387Ky4M">Discord ↗</a></nav></details></div></header>
 <script>
+import { accountAppearance, type AvatarAccount } from '../../../app/lib/account-avatar';
+let accountRequest = 0;
+function showAccount(account: AvatarAccount | null) {
+  const { name, initial, images } = accountAppearance(account);
+  document.querySelectorAll<HTMLAnchorElement>('[data-account-link]').forEach(link => {
+    const avatar = link.querySelector<HTMLElement>('.account-avatar')!;
+    const image = avatar.querySelector<HTMLImageElement>('img')!;
+    const fallback = avatar.querySelector<HTMLElement>('b')!;
+    image.onerror = null;
+    image.removeAttribute('src');
+    image.hidden = true;
+    fallback.hidden = true;
+    avatar.hidden = !account;
+    link.setAttribute('aria-label', account ? `Mon compte — ${name}` : 'Mon compte');
+    if (!account) { link.removeAttribute('title'); return; }
+    link.title = name;
+    fallback.textContent = initial;
+    let index = 0;
+    const nextImage = () => {
+      const source = images[index++];
+      if (!source) { image.hidden = true; fallback.hidden = false; image.onerror = null; return; }
+      image.dataset.kind = source.kind;
+      image.src = source.url;
+      image.hidden = false;
+    };
+    image.onerror = nextImage;
+    nextImage();
+  });
+}
+async function loadAccount() {
+  const request = ++accountRequest;
+  try {
+    const response = await fetch('/api/me', { credentials: 'include', cache: 'no-store' });
+    const data = response.ok ? await response.json() : null;
+    if (request === accountRequest) showAccount(data?.user ?? null);
+  } catch { if (request === accountRequest) showAccount(null); }
+}
+void loadAccount();
+window.addEventListener('cobblestar:account-changed', loadAccount);
+window.addEventListener('focus', loadAccount);
+window.addEventListener('pageshow', event => { if (event.persisted) void loadAccount(); });
 const menu=document.querySelector<HTMLDetailsElement>('.astral-menu');
 menu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.open=false}));
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu?.open){menu.open=false;menu.querySelector('summary')?.focus()}});

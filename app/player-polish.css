@@ -222,3 +222,10 @@ body:has(.astral-header) :is(.vote-profile-action,.vote-site-action,.astral-acco
 .astral-header .astral-shop img{display:block!important}@media(max-width:480px){.astral-header{gap:8px;padding-inline:12px}.astral-header .astral-brand{gap:6px}.astral-header .astral-brand>img{width:28px;height:28px}.astral-header .astral-brand>span{font-size:16px}.astral-header .astral-header-actions{gap:6px}.astral-header .astral-shop{padding-inline:9px;gap:5px}.astral-header .astral-shop img{width:32px;height:28px;flex-basis:32px}}
 
 @media(max-width:360px){.astral-header .astral-brand>span{display:none}.astral-header .astral-brand>img{width:34px;height:34px}}
+/* Shared identity in the Astro header and player pages. */
+.astral-header .account-avatar{display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;flex:0 0 32px;border:1px solid #ac87ca;border-radius:9px;overflow:hidden;background:#352340;color:#fff4dc;font-weight:700}
+.astral-header .account-avatar img{display:block;width:100%;height:100%;object-fit:cover;border-radius:0}
+.astral-header .account-avatar img[data-kind="minecraft"]{image-rendering:pixelated}
+.astral-header .account-avatar[hidden],.astral-header .account-avatar [hidden]{display:none!important}
+.astral-header .account-menu-link{display:flex;align-items:center;gap:10px}
+.astral-header .astral-account{flex-shrink:0;max-width:none}
