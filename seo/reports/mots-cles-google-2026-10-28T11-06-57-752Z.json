@@ -1,0 +1,756 @@
+{
+  "checkedAt": "2026-10-28T11:06:57.753Z",
+  "date": "2026-10-28",
+  "site": "https://cobblestar-mc.fr",
+  "method": {
+    "engine": "Google",
+    "language": "fr",
+    "country": "FR",
+    "personalization": "pws=0 ; résultats non personnalisés affichés",
+    "device": "ordinateur",
+    "scope": "Première page chargée, recherches réalisées dans le navigateur via le champ de recherche Google",
+    "evidence": "Titres et URL des résultats rendus dans le navigateur ; observations consignées depuis les sorties des contrôles.",
+    "limits": [
+      "Observation ponctuelle et locale, pas un classement universel.",
+      "Rang chiffré seulement pour CobbleStar, premier résultat organique directement vérifié.",
+      "Absence de première page ne signifie ni non-indexation ni absence du top 100.",
+      "Blocs IA, vidéos et annonces exclus du rang communiqué.",
+      "Les éventuelles reformulations automatiques de Google ne sont pas systématiquement documentées ; les pages indiquées sont celles renvoyées à la saisie de ces expressions.",
+      "Google a présenté un CAPTCHA sur la recherche Évoli. Aucun contournement ni résolution effectués.",
+      "Les 40 expressions initiales ont été interrogées, dont Cosmédex reste non concluant ; quatre variantes supplémentaires ont été vérifiées, deux autres restent en attente."
+    ]
+  },
+  "summary": {
+    "tracked": 46,
+    "verified": 43,
+    "present": 19,
+    "notObserved": 24,
+    "unverified": 3
+  },
+  "results": [
+    {
+      "query": "cobblestar",
+      "target": "/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": 1,
+      "observedPages": [
+        "https://cobblestar-mc.fr/",
+        "https://cobblestar-mc.fr/rejoindre/"
+      ],
+      "otherObservedResults": [
+        "https://modrinth.com/project/390OOH2p",
+        "https://minecraft-server-list.com/server/515371/"
+      ],
+      "searchUrl": "https://www.google.com/search?q=cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "serveur cobblemon",
+      "target": "/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://cobblemon.com/en/servers",
+        "https://www.serveursminecraft.org/serveur/7260/",
+        "https://tropimon.fr/"
+      ],
+      "searchUrl": "https://www.google.com/search?q=serveur+cobblemon&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "serveur cobblemon français",
+      "target": "/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://tropimon.fr/",
+        "https://cobblemon-ultra.fr/",
+        "https://pixelmongo.fr/news/top-10-serveurs-cobblemon-francais-2026-comparatif-guide"
+      ],
+      "searchUrl": "https://www.google.com/search?q=serveur+cobblemon+fran%C3%A7ais&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "serveur cobblemon fr",
+      "target": "/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://cobblemon-ultra.fr/",
+        "https://cobblemon.com/en/servers",
+        "https://tropimon.fr/"
+      ],
+      "searchUrl": "https://www.google.com/search?q=serveur+cobblemon+fr&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "cobblemon fr",
+      "target": "/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://cobblemoon.fr/",
+        "https://cobblemon-ultra.fr/",
+        "https://tropimon.fr/"
+      ],
+      "searchUrl": "https://www.google.com/search?q=cobblemon+fr&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "minecraft pokemon",
+      "target": "/minecraft-pokemon/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://minecraft.fr/cobblemon-mod-pokemon-minecraft/",
+        "https://pokeisland.fr/"
+      ],
+      "searchUrl": "https://www.google.com/search?q=minecraft+pokemon&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "pokemon minecraft",
+      "target": "/minecraft-pokemon/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://pokeisland.fr/",
+        "https://minecraft.fr/cobblemon-mod-pokemon-minecraft/"
+      ],
+      "searchUrl": "https://www.google.com/search?q=pokemon+minecraft&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "mod pokemon minecraft",
+      "target": "/minecraft-pokemon/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://minecraft.fr/cobblemon-mod-pokemon-minecraft/",
+        "https://www.minecraft-france.fr/pixelmon/",
+        "https://cobblemon.com/"
+      ],
+      "searchUrl": "https://www.google.com/search?q=mod+pokemon+minecraft&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "cobblemon français",
+      "target": "/minecraft-pokemon/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://cobblemoon.fr/",
+        "https://pixelmongo.fr/news/cobblemon-language-changer-langue",
+        "https://cobblemon-ultra.fr/"
+      ],
+      "searchUrl": "https://www.google.com/search?q=cobblemon+fran%C3%A7ais&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "jouer pokemon minecraft",
+      "target": "/minecraft-pokemon/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://pokeisland.fr/",
+        "https://pokeisland.fr/blog/jouer-pokemon-sur-minecraft-2026/"
+      ],
+      "searchUrl": "https://www.google.com/search?q=jouer+pokemon+minecraft&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "serveur minecraft pokemon français",
+      "target": "/minecraft-pokemon/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://serveur-minecraft.com/pixelmon",
+        "https://www.serveursminecraft.org/serveurs/pixelmon/1/"
+      ],
+      "searchUrl": "https://www.google.com/search?q=serveur+minecraft+pokemon+fran%C3%A7ais&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "installer cobblemon",
+      "target": "/installer-cobblemon/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://pokelegends.fr/blog/comment-installer-cobblemon",
+        "https://pixelmongo.fr/news/installer-cobblemon-minecraft-guide-etape-par-etape"
+      ],
+      "searchUrl": "https://www.google.com/search?q=installer+cobblemon&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "comment installer cobblemon",
+      "target": "/installer-cobblemon/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://pokelegends.fr/blog/comment-installer-cobblemon",
+        "https://pixelmongo.fr/news/comment-installer-cobblemon-2025"
+      ],
+      "searchUrl": "https://www.google.com/search?q=comment+installer+cobblemon&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "modpack cobblemon",
+      "target": "/installer-cobblemon/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://www.curseforge.com/minecraft/modpacks/cobblemon-neoforge",
+        "https://modrinth.com/project/5FFgwNNP"
+      ],
+      "searchUrl": "https://www.google.com/search?q=modpack+cobblemon&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "cobblemon java",
+      "target": "/installer-cobblemon/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://cobblemon.com/",
+        "https://www.curseforge.com/minecraft/mc-mods/cobblemon"
+      ],
+      "searchUrl": "https://www.google.com/search?q=cobblemon+java&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "cobblemon ne se lance pas",
+      "target": "/installer-cobblemon/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://wiki.cobblemoon.fr/informations/jouer-a-cobblemoon/resolution-des-problemes-launcher",
+        "https://wiki.cobblemon-ultra.fr/wiki/informations/probleme-launcher"
+      ],
+      "searchUrl": "https://www.google.com/search?q=cobblemon+ne+se+lance+pas&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "comment jouer à cobblemon",
+      "target": "/installer-cobblemon/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://pokelegends.fr/blog/comment-installer-cobblemon",
+        "https://wiki.cobblemoon.fr/informations/jouer-a-cobblemoon"
+      ],
+      "searchUrl": "https://www.google.com/search?q=comment+jouer+%C3%A0+cobblemon&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "cobblemon java ou bedrock",
+      "target": "/installer-cobblemon/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://pixelmongo.fr/news/cobblemon-bedrock-edition",
+        "https://pokelegends.fr/blog/comment-installer-cobblemon"
+      ],
+      "searchUrl": "https://www.google.com/search?q=cobblemon+java+ou+bedrock&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "ip cobblestar",
+      "target": "/rejoindre/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/rejoindre/",
+        "https://cobblestar-mc.fr/"
+      ],
+      "otherObservedResults": [],
+      "searchUrl": "https://www.google.com/search?q=ip+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "rejoindre cobblestar",
+      "target": "/rejoindre/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/rejoindre/",
+        "https://cobblestar-mc.fr/"
+      ],
+      "otherObservedResults": [],
+      "searchUrl": "https://www.google.com/search?q=rejoindre+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "installer cobblemon serveur fr",
+      "target": "/rejoindre/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://pixelmongo.fr/news/comment-installer-cobblemon-2025",
+        "https://help.bisecthosting.com/hc/fr/articles/44453841491227-Comment-installer-Cobblemon-sur-un-serveur-Minecraft"
+      ],
+      "searchUrl": "https://www.google.com/search?q=installer+cobblemon+serveur+fr&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "launcher cobblestar",
+      "target": "/telecharger/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/",
+        "https://cobblestar-mc.fr/rejoindre/"
+      ],
+      "otherObservedResults": [],
+      "searchUrl": "https://www.google.com/search?q=launcher+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "télécharger cobblestar",
+      "target": "/telecharger/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/rejoindre/",
+        "https://cobblestar-mc.fr/"
+      ],
+      "otherObservedResults": [],
+      "searchUrl": "https://www.google.com/search?q=t%C3%A9l%C3%A9charger+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "wiki cobblestar",
+      "target": "/wiki/",
+      "segment": "marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://wiki.cobblemon.com/index.php/Main_Page",
+        "https://wiki.cobblemoon.fr/"
+      ],
+      "searchUrl": "https://www.google.com/search?q=wiki+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "guides cobblemon français",
+      "target": "/wiki/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://pixelmongo.fr/wiki/guides-cobblemon/guide-debutant-cobblemon-commencer-pixelmongo",
+        "https://www.liste-serveurs.fr/cobblemon/"
+      ],
+      "searchUrl": "https://www.google.com/search?q=guides+cobblemon+fran%C3%A7ais&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "pension cobblestar",
+      "target": "/wiki/daycare/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/",
+        "https://cobblestar-mc.fr/",
+        "https://cobblestar-mc.fr/actualites/",
+        "https://cobblestar-mc.fr/minecraft-pokemon/"
+      ],
+      "otherObservedResults": [],
+      "searchUrl": "https://www.google.com/search?q=pension+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "reproduction cobblemon cobblestar",
+      "target": "/wiki/daycare/",
+      "segment": "marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://www.breakflip.com/guides/11039.html",
+        "https://wiki.cobblemoon.fr/cobblemon/reproduction"
+      ],
+      "searchUrl": "https://www.google.com/search?q=reproduction+cobblemon+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "métiers cobblestar",
+      "target": "/wiki/metiers/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/"
+      ],
+      "otherObservedResults": [
+        "https://wiki.cobblegems.fr/les-features/metiers"
+      ],
+      "searchUrl": "https://www.google.com/search?q=m%C3%A9tiers+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "jobs cobblemon cobblestar",
+      "target": "/wiki/metiers/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/"
+      ],
+      "otherObservedResults": [
+        "https://our-story-network.gitbook.io/cr-wiki/cr-fr/cobblemon-realms/cobbleworkers-guide"
+      ],
+      "searchUrl": "https://www.google.com/search?q=jobs+cobblemon+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "talents métiers cobblestar",
+      "target": "/wiki/talents/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/"
+      ],
+      "otherObservedResults": [
+        "https://wiki.cobblemoon.fr/cobblemoon/profil-dresseur/talents"
+      ],
+      "searchUrl": "https://www.google.com/search?q=talents+m%C3%A9tiers+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "gts cobblestar",
+      "target": "/wiki/gts/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/"
+      ],
+      "otherObservedResults": [
+        "https://wiki.cobblegems.fr/le-commerce/gts"
+      ],
+      "searchUrl": "https://www.google.com/search?q=gts+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "vendre pokemon cobblemon cobblestar",
+      "target": "/wiki/gts/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/pokesell/",
+        "https://cobblestar-mc.fr/wiki/"
+      ],
+      "otherObservedResults": [],
+      "searchUrl": "https://www.google.com/search?q=vendre+pokemon+cobblemon+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "raids cobblestar",
+      "target": "/wiki/raids/",
+      "segment": "marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://pixelmongo.fr/wiki/mecaniques-cobblemon/cobblemon-raid-mega-raid",
+        "https://www.curseforge.com/minecraft/mc-mods/cobblemonraiddens"
+      ],
+      "searchUrl": "https://www.google.com/search?q=raids+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "épreuves badges cobblestar",
+      "target": "/wiki/epreuves/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/"
+      ],
+      "otherObservedResults": [],
+      "searchUrl": "https://www.google.com/search?q=%C3%A9preuves+badges+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "ligue cobblestar",
+      "target": "/wiki/ligue/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/",
+        "https://cobblestar-mc.fr/"
+      ],
+      "otherObservedResults": [
+        "https://wiki.cobblemoon.fr/cobblemoon/navigation/zones/ligue-pokemon"
+      ],
+      "searchUrl": "https://www.google.com/search?q=ligue+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "ranked cobblestar",
+      "target": "/wiki/ranked/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/"
+      ],
+      "otherObservedResults": [
+        "https://wiki.cobblemoon.fr/cobblemoon/ranked",
+        "https://www.curseforge.com/minecraft/mc-mods/cobblemon-rankeds"
+      ],
+      "searchUrl": "https://www.google.com/search?q=ranked+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "battle pass cobblestar",
+      "target": "/wiki/battlepass/",
+      "segment": "marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://wiki.cobblegems.fr/les-features/battlepass",
+        "https://store.cobblegems.fr/category/battlepass"
+      ],
+      "searchUrl": "https://www.google.com/search?q=battle+pass+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "grades gratuits cobblestar",
+      "target": "/wiki/grades/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/"
+      ],
+      "otherObservedResults": [
+        "https://nexumon.com/wiki/grades-gratuits"
+      ],
+      "searchUrl": "https://www.google.com/search?q=grades+gratuits+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "club claim cobblestar",
+      "target": "/wiki/clubs/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/"
+      ],
+      "otherObservedResults": [
+        "https://pixelax.fr/wiki/divers/claim"
+      ],
+      "searchUrl": "https://www.google.com/search?q=club+claim+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "cartes boosters cobblestar",
+      "target": "/wiki/album/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/"
+      ],
+      "otherObservedResults": [
+        "https://arceusacademy.fr/news/cartes-cobblemon-academy"
+      ],
+      "searchUrl": "https://www.google.com/search?q=cartes+boosters+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "certification sga cobblestar",
+      "target": "/wiki/galerie/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/"
+      ],
+      "otherObservedResults": [
+        "https://www.sgatech.co.uk/page/certifications"
+      ],
+      "searchUrl": "https://www.google.com/search?q=certification+sga+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "cosmedex cobblestar",
+      "target": "/wiki/cosmedex/",
+      "segment": "marque",
+      "status": "a_confirmer",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [],
+      "searchUrl": "https://www.google.com/search?q=cosmedex+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": "Extraction sans résultat ; état insuffisant pour conclure."
+    },
+    {
+      "query": "pokemon star cobblestar",
+      "target": "/wiki/pokemon-star/",
+      "segment": "marque",
+      "status": "present_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [
+        "https://cobblestar-mc.fr/",
+        "https://cobblestar-mc.fr/wiki/"
+      ],
+      "otherObservedResults": [
+        "https://guidactik.com/minecraft/guide-cobblemon-star-academy/"
+      ],
+      "searchUrl": "https://www.google.com/search?q=pokemon+star+cobblestar&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "pokédex cobblemon français",
+      "target": "/wiki/pokedex/",
+      "segment": "hors marque",
+      "status": "non_observe_premiere_page",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [
+        "https://cobblemon-wiki.fr/pokedex/",
+        "https://pixelmongo.fr/wiki/mecaniques-cobblemon/cobblemon-pokedex-guide",
+        "https://www.cobbledex.info/fr/all-mons"
+      ],
+      "searchUrl": "https://www.google.com/search?q=pok%C3%A9dex+cobblemon+fran%C3%A7ais&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "cobblemon évolution évoli",
+      "target": "/wiki/pokedex/eevee/",
+      "segment": "hors marque",
+      "status": "bloque_captcha",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [],
+      "searchUrl": "https://www.google.com/search?q=cobblemon+%C3%A9volution+%C3%A9voli&hl=fr&gl=fr&pws=0",
+      "note": null
+    },
+    {
+      "query": "où trouver riolu cobblemon",
+      "target": "/wiki/pokedex/riolu/",
+      "segment": "hors marque",
+      "status": "non_verifie_apres_blocage",
+      "observedOrganicRank": null,
+      "observedPages": [],
+      "otherObservedResults": [],
+      "searchUrl": "https://www.google.com/search?q=o%C3%B9+trouver+riolu+cobblemon&hl=fr&gl=fr&pws=0",
+      "note": null
+    }
+  ],
+  "comparison": {
+    "reference": "seo/reports/mots-cles-google-2026-10-27.json",
+    "comparableQueries": [
+      "cobblestar",
+      "cobblemon fr",
+      "serveur cobblemon français",
+      "minecraft pokemon",
+      "installer cobblemon",
+      "pokédex cobblemon français"
+    ],
+    "finding": "Sur les six expressions comparables, même présence/absence de première page : marque en premier résultat organique, cinq expressions sans marque non observées. L’ordre des concurrents varie ; aucune progression de position du site démontrée."
+  },
+  "searchConsole": {
+    "source": "seo/reports/suivi-quotidien-2026-10-28.json",
+    "selectedPeriod": "3 mois",
+    "availableChartStart": "2026-10-25",
+    "availableChartEnd": "2026-10-26",
+    "lastUpdateDisplayed": "3.5 hours ago",
+    "clicks": 0,
+    "impressions": 0,
+    "queries": [],
+    "averagePosition": null,
+    "ctr": null,
+    "note": "Avec zéro impression, les valeurs 0 de CTR et position affichées ne sont pas des mesures de classement exploitables."
+  },
+  "automation": {
+    "id": "suivi-seo-cobblestar",
+    "updated": true,
+    "schedule": "Tous les jours à 09:00 Europe/Paris",
+    "change": "Recherche quotidienne de toutes les expressions de queryMap, en plus du bilan approfondi du lundi."
+  },
+  "priorities": [
+    {
+      "priority": "P1",
+      "pages": [
+        "/",
+        "/minecraft-pokemon/",
+        "/installer-cobblemon/"
+      ],
+      "action": "Concentrer les améliorations utiles et le maillage sur ces pages pour les requêtes sans marque ; ne pas multiplier les pages variantes.",
+      "success": "Premières impressions hors marque mesurées dans Search Console."
+    },
+    {
+      "priority": "P1",
+      "pages": [
+        "/wiki/",
+        "/wiki/pokesell/",
+        "/wiki/gts/",
+        "/wiki/raids/"
+      ],
+      "action": "Vérifier dans Search Console l’indexation des guides ciblés, puis comparer les URL affichées. Le sommaire ressort souvent à la place du guide ; cela ne prouve pas une cannibalisation.",
+      "success": "Pages spécialisées observées sur leurs intentions pertinentes et indexation documentée."
+    },
+    {
+      "priority": "P1",
+      "pages": [
+        "/wiki/pokedex/",
+        "/wiki/pokedex/eevee/",
+        "/wiki/pokedex/riolu/"
+      ],
+      "action": "Reprendre les recherches bloquées après résolution de la limite et suivre les impressions des fiches ; maintenir leur contenu serveur et les liens explorables.",
+      "success": "Trois recherches en attente clarifiées et premiers clics/impressions réels des fiches."
+    }
+  ]
+}

@@ -25,7 +25,8 @@
         "pokemon minecraft",
         "mod pokemon minecraft",
         "cobblemon français",
-        "jouer pokemon minecraft"
+        "jouer pokemon minecraft",
+        "serveur minecraft pokemon français"
       ],
       "priority": "P1",
       "competition": "Forte, estimation qualitative : projets officiels, médias, serveurs et tutoriels.",
@@ -39,7 +40,9 @@
         "comment installer cobblemon",
         "modpack cobblemon",
         "cobblemon java",
-        "cobblemon ne se lance pas"
+        "cobblemon ne se lance pas",
+        "comment jouer à cobblemon",
+        "cobblemon java ou bedrock"
       ],
       "priority": "P1",
       "competition": "Forte ; requêtes précises à confirmer dans Search Console.",
@@ -177,6 +180,27 @@
       "queries": [
         "pokemon star cobblestar"
       ]
+    },
+    {
+      "page": "/wiki/pokedex/",
+      "queries": [
+        "pokédex cobblemon français"
+      ],
+      "intent": "Consulter un Pokédex Cobblemon en français."
+    },
+    {
+      "page": "/wiki/pokedex/eevee/",
+      "queries": [
+        "cobblemon évolution évoli"
+      ],
+      "intent": "Comprendre les évolutions d’Évoli."
+    },
+    {
+      "page": "/wiki/pokedex/riolu/",
+      "queries": [
+        "où trouver riolu cobblemon"
+      ],
+      "intent": "Lire les conditions d’apparition de Riolu."
     }
   ],
   "weekly": [
@@ -476,5 +500,17 @@
       "page": "/wiki/pokedex/#lire-les-fiches",
       "report": "seo/reports/suivi-quotidien-2026-10-28.json"
     }
+  },
+  "keywordMonitoring": {
+    "frequency": "daily",
+    "source": "queryMap[].queries",
+    "latestReport": "seo/reports/mots-cles-google-2026-10-28T11-06-57-752Z.json",
+    "comparisonBaseline": "seo/reports/mots-cles-google-2026-10-27.json",
+    "method": "Google FR, première page observée ; Search Console séparée",
+    "unverifiedQueries": [
+      "cosmedex cobblestar",
+      "cobblemon évolution évoli",
+      "où trouver riolu cobblemon"
+    ]
   }
 }
