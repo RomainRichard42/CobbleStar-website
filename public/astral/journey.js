@@ -15,7 +15,7 @@
   function measureSoon(){if(!measureQueued){measureQueued=true;requestAnimationFrame(()=>{measureQueued=false;measure()})}}
   function measure(){
     snap=stepped&&!reduced.matches;root.classList.toggle('snap-layout',snap);
-    headerH=$('.site-header').offsetHeight;
+    const header=$('.site-header');headerH=header.offsetHeight+(parseFloat(getComputedStyle(header).top)||0);
     stageH=Math.max(240,innerHeight-headerH);story=motion&&snap&&room.matches&&stageH>=490;
     root.style.setProperty('--stage-header',headerH+'px');root.style.setProperty('--stage-height',stageH+'px');
     heroRange=stageH*1.25;horizontalDistance=stageH*.9;root.style.setProperty('--opening-distance',(heroRange+horizontalDistance*2)+'px');
@@ -67,7 +67,7 @@
   function move(dir,keyboard=false){go(active+dir,{focus:keyboard})}
   function isControl(el){return el instanceof Element&&Boolean(el.closest('input,textarea,select,video,iframe,button,a,summary,[contenteditable=true],.display-settings,.preview-tools'))}
   addEventListener('wheel',event=>{
-    if(!snap||event.ctrlKey||event.metaKey||event.target instanceof Element&&event.target.closest('input,textarea,select,[contenteditable=true],.display-settings[open],.preview-tools[open],.mobile-navigation[open],.astral-menu[open]'))return;
+    if(!snap||event.ctrlKey||event.metaKey||event.target instanceof Element&&event.target.closest('input,textarea,select,[contenteditable=true],.display-settings[open],.preview-tools[open],.mobile-navigation[open],.astral-menu[open],.desktop-discover[open]'))return;
     const delta=Math.abs(event.deltaY)>=Math.abs(event.deltaX)?event.deltaY:event.deltaX;if(!delta)return;
     event.preventDefault();const now=performance.now(),idle=now-lastWheel;lastWheel=now;
     if(idle>110){gestureTaken=false;wheelTotal=0}
@@ -86,7 +86,7 @@
     if(event.key==='Home')go(0,{focus:true});else if(event.key==='End')go(steps.length-1,{focus:true});else move(['ArrowUp','PageUp'].includes(event.key)||event.key===' '&&event.shiftKey?-1:1,true);
   });
   $('#start-journey').onclick=()=>go(1,{focus:true});
-  $$('a[href^="#"]').forEach(link=>link.addEventListener('click',event=>{const dest=document.getElementById(link.hash.slice(1));if(!dest)return;event.preventDefault();let index=steps.findIndex(s=>s.el===dest||s.el.contains(dest)||dest.contains(s.el));if(index<0){const y=Math.max(0,top(dest)-headerH);index=steps.reduce((best,s,i)=>Math.abs(s.y-y)<Math.abs(steps[best].y-y)?i:best,0)}go(index,{focus:true,instant:link.classList.contains('skip')||link.classList.contains('intro-skip')});if(link.classList.contains('skip'))focusTarget(dest)}));
+  $$('a[href^="#"],a[href^="/#"]').forEach(link=>link.addEventListener('click',event=>{const dest=document.getElementById(link.hash.slice(1));if(!dest)return;event.preventDefault();let index=steps.findIndex(s=>s.el===dest||s.el.contains(dest)||dest.contains(s.el));if(index<0){const y=Math.max(0,top(dest)-headerH);index=steps.reduce((best,s,i)=>Math.abs(s.y-y)<Math.abs(steps[best].y-y)?i:best,0)}go(index,{focus:true,instant:link.classList.contains('skip')||link.classList.contains('intro-skip')});if(link.classList.contains('skip'))focusTarget(dest)}));
   rail.addEventListener('focusin',event=>{const card=event.target.closest('.activity-card');if(!snap||!card||anim)return;const index=steps.findIndex(s=>s.el===card);if(index>=0){active=index;rail.scrollTo({left:steps[index].rail,behavior:'auto'});draw()}});
   // Visible native controls and a separate Stop action are kept even for muted autoplay.
   const player=$('.gameplay-player'),host=$('#video-host'),startVideoButton=$('.video-start'),pauseVideoButton=$('#video-pause'),videoStatus=$('#video-status');

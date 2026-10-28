@@ -1,0 +1,14 @@
+---
+import {desktopLinks,desktopLinkActive,serverLinks} from '../../../app/lib/desktop-navigation';
+const pathname=Astro.url.pathname;
+---
+<nav class="astral-desktop" aria-label="Navigation principale">
+  <details class="desktop-discover">
+    <summary>Le serveur <span aria-hidden="true">⌄</span></summary>
+    <div class="desktop-mega">
+      <div class="desktop-mega-intro"><h2>Deux mondes<br/>à explorer.</h2><p>Astéria, Nébélia et une place pour ton équipe.</p><a href="/roadmap/">Découvrir le serveur →</a></div>
+      <div class="desktop-mega-links">{serverLinks.map(link=><a href={link.href}><strong>{link.title}</strong><small>{link.detail}</small></a>)}</div>
+    </div>
+  </details>
+  {desktopLinks.map(([href,label])=><a href={href} aria-current={desktopLinkActive(pathname,href)?'page':undefined}>{label}</a>)}
+</nav>

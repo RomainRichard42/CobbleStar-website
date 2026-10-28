@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 
 import AccountLink from './AccountLink';
 import MobileMenu from './MobileMenu';
+import DesktopNavigation from './DesktopNavigation';
 import { observePlayer, starsLabel } from '../lib/player-session';
 import type { AvatarAccount } from '../lib/account-avatar';
 
@@ -27,8 +28,8 @@ export default function SiteHeader() {
 
 
   const isAdmin=/^\/(admin|wiki\/admin|actualites\/admin)(\/|$)/.test(pathname);
-  const links=[["/roadmap/","Le serveur"],["/wiki/","Wiki"],["/actualites/","Actualités"],["/vote/","Voter"]];
-  if (!isAdmin) return <header className="astral-header site-header"><a className="astral-skip" href="#contenu">Aller au contenu</a><a className="astral-brand" href="/" aria-label="CobbleStar, accueil"><img src="/media/cobblestar-logo-128.webp" alt="" width="56" height="56"/><span>COBBLE<b>STAR</b></span></a><nav className="astral-desktop" aria-label="Navigation principale">{links.map(([href,label])=><a key={href} href={href} aria-current={pathname.startsWith(href)?"page":undefined}>{label}</a>)}<a href="https://discord.gg/Sd387Ky4M">Discord ↗</a></nav><div className="astral-header-actions"><AccountLink account={account} balance={balance}/><a className="astral-shop" href="/boutique/"><img src="/astral/assets/stars-button-v3.webp" alt="" width="44" height="34"/>Boutique</a><MobileMenu account={account} balance={balance} pathname={pathname}/></div></header>;
+
+  if (!isAdmin) return <header className="astral-header site-header"><a className="astral-skip" href="#contenu">Aller au contenu</a><a className="astral-brand" href="/" aria-label="CobbleStar, accueil"><img src="/media/cobblestar-logo-128.webp" alt="" width="56" height="56"/><span>COBBLE<b>STAR</b></span></a><DesktopNavigation pathname={pathname}/><div className="astral-header-actions"><AccountLink account={account} balance={balance}/><a className="astral-shop" href="/boutique/"><img src="/astral/assets/stars-button-v3.webp" alt="" width="44" height="34"/>Boutique</a><MobileMenu account={account} balance={balance} pathname={pathname}/></div></header>;
   return (
     <div className="nav-frame">
       <a className="skip-link" href="#contenu">Aller au contenu</a>

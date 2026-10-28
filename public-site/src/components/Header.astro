@@ -1,13 +1,13 @@
 ---
 import PlayerProfile from './PlayerProfile.astro';
+import DesktopNavigation from './DesktopNavigation.astro';
 import {mobileLinks} from '../../../app/lib/mobile-navigation';
 const pathname=Astro.url.pathname;
-const links=[['/roadmap/','Le serveur'],['/wiki/','Wiki'],['/actualites/','Actualités'],['/vote/','Voter']];
 ---
 <header class="astral-header site-header">
   <a class="astral-skip skip" href={pathname==='/'?'#mondes':'#contenu'}>Aller au contenu</a>
   <a class="astral-brand" href="/" aria-label="CobbleStar, accueil"><img src="/media/cobblestar-logo-128.webp" alt="" width="56" height="56"/><span>COBBLE<b>STAR</b></span></a>
-  <nav class="astral-desktop" aria-label="Navigation principale">{links.map(([href,label])=><a href={href} aria-current={pathname.startsWith(href)?'page':undefined}>{label}</a>)}<a href="https://discord.gg/Sd387Ky4M">Discord ↗</a></nav>
+  <DesktopNavigation/>
   <div class="astral-header-actions">
     <PlayerProfile/>
     <a class="astral-shop" href="/boutique/" aria-current={pathname.startsWith('/boutique/')?'page':undefined}><img src="/astral/assets/stars-button-v3.webp" alt="" width="44" height="34"/>Boutique</a>
@@ -29,6 +29,7 @@ const links=[['/roadmap/','Le serveur'],['/wiki/','Wiki'],['/actualites/','Actua
 import { accountAppearance, type AvatarAccount } from '../../../app/lib/account-avatar';
 import { observePlayer, starsLabel } from '../../../app/lib/player-session';
 import { bindMobileMenu } from '../../../app/lib/mobile-navigation';
+import { bindDesktopMenu } from '../../../app/lib/desktop-navigation';
 let displayedAccount: AvatarAccount | null | undefined;
 function showAccount(account: AvatarAccount | null, balance: number | null) {
   const { name, initial, images } = accountAppearance(account);
@@ -62,4 +63,6 @@ function showAccount(account: AvatarAccount | null, balance: number | null) {
 observePlayer(showAccount);
 const menu=document.querySelector<HTMLDetailsElement>('.player-menu');
 if(menu) bindMobileMenu(menu);
+const desktopMenu=document.querySelector<HTMLDetailsElement>('.desktop-discover');
+if(desktopMenu) bindDesktopMenu(desktopMenu);
 </script>
