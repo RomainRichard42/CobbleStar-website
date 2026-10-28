@@ -303,6 +303,7 @@ function AccountPortal() {
               <button className={styles.regenerate} type="button" onClick={() => setShowRelink(true)} disabled={showRelink}>Récupérer / changer la liaison Minecraft</button>
             </section>}
 
+            <Link className={styles.adminLink} href="/wiki/pokedex/#ma-collection"><span><small>MON POKÉDEX</small><b>Ma collection et mes objectifs</b><p>Retrouve ton équipe et ton PC, tes favoris et les Pokémon que tu veux capturer.</p></span><strong>→</strong></Link>
             {success && <p className={styles.linkSuccess} role="status">✓ {success}</p>}
 
             {account.admin === true && <Link className={styles.adminLink} href="/admin/"><span><small>ACCÈS ADMINISTRATEUR</small><b>Ouvrir le centre de contrôle</b></span><strong>→</strong></Link>}

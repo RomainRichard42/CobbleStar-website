@@ -32,6 +32,8 @@ import { registerPublicSite } from "./public-site.js";
 import { availableWiki } from "./wiki-availability.js";
 import { registerRequestLogging } from "./request-logging.js";
 import { publicDex } from './dex-data.js';
+import { registerPlayerCollection } from './player-collection.js';
+import { collectionStore } from './player-collection-store.js';
 import { registerPublicDex } from './public-dex.js';
 
 type UserRow = RowDataPacket & {
@@ -1055,6 +1057,7 @@ app.post("/api/internal/rewards/:id/fail", { config: { rateLimit: { max: 300, ti
 });
 
 registerPublicDex(app, publicDex);
+registerPlayerCollection(app, { session: loadSession, origin: config.SITE_ORIGIN, entries: publicDex.list, store: collectionStore });
 registerPublicSite(app, { getWiki: () => wikiSlot("published"), getNews: () => newsSlot("published"), getDex: publicDex.list, getDexInfo: publicDex.info });
 
 await app.register(staticFiles, {

@@ -1,4 +1,5 @@
 import {loadDetails,clearDetails} from './dex-details';
+import {bindCollection} from './player-collection';
 import type {PreviewAsset} from './bedrock-model';
 type Renderer=ReturnType<typeof import('./dex-renderer').createDexRenderer>;
 const cards=[...document.querySelectorAll<HTMLElement>('[data-dex]')];
@@ -39,7 +40,7 @@ function animate(now:number){if(dead)return;const delta=previous?Math.min((now-p
 requestAnimationFrame(animate);
 function filter(){
  const terms=normalize(search.value).trim().split(/\s+/).filter(Boolean);
- const matches=cards.filter(c=>(category==='all'||c.dataset.collection===category)&&terms.every(t=>normalize([c.dataset.name,c.dataset.species,c.dataset.collection,c.dataset.form].join(' ')).includes(t)));
+ const matches=cards.filter(c=>c.dataset.collectionMatch!=='false'&&(category==='all'||c.dataset.collection===category)&&terms.every(t=>normalize([c.dataset.name,c.dataset.species,c.dataset.collection,c.dataset.form].join(' ')).includes(t)));
  matches.sort((a,b)=>{const prefix=sort.value==='collection'?(a.dataset.collection||'').localeCompare(b.dataset.collection||'','fr'):0;return prefix||(a.dataset.name||'').localeCompare(b.dataset.name||'','fr')||(a.dataset.form||'').localeCompare(b.dataset.form||'','fr');});
  visible.clear();for(const c of cards){c.hidden=true;observer.unobserve(c);}
  for(const [i,c] of matches.entries()){grid.append(c);c.hidden=i>=limit;if(!c.hidden)observer.observe(c);}
@@ -69,3 +70,5 @@ window.addEventListener('pageshow',event=>{if(event.persisted){dead=false;previo
 filter();
 
 document.querySelectorAll<HTMLElement>('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===category)));
+
+bindCollection(cards,()=>{limit=24;filter();});

@@ -1,0 +1,35 @@
+<section id="ma-collection" class="collection-hub" aria-labelledby="collection-title">
+ <div class="collection-intro"><div><h2 id="collection-title">Ton carnet de capture</h2><p>Retrouve tes Pokémon, prépare tes prochaines captures et garde tes favoris à portée de main.</p></div><a href="/compte/" class="public-button secondary">Mon compte ↗</a></div>
+ <p id="collection-sync" role="status">Connexion au carnet…</p><button type="button" id="collection-refresh">Actualiser le carnet</button>
+ <div id="collection-login" hidden><a class="public-button" href="/compte/">Se connecter avec Discord</a><p>Enregistre tes envies dès maintenant. À l’ouverture, lie ton compte Minecraft pour retrouver automatiquement ton équipe et ton PC.</p></div>
+ <div id="collection-private" hidden>
+  <div class="collection-metrics">
+   <div><strong id="collection-owned">—</strong><span>espèces possédées</span></div>
+   <div><strong id="collection-shiny">—</strong><span>Pokémon chromatiques</span></div>
+   <div><strong id="collection-favorites">0</strong><span>favoris</span></div>
+   <div><strong id="collection-goals">0 / 0</strong><span>objectifs atteints</span></div>
+  </div>
+  <label class="collection-progress-label" for="collection-progress">Ta collection d’espèces <span id="collection-percent">—</span></label><progress id="collection-progress" max="100" value="0">0 %</progress>
+  <details class="collection-bottom"><summary>Comment ma collection est-elle comptée ?</summary><p>Le suivi compte les espèces présentes dans ton équipe et ton PC, toutes formes confondues. Un échange, une évolution ou une libération peut modifier ta collection. Favoris et objectifs s’appliquent à l’espèce.</p></details>
+  <div class="collection-views" role="group" aria-label="Mon suivi du Pokédex">
+   <button type="button" data-collection-view="all" aria-pressed="true">Tout explorer</button>
+   <button type="button" data-collection-view="owned" aria-pressed="false">Possédés</button>
+   <button type="button" data-collection-view="missing" aria-pressed="false">Manquants</button>
+   <button type="button" data-collection-view="shiny" aria-pressed="false">✦ Chromatiques</button>
+   <button type="button" data-collection-view="favorite" aria-pressed="false">♥ Favoris</button>
+   <button type="button" data-collection-view="wanted" aria-pressed="false">À capturer</button>
+   <button type="button" data-collection-view="completed" aria-pressed="false">Objectifs atteints</button>
+  </div>
+ </div>
+ <p id="collection-feedback" role="status" aria-live="polite"></p>
+</section>
+<dialog id="collection-goal-dialog" aria-labelledby="collection-goal-title">
+ <form id="collection-goal-form"><div class="collection-intro"><h2 id="collection-goal-title">Mon objectif</h2><button type="button" id="collection-goal-close" aria-label="Fermer l’objectif">×</button></div>
+ <p>Choisis combien de Pokémon de cette espèce tu souhaites posséder. La progression suit ton équipe et ton PC.</p>
+ <label>Nombre à posséder<input id="collection-target" type="number" min="1" max="999" required value="1"/></label>
+ <label class="collection-check"><input id="collection-target-shiny" type="checkbox"/>Uniquement les chromatiques</label>
+ <label><span>Ma note (facultatif)</span><textarea id="collection-note" maxlength="160" rows="3" placeholder="Compléter mon équipe, préparer une évolution…"></textarea></label>
+ <p id="collection-goal-error" role="alert"></p>
+ <div class="collection-goal-actions"><button type="submit">Enregistrer l’objectif</button><button type="button" id="collection-goal-remove">Retirer l’objectif</button></div>
+ </form>
+</dialog>

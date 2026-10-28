@@ -54,6 +54,8 @@ test("recovery sums balances exactly, preserves all business records and evicts 
     assert.ok(db.calls.some(c => c.sql === `UPDATE ${table} SET user_id=? WHERE user_id=?` && c.args[0] === "target" && c.args[1] === "source"));
   }
   assert.ok(db.calls.some(c => c.sql.startsWith("UPDATE wallets SET balance=balance+") && c.args[0] === "9007199254740993"));
+  assert.ok(db.calls.some(c => c.sql.startsWith("INSERT INTO player_collection_goals") && c.args[0] === "target" && c.args[1] === "source"));
+  assert.ok(db.calls.some(c => c.sql.startsWith("DELETE FROM player_collection_goals") && c.args[0] === "source"));
   assert.ok(db.calls.some(c => c.sql.startsWith("DELETE FROM sessions") && c.args[2] === "session"));
   assert.ok(db.calls.some(c => c.sql.startsWith("UPDATE sessions SET user_id") && c.args[0] === "target"));
   assert.ok(db.calls.some(c => c.sql.startsWith("INSERT INTO account_link_events") && c.args[8] === "9007199254740993"));
@@ -63,6 +65,7 @@ test("different UUIDs keep their wallets and purchase records in place", async (
   const db = connectionFixture({ accounts: [source({ minecraft_uuid: otherUuid }), target()] });
   await confirmPlayerLink(db, input);
   assert.ok(!db.calls.some(c => c.sql.startsWith("UPDATE wallets") || c.sql.startsWith("UPDATE shop_purchases") || c.sql.includes("SET merged_into=")));
+  assert.ok(!db.calls.some(c => c.sql.includes("player_collection_goals")));
 });
 test("expired sessions, replaced Discord identities and pre-migration codes cannot recover accounts", async () => {
   for (const fixture of [{ session: false }, { code: { issuer_discord_id: null } }, { code: { issuer_discord_id: "222222222222222222" } }]) {
