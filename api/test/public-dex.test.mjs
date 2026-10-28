@@ -21,3 +21,27 @@ test('all bundled forms resolve to actual geometry and PNG textures',async()=>{
  for(const e of entries.filter(e=>!['Star','Classiques'].includes(e.collection))){const a=await dex.asset(e.id);assert.ok(a.model['minecraft:geometry'][0].bones.length,e.id);const b=Buffer.from(a.texture,'base64');assert.equal(b.subarray(1,4).toString(),'PNG',e.id);const d=a.model['minecraft:geometry'][0].description;assert.equal(b.readUInt32BE(16)/d.texture_width,b.readUInt32BE(20)/d.texture_height,e.id);if(a.emissive)assert.equal(Buffer.from(a.emissive,'base64').subarray(1,4).toString(),'PNG');}
  assert.equal(new Set(entries.map(e=>e.id)).size,entries.length);
 });
+test('internal creations stay out of public lists, info and assets, including alternate sources',async()=>{
+ const internal=JSON.parse(readFileSync(new URL('../dex.catalog.json',import.meta.url))).entries.filter(e=>e.collection==='Créations CobbleStar');
+ assert.equal(internal.length,8);
+ const species=[...new Set(internal.map(e=>e.species))];
+ const dex=createPublicDex({...source,
+  list:async()=>[...await source.list(),...species.map(species=>({species,revision:1,hasAsh:false}))],
+  nativeSpecies:async()=>[...await source.nativeSpecies(),...species.map(species=>({species,preview:true}))],
+  asset:async name=>species.includes(name)?{...published,species:name}:source.asset(name)
+ });
+ const entries=await dex.list();
+ assert.ok(entries.some(e=>e.collection==='Astéria'));
+ assert.ok(entries.some(e=>e.id==='star-dragonite-base'));
+ assert.ok(!entries.some(e=>species.includes(e.species)||e.collection==='Créations CobbleStar'));
+ const app=Fastify();registerPublicDex(app,dex);
+ try{
+  for(const id of [...internal.map(e=>e.id),...species.flatMap(s=>['native-'+s,'star-'+s+'-base'])]){
+   for(const endpoint of ['info','asset']){
+    const response=await app.inject('/api/pokedex/'+id+'/'+endpoint);
+    assert.equal(response.statusCode,404,id+'/'+endpoint);
+    assert.equal(response.headers['cache-control'],'no-store');
+   }
+  }
+ }finally{await app.close();}
+});

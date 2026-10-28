@@ -7,10 +7,13 @@ import {dexInfo} from './dex-info.js';
 export type DexEntry={id:string;species:string;name:string;collection:string;form:string;assetUrl:string};
 type Bundled=Omit<DexEntry,'assetUrl'>&{model:string;texture:string;emissive?:string};
 const bundled=(JSON.parse(readFileSync(new URL('../dex.catalog.json',import.meta.url),'utf8')) as {entries:Bundled[]}).entries;
+// Keep internal creations available to staff tooling, outside every public dex source.
+const internalSpecies=new Set(bundled.filter(e=>e.collection==='Créations CobbleStar').map(e=>e.species));
+const publicBundled=bundled.filter(e=>!internalSpecies.has(e.species));
 export type DexSource={list:()=>Promise<{species:string;revision:number;hasAsh:boolean}[]>;asset:(species:string)=>Promise<StarModel|null>;names:()=>Promise<Map<string,string>>;nativeSpecies:()=>Promise<{species:string;preview:boolean}[]>;nativeKit:(species:string)=>Promise<Buffer>;nativeAsset?:(species:string)=>Promise<any>;motion?:(id:string,species:string)=>Promise<any>};
 export function createPublicDex(source:DexSource){
  const url=(id:string)=>`/api/pokedex/${id}/asset`;
- const shipped=bundled.map(({id,species,name,collection,form})=>({id,species,name,collection,form,assetUrl:url(id)}));
+ const shipped=publicBundled.map(({id,species,name,collection,form})=>({id,species,name,collection,form,assetUrl:url(id)}));
  let cached:{until:number;entries:DexEntry[]}|undefined;
  let pending:Promise<DexEntry[]>|undefined;
  const list=async()=>{
@@ -18,11 +21,13 @@ export function createPublicDex(source:DexSource){
   return pending??=(async()=>{
    const [rows,names,native]=await Promise.all([source.list(),source.names(),source.nativeSpecies()]);
    const entries=[...rows.flatMap(row=>['base',...(row.hasAsh&&row.species==='greninja'?['ash']:[])].map(form=>({id:`star-${row.species}-${form}`,species:row.species,name:names.get(row.species)||row.species,collection:'Star',form:form==='ash'?'Sachanobi Star':'Star',assetUrl:url(`star-${row.species}-${form}`)+`?v=${row.revision}`}))),...shipped,...native.filter(n=>n.species!=='cobblestar_egg').map(({species,preview})=>({id:`native-${species}`,species,name:names.get(species)||species,collection:'Classiques',form:'Classique',assetUrl:preview?url(`native-${species}`):''}))];
-   cached={until:Date.now()+60_000,entries};return entries;
+   const visible=entries.filter(e=>!internalSpecies.has(e.species));
+   cached={until:Date.now()+60_000,entries:visible};return visible;
   })().finally(()=>{pending=undefined;});
  };
  const asset=async(id:string)=>{
-  const item=bundled.find(e=>e.id===id);
+  if(!(await list()).some(e=>e.id===id&&e.assetUrl))return null;
+  const item=publicBundled.find(e=>e.id===id);
   if(item){
    const read=(path:string)=>readFileSync(new URL('../'+path,import.meta.url));
    return {species:item.species,model:JSON.parse(read(item.model).toString()),texture:read(item.texture).toString('base64'),...(item.emissive?{emissive:read(item.emissive).toString('base64')}:{} ),motion:await source.motion?.(id,item.species)};
