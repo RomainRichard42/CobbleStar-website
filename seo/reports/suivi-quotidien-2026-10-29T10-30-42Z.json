@@ -1,0 +1,263 @@
+{
+  "date": "2026-10-29",
+  "checkedAt": "2026-10-29T10:46:30.360Z",
+  "site": "https://cobblestar-mc.fr/",
+  "technical": {
+    "report": "audit-2026-10-29T10-30-42Z.json",
+    "pages": 1057,
+    "errors": 0,
+    "warnings": 0,
+    "metrics": {
+      "home": {
+        "htmlBytes": 27773,
+        "scriptFiles": 6,
+        "scriptBytes": 29697,
+        "inlineScriptBytes": 347,
+        "totalScriptBytes": 30044
+      },
+      "cloudflareEmailLinks": 1059,
+      "checkedLinks": 6366,
+      "checkedImages": 30,
+      "checkedDocuments": 1059,
+      "maxClickDepth": 2,
+      "crawlerHttpStatus": 200
+    },
+    "previous": {
+      "pages": 1062,
+      "errors": 0,
+      "warnings": 0,
+      "metrics": {
+        "home": {
+          "htmlBytes": 24381,
+          "scriptFiles": 5,
+          "scriptBytes": 23934,
+          "inlineScriptBytes": 700,
+          "totalScriptBytes": 24634
+        },
+        "cloudflareEmailLinks": 1064,
+        "checkedLinks": 6393,
+        "checkedImages": 30,
+        "checkedDocuments": 1064,
+        "maxClickDepth": 2,
+        "crawlerHttpStatus": 200
+      }
+    },
+    "removedPublicSpecies": [
+      "astreval",
+      "basteros",
+      "ludilux",
+      "allodus",
+      "patapouf"
+    ],
+    "removalReason": "Créations internes retirées à la demande du propriétaire",
+    "dexHtmlBytes": 1034522,
+    "removedStatusAfterDeployment": 404
+  },
+  "google": {
+    "report": "mots-cles-google-2026-10-29T10-30-42Z.json",
+    "tracked": 46,
+    "firstPagesLoaded": 46,
+    "present": 20,
+    "notObserved": 22,
+    "automaticallyReplaced": 4,
+    "correctionIncomplete": 10,
+    "expanded": 3,
+    "brandOrganicRank": 1,
+    "genericFirstPage": "Aucune URL CobbleStar observée pour les expressions généralistes vérifiées.",
+    "changes": [
+      {
+        "query": "pension cobblestar",
+        "previousDate": "2026-10-28",
+        "previousStatus": "present_premiere_page",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/commandes/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/minecraft-pokemon/"
+        ],
+        "limit": "Comparaison indicative ; requête corrigée/élargie ou contrôle des corrections incomplet. Les corrections du relevé précédent n’étaient pas systématiquement vérifiées."
+      },
+      {
+        "query": "reproduction cobblemon cobblestar",
+        "previousDate": "2026-10-28",
+        "previousStatus": "non_observe_premiere_page",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/"
+        ],
+        "exitedPages": [],
+        "limit": "Comparaison indicative ; requête corrigée/élargie ou contrôle des corrections incomplet. Les corrections du relevé précédent n’étaient pas systématiquement vérifiées."
+      },
+      {
+        "query": "métiers cobblestar",
+        "previousDate": "2026-10-28",
+        "previousStatus": "present_premiere_page",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/"
+        ],
+        "exitedPages": [],
+        "limit": "Comparaison indicative ; requête corrigée/élargie ou contrôle des corrections incomplet. Les corrections du relevé précédent n’étaient pas systématiquement vérifiées."
+      },
+      {
+        "query": "jobs cobblemon cobblestar",
+        "previousDate": "2026-10-28",
+        "previousStatus": "present_premiere_page",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/"
+        ],
+        "exitedPages": [],
+        "limit": "Comparaison indicative ; requête corrigée/élargie ou contrôle des corrections incomplet. Les corrections du relevé précédent n’étaient pas systématiquement vérifiées."
+      },
+      {
+        "query": "talents métiers cobblestar",
+        "previousDate": "2026-10-28",
+        "previousStatus": "present_premiere_page",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/"
+        ],
+        "exitedPages": [],
+        "limit": "Comparaison indicative ; requête corrigée/élargie ou contrôle des corrections incomplet. Les corrections du relevé précédent n’étaient pas systématiquement vérifiées."
+      },
+      {
+        "query": "gts cobblestar",
+        "previousDate": "2026-10-28",
+        "previousStatus": "present_premiere_page",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/"
+        ],
+        "exitedPages": [],
+        "limit": "Comparaison indicative ; requête corrigée/élargie ou contrôle des corrections incomplet. Les corrections du relevé précédent n’étaient pas systématiquement vérifiées."
+      },
+      {
+        "query": "ranked cobblestar",
+        "previousDate": "2026-10-28",
+        "previousStatus": "present_premiere_page",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/commandes/"
+        ],
+        "exitedPages": [],
+        "limit": "Comparaison de pages observées, pas une évolution de position moyenne. Le précédent relevé ne contrôlait pas toutes les corrections."
+      },
+      {
+        "query": "grades gratuits cobblestar",
+        "previousDate": "2026-10-28",
+        "previousStatus": "present_premiere_page",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/boutique/"
+        ],
+        "exitedPages": [],
+        "limit": "Comparaison de pages observées, pas une évolution de position moyenne. Le précédent relevé ne contrôlait pas toutes les corrections."
+      },
+      {
+        "query": "club claim cobblestar",
+        "previousDate": "2026-10-28",
+        "previousStatus": "present_premiere_page",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/clubs/"
+        ],
+        "exitedPages": [],
+        "limit": "Comparaison indicative ; requête corrigée/élargie ou contrôle des corrections incomplet. Les corrections du relevé précédent n’étaient pas systématiquement vérifiées."
+      },
+      {
+        "query": "certification sga cobblestar",
+        "previousDate": "2026-10-28",
+        "previousStatus": "present_premiere_page",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/commandes/"
+        ],
+        "exitedPages": [],
+        "limit": "Comparaison de pages observées, pas une évolution de position moyenne. Le précédent relevé ne contrôlait pas toutes les corrections."
+      }
+    ],
+    "limits": [
+      "Résultats ponctuels localisés en France par Google ; susceptibles de varier.",
+      "CAPTCHA rencontré à la deuxième vérification de « launcher cobblestar » : aucune tentative de contournement et recherches arrêtées.",
+      "Les 46 premières pages ont été chargées avant le CAPTCHA ; 4 requêtes ont été automatiquement remplacées et 10 contrôles de correction restent incomplets.",
+      "Seul le rang organique 1 de la marque a été vérifié ; aucun rang déduit de l’ordre brut des titres.",
+      "Absence de première page ne prouve ni désindexation ni position au-delà."
+    ]
+  },
+  "searchConsole": {
+    "report": "search-console-2026-10-29T10-30-42Z.json",
+    "period": "2026-10-25/2026-10-27",
+    "lastUpdate": "3,5 heures au moment du relevé",
+    "clicks": 1,
+    "impressions": 6,
+    "ctrPercent": 16.7,
+    "averagePosition": 12.8,
+    "indexing": "Rapport encore en traitement",
+    "sitemapDiscoveredPages": 1062,
+    "sitemapLastRead": "2026-10-28",
+    "previousDiscoveredPages": 47,
+    "caveat": "Découverte du sitemap distincte de l’indexation. Volume insuffisant pour conclure à une tendance ou à un classement général."
+  },
+  "mobile": {
+    "report": "mobile-2026-10-29T10-30-42Z.json",
+    "viewport": "390 x 844",
+    "pages": [
+      "/",
+      "/wiki/",
+      "/wiki/pokedex/",
+      "/wiki/pokedex/eevee/#attaques",
+      "/boutique/#jetons"
+    ],
+    "result": "Pas de débordement horizontal du document ni d’image cassée détectée sur les pages échantillonnées ; menu mobile vérifié visuellement.",
+    "limits": "Émulation Chromium, pas un téléphone physique ; pas de Core Web Vitals terrain disponibles."
+  },
+  "improvement": {
+    "path": "/minecraft-pokemon/",
+    "change": "Sommaire accessible de six liens vers installation, versions, choix du serveur, Pokédex et questions fréquentes ; accord grammatical corrigé.",
+    "dates": "Date éditoriale conservée : amélioration de présentation, pas de renouvellement artificiel de contenu.",
+    "commit": "14945f5",
+    "validation": [
+      "Build Astro réussi",
+      "15 tests publics réussis",
+      "Sommaire visible sur mobile ; ancre atteinte à 109,5 px du haut après défilement"
+    ],
+    "deployment": "Mis en ligne, vérifié par HTTP et marqueurs du sommaire",
+    "publicationReport": "publication-2026-10-29T10-30-42Z.json",
+    "preview": "C:/Users/romain/Documents/Codex/2026-10-22/cobblestar-reprise/outputs/seo-2026-10-29/guide-publie.png"
+  },
+  "priorities": [
+    {
+      "priority": "P1",
+      "action": "Alléger le catalogue sans perdre les liens indexables vers les espèces.",
+      "pages": [
+        "/wiki/pokedex/"
+      ],
+      "reason": "Environ 1,03 Mo de HTML ; tous les Pokémon restent accessibles mais le document initial est lourd.",
+      "success": "HTML initial sensiblement réduit, 1009 fiches toujours atteignables et tests de maillage sans régression.",
+      "constraint": "La future page de collection et ses maquettes attendent la validation de Romain."
+    },
+    {
+      "priority": "P1",
+      "action": "Vérifier la couverture des fiches et des guides lorsque le rapport d’indexation sera disponible.",
+      "pages": [
+        "/sitemap.xml",
+        "/wiki/pokedex/eevee/",
+        "/wiki/pokedex/riolu/",
+        "/minecraft-pokemon/"
+      ],
+      "reason": "Sitemap découvert passé de 47 à 1062 URL ; indexation globale encore non mesurable.",
+      "success": "Statuts d’indexation réels, canoniques choisies et éventuelles exclusions documentés."
+    },
+    {
+      "priority": "P1",
+      "action": "Consolider les guides répondant aux recherches généralistes et reprendre les contrôles de requêtes interrompus lors du prochain passage.",
+      "pages": [
+        "/",
+        "/minecraft-pokemon/",
+        "/installer-cobblemon/",
+        "/wiki/pokedex/"
+      ],
+      "reason": "Pas de présence en première page observée sur les expressions généralistes ; premières impressions réelles sur deux requêtes hors marque.",
+      "success": "Suivi par requête dans Search Console et comparaisons Google sans corrections automatiques non signalées."
+    }
+  ],
+  "preserved": [
+    "Préouverture",
+    "Téléchargement du launcher désactivé",
+    "PokéPark absent",
+    "Comptes, API, bot et administration non modifiés",
+    "Maquettes collection non publiées"
+  ]
+}

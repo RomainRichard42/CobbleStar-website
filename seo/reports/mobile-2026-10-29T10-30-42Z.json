@@ -1,0 +1,72 @@
+{
+  "checkedAt": "2026-10-29T10:45:12.710Z",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "pages": [
+    {
+      "broken": [],
+      "documentWidth": 375,
+      "h1": [
+        {
+          "font": "54px",
+          "text": "LE WIKI COBBLESTAR."
+        }
+      ],
+      "paragraphFont": "18px",
+      "url": "https://cobblestar-mc.fr/wiki/",
+      "width": 390
+    },
+    {
+      "broken": [],
+      "documentWidth": 375,
+      "h1": [
+        {
+          "font": "40px",
+          "text": "LE POKÉDEX COBBLESTAR."
+        }
+      ],
+      "paragraphFont": "18px",
+      "url": "https://cobblestar-mc.fr/wiki/pokedex/",
+      "width": 390
+    },
+    {
+      "broken": [],
+      "documentWidth": 375,
+      "h1": [
+        {
+          "font": "44px",
+          "text": "ÉVOLI"
+        }
+      ],
+      "paragraphFont": "18px",
+      "url": "https://cobblestar-mc.fr/wiki/pokedex/eevee/#attaques",
+      "width": 390
+    },
+    {
+      "broken": [],
+      "documentWidth": 375,
+      "h1": [
+        {
+          "font": "38px",
+          "text": "CHOISIS TON GRADE."
+        }
+      ],
+      "paragraphFont": "14px",
+      "url": "https://cobblestar-mc.fr/boutique/#jetons",
+      "width": 390
+    }
+  ],
+  "home": {
+    "menu": "Ouverture vérifiée visuellement, compte et boutique visibles",
+    "overflow": false
+  },
+  "localGuide": {
+    "anchors": "Navigation vers #choisir-serveur vérifiée, titre à 109.5 px du haut après défilement",
+    "content": "Sommaire accessible et HTML complet"
+  },
+  "limits": [
+    "Contrôles Chromium à 390 px ; pas de mesure sur téléphone physique ni de Core Web Vitals terrain."
+  ]
+}

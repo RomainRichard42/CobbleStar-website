@@ -1,0 +1,90 @@
+{
+  "checkedAt": "2026-10-29T10:34:27.316Z",
+  "property": "https://cobblestar-mc.fr/",
+  "period": "3 mois sélectionnés ; données disponibles du 25 au 27 octobre 2026",
+  "lastUpdate": "3.5 hours ago",
+  "clicks": 1,
+  "impressions": 6,
+  "ctrPercent": 16.7,
+  "averagePosition": 12.8,
+  "queriesText": "Top queries\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition\n\nmode pokemon minecraft\t0\t1\t0%\t26.0\ncobblemon minecraft\t0\t1\t0%\t47.0",
+  "pagesText": "Top pages\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition\n\nhttps://cobblestar-mc.fr/\t1\t4\t25%\t1.0\nhttps://cobblestar-mc.fr/rejoindre/\t0\t4\t0%\t4.5\nhttps://cobblestar-mc.fr/wiki/\t0\t2\t0%\t10.0\nhttps://cobblestar-mc.fr/minecraft-pokemon/\t0\t2\t0%\t36.5",
+  "devicesText": "Device\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition\n\nDesktop\t1\t6\t16.7%\t12.8",
+  "sitemap": {
+    "lastRead": "2026-10-28",
+    "submitted": "2026-10-28",
+    "status": "Success",
+    "discoveredPages": 1062,
+    "currentServedPages": 1057
+  },
+  "indexing": {
+    "status": "processing",
+    "message": "Processing data, please check again in a day or so"
+  },
+  "periodStart": "2026-10-25",
+  "periodEnd": "2026-10-27",
+  "previousReport": "suivi-quotidien-2026-10-28.json",
+  "deviceMetrics": [
+    {
+      "device": "desktop",
+      "clicks": 1,
+      "impressions": 6,
+      "ctrPercent": 16.7,
+      "averagePosition": 12.8
+    }
+  ],
+  "queryMetrics": [
+    {
+      "query": "mode pokemon minecraft",
+      "clicks": 0,
+      "impressions": 1,
+      "ctrPercent": 0,
+      "averagePosition": 26
+    },
+    {
+      "query": "cobblemon minecraft",
+      "clicks": 0,
+      "impressions": 1,
+      "ctrPercent": 0,
+      "averagePosition": 47
+    }
+  ],
+  "pageMetrics": [
+    {
+      "path": "/",
+      "clicks": 1,
+      "impressions": 4,
+      "ctrPercent": 25,
+      "averagePosition": 1
+    },
+    {
+      "path": "/rejoindre/",
+      "clicks": 0,
+      "impressions": 4,
+      "ctrPercent": 0,
+      "averagePosition": 4.5
+    },
+    {
+      "path": "/wiki/",
+      "clicks": 0,
+      "impressions": 2,
+      "ctrPercent": 0,
+      "averagePosition": 10
+    },
+    {
+      "path": "/minecraft-pokemon/",
+      "clicks": 0,
+      "impressions": 2,
+      "ctrPercent": 0,
+      "averagePosition": 36.5
+    }
+  ],
+  "limits": [
+    "Très faible volume : aucune tendance robuste ne peut être conclue.",
+    "La période disponible s’étend d’un jour depuis le relevé du 28 octobre (25–26 octobre).",
+    "Les requêtes anonymisées ne sont pas toutes visibles : impossible d’attribuer le clic à une recherche de marque.",
+    "Les impressions par page et celles de la propriété utilisent des agrégations différentes ; ne pas additionner les lignes pour reconstituer le total.",
+    "1062 pages découvertes dans le sitemap ne signifient pas 1062 pages indexées.",
+    "Core Web Vitals : pas de données terrain mobiles ni ordinateur disponibles."
+  ]
+}

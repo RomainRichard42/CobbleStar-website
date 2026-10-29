@@ -1,0 +1,49 @@
+{
+  "checkedAt": "2026-10-29T10:45:04.407Z",
+  "reason": "Retrait demandé des créations internes du Pokédex public",
+  "pages": [
+    {
+      "url": "https://cobblestar-mc.fr/wiki/pokedex/astreval/",
+      "status": 502
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/pokedex/basteros/",
+      "status": 502
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/pokedex/ludilux/",
+      "status": 502
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/pokedex/allodus/",
+      "status": 502
+    },
+    {
+      "url": "https://cobblestar-mc.fr/wiki/pokedex/patapouf/",
+      "status": 502
+    }
+  ],
+  "note": "Premier contrôle effectué pendant le redémarrage de déploiement : réponses 502 transitoires. Contrôle après démarrage : toutes ces URL renvoient bien 404.",
+  "afterDeployment": [
+    {
+      "path": "/wiki/pokedex/astreval/",
+      "status": 404
+    },
+    {
+      "path": "/wiki/pokedex/basteros/",
+      "status": 404
+    },
+    {
+      "path": "/wiki/pokedex/ludilux/",
+      "status": 404
+    },
+    {
+      "path": "/wiki/pokedex/allodus/",
+      "status": 404
+    },
+    {
+      "path": "/wiki/pokedex/patapouf/",
+      "status": 404
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "checkedAt": "2026-10-29T10:46:48.457Z",
+  "commit": "14945f5",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200
+    },
+    {
+      "path": "/minecraft-pokemon/",
+      "status": 200,
+      "toc": true,
+      "anchors": true,
+      "canonical": "rel=\"canonical\" href=\"https://cobblestar-mc.fr/minecraft-pokemon/\"",
+      "preopening": true
+    },
+    {
+      "path": "/wiki/pokedex/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokedex/eevee/",
+      "status": 200
+    },
+    {
+      "path": "/boutique/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokedex/astreval/",
+      "status": 404
+    },
+    {
+      "path": "/wiki/pokedex/basteros/",
+      "status": 404
+    },
+    {
+      "path": "/wiki/pokedex/ludilux/",
+      "status": 404
+    },
+    {
+      "path": "/wiki/pokedex/allodus/",
+      "status": 404
+    },
+    {
+      "path": "/wiki/pokedex/patapouf/",
+      "status": 404
+    }
+  ]
+}
