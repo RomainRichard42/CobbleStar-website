@@ -2,6 +2,7 @@ import * as T from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {meshModel,type PreviewAsset,type TextureFrames} from './bedrock-model';
 import {animateModel} from './bedrock-motion';
+import {modelDepthRange} from './model-depth';
 
 export function createDexRenderer(interactive=false){
  const renderer=new T.WebGLRenderer({alpha:true,antialias:true});renderer.setPixelRatio(1);renderer.outputColorSpace=T.SRGBColorSpace;
@@ -11,7 +12,13 @@ export function createDexRenderer(interactive=false){
  if(controls){controls.enableZoom=false;controls.enablePan=false;controls.addEventListener('change',render);}
  type Item={model:T.Group;animate:(time:number)=>void;radius:number;fit:Map<number,number>;textures:T.Texture[];materials:T.Material[];frames:{material:T.MeshStandardMaterial|T.MeshBasicMaterial;textures:T.Texture[];fps:number}[]};
  const cache=new Map<string,Item>();let current:Item|undefined,radius=1,closed=false;
- function render(){if(!closed)renderer.render(scene,camera);}
+ function render(){if(!closed){
+  // Cobblemon eyes and markings can be only 0.01 model units above the skin.
+  // A fixed 0.01–10000 frustum loses enough precision to make them flicker.
+  const depth=modelDepthRange(radius,camera.position.length());
+  if(camera.near!==depth.near||camera.far!==depth.far){camera.near=depth.near;camera.far=depth.far;camera.updateProjectionMatrix();}
+  renderer.render(scene,camera);
+ }}
  function disposeItem(item:Item){const geometries=new Set<T.BufferGeometry>();item.model.traverse(o=>{if(o instanceof T.Mesh)geometries.add(o.geometry);});geometries.forEach(g=>g.dispose());item.materials.forEach(m=>m.dispose());item.textures.forEach(t=>t.dispose());}
  function frame(){
   const direction=new T.Vector3(-.4,.18,-1).normalize();camera.position.copy(direction);camera.lookAt(0,0,0);
