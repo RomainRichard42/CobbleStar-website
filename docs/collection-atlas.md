@@ -20,3 +20,9 @@ Les clés de sérialisation Cobblemon sont définies dans [DataKeys.kt](https://
 Tests API de projection Star, disponibilité publique, session/origine, compte propriétaire et absence de données de sauvegarde brutes. Tests du client sur enregistrement, échec, expiration et changement de compte pendant une requête. Tests Astro sur routage, noindex/no-store, catalogue sans données personnelles et liens depuis le Pokédex.
 
 Le serveur local de contrôle visuel et ses possessions fictives restent hors du dépôt et de l’application publiée.
+
+## Affichage sobre par défaut
+
+Les modèles de la collection, du Pokédex, des fiches et de l’accueil sont figés dans leur pose Cobblemon au chargement. Les animations ne démarrent que sur demande. Atlas conserve le rendu de chaque canvas immobile et ne le redessine pas en boucle.
+
+Icône Équipe & PC : PC Cobblemon, fichier original inchangé du wiki officiel : https://wiki.cobblemon.com/index.php/File:PC.png (https://wiki.cobblemon.com/images/8/89/PC.png).

@@ -69,3 +69,6 @@
 #collection-app{padding-top:20px}#collection-app .atlas-title h1{text-transform:none;letter-spacing:normal}#collection-app .atlas-title h1 em{color:#c2a0ec}#collection-app .sync{color:#d0bddf}#collection-app .atlas-title .sync{display:none}#collection-app .collection-connection{line-height:1.6}#collection-app #detail:focus-visible{outline:2px solid #e9c280}
 
 #collection-app .atlas-title h1 em{color:#c2a0ec!important}#collection-app .pokemon-card h3,#collection-app .focus-copy h2{letter-spacing:normal}#collection-app button:disabled{cursor:not-allowed}
+
+#collection-app .atlas-tabs-note .icon-pc{width:32px;height:32px}
+#collection-app .atlas-tabs-note .icon-pc img{width:100%;height:100%;object-fit:contain;image-rendering:pixelated}

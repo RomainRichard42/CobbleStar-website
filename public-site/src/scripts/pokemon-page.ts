@@ -117,10 +117,10 @@ if(input){
 }
 const host=document.getElementById('pokemon-model'),pause=document.getElementById('pokemon-pause') as HTMLButtonElement;
 if(host?.dataset.asset){
- let renderer:ReturnType<typeof createDexRenderer>|undefined,dead=false,visible=true,time=0,previous=0,paused=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ let renderer:ReturnType<typeof createDexRenderer>|undefined,dead=false,visible=true,time=0,previous=0,paused=true;
  const label=()=>{pause.textContent=paused?'Animer le Pokémon':'Mettre en pause';pause.setAttribute('aria-pressed',String(paused));};
  label();pause.addEventListener('click',()=>{paused=!paused;label();});
- const motion=matchMedia('(prefers-reduced-motion: reduce)');motion.addEventListener('change',()=>{paused=motion.matches;label();});
+ const motion=matchMedia('(prefers-reduced-motion: reduce)');motion.addEventListener('change',()=>{if(motion.matches)paused=true;label();});
  const resize=new ResizeObserver(()=>renderer?.resize(host.clientWidth,host.clientHeight));resize.observe(host);
  const observer=new IntersectionObserver(e=>{visible=e[0].isIntersecting;});observer.observe(host);
  document.querySelectorAll<HTMLElement>('[data-pokemon-turn]').forEach(b=>b.addEventListener('click',()=>renderer?.turn(Number(b.dataset.pokemonTurn))));

@@ -3,9 +3,9 @@ const host=document.getElementById('home-dragonite')!;
 const section=host.closest<HTMLElement>('.creation')!;
 const pause=document.getElementById('dragonite-pause') as HTMLButtonElement;
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-let renderer:ReturnType<typeof createDexRenderer>|undefined,loading=false,visible=false,paused=reduced.matches,dead=false,elapsed=0,previous=0,last=0;
+let renderer:ReturnType<typeof createDexRenderer>|undefined,loading=false,visible=false,paused=true,dead=false,elapsed=0,previous=0,last=0;
 function label(){pause.setAttribute('aria-pressed',String(paused));pause.textContent=paused?'Animer Dracolosse':'Mettre Dracolosse en pause';}
-pause.addEventListener('click',()=>{paused=!paused;label();});reduced.addEventListener('change',()=>{paused=reduced.matches;label();});label();
+pause.addEventListener('click',()=>{paused=!paused;label();});reduced.addEventListener('change',()=>{if(reduced.matches)paused=true;label();});label();
 const size=()=>renderer?.resize(Math.max(1,host.clientWidth),Math.max(1,host.clientHeight));
 const resize=new ResizeObserver(size);resize.observe(host);
 async function load(){if(loading||renderer)return;loading=true;

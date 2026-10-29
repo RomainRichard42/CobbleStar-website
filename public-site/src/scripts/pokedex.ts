@@ -20,11 +20,11 @@ async function asset(url:string){if(assets.has(url))return assets.get(url)!;cons
 let queue=Promise.resolve();
 const visible=new Set<HTMLElement>(),loading=new Set<HTMLElement>();
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
-let paused=reduced.matches,dead=false,lastFrame=0,elapsed=0,previous=0;
+let paused=true,dead=false,lastFrame=0,elapsed=0,previous=0;
 const pauses=[document.getElementById('dex-pause')!,document.getElementById('dex-view-pause')!];
-function updatePause(){for(const pause of pauses){pause.setAttribute('aria-pressed',String(paused));pause.textContent=paused?'Reprendre les animations':'Mettre les animations en pause';}}
+function updatePause(){for(const pause of pauses){pause.setAttribute('aria-pressed',String(paused));pause.textContent=paused?'Activer les animations':'Mettre les animations en pause';}}
 pauses.forEach(pause=>pause.addEventListener('click',()=>{paused=!paused;updatePause();}));
-reduced.addEventListener('change',()=>{paused=reduced.matches;updatePause();});updatePause();
+reduced.addEventListener('change',()=>{if(reduced.matches)paused=true;updatePause();});updatePause();
 function paint(card:HTMLElement,time:number){const canvas=card.querySelector('canvas');if(!canvas||!thumb?.show(card.dataset.asset!,time))return;const ctx=canvas.getContext('2d')!;ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(thumb.canvas,0,0);}
 const observer=new IntersectionObserver(entries=>{for(const entry of entries){const card=entry.target as HTMLElement;if(!entry.isIntersecting){visible.delete(card);continue;}visible.add(card);if(card.hidden||loading.has(card)||!card.dataset.asset||thumb?.has(card.dataset.asset))continue;loading.add(card);queue=queue.then(async()=>{
  if(card.hidden){loading.delete(card);return;}
