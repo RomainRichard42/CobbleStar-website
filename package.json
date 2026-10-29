@@ -15,7 +15,7 @@
     "ci": "npm run lint && npm run build:site && npm --prefix api test && npm run test:public && npm run package:kinetic",
     "lint": "eslint app",
     "dev:public": "astro dev --host 127.0.0.1",
-    "test:public": "node --test scripts/test-public-site.mjs scripts/test-dex-motion.mjs",
+    "test:public": "node --test scripts/test-public-site.mjs scripts/test-dex-motion.mjs scripts/test-collection-session.mjs",
     "audit:seo": "node scripts/seo-audit.mjs"
   },
   "dependencies": {

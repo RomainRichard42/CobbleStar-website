@@ -48,7 +48,7 @@ function evolutionLink(species:string){
   <div id="pokemon-controls" class="public-actions" hidden><button class="public-button secondary" data-pokemon-turn="-0.4" aria-label="Tourner le Pokémon à gauche">↶</button><button class="public-button secondary" data-pokemon-turn="0.4" aria-label="Tourner le Pokémon à droite">↷</button><button class="public-button secondary" id="pokemon-pause" aria-pressed="false">Mettre en pause</button></div>
   <h2>Formes et collections</h2><ul class="pokemon-forms">{forms.map(e=><li><a aria-current={e.id===selected.id?'true':undefined} href={dexPath(e.species)+(e.id===primary.id?'':'?forme='+encodeURIComponent(e.id))}>{e.collection} · {e.form}</a></li>)}</ul>
   <p>CobbleStar prépare son ouverture. En attendant, compare les formes et prépare ton équipe.</p>
-  <a class="public-button secondary" href={'/wiki/pokedex/?pokemon='+encodeURIComponent(selected.species)+'#ma-collection'}>Suivre {name} dans mon carnet →</a>
+  <a class="public-button secondary" href={'/collection/?pokemon='+encodeURIComponent(selected.species)}>Suivre {name} dans mon carnet →</a>
  </aside>
  <article class="pokemon-content">
  <div class="dex-types">{info.types.map((t:string)=><span class="dex-type" data-type={t}>{typeNames[t]||t}</span>)}</div>

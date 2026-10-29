@@ -29,6 +29,16 @@ test('Pokédex renders public names in Astro and stays discoverable from the wik
  assert.match((await get('/wiki/')).html,/href="\/wiki\/pokedex\/"/);assert.match((await get('/sitemap.xml')).html,/<loc>https:\/\/cobblestar-mc.fr\/wiki\/pokedex\/<\/loc>/);
  const shop=await get('/boutique/');assert.match(shop.html,/id="tab-jetons"/);for(const token of ['nova','pulsar','quasar']){assert.match(shop.html,new RegExp('/shop/tokens/'+token+'\\.png'));assert.equal((await get('/shop/tokens/'+token+'.png')).response.status,200);}assert.match(shop.html,/href="\/wiki\/caisses\/"/);
 });
+
+test('Atlas has its own noindex page with public catalogue only and replaces the embedded tracker',async()=>{
+ const page=await get('/collection/');assert.equal(page.response.status,200);
+ assert.match(page.response.headers.get('cache-control'),/no-store/);
+ assert.match(page.response.headers.get('x-robots-tag'),/noindex/);
+ assert.match(page.html,/id="collection-catalog"/);assert.match(page.html,/Pikachu/);
+ assert.doesNotMatch(page.html,/données de démo|Aster|Relevé de démonstration|userId|snapshot_json/);
+ const dex=await get('/wiki/pokedex/');assert.match(dex.html,/href="\/collection\/"/);
+ assert.doesNotMatch(dex.html,/id="collection-goal-dialog"/);
+});
 test('public pages have meaningful HTML, unique metadata and no React runtime',async()=>{
   const paths=['/','/rejoindre/','/minecraft-pokemon/','/installer-cobblemon/','/telecharger/','/wiki/','/actualites/','/roadmap/','/confidentialite/',...wiki.content.articles.filter(a=>a.published).map(a=>`/wiki/${a.id}/`),...news.content.articles.filter(a=>a.published).map(a=>`/actualites/${a.slug}/`)];
   const titles=new Set();

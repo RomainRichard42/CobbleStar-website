@@ -1,0 +1,12 @@
+Icônes d’interface : Lucide, https://github.com/lucide-icons/lucide (licence dans lucide-LICENSE).
+Poké Balls : textures existantes du projet CobbleStar, assets/mockups/daycare.
+Modèles Pokémon et animation : données et moteur Cobblemon déjà présents dans la maquette.
+Illustration de fond : capture Cobblemon existante, cobblemon-lakeside.webp.
+Logo et Stars : assets fournis du projet, non modifiés.
+
+Référence de direction artistique (pas de visuel Nintendo importé) : https://www.nintendo.com/en-gb/Games/Nintendo-DS/Pokemon-Ranger-272442.html
+Catalogue : https://cobblestar-mc.fr/api/pokedex ; types et numéros issus des données dex-info du dépôt CobbleStar.
+
+Révision DA CobbleStar : Starwatch, terminal_visual, objets astrolabe (Hyper Ball, boussole, étoile du Nether, livre de connaissances) copiés sans modification depuis les ressources du mod CobbleStar. Love Ball conservée depuis les ressources de la pension.
+
+Atlas : barrière Minecraft copiée depuis les textures Minecraft du projet. Loupe et cible dessinées en SVG pour cette interface. Les modèles sont chargés depuis le catalogue public du serveur, sans copie de données de joueur.

@@ -4,7 +4,7 @@ import type { FastifyInstance } from 'fastify';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 
 export function isPublicPage(path: string) {
-  if (['/','/wiki','/actualites','/rejoindre','/minecraft-pokemon','/installer-cobblemon','/telecharger','/telecharger/windows','/roadmap','/confidentialite','/robots.txt','/sitemap.xml','/actualites/rss.xml'].includes(path.replace(/\/$/,'') || '/')) return true;
+  if (['/','/collection','/wiki','/actualites','/rejoindre','/minecraft-pokemon','/installer-cobblemon','/telecharger','/telecharger/windows','/roadmap','/confidentialite','/robots.txt','/sitemap.xml','/actualites/rss.xml'].includes(path.replace(/\/$/,'') || '/')) return true;
   if (/^\/wiki\/pokedex\/[a-z0-9_-]+\/?$/.test(path)) return true;
   return /^\/(wiki|actualites)\/(?!admin(?:\/|$))[a-z0-9_-]+\/?$/.test(path);
 }
@@ -14,7 +14,7 @@ export function registerPublicSite(app: FastifyInstance, content: {getWiki:()=>P
   const renderer = () => render ? Promise.resolve(render) : loaded ??= import(pathToFileURL(resolve(process.cwd(),'public-astro/server/entry.mjs')).href).then(module=>module.handler as Handler).catch(error=>{loaded=undefined;throw error;});
   app.addHook('onRequest',async(request,reply)=>{
     const path=request.url.split('?')[0]!;
-    if (/^\/(?:apercus|maquettes|admin|compte|boutique-jeu|roadmap-carte)(?:\/|$)|^\/(?:wiki|actualites)\/admin(?:\/|$)/.test(path)) reply.header('X-Robots-Tag','noindex, nofollow');
+    if (/^\/(?:apercus|maquettes|admin|compte|collection|boutique-jeu|roadmap-carte)(?:\/|$)|^\/(?:wiki|actualites)\/admin(?:\/|$)/.test(path)) reply.header('X-Robots-Tag','noindex, nofollow');
     if (!['GET','HEAD'].includes(request.method)) return;
     const normalized=path.replace(/\/index\.html$/, '/') || '/';
     const nextPublic=/^\/(?:boutique|vote)\/?$/.test(normalized);
@@ -25,7 +25,7 @@ export function registerPublicSite(app: FastifyInstance, content: {getWiki:()=>P
     if(path!==canonical)return reply.code(308).redirect(canonical+query);
     if(nextPublic)return;
     const handler=await renderer();
-    reply.header('Cache-Control',path.startsWith('/telecharger/windows')?'no-store':'public, max-age=60');
+    reply.header('Cache-Control',(path.startsWith('/telecharger/windows')||path.startsWith('/collection'))?'no-store':'public, max-age=60');
     reply.header('X-CobbleStar-Renderer','Astro');
     for(const [name,value] of Object.entries(reply.getHeaders()))if(value!==undefined)reply.raw.setHeader(name,value);
     reply.hijack();

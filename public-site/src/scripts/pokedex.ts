@@ -1,5 +1,5 @@
 import {loadDetails,clearDetails} from './dex-details';
-import {bindCollection} from './player-collection';
+
 import type {PreviewAsset} from './bedrock-model';
 type Renderer=ReturnType<typeof import('./dex-renderer').createDexRenderer>;
 const cards=[...document.querySelectorAll<HTMLElement>('[data-dex]')];
@@ -70,5 +70,3 @@ window.addEventListener('pageshow',event=>{if(event.persisted){dead=false;previo
 filter();
 
 document.querySelectorAll<HTMLElement>('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.filter===category)));
-
-bindCollection(cards,()=>{limit=24;filter();});

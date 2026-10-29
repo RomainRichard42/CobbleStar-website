@@ -1,7 +1,5 @@
 ---
 import '../../styles/dex-details.css';
-import '../../styles/player-collection.css';
-import CollectionTracker from '../../components/CollectionTracker.astro';
 import Layout from '../../layouts/PublicLayout.astro';
 import {dexPath} from '../../lib/dex-pages';
 import {breadcrumbs} from '../../lib/content';
@@ -14,7 +12,7 @@ const species=new Set(entries.map(e=>e.species)).size;
 <Layout pageType="CollectionPage" title="Pokédex Cobblemon français — Pokémon et formes CobbleStar" description="Explore le Pokédex visuel de CobbleStar : Pokémon classiques, versions Star et formes d’Astéria et Nébélia. Types, évolutions, statistiques, attaques et lieux d’apparition." schema={[breadcrumbs([{name:'Accueil',path:'/'},{name:'Wiki',path:'/wiki/'},{name:'Pokédex',path:'/wiki/pokedex/'}])]}>
 <main id="contenu" class="public-shell dex-page">
  <header class="dex-heading"><a href="/wiki/">← Retour au wiki</a><h1>Le Pokédex <em>CobbleStar.</em></h1><p class="lead">Explore les Pokémon et les formes du serveur. Ouvre une fiche pour retrouver leurs types, statistiques, évolutions et attaques.</p><div class="dex-numbers"><strong>{species} <span>Pokémon</span></strong><strong>{entries.length} <span>apparences</span></strong><strong>{entries.filter(e=>e.collection==='Star').length} <span>formes Star</span></strong></div></header>
- <CollectionTracker />
+ <div id="ma-collection" class="public-actions"><a class="public-button" href="/collection/">Ma collection et mes chasses →</a></div>
  {unavailable&&<p role="alert" class="public-note">Le Pokédex est momentanément indisponible. Réessaie dans quelques instants.</p>}
  {entries.some(e=>!e.assetUrl)&&<p class="dex-context">{entries.filter(e=>!e.assetUrl).length} apparences ne peuvent pas encore être affichées en 3D. Leurs fiches restent consultables.</p>}
  <p class="dex-reading-link"><a href="#lire-les-fiches">Comment lire les fiches du Pokédex ? ↓</a></p>

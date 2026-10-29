@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/PublicLayout.astro';
+import '../styles/atlas.css';
+import metadata from '../lib/collection-species.json';
+import type {PublicLocals} from '../lib/content';
+let catalog:any[] = [], unavailable = false;
+try {
+  const entries = await (Astro.locals as PublicLocals).getDex();
+  const grouped = new Map<string,typeof entries>();
+  for (const entry of entries) { const group = grouped.get(entry.species)||[];group.push(entry);grouped.set(entry.species,group); }
+  catalog = [...grouped].map(([species,forms]) => {
+    const base = forms.find(e=>e.collection==='Classiques') || forms[0];
+    const star = forms.find(e=>e.collection==='Star');
+    const info = metadata[species as keyof typeof metadata];
+    return {id:species,name:base.name,num:info?.num||'—',types:info?.types||[],assetUrl:base.assetUrl,starAssetUrl:star?.assetUrl||''};
+  });
+} catch { unavailable=true;Astro.response.status=503; }
+Astro.response.headers.set('Cache-Control','no-store');
+---
+<Layout title="Ma collection Pokémon" description="Retrouve ton équipe et tes boîtes PC, tes Pokémon Star et chromatiques. Prépare tes prochaines captures dans ton carnet CobbleStar." noindex wide>
+  <main id="contenu"><div id="collection-app">
+    {unavailable ? <div class="shell"><h1>Ma collection</h1><p role="alert">Le catalogue est momentanément indisponible. Réessaie dans quelques instants.</p><a href="/compte/">Retour à mon compte</a></div> : <>
+      <div id="atlas-view"><div class="shell"><h1>Ma collection</h1><p role="status">Chargement de ton carnet…</p></div></div>
+      <dialog id="detail" aria-labelledby="detail-title"><button type="button" class="close" aria-label="Fermer la fiche">×</button><div id="detail-body"></div></dialog>
+      <p id="toast" class="toast" role="status" hidden></p>
+      <script id="collection-catalog" type="application/json" set:html={JSON.stringify(catalog).replaceAll('<','\\u003c')}/>
+      <noscript><div class="shell"><p>Active JavaScript pour consulter ta collection et enregistrer tes objectifs.</p><a href="/wiki/pokedex/">Consulter les fiches du Pokédex</a></div></noscript>
+    </>}
+  </div></main>
+</Layout>
+<script>if(document.querySelector('#collection-catalog')) import('../scripts/atlas/app.js');</script>

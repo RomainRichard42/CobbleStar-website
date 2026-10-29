@@ -84,12 +84,14 @@ export async function confirmPlayerLink(connection: PoolConnection, input: {
       const [result] = await connection.execute<ResultSetHeader>(`UPDATE ${table} SET user_id=? WHERE user_id=?`, [targetId, source.id]);
       moved[table] = result.affectedRows;
     }
-    await connection.execute(`INSERT INTO player_collection_goals(user_id,species,favorite,wanted,target,shiny,note)
-      SELECT ?,species,favorite,wanted,target,shiny,note FROM player_collection_goals WHERE user_id=?
+    await connection.execute(`INSERT INTO player_collection_goals(user_id,species,favorite,wanted,target,shiny,note,star,stage)
+      SELECT ?,species,favorite,wanted,target,shiny,note,star,stage FROM player_collection_goals WHERE user_id=?
       ON DUPLICATE KEY UPDATE
         target=IF(player_collection_goals.wanted,player_collection_goals.target,VALUES(target)),
         shiny=IF(player_collection_goals.wanted,player_collection_goals.shiny,VALUES(shiny)),
         note=IF(player_collection_goals.wanted,player_collection_goals.note,VALUES(note)),
+        star=IF(player_collection_goals.wanted,player_collection_goals.star,VALUES(star)),
+        stage=IF(player_collection_goals.wanted,player_collection_goals.stage,VALUES(stage)),
         favorite=GREATEST(player_collection_goals.favorite,VALUES(favorite)),
         wanted=GREATEST(player_collection_goals.wanted,VALUES(wanted))`, [targetId, source.id]);
     await connection.execute(`DELETE FROM player_collection_goals WHERE user_id=?`, [source.id]);
