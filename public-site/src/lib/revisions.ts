@@ -1,8 +1,8 @@
 // Update only after a substantive edit to this page. Never derive dates from request/build time.
 // CMS article dates are supplied separately from their own published content.
 export const pageRevisions: Record<string,string> = {
-  '/':'2026-10-27',
-  '/minecraft-pokemon/':'2026-10-27',
+  '/':'2026-10-30',
+  '/minecraft-pokemon/':'2026-10-30',
   '/installer-cobblemon/':'2026-10-27',
   '/rejoindre/':'2026-10-26',
   '/telecharger/':'2026-10-26',

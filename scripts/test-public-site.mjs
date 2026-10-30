@@ -30,6 +30,20 @@ test('Pokédex renders public names in Astro and stays discoverable from the wik
  const shop=await get('/boutique/');assert.match(shop.html,/id="tab-jetons"/);for(const token of ['nova','pulsar','quasar']){assert.match(shop.html,new RegExp('/shop/tokens/'+token+'\\.png'));assert.equal((await get('/shop/tokens/'+token+'.png')).response.status,200);}assert.match(shop.html,/href="\/wiki\/caisses\/"/);
 });
 
+test('compact Pokédex retains every crawlable form link beyond the first visual batch',async()=>{
+ const original=dexEntries;
+ try {
+  dexEntries=Array.from({length:60},(_,i)=>({id:`star-pikachu-${i}`,species:'pikachu',name:i===59?'Pikachu <Rare>':'Pikachu',collection:'Star',form:`Forme ${i}`,assetUrl:`/api/pokedex/star-pikachu-${i}/asset?v=3`}));
+  const {html,response}=await get('/wiki/pokedex/');
+  assert.equal(response.status,200);
+  assert.equal((html.match(/class="dex-profile-link"/g)||[]).length,60);
+  for(let i=0;i<60;i++)assert.ok(html.includes(`href="/wiki/pokedex/pikachu/?forme=star-pikachu-${i}"`));
+  assert.match(html,/Pikachu &lt;Rare&gt;/);assert.match(html,/Star · Forme 59/);
+  assert.equal((html.match(/class="dex-portrait"/g)||[]).length,1,'only the reusable template contains a portrait');
+  assert.doesNotMatch(html,/<canvas/);
+ } finally {dexEntries=original;}
+});
+
 test('Atlas has its own noindex page with public catalogue only and replaces the embedded tracker',async()=>{
  const page=await get('/collection/');assert.equal(page.response.status,200);
  assert.match(page.response.headers.get('cache-control'),/no-store/);

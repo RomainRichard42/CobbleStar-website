@@ -3,6 +3,23 @@ import {loadDetails,clearDetails} from './dex-details';
 import type {PreviewAsset} from './bedrock-model';
 type Renderer=ReturnType<typeof import('./dex-renderer').createDexRenderer>;
 const cards=[...document.querySelectorAll<HTMLElement>('[data-dex]')];
+// Every name, form and profile link is already in the server HTML. Only the
+// visible batch needs the richer controls and portrait containers.
+const cardTemplate=document.getElementById('dex-card-preview') as HTMLTemplateElement;
+for(const card of cards)card.dataset.name=card.querySelector('a')!.firstChild!.textContent!.trim();
+function prepareCard(card:HTMLElement){
+ if(card.querySelector('.dex-open'))return;
+ const button=cardTemplate.content.firstElementChild!.cloneNode(true) as HTMLButtonElement;
+ const {name,collection,form,asset}=card.dataset;
+ button.disabled=!asset;
+ button.setAttribute('aria-label',`Voir ${name} — ${collection}, ${form} en 3D`);
+ button.querySelector('h2')!.textContent=name!;
+ button.querySelector('.dex-collection')!.textContent=collection!;
+ button.querySelector('p')!.textContent=form!;
+ if(!asset){button.querySelector('.dex-loading')!.textContent='Visuel en préparation';button.querySelector('.dex-inspect')!.textContent='Visuel indisponible';}
+ card.querySelector('a')!.textContent=`Fiche complète de ${name} →`;
+ card.prepend(button);
+}
 const grid=document.getElementById('dex-grid')!;
 const search=document.getElementById('dex-search') as HTMLInputElement;
 const sort=document.getElementById('dex-sort') as HTMLSelectElement;
@@ -43,7 +60,9 @@ function filter(){
  const matches=cards.filter(c=>c.dataset.collectionMatch!=='false'&&(category==='all'||c.dataset.collection===category)&&terms.every(t=>normalize([c.dataset.name,c.dataset.species,c.dataset.collection,c.dataset.form].join(' ')).includes(t)));
  matches.sort((a,b)=>{const prefix=sort.value==='collection'?(a.dataset.collection||'').localeCompare(b.dataset.collection||'','fr'):0;return prefix||(a.dataset.name||'').localeCompare(b.dataset.name||'','fr')||(a.dataset.form||'').localeCompare(b.dataset.form||'','fr');});
  visible.clear();for(const c of cards){c.hidden=true;observer.unobserve(c);}
- for(const [i,c] of matches.entries()){grid.append(c);c.hidden=i>=limit;if(!c.hidden)observer.observe(c);}
+ const batch=document.createDocumentFragment();
+ for(const [i,c] of matches.entries()){batch.append(c);c.hidden=i>=limit;if(!c.hidden){prepareCard(c);observer.observe(c);}}
+ grid.append(batch);
  status.textContent=`${matches.length} apparence${matches.length>1?'s':''} · ${Math.min(limit,matches.length)} affichée${Math.min(limit,matches.length)>1?'s':''}`;
  more.hidden=matches.length<=limit;document.getElementById('dex-empty')!.hidden=matches.length>0;
 }
@@ -58,7 +77,7 @@ async function open(card:HTMLElement){
  try{const [module,data]=await Promise.all([library(),asset(card.dataset.asset!)]);if(ticket!==opening)return;viewer=module.createDexRenderer(true);host.replaceChildren(viewer.canvas);viewer.resize(Math.max(host.clientWidth,1),Math.max(host.clientHeight,1));await viewer.set(data);if(ticket===opening)viewStatus.textContent='';}
  catch{if(ticket===opening)viewStatus.textContent='Le modèle ne peut pas être affiché. Ferme puis rouvre cet aperçu pour réessayer.';}
 }
-cards.forEach(c=>c.querySelector('button')!.addEventListener('click',()=>void open(c)));
+grid.addEventListener('click',event=>{const button=(event.target as HTMLElement).closest<HTMLButtonElement>('.dex-open');if(button&&!button.disabled)void open(button.closest<HTMLElement>('[data-dex]')!);});
 dialog.querySelector('.dex-close')!.addEventListener('click',()=>dialog.close());
 dialog.addEventListener('click',e=>{if(e.target===dialog){const b=dialog.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)dialog.close();}});
 dialog.addEventListener('close',()=>{opening++;clearDetails();viewer?.dispose();viewer=undefined;document.body.style.overflow=oldOverflow;trigger?.focus({preventScroll:true});});
