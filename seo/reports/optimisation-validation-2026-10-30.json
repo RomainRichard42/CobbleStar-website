@@ -1,0 +1,132 @@
+{
+  "checkedAt": "2026-10-30T11:54:14.875Z",
+  "pages": [
+    {
+      "path": "/wiki/pokedex/",
+      "beforeBytes": 1032536,
+      "afterBytes": 438868,
+      "gzipBytes": 34613,
+      "beforeElements": 11337,
+      "afterElements": 3603,
+      "lostLinks": [
+        "/_astro/pokedex.4EacjRKu.css",
+        "/cdn-cgi/l/email-protection"
+      ],
+      "cards": 1106,
+      "profileLinks": 1106
+    },
+    {
+      "path": "/",
+      "beforeBytes": 27773,
+      "afterBytes": 29261,
+      "gzipBytes": 8074,
+      "beforeElements": 453,
+      "afterElements": 476,
+      "lostLinks": [
+        "/cdn-cgi/l/email-protection"
+      ],
+      "cards": 0,
+      "profileLinks": 0
+    },
+    {
+      "path": "/minecraft-pokemon/",
+      "beforeBytes": 26030,
+      "afterBytes": 29497,
+      "gzipBytes": 8240,
+      "beforeElements": 330,
+      "afterElements": 361,
+      "lostLinks": [
+        "/cdn-cgi/l/email-protection"
+      ],
+      "cards": 0,
+      "profileLinks": 0
+    }
+  ],
+  "commit": "ae666f0",
+  "tests": {
+    "passed": 21,
+    "failed": 0,
+    "commands": [
+      "astro build",
+      "compose-public-site",
+      "test-public-site",
+      "test-collection-session"
+    ]
+  },
+  "mobile": {
+    "viewport": [
+      390,
+      844
+    ],
+    "pages": [
+      "/",
+      "/wiki/pokedex/",
+      "/minecraft-pokemon/"
+    ],
+    "horizontalOverflow": false,
+    "canvasFitsPortrait": true
+  },
+  "browserChecks": [
+    "24 puis 48 apparences",
+    "Recherche Florizarre et ouverture 3D",
+    "Recherche anglaise eevee : 2 apparences",
+    "Filtre Star : 22 apparences",
+    "Animations désactivées par défaut",
+    "Sommaire du guide : toutes les ancres présentes",
+    "Production : Évoli classique et Star rendus, aucune erreur console",
+    "Production : modèle et texture Sachanobi Star présents (HTTP 200)"
+  ],
+  "seo": {
+    "allProfileLinksPreserved": true,
+    "serverRenderedCatalogue": true,
+    "canonicalsPreserved": true,
+    "newDuplicatePages": false
+  },
+  "sources": [
+    "https://developers.google.com/search/docs/crawling-indexing/javascript/lazy-loading",
+    "https://developers.google.com/search/docs/crawling-indexing/links-crawlable",
+    "https://www.cobblemon.com/"
+  ],
+  "limits": [
+    "Poids HTML brut et gzip calculé, pas un score de performance terrain.",
+    "Aucune amélioration de position Google encore mesurée.",
+    "Modèles et textures inchangés ; contrôle visuel représentatif, pas vérification manuelle de chaque modèle."
+  ],
+  "publication": "verified",
+  "production": [
+    {
+      "path": "/wiki/pokedex/",
+      "status": 200,
+      "htmlBytes": 439024,
+      "htmlReductionPercent": 57,
+      "profileLinks": 1106,
+      "missingPokedexLinks": [],
+      "updatedContent": true
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "htmlBytes": 29416,
+      "htmlReductionPercent": -6,
+      "profileLinks": 0,
+      "missingPokedexLinks": [],
+      "updatedContent": true
+    },
+    {
+      "path": "/minecraft-pokemon/",
+      "status": 200,
+      "htmlBytes": 29652,
+      "htmlReductionPercent": -14,
+      "profileLinks": 0,
+      "missingPokedexLinks": [],
+      "updatedContent": true
+    }
+  ],
+  "publishedCheckedAt": "2026-10-30T11:57:49.031Z",
+  "seoAudit": {
+    "report": "audit-2026-10-30T11-57-00Z-post-optimisation.json",
+    "pages": 1057,
+    "errors": [],
+    "warnings": []
+  }
+}
