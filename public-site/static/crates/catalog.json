@@ -1,0 +1,1052 @@
+{
+  "checkedAt": "2026-10-30T15:35:05.868Z",
+  "source": "Configuration du serveur CobbleStar",
+  "crates": [
+    {
+      "id": "vote",
+      "name": "Vote",
+      "pityThreshold": 0,
+      "guaranteedTier": "Constellation",
+      "tiers": [
+        {
+          "name": "Commun",
+          "chance": 70,
+          "rewards": [
+            {
+              "type": "currency",
+              "id": "",
+              "label": "CobbleDollars 10.000",
+              "amount": 1,
+              "weight": 2,
+              "icon": "/crates/icons/poke_ball.png",
+              "iconKind": "rarity",
+              "chance": 6.363636363636363
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:quick_ball",
+              "label": "Rapide Ball x32",
+              "amount": 32,
+              "weight": 1,
+              "icon": "/crates/icons/quick_ball.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:dream_ball",
+              "label": "Rêve Ball x32",
+              "amount": 32,
+              "weight": 1,
+              "icon": "/crates/icons/dream_ball.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:normal_gem",
+              "label": "Joyau Normal",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/normal_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:fire_gem",
+              "label": "Joyau Feu",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/fire_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:water_gem",
+              "label": "Joyau Eau",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/water_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:grass_gem",
+              "label": "Joyau Plante",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/grass_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:electric_gem",
+              "label": "Joyau Électrik",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/electric_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:ice_gem",
+              "label": "Joyau Glace",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/ice_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:fighting_gem",
+              "label": "Joyau Combat",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/fighting_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:poison_gem",
+              "label": "Joyau Poison",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/poison_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:ground_gem",
+              "label": "Joyau Sol",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/ground_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:flying_gem",
+              "label": "Joyau Vol",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/flying_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:psychic_gem",
+              "label": "Joyau Psy",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/psychic_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:bug_gem",
+              "label": "Joyau Insecte",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/bug_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:rock_gem",
+              "label": "Joyau Roche",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/rock_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:ghost_gem",
+              "label": "Joyau Spectre",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/ghost_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:dragon_gem",
+              "label": "Joyau Dragon",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/dragon_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:dark_gem",
+              "label": "Joyau Ténèbres",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/dark_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:steel_gem",
+              "label": "Joyau Acier",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/steel_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:fairy_gem",
+              "label": "Joyau Fée",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/fairy_gem.png",
+              "iconKind": "item",
+              "chance": 3.1818181818181817
+            }
+          ],
+          "ball": "poke_ball"
+        },
+        {
+          "name": "Peu commun",
+          "chance": 22,
+          "rewards": [
+            {
+              "type": "item",
+              "id": "tmcraft:tutor_move_recorder",
+              "label": "Move Recorder",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/great_ball.png",
+              "iconKind": "rarity",
+              "chance": 5.5
+            },
+            {
+              "type": "item",
+              "id": "tmcraft:egg_move_recorder",
+              "label": "Egg Move Recorder",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/great_ball.png",
+              "iconKind": "rarity",
+              "chance": 5.5
+            },
+            {
+              "type": "item",
+              "id": "tmcraft:tm_move_recorder",
+              "label": "TM Move Recorder",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/great_ball.png",
+              "iconKind": "rarity",
+              "chance": 5.5
+            },
+            {
+              "type": "currency",
+              "id": "",
+              "label": "CobbleDollars 25.000",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/great_ball.png",
+              "iconKind": "rarity",
+              "chance": 5.5
+            }
+          ],
+          "ball": "great_ball"
+        },
+        {
+          "name": "Rare",
+          "chance": 7,
+          "rewards": [
+            {
+              "type": "item",
+              "id": "cobblenav:pokenav_item_base",
+              "label": "PokéNav",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/ultra_ball.png",
+              "iconKind": "rarity",
+              "chance": 1.4
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:rare_candy",
+              "label": "Super Bonbon x8",
+              "amount": 8,
+              "weight": 2,
+              "icon": "/crates/icons/rare_candy.png",
+              "iconKind": "item",
+              "chance": 2.8
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:ability_capsule",
+              "label": "Pilule Talent",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/ability_capsule.png",
+              "iconKind": "item",
+              "chance": 1.4
+            },
+            {
+              "type": "item",
+              "id": "cobblestar_planets:key_nova",
+              "label": "Clé Nova",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/shop/tokens/nova.png",
+              "iconKind": "item",
+              "chance": 1.4
+            }
+          ],
+          "ball": "ultra_ball"
+        },
+        {
+          "name": "Constellation",
+          "chance": 1,
+          "rewards": [
+            {
+              "type": "item",
+              "id": "cobblestar_planets:key_pulsar",
+              "label": "Clé Pulsar x2",
+              "amount": 2,
+              "weight": 1,
+              "icon": "/shop/tokens/pulsar.png",
+              "iconKind": "item",
+              "chance": 0.5
+            },
+            {
+              "type": "command",
+              "id": "",
+              "label": "Shiny Aléatoire",
+              "amount": 1,
+              "weight": 1,
+              "pokemon": null,
+              "shiny": true,
+              "icon": "/crates/icons/constellation_ball.png",
+              "iconKind": "rarity",
+              "chance": 0.5
+            }
+          ],
+          "ball": "constellation_ball"
+        }
+      ]
+    },
+    {
+      "id": "nova",
+      "name": "Nova",
+      "pityThreshold": 40,
+      "guaranteedTier": "Très rare",
+      "tiers": [
+        {
+          "name": "Commun",
+          "chance": 50,
+          "rewards": [
+            {
+              "type": "currency",
+              "id": "",
+              "label": "CobbleDollars 100.000",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/poke_ball.png",
+              "iconKind": "rarity",
+              "chance": 25
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:rare_candy",
+              "label": "Super Bonbon x24",
+              "amount": 24,
+              "weight": 1,
+              "icon": "/crates/icons/rare_candy.png",
+              "iconKind": "item",
+              "chance": 25
+            }
+          ],
+          "ball": "poke_ball"
+        },
+        {
+          "name": "Peu commun",
+          "chance": 25,
+          "rewards": [
+            {
+              "type": "item",
+              "id": "tmcraft:move_upgrade_smithing_template",
+              "label": "Modèle de Forge x2",
+              "amount": 2,
+              "weight": 1,
+              "icon": "/crates/icons/great_ball.png",
+              "iconKind": "rarity",
+              "chance": 12.5
+            },
+            {
+              "type": "currency",
+              "id": "",
+              "label": "CobbleDollars 200.000",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/great_ball.png",
+              "iconKind": "rarity",
+              "chance": 12.5
+            }
+          ],
+          "ball": "great_ball"
+        },
+        {
+          "name": "Rare",
+          "chance": 15,
+          "rewards": [
+            {
+              "type": "command",
+              "id": "",
+              "label": "Pokémon Shiny",
+              "amount": 1,
+              "weight": 1,
+              "pokemon": null,
+              "shiny": true,
+              "icon": "/crates/icons/ultra_ball.png",
+              "iconKind": "rarity",
+              "chance": 7.5
+            },
+            {
+              "type": "item",
+              "id": "cobblestar_planets:key_nova",
+              "label": "Clé Nova x2",
+              "amount": 2,
+              "weight": 1,
+              "icon": "/shop/tokens/nova.png",
+              "iconKind": "item",
+              "chance": 7.5
+            }
+          ],
+          "ball": "ultra_ball"
+        },
+        {
+          "name": "Très rare",
+          "chance": 7,
+          "rewards": [
+            {
+              "type": "item",
+              "id": "cobblemon:ability_patch",
+              "label": "Patch Talent x2",
+              "amount": 2,
+              "weight": 1,
+              "icon": "/crates/icons/ability_patch.png",
+              "iconKind": "item",
+              "chance": 1.4
+            },
+            {
+              "type": "item",
+              "id": "cobblestar_planets:booster_nebelia",
+              "label": "Booster Nébélia",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/booster_nebelia.png",
+              "iconKind": "item",
+              "chance": 1.4
+            },
+            {
+              "type": "item",
+              "id": "cobblestar_planets:booster_asteria",
+              "label": "Booster Asteria",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/booster_asteria.png",
+              "iconKind": "item",
+              "chance": 1.4
+            },
+            {
+              "type": "item",
+              "id": "mega_showdown:blank_z",
+              "label": "Z-Vierge",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/master_ball.png",
+              "iconKind": "rarity",
+              "chance": 1.4
+            },
+            {
+              "type": "item",
+              "id": "cobblestar_planets:key_pulsar",
+              "label": "Clé Pulsar x2",
+              "amount": 2,
+              "weight": 1,
+              "icon": "/shop/tokens/pulsar.png",
+              "iconKind": "item",
+              "chance": 1.4
+            }
+          ],
+          "ball": "master_ball"
+        },
+        {
+          "name": "Constellation",
+          "chance": 3,
+          "rewards": [
+            {
+              "type": "item",
+              "id": "cobblestar_planets:key_quasar",
+              "label": "Clé Quasar x2",
+              "amount": 2,
+              "weight": 1,
+              "icon": "/shop/tokens/quasar.png",
+              "iconKind": "item",
+              "chance": 3
+            }
+          ],
+          "ball": "constellation_ball"
+        }
+      ]
+    },
+    {
+      "id": "pulsar",
+      "name": "Pulsar",
+      "pityThreshold": 20,
+      "guaranteedTier": "Très rare",
+      "tiers": [
+        {
+          "name": "Commun",
+          "chance": 45,
+          "rewards": [
+            {
+              "type": "currency",
+              "id": "",
+              "label": "CobbleDollars 350.000",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/poke_ball.png",
+              "iconKind": "rarity",
+              "chance": 45
+            }
+          ],
+          "ball": "poke_ball"
+        },
+        {
+          "name": "Peu commun",
+          "chance": 25,
+          "rewards": [
+            {
+              "type": "command",
+              "id": "",
+              "label": "Pokémon Shiny",
+              "amount": 1,
+              "weight": 1,
+              "pokemon": null,
+              "shiny": true,
+              "icon": "/crates/icons/great_ball.png",
+              "iconKind": "rarity",
+              "chance": 6.25
+            },
+            {
+              "type": "currency",
+              "id": "",
+              "label": "CobbleDollars 600.000",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/great_ball.png",
+              "iconKind": "rarity",
+              "chance": 6.25
+            },
+            {
+              "type": "item",
+              "id": "mega_showdown:mega_stone",
+              "label": "Méga-Gemme",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/great_ball.png",
+              "iconKind": "rarity",
+              "chance": 6.25
+            },
+            {
+              "type": "item",
+              "id": "mega_showdown:keystone",
+              "label": "Gemme Sésame",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/great_ball.png",
+              "iconKind": "rarity",
+              "chance": 6.25
+            }
+          ],
+          "ball": "great_ball"
+        },
+        {
+          "name": "Rare",
+          "chance": 15,
+          "rewards": [
+            {
+              "type": "item",
+              "id": "cobblemon_utility:mastercandy",
+              "label": "Bonbon lvl 100 x8",
+              "amount": 8,
+              "weight": 1,
+              "icon": "/crates/icons/ultra_ball.png",
+              "iconKind": "rarity",
+              "chance": 7.5
+            },
+            {
+              "type": "item",
+              "id": "minecraft:nether_star",
+              "label": "Étoile du Nether",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/ultra_ball.png",
+              "iconKind": "rarity",
+              "chance": 7.5
+            }
+          ],
+          "ball": "ultra_ball"
+        },
+        {
+          "name": "Très rare",
+          "chance": 10,
+          "rewards": [
+            {
+              "type": "item",
+              "id": "mega_showdown:sparkling_stone_light",
+              "label": "Pierre Scintillante Claire",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/master_ball.png",
+              "iconKind": "rarity",
+              "chance": 1.25
+            },
+            {
+              "type": "item",
+              "id": "mega_showdown:sparkling_stone_dark",
+              "label": "Pierre Scintillante Sombre",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/master_ball.png",
+              "iconKind": "rarity",
+              "chance": 1.25
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:shiningatksilvercap",
+              "label": "Shining Atk Silver Cap",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/master_ball.png",
+              "iconKind": "rarity",
+              "chance": 1.25
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:shiningspatksilvercap",
+              "label": "Shining Sp. Atk Silver Cap",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/master_ball.png",
+              "iconKind": "rarity",
+              "chance": 1.25
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:shiningspdefsilvercap",
+              "label": "Shining Sp. Def Silver Cap",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/master_ball.png",
+              "iconKind": "rarity",
+              "chance": 1.25
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:shiningspeedsilvercap",
+              "label": "Shining Speed Silver Cap",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/master_ball.png",
+              "iconKind": "rarity",
+              "chance": 1.25
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:shiningdefsilvercap",
+              "label": "Shining Def Silver Cap",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/master_ball.png",
+              "iconKind": "rarity",
+              "chance": 1.25
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:shininghpsilvercap",
+              "label": "Shining HP Silver Cap",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/master_ball.png",
+              "iconKind": "rarity",
+              "chance": 1.25
+            }
+          ],
+          "ball": "master_ball"
+        },
+        {
+          "name": "Constellation",
+          "chance": 5,
+          "rewards": [
+            {
+              "type": "item",
+              "id": "cobblestar_planets:key_quasar",
+              "label": "Clé Quasar x2",
+              "amount": 2,
+              "weight": 1,
+              "icon": "/shop/tokens/quasar.png",
+              "iconKind": "item",
+              "chance": 1.6666666666666667
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:goldencap",
+              "label": "IVS Tous Max",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/constellation_ball.png",
+              "iconKind": "rarity",
+              "chance": 1.6666666666666667
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:master_ball",
+              "label": "Master Ball",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/master_ball.png",
+              "iconKind": "item",
+              "chance": 1.6666666666666667
+            }
+          ],
+          "ball": "constellation_ball"
+        }
+      ]
+    },
+    {
+      "id": "quasar",
+      "name": "Quasar",
+      "pityThreshold": 10,
+      "guaranteedTier": "Constellation",
+      "tiers": [
+        {
+          "name": "Peu commun",
+          "chance": 35,
+          "rewards": [
+            {
+              "type": "currency",
+              "id": "",
+              "label": "CobbleDollars 1.000.000",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/great_ball.png",
+              "iconKind": "rarity",
+              "chance": 11.666666666666666
+            },
+            {
+              "type": "item",
+              "id": "cobblestar_planets:key_pulsar",
+              "label": "Clé pulsar x3",
+              "amount": 3,
+              "weight": 1,
+              "icon": "/shop/tokens/pulsar.png",
+              "iconKind": "item",
+              "chance": 11.666666666666666
+            },
+            {
+              "type": "command",
+              "id": "cobblemonarmory:metagross_hammer",
+              "label": "Arceus tool (casse tous les blocs rapidement)",
+              "amount": 1,
+              "weight": 1,
+              "pokemon": null,
+              "shiny": false,
+              "icon": "/crates/icons/great_ball.png",
+              "iconKind": "rarity",
+              "chance": 11.666666666666666
+            }
+          ],
+          "ball": "great_ball"
+        },
+        {
+          "name": "Rare",
+          "chance": 40,
+          "rewards": [
+            {
+              "type": "currency",
+              "id": "",
+              "label": "CobbleDollars 2.500.000",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/ultra_ball.png",
+              "iconKind": "rarity",
+              "chance": 5
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:mastercandy",
+              "label": "Bonbon lvl100 x32",
+              "amount": 32,
+              "weight": 1,
+              "icon": "/crates/icons/ultra_ball.png",
+              "iconKind": "rarity",
+              "chance": 5
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:shiningatksilvercap",
+              "label": "Shining Atk Silver Cap",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/ultra_ball.png",
+              "iconKind": "rarity",
+              "chance": 5
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:shiningspatksilvercap",
+              "label": "Shining Sp. Atk Silver Cap",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/ultra_ball.png",
+              "iconKind": "rarity",
+              "chance": 5
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:shiningspdefsilvercap",
+              "label": "Shining Sp. Def Silver Cap",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/ultra_ball.png",
+              "iconKind": "rarity",
+              "chance": 5
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:shiningspeedsilvercap",
+              "label": "Shining Speed Silver Cap",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/ultra_ball.png",
+              "iconKind": "rarity",
+              "chance": 5
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:shiningdefsilvercap",
+              "label": "Shining Def Silver Cap",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/ultra_ball.png",
+              "iconKind": "rarity",
+              "chance": 5
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:shininghpsilvercap",
+              "label": "Shining HP Silver Cap",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/ultra_ball.png",
+              "iconKind": "rarity",
+              "chance": 5
+            }
+          ],
+          "ball": "ultra_ball"
+        },
+        {
+          "name": "Très rare",
+          "chance": 24,
+          "rewards": [
+            {
+              "type": "item",
+              "id": "cobblestar_planets:key_quasar",
+              "label": "Clef quasar x2",
+              "amount": 2,
+              "weight": 1,
+              "icon": "/shop/tokens/quasar.png",
+              "iconKind": "item",
+              "chance": 6
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:shinycard",
+              "label": "Shiny swap",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/master_ball.png",
+              "iconKind": "rarity",
+              "chance": 6
+            },
+            {
+              "type": "item",
+              "id": "cobblemon:pp_max",
+              "label": "PP max x8",
+              "amount": 8,
+              "weight": 1,
+              "icon": "/crates/icons/pp_max.png",
+              "iconKind": "item",
+              "chance": 6
+            },
+            {
+              "type": "item",
+              "id": "cobblemon_utility:goldencap",
+              "label": "IVS TOUT MAX",
+              "amount": 1,
+              "weight": 1,
+              "icon": "/crates/icons/master_ball.png",
+              "iconKind": "rarity",
+              "chance": 6
+            }
+          ],
+          "ball": "master_ball"
+        },
+        {
+          "name": "Constellation",
+          "chance": 1,
+          "rewards": [
+            {
+              "type": "command",
+              "id": "",
+              "label": "Giratina shiny",
+              "amount": 1,
+              "weight": 1,
+              "pokemon": "giratina",
+              "shiny": true,
+              "icon": "/crates/icons/constellation_ball.png",
+              "iconKind": "rarity",
+              "chance": 0.1
+            },
+            {
+              "type": "command",
+              "id": "",
+              "label": "Kyogre shiny",
+              "amount": 1,
+              "weight": 1,
+              "pokemon": "kyogre",
+              "shiny": true,
+              "icon": "/crates/icons/constellation_ball.png",
+              "iconKind": "rarity",
+              "chance": 0.1
+            },
+            {
+              "type": "command",
+              "id": "",
+              "label": "Groudon shiny",
+              "amount": 1,
+              "weight": 1,
+              "pokemon": "groudon",
+              "shiny": true,
+              "icon": "/crates/icons/constellation_ball.png",
+              "iconKind": "rarity",
+              "chance": 0.1
+            },
+            {
+              "type": "command",
+              "id": "",
+              "label": "Palkia shiny",
+              "amount": 1,
+              "weight": 1,
+              "pokemon": "palkia",
+              "shiny": true,
+              "icon": "/crates/icons/constellation_ball.png",
+              "iconKind": "rarity",
+              "chance": 0.1
+            },
+            {
+              "type": "command",
+              "id": "",
+              "label": "Dialga shiny",
+              "amount": 1,
+              "weight": 1,
+              "pokemon": "dialga",
+              "shiny": true,
+              "icon": "/crates/icons/constellation_ball.png",
+              "iconKind": "rarity",
+              "chance": 0.1
+            },
+            {
+              "type": "command",
+              "id": "",
+              "label": "Mewtwo shiny",
+              "amount": 1,
+              "weight": 1,
+              "pokemon": "mewtwo",
+              "shiny": true,
+              "icon": "/crates/icons/constellation_ball.png",
+              "iconKind": "rarity",
+              "chance": 0.1
+            },
+            {
+              "type": "command",
+              "id": "",
+              "label": "Yveltal shiny",
+              "amount": 1,
+              "weight": 1,
+              "pokemon": "yveltal",
+              "shiny": true,
+              "icon": "/crates/icons/constellation_ball.png",
+              "iconKind": "rarity",
+              "chance": 0.1
+            },
+            {
+              "type": "command",
+              "id": "",
+              "label": "Xerneas shiny",
+              "amount": 1,
+              "weight": 1,
+              "pokemon": "xerneas",
+              "shiny": true,
+              "icon": "/crates/icons/constellation_ball.png",
+              "iconKind": "rarity",
+              "chance": 0.1
+            },
+            {
+              "type": "command",
+              "id": "",
+              "label": "Rayquaza shiny",
+              "amount": 1,
+              "weight": 1,
+              "pokemon": "rayquaza",
+              "shiny": true,
+              "icon": "/crates/icons/constellation_ball.png",
+              "iconKind": "rarity",
+              "chance": 0.1
+            },
+            {
+              "type": "command",
+              "id": "",
+              "label": "Ethernatos shiny",
+              "amount": 1,
+              "weight": 1,
+              "pokemon": "eternatus",
+              "shiny": true,
+              "icon": "/crates/icons/constellation_ball.png",
+              "iconKind": "rarity",
+              "chance": 0.1
+            }
+          ],
+          "ball": "constellation_ball"
+        }
+      ]
+    }
+  ]
+}

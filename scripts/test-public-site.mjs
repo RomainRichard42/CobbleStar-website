@@ -203,3 +203,16 @@ test('species navigation links canonical neighbours once per species, including 
   assert.match(first.html,/Début du Pokédex/);assert.match(last.html,/Fin du Pokédex/);
  }finally{dexEntries=original;}
 });
+
+test('live crate catalogue exposes all rewards, accurate odds and a mechanically attached capsule',async()=>{
+ const raw=(await get('/crates/catalog.json')).html;assert.doesNotMatch(raw,/"command"\s*:|pokegiveother|give \{player\}|bal \{player\}/);
+ const catalog=JSON.parse(raw);assert.equal(catalog.crates.length,4);const counts={vote:31,nova:12,pulsar:18,quasar:25};const {html}=await get('/wiki/caisses/');const icons=new Set();
+ for(const crate of catalog.crates){const rewards=crate.tiers.flatMap(t=>t.rewards);assert.equal(rewards.length,counts[crate.id]);assert.ok(Math.abs(crate.tiers.reduce((n,t)=>n+t.chance,0)-100)<1e-8);
+  for(const tier of crate.tiers){assert.ok(Math.abs(tier.rewards.reduce((n,r)=>n+r.chance,0)-tier.chance)<1e-8);for(const r of tier.rewards){assert.ok(r.chance>0);assert.ok(html.includes(r.label.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;')));icons.add(r.icon);}}
+  const motion=JSON.parse((await get('/crates/motion-'+crate.id+'.json')).html);assert.ok(motion.selected>=0&&motion.selected<rewards.length);assert.ok(motion.frames.every(f=>f.balls.length===rewards.length&&f.balls.flat().every(Number.isFinite)));
+  for(const f of motion.frames.filter(f=>f.t>=112&&f.t<=148)){const ball=f.balls[motion.selected];assert.ok(Math.abs(ball[0]-f.claw[0])<.001);assert.ok(Math.abs(ball[2]-f.claw[2])<.001);assert.ok(Math.abs(f.claw[1]-ball[1]-4.3*motion.scale)<.001);assert.equal(f.grip,1);}
+  const held=motion.frames.find(f=>f.t===132).balls[motion.selected],pickup=motion.frames.find(f=>f.t===110).balls[motion.selected];assert.ok(held[1]>pickup[1]+5,'capsule actually rises with the closed claw');
+ }
+ for(const icon of icons)assert.equal((await get(icon)).response.status,200,icon);
+ const model=JSON.parse((await get('/crates/balls/model.json')).html);assert.ok(model.elements.some(e=>e.name==='top_outer'));assert.match(html,/Voir la prise au ralenti/);
+});

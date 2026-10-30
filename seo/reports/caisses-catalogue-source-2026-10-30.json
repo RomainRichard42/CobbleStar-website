@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-30T15:46:04.574Z",
+  "source": "Read-only Kinetic file editor, Minecraft server config/cobblestar-crates.json",
+  "sha256": "21216187e4df6d387d45e5db2bbe2f112aec4aecd56ad5384339e0104af32ff9",
+  "counts": [
+    {
+      "id": "vote",
+      "rewards": 31
+    },
+    {
+      "id": "nova",
+      "rewards": 12
+    },
+    {
+      "id": "pulsar",
+      "rewards": 18
+    },
+    {
+      "id": "quasar",
+      "rewards": 25
+    }
+  ],
+  "privateCommandsExported": false,
+  "tests": {
+    "passed": 23,
+    "failed": 0
+  },
+  "limits": [
+    "Point-in-time configuration snapshot; no automatic catalogue synchronization",
+    "Rarity icons are used when an item illustration is unavailable",
+    "Browser walkthrough uses the mod movement engine and native ball geometry; it is not a recording of Minecraft"
+  ]
+}
