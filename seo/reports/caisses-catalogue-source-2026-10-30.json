@@ -29,5 +29,195 @@
     "Point-in-time configuration snapshot; no automatic catalogue synchronization",
     "Rarity icons are used when an item illustration is unavailable",
     "Browser walkthrough uses the mod movement engine and native ball geometry; it is not a recording of Minecraft"
-  ]
+  ],
+  "published": {
+    "at": "2026-10-30T15:49:50.783Z",
+    "commit": "2306801",
+    "pagesAndAssets": [
+      {
+        "url": "/wiki/caisses/",
+        "status": 200
+      },
+      {
+        "url": "/crates/motion-vote.json",
+        "status": 200
+      },
+      {
+        "url": "/crates/motion-nova.json",
+        "status": 200
+      },
+      {
+        "url": "/crates/motion-pulsar.json",
+        "status": 200
+      },
+      {
+        "url": "/crates/motion-quasar.json",
+        "status": 200
+      },
+      {
+        "url": "/crates/balls/model.json",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/poke_ball.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/quick_ball.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/dream_ball.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/normal_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/fire_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/water_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/grass_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/electric_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/ice_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/fighting_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/poison_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/ground_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/flying_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/psychic_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/bug_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/rock_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/ghost_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/dragon_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/dark_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/steel_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/fairy_gem.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/great_ball.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/ultra_ball.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/rare_candy.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/ability_capsule.png",
+        "status": 200
+      },
+      {
+        "url": "/shop/tokens/nova.png",
+        "status": 200
+      },
+      {
+        "url": "/shop/tokens/pulsar.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/constellation_ball.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/ability_patch.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/booster_nebelia.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/booster_asteria.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/master_ball.png",
+        "status": 200
+      },
+      {
+        "url": "/shop/tokens/quasar.png",
+        "status": 200
+      },
+      {
+        "url": "/crates/icons/pp_max.png",
+        "status": 200
+      }
+    ],
+    "catalogueCounts": [
+      {
+        "id": "vote",
+        "count": 31
+      },
+      {
+        "id": "nova",
+        "count": 12
+      },
+      {
+        "id": "pulsar",
+        "count": 18
+      },
+      {
+        "id": "quasar",
+        "count": 25
+      }
+    ],
+    "browser": {
+      "mobileWidth": 390,
+      "overflow": false,
+      "clawGrabVerified": true,
+      "consoleErrors": []
+    }
+  }
 }
