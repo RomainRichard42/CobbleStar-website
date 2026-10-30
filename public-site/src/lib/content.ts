@@ -11,7 +11,7 @@ export type PublicLocals = { getWiki: () => Promise<WikiEnvelope>; getNews: () =
 export function publishedWiki(envelope: WikiEnvelope) {
   envelope = {...envelope, content:availableWiki(envelope.content)};
   const branches = envelope.content.branches.filter(b => b.visible).sort((a,b) => a.order-b.order);
-  const articles = envelope.content.articles.filter(a => a.published && branches.some(b => b.id === a.branchId)).sort((a,b) => a.order-b.order);
+  const articles = envelope.content.articles.filter(a => a.published && branches.some(b => b.id === a.branchId)).map(a=>a.id==='caisses'?{...a,hero:{asset:'/crates/nova.webp',alt:'Machine Nova de CobbleStar, pince et capsules Gobou'},modifiedAt:a.modifiedAt&&Date.parse(a.modifiedAt)>Date.parse('2026-10-30T12:15:00Z')?a.modifiedAt:'2026-10-30T12:15:00Z'}:a).sort((a,b) => a.order-b.order);
   return { ...envelope, branches: branches.filter(b=>articles.some(a=>a.branchId===b.id)), articles };
 }
 export function publishedNews(envelope: NewsEnvelope) {

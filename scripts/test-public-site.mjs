@@ -27,7 +27,7 @@ test('public routing preserves account, shop, admin and API routes',async()=>{
 test('Pokédex renders public names in Astro and stays discoverable from the wiki and sitemap',async()=>{
  const page=await get('/wiki/pokedex/');assert.equal(page.response.status,200);assert.match(page.html,/Pikachu/);assert.match(page.html,/data-asset="\/api\/pokedex\/native-pikachu\/asset"/);assert.match(page.html,/id="dex-dialog"/);assert.match(page.html,/rel="canonical" href="https:\/\/cobblestar-mc.fr\/wiki\/pokedex\/"/);assert.ok(!(page.response.headers.get('x-robots-tag')||'').includes('noindex'));
  assert.match((await get('/wiki/')).html,/href="\/wiki\/pokedex\/"/);assert.match((await get('/sitemap.xml')).html,/<loc>https:\/\/cobblestar-mc.fr\/wiki\/pokedex\/<\/loc>/);
- const shop=await get('/boutique/');assert.match(shop.html,/id="tab-jetons"/);for(const token of ['nova','pulsar','quasar']){assert.match(shop.html,new RegExp('/shop/tokens/'+token+'\\.png'));assert.equal((await get('/shop/tokens/'+token+'.png')).response.status,200);}assert.match(shop.html,/href="\/wiki\/caisses\/"/);
+ const shop=await get('/boutique/');assert.match(shop.html,/id="tab-jetons"/);for(const token of ['nova','pulsar','quasar']){assert.match(shop.html,new RegExp('/shop/tokens/'+token+'\\.png'));assert.equal((await get('/shop/tokens/'+token+'.png')).response.status,200);}assert.match(shop.html,/href="\/wiki\/caisses\/#demo-machines"/);
 });
 
 test('compact Pokédex retains every crawlable form link beyond the first visual batch',async()=>{
@@ -42,6 +42,15 @@ test('compact Pokédex retains every crawlable form link beyond the first visual
   assert.equal((html.match(/class="dex-portrait"/g)||[]).length,1,'only the reusable template contains a portrait');
   assert.doesNotMatch(html,/<canvas/);
  } finally {dexEntries=original;}
+});
+
+test('crate showcase keeps the guide indexable and loads only public display assets',async()=>{
+ const {html}=await get('/wiki/caisses/');assert.match(html,/id="demo-machines"/);assert.match(html,/Aucun jeton dépensé/);assert.match(html,/id="section-13"/);
+ assert.equal((html.match(/data-machine="/g)||[]).length,4);assert.equal((html.match(/data-crate-step="/g)||[]).length,6);
+ for(const id of ['vote','nova','pulsar','quasar']){assert.equal((await get('/crates/'+id+'.webp')).response.status,200);const {html:raw}=await get('/crates/'+id+'.json');const model=JSON.parse(raw);assert.ok(model.crate.faces.length>900);assert.ok(model.ball.faces.length>100);assert.ok(model.crate.faces.every(f=>f.p.flat().every(Number.isFinite)));assert.ok(!('rewards' in model));}
+ const motion=JSON.parse((await get('/crates/motion.json')).html);assert.equal(motion.rate,32);assert.ok(motion.frames.every(f=>f.balls.flat().every(Number.isFinite)));assert.ok(motion.frames.some(f=>f.grip===1));assert.ok(motion.frames.some(f=>f.lid===1));
+ assert.match((await get('/sitemap.xml')).html,/<loc>https:\/\/cobblestar-mc.fr\/wiki\/caisses\/<\/loc><lastmod>2026-10-30T12:15:00Z<\/lastmod>/);
+ assert.doesNotMatch(html,/<link[^>]+href="\/crates\/(?:motion|nova)\.json/);
 });
 
 test('Atlas has its own noindex page with public catalogue only and replaces the embedded tracker',async()=>{
@@ -84,7 +93,7 @@ test('unavailable activity stays absent even when an older CMS document advertis
  } finally { wiki=previous; }
 });
 test('sitemap, RSS and redirects stay canonical without indexing private pages',async()=>{
-  const map=await get('/sitemap.xml');assert.equal(map.response.status,200);assert.ok(map.html.includes('/wiki/'));assert.ok(!map.html.includes('/admin/'));assert.ok(!map.html.includes('<loc>https://cobblestar-mc.fr/compte/</loc>'));assert.ok(map.html.includes('/rejoindre/</loc><lastmod>2026-10-26</lastmod>'));for(const article of wiki.content.articles){if(article.modifiedAt)assert.ok(map.html.includes('/wiki/'+article.id+'/</loc><lastmod>'+article.modifiedAt+'</lastmod>'));}assert.ok(map.html.includes('/actualites/'+news.content.articles[0].slug+'/'));
+  const map=await get('/sitemap.xml');assert.equal(map.response.status,200);assert.ok(map.html.includes('/wiki/'));assert.ok(!map.html.includes('/admin/'));assert.ok(!map.html.includes('<loc>https://cobblestar-mc.fr/compte/</loc>'));assert.ok(map.html.includes('/rejoindre/</loc><lastmod>2026-10-26</lastmod>'));for(const article of wiki.content.articles){if(article.modifiedAt&&article.id!=='caisses')assert.ok(map.html.includes('/wiki/'+article.id+'/</loc><lastmod>'+article.modifiedAt+'</lastmod>'));}assert.ok(map.html.includes('/actualites/'+news.content.articles[0].slug+'/'));
   const rss=await get('/actualites/rss.xml');assert.equal(rss.response.status,200);assert.ok(rss.html.includes('<rss version="2.0">'));
   for(const [from,to] of [['/wiki','/wiki/'],['/wiki/index.html','/wiki/'],['/rejoindre','/rejoindre/']]){const r=await get(from);assert.equal(r.response.status,308);assert.equal(r.response.headers.get('location'),to);}
   assert.ok((await get('/robots.txt')).html.includes('Sitemap: https://cobblestar-mc.fr/sitemap.xml'));

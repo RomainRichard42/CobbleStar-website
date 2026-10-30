@@ -1,0 +1,54 @@
+{
+  "source": "CobbleStar-mod/src/main/resources/assets/cobblestar_planets/models/cosmic",
+  "generatedAt": "2026-10-30T12:10:22.057Z",
+  "files": [
+    {
+      "file": "crate_vote.json",
+      "sha256": "8aa113324f0492709a86c92c1916abcec69b467826855b5f848b0800a0e96e90"
+    },
+    {
+      "file": "ball_vote.json",
+      "sha256": "9641425c597287e795a5770158ee1b85490d50ec783a162d4c2ff019a42506af"
+    },
+    {
+      "file": "key_vote.json",
+      "sha256": "dc8f537b264edcacde4f9f79b4d1ff3cffc5bc0f9d395d54e7a0ea68b77eaad5"
+    },
+    {
+      "file": "crate_nova.json",
+      "sha256": "e93bcb63ab90ff525c625cb560d38d6b12ddea66139eb3faf700013005ff514c"
+    },
+    {
+      "file": "ball_nova.json",
+      "sha256": "1b4de812e2c833b1052e5782a15c22c12aec43f42cee2c6bbb83d925cbb3ae77"
+    },
+    {
+      "file": "key_nova.json",
+      "sha256": "c0e97d9ee66868957d937707578413bba98e108c0f1e11d07831deacc6c94fc0"
+    },
+    {
+      "file": "crate_pulsar.json",
+      "sha256": "88e29df011646233e61768dc40d898e35e3eee910956d5ca6b97d9a699fb3a64"
+    },
+    {
+      "file": "ball_pulsar.json",
+      "sha256": "78e4af505281e0d7df973eaff3c8bc56bd9658c69f110273164a12de20443b43"
+    },
+    {
+      "file": "key_pulsar.json",
+      "sha256": "a187934c7c8282e3cdf96d02811901e8eb3a2ba6b205bfa2fa757a177f125809"
+    },
+    {
+      "file": "crate_quasar.json",
+      "sha256": "0a0bf4db16a501364bd1dbcd3432671f67f7a2a26beca47f49a943bbb1ba2834"
+    },
+    {
+      "file": "ball_quasar.json",
+      "sha256": "3a67a4c4e15ded46e2b23b131eff3a9c288fbc3fec3cd90fb2aa2468e156465e"
+    },
+    {
+      "file": "key_quasar.json",
+      "sha256": "0e677b3ad65539ed029131bb7e4b2a79b3f87ba6ef49f060a7df7b2fda80827f"
+    }
+  ]
+}

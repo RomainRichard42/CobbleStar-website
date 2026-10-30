@@ -226,7 +226,7 @@ export default function ShopPage() {
             <div><h3>{id[0].toUpperCase()+id.slice(1)} {tokenPack&&<span>×4</span>}</h3><p>{tokenPack?'4 jetons pour 4 ouvertures':'1 jeton pour 1 ouverture'}</p>
             <strong className="shop-star-price"><StarsArt/>{item.starsPrice.toLocaleString('fr-FR')} <span>Stars</span></strong>
             <p className="store-token-saving">{tokenPack?`${(single.starsPrice*4-item.starsPrice).toLocaleString('fr-FR')} Stars économisées`:'Utilisable dans la machine du même nom'}</p>
-            <a href="/wiki/caisses/">Contenu et fonctionnement des machines →</a></div>
+            <a href="/wiki/caisses/#demo-machines">Voir la machine et son ouverture →</a></div>
           </article>;
         })}</div>
         <div className="store-token-note"><p>Les jetons correspondent aux anciennes clés. Une ouverture donne un lot aléatoire : consulte le contenu et les probabilités dans <code>/crates</code> en jeu.</p><p><strong>Jeton Vote :</strong> obtenu grâce aux votes et récompenses du serveur. <Link href="/vote/">Voir les votes →</Link></p><button type="button" className="store-action" onClick={()=>selectTab('stars',true)}>Voir les packs de Stars →</button></div>
