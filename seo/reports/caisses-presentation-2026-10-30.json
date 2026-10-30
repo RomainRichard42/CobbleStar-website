@@ -1,0 +1,100 @@
+{
+  "at": "2026-10-30T12:22:54.126Z",
+  "commit": "38c91c5",
+  "checks": {
+    "all200": true,
+    "oneH1": true,
+    "canonical": true,
+    "indexable": true,
+    "sixSteps": true,
+    "fourMachines": true,
+    "shopLinks": true,
+    "sitemapDate": true,
+    "structuredData": true
+  },
+  "assets": [
+    {
+      "path": "/wiki/caisses/",
+      "status": 200,
+      "bytes": 25180
+    },
+    {
+      "path": "/boutique/",
+      "status": 200,
+      "bytes": 37045
+    },
+    {
+      "path": "/sitemap.xml",
+      "status": 200,
+      "bytes": 73943
+    },
+    {
+      "path": "/crates/vote.json",
+      "status": 200,
+      "bytes": 140394
+    },
+    {
+      "path": "/crates/vote.webp",
+      "status": 200,
+      "bytes": 41444
+    },
+    {
+      "path": "/crates/nova.json",
+      "status": 200,
+      "bytes": 145463
+    },
+    {
+      "path": "/crates/nova.webp",
+      "status": 200,
+      "bytes": 39078
+    },
+    {
+      "path": "/crates/pulsar.json",
+      "status": 200,
+      "bytes": 148785
+    },
+    {
+      "path": "/crates/pulsar.webp",
+      "status": 200,
+      "bytes": 37932
+    },
+    {
+      "path": "/crates/quasar.json",
+      "status": 200,
+      "bytes": 154122
+    },
+    {
+      "path": "/crates/quasar.webp",
+      "status": 200,
+      "bytes": 38272
+    },
+    {
+      "path": "/crates/motion.json",
+      "status": 200,
+      "bytes": 132807
+    }
+  ],
+  "tests": {
+    "passed": 22,
+    "failed": 0
+  },
+  "browser": {
+    "desktop": "1280x720",
+    "mobile": "390x844",
+    "machines": [
+      "vote",
+      "nova",
+      "pulsar",
+      "quasar"
+    ],
+    "animation": "opt-in only",
+    "mobileStepNavigation": true,
+    "horizontalOverflow": false,
+    "consoleErrors": []
+  },
+  "limits": [
+    "Demonstrates mechanism only; no live reward catalogue or probabilities",
+    "Search Console evidence covers four inspected URLs, not all indexed pages"
+  ],
+  "sitemapLastmod": "2026-10-30T12:15:00Z"
+}
