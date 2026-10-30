@@ -1,10 +1,11 @@
 import * as THREE from 'three';
 import {createBallFactory} from './crate-ball';
+import catalog from '../../static/crates/catalog.json';
 type Model={palette:number[];tokenSlot?:number[];tokenYaw?:number;faces:{part:string;material:number;alpha:number;p:number[][]}[]};
 type Frame={t:number;claw:number[];carriage:number[];grip:number;lid:number;roll:number;squash:number;balls:number[][]};
 type Motion={selected:number;scale:number;end:number;rate:number;angles:number[];frames:Frame[]};
 export async function createCrateScene(host:HTMLElement,id:string){
- const [model,motion,catalog]=await Promise.all([fetch('/crates/'+id+'.json').then(r=>{if(!r.ok)throw Error('model');return r.json() as Promise<Record<string,Model>>;}),fetch('/crates/motion-'+id+'.json').then(r=>{if(!r.ok)throw Error('motion');return r.json() as Promise<Motion>;} ),fetch('/crates/catalog.json').then(r=>r.json())]);
+ const [model,motion]=await Promise.all([fetch('/crates/'+id+'.json').then(r=>{if(!r.ok)throw Error('model');return r.json() as Promise<Record<string,Model>>;}),fetch('/crates/motion-'+id+'.json?v='+encodeURIComponent(catalog.checkedAt)).then(r=>{if(!r.ok)throw Error('motion');return r.json() as Promise<Motion>;} )]);
  const crate=catalog.crates.find((c:any)=>c.id===id),rewards=crate.tiers.flatMap((tier:any)=>tier.rewards.map((r:any)=>({...r,tier:tier.name,ball:tier.ball}))),winner=rewards[motion.selected];
  const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:'low-power'});
  renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.setClearColor(0,0);renderer.outputColorSpace=THREE.SRGBColorSpace;
