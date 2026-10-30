@@ -1,0 +1,321 @@
+{
+  "date": "2026-10-30",
+  "checkedAt": "2026-10-30T11:16:58.314Z",
+  "technical": {
+    "report": "audit-2026-10-30T11-10-36Z.json",
+    "pages": 1057,
+    "errors": [],
+    "warnings": [],
+    "metrics": {
+      "home": {
+        "htmlBytes": 27773,
+        "scriptFiles": 6,
+        "scriptBytes": 29696,
+        "inlineScriptBytes": 347,
+        "totalScriptBytes": 30043
+      },
+      "cloudflareEmailLinks": 1059,
+      "checkedLinks": 6372,
+      "checkedImages": 30,
+      "checkedDocuments": 1060,
+      "maxClickDepth": 2,
+      "crawlerHttpStatus": 200
+    },
+    "previous": {
+      "pages": 1057,
+      "errors": 0,
+      "warnings": 0,
+      "metrics": {
+        "home": {
+          "htmlBytes": 27773,
+          "scriptFiles": 6,
+          "scriptBytes": 29697,
+          "inlineScriptBytes": 347,
+          "totalScriptBytes": 30044
+        },
+        "cloudflareEmailLinks": 1059,
+        "checkedLinks": 6366,
+        "checkedImages": 30,
+        "checkedDocuments": 1059,
+        "maxClickDepth": 2,
+        "crawlerHttpStatus": 200
+      }
+    },
+    "dexHtmlBytes": 1031119
+  },
+  "google": {
+    "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+    "tracked": 46,
+    "firstPagesLoaded": 46,
+    "present": 19,
+    "notObserved": 23,
+    "automaticallyReplaced": 4,
+    "brandOrganicRank": 1,
+    "changes": [
+      {
+        "query": "cobblestar",
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/boutique/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/rejoindre/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      {
+        "query": "launcher cobblestar",
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/telecharger/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      {
+        "query": "télécharger cobblestar",
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/telecharger/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/rejoindre/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      {
+        "query": "pension cobblestar",
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/roadmap/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/commandes/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      {
+        "query": "reproduction cobblemon cobblestar",
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      {
+        "query": "métiers cobblestar",
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/roadmap/"
+        ],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      {
+        "query": "gts cobblestar",
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/gts/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      {
+        "query": "vendre pokemon cobblemon cobblestar",
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/gts/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/pokesell/",
+          "https://cobblestar-mc.fr/wiki/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      {
+        "query": "épreuves badges cobblestar",
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/grades/"
+        ],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      {
+        "query": "ranked cobblestar",
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/grades/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/commandes/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      {
+        "query": "grades gratuits cobblestar",
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/grades/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      {
+        "query": "club claim cobblestar",
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "resultats_elargis",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      {
+        "query": "certification sga cobblestar",
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/galerie/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/commandes/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      {
+        "query": "pokemon star cobblestar",
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/pokemon-star/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "resultats_elargis",
+        "comparableWithoutCorrectionCaveat": false
+      }
+    ],
+    "limits": [
+      "CAPTCHA rencontré le 30 octobre à 11:13:34 UTC lors du clic sur la recherche exacte « wiki cobblestar ». Arrêt des recherches Google, aucun contournement.",
+      "Non vérifiées pour leur orthographe exacte : wiki cobblestar, raids cobblestar, battle pass cobblestar, cosmedex cobblestar.",
+      "Absence en première page ne prouve ni désindexation ni position au-delà de cette page."
+    ],
+    "genericFirstPage": "Aucune URL CobbleStar observée sur les expressions généralistes vérifiées."
+  },
+  "searchConsole": {
+    "report": "search-console-2026-10-30T11-10-36Z.json",
+    "periodStart": "2026-10-25",
+    "periodEnd": "2026-10-28",
+    "clicks": 1,
+    "impressions": 34,
+    "ctrPercent": 2.9,
+    "averagePosition": 6.1,
+    "previous": {
+      "periodStart": "2026-10-25",
+      "periodEnd": "2026-10-27",
+      "clicks": 1,
+      "impressions": 6,
+      "ctrPercent": 16.7,
+      "averagePosition": 12.8
+    },
+    "limits": [
+      "Données du 25 au 28 octobre : pas de mesure des 29 et 30 octobre.",
+      "Très faible volume ; les variations ne constituent pas une tendance robuste.",
+      "Les recherches effectuées pour cet audit peuvent elles-mêmes contribuer aux impressions, particulièrement sur la marque.",
+      "Requêtes anonymisées non affichées ; segmentation marque/hors marque incomplète.",
+      "Pages découvertes dans le sitemap ne signifient pas pages indexées."
+    ],
+    "indexing": "processing",
+    "sitemap": {
+      "status": "Success",
+      "lastRead": "2026-10-28",
+      "discoveredPages": 1062,
+      "currentServedPages": 1057
+    }
+  },
+  "mobile": {
+    "report": "mobile-2026-10-30T11-10-36Z.json",
+    "result": "Six pages contrôlées à 390 px sans débordement du document ni image chargée cassée ; accueil et collection examinés visuellement.",
+    "limits": "Émulation navigateur, pas de mesure sur téléphone physique ni de Core Web Vitals terrain."
+  },
+  "improvement": {
+    "path": "/wiki/pokedex/#suivre-ma-collection",
+    "change": "Guide des favoris, chasses, objectifs Star/chromatiques et règles de comptage équipe + PC ; préouverture explicitée.",
+    "commit": "a01b01c",
+    "validation": [
+      "Build Astro réussi",
+      "20 tests publics/session réussis"
+    ],
+    "deployment": "Publié et vérifié dans le HTML public",
+    "publicationReport": "publication-2026-10-30T11-10-36Z.json"
+  },
+  "priorities": [
+    {
+      "priority": "P1",
+      "page": "/wiki/pokedex/",
+      "action": "Réduire les 1,03 Mo de HTML initial tout en conservant les liens explorables vers chaque espèce.",
+      "success": "Diminution mesurée du HTML, fiches toujours atteignables depuis le catalogue et absence de régression mobile."
+    },
+    {
+      "priority": "P1",
+      "pages": [
+        "/wiki/pokedex/eevee/",
+        "/wiki/pokedex/riolu/",
+        "/wiki/gts/",
+        "/wiki/pokemon-star/"
+      ],
+      "action": "Contrôler la couverture réelle des fiches et guides dans Search Console dès que le rapport sera prêt.",
+      "success": "Statuts d’indexation et canoniques choisies documentés ; ne pas confondre sitemap découvert et indexation."
+    },
+    {
+      "priority": "P1",
+      "pages": [
+        "/minecraft-pokemon/",
+        "/installer-cobblemon/",
+        "/"
+      ],
+      "action": "Consolider les réponses aux intentions hors marque avec les données Search Console et des captures authentiques dès leur disponibilité ; reprendre les quatre requêtes Google non vérifiées lors du prochain audit.",
+      "success": "Nouveaux relevés sans blocage et suivi des impressions hors marque, sans promesse de rang."
+    }
+  ],
+  "preserved": [
+    "Préouverture",
+    "Téléchargement launcher désactivé",
+    "PokéPark absent",
+    "Collection privée hors sitemap",
+    "Comptes, API, bot et administration non modifiés"
+  ]
+}

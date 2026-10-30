@@ -1,0 +1,2583 @@
+{
+  "checkedAt": "2026-10-30T11:15:03.360Z",
+  "date": "2026-10-30",
+  "site": "https://cobblestar-mc.fr",
+  "method": "Google France en français ; premières pages lues dans le navigateur",
+  "summary": {
+    "tracked": 46,
+    "firstPagesLoaded": 46,
+    "present": 19,
+    "notObserved": 23,
+    "automaticallyReplaced": 4,
+    "brandOrganicRank": 1
+  },
+  "limits": [
+    "CAPTCHA rencontré le 30 octobre à 11:13:34 UTC lors du clic sur la recherche exacte « wiki cobblestar ». Arrêt des recherches Google, aucun contournement.",
+    "Non vérifiées pour leur orthographe exacte : wiki cobblestar, raids cobblestar, battle pass cobblestar, cosmedex cobblestar.",
+    "Absence en première page ne prouve ni désindexation ni position au-delà de cette page."
+  ],
+  "results": [
+    {
+      "query": "cobblestar",
+      "target": "/",
+      "checkedAt": "2026-10-30T11:11:31.619Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [
+        "https://cobblestar-mc.fr/",
+        "https://cobblestar-mc.fr/boutique/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Cobblestar Studios [Cobblemon] - Minecraft Data Pack",
+          "url": "https://modrinth.com/project/390OOH2p"
+        },
+        {
+          "title": "Cobblestar - Minecraft Semi Vanilla Server IP",
+          "url": "https://minecraft-server-list.com/server/515371/"
+        },
+        {
+          "title": "[TUTO] COMMENT INSTALLER COBBLEMON Star Academy & ...",
+          "url": "https://www.youtube.com/watch?v=bw8FOXNJITE"
+        },
+        {
+          "title": "Cobblemon - Star Academy (Legacy) - Minecraft Modpacks",
+          "url": "https://www.curseforge.com/minecraft/modpacks/cobblemon-star-academy"
+        },
+        {
+          "title": "Cobblemon Academy: Accueil",
+          "url": "https://cobblemon-academy.fr/"
+        },
+        {
+          "title": "COBBLESTAR LTD overview - Companies House - GOV.UK",
+          "url": "https://find-and-update.company-information.service.gov.uk/company/08131673"
+        },
+        {
+          "title": "Cobblestar Studios [Cobblemon] - Gallery",
+          "url": "https://modrinth.com/datapack/cobblestar-studios/gallery"
+        }
+      ],
+      "observedOrganicRank": 1,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/boutique/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/rejoindre/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "serveur cobblemon",
+      "target": "/",
+      "checkedAt": "2026-10-30T11:11:40.463Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Cobblemon Servers",
+          "url": "https://cobblemon.com/en/servers"
+        },
+        {
+          "title": "Serveur Cobblemon | Liste de Serveur Minecraft",
+          "url": "https://www.serveursminecraft.org/serveur/7260/"
+        },
+        {
+          "title": "Tropimon | TROPIMON • Serveur Cobblemon FR Nº1",
+          "url": "https://tropimon.fr/"
+        },
+        {
+          "title": "Accueil • Cobblemon Ultra FR • Serveur Minecraft Pokémon",
+          "url": "https://cobblemon-ultra.fr/"
+        },
+        {
+          "title": "Cobblemoon: Accueil",
+          "url": "https://cobblemoon.fr/"
+        },
+        {
+          "title": "Top 10 serveurs Cobblemon français 2026 : comparatif et ...",
+          "url": "https://pixelmongo.fr/news/top-10-serveurs-cobblemon-francais-2026-comparatif-guide"
+        },
+        {
+          "title": "Installer Cobblemon Academy 2.0 (Client & Serveur Minecraft)",
+          "url": "https://www.youtube.com/watch?v=tEDCJ9ahwGc"
+        },
+        {
+          "title": "Comment héberger un serveur Cobblemon en 2026",
+          "url": "https://minestrator.com/blog/article/comment-heberger-un-serveur-cobblemon-en-2026"
+        },
+        {
+          "title": "PokeIsland: Accueil",
+          "url": "https://pokeisland.fr/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=serveur%20cobblemon",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "serveur cobblemon français",
+      "target": "/",
+      "checkedAt": "2026-10-30T11:11:41.742Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Tropimon | TROPIMON • Serveur Cobblemon FR Nº1",
+          "url": "https://tropimon.fr/"
+        },
+        {
+          "title": "Accueil • Cobblemon Ultra FR • Serveur Minecraft Pokémon",
+          "url": "https://cobblemon-ultra.fr/"
+        },
+        {
+          "title": "Top 10 serveurs Cobblemon français 2026 : comparatif et ...",
+          "url": "https://pixelmongo.fr/news/top-10-serveurs-cobblemon-francais-2026-comparatif-guide"
+        },
+        {
+          "title": "Cobblemoon: Accueil",
+          "url": "https://cobblemoon.fr/"
+        },
+        {
+          "title": "Serveur Cobblemon | Liste de Serveur Minecraft",
+          "url": "https://www.serveursminecraft.org/serveur/7260/"
+        },
+        {
+          "title": "Cobblemon Servers",
+          "url": "https://cobblemon.com/en/servers"
+        },
+        {
+          "title": "Karamon : serveur Minecraft Cobblemon (Pokémon) français",
+          "url": "https://karamon.fr/"
+        },
+        {
+          "title": "Serveur Minecraft Cobblemon Academy 2.0",
+          "url": "https://www.oxygenserv.com/serveur-minecraft-cobblemon-academy-2-0"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=serveur%20cobblemon%20fran%C3%A7ais",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "serveur cobblemon fr",
+      "target": "/",
+      "checkedAt": "2026-10-30T11:11:42.714Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Tropimon | TROPIMON • Serveur Cobblemon FR Nº1",
+          "url": "https://tropimon.fr/"
+        },
+        {
+          "title": "Cobblemon Servers",
+          "url": "https://cobblemon.com/en/servers"
+        },
+        {
+          "title": "Cobblemoon: Accueil",
+          "url": "https://cobblemoon.fr/"
+        },
+        {
+          "title": "Top 10 serveurs Cobblemon français 2026 : comparatif et ...",
+          "url": "https://pixelmongo.fr/news/top-10-serveurs-cobblemon-francais-2026-comparatif-guide"
+        },
+        {
+          "title": "Accueil • Cobblemon Ultra FR • Serveur Minecraft Pokémon",
+          "url": "https://cobblemon-ultra.fr/"
+        },
+        {
+          "title": "Serveur Cobblemon | Liste de Serveur Minecraft",
+          "url": "https://www.serveursminecraft.org/serveur/7260/"
+        },
+        {
+          "title": "Cobblemon Star Academy: The BEST FR Server (Free)",
+          "url": "https://www.youtube.com/watch?v=lyi9LM-XtJQ"
+        },
+        {
+          "title": "Pixelax - Serveur Cobblemon FR",
+          "url": "https://pixelax.fr/"
+        },
+        {
+          "title": "Serveur Cobblemon Français",
+          "url": "https://arceusacademy.fr/serveur-cobblemon-fr"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=serveur%20cobblemon%20fr",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "cobblemon fr",
+      "target": "/",
+      "checkedAt": "2026-10-30T11:11:43.623Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Cobblemoon: Accueil",
+          "url": "https://cobblemoon.fr/"
+        },
+        {
+          "title": "Accueil • Cobblemon Ultra FR • Serveur Minecraft Pokémon",
+          "url": "https://cobblemon-ultra.fr/"
+        },
+        {
+          "title": "Tropimon | TROPIMON • Serveur Cobblemon FR Nº1",
+          "url": "https://tropimon.fr/"
+        },
+        {
+          "title": "Cobblemon Servers",
+          "url": "https://cobblemon.com/en/servers"
+        },
+        {
+          "title": "Cobblemon Academy: Accueil",
+          "url": "https://cobblemon-academy.fr/"
+        },
+        {
+          "title": "Serveur Cobblemon | Liste de Serveur Minecraft",
+          "url": "https://www.serveursminecraft.org/serveur/7260/"
+        },
+        {
+          "title": "Cobblemon Star Academy: The BEST FR Server (Free)",
+          "url": "https://www.youtube.com/watch?v=lyi9LM-XtJQ"
+        },
+        {
+          "title": "Serveur Cobblemon Minecraft FR - Arceus Academy",
+          "url": "https://arceusacademy.fr/"
+        },
+        {
+          "title": "Pixelax - Serveur Cobblemon FR",
+          "url": "https://pixelax.fr/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20fr",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "minecraft pokemon",
+      "target": "/minecraft-pokemon/",
+      "checkedAt": "2026-10-30T11:11:44.580Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Cobblemon - Le Mod Pokémon Ultime sur Minecraft (1.21.1)",
+          "url": "https://minecraft.fr/cobblemon-mod-pokemon-minecraft/"
+        },
+        {
+          "title": "PokeIsland: Accueil",
+          "url": "https://pokeisland.fr/"
+        },
+        {
+          "title": "Minecraft Pixelmon",
+          "url": "https://www.youtube.com/playlist?list=PL2PKD3GfkdK8HKRUnvVZMfmUWwfZKBqL8"
+        },
+        {
+          "title": "Quel est le Meilleur Mod Pokémon sur Minecraft en 2025 ?",
+          "url": "https://pixelmongo.fr/news/pixelmonvscobblemon"
+        },
+        {
+          "title": "Quelle est la meilleure façon de jouer à Pokémon dans ...",
+          "url": "https://www.reddit.com/r/feedthebeast/comments/1j4xwly/whats_the_best_way_to_play_pokemon_in_mc/?tl=fr"
+        },
+        {
+          "title": "Pixelmon Mod for Minecraft – Applications sur ...",
+          "url": "https://play.google.com/store/apps/details?id=com.modmcpe.pixelmonmod&hl=fr"
+        },
+        {
+          "title": "Top 5 des meilleurs serveurs Pokémon Minecraft français ...",
+          "url": "https://pokeisland.fr/blog/meilleurs-serveurs-pokemon-minecraft-2026/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=minecraft%20pokemon",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "pokemon minecraft",
+      "target": "/minecraft-pokemon/",
+      "checkedAt": "2026-10-30T11:11:55.424Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "PokeIsland: Accueil",
+          "url": "https://pokeisland.fr/"
+        },
+        {
+          "title": "Cobblemon - Le Mod Pokémon Ultime sur Minecraft (1.21.1)",
+          "url": "https://minecraft.fr/cobblemon-mod-pokemon-minecraft/"
+        },
+        {
+          "title": "Minecraft Pixelmon",
+          "url": "https://www.youtube.com/playlist?list=PL2PKD3GfkdK8HKRUnvVZMfmUWwfZKBqL8"
+        },
+        {
+          "title": "Pixelmon – Le mod Pokémon pour Minecraft",
+          "url": "https://www.minecraft-france.fr/pixelmon/"
+        },
+        {
+          "title": "Quelle est la meilleure façon de jouer à Pokémon dans ...",
+          "url": "https://www.reddit.com/r/feedthebeast/comments/1j4xwly/whats_the_best_way_to_play_pokemon_in_mc/?tl=fr"
+        },
+        {
+          "title": "Quel est le Meilleur Mod Pokémon sur Minecraft en 2025 ?",
+          "url": "https://pixelmongo.fr/news/pixelmonvscobblemon"
+        },
+        {
+          "title": "Jouer à Pokémon sur Minecraft 2026 : mods vs serveurs ...",
+          "url": "https://pokeisland.fr/blog/jouer-pokemon-sur-minecraft-2026/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=pokemon%20minecraft",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "mod pokemon minecraft",
+      "target": "/minecraft-pokemon/",
+      "checkedAt": "2026-10-30T11:11:56.419Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Cobblemon - Le Mod Pokémon Ultime sur Minecraft (1.21.1)",
+          "url": "https://minecraft.fr/cobblemon-mod-pokemon-minecraft/"
+        },
+        {
+          "title": "Cobblemon",
+          "url": "https://cobblemon.com/"
+        },
+        {
+          "title": "Pixelmon – Le mod Pokémon pour Minecraft",
+          "url": "https://www.minecraft-france.fr/pixelmon/"
+        },
+        {
+          "title": "Pixelmon Mod for Minecraft – Applications sur ...",
+          "url": "https://play.google.com/store/apps/details?id=com.modmcpe.pixelmonmod&hl=fr"
+        },
+        {
+          "title": "Quel est le Meilleur Mod Pokémon sur Minecraft en 2025 ?",
+          "url": "https://pixelmongo.fr/news/pixelmonvscobblemon"
+        },
+        {
+          "title": "Quelle est la meilleure façon de jouer à Pokémon dans ...",
+          "url": "https://www.reddit.com/r/feedthebeast/comments/1j4xwly/whats_the_best_way_to_play_pokemon_in_mc/?tl=fr"
+        },
+        {
+          "title": "Cobblemon - Minecraft Mods",
+          "url": "https://www.curseforge.com/minecraft/mc-mods/cobblemon"
+        },
+        {
+          "title": "PokeIsland: Accueil",
+          "url": "https://pokeisland.fr/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=mod%20pokemon%20minecraft",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "cobblemon français",
+      "target": "/minecraft-pokemon/",
+      "checkedAt": "2026-10-30T11:11:57.426Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Cobblemoon: Accueil",
+          "url": "https://cobblemoon.fr/"
+        },
+        {
+          "title": "Cobblemon : Comment Changer la Langue du Mod en ...",
+          "url": "https://pixelmongo.fr/news/cobblemon-language-changer-langue"
+        },
+        {
+          "title": "Accueil • Cobblemon Ultra FR • Serveur Minecraft Pokémon",
+          "url": "https://cobblemon-ultra.fr/"
+        },
+        {
+          "title": "Tropimon | TROPIMON • Serveur Cobblemon FR Nº1",
+          "url": "https://tropimon.fr/"
+        },
+        {
+          "title": "Cobblemon FR : le mod Pokémon pour Minecraft en français",
+          "url": "https://cobblemon-wiki.fr/articles/cobblemon-fr/"
+        },
+        {
+          "title": "Cobblemon Academy: Accueil",
+          "url": "https://cobblemon-academy.fr/"
+        },
+        {
+          "title": "Serveur Cobblemon | Liste de Serveur Minecraft",
+          "url": "https://www.serveursminecraft.org/serveur/7260/"
+        },
+        {
+          "title": "Pixelax - Serveur Cobblemon FR",
+          "url": "https://pixelax.fr/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20fran%C3%A7ais",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "jouer pokemon minecraft",
+      "target": "/minecraft-pokemon/",
+      "checkedAt": "2026-10-30T11:11:58.524Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "PokeIsland: Accueil",
+          "url": "https://pokeisland.fr/"
+        },
+        {
+          "title": "Jouer à Pokémon sur Minecraft 2026 : mods vs serveurs ...",
+          "url": "https://pokeisland.fr/blog/jouer-pokemon-sur-minecraft-2026/"
+        },
+        {
+          "title": "Quelle est la meilleure façon de jouer à Pokémon dans ...",
+          "url": "https://www.reddit.com/r/feedthebeast/comments/1j4xwly/whats_the_best_way_to_play_pokemon_in_mc/?tl=fr"
+        },
+        {
+          "title": "Comment jouer à Cobblemon : Guide d'installation ...",
+          "url": "https://pixelmongo.fr/news/comment-jouer-cobblemon-guide-installation-minecraft-premiers-pas-2026"
+        },
+        {
+          "title": "Pixelmon Mod for Minecraft – Applications sur ...",
+          "url": "https://play.google.com/store/apps/details?id=com.modmcpe.pixelmonmod&hl=fr"
+        },
+        {
+          "title": "Jouer à Cobblemoon",
+          "url": "https://wiki.cobblemoon.fr/informations/jouer-a-cobblemoon"
+        },
+        {
+          "title": "Meilleurs Serveurs Pixelmon Français Gratuits",
+          "url": "https://serveur-minecraft.com/pixelmon"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=jouer%20pokemon%20minecraft",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "serveur minecraft pokemon français",
+      "target": "/minecraft-pokemon/",
+      "checkedAt": "2026-10-30T11:11:59.497Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Meilleurs Serveurs Pixelmon Français Gratuits",
+          "url": "https://serveur-minecraft.com/pixelmon"
+        },
+        {
+          "title": "Liste de Serveur Minecraft pixelmon",
+          "url": "https://www.serveursminecraft.org/serveurs/pixelmon/1/"
+        },
+        {
+          "title": "Top 5 des meilleurs serveurs Pokémon Minecraft français ...",
+          "url": "https://pokeisland.fr/blog/meilleurs-serveurs-pokemon-minecraft-2026/"
+        },
+        {
+          "title": "Accueil • Cobblemon Ultra FR • Serveur Minecraft Pokémon",
+          "url": "https://cobblemon-ultra.fr/"
+        },
+        {
+          "title": "Pixelax - Serveur Cobblemon FR",
+          "url": "https://pixelax.fr/"
+        },
+        {
+          "title": "PixelmonFR — 13 ans d'histoire (2013–2026) · Le premier ...",
+          "url": "https://pixelmon.fr/"
+        },
+        {
+          "title": "Tropimon | TROPIMON • Serveur Cobblemon FR Nº1",
+          "url": "https://tropimon.fr/"
+        },
+        {
+          "title": "Rejoignez-nous sur Pixelax, le serveur Minecraft ... - Margxt",
+          "url": "https://www.margxt.fr/rejoignez-nous-sur-pixelax-le-serveur-minecraft-cobblemon-francais/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=serveur%20minecraft%20pokemon%20fran%C3%A7ais",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "installer cobblemon",
+      "target": "/installer-cobblemon/",
+      "checkedAt": "2026-10-30T11:12:00.100Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Comment installer Cobblemon - PokeLegends",
+          "url": "https://pokelegends.fr/blog/comment-installer-cobblemon"
+        },
+        {
+          "title": "Installer Cobblemon | Guide Complet 2026",
+          "url": "https://pixelmongo.fr/news/installer-cobblemon-minecraft-guide-etape-par-etape"
+        },
+        {
+          "title": "Cobblemon",
+          "url": "https://cobblemon.com/"
+        },
+        {
+          "title": "Comment installer le modpack Cobblemon: Star Academy",
+          "url": "https://www.ouiheberg.com/fr/blog/comment-installer-le-modpack-cobblemon-star-academy"
+        },
+        {
+          "title": "Jouer à Cobblemoon",
+          "url": "https://wiki.cobblemoon.fr/informations/jouer-a-cobblemoon"
+        },
+        {
+          "title": "Comment installer Cobblemon Star Academy sur son ...",
+          "url": "https://octoheberg.fr/fr/blog/comment-installer-cobblemon-star-academy-sur-son-serveur-minecraft"
+        },
+        {
+          "title": "[tutorial] how to install cobblemon academy season 2 ...",
+          "url": "https://www.youtube.com/watch?v=RR1TJUwavww"
+        },
+        {
+          "title": "Cobblemon Launcher : installation et configuration complète",
+          "url": "https://pixelmongo.fr/news/cobblemon-launcher-installation"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=installer%20cobblemon",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "comment installer cobblemon",
+      "target": "/installer-cobblemon/",
+      "checkedAt": "2026-10-30T11:12:01.054Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Comment installer Cobblemon - PokeLegends",
+          "url": "https://pokelegends.fr/blog/comment-installer-cobblemon"
+        },
+        {
+          "title": "[ COBBLEMON FR ] Comment installer Cobblemon ? [ 1.21.1 ]",
+          "url": "https://www.youtube.com/watch?v=L4PBNBqp7Kg"
+        },
+        {
+          "title": "Installer Cobblemon Academy 2.0 (Client & Serveur Minecraft)",
+          "url": "https://www.youtube.com/watch?v=tEDCJ9ahwGc"
+        },
+        {
+          "title": "Installer Cobblemon | Guide Complet 2026",
+          "url": "https://pixelmongo.fr/news/installer-cobblemon-minecraft-guide-etape-par-etape"
+        },
+        {
+          "title": "How to Install COBBLEMON on MINECRAFT very EASILY?",
+          "url": "https://www.youtube.com/watch?v=S_ZkLPzUiAo"
+        },
+        {
+          "title": "Comment installer le modpack Cobblemon: Star Academy",
+          "url": "https://www.ouiheberg.com/fr/blog/comment-installer-le-modpack-cobblemon-star-academy"
+        },
+        {
+          "title": "Jouer à Cobblemoon",
+          "url": "https://wiki.cobblemoon.fr/informations/jouer-a-cobblemoon"
+        },
+        {
+          "title": "Comment installer Cobblemon sur Minecraft PC (tutoriel)",
+          "url": "https://www.tiktok.com/@nearoxyt/video/7505710215443025174"
+        },
+        {
+          "title": "Comment installer Cobblemon sur un serveur Minecraft",
+          "url": "https://help.bisecthosting.com/hc/fr/articles/44453841491227-Comment-installer-Cobblemon-sur-un-serveur-Minecraft"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=comment%20installer%20cobblemon",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "modpack cobblemon",
+      "target": "/installer-cobblemon/",
+      "checkedAt": "2026-10-30T11:12:01.953Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Cobblemon Official Modpack [NeoForge] - Minecraft",
+          "url": "https://www.curseforge.com/minecraft/modpacks/cobblemon-neoforge"
+        },
+        {
+          "title": "Cobblemon Official Modpack [Fabric] - Minecraft ...",
+          "url": "https://modrinth.com/project/5FFgwNNP"
+        },
+        {
+          "title": "Meilleurs modpacks Cobblemon | Parcourir et installer ...",
+          "url": "https://www.cobbledex.info/fr/modpack"
+        },
+        {
+          "title": "Cobblemon Academy 2.0 est un modpack centré sur la ...",
+          "url": "https://minecraft.fr/cobblemon-academy-est-un-modpack-centre-sur-la-progression-les-quetes-et-lexploration-autour-de-cobblemon/"
+        },
+        {
+          "title": "Meilleurs Modpacks Cobblemon 2025 - PixelmonGo",
+          "url": "https://pixelmongo.fr/news/cobblemon-modpack-guide"
+        },
+        {
+          "title": "Comment installer le modpack Cobblemon: Star Academy",
+          "url": "https://www.ouiheberg.com/fr/blog/comment-installer-le-modpack-cobblemon-star-academy"
+        },
+        {
+          "title": "Cobblemon",
+          "url": "https://cobblemon.com/"
+        },
+        {
+          "title": "What's the best modpack for playing Cobblemon?",
+          "url": "https://www.reddit.com/r/cobblemon/comments/1qvs76j/whats_the_best_modpack_for_playing_cobblemon/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=modpack%20cobblemon",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "cobblemon java",
+      "target": "/installer-cobblemon/",
+      "checkedAt": "2026-10-30T11:12:06.462Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Cobblemon",
+          "url": "https://www.cobblemon.com/"
+        },
+        {
+          "title": "Cobblemon - Minecraft Mods",
+          "url": "https://www.curseforge.com/minecraft/mc-mods/cobblemon"
+        },
+        {
+          "title": "Comment installer Cobblemon - PokeLegends",
+          "url": "https://pokelegends.fr/blog/comment-installer-cobblemon"
+        },
+        {
+          "title": "Cobblemon sur Bedrock : est-ce possible ? Comment jouer ?",
+          "url": "https://pixelmongo.fr/news/cobblemon-bedrock-edition"
+        },
+        {
+          "title": "Cobblemon - Minecraft Mod",
+          "url": "https://modrinth.com/mod/cobblemon/versions"
+        },
+        {
+          "title": "PokeIsland: Accueil",
+          "url": "https://pokeisland.fr/"
+        },
+        {
+          "title": "Accueil • Cobblemon Ultra FR • Serveur Minecraft Pokémon",
+          "url": "https://cobblemon-ultra.fr/"
+        },
+        {
+          "title": "Cobblemon Servers",
+          "url": "https://cobblemon.com/en/servers"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20java",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "cobblemon ne se lance pas",
+      "target": "/installer-cobblemon/",
+      "checkedAt": "2026-10-30T11:12:06.990Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Résolution des problèmes launcher",
+          "url": "https://wiki.cobblemoon.fr/informations/jouer-a-cobblemoon/resolution-des-problemes-launcher"
+        },
+        {
+          "title": "Problème Launcher",
+          "url": "https://wiki.cobblemon-ultra.fr/wiki/informations/probleme-launcher"
+        },
+        {
+          "title": "Cobblemon ne se lance pas correctement : r/Minecraft",
+          "url": "https://www.reddit.com/r/Minecraft/comments/1jht72e/cobblemon_not_launching_correctly/?tl=fr"
+        },
+        {
+          "title": "Cobblemon Launcher : installation et configuration complète",
+          "url": "https://pixelmongo.fr/news/cobblemon-launcher-installation"
+        },
+        {
+          "title": "Impossible de me connecter sur le serveur Cobblemon",
+          "url": "https://play-mc.fr/forum/d/2404-impossible-de-me-connecter-sur-le-serveur-cobblemon"
+        },
+        {
+          "title": "Mon PC plante mon jeu quand je l'ouvre, comment je fais ...",
+          "url": "https://www.reddit.com/r/cobblemon/comments/1kf9896/the_pc_crashes_my_game_when_i_open_it_how_do_i/?tl=fr"
+        },
+        {
+          "title": "cobblemon server ne démarre pas - version de java ...",
+          "url": "https://www.reddit.com/r/fabricmc/comments/1q0s83u/cobblemon_server_wont_start_incompatible_java/?tl=fr"
+        },
+        {
+          "title": "Ma survie modpack cobblemon star academy crash sans ...",
+          "url": "https://minecraft.fr/forum/threads/ma-survie-modpack-cobblemon-star-academy-crash-sans-cesse.276904/"
+        },
+        {
+          "title": "Comment installer Cobblemon Academy 2.0 : Guide ...",
+          "url": "https://www.ouiheberg.com/fr/documentation/article/comment-installer-cobblemon-academy-20-guide-complet-client-serveur"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20ne%20se%20lance%20pas",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "comment jouer à cobblemon",
+      "target": "/installer-cobblemon/",
+      "checkedAt": "2026-10-30T11:12:07.949Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Comment installer Cobblemon - PokeLegends",
+          "url": "https://pokelegends.fr/blog/comment-installer-cobblemon"
+        },
+        {
+          "title": "Jouer à Cobblemoon",
+          "url": "https://wiki.cobblemoon.fr/informations/jouer-a-cobblemoon"
+        },
+        {
+          "title": "Comment jouer à Cobblemon en solo (singleplayer)",
+          "url": "https://pixelmongo.fr/news/cobblemon-solo-singleplayer-guide"
+        },
+        {
+          "title": "Meilleure façon de commencer à jouer ? : r/cobblemon",
+          "url": "https://www.reddit.com/r/cobblemon/comments/1tyocvq/new_to_cobblemon_best_way_to_start_playing/?tl=fr"
+        },
+        {
+          "title": "Comment installer le modpack Cobblemon: Star Academy",
+          "url": "https://www.ouiheberg.com/fr/blog/comment-installer-le-modpack-cobblemon-star-academy"
+        },
+        {
+          "title": "Comment jouer à Cobblemon : Guide d'installation ...",
+          "url": "https://pixelmongo.fr/news/comment-jouer-cobblemon-guide-installation-minecraft-premiers-pas-2026"
+        },
+        {
+          "title": "Comment installer Cobblemon sur Minecraft PC (tutoriel)",
+          "url": "https://www.tiktok.com/@nearoxyt/video/7505710215443025174"
+        },
+        {
+          "title": "Comment bien débuter",
+          "url": "https://wiki.cobblemon-ultra.fr/wiki/les-tutoriels/nos-tutoriels/comment-bien-debuter"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=comment%20jouer%20%C3%A0%20cobblemon",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "cobblemon java ou bedrock",
+      "target": "/installer-cobblemon/",
+      "checkedAt": "2026-10-30T11:12:08.702Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Cobblemon sur Bedrock : est-ce possible ? Comment jouer ?",
+          "url": "https://pixelmongo.fr/news/cobblemon-bedrock-edition"
+        },
+        {
+          "title": "Quelle version de Minecraft il me faut pour Cobblemon, et ...",
+          "url": "https://www.reddit.com/r/cobblemon/comments/1i0l77s/what_version_of_minecraft_do_i_need_for_cobblemon/?tl=fr"
+        },
+        {
+          "title": "Cobblemon sur Bedrock, console ou mobile : est-ce ...",
+          "url": "https://arceusacademy.fr/news/cobblemon-bedrock-console-mobile"
+        },
+        {
+          "title": "Comment installer Cobblemon - PokeLegends",
+          "url": "https://pokelegends.fr/blog/comment-installer-cobblemon"
+        },
+        {
+          "title": "Comment installer Cobblemon sur Minecraft · Guide 2026",
+          "url": "https://cobblemon-ascent.fr/installer-cobblemon/"
+        },
+        {
+          "title": "They Finally Ported Cobblemon To Minecraft Bedrock",
+          "url": "https://www.youtube.com/watch?v=C0WEx-KSBLk"
+        },
+        {
+          "title": "Java vs Microsoft update for Minecraft : r/cobblemon",
+          "url": "https://www.reddit.com/r/cobblemon/comments/16l7sb5/java_vs_microsoft_update_for_minecraft/"
+        },
+        {
+          "title": "Can You Play Cobblemon on Bedrock or Mobile? (2026)",
+          "url": "https://www.mc-complex.com/forums/pixelmon/wiki-page/58/can-you-play-cobblemon-on-bedrock-or-mobile-2026/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20java%20ou%20bedrock",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "ip cobblestar",
+      "target": "/rejoindre/",
+      "checkedAt": "2026-10-30T11:12:09.346Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [
+        "https://cobblestar-mc.fr/",
+        "https://cobblestar-mc.fr/rejoindre/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Cobblestar - Minecraft Semi Vanilla Server IP",
+          "url": "https://minecraft-server-list.com/server/515371/"
+        },
+        {
+          "title": "CobbleStory Minecraft Server | IP, Similar Servers, Vote ...",
+          "url": "https://minecraft.buzz/server/cobblestory"
+        },
+        {
+          "title": "CobbleStory - Serveur Cobblemon FR IP & Information",
+          "url": "https://top-mc-servers.net/server/394"
+        },
+        {
+          "title": "Cobblemon Server IP",
+          "url": "https://www.mc-complex.com/cobblemon/"
+        },
+        {
+          "title": "cobblemon - IP, players and Minecraft server info",
+          "url": "https://mcserv.org/servers/cobblemon-bnzsaternosme"
+        },
+        {
+          "title": "CobbleStory - Meilleur Cobblemon FR IP & Vote",
+          "url": "https://mcservertime.com/server-cobblestory-meilleur-cobblemon-fr.2591"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=ip%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "rejoindre cobblestar",
+      "target": "/rejoindre/",
+      "checkedAt": "2026-10-30T11:12:10.061Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [
+        "https://cobblestar-mc.fr/rejoindre/",
+        "https://cobblestar-mc.fr/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Comment installer Cobblemon Star Academy 2.0 sur un ...",
+          "url": "https://www.hosterfy.com/fr/articles/post/comment-installer-cobblemon-star-academy-sur-un-serveur-minecraft-131"
+        },
+        {
+          "title": "Comment installer Cobblemon Star Academy sur son ...",
+          "url": "https://octoheberg.fr/fr/blog/comment-installer-cobblemon-star-academy-sur-son-serveur-minecraft"
+        },
+        {
+          "title": "Comment installer le modpack Cobblemon: Star Academy",
+          "url": "https://www.ouiheberg.com/fr/blog/comment-installer-le-modpack-cobblemon-star-academy"
+        },
+        {
+          "title": "Cobblemon Star Academy Wiki — Guide officiel PixelMongo",
+          "url": "https://pixelmongo.fr/wiki/academy-cobblemon/cobblemon-star-academy-wiki"
+        },
+        {
+          "title": "Cobblemon Academy 2.0 : guide du modpack et serveur ...",
+          "url": "https://helloserv.fr/fr/blog/creer-serveur-cobblemon-academy-2-0"
+        },
+        {
+          "title": "Guide complet pour Cobblemon Star Academy",
+          "url": "https://guidactik.com/minecraft/guide-cobblemon-star-academy/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=rejoindre%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "installer cobblemon serveur fr",
+      "target": "/rejoindre/",
+      "checkedAt": "2026-10-30T11:12:10.726Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Comment installer Cobblemon en 2025 — Guide débutant ...",
+          "url": "https://pixelmongo.fr/news/comment-installer-cobblemon-2025"
+        },
+        {
+          "title": "Comment installer Cobblemon sur un serveur Minecraft",
+          "url": "https://help.bisecthosting.com/hc/fr/articles/44453841491227-Comment-installer-Cobblemon-sur-un-serveur-Minecraft"
+        },
+        {
+          "title": "Installer Cobblemon Academy 2.0 - Tuto 2026",
+          "url": "https://minestrator.com/blog/article/installer-cobblemon-academy-2-0-serveur-minecraft-2026"
+        },
+        {
+          "title": "Créer un serveur Cobblemon : le guide complet",
+          "url": "https://cobblemon-ascent.fr/creer-serveur-cobblemon/"
+        },
+        {
+          "title": "Comment installer Cobblemon - PokeLegends",
+          "url": "https://pokelegends.fr/blog/comment-installer-cobblemon"
+        },
+        {
+          "title": "Jouer et configurer un serveur Minecraft Cobblemon",
+          "url": "https://server.nitrado.net/fr-FR/guides/jouer-et-configurer-un-serveur-minecraft-cobblemon"
+        },
+        {
+          "title": "Launcher • Cobblemon Ultra FR • Serveur Minecraft ...",
+          "url": "https://cobblemon-ultra.fr/launcher"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=installer%20cobblemon%20serveur%20fr",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "launcher cobblestar",
+      "target": "/telecharger/",
+      "checkedAt": "2026-10-30T11:12:11.244Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Essayez avec l'orthographe launcher cobblestar uniquement."
+      ],
+      "observedPages": [
+        "https://cobblestar-mc.fr/telecharger/",
+        "https://cobblestar-mc.fr/rejoindre/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Cobblemon Launcher : installation et configuration complète",
+          "url": "https://pixelmongo.fr/news/cobblemon-launcher-installation"
+        },
+        {
+          "title": "Launcher | TROPIMON • Serveur Cobblemon FR Nº1",
+          "url": "https://tropimon.fr/launcher"
+        },
+        {
+          "title": "Launcher | PokéAcademy • Serveur Cobblemon FR",
+          "url": "https://pokeacademy.fr/launcher"
+        },
+        {
+          "title": "Téléchargement - Pixelcraft Studios",
+          "url": "https://pixelcraft-studios.fr/telechargement"
+        },
+        {
+          "title": "Launcher • Cobblemon Ultra FR • Serveur Minecraft ...",
+          "url": "https://cobblemon-ultra.fr/launcher"
+        },
+        {
+          "title": "Jouer",
+          "url": "https://cobblemoon.fr/join"
+        },
+        {
+          "title": "Rejoignez-nous — Poke Cobble 2.0",
+          "url": "https://pokecobble2.fr/rejoignez-nous/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=launcher%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/telecharger/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "télécharger cobblestar",
+      "target": "/telecharger/",
+      "checkedAt": "2026-10-30T11:12:12.159Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [
+        "https://cobblestar-mc.fr/telecharger/",
+        "https://cobblestar-mc.fr/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "v1.01 - Cobblestar Studios [Cobblemon]",
+          "url": "https://modrinth.com/datapack/cobblestar-studios/version/v1.01"
+        },
+        {
+          "title": "Comment installer Cobblemon Star Academy 2.0 sur un ...",
+          "url": "https://www.hosterfy.com/fr/articles/post/comment-installer-cobblemon-star-academy-sur-un-serveur-minecraft-131"
+        },
+        {
+          "title": "Comment installer le modpack Cobblemon: Star Academy",
+          "url": "https://www.ouiheberg.com/fr/blog/comment-installer-le-modpack-cobblemon-star-academy"
+        },
+        {
+          "title": "Téléchargement - Pixelcraft Studios",
+          "url": "https://pixelcraft-studios.fr/telechargement"
+        },
+        {
+          "title": "Comment installer « Cobblemon - Star Academy (Legacy)",
+          "url": "https://gdlauncher.com/fr/modpacks/curseforge/cobblemon-star-academy"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=t%C3%A9l%C3%A9charger%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/telecharger/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/rejoindre/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "wiki cobblestar",
+      "target": "/wiki/",
+      "checkedAt": "2026-10-30T11:12:22.720Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "requete_remplacee_non_verifiee",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Résultats pour wiki cobblemon",
+        "Essayez avec l'orthographe wiki cobblestar"
+      ],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Cobblemon Wiki",
+          "url": "https://wiki.cobblemon.com/"
+        },
+        {
+          "title": "Cobblemoon | Wiki: Bienvenue",
+          "url": "https://wiki.cobblemoon.fr/"
+        },
+        {
+          "title": "Cobblemon Wiki, Spawns & Pokédex | Cobbledex",
+          "url": "https://www.cobbledex.info/"
+        },
+        {
+          "title": "Cobblemon Wiki - Guides, Pokédex & Documentation",
+          "url": "https://cobblemon.gg/wiki"
+        },
+        {
+          "title": "Pokemon | Cobblemoon | Wiki",
+          "url": "https://wiki.cobblemoon.fr/cobblemon/pokemon"
+        },
+        {
+          "title": "Cobblemon-Ultra 1.21.1: Accueil",
+          "url": "https://wiki.cobblemon-ultra.fr/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=wiki%20cobblestar",
+      "comparison": null,
+      "limits": [
+        "Google a remplacé la requête. La vérification exacte est interrompue après CAPTCHA ; les résultats affichés ne répondent pas à la requête demandée."
+      ]
+    },
+    {
+      "query": "guides cobblemon français",
+      "target": "/wiki/",
+      "checkedAt": "2026-10-30T11:12:23.265Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Termes manquants : français ‎| Afficher les résultats avec : français"
+      ],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Guide Débutant Cobblemon : Commencer PixelMongo | Wiki",
+          "url": "https://pixelmongo.fr/wiki/guides-cobblemon/guide-debutant-cobblemon-commencer-pixelmongo"
+        },
+        {
+          "title": "Le guide francophone de référence sur Cobblemon",
+          "url": "https://www.liste-serveurs.fr/cobblemon/"
+        },
+        {
+          "title": "Guide complet pour Cobblemon Star Academy",
+          "url": "https://guidactik.com/minecraft/guide-cobblemon-star-academy/"
+        },
+        {
+          "title": "Guide Cobblemon Minecraft 2026 : débuter, capturer et ...",
+          "url": "https://pixelmongo.fr/news/guide-cobblemon-minecraft-2026-debuter-capturer-evoluer-pokemon"
+        },
+        {
+          "title": "Cobblemon Academy 2.0 : guide du modpack et serveur ...",
+          "url": "https://helloserv.fr/fr/blog/creer-serveur-cobblemon-academy-2-0"
+        },
+        {
+          "title": "COBBLEMON STAR ACADEMY & ACADEMY 2.0",
+          "url": "https://www.youtube.com/playlist?list=PLQ9FJN68uOJzJaJTPTvMsQ14B5cu88cIi"
+        },
+        {
+          "title": "Articles et guides Cobblemon Minecraft FR",
+          "url": "https://arceusacademy.fr/articles-cobblemon"
+        },
+        {
+          "title": "Cobblemon Academy: Accueil",
+          "url": "https://cobblemon-academy.fr/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=guides%20cobblemon%20fran%C3%A7ais",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "pension cobblestar",
+      "target": "/wiki/daycare/",
+      "checkedAt": "2026-10-30T11:12:23.957Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Essayez avec cette orthographe : pension cobblestone"
+      ],
+      "observedPages": [
+        "https://cobblestar-mc.fr/",
+        "https://cobblestar-mc.fr/wiki/",
+        "https://cobblestar-mc.fr/roadmap/",
+        "https://cobblestar-mc.fr/actualites/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Chambres dans la vieille ville de Donostia",
+          "url": "https://www.pensionbretxa.com/fr/"
+        },
+        {
+          "title": "Pension Kobr Vrchlabí",
+          "url": "https://www.pensionkobr.cz/en/"
+        },
+        {
+          "title": "PENSION SAN MARTIN (Saint-Sébastien, Espagne)",
+          "url": "https://www.tripadvisor.fr/Hotel_Review-g187457-d3252822-Reviews-Pension_San_Martin-San_Sebastian_Donostia_Guipuzcoa_Province_Basque_Country.html"
+        },
+        {
+          "title": "Pensión Codesal, O Pedrouzo (updated prices 2027)",
+          "url": "https://www.booking.com/hotel/es/pension-codesal.html"
+        },
+        {
+          "title": "Pensión Codesal, O Pedrouzo - Reserving",
+          "url": "https://reserving.com/hotels/europe/spain/galicia/la-coruna/o-pedrouzo/pension-codesal"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=pension%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/roadmap/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/commandes/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "reproduction cobblemon cobblestar",
+      "target": "/wiki/daycare/",
+      "checkedAt": "2026-10-30T11:12:24.613Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Essayez avec cette orthographe : reproduction cobblemon cobble star"
+      ],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Reproduction",
+          "url": "https://wiki.cobblemoon.fr/cobblemon/reproduction"
+        },
+        {
+          "title": "Reproduction dans Cobblemon Star Academy",
+          "url": "https://www.breakflip.com/guides/11039.html"
+        },
+        {
+          "title": "Reproduction",
+          "url": "https://wiki.cobblegems.fr/les-pokemons/reproduction"
+        },
+        {
+          "title": "Cobblemon Breeding Guide Complet 2025 | CobblemonWiki",
+          "url": "https://cobblemon-wiki.fr/articles/cobblemon-breeding/"
+        },
+        {
+          "title": "guide complet des œufs, breeding et IVs parfaits 2026",
+          "url": "https://pixelmongo.fr/news/reproduction-cobblemon-guide-oeufs-breeding-ivs-parfaits-2026"
+        },
+        {
+          "title": "Reproduction",
+          "url": "https://wiki.pokeisland.fr/cobblemon/reproduction"
+        },
+        {
+          "title": "La reproduction",
+          "url": "https://wiki.cobblemon-ultra.fr/wiki/les-tutoriels/nos-tutoriels/la-reproduction"
+        },
+        {
+          "title": "Reproduction (Cobbreeding) · Wiki Cobblemon Ascent",
+          "url": "https://cobblemon-ascent.fr/wiki/pokemon/reproduction"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=reproduction%20cobblemon%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "métiers cobblestar",
+      "target": "/wiki/metiers/",
+      "checkedAt": "2026-10-30T11:12:25.632Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Termes manquants : cobblestar ‎| Afficher les résultats avec : cobblestar"
+      ],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/",
+        "https://cobblestar-mc.fr/",
+        "https://cobblestar-mc.fr/roadmap/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Les Métiers • Cobblemon Ultra FR • Serveur Minecraft ...",
+          "url": "https://www.cobblemon-ultra.fr/news/metiers"
+        },
+        {
+          "title": "Métiers",
+          "url": "https://wiki.cobblegems.fr/les-features/metiers"
+        },
+        {
+          "title": "Métiers & quêtes | Pixelax - Serveur Cobblemon FR",
+          "url": "https://pixelax.fr/wiki/lieux-importants/metiers-et-quetes"
+        },
+        {
+          "title": "Cobblemon Academy: Accueil",
+          "url": "https://cobblemon-academy.fr/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=m%C3%A9tiers%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/roadmap/"
+        ],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "jobs cobblemon cobblestar",
+      "target": "/wiki/metiers/",
+      "checkedAt": "2026-10-30T11:12:26.179Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/",
+        "https://cobblestar-mc.fr/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Guide des Pokémon Workers | Cobblemon Realms (FR)",
+          "url": "https://our-story-network.gitbook.io/cr-wiki/cr-fr/cobblemon-realms/cobbleworkers-guide"
+        },
+        {
+          "title": "Jobs Cobb - Minecraft Mods",
+          "url": "https://www.curseforge.com/minecraft/mc-mods/jobs-cobb"
+        },
+        {
+          "title": "Les Métiers • Cobblemon Ultra FR • Serveur Minecraft ...",
+          "url": "https://www.cobblemon-ultra.fr/news/metiers"
+        },
+        {
+          "title": "CobblemonJob - Minecraft Mod",
+          "url": "https://modrinth.com/project/pprL6npc"
+        },
+        {
+          "title": "Travailleurs | Pixelax - Serveur Cobblemon FR",
+          "url": "https://pixelax.fr/wiki/divers/travailleurs"
+        },
+        {
+          "title": "Pokémon Workers guide | Cobblemon Realms (EN)",
+          "url": "https://our-story-network.gitbook.io/cr-wiki/cr-en/cobblemon-realms/cobbleworkers-guide"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=jobs%20cobblemon%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "talents métiers cobblestar",
+      "target": "/wiki/talents/",
+      "checkedAt": "2026-10-30T11:12:26.799Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Essayez avec cette orthographe : talents métiers cobblestone",
+        "Termes manquants : métiers ‎| Afficher les résultats avec : métiers",
+        "Termes manquants : talents ‎| Afficher les résultats avec : talents",
+        "Termes manquants : métiers ‎| Afficher les résultats avec : métiers",
+        "Termes manquants : talents ‎cobblestar",
+        "Termes manquants : talents ‎| Afficher les résultats avec : talents"
+      ],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/",
+        "https://cobblestar-mc.fr/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Talents | Cobblemoon | Wiki",
+          "url": "https://wiki.cobblemoon.fr/cobblemoon/profil-dresseur/talents"
+        },
+        {
+          "title": "Liste des talents | Base de données Cobblemon",
+          "url": "https://www.cobbledex.info/fr/abilities"
+        },
+        {
+          "title": "Guide des Pokémon Workers | Cobblemon Realms (FR)",
+          "url": "https://our-story-network.gitbook.io/cr-wiki/cr-fr/cobblemon-realms/cobbleworkers-guide"
+        },
+        {
+          "title": "Les Métiers • Cobblemon Ultra FR • Serveur Minecraft ...",
+          "url": "https://www.cobblemon-ultra.fr/news/metiers"
+        },
+        {
+          "title": "Talents Cobblemon : Abilities et Talents Cachés",
+          "url": "https://pixelmongo.fr/wiki/mecaniques-cobblemon/talents-abilities-dans-cobblemon"
+        },
+        {
+          "title": "Métiers",
+          "url": "https://wiki.cobblegems.fr/les-features/metiers"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=talents%20m%C3%A9tiers%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "gts cobblestar",
+      "target": "/wiki/gts/",
+      "checkedAt": "2026-10-30T11:12:27.740Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Essayez avec l'orthographe gts cobblestar uniquement.",
+        "Termes manquants : cobblestar ‎| Afficher les résultats avec : cobblestar",
+        "Termes manquants : cobblestar ‎| Afficher les résultats avec : cobblestar",
+        "Termes manquants : cobblestar ‎| Afficher les résultats avec : cobblestar",
+        "Termes manquants : cobblestar ‎| Afficher les résultats avec : cobblestar"
+      ],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/gts/",
+        "https://cobblestar-mc.fr/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "GTS | Wiki CobbleGems",
+          "url": "https://wiki.cobblegems.fr/le-commerce/gts"
+        },
+        {
+          "title": "GTS | Cobblemoon | Wiki",
+          "url": "https://wiki.cobblemoon.fr/cobblemoon/economie/gts"
+        },
+        {
+          "title": "Cobblemon GTS - Minecraft Mod",
+          "url": "https://modrinth.com/project/UTjx5ypK"
+        },
+        {
+          "title": "Le GTS | Cobblemon-Ultra 1.21.1",
+          "url": "https://wiki.cobblemon-ultra.fr/wiki/utilitaires/le-gts"
+        },
+        {
+          "title": "GTS | Apex Cobblemon Wiki",
+          "url": "https://wiki.apexcobblemon.com/features/trading/gts"
+        },
+        {
+          "title": "cobble-gts - Minecraft Mods",
+          "url": "https://www.curseforge.com/minecraft/mc-mods/cobble-gts"
+        },
+        {
+          "title": "How To Use The GTS In Cobblemon! #cobblemon #shorts",
+          "url": "https://www.youtube.com/shorts/0UsMeKufrJQ?vl=fr"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=gts%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/gts/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "vendre pokemon cobblemon cobblestar",
+      "target": "/wiki/gts/",
+      "checkedAt": "2026-10-30T11:12:28.356Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Essayez avec cette orthographe : vendre pokemon cobblemon cobble star",
+        "Termes manquants : cobblestar ‎| Afficher les résultats avec : cobblestar"
+      ],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/gts/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "GTS | Cobblemoon | Wiki",
+          "url": "https://wiki.cobblemoon.fr/cobblemoon/economie/gts"
+        },
+        {
+          "title": "Qu'est-ce que tu peux vendre aux traders Pokémon en ...",
+          "url": "https://www.reddit.com/r/cobblemon/comments/1r04zlk/what_can_you_sell_to_pok%C3%A9mon_traders_in_exchange/?tl=fr"
+        },
+        {
+          "title": "Le GTS | Cobblemon-Ultra 1.21.1",
+          "url": "https://wiki.cobblemon-ultra.fr/wiki/utilitaires/le-gts"
+        },
+        {
+          "title": "GTS | Wiki CobbleGems",
+          "url": "https://wiki.cobblegems.fr/le-commerce/gts"
+        },
+        {
+          "title": "Economie | Cobblemoon | Wiki",
+          "url": "https://wiki.cobblemoon.fr/cobblemoon/economie"
+        },
+        {
+          "title": "Gagner de l'argent sur Cobblemon : les meilleures méthodes",
+          "url": "https://arceusacademy.fr/news/gagner-argent-cobblemon"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=vendre%20pokemon%20cobblemon%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/gts/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/pokesell/",
+          "https://cobblestar-mc.fr/wiki/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "incomplet_CAPTCHA",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "raids cobblestar",
+      "target": "/wiki/raids/",
+      "checkedAt": "2026-10-30T11:12:35.537Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "requete_remplacee_non_verifiee",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Résultats pour raids cobblemon",
+        "Essayez avec l'orthographe raids cobblestar"
+      ],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Raids Cobblemon : guide complet des Raids et Méga Raids",
+          "url": "https://pixelmongo.fr/wiki/mecaniques-cobblemon/cobblemon-raid-mega-raid"
+        },
+        {
+          "title": "Cobblemon Raid Dens - Minecraft Mod",
+          "url": "https://modrinth.com/project/GebWh45l"
+        },
+        {
+          "title": "Raids · Wiki Cobblemon Ascent",
+          "url": "https://cobblemon-ascent.fr/wiki/exploration/raid-dens"
+        },
+        {
+          "title": "Méga Raid",
+          "url": "https://wiki.cobblemoon.fr/cobblemoon/evenement/mega-raid"
+        },
+        {
+          "title": "Cobblemon Raid Dens - Minecraft Mods",
+          "url": "https://www.curseforge.com/minecraft/mc-mods/cobblemonraiddens/files/7022647"
+        },
+        {
+          "title": "Raids - Cobblemon Islands Guide",
+          "url": "https://wiki.cobblemonislands.com/features/raids"
+        },
+        {
+          "title": "how do i beat 5* raids : r/cobblemon",
+          "url": "https://www.reddit.com/r/cobblemon/comments/1sk0677/how_do_i_beat_5_raids/"
+        },
+        {
+          "title": "Raids Cobblemon : Comment Participer aux Méga- ...",
+          "url": "https://pixelmongo.fr/news/raids-cobblemon-mega-raids-recompenses-exclusives-2026"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=raids%20cobblestar",
+      "comparison": null,
+      "limits": [
+        "Google a remplacé la requête. La vérification exacte est interrompue après CAPTCHA ; les résultats affichés ne répondent pas à la requête demandée."
+      ]
+    },
+    {
+      "query": "épreuves badges cobblestar",
+      "target": "/wiki/epreuves/",
+      "checkedAt": "2026-10-30T11:12:36.139Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Termes manquants : épreuves ‎| Afficher les résultats avec : épreuves",
+        "Termes manquants : épreuves ‎| Afficher les résultats avec : épreuves"
+      ],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/",
+        "https://cobblestar-mc.fr/wiki/grades/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Cobblemon Academy Gym : guide des arènes et badges 2026",
+          "url": "https://cobblemon-wiki.fr/articles/cobblemon-academy-gym/"
+        },
+        {
+          "title": "Gym Leaders Cobblemon — Arènes & Badges 2026",
+          "url": "https://pixelmongo.fr/wiki/mecaniques-cobblemon/cobblemon-gym-leaders"
+        },
+        {
+          "title": "Les PREMIERS BADGES de TYPES sur COBBLEMON ! ...",
+          "url": "https://www.youtube.com/watch?v=8m0AwsPloaI"
+        },
+        {
+          "title": "8ème badge challenge monotype insecte sur #cobbleverse ...",
+          "url": "https://www.youtube.com/shorts/NCWTZxkyB9o"
+        },
+        {
+          "title": "Cap de niveau et dresseurs | Cobblemon Realms (FR)",
+          "url": "https://our-story-network.gitbook.io/cr-wiki/cr-fr/cobblemon-realms/levelcap-and-trainers"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=%C3%A9preuves%20badges%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/grades/"
+        ],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "ligue cobblestar",
+      "target": "/wiki/ligue/",
+      "checkedAt": "2026-10-30T11:12:36.706Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/",
+        "https://cobblestar-mc.fr/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Ligue Pokémon",
+          "url": "https://wiki.cobblemoon.fr/cobblemoon/navigation/zones/ligue-pokemon"
+        },
+        {
+          "title": "Comment trouver la Ligue des Quatre ? -Cobblemon",
+          "url": "https://www.reddit.com/r/cobblemon/comments/1lu0sq2/how_do_i_find_the_elite_four_cobblemon/?tl=fr"
+        },
+        {
+          "title": "Cobblemon Academy: Accueil",
+          "url": "https://cobblemon-academy.fr/"
+        },
+        {
+          "title": "Arènes | Cobblemoon | Wiki",
+          "url": "https://wiki.cobblemoon.fr/cobblemoon/navigation/zones/arenes"
+        },
+        {
+          "title": "Guide complet pour Cobblemon Star Academy",
+          "url": "https://guidactik.com/minecraft/guide-cobblemon-star-academy/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=ligue%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "ranked cobblestar",
+      "target": "/wiki/ranked/",
+      "checkedAt": "2026-10-30T11:12:37.283Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Essayez avec cette orthographe : ranked cobble star"
+      ],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/grades/",
+        "https://cobblestar-mc.fr/wiki/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Ranked | Cobblemoon | Wiki",
+          "url": "https://wiki.cobblemoon.fr/cobblemoon/ranked"
+        },
+        {
+          "title": "Cobblemon Rankeds - Minecraft Mods",
+          "url": "https://www.curseforge.com/minecraft/mc-mods/cobblemon-rankeds"
+        },
+        {
+          "title": "Ranked | Cobblemon Islands",
+          "url": "https://wiki.cobblemonislands.com/features/ranked"
+        },
+        {
+          "title": "v1.2.3 - Cobblemon Ranked",
+          "url": "https://modrinth.com/mod/cobblemon-ranked/version/v1.2.3"
+        },
+        {
+          "title": "Championship Leaderboards",
+          "url": "https://www.cobblemonchampions.com/leaderboard"
+        },
+        {
+          "title": "CobbleRanked - GashiStudios",
+          "url": "https://www.gashistudios.site/docs/cobbleranked/"
+        },
+        {
+          "title": "Cobblemon Ranked - Minecraft Mods",
+          "url": "https://www.curseforge.com/minecraft/mc-mods/cobblemon-ranked"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=ranked%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/grades/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/commandes/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "battle pass cobblestar",
+      "target": "/wiki/battlepass/",
+      "checkedAt": "2026-10-30T11:12:37.846Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "requete_remplacee_non_verifiee",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Résultats pour battle pass cobblestone",
+        "Essayez avec l'orthographe battle pass cobblestar",
+        "Termes manquants : cobblestone ‎| Afficher les résultats avec : cobblestone",
+        "Termes manquants : cobblestone ‎| Afficher les résultats avec : cobblestone",
+        "Termes manquants : pass ‎| Afficher les résultats avec : pass"
+      ],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/battlepass/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "BattlePass",
+          "url": "https://wiki.cobblegems.fr/les-features/battlepass"
+        },
+        {
+          "title": "Cobblemon Battle Pass - CobblePass - Minecraft Mods",
+          "url": "https://www.curseforge.com/minecraft/mc-mods/cobblemon-cobblepass"
+        },
+        {
+          "title": "Battlepass",
+          "url": "https://store.cobblegems.fr/category/battlepass"
+        },
+        {
+          "title": "PokéPass Cobblemon : le Battle Pass de CobbleGems expliqué",
+          "url": "https://cobblemon-wiki.fr/articles/cobblemon-pokepass-battlepass/"
+        },
+        {
+          "title": "Cobblemon BattlePass - Minecraft Mods",
+          "url": "https://www.curseforge.com/minecraft/mc-mods/cobblemon-battlepass"
+        },
+        {
+          "title": "The Cobblestone Collection (CS2 & CS:GO)",
+          "url": "https://stash.clash.gg/collection/The-Cobblestone-Collection"
+        },
+        {
+          "title": "Serveur Minecraft Skyblock Français",
+          "url": "https://excalia.fr/wiki/s3-progres-events-social/concours-de-farm"
+        },
+        {
+          "title": "Cobblestone - Counter-Strike Wiki - Fandom",
+          "url": "https://counterstrike.fandom.com/wiki/Cobblestone"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=battle%20pass%20cobblestar",
+      "comparison": null,
+      "limits": [
+        "Google a remplacé la requête. La vérification exacte est interrompue après CAPTCHA ; les résultats affichés ne répondent pas à la requête demandée."
+      ]
+    },
+    {
+      "query": "grades gratuits cobblestar",
+      "target": "/wiki/grades/",
+      "checkedAt": "2026-10-30T11:12:38.434Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Termes manquants : gratuits ‎| Afficher les résultats avec : gratuits"
+      ],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/grades/",
+        "https://cobblestar-mc.fr/wiki/boutique/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Grades & Rankup",
+          "url": "https://wiki.cobblemon-ultra.fr/wiki/utilitaires/editor"
+        },
+        {
+          "title": "Grade Discord - Serveur Cobblemon FR",
+          "url": "https://pixelax.fr/wiki/divers/grade-discord"
+        },
+        {
+          "title": "Rangs | Cobblemoon | Wiki",
+          "url": "https://wiki.cobblemoon.fr/cobblemoon/profil-dresseur/rangs"
+        },
+        {
+          "title": "Grades - Pixelcraft Studios",
+          "url": "https://pixelcraft-studios.fr/shop/categories/grades"
+        },
+        {
+          "title": "Grades",
+          "url": "https://wiki.cobblegems.fr/la-boutique/grades"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=grades%20gratuits%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/grades/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "club claim cobblestar",
+      "target": "/wiki/clubs/",
+      "checkedAt": "2026-10-30T11:12:38.998Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Essayez avec cette orthographe : club claim cobblestone",
+        "Termes manquants : club ‎cobblestar",
+        "Termes manquants : club ‎cobblestar",
+        "Termes manquants : club ‎cobblestar",
+        "Termes manquants : club ‎cobblestar",
+        "Termes manquants : club ‎| Afficher les résultats avec : club"
+      ],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/clubs/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Les Villes/Factions",
+          "url": "https://wiki.cobblemon-ultra.fr/wiki/utilitaires/les-villes-factions"
+        },
+        {
+          "title": "Claim – Divers | Wiki Pixelax",
+          "url": "https://pixelax.fr/wiki/divers/claim"
+        },
+        {
+          "title": "Les commandes",
+          "url": "https://wiki.cobblegems.fr/bienvenue-sur-cobblegems/les-commandes"
+        },
+        {
+          "title": "MINECRAFT COBBLEMON ACADEMY 2.0 (Pokérayou)",
+          "url": "https://www.youtube.com/watch?v=mYYUjfohpoA"
+        },
+        {
+          "title": "Claiming Guide",
+          "url": "https://wiki.apexcobblemon.com/info/server-guides/claiming-guide"
+        },
+        {
+          "title": "Claiming Guide - CobbleLand Wiki",
+          "url": "https://wiki.cobbleland.com/cobblemon-wiki/welcome-to-cobbleland/mechanic-guides/claiming-guide"
+        },
+        {
+          "title": "CobbleClub Network - Minecraft Server",
+          "url": "https://modrinth.com/project/XpmYqgdk"
+        },
+        {
+          "title": "Claiming Land | CobbleGalaxy Wiki",
+          "url": "https://cobblegalaxy-wiki.gitbook.io/cobblegalaxy-wiki/starting-off/home/claiming-land"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=club%20claim%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "resultats_elargis",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "cartes boosters cobblestar",
+      "target": "/wiki/album/",
+      "checkedAt": "2026-10-30T11:12:39.867Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Cartes Cobblemon Academy : boosters, raretés et bonus",
+          "url": "https://arceusacademy.fr/news/cartes-cobblemon-academy"
+        },
+        {
+          "title": "Guide des cartes à collectionner sur Minecraft, Cobblemon ...",
+          "url": "https://guidactik.com/minecraft/guide-des-cartes-sur-minecraft-cobblemon/"
+        },
+        {
+          "title": "Cobblemon Academy 2.0 : Guide Complet du Modpack Star ...",
+          "url": "https://cobblemon-wiki.fr/articles/cobblemon-academy/"
+        },
+        {
+          "title": "Booster De Cartes",
+          "url": "https://store.cobblegems.fr/package/7620069"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cartes%20boosters%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "resultats_elargis",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "certification sga cobblestar",
+      "target": "/wiki/galerie/",
+      "checkedAt": "2026-10-30T11:12:45.012Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Termes manquants : certification ‎cobblestar",
+        "Termes manquants : cobblestar ‎| Afficher les résultats avec : cobblestar",
+        "Termes manquants : cobblestar ‎| Afficher les résultats avec : cobblestar",
+        "Termes manquants : sga ‎cobblestar"
+      ],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/galerie/",
+        "https://cobblestar-mc.fr/wiki/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Nos engagements de responsabilité sociétale d'entreprise",
+          "url": "https://sga-industries.com/industries/responsabilite-societale-entreprise"
+        },
+        {
+          "title": "Quality and Certifications - ISO 14001",
+          "url": "https://www.sgatech.co.uk/page/certifications"
+        },
+        {
+          "title": "Awards",
+          "url": "https://www.sgainc.com/awards"
+        },
+        {
+          "title": "STAR Registry Entries for CobbleStone Software",
+          "url": "https://cloudsecurityalliance.org/star/registry/cobblestone-software"
+        },
+        {
+          "title": "CSA STAR: What It Is, How It Works, and Which Level You Need",
+          "url": "https://copla.com/blog/compliance-regulations/csa-star-certification-levels-guide/"
+        },
+        {
+          "title": "cs-métiers du paysage",
+          "url": "https://chlorofil.fr/diplomes/secondaire/cs/paysage"
+        },
+        {
+          "title": "CobbleStone Contract Management Software | Attestations",
+          "url": "https://www.cobblestonesoftware.com/company/attestations"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=certification%20sga%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/galerie/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/commandes/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "cosmedex cobblestar",
+      "target": "/wiki/cosmedex/",
+      "checkedAt": "2026-10-30T11:12:45.591Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "requete_remplacee_non_verifiee",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Résultats pour cosmedex cobblestone",
+        "Essayez avec l'orthographe cosmedex cobblestar"
+      ],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Tuto Cobblestone - Aubagne",
+          "url": "https://lescousins.fr/cobblestone/"
+        },
+        {
+          "title": "EMAIL MAYCO WHITE COBBLESTONE SG202 - POT DE ...",
+          "url": "https://lescousins.fr/product/email-mayco-white-cobblestone-sg202-pot-de-473ml/"
+        },
+        {
+          "title": "EMAIL MAYCO WHITE COBBLESTONE SG202",
+          "url": "https://lescousins.fr/product/email-mayco-white-cobblestone-sg202-pot-de-118ml/"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cosmedex%20cobblestar",
+      "comparison": null,
+      "limits": [
+        "Google a remplacé la requête. La vérification exacte est interrompue après CAPTCHA ; les résultats affichés ne répondent pas à la requête demandée."
+      ]
+    },
+    {
+      "query": "pokemon star cobblestar",
+      "target": "/wiki/pokemon-star/",
+      "checkedAt": "2026-10-30T11:12:46.851Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "present_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/pokemon-star/",
+        "https://cobblestar-mc.fr/"
+      ],
+      "otherObservedResults": [
+        {
+          "title": "Guide complet pour Cobblemon Star Academy",
+          "url": "https://guidactik.com/minecraft/guide-cobblemon-star-academy/"
+        },
+        {
+          "title": "COBBLEMON STAR ACADEMY & ACADEMY 2.0",
+          "url": "https://www.youtube.com/playlist?list=PLQ9FJN68uOJzJaJTPTvMsQ14B5cu88cIi"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=pokemon%20star%20cobblestar",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/pokemon-star/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/"
+        ],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "resultats_elargis",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "pokédex cobblemon français",
+      "target": "/wiki/pokedex/",
+      "checkedAt": "2026-10-30T11:12:47.372Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [
+        "Termes manquants : français ‎| Afficher les résultats avec : français",
+        "Termes manquants : français ‎| Afficher les résultats avec : français",
+        "Termes manquants : français ‎| Afficher les résultats avec : français"
+      ],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Pokédex Cobblemon : Liste Complète et ... - PixelmonGo",
+          "url": "https://pixelmongo.fr/wiki/mecaniques-cobblemon/cobblemon-pokedex-guide"
+        },
+        {
+          "title": "Évolutions par Caractéristiques dans Cobblemon",
+          "url": "https://www.cobbledex.info/fr/evolution-methods/properties"
+        },
+        {
+          "title": "Cobblemon Pokédex : Guide Complet Pokéfinder et Liste ...",
+          "url": "https://pixelmongo.fr/news/cobblemon-pokedex-guide-pokefinder-liste-pokemon-2026"
+        },
+        {
+          "title": "Pokédex",
+          "url": "https://wiki.cobblemoon.fr/cobblemon/pokedex"
+        },
+        {
+          "title": "Pokédex Cobblemon Star Academy : liste et localisation ...",
+          "url": "https://www.breakflip.com/guides/11095.html"
+        },
+        {
+          "title": "Pokédex | Pixelax - Serveur Cobblemon FR",
+          "url": "https://pixelax.fr/wiki/divers/pokedex"
+        },
+        {
+          "title": "All Pokémon Directory | Cobblemon Pokédex",
+          "url": "https://www.cobbledex.info/fr/all-mons"
+        },
+        {
+          "title": "Le Pokédex",
+          "url": "https://wiki.cobblemon-ultra.fr/wiki/utilitaires/le-pokedex"
+        },
+        {
+          "title": "Pokédex Cobblemon : Compléter sa Collection",
+          "url": "https://pixelmongo.fr/wiki/mecaniques-cobblemon/pokedex-cobblemon-completer-sa-collection"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=pok%C3%A9dex%20cobblemon%20fran%C3%A7ais",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines. Relevé indicatif : correction, élargissement ou contrôle antérieur incomplet, pas de changement certain de classement.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": false
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "cobblemon évolution évoli",
+      "target": "/wiki/pokedex/eevee/",
+      "checkedAt": "2026-10-30T11:12:48.272Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Toutes les Évolutions d'Évoli Cobblemon",
+          "url": "https://pixelmongo.fr/wiki/evolutions/toutes-les-evolutions-devoli-cobblemon"
+        },
+        {
+          "title": "Évolutions d'Évoli : r/cobblemon",
+          "url": "https://www.reddit.com/r/cobblemon/comments/1972xv8/eeveelutions/?tl=fr"
+        },
+        {
+          "title": "Évolutions d'Évoli sur Cobblemon : comment obtenir les 8 ...",
+          "url": "https://arceusacademy.fr/news/evolutions-evoli-cobblemon"
+        },
+        {
+          "title": "Cobblemon Evolution Guide",
+          "url": "https://www.cobbledex.info/evolution-guide"
+        },
+        {
+          "title": "Évoli sur Cobblemon : toutes les évolutions",
+          "url": "https://pixelmongo.fr/news/evoli-cobblemon-toutes-evolutions-2026"
+        },
+        {
+          "title": "Évolutions supplémentaires d'Évoli | Cobblemon ... - GitBook",
+          "url": "https://our-story-network.gitbook.io/cr-wiki/cr-fr/pokemon-exclusif/extra-eevee"
+        },
+        {
+          "title": "Évoli (n° 133) | Pokédex Cobblemon",
+          "url": "https://www.cobbledex.info/fr/mon/%C3%A9voli"
+        },
+        {
+          "title": "Les Évolitions - Wiki Cobblemon Academy",
+          "url": "https://narkoos-organization.gitbook.io/wiki-cobblemon-academy/les-pokemon/les-evolitions"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20%C3%A9volution%20%C3%A9voli",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    },
+    {
+      "query": "où trouver riolu cobblemon",
+      "target": "/wiki/pokedex/riolu/",
+      "checkedAt": "2026-10-30T11:12:48.889Z",
+      "method": "Google interface navigateur, hl=fr&gl=fr&pws=0, première page ; DOM après événement load",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "verifie",
+      "correctionLines": [],
+      "observedPages": [],
+      "otherObservedResults": [
+        {
+          "title": "Où est-ce que les Riolu apparaissent ? : r/cobblemon",
+          "url": "https://www.reddit.com/r/cobblemon/comments/132x9u8/where_do_riolus_spawn/?tl=fr"
+        },
+        {
+          "title": "Riolu (Riolu) Cobblemon — Guide complet Pokémon Sinnoh",
+          "url": "https://pixelmongo.fr/wiki/pokemon-sinnoh/riolu-dans-cobblemon"
+        },
+        {
+          "title": "Cobblemon Riolu : Évolution en Lucario et Guide Capture",
+          "url": "https://cobblemon-wiki.fr/articles/cobblemon-riolu/"
+        },
+        {
+          "title": "Lucario Cobblemon : comment l'obtenir et faire évoluer Riolu",
+          "url": "https://arceusacademy.fr/news/lucario-cobblemon"
+        },
+        {
+          "title": "Oh les biomes où tu vas Riolu Spawn : r/cobblemon",
+          "url": "https://www.reddit.com/r/cobblemon/comments/13nechw/oh_the_biomes_youll_go_riolu_spawn/?tl=fr"
+        },
+        {
+          "title": "Riolu | Cobblemon Pokédex",
+          "url": "https://cobblemon.tools/pokedex/pokemon/riolu"
+        }
+      ],
+      "observedOrganicRank": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=o%C3%B9%20trouver%20riolu%20cobblemon",
+      "comparison": {
+        "previousDate": "2026-10-29",
+        "enteredPages": [],
+        "exitedPages": [],
+        "limit": "Comparaison ponctuelle de pages, non de positions ; suggestions et élargissements conservés dans correctionLines.",
+        "baselineCorrectionCheck": "verifie",
+        "comparableWithoutCorrectionCaveat": true
+      },
+      "limits": [
+        "Résultats ponctuels, compte Google connecté ; pws=0 limite mais ne garantit pas l’absence de personnalisation. Aucun rang déduit des modules IA ou vidéos."
+      ]
+    }
+  ]
+}

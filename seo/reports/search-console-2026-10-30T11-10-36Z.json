@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-10-30T11:13:26.396Z",
+  "property": "https://cobblestar-mc.fr/",
+  "periodStart": "2026-10-25",
+  "periodEnd": "2026-10-28",
+  "period": "3 mois sélectionnés ; données disponibles du 25 au 28 octobre 2026",
+  "lastUpdate": "3.5 hours ago",
+  "clicks": 1,
+  "impressions": 34,
+  "ctrPercent": 2.9,
+  "averagePosition": 6.1,
+  "indexing": {
+    "status": "processing",
+    "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n2\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nPage indexing\n\nProcessing data, please check again in a day or so\ninfo_filled\nWhy pages aren’t indexed\nPages that aren’t indexed can’t be served on Google\n\nReason\n\tSource\n\n\tValidation\n\tTrend\t\nPages\n\nProcessing data, please check again in a day or so\nPage indexing"
+  },
+  "coreWebVitals": "No data mobile or desktop",
+  "queryTable": "Top queries\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition\n\nmode pokemon minecraft\t0\t1\t0%\t26.0\nmine craft pokemon\t0\t1\t0%\t29.0\ncobblemon minecraft\t0\t1\t0%\t47.0",
+  "pageTable": "Top pages\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition\n\nhttps://cobblestar-mc.fr/\t1\t13\t7.7%\t2.6\nhttps://cobblestar-mc.fr/wiki/\t0\t16\t0%\t4.8\nhttps://cobblestar-mc.fr/rejoindre/\t0\t15\t0%\t4.3\nhttps://cobblestar-mc.fr/minecraft-pokemon/\t0\t4\t0%\t27.3\nhttps://cobblestar-mc.fr/wiki/pokesell/\t0\t1\t0%\t2.0\nhttps://cobblestar-mc.fr/actualites/\t0\t1\t0%\t4.0\nhttps://cobblestar-mc.fr/wiki/pokedex/eevee/\t0\t1\t0%\t10.0",
+  "deviceTable": "Device\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition\n\nDesktop\t1\t30\t3.3%\t6.4\nTablet\t0\t3\t0%\t4.0\nMobile\t0\t1\t0%\t4.0",
+  "sitemapText": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n2\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nSitemaps\nAdd a new sitemap\nhttps://cobblestar-mc.fr/\nEnter sitemap URL\nSUBMIT\nSubmitted sitemaps\n\nSitemap\n\tType\n\tSubmitted\n\tLast read\n\tStatus\n\t\nDiscovered pages\t\nDiscovered videos\t\n/sitemap.xml\tSitemap\tOct 28, 2026\tOct 28, 2026\tSuccess\t1,062\t0\t\nRows per page:\n5\n10\n25\n50\n100\n250\n500\n1-1 of 1\n\nSitemaps",
+  "limits": [
+    "Données du 25 au 28 octobre : pas de mesure des 29 et 30 octobre.",
+    "Très faible volume ; les variations ne constituent pas une tendance robuste.",
+    "Les recherches effectuées pour cet audit peuvent elles-mêmes contribuer aux impressions, particulièrement sur la marque.",
+    "Requêtes anonymisées non affichées ; segmentation marque/hors marque incomplète.",
+    "Pages découvertes dans le sitemap ne signifient pas pages indexées."
+  ]
+}

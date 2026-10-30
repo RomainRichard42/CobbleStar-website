@@ -265,7 +265,8 @@
       "statusBeforeRequest": "Discovered - currently not indexed",
       "requestResult": "Indexing requested — URL added to a priority crawl queue",
       "indexed": false
-    }
+    },
+    "latestMeasuredReport": "seo/reports/search-console-2026-10-30T11-10-36Z.json"
   },
   "confirmedAvailability": {
     "date": "2026-10-26",
@@ -504,13 +505,14 @@
   "keywordMonitoring": {
     "frequency": "daily",
     "source": "queryMap[].queries",
-    "latestReport": "seo/reports/mots-cles-google-2026-10-28T11-06-57-752Z.json",
-    "comparisonBaseline": "seo/reports/mots-cles-google-2026-10-27.json",
+    "latestReport": "seo/reports/mots-cles-google-2026-10-30T11-10-36Z.json",
+    "comparisonBaseline": "seo/reports/mots-cles-google-2026-10-29T10-30-42Z.json",
     "method": "Google FR, première page observée ; Search Console séparée",
     "unverifiedQueries": [
-      "cosmedex cobblestar",
-      "cobblemon évolution évoli",
-      "où trouver riolu cobblemon"
+      "wiki cobblestar",
+      "raids cobblestar",
+      "battle pass cobblestar",
+      "cosmedex cobblestar"
     ]
   }
 }
