@@ -9,6 +9,6 @@ export const pageRevisions: Record<string,string> = {
   '/roadmap/':'2026-10-26',
   '/wiki/':'2026-10-27',
   '/boutique/':'2026-10-27',
-  '/wiki/pokedex/':'2026-10-27',
+  '/wiki/pokedex/':'2026-10-30',
   '/vote/':'2026-10-26',
 };
