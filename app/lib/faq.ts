@@ -50,11 +50,11 @@ export const SHOP_FAQ: ReadonlyArray<FaqEntry> = [
 export const VOTE_FAQ: ReadonlyArray<FaqEntry> = [
   {
     question: "Combien de votes faut-il pour avoir une récompense ?",
-    answer: "Un vote confirmé depuis cette page rapporte une clé pour la machine Vote. Prépare ton vote, termine-le sur l’annuaire avec ton pseudo Minecraft, puis reviens vérifier sa validation. Ouvrir le lien seul ne donne aucune clé.",
+    answer: "Un vote confirmé depuis cette page rapporte une clé pour la machine Vote. Prépare ton vote, termine-le sur le site avec ton pseudo Minecraft, puis reviens vérifier sa validation. Ouvrir le lien seul ne donne aucune clé.",
   },
   {
     question: "Peut-on voter sur plusieurs plateformes en même temps ?",
-    answer: "Oui. Top-Serveurs permet un vote toutes les 2 heures, Serveur-Privé toutes les 1 h 30 et ServeursMinecraft.org toutes les 24 heures. Chaque annuaire applique aussi ses règles de connexion et de réseau.",
+    answer: "Oui. Top-Serveurs permet un vote toutes les 2 heures, Serveur-Privé toutes les 1 h 30 et ServeursMinecraft.org toutes les 24 heures. Chaque site applique aussi ses règles de connexion et de réseau.",
   },
   {
     question: "Pourquoi ma récompense n’arrive pas ?",
