@@ -29,6 +29,10 @@ export const config = z.object({
   GAME_ADMIN_DISCORD_IDS: z.string().default(""),
   GAME_ADMIN_READ_DISCORD_IDS: z.string().default(""),
   ENABLE_TEST_PURCHASES: bool,
+  STRIPE_ENABLED: bool,
+  STRIPE_MODE: z.enum(["test", "live"]).default("test"),
+  STRIPE_SECRET_KEY: z.string().trim().default(""),
+  STRIPE_WEBHOOK_SECRET: z.string().trim().default(""),
   WIKI_ADMIN_EMAILS: z.string().default("romain.richard42400@gmail.com"),
 }).parse(process.env);
 

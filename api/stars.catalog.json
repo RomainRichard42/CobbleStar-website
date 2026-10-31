@@ -1,0 +1,7 @@
+[
+  { "id": "stars_500", "stars": 500, "amountCents": 499, "bonus": "" },
+  { "id": "stars_1100", "stars": 1100, "amountCents": 999, "bonus": "+ 10 % de Stars" },
+  { "id": "stars_2400", "stars": 2400, "amountCents": 2000, "bonus": "+ 20 % de Stars" },
+  { "id": "stars_3600", "stars": 3600, "amountCents": 3000, "bonus": "+ 20 % de Stars" },
+  { "id": "stars_6500", "stars": 6500, "amountCents": 4999, "bonus": "+ 30 % de Stars" }
+]
