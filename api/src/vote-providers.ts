@@ -67,7 +67,7 @@ export function voteProviders(settings: VoteSettings, fetcher: typeof fetch = fe
           return { voted: true, remainingSeconds: Math.ceil(json.duration * 60) };
         }
         const d = json.data;
-        if (typeof d?.username !== 'string' || !/^[A-Za-z0-9_]{3,16}$/.test(d.username) || !Number.isSafeInteger(d.voted_at) || !Number.isInteger(d.next_vote_seconds) || d.next_vote_seconds < 0 || d.next_vote_seconds > 5400) throw new Error();
+        if (typeof d?.username !== 'string' || !/^[A-Za-z0-9_]{3,16}$/.test(d.username) || !Number.isSafeInteger(d.voted_at) || d.voted_at <= 0 || !Number.isInteger(d.next_vote_seconds) || d.next_vote_seconds < 0 || d.next_vote_seconds > 5400) throw new Error();
         return { voted: true, username: d.username, votedAt: d.voted_at * 1000, remainingSeconds: d.next_vote_seconds };
       } catch { throw new VoteError('VOTE_PROVIDER_UNAVAILABLE'); }
     }

@@ -15,5 +15,6 @@ CREATE TABLE vote_attempts (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE vote_identity_locks (
-  identity_hash CHAR(64) PRIMARY KEY
+  identity_hash CHAR(64) PRIMARY KEY,
+  last_claimed_at DATETIME NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -42,9 +42,10 @@ export const voteStore: VoteStore = {
       if (latest[0] && Date.now()-latest[0].voted_at.getTime()<minutes*60000) throw new VoteError('VOTE_COOLDOWN_ACTIVE');
       if (row.ip_hash) {
         await c.execute(`INSERT IGNORE INTO vote_identity_locks(identity_hash) VALUES(?)`,[row.ip_hash]);
-        await c.execute(`SELECT identity_hash FROM vote_identity_locks WHERE identity_hash=? FOR UPDATE`,[row.ip_hash]);
-        const [claimed] = await c.execute<RowDataPacket[]>(`SELECT a.id FROM vote_attempts a JOIN vote_claims v ON v.id=a.claim_id WHERE a.vote_site=? AND a.ip_hash=? AND v.voted_at>DATE_SUB(UTC_TIMESTAMP(),INTERVAL ? MINUTE) LIMIT 1`,[row.vote_site,row.ip_hash,minutes]);
-        if (claimed.length) throw new VoteError('VOTE_PROVIDER_COOLDOWN');
+        // Locking read sees the previous commit even with MySQL REPEATABLE READ.
+        const [locks] = await c.execute<(RowDataPacket & {last_claimed_at:Date|null})[]>(`SELECT last_claimed_at FROM vote_identity_locks WHERE identity_hash=? FOR UPDATE`,[row.ip_hash]);
+        if (locks[0]?.last_claimed_at && Date.now()-locks[0].last_claimed_at.getTime()<minutes*60000) throw new VoteError('VOTE_PROVIDER_COOLDOWN');
+        await c.execute(`UPDATE vote_identity_locks SET last_claimed_at=UTC_TIMESTAMP() WHERE identity_hash=?`,[row.ip_hash]);
       }
       const id=randomUUID();
       try { await c.execute(`INSERT INTO vote_claims(id,user_id,vote_site,external_reference,reward_keys,reward_status,voted_at) VALUES(?,?,?,?,1,'pending',UTC_TIMESTAMP())`,[id,actor.id,row.vote_site,reference]); }
