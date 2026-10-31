@@ -1,0 +1,309 @@
+{
+  "date": "2026-10-31",
+  "checkedAt": "2026-10-31T11:58:58.764Z",
+  "supersedes": "suivi-quotidien-2026-10-31T11-11-45Z.json",
+  "status": "termine_avec_trois_requetes_exactes_bloquees_par_google",
+  "technical": {
+    "report": "audit-2026-10-31T11-45-54Z-production.json",
+    "pages": 1057,
+    "errors": [],
+    "warnings": [],
+    "metrics": {
+      "home": {
+        "htmlBytes": 29416,
+        "scriptFiles": 6,
+        "scriptBytes": 29862,
+        "inlineScriptBytes": 347,
+        "totalScriptBytes": 30209
+      },
+      "cloudflareEmailLinks": 1059,
+      "checkedLinks": 6375,
+      "checkedImages": 63,
+      "checkedDocuments": 1060,
+      "maxClickDepth": 2,
+      "crawlerHttpStatus": 200
+    },
+    "dexHtmlBytes": 439024
+  },
+  "google": {
+    "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+    "tracked": 46,
+    "verified": 43,
+    "present": 21,
+    "notObserved": 22,
+    "unverified": [
+      "raids cobblestar",
+      "battle pass cobblestar",
+      "cosmedex cobblestar"
+    ],
+    "brandOrganicRank": 1,
+    "genericFirstPage": "Aucune URL CobbleStar observée sur les expressions généralistes vérifiées",
+    "changes": [
+      {
+        "query": "cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/welcome/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/boutique/"
+        ],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      },
+      {
+        "query": "rejoindre cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/welcome/"
+        ],
+        "exitedPages": [],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      },
+      {
+        "query": "launcher cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/actualites/launcher-modpack/"
+        ],
+        "exitedPages": [],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      },
+      {
+        "query": "wiki cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/",
+          "https://cobblestar-mc.fr/actualites/wiki-synchronise/",
+          "https://cobblestar-mc.fr/",
+          "https://cobblestar-mc.fr/wiki/metiers/",
+          "https://cobblestar-mc.fr/wiki/ranked/"
+        ],
+        "exitedPages": [],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      },
+      {
+        "query": "pension cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/actualites/pension-pokemon/",
+          "https://cobblestar-mc.fr/wiki/daycare/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/roadmap/",
+          "https://cobblestar-mc.fr/actualites/"
+        ],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      },
+      {
+        "query": "reproduction cobblemon cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/daycare/"
+        ],
+        "exitedPages": [],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      },
+      {
+        "query": "métiers cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/metiers/",
+          "https://cobblestar-mc.fr/wiki/talents/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/",
+          "https://cobblestar-mc.fr/roadmap/"
+        ],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      },
+      {
+        "query": "jobs cobblemon cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/metiers/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/"
+        ],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      },
+      {
+        "query": "talents métiers cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/talents/",
+          "https://cobblestar-mc.fr/wiki/metiers/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/"
+        ],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      },
+      {
+        "query": "épreuves badges cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/epreuves/",
+          "https://cobblestar-mc.fr/wiki/ligue/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/",
+          "https://cobblestar-mc.fr/wiki/grades/"
+        ],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      },
+      {
+        "query": "ligue cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/ligue/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/",
+          "https://cobblestar-mc.fr/"
+        ],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      },
+      {
+        "query": "ranked cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/ranked/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/grades/",
+          "https://cobblestar-mc.fr/wiki/"
+        ],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      },
+      {
+        "query": "club claim cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/organisations/",
+          "https://cobblestar-mc.fr/wiki/deplacements/"
+        ],
+        "exitedPages": [
+          "https://cobblestar-mc.fr/wiki/clubs/"
+        ],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      },
+      {
+        "query": "cartes boosters cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/album/"
+        ],
+        "exitedPages": [],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      },
+      {
+        "query": "certification sga cobblestar",
+        "previousDate": "2026-10-30",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/album/"
+        ],
+        "exitedPages": [],
+        "limits": "Présences de pages observées, pas évolution certaine de position. Les suggestions Google éventuelles limitent la comparaison."
+      }
+    ]
+  },
+  "searchConsole": {
+    "report": "search-console-2026-10-31T11-45-54Z.json",
+    "periodStart": "2026-10-25",
+    "periodEnd": "2026-10-29",
+    "scope": "Recherche Web, tous pays, trois mois sélectionnés ; données disponibles du 25 au 29 octobre",
+    "clicks": 1,
+    "impressions": 59,
+    "ctrPercent": 1.7,
+    "averagePosition": 5.3,
+    "indexing": "processing",
+    "inspections": [
+      {
+        "url": "https://cobblestar-mc.fr/wiki/pokedex/eevee/",
+        "indexed": true,
+        "checkedAt": "2026-10-31T11:50:41.342Z"
+      },
+      {
+        "url": "https://cobblestar-mc.fr/wiki/pokedex/riolu/",
+        "indexed": true,
+        "checkedAt": "2026-10-31T11:51:48.037Z"
+      },
+      {
+        "url": "https://cobblestar-mc.fr/wiki/gts/",
+        "indexed": true,
+        "checkedAt": "2026-10-31T11:52:05.349Z"
+      },
+      {
+        "url": "https://cobblestar-mc.fr/wiki/pokemon-star/",
+        "indexed": true,
+        "checkedAt": "2026-10-31T11:52:28.424Z"
+      }
+    ],
+    "sitemap": {
+      "status": "Success",
+      "lastRead": "2026-10-30",
+      "discoveredPages": 1057
+    },
+    "limits": [
+      "Données disponibles seulement jusqu’au 29 octobre.",
+      "Très faible volume ; pas de conclusion sur une tendance durable.",
+      "Les recherches de l’audit peuvent contribuer aux impressions.",
+      "Les métriques globales ne sont pas les positions individuelles des mots-clés suivis."
+    ]
+  },
+  "mobile": {
+    "report": "mobile-2026-10-31T11-45-54Z.json",
+    "width": 390,
+    "pages": 6,
+    "overflow": false,
+    "brokenLoadedImages": 0,
+    "limits": "Émulation navigateur, pas de mesure Core Web Vitals terrain"
+  },
+  "improvement": {
+    "page": "/wiki/caisses/",
+    "commit": "c0bd830",
+    "published": true,
+    "changes": [
+      "Lien Kyogre 404 éliminé sans retirer le lot.",
+      "Liens proposés seulement pour les espèces publiées.",
+      "Explication des probabilités et garanties."
+    ],
+    "testsPassed": 24
+  },
+  "priorities": [
+    {
+      "priority": "P1",
+      "pages": [
+        "/",
+        "/minecraft-pokemon/",
+        "/installer-cobblemon/"
+      ],
+      "action": "Poursuivre le contenu utile hors marque et son suivi dans Search Console ; aucune promesse de position."
+    },
+    {
+      "priority": "P1",
+      "pages": [
+        "/wiki/pokedex/",
+        "/wiki/pokedex/eevee/",
+        "/wiki/pokedex/riolu/"
+      ],
+      "action": "Étendre progressivement les inspections d’indexation réelle lorsque le rapport global est prêt."
+    },
+    {
+      "priority": "P2",
+      "queries": [
+        "raids cobblestar",
+        "battle pass cobblestar",
+        "cosmedex cobblestar"
+      ],
+      "action": "Reprendre leurs recherches exactes au prochain relevé autorisé, sans contourner le CAPTCHA."
+    }
+  ],
+  "preserved": [
+    "Préouverture",
+    "Launcher désactivé",
+    "PokéPark absent",
+    "Comptes, API, bot et administration"
+  ]
+}

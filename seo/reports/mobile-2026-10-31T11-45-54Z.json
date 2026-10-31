@@ -1,0 +1,52 @@
+{
+  "at": "2026-10-31T11:56:57.189Z",
+  "width": 390,
+  "results": [
+    {
+      "brokenLoadedImages": [],
+      "documentWidth": 375,
+      "h1": 1,
+      "path": "/wiki/caisses/",
+      "viewport": 390
+    },
+    {
+      "brokenLoadedImages": [],
+      "documentWidth": 375,
+      "h1": 1,
+      "path": "/",
+      "viewport": 390
+    },
+    {
+      "brokenLoadedImages": [],
+      "documentWidth": 375,
+      "h1": 1,
+      "path": "/wiki/pokedex/",
+      "viewport": 390
+    },
+    {
+      "brokenLoadedImages": [],
+      "documentWidth": 375,
+      "h1": 1,
+      "path": "/wiki/pokedex/eevee/",
+      "viewport": 390
+    },
+    {
+      "brokenLoadedImages": [],
+      "documentWidth": 375,
+      "h1": 1,
+      "path": "/minecraft-pokemon/",
+      "viewport": 390
+    },
+    {
+      "brokenLoadedImages": [],
+      "documentWidth": 375,
+      "h1": 1,
+      "path": "/boutique/",
+      "viewport": 390
+    }
+  ],
+  "limits": [
+    "Émulation de navigateur, pas de téléphone physique ni de mesure Core Web Vitals.",
+    "Les images non encore chargées ne sont pas qualifiées de cassées."
+  ]
+}
