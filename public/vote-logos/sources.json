@@ -1,0 +1,18 @@
+{
+  "retrievedAt": "2026-10-31T22:04:50.511Z",
+  "logos": [
+    {
+      "file": "top-serveurs.svg",
+      "source": "https://top-serveurs.net/images/logo-base.svg"
+    },
+    {
+      "file": "serveur-prive.svg",
+      "source": "https://serveur-prive.net",
+      "note": "SVG du lien de marque du header, couleurs CSS officielles intégrées sans changer les tracés."
+    },
+    {
+      "file": "serveursminecraft.webp",
+      "source": "https://www.serveursminecraft.org/assets/images/ban.webp"
+    }
+  ]
+}
