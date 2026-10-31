@@ -22,11 +22,15 @@ test('provider replies are checked, bounded and never leak credentials',async()=
 test('OTP proof requires typed server data; SM eligibility is not a successful vote',async()=>{
  const p=voteProviders(settings,async url=>String(url).endsWith('/otp')?reply({success:true,data:{token:'ABCDEF'}}):reply({success:true,data:{username:'Dresseur',voted_at:1793480000,next_vote_seconds:5399}}));
  assert.equal(await p.otp(),'ABCDEF'); assert.equal((await p.check('serveur_prive','Dresseur','ABCDEF',null)).username,'Dresseur');
+ assert.deepEqual(await voteProviders(settings,async()=>reply({success:false,message:'No vote found with this token'},404)).check('serveur_prive','Dresseur','ABCDEF',null),{voted:false});
  assert.deepEqual(parseMinecraftEligibility('true'),{voted:false}); assert.equal(parseMinecraftEligibility('86399').voted,true);
  for(const value of ['false','0','-1','86401','<html>error</html>'])assert.throws(()=>parseMinecraftEligibility(value));
  assert.equal(voteClientIp('198.51.100.4','192.0.2.99',[]),'198.51.100.4');
  assert.equal(voteClientIp('::ffff:127.0.0.1','192.0.2.99, 198.51.100.4',['127.0.0.1']),'198.51.100.4');
  assert.equal(voteClientIp('127.0.0.1','spoof',['127.0.0.1']),null);
+ assert.equal(voteClientIp('23.109.138.130','192.0.2.99, 198.51.100.4, 172.64.1.2',['23.109.138.130','172.64.0.0/13']),'198.51.100.4');
+ assert.equal(voteClientIp('23.109.138.130','192.0.2.99, 198.51.100.4',['23.109.138.130','invalid/0']),'198.51.100.4');
+ assert.equal(voteClientIp('127.0.0.1','2400:cb00::1',['127.0.0.1','2400:cb00::/32']),null);
 });
 async function fixture(t, overrides={}) {
  const rows=new Map();let claims=0, voted=false, current=actor;

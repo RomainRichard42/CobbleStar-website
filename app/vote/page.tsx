@@ -43,7 +43,7 @@ export default function VotePage() {
       if(!res.ok) { if(data.error==='VOTE_ATTEMPT_EXPIRED'||data.error==='VOTE_NETWORK_CHANGED')setAttempts(p=>{const n={...p};delete n[site.id];return n;}); throw new Error(messages[data.error]||"La vérification est indisponible pour le moment. Réessaie dans quelques instants."); }
       if(check) {
         setNotes(p=>({...p,[site.id]:data.verified?"Vote validé : 1 clé Vote réservée pour ton joueur. Livraison à ta prochaine connexion en jeu.":"Le vote n’est pas encore confirmé. Termine-le sur l’annuaire, puis vérifie à nouveau."}));
-        if(data.verified){setAttempts(p=>{const n={...p};delete n[site.id];return n;});await refresh();}
+        if(data.verified){setAttempts(p=>{const n={...p};delete n[site.id];return n;});await refresh().catch(()=>setLoadError(true));}
       } else setAttempts(p=>({...p,[site.id]:data.attempt}));
     } catch(e) { setNotes(p=>({...p,[site.id]:e instanceof Error&&e.message?e.message:"Impossible de vérifier le vote pour le moment."})); }
     finally {setBusy(null);}
@@ -67,7 +67,7 @@ export default function VotePage() {
             {!site.verificationEnabled?<><span>Récompenses en préparation sur cet annuaire.</span>{site.url&&<a href={site.url} target="_blank" rel="noopener noreferrer">Voir la fiche ↗</a>}</>:!board.player?.linked?<span>Connecte et lie ton compte pour voter.</span>:waiting?<span>Prochain vote dans {remaining(site.availableAt!,now)}</span>:a?<><a className="vote-primary" href={a.url} target="_blank" rel="noopener noreferrer">Ouvrir l’annuaire ↗</a><button disabled={busy!==null} onClick={()=>void vote(site,true)}>{busy===site.id?"Vérification…":"Vérifier mon vote"}</button><small>Lien valable jusqu’à {new Date(a.expiresAt).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}.</small></>:<button className="vote-primary" disabled={busy!==null} onClick={()=>void vote(site,false)}>{busy===site.id?"Préparation…":"Préparer mon vote →"}</button>}
             {notes[site.id]&&<p className="vote-feedback" role="status">{notes[site.id]}</p>}
           </div></article>;})}</div>
-        <section className="vote-ranking" aria-labelledby="ranking-title"><h2 id="ranking-title">Les dresseurs du mois</h2>{board?.leaderboard.length?<ol>{board.leaderboard.map(p=><li key={p.rank}><span>#{p.rank}</span><b>{p.username}</b><span>{p.votes} vote{p.votes>1?'s':''}</span></li>)}</ol>:<p>Le premier vote confirmé lancera le classement du mois.</p>}<p>Les votes sont comptés du premier au dernier jour du mois, en UTC.</p></section>
+        <section className="vote-ranking" aria-labelledby="ranking-title"><h2 id="ranking-title">Les dresseurs du mois</h2>{!board?<p>Chargement du classement…</p>:board.leaderboard.length?<ol>{board.leaderboard.map(p=><li key={p.rank}><span>#{p.rank}</span><b>{p.username}</b><span>{p.votes} vote{p.votes>1?'s':''}</span></li>)}</ol>:<p>Le premier vote confirmé lancera le classement du mois.</p>}<p>Les votes sont comptés du premier au dernier jour du mois, en UTC.</p></section>
       </div>
     </section>
     <FaqSection title="Questions sur le vote CobbleStar" id="faq-vote" items={VOTE_FAQ}/><FaqStructuredData faqItems={VOTE_FAQ} pageUrl="/vote/"/>
