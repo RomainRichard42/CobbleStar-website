@@ -7,9 +7,9 @@ export function accountAppearance(account: AvatarAccount | null) {
   const minecraft = account?.minecraft;
   const name = (minecraft?.linked && minecraft.username) || account?.discord?.globalName || account?.discord?.username || 'Dresseur';
   const images: { url: string; kind: 'minecraft' | 'discord' }[] = [];
-  const uuid = minecraft?.uuid?.replaceAll('-', '');
+  const uuid = minecraft?.uuid?.replaceAll('-', '').toLowerCase();
   if (minecraft?.linked && uuid && /^[a-f0-9]{32}$/i.test(uuid)) {
-    images.push({ url: `https://mc-heads.net/avatar/${uuid}/64`, kind: 'minecraft' });
+    images.push({ url: `/api/me/avatar?uuid=${uuid}`, kind: 'minecraft' });
   }
   const discord = account?.discord;
   if (discord?.avatarUrl && /^https:\/\/cdn\.discordapp\.com\/avatars\/[0-9]+\/[a-zA-Z0-9_]+\.png\?size=\d+$/.test(discord.avatarUrl)) {
