@@ -9,6 +9,7 @@ for required in \
   "${project_dir}/api/dist/server.js" \
   "${project_dir}/api/migrations/001_initial.sql" \
   "${project_dir}/api/shop.catalog.json" \
+  "${project_dir}/api/stars.catalog.json" \
   "${project_dir}/api/vote-sites.json" \
   "${project_dir}/wiki.default.json" \
   "${project_dir}/news.default.json" \
@@ -29,6 +30,7 @@ cp -a "${project_dir}/api/migrations/." "${deploy_dir}/migrations/"
 cp "${project_dir}/api/package.json" "${deploy_dir}/package.json"
 cp "${project_dir}/api/package-lock.json" "${deploy_dir}/package-lock.json"
 cp "${project_dir}/api/shop.catalog.json" "${deploy_dir}/shop.catalog.json"
+cp "${project_dir}/api/stars.catalog.json" "${deploy_dir}/stars.catalog.json"
 cp "${project_dir}/api/vote-sites.json" "${deploy_dir}/vote-sites.json"
 cp "${project_dir}/wiki.default.json" "${deploy_dir}/wiki.default.json"
 cp "${project_dir}/news.default.json" "${deploy_dir}/news.default.json"

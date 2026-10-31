@@ -35,6 +35,8 @@ import { publicDex } from './dex-data.js';
 import { registerPlayerCollection } from './player-collection.js';
 import { collectionStore } from './player-collection-store.js';
 import { registerPublicDex } from './public-dex.js';
+import { registerStripePayments } from "./stripe-payments.js";
+import { stripeStore } from "./stripe-store.js";
 
 type UserRow = RowDataPacket & {
   id: string; email: string | null; discord_email: string | null; password_hash: string | null;
@@ -754,7 +756,14 @@ app.get("/api/wallet", { preHandler: requireAccount }, async (request, reply) =>
   return { balance: rows[0]?.balance ?? 0, currency: "Stars" };
 });
 
-app.get("/api/shop/status", async () => ({ testPurchasesEnabled: config.ENABLE_TEST_PURCHASES }));
+registerStripePayments(app, {
+  enabled: config.STRIPE_ENABLED, mode: config.STRIPE_MODE, secretKey: config.STRIPE_SECRET_KEY,
+  webhookSecret: config.STRIPE_WEBHOOK_SECRET, siteOrigin: config.SITE_ORIGIN,
+  testerIds: config.GAME_ADMIN_DISCORD_IDS.split(",").map(id => id.trim()).filter(Boolean),
+  legacyTestPurchases: config.ENABLE_TEST_PURCHASES,
+}, { session: loadSession,
+  sessionHash: request => request.cookies[sessionCookie] ? digest(request.cookies[sessionCookie]!) : null,
+  store: stripeStore });
 
 app.post("/api/shop/test-recharge", { preHandler: requireAccount, config: { rateLimit: { max: 4, timeWindow: "15 minutes" } } }, async (request, reply) => {
   if (!config.ENABLE_TEST_PURCHASES) return reply.code(404).send({ error: "TEST_PURCHASES_DISABLED" });

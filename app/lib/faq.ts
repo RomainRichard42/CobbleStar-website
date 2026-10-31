@@ -35,7 +35,7 @@ export const SHOP_FAQ: ReadonlyArray<FaqEntry> = [
   },
   {
     question: "Quels moyens de paiement sont utilisés ?",
-    answer: "Les moyens de paiement proposés et le montant total sont affichés avant chaque validation. Aucun abonnement n’est ajouté à l’achat d’un pack de Stars.",
+    answer: "Les achats de Stars ne sont pas encore ouverts. Lorsqu’ils seront disponibles, le paiement par carte se fera sur Stripe, avec le montant affiché avant validation. Un pack de Stars est un achat unique, sans abonnement ni prélèvement récurrent.",
   },
   {
     question: "Comment acheter et renouveler un grade ?",
