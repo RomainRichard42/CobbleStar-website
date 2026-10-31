@@ -85,7 +85,8 @@ export async function confirmPlayerLink(connection: PoolConnection, input: {
       moved[table] = result.affectedRows;
     }
     await connection.execute(`INSERT INTO player_collection_goals(user_id,species,favorite,wanted,target,shiny,note,star,stage)
-      SELECT ?,species,favorite,wanted,target,shiny,note,star,stage FROM player_collection_goals WHERE user_id=?
+      SELECT ?,source.species,source.favorite,source.wanted,source.target,source.shiny,source.note,source.star,source.stage
+      FROM player_collection_goals AS source WHERE source.user_id=?
       ON DUPLICATE KEY UPDATE
         target=IF(player_collection_goals.wanted,player_collection_goals.target,VALUES(target)),
         shiny=IF(player_collection_goals.wanted,player_collection_goals.shiny,VALUES(shiny)),

@@ -78,6 +78,23 @@ test("MySQL: UUID recovery, preserved records, rollback, replay and concurrent c
     assert.equal(events.length, 1);
     await assert.rejects(run(f.input), /INVALID_OR_EXPIRED_CODE/);
   });
+  await t.test("collection goals merge without SQL ambiguity and preserve the player's existing hunt", async () => {
+    const f = await seed();
+    await db.execute(`INSERT INTO player_collection_goals(user_id,species,favorite,wanted,target,shiny,note,star,stage)
+      VALUES(?,'eevee',1,1,3,1,'Source hunt',1,'active'),(?,'pikachu',1,1,1,1,'New hunt',0,'active'),
+      (?,'eevee',0,1,2,0,'Existing player hunt',0,'plan')`, [f.sourceId, f.sourceId, f.targetId]);
+    await run(f.input);
+    const [goals] = await db.execute(`SELECT * FROM player_collection_goals WHERE user_id=? ORDER BY species`, [f.targetId]);
+    assert.equal(goals.length, 2);
+    const eevee = goals.find(goal => goal.species === "eevee");
+    assert.equal(Number(eevee.favorite), 1); assert.equal(Number(eevee.wanted), 1);
+    assert.equal(Number(eevee.target), 2); assert.equal(Number(eevee.shiny), 0);
+    assert.equal(eevee.note, "Existing player hunt"); assert.equal(Number(eevee.star), 0); assert.equal(eevee.stage, "plan");
+    const pikachu = goals.find(goal => goal.species === "pikachu");
+    assert.equal(pikachu.note, "New hunt"); assert.equal(Number(pikachu.shiny), 1); assert.equal(pikachu.stage, "active");
+    const [[source]] = await db.execute(`SELECT COUNT(*) n FROM player_collection_goals WHERE user_id=?`, [f.sourceId]);
+    assert.equal(Number(source.n), 0);
+  });
   await t.test("first link keeps the existing provisional account and its balance", async () => {
     const f = await seed({ targetExists: false });
     await run({ ...f.input, relinkEnabled: false });
