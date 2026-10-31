@@ -72,7 +72,11 @@
       "failed": 0
     },
     "deployment": "not_published",
-    "blocker": "Accès navigateur et panneau Kinetic indisponible ; correction préparée, pas de mise en ligne revendiquée."
+    "blocker": "Accès navigateur et panneau Kinetic indisponible ; correction préparée, pas de mise en ligne revendiquée.",
+    "commit": "c0bd830",
+    "pushed": true,
+    "deploymentCheckedAt": "2026-10-31T11:21:43.083Z",
+    "oldBrokenLinkStillLive": true
   },
   "priorities": [
     {
@@ -117,5 +121,6 @@
     "status": "ACTIVE",
     "schedule": "Chaque jour à 9 h, Europe/Paris ; audit approfondi le lundi",
     "changed": false
-  }
+  },
+  "browserAccessRecheck": "Toujours désactivé après réponse utilisateur et nouvelle vérification"
 }
