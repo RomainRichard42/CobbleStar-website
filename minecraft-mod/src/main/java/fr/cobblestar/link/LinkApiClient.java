@@ -16,6 +16,7 @@ final class LinkApiClient {
     record StarsResult(boolean success, long balance, String message) {}
     record Reward(String id, String productId, String itemId, int itemCount, String leaseToken) {}
     record RewardResult(boolean success, Reward reward, String message) {}
+    record AnnouncementResult(boolean success, PurchaseAnnouncement announcement) {}
 
     private static final Gson GSON = new Gson();
     private final LinkConfig config;
@@ -108,6 +109,34 @@ final class LinkApiClient {
 
     boolean completeReward(String uuid, Reward reward) {
         return finishReward(uuid, reward, "/complete", null);
+    }
+
+    AnnouncementResult claimAnnouncement(String serverId) {
+        JsonObject body = new JsonObject(); body.addProperty("serverId", serverId);
+        try {
+            var response = client.send(jsonRequest(endpoint("/api/internal/stars/announcements/claim"), body).build(), HttpResponse.BodyHandlers.ofInputStream());
+            try (var stream = response.body()) {
+                if (response.statusCode() == 204) return new AnnouncementResult(true, null);
+                if (response.statusCode() != 200) return new AnnouncementResult(false, null);
+                byte[] bytes = stream.readNBytes(4097);
+                if (bytes.length > 4096) return new AnnouncementResult(false, null);
+                var value = JsonParser.parseString(new String(bytes, java.nio.charset.StandardCharsets.UTF_8)).getAsJsonObject().getAsJsonObject("announcement");
+                return new AnnouncementResult(true, new PurchaseAnnouncement(value.get("id").getAsString(),
+                    value.get("minecraftUuid").getAsString(), value.get("minecraftUsername").isJsonNull() ? null : value.get("minecraftUsername").getAsString(),
+                    value.get("stars").getAsInt(), value.get("leaseToken").getAsString()));
+            }
+        } catch (InterruptedException exception) {
+            Thread.currentThread().interrupt(); return new AnnouncementResult(false, null);
+        } catch (IOException | RuntimeException exception) { return new AnnouncementResult(false, null); }
+    }
+
+    boolean completeAnnouncement(String serverId, PurchaseAnnouncement announcement) {
+        JsonObject body = new JsonObject(); body.addProperty("serverId", serverId); body.addProperty("leaseToken", announcement.leaseToken());
+        try {
+            var response = client.send(jsonRequest(endpoint("/api/internal/stars/announcements/" + announcement.id() + "/complete"), body).build(), HttpResponse.BodyHandlers.discarding());
+            return response.statusCode() == 200;
+        } catch (InterruptedException exception) { Thread.currentThread().interrupt(); return false; }
+        catch (IOException | RuntimeException exception) { return false; }
     }
 
     boolean failReward(String uuid, Reward reward, String error) {

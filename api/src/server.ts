@@ -37,6 +37,7 @@ import { collectionStore } from './player-collection-store.js';
 import { registerPublicDex } from './public-dex.js';
 import { registerStripePayments } from "./stripe-payments.js";
 import { stripeStore } from "./stripe-store.js";
+import { registerPurchaseAnnouncements } from "./purchase-announcements.js";
 import { registerMinecraftAvatars } from './minecraft-avatar.js';
 
 type UserRow = RowDataPacket & {
@@ -415,6 +416,7 @@ app.get("/api/me", { preHandler: requireAccount }, async (request, reply) => {
 registerMinecraftAvatars(app, { session: loadSession });
 registerDiscordBridge(app, request => serverKeyMatches(serverKeyFrom(request)));
 registerGameAdmin(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
+registerPurchaseAnnouncements(app, { server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerDiscordAdmin(app, { session: loadSession });
 registerQuestStudio(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerArenaStudio(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });

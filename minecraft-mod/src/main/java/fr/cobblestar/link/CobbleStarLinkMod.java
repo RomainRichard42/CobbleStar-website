@@ -36,6 +36,7 @@ public final class CobbleStarLinkMod implements ModInitializer {
         }
 
         new RewardDeliveryService(api, config, LOGGER).register();
+        new PurchaseAnnouncementService(api, config, LOGGER).register();
 
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             dispatcher.register(literal("link")
