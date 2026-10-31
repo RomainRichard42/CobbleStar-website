@@ -35,7 +35,11 @@ export const SHOP_FAQ: ReadonlyArray<FaqEntry> = [
   },
   {
     question: "Quels moyens de paiement sont utilisés ?",
-    answer: "Les achats de Stars ne sont pas encore ouverts. Lorsqu’ils seront disponibles, le paiement par carte se fera sur Stripe, avec le montant affiché avant validation. Un pack de Stars est un achat unique, sans abonnement ni prélèvement récurrent.",
+    answer: "Le paiement par carte s’effectue sur la page sécurisée de Stripe, avec le montant total affiché avant validation. Un pack de Stars est un achat unique, sans abonnement ni prélèvement récurrent. Le compte Minecraft lié reçoit les Stars après confirmation du paiement.",
+  },
+  {
+    question: "Quand pourrai-je utiliser mes Stars en jeu ?",
+    answer: "Le serveur est en préouverture. Les grades, les jetons et les autres offres seront accessibles dans /boutique en jeu à l’ouverture du serveur. Une recharge de Stars ne donne pas un accès anticipé au serveur.",
   },
   {
     question: "Comment acheter et renouveler un grade ?",
