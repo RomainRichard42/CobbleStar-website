@@ -1,0 +1,121 @@
+{
+  "date": "2026-10-31",
+  "checkedAt": "2026-10-31T11:19:06.093Z",
+  "status": "audit_technique_termine_correction_locale_validee_publication_bloquee",
+  "technical": {
+    "report": "audit-2026-10-31T11-11-45Z.json",
+    "pages": 1057,
+    "errors": [
+      "https://cobblestar-mc.fr/wiki/caisses/: Broken internal link /wiki/pokedex/kyogre/ (HTTP 404)"
+    ],
+    "warnings": [],
+    "metrics": {
+      "home": {
+        "htmlBytes": 29416,
+        "scriptFiles": 6,
+        "scriptBytes": 29862,
+        "inlineScriptBytes": 347,
+        "totalScriptBytes": 30209
+      },
+      "cloudflareEmailLinks": 1059,
+      "checkedLinks": 6376,
+      "checkedImages": 63,
+      "checkedDocuments": 1061,
+      "maxClickDepth": 2,
+      "crawlerHttpStatus": 200
+    },
+    "dexHtmlBytes": 439024,
+    "comparison": {
+      "baseline": "audit-2026-10-30T11-57-00Z-post-optimisation.json",
+      "diff": {
+        "pages": 0,
+        "links": 2,
+        "images": 33,
+        "dexHtmlBytes": 0
+      },
+      "newErrors": [
+        "https://cobblestar-mc.fr/wiki/caisses/: Broken internal link /wiki/pokedex/kyogre/ (HTTP 404)"
+      ]
+    },
+    "scope": "HTTP, robots, sitemap, indexabilité technique, titres/descriptions uniques, H1, canonical, JSON structuré parseable, redirections, vrais 404, liens/ancres, images et poids HTML. Ne mesure ni indexation Google ni Core Web Vitals."
+  },
+  "google": {
+    "report": "mots-cles-google-2026-10-31T11-11-45Z.json",
+    "tracked": 46,
+    "verified": 0,
+    "status": "unavailable_browser_access",
+    "rankingChanges": null
+  },
+  "searchConsole": {
+    "report": "search-console-2026-10-31T11-11-45Z.json",
+    "status": "unavailable_browser_access",
+    "metrics": null,
+    "newInspections": 0
+  },
+  "mobile": {
+    "status": "not_visually_verified_today",
+    "reason": "Accès navigateur indisponible ; aucune nouvelle mesure à 390 px ni sur appareil réel.",
+    "lastVisualReport": "mobile-2026-10-30T11-10-36Z.json",
+    "staticViewportChecks": true
+  },
+  "improvement": {
+    "page": "/wiki/caisses/",
+    "changes": [
+      "Liens de récompenses conditionnés à la présence réelle de l’espèce dans le Pokédex public.",
+      "Conservation du lot Kyogre sans lien 404.",
+      "Explication des probabilités par palier et par lot, des arrondis et de la limite des garanties.",
+      "Texte alternatif du visuel mis en accord avec les Balls de rareté."
+    ],
+    "validation": "validation-caisses-2026-10-31T11-11-45Z.json",
+    "tests": {
+      "passed": 24,
+      "failed": 0
+    },
+    "deployment": "not_published",
+    "blocker": "Accès navigateur et panneau Kinetic indisponible ; correction préparée, pas de mise en ligne revendiquée."
+  },
+  "priorities": [
+    {
+      "priority": "P1",
+      "pages": [
+        "/wiki/caisses/"
+      ],
+      "action": "Publier la correction du lien vers Kyogre et l’aide à la lecture des probabilités.",
+      "success": "Liens des récompenses vers des fiches réellement publiées, HTTP 200 ; Kyogre reste dans la liste des gains."
+    },
+    {
+      "priority": "P1",
+      "pages": [
+        "/wiki/pokedex/eevee/",
+        "/wiki/pokedex/riolu/",
+        "/wiki/gts/",
+        "/wiki/pokemon-star/"
+      ],
+      "action": "Rétablir l’accès au navigateur puis reprendre Search Console et les 46 recherches Google FR.",
+      "success": "Mesures datées, période et délai renseignés, inspections réelles et observations Google séparées."
+    },
+    {
+      "priority": "P1",
+      "pages": [
+        "/",
+        "/minecraft-pokemon/",
+        "/installer-cobblemon/"
+      ],
+      "action": "Consolider les contenus hors marque selon les prochaines requêtes mesurées et ajouter les captures authentiques dès leur disponibilité.",
+      "success": "Réponses utiles aux recherches hors marque, maillage vers installation et serveur ; évolution mesurée dans Search Console."
+    }
+  ],
+  "preserved": [
+    "Préouverture",
+    "Launcher désactivé",
+    "PokéPark absent",
+    "Créations internes exclues du Pokédex public",
+    "Comptes, API, bot et administration préservés"
+  ],
+  "automation": {
+    "id": "suivi-seo-cobblestar",
+    "status": "ACTIVE",
+    "schedule": "Chaque jour à 9 h, Europe/Paris ; audit approfondi le lundi",
+    "changed": false
+  }
+}

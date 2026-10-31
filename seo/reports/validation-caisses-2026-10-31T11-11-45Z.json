@@ -1,0 +1,58 @@
+{
+  "at": "2026-10-31T11:17:47.491Z",
+  "origin": "http://127.0.0.1:8792",
+  "source": "Contenus publics actuels du wiki et Pokédex",
+  "checks": {
+    "allRewardLinks200": true,
+    "kyogreStillListed": true,
+    "noUnpublishedKyogreLink": true,
+    "probabilityHelp": true,
+    "oneH1": true,
+    "canonical": true,
+    "viewport": true,
+    "modifiedAt": true
+  },
+  "links": [
+    {
+      "path": "/wiki/pokedex/giratina/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokedex/groudon/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokedex/palkia/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokedex/dialga/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokedex/mewtwo/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokedex/yveltal/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokedex/xerneas/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokedex/rayquaza/",
+      "status": 200
+    },
+    {
+      "path": "/wiki/pokedex/eternatus/",
+      "status": 200
+    }
+  ],
+  "tests": {
+    "passed": 24,
+    "failed": 0
+  },
+  "deployment": "not_published"
+}

@@ -1,0 +1,29 @@
+{
+  "checkedAt": "2026-10-31T11:17:47.491Z",
+  "property": "https://cobblestar-mc.fr/",
+  "status": "unavailable_browser_access",
+  "periodStart": null,
+  "periodEnd": null,
+  "clicks": null,
+  "impressions": null,
+  "ctrPercent": null,
+  "averagePosition": null,
+  "indexing": null,
+  "limits": [
+    "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+    "Aucune nouvelle inspection d’URL ou mesure Google obtenue."
+  ],
+  "historicalReferences": [
+    {
+      "report": "search-console-2026-10-30T11-10-36Z.json",
+      "date": "2026-10-30",
+      "dataThrough": "2026-10-28"
+    },
+    {
+      "report": "indexation-inspections-2026-10-30.json",
+      "date": "2026-10-30",
+      "statusThen": "Quatre URL indexées",
+      "recheckedToday": false
+    }
+  ]
+}

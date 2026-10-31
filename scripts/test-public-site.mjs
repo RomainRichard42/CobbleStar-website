@@ -49,7 +49,7 @@ test('crate showcase keeps the guide indexable and loads only public display ass
  assert.equal((html.match(/data-machine="/g)||[]).length,4);assert.equal((html.match(/data-crate-step="/g)||[]).length,6);
  for(const id of ['vote','nova','pulsar','quasar']){assert.equal((await get('/crates/'+id+'.webp')).response.status,200);const {html:raw}=await get('/crates/'+id+'.json');const model=JSON.parse(raw);assert.ok(model.crate.faces.length>900);assert.ok(model.ball.faces.length>100);assert.ok(model.crate.faces.every(f=>f.p.flat().every(Number.isFinite)));assert.ok(!('rewards' in model));}
  const motion=JSON.parse((await get('/crates/motion.json')).html);assert.equal(motion.rate,32);assert.ok(motion.frames.every(f=>f.balls.flat().every(Number.isFinite)));assert.ok(motion.frames.some(f=>f.grip===1));assert.ok(motion.frames.some(f=>f.lid===1));
- assert.match((await get('/sitemap.xml')).html,/<loc>https:\/\/cobblestar-mc.fr\/wiki\/caisses\/<\/loc><lastmod>2026-10-30T12:15:00Z<\/lastmod>/);
+ assert.match((await get('/sitemap.xml')).html,/<loc>https:\/\/cobblestar-mc.fr\/wiki\/caisses\/<\/loc><lastmod>2026-10-31T11:15:00Z<\/lastmod>/);
  assert.doesNotMatch(html,/<link[^>]+href="\/crates\/(?:motion|nova)\.json/);
 });
 
@@ -215,4 +215,10 @@ test('live crate catalogue exposes all rewards, accurate odds and a mechanically
  }
  for(const icon of icons)assert.equal((await get(icon)).response.status,200,icon);
  const model=JSON.parse((await get('/crates/balls/model.json')).html);assert.ok(model.elements.some(e=>e.name==='top_outer'));assert.match(html,/Voir la prise au ralenti/);
+});
+
+
+test('crate rewards link only published species while preserving unavailable species as rewards',async()=>{
+ const original=dexEntries;try{dexEntries=[...original,{id:'native-giratina',species:'giratina',name:'Giratina',collection:'Classiques',form:'Classique'}];const {html}=await get('/wiki/caisses/');assert.match(html,/Giratina shiny/);assert.match(html,/Kyogre shiny/);assert.match(html,/href="\/wiki\/pokedex\/giratina\/"/);assert.doesNotMatch(html,/href="\/wiki\/pokedex\/kyogre\/"/);assert.match(html,/Comment lire les probabilités/);assert.match(html,/sans garantir un Pokémon précis/);
+ }finally{dexEntries=original;}
 });

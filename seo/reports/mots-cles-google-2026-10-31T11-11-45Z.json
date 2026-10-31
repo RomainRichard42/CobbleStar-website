@@ -1,0 +1,1067 @@
+{
+  "checkedAt": "2026-10-31T11:17:47.491Z",
+  "date": "2026-10-31",
+  "site": "https://cobblestar-mc.fr",
+  "method": "Google FR inaccessible dans cette session",
+  "summary": {
+    "tracked": 46,
+    "verified": 0,
+    "unverified": 46,
+    "firstPagesLoaded": 0,
+    "present": null,
+    "notObserved": null,
+    "brandOrganicRank": null
+  },
+  "limits": [
+    "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+    "Une absence de mesure ne prouve ni absence de première page ni désindexation."
+  ],
+  "results": [
+    {
+      "query": "cobblestar",
+      "target": "/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:11:31.619Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "serveur cobblemon",
+      "target": "/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=serveur%20cobblemon",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:11:40.463Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "serveur cobblemon français",
+      "target": "/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=serveur%20cobblemon%20fran%C3%A7ais",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:11:41.742Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "serveur cobblemon fr",
+      "target": "/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=serveur%20cobblemon%20fr",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:11:42.714Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "cobblemon fr",
+      "target": "/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20fr",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:11:43.623Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "minecraft pokemon",
+      "target": "/minecraft-pokemon/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=minecraft%20pokemon",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:11:44.580Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "pokemon minecraft",
+      "target": "/minecraft-pokemon/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=pokemon%20minecraft",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:11:55.424Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "mod pokemon minecraft",
+      "target": "/minecraft-pokemon/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=mod%20pokemon%20minecraft",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:11:56.419Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "cobblemon français",
+      "target": "/minecraft-pokemon/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20fran%C3%A7ais",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:11:57.426Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "jouer pokemon minecraft",
+      "target": "/minecraft-pokemon/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=jouer%20pokemon%20minecraft",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:11:58.524Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "serveur minecraft pokemon français",
+      "target": "/minecraft-pokemon/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=serveur%20minecraft%20pokemon%20fran%C3%A7ais",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:11:59.497Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "installer cobblemon",
+      "target": "/installer-cobblemon/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=installer%20cobblemon",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:00.100Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "comment installer cobblemon",
+      "target": "/installer-cobblemon/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=comment%20installer%20cobblemon",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:01.054Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "modpack cobblemon",
+      "target": "/installer-cobblemon/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=modpack%20cobblemon",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:01.953Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "cobblemon java",
+      "target": "/installer-cobblemon/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20java",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:06.462Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "cobblemon ne se lance pas",
+      "target": "/installer-cobblemon/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20ne%20se%20lance%20pas",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:06.990Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "comment jouer à cobblemon",
+      "target": "/installer-cobblemon/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=comment%20jouer%20%C3%A0%20cobblemon",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:07.949Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "cobblemon java ou bedrock",
+      "target": "/installer-cobblemon/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20java%20ou%20bedrock",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:08.702Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "ip cobblestar",
+      "target": "/rejoindre/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=ip%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:09.346Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "rejoindre cobblestar",
+      "target": "/rejoindre/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=rejoindre%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:10.061Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "installer cobblemon serveur fr",
+      "target": "/rejoindre/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=installer%20cobblemon%20serveur%20fr",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:10.726Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "launcher cobblestar",
+      "target": "/telecharger/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=launcher%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:11.244Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "télécharger cobblestar",
+      "target": "/telecharger/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=t%C3%A9l%C3%A9charger%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:12.159Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "wiki cobblestar",
+      "target": "/wiki/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=wiki%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": null
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "guides cobblemon français",
+      "target": "/wiki/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=guides%20cobblemon%20fran%C3%A7ais",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:23.265Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "pension cobblestar",
+      "target": "/wiki/daycare/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=pension%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:23.957Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "reproduction cobblemon cobblestar",
+      "target": "/wiki/daycare/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=reproduction%20cobblemon%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:24.613Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "métiers cobblestar",
+      "target": "/wiki/metiers/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=m%C3%A9tiers%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:25.632Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "jobs cobblemon cobblestar",
+      "target": "/wiki/metiers/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=jobs%20cobblemon%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:26.179Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "talents métiers cobblestar",
+      "target": "/wiki/talents/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=talents%20m%C3%A9tiers%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:26.799Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "gts cobblestar",
+      "target": "/wiki/gts/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=gts%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:27.740Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "vendre pokemon cobblemon cobblestar",
+      "target": "/wiki/gts/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=vendre%20pokemon%20cobblemon%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:28.356Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "raids cobblestar",
+      "target": "/wiki/raids/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=raids%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": null
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "épreuves badges cobblestar",
+      "target": "/wiki/epreuves/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=%C3%A9preuves%20badges%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:36.139Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "ligue cobblestar",
+      "target": "/wiki/ligue/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=ligue%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:36.706Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "ranked cobblestar",
+      "target": "/wiki/ranked/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=ranked%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:37.283Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "battle pass cobblestar",
+      "target": "/wiki/battlepass/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=battle%20pass%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": null
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "grades gratuits cobblestar",
+      "target": "/wiki/grades/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=grades%20gratuits%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:38.434Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "club claim cobblestar",
+      "target": "/wiki/clubs/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=club%20claim%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:38.998Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "cartes boosters cobblestar",
+      "target": "/wiki/album/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cartes%20boosters%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:39.867Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "certification sga cobblestar",
+      "target": "/wiki/galerie/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=certification%20sga%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:45.012Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "cosmedex cobblestar",
+      "target": "/wiki/cosmedex/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cosmedex%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": null
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "pokemon star cobblestar",
+      "target": "/wiki/pokemon-star/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=pokemon%20star%20cobblestar",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:46.851Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "pokédex cobblemon français",
+      "target": "/wiki/pokedex/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=pok%C3%A9dex%20cobblemon%20fran%C3%A7ais",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:47.372Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "cobblemon évolution évoli",
+      "target": "/wiki/pokedex/eevee/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20%C3%A9volution%20%C3%A9voli",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:48.272Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    },
+    {
+      "query": "où trouver riolu cobblemon",
+      "target": "/wiki/pokedex/riolu/",
+      "checkedAt": "2026-10-31T11:17:47.491Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=o%C3%B9%20trouver%20riolu%20cobblemon",
+      "status": "non_verifie_acces_navigateur",
+      "method": "Navigation Google non disponible",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "correctionCheck": "non_verifie",
+      "comparison": {
+        "status": "impossible_sans_releve_actuel",
+        "lastValidObservation": {
+          "report": "mots-cles-google-2026-10-30T11-10-36Z.json",
+          "checkedAt": "2026-10-30T11:12:48.889Z"
+        }
+      },
+      "limits": [
+        "Navigateur intégré désactivé dans Work ; contrôle Firefox arrêté car la politique de contrôle des URL n’y est pas prise en charge. Aucun contournement.",
+        "Aucune entrée, sortie, position ou évolution déduite des observations passées."
+      ]
+    }
+  ]
+}
