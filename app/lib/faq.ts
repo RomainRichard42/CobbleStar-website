@@ -50,7 +50,7 @@ export const SHOP_FAQ: ReadonlyArray<FaqEntry> = [
 export const VOTE_FAQ: ReadonlyArray<FaqEntry> = [
   {
     question: "Combien de votes faut-il pour avoir une récompense ?",
-    answer: "Un vote confirmé depuis cette page rapporte une clé pour la machine Vote. Prépare ton vote, termine-le sur le site avec ton pseudo Minecraft, puis reviens vérifier sa validation. Ouvrir le lien seul ne donne aucune clé.",
+    answer: "Un vote confirmé depuis cette page rapporte un jeton pour la machine Vote. Prépare ton vote, termine-le sur le site avec ton pseudo Minecraft, puis reviens vérifier sa validation. Ouvrir le lien seul ne donne aucun jeton.",
   },
   {
     question: "Peut-on voter sur plusieurs plateformes en même temps ?",
@@ -58,7 +58,7 @@ export const VOTE_FAQ: ReadonlyArray<FaqEntry> = [
   },
   {
     question: "Pourquoi ma récompense n’arrive pas ?",
-    answer: "Vérifie que ton compte Minecraft est lié et que le vote est indiqué comme validé ici. La clé est ensuite livrée automatiquement en jeu. Si tu es hors ligne, elle reste en attente de ta prochaine connexion. Le serveur est actuellement en préouverture.",
+    answer: "Vérifie que ton compte Minecraft est lié et que le vote est indiqué comme validé ici. Le jeton est ensuite livré automatiquement en jeu. Si tu es hors ligne, il reste en attente de ta prochaine connexion. Le serveur est actuellement en préouverture.",
   },
 ];
 

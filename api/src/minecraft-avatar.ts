@@ -90,7 +90,16 @@ export function createMinecraftAvatarStore(options: { fetch?: typeof fetch; now?
 type Player = { minecraft_uuid: string | null; minecraft_linked_at: Date | null };
 export function registerMinecraftAvatars(app: FastifyInstance, auth: {
   session: (request: FastifyRequest) => Promise<Player | null>;
+  publicVoter?: (uuid: string) => Promise<boolean>;
 }, avatars = createMinecraftAvatarStore()) {
+  app.get('/api/votes/avatars/:uuid', async (request, reply) => {
+    reply.header('Cache-Control', 'no-store');
+    const { uuid } = request.params as { uuid: string };
+    if (!uuidPattern.test(uuid) || !await auth.publicVoter?.(uuid)) return reply.code(404).send({ error: 'VOTER_NOT_FOUND' });
+    const image = await avatars.get(uuid);
+    if (!image) return reply.header('Retry-After', '60').code(503).send({ error: 'MINECRAFT_SKIN_UNAVAILABLE' });
+    return reply.header('Cache-Control', 'public, max-age=300').type('image/png').send(image);
+  });
   app.get('/api/me/avatar', async (request, reply) => {
     reply.header('Cache-Control', 'private, no-store');
     const player = await auth.session(request);

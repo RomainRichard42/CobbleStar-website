@@ -101,3 +101,22 @@ test('avatar endpoint requires the authenticated linked identity and enables Dis
     assert.equal(unavailable.headers['retry-after'],'60');
   } finally {await app.close();}
 });
+
+test('public voter faces require a confirmed monthly voter before fetching an official skin', async()=>{
+  const app=Fastify(); let confirmed=false, requested=[], checked=[], image=Buffer.from('voter-face');
+  registerMinecraftAvatars(app,{session:async()=>null,publicVoter:async value=>{checked.push(value);return confirmed;}},{get:async value=>{requested.push(value);return image;}});
+  try {
+    assert.equal((await app.inject('/api/votes/avatars/not-a-uuid')).statusCode,404);
+    assert.deepEqual(checked,[]);
+    assert.equal((await app.inject(`/api/votes/avatars/${uuid}`)).statusCode,404);
+    assert.deepEqual(requested,[],'non-voters cannot trigger Mojang lookups');
+    confirmed=true;
+    const face=await app.inject(`/api/votes/avatars/${uuid}`);
+    assert.equal(face.statusCode,200); assert.equal(face.headers['content-type'],'image/png');
+    assert.equal(face.headers['cache-control'],'public, max-age=300');
+    assert.deepEqual(requested,[uuid]);
+    image=undefined;
+    const unavailable=await app.inject(`/api/votes/avatars/${uuid}`);
+    assert.equal(unavailable.statusCode,503); assert.equal(unavailable.headers['cache-control'],'no-store');
+  } finally {await app.close();}
+});
