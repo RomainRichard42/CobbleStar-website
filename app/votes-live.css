@@ -19,3 +19,4 @@
 @media(max-width:560px){.vh-player dt{font-size:13px}}
 .vh-identity>span{line-height:1.4}.vh-identity>b{line-height:1.25}.vh-player dd{line-height:1.2}.vh-rewards{scroll-margin-top:120px}
 @media(max-width:560px){.vh-filters button{flex:0 1 auto;white-space:nowrap;gap:5px;padding-inline:8px}}
+@media(max-width:360px){.vh-tier-tabs button{flex-direction:column;justify-content:center;min-height:96px;gap:7px;text-align:center}.vh-tier-tabs button span{width:100%;justify-items:center;overflow-wrap:anywhere}}
