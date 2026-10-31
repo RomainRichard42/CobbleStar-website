@@ -37,13 +37,18 @@ traceur de paiement n'est chargé dans le navigateur du joueur.
    ```dotenv
    STRIPE_ENABLED=true
    STRIPE_MODE=test
-   STRIPE_SECRET_KEY=<clé secrète de test sk_test_...>
+   STRIPE_SECRET_KEY=<clé serveur de test rk_test_... ou sk_test_...>
    STRIPE_WEBHOOK_SECRET=<secret de cette destination whsec_...>
    ENABLE_TEST_PURCHASES=false
    ```
 
    Aucune clé publique n'est nécessaire pour cette intégration hébergée.
    Le secret du Stripe CLI n'est pas celui de la destination du Dashboard.
+   Les clés restreintes `rk_test_...` / `rk_live_...` et les clés secrètes
+   `sk_test_...` / `sk_live_...` sont acceptées uniquement dans leur mode.
+   Privilégier une clé restreinte au paiement ponctuel, autorisée à créer et
+   relire les sessions Checkout ainsi que leurs produits et prix. Les clés
+   publiques et les clés d'organisation sont refusées.
 5. Redémarrer l'API. Connecté avec un compte staff dont Minecraft est lié,
    choisir un pack dans `/boutique/#stars`, puis « Tester le paiement Stripe ».
    Utiliser les données de test documentées par Stripe, jamais une vraie carte.
