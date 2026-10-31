@@ -246,7 +246,7 @@ export default function ShopPage() {
         <div><span className="kicker">BOUTIQUE COBBLESTAR</span><h1 id="shop-title">Choisis <em>ton grade.</em></h1><p>Les tags du serveur, des avantages en jeu et une façon de soutenir CobbleStar.</p></div>
         <img src="/astral/assets/stars-640-v3.webp" alt="" width="400" height="226" />
       </header>
-      <p className="store-opening"><strong>Ouverture à venir.</strong> Les offres en jeu seront accessibles à l’ouverture du serveur.</p>
+      <p className="store-opening"><strong>Serveur en préouverture.</strong> {checkoutMode === "live" && checkoutEnabled && "Les recharges de Stars sont disponibles. "}Les offres en jeu seront accessibles à l’ouverture du serveur.</p>
       <div className="store-toolbar" id="store-navigation">
         <div className="store-tabs" role="tablist" aria-label="Dans la boutique">{shopTabs.map((tab,index)=><button key={tab.id} id={`tab-${tab.id}`} type="button" role="tab" aria-selected={activeTab===tab.id} aria-controls={tab.id} tabIndex={activeTab===tab.id?0:-1} onClick={()=>selectTab(tab.id)} onKeyDown={event=>{
           const next = event.key === "ArrowRight" ? (index+1)%shopTabs.length : event.key === "ArrowLeft" ? (index+shopTabs.length-1)%shopTabs.length : event.key === "Home" ? 0 : event.key === "End" ? shopTabs.length-1 : -1;
@@ -320,7 +320,7 @@ export default function ShopPage() {
         <div className="shop-v2-dialog-account"><small>DESTINATION</small><b>{username || (account ? "Minecraft à lier" : "Aucun compte connecté")}</b><span>{linked ? "✓ Compte Minecraft lié" : "Compte à préparer avant l’achat"}</span></div>
         {!account ? <Link className="shop-v2-dialog-action" href="/compte/">Se connecter pour continuer <span>→</span></Link> : !linked ? <button className="shop-v2-dialog-action" type="button" onClick={() => { setSelectedPack(null); setLinkOpen(true); }}>Lier mon compte Minecraft <span>→</span></button> : checkoutEnabled ? <button className="shop-v2-dialog-action" type="button" onClick={startCheckout} disabled={rechargeBusy}>{rechargeBusy ? "Ouverture du paiement…" : checkoutMode === "test" ? "Tester le paiement Stripe" : `Payer ${selectedPack.price} avec Stripe`}<span aria-hidden="true">→</span></button> : <button className="shop-v2-dialog-action is-disabled" type="button" disabled>Achats bientôt disponibles</button>}
         {rechargeMessage && <p className="shop-v2-dialog-message" role="status">{rechargeMessage}</p>}
-        <p className="shop-v2-dialog-note">{checkoutMode === "test" ? "Test staff : aucun débit réel et aucune Star ajoutée au solde." : checkoutEnabled ? "Tu seras redirigé vers Stripe pour payer. Les Stars seront créditées après confirmation du paiement." : "Vérifie le montant et le compte Minecraft de destination. Les achats ne sont pas encore ouverts."}</p>
+        <p className="shop-v2-dialog-note">{checkoutMode === "test" ? "Test staff : aucun débit réel et aucune Star ajoutée au solde." : checkoutEnabled ? "Tu seras redirigé vers Stripe pour payer. Les Stars seront créditées après confirmation du paiement. Les offres en jeu seront accessibles à l’ouverture du serveur." : "Vérifie le montant et le compte Minecraft de destination. Les achats ne sont pas encore ouverts."}</p>
       </section>
     </div>}
 
