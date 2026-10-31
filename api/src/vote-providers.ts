@@ -1,4 +1,4 @@
-import { isIP } from 'node:net';
+import { BlockList, isIP } from 'node:net';
 
 export type VoteSettings = { topToken: string; privateToken: string; minecraftId: string; minecraftEnabled: boolean; proxyPeers: string[]; ipSecret: string };
 export type VoteProof = { voted: false } | { voted: true; username?: string; votedAt?: number; remainingSeconds?: number };
@@ -24,11 +24,24 @@ export function voteClientIp(peer: string | undefined, forwarded: unknown, trust
   const normalize = (ip: string) => ip.startsWith('::ffff:') ? ip.slice(7) : ip;
   const direct = normalize(peer ?? '');
   if (!isIP(direct)) return null;
-  if (!trustedPeers.map(normalize).includes(direct)) return direct;
-  if (typeof forwarded !== 'string') return null;
-  // Only the rightmost address appended by an explicitly trusted reverse proxy.
-  const ip = normalize(forwarded.split(',').at(-1)!.trim());
-  return isIP(ip) ? ip : null;
+  const proxies = new BlockList();
+  for (const entry of trustedPeers) {
+    const [address, prefix] = entry.split('/'); const ip=normalize(address ?? ''); const version=isIP(ip);
+    if (!version) continue;
+    try { if (prefix !== undefined) proxies.addSubnet(ip,Number(prefix),version===6?'ipv6':'ipv4');
+      else proxies.addAddress(ip,version===6?'ipv6':'ipv4'); } catch { /* Invalid trust entries never expand access. */ }
+  }
+  const trusted = (ip:string) => proxies.check(ip,isIP(ip)===6?'ipv6':'ipv4');
+  if (!trusted(direct)) return direct;
+  if (typeof forwarded !== 'string' || forwarded.length>2048) return null;
+  const chain=forwarded.split(',').map(v=>normalize(v.trim())); let ip=direct;
+  // Walk from the socket towards the client, stopping at the first untrusted hop.
+  // A user-controlled prefix cannot replace the real client appended by the CDN.
+  for (let i=chain.length-1;i>=0;i--) {
+    if (!trusted(ip)) break;
+    const next=chain[i]!; if (!isIP(next)) return null; ip=next;
+  }
+  return trusted(ip) ? null : ip;
 }
 export function parseMinecraftEligibility(text: string): VoteProof {
   const value = text.trim();
@@ -60,7 +73,7 @@ export function voteProviders(settings: VoteSettings, fetcher: typeof fetch = fe
       const { text, status } = await response(url, fetcher);
       try {
         const json = JSON.parse(text);
-        if (status === 404 && json.success === false && (id === 'top_serveurs' ? json.code === 404 : json.message === 'User not voted')) return { voted: false };
+        if (status === 404 && json.success === false && (id === 'top_serveurs' ? json.code === 404 : true)) return { voted: false };
         if (status !== 200 || json.success !== true) throw new Error();
         if (id === 'top_serveurs') {
           if (json.code !== 200 || typeof json.duration !== 'number' || !Number.isFinite(json.duration) || json.duration < 0 || json.duration > 120) throw new Error();
