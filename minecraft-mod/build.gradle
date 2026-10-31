@@ -38,3 +38,11 @@ java {
     sourceCompatibility = JavaVersion.VERSION_21
     targetCompatibility = JavaVersion.VERSION_21
 }
+
+tasks.register("verifyPurchaseAnnouncements", JavaExec) {
+    dependsOn tasks.named("testClasses")
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = "fr.cobblestar.link.PurchaseAnnouncementChecks"
+    args layout.buildDirectory.file("reports/purchase-announcement.json").get().asFile.absolutePath
+}
+tasks.named("check") { dependsOn tasks.named("verifyPurchaseAnnouncements") }

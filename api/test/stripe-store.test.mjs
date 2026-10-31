@@ -17,15 +17,15 @@ const uuid = "a".repeat(32);
 // No production connection, migration, Stripe API or genuine money is used.
 async function withDatabase(work) {
   const saved = { execute: pool.execute, getConnection: pool.getConnection };
-  let data = { orders: {}, checkouts: {}, events: {}, transactions: {}, balance: 100, sessionValid: true, ownerUuid: uuid, merged: null };
-  const state = { failAfterWallet: false, queries: [], get data() { return data; } };
+  let data = { orders: {}, checkouts: {}, events: {}, transactions: {}, announcements: {}, balance: 100, sessionValid: true, ownerUuid: uuid, merged: null };
+  const state = { failAfterWallet: false, failAnnouncement: false, queries: [], get data() { return data; } };
   let tail = Promise.resolve();
   const getOrder = id => data.orders[id] && ({ ...data.orders[id], ...data.checkouts[id] });
   async function execute(sql, args = []) {
     const q = sql.replace(/\s+/g, " ").trim(); state.queries.push(q);
     if (q.startsWith("SELECT u.id,u.minecraft_uuid")) return [data.sessionValid ? [{ id: args[0], minecraft_uuid: data.ownerUuid, minecraft_linked_at: new Date() }] : []];
     if (q.startsWith("SELECT user_id FROM orders")) return [[data.orders[args[0]] && { user_id: data.orders[args[0]].userId }].filter(Boolean)];
-    if (q.startsWith("SELECT id,minecraft_uuid,merged_into")) return [[{ id: args[0], minecraft_uuid: data.ownerUuid, merged_into: data.merged }]];
+    if (q.startsWith("SELECT id,minecraft_uuid,merged_into")) return [[{ id: args[0], minecraft_uuid: data.ownerUuid, merged_into: data.merged, minecraft_username: "Dresseur" }]];
     if (q.startsWith("SELECT o.id,")) {
       let order = q.includes("c.request_id=?") ? Object.values(data.checkouts).find(c => c.requestId === args[0]) : data.checkouts[args[0]];
       order = order && getOrder(order.id);
@@ -52,6 +52,12 @@ async function withDatabase(work) {
       data.transactions[args[3]] = { userId: args[1], delta: args[2] }; return [{ affectedRows: 1 }];
     }
     if (q.startsWith("UPDATE wallets SET balance=balance+")) { data.balance += args[0]; return [{ affectedRows: 1 }]; }
+    if (q.startsWith("INSERT INTO purchase_announcements")) {
+      if (state.failAnnouncement) throw Error("simulated announcement queue failure");
+      assert.equal(data.announcements[args[0]], undefined);
+      data.announcements[args[0]] = { id: args[0], uuid: args[1], username: args[2], stars: args[3] };
+      return [{ affectedRows: 1 }];
+    }
     if (q.startsWith("UPDATE orders SET status")) {
       if (state.failAfterWallet) throw Error("simulated DB failure after wallet write");
       Object.assign(data.orders[args[2]], { status: args[0], reference: args[1] }); return [{ affectedRows: 1 }];
@@ -98,6 +104,7 @@ test("a paid live order, concurrent duplicates and different event types grant e
   assert.equal(results.filter(r => !r.duplicate).length, 1);
   assert.equal(state.data.balance, 600); assert.equal(Object.keys(state.data.transactions).length, 1);
   assert.equal(state.data.orders[order.id].status, "paid"); assert.equal(Object.keys(state.data.events).length, 2);
+  assert.deepEqual(Object.values(state.data.announcements), [{ id: order.id, uuid, username: "Dresseur", stars: 500 }]);
   // A delayed expired event must not undo a paid order or its balance.
   await stripeStore.settle({ ...session, paid: false, expired: true }, "evt_expired", "checkout.session.expired");
   assert.equal(state.data.orders[order.id].status, "paid"); assert.equal(state.data.balance, 600);
@@ -106,6 +113,7 @@ test("test payments are recorded but never issue Stars or create a money ledger 
   const order = await makeOrder("test");
   assert.equal((await stripeStore.settle(payment(order), "evt_test", "checkout.session.completed")).status, "test_paid");
   assert.equal(state.data.balance, 100); assert.equal(Object.keys(state.data.transactions).length, 0);
+  assert.equal(Object.keys(state.data.announcements).length, 0);
   assert.equal(state.queries.some(q => q.startsWith("UPDATE wallets")), false);
 }));
 test("wrong amount, currency, quantity, pack, mode and ownership cannot credit a wallet", () => withDatabase(async ({ state, makeOrder, payment }) => {
@@ -126,6 +134,7 @@ test("unpaid/expired sessions stay uncredited; only an authoritative paid event 
   assert.equal(state.data.orders[order.id].status, "pending"); assert.equal(state.data.balance, 100);
   await stripeStore.settle({ ...session, paid: false, complete: false, expired: true }, "evt_expired", "checkout.session.expired");
   assert.equal(state.data.orders[order.id].status, "expired"); assert.equal(state.data.balance, 100);
+  assert.equal(Object.keys(state.data.announcements).length, 0);
   await stripeStore.settle(session, "evt_paid_later", "checkout.session.async_payment_succeeded");
   assert.equal(state.data.orders[order.id].status, "paid"); assert.equal(state.data.balance, 600);
 }));
@@ -135,7 +144,21 @@ test("wallet, ledger, order and webhook receipt roll back together, and retry ca
   await assert.rejects(stripeStore.settle(session, "evt_retry", "checkout.session.completed"));
   assert.equal(state.data.balance, 100); assert.equal(state.data.orders[order.id].status, "pending");
   assert.equal(Object.keys(state.data.transactions).length, 0); assert.equal(Object.keys(state.data.events).length, 0);
+  assert.equal(Object.keys(state.data.announcements).length, 0);
   state.failAfterWallet = false;
   await stripeStore.settle(session, "evt_retry", "checkout.session.completed");
   assert.equal(state.data.balance, 600); assert.equal(Object.keys(state.data.transactions).length, 1);
+}));
+test("an announcement queue failure rolls back the credit and retries once with the same order", () => withDatabase(async ({ state, makeOrder, payment }) => {
+  const order = await makeOrder(), session = payment(order);
+  state.failAnnouncement = true;
+  await assert.rejects(stripeStore.settle(session, "evt_queue", "checkout.session.completed"));
+  assert.equal(state.data.balance, 100);
+  assert.equal(Object.keys(state.data.announcements).length, 0);
+  assert.equal(Object.keys(state.data.transactions).length, 0);
+  state.failAnnouncement = false;
+  await stripeStore.settle(session, "evt_queue", "checkout.session.completed");
+  await stripeStore.settle(session, "evt_queue", "checkout.session.completed");
+  assert.equal(state.data.balance, 600);
+  assert.equal(Object.keys(state.data.announcements).length, 1);
 }));

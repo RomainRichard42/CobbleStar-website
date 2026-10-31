@@ -17,6 +17,7 @@ final class LinkConfig {
     String apiBaseUrl = "https://api.cobblestar-mc.fr";
     String serverKey = PLACEHOLDER;
     int timeoutSeconds = 10;
+    String serverId = "main";
 
     static LinkConfig load() {
         Path path = FabricLoader.getInstance().getConfigDir().resolve("cobblestar-link.json");
@@ -38,6 +39,7 @@ final class LinkConfig {
         return apiUrl != null && apiUrl.startsWith("https://")
             && apiBaseUrl != null && apiBaseUrl.startsWith("https://")
             && serverKey != null && serverKey.length() >= 32 && !serverKey.equals(PLACEHOLDER)
-            && timeoutSeconds >= 3 && timeoutSeconds <= 30;
+            && timeoutSeconds >= 3 && timeoutSeconds <= 30
+            && serverId != null && serverId.matches("[A-Za-z0-9_-]{1,48}");
     }
 }

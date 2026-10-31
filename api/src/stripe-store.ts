@@ -91,8 +91,8 @@ export const stripeStore: PaymentStore = {
     if (!userId) throw new PaymentError("PAYMENT_ORDER_UNKNOWN", 404);
     return transaction(async connection => {
       // Lock user before order/wallet, consistently with account relinking and shop purchases.
-      const [owners] = await connection.execute<(RowDataPacket & { minecraft_uuid: string; merged_into: string | null })[]>(
-        `SELECT id,minecraft_uuid,merged_into FROM users WHERE id=? FOR UPDATE`, [userId]);
+      const [owners] = await connection.execute<(RowDataPacket & { minecraft_uuid: string; merged_into: string | null; minecraft_username: string | null })[]>(
+        `SELECT id,minecraft_uuid,merged_into,minecraft_username FROM users WHERE id=? FOR UPDATE`, [userId]);
       const [rows] = await connection.execute<OrderRow[]>(
         `SELECT ${columns} FROM stripe_checkouts c JOIN orders o ON o.id=c.order_id
          WHERE o.id=? AND o.provider='stripe' FOR UPDATE`, [session.orderId]);
@@ -126,6 +126,9 @@ export const stripeStore: PaymentStore = {
             [randomUUID(), userId, order.stars, `stripe:${session.id}`,
               JSON.stringify({ orderId: order.id, packId: order.packId, amountCents: order.amountCents, currency: order.currency })]);
           await connection.execute(`UPDATE wallets SET balance=balance+? WHERE user_id=?`, [order.stars, userId]);
+          const username = owners[0].minecraft_username;
+          await connection.execute(`INSERT INTO purchase_announcements(order_id,minecraft_uuid,minecraft_username,stars_amount)
+            VALUES(?,?,?,?)`, [order.id, order.minecraftUuid, username && /^[A-Za-z0-9_]{1,16}$/.test(username) ? username : null, order.stars]);
         }
         await connection.execute(`UPDATE orders SET status=?,provider_reference=?,paid_at=UTC_TIMESTAMP() WHERE id=?`, [status, session.id, order.id]);
         await connection.execute(`UPDATE stripe_checkouts SET payment_intent_id=? WHERE order_id=?`, [session.paymentIntent, order.id]);

@@ -98,6 +98,22 @@ Les tables de rapprochement ne stockent ni carte, ni adresse, ni corps brut
 des événements : seulement références techniques et état de la commande.
 Les secrets et les erreurs détaillées du SDK ne sont pas journalisés.
 
+## Annonce dans le chat Minecraft
+
+La migration `024_purchase_announcements.sql` ajoute une file liée à la
+commande. Une annonce est insérée uniquement lors du nouveau crédit réel,
+dans la même transaction que le portefeuille et l'historique. Une confirmation
+Stripe répétée ne recrée ni crédit ni annonce. Les commandes historiques ne
+sont pas reprises. L'annonce expose uniquement le pseudo et les Stars reçues.
+
+Core serveur 1.1.1 récupère la file avec les routes authentifiées
+`POST /api/internal/stars/announcements/claim` et `/:id/complete`, protégées
+par la clé serveur existante. Les baux durent deux minutes ; les accusés sont
+idempotents. Une jointure avec la commande `paid` et le checkout `live` protège
+aussi la lecture de la file. Aucun endpoint public ne peut créer un message.
+Le journal local du module empêche de répéter le message après un accusé perdu.
+Voir [le fonctionnement hors ligne et les limites de panne](../minecraft-mod/README.md#annonces-de-recharge).
+
 ## Validation locale
 
 ```sh

@@ -11,6 +11,7 @@ Object.assign(process.env, {
   MINECRAFT_SERVER_KEY: "test-only-server-secret-never-used-in-production",
 });
 const { stripeStore } = await import("../dist/stripe-store.js");
+const { announcementStore } = await import("../dist/purchase-announcements.js");
 const { pool } = await import("../dist/db.js");
 const { starPacks } = await import("../dist/star-packs.js");
 test.after(() => pool.end());
@@ -34,9 +35,10 @@ test("MySQL Stripe: real migration, concurrent delivery, idempotency, test isola
     };
     for (const name of (await readdir(directory)).filter(name => name.endsWith(".sql")).sort()) await apply(name);
     await apply("023_stripe_payments.sql");
+    await apply("024_purchase_announcements.sql");
     pool.execute = db.execute.bind(db); pool.getConnection = db.getConnection.bind(db);
     const id = randomUUID(), uuid = randomBytes(16).toString("hex"), hash = randomBytes(32).toString("hex");
-    await db.execute(`INSERT INTO users(id,discord_id,minecraft_uuid,minecraft_linked_at) VALUES(?,'123456789012345678',?,UTC_TIMESTAMP())`, [id, uuid]);
+    await db.execute(`INSERT INTO users(id,discord_id,minecraft_uuid,minecraft_username,minecraft_linked_at) VALUES(?,'123456789012345678',?,'Dresseur',UTC_TIMESTAMP())`, [id, uuid]);
     await db.execute(`INSERT INTO wallets(user_id,balance) VALUES(?,100)`, [id]);
     await db.execute(`INSERT INTO sessions(token_hash,user_id,discord_id,expires_at) VALUES(?,?,'123456789012345678',DATE_ADD(UTC_TIMESTAMP(),INTERVAL 1 DAY))`, [hash, id]);
     const reserve = (mode = "live", request = randomUUID()) => stripeStore.reserve(id, hash, request, starPacks[0], mode);
@@ -58,12 +60,34 @@ test("MySQL Stripe: real migration, concurrent delivery, idempotency, test isola
       const [[ledger]] = await db.execute("SELECT COUNT(*) n FROM star_transactions WHERE user_id=?", [id]); assert.equal(Number(ledger.n), 1);
       assert.equal((await stripeStore.read(order.id, id)).status, "paid");
       assert.equal(await stripeStore.read(order.id, randomUUID()), null);
+      const [[notice]] = await db.query("SELECT COUNT(*) n,MAX(stars_amount) stars,MAX(minecraft_username) username FROM purchase_announcements");
+      assert.equal(Number(notice.n), 1); assert.equal(Number(notice.stars), 500); assert.equal(notice.username, "Dresseur");
     });
     await t.test("test payments leave the real balance and revenue untouched", async () => {
       const order = await reserve("test"); await stripeStore.settle(snapshot(order), "evt_test", "checkout.session.completed");
       const [[wallet]] = await db.execute("SELECT balance FROM wallets WHERE user_id=?", [id]); assert.equal(Number(wallet.balance), 600);
       const [[paid]] = await db.query("SELECT COUNT(*) n FROM orders WHERE status='paid'"); assert.equal(Number(paid.n), 1);
       assert.equal((await stripeStore.read(order.id, id)).status, "test_paid");
+      const [[notice]] = await db.query("SELECT COUNT(*) n FROM purchase_announcements"); assert.equal(Number(notice.n), 1);
+    });
+    await t.test("announcement leases isolate servers, tolerate lost responses and cannot replay a delivery", async () => {
+      assert.equal(await announcementStore.claim("another-server"), null);
+      const claimed = await Promise.all([announcementStore.claim("main"), announcementStore.claim("main")]);
+      assert.equal(claimed.filter(Boolean).length, 1);
+      const first = claimed.find(Boolean);
+      assert.equal(first.minecraftUuid, uuid); assert.equal(first.minecraftUsername, "Dresseur"); assert.equal(first.stars, 500);
+      assert.equal(await announcementStore.complete("other", first.id, first.leaseToken), false);
+      assert.equal(await announcementStore.complete("main", first.id, "wrong-token"), false);
+      await db.execute("UPDATE purchase_announcements SET lease_expires_at=UTC_TIMESTAMP()-INTERVAL 1 MINUTE WHERE order_id=?", [first.id]);
+      const retry = await announcementStore.claim("main"); assert.equal(retry.id, first.id); assert.notEqual(retry.leaseToken, first.leaseToken);
+      assert.equal(await announcementStore.complete("main", first.id, first.leaseToken), false);
+      assert.equal(await announcementStore.complete("main", retry.id, retry.leaseToken), true);
+      assert.equal(await announcementStore.complete("main", retry.id, retry.leaseToken), true);
+      assert.equal(await announcementStore.claim("main"), null);
+      // Even an erroneous queue row cannot publicize an unpaid checkout.
+      const pending = await reserve();
+      await db.execute("INSERT INTO purchase_announcements(order_id,minecraft_uuid,stars_amount) VALUES(?,?,500)", [pending.id, uuid]);
+      assert.equal(await announcementStore.claim("main"), null);
     });
     await t.test("a failure after the wallet update rolls everything back and can be retried", async () => {
       const order = await reserve(), session = snapshot(order);
@@ -80,6 +104,7 @@ test("MySQL Stripe: real migration, concurrent delivery, idempotency, test isola
       pool.getConnection = db.getConnection.bind(db);
       const [[wallet]] = await db.execute("SELECT balance FROM wallets WHERE user_id=?", [id]); assert.equal(Number(wallet.balance), 600);
       const [[events]] = await db.execute("SELECT COUNT(*) n FROM stripe_webhook_events WHERE event_id='evt_retry'"); assert.equal(Number(events.n), 0);
+      const [[notice]] = await db.execute("SELECT COUNT(*) n FROM purchase_announcements WHERE order_id=?", [order.id]); assert.equal(Number(notice.n), 0);
       assert.equal((await stripeStore.read(order.id, id)).status, "pending");
       await stripeStore.settle(session, "evt_retry", "checkout.session.completed");
       const [[credited]] = await db.execute("SELECT balance FROM wallets WHERE user_id=?", [id]); assert.equal(Number(credited.balance), 1100);
