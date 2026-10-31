@@ -33,6 +33,12 @@ export const config = z.object({
   STRIPE_MODE: z.enum(["test", "live"]).default("test"),
   STRIPE_SECRET_KEY: z.string().trim().default(""),
   STRIPE_WEBHOOK_SECRET: z.string().trim().default(""),
+  VOTE_TOP_SERVEURS_TOKEN: z.string().trim().default(""),
+  VOTE_SERVEUR_PRIVE_TOKEN: z.string().trim().default(""),
+  VOTE_SERVERSMINECRAFT_ID: z.string().trim().default("7799"),
+  VOTE_SERVERSMINECRAFT_ENABLED: bool,
+  VOTE_PROXY_PEERS: z.string().default(""),
+  VOTE_NETWORK_DIAGNOSTICS: bool,
   WIKI_ADMIN_EMAILS: z.string().default("romain.richard42400@gmail.com"),
 }).parse(process.env);
 
