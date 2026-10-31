@@ -76,11 +76,29 @@ async function fixture(overrides = {}) {
 
 test("payment configuration fails closed and only allows hosted Stripe URLs", () => {
   assert.equal(stripeConfigurationValid(settings), true);
-  for (const change of [{ secretKey: "" }, { webhookSecret: "" }, { mode: "test" }])
+  for (const change of [{ secretKey: "" }, { webhookSecret: "" }, { mode: "test" },
+    { secretKey: "pk_live_" + "x".repeat(24) }, { secretKey: "rk_live_short" },
+    { secretKey: "rk_test_" + "x".repeat(24) }, { secretKey: "sk_org_" + "x".repeat(24) }])
     assert.equal(stripeConfigurationValid({ ...settings, ...change }), false);
   assert.equal(checkoutAddressValid("https://checkout.stripe.com/c/pay/cs_test_example"), true);
   for (const url of ["javascript:alert(1)", "http://checkout.stripe.com/", "https://checkout.stripe.com.evil.test/", "https://user@checkout.stripe.com/"])
     assert.equal(checkoutAddressValid(url), false);
+});
+test("restricted keys keep mode isolation and support checkout and signed reconciliation", async t => {
+  for (const mode of ["live", "test"]) {
+    const secretKey = ["rk", mode, "x".repeat(24)].join("_");
+    assert.equal(stripeConfigurationValid({ mode, secretKey, webhookSecret }), true);
+    assert.equal(stripeConfigurationValid({ mode: mode === "live" ? "test" : "live", secretKey, webhookSecret }), false);
+    const f = await fixture({ mode, secretKey }); t.after(() => f.app.close());
+    if (mode === "test") {
+      assert.equal((await f.checkout()).statusCode, 503);
+      f.state.user = { ...player, discord_id: "staff" };
+    }
+    assert.equal((await f.app.inject("/api/shop/status")).json().checkoutMode, mode);
+    assert.equal((await f.checkout()).statusCode, 201);
+    assert.equal((await f.deliver()).statusCode, 200);
+    assert.equal(f.state.settled[0].session.mode, mode);
+  }
 });
 test("authentication, Minecraft linkage, origin, pack whitelist and server-owned prices", async t => {
   const f = await fixture(); t.after(() => f.app.close());

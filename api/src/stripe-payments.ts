@@ -22,7 +22,7 @@ const sessionEvents = new Set(["checkout.session.completed", "checkout.session.a
   "checkout.session.async_payment_failed", "checkout.session.expired"]);
 
 export function stripeConfigurationValid(settings: Pick<Settings, "mode" | "secretKey" | "webhookSecret">) {
-  return settings.secretKey.startsWith(`sk_${settings.mode}_`) && settings.secretKey.length > 20
+  return ["sk", "rk"].some(kind => settings.secretKey.startsWith(`${kind}_${settings.mode}_`)) && settings.secretKey.length > 20
     && settings.webhookSecret.startsWith("whsec_") && settings.webhookSecret.length > 20;
 }
 export function checkoutAddressValid(value: string) {
