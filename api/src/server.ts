@@ -416,7 +416,12 @@ app.get("/api/me", { preHandler: requireAccount }, async (request, reply) => {
   return { user: { ...publicUser(account), admin: canReadGame(account) || await isWikiAdmin(account), gameAdmin: canReadGame(account) } };
 });
 
-registerMinecraftAvatars(app, { session: loadSession });
+registerMinecraftAvatars(app, { session: loadSession, publicVoter: async uuid => {
+  const [rows] = await pool.execute<RowDataPacket[]>(`SELECT 1 FROM users u JOIN vote_claims v ON v.user_id=u.id
+    WHERE u.minecraft_uuid=? AND u.minecraft_linked_at IS NOT NULL
+    AND v.voted_at>=DATE_FORMAT(UTC_TIMESTAMP(),'%Y-%m-01') LIMIT 1`, [uuid]);
+  return rows.length > 0;
+} });
 registerDiscordBridge(app, request => serverKeyMatches(serverKeyFrom(request)));
 registerGameAdmin(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerPurchaseAnnouncements(app, { server: (request) => serverKeyMatches(serverKeyFrom(request)) });
@@ -717,12 +722,12 @@ app.get("/api/votes", async (request, reply) => {
   }
   const account = await loadSession(request);
   const [rankingRows] = await pool.execute<(RowDataPacket & {
-    user_id: string; username: string | null; votes: number; keys_won: number;
+    user_id: string; username: string | null; minecraft_uuid: string | null; votes: number; keys_won: number;
   })[]>(`
-    SELECT v.user_id,u.minecraft_username AS username,COUNT(*) AS votes,COALESCE(SUM(v.reward_keys),0) AS keys_won
+    SELECT v.user_id,u.minecraft_username AS username,u.minecraft_uuid,COUNT(*) AS votes,COALESCE(SUM(v.reward_keys),0) AS keys_won
     FROM vote_claims v JOIN users u ON u.id=v.user_id
     WHERE v.voted_at>=DATE_FORMAT(UTC_TIMESTAMP(),'%Y-%m-01')
-    GROUP BY v.user_id,u.minecraft_username
+    GROUP BY v.user_id,u.minecraft_username,u.minecraft_uuid
     ORDER BY votes DESC,MAX(v.voted_at) ASC,u.minecraft_username ASC
     LIMIT 1000`);
 
@@ -751,7 +756,8 @@ app.get("/api/votes", async (request, reply) => {
   });
 
   const leaderboard = rankingRows.slice(0, 20).map((row, index) => ({
-    rank: index + 1, username: row.username ?? "Joueur", votes: Number(row.votes), keysWon: Number(row.keys_won),
+    rank: index + 1, username: row.username ?? "Joueur", minecraftUuid: row.minecraft_uuid,
+    votes: Number(row.votes), keysWon: Number(row.keys_won),
   }));
   const playerIndex = account ? rankingRows.findIndex((row) => row.user_id === account.id) : -1;
   const playerRow = playerIndex >= 0 ? rankingRows[playerIndex] : null;
