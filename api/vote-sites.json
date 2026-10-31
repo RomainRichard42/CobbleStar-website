@@ -1,29 +1,29 @@
 {
   "sites": [
     {
-      "id": "portail_1",
-      "name": "Premier portail",
-      "url": "",
-      "intervalMinutes": 90,
-      "enabled": false,
+      "id": "top_serveurs",
+      "name": "Top-Serveurs",
+      "url": "https://top-serveurs.net/minecraft/vote/cobblestar-cobblemon-fr?pseudo={username}",
+      "intervalMinutes": 120,
+      "enabled": true,
       "accent": "pink",
       "icon": "✦"
     },
     {
-      "id": "portail_2",
-      "name": "Deuxième portail",
-      "url": "",
-      "intervalMinutes": 120,
-      "enabled": false,
-      "accent": "cyan",
+      "id": "serveur_prive",
+      "name": "Serveur-Privé",
+      "url": "https://serveur-prive.net/minecraft/cobblestar-cobblemon-fr/vote",
+      "intervalMinutes": 90,
+      "enabled": true,
+      "accent": "violet",
       "icon": "◉"
     },
     {
-      "id": "portail_3",
-      "name": "Troisième portail",
-      "url": "",
-      "intervalMinutes": 180,
-      "enabled": false,
+      "id": "serveursminecraft",
+      "name": "ServeursMinecraft.org",
+      "url": "https://www.serveursminecraft.org/serveur/7799/",
+      "intervalMinutes": 1440,
+      "enabled": true,
       "accent": "yellow",
       "icon": "⌁"
     }

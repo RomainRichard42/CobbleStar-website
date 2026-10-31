@@ -50,15 +50,15 @@ export const SHOP_FAQ: ReadonlyArray<FaqEntry> = [
 export const VOTE_FAQ: ReadonlyArray<FaqEntry> = [
   {
     question: "Combien de votes faut-il pour avoir une récompense ?",
-    answer: "Chaque portail de vote possède son propre cooldown. À l’obtention d’un vote validé, la récompense liée au mode de vote est préparée pour ton joueur.",
+    answer: "Un vote confirmé depuis cette page rapporte une clé pour la machine Vote. Prépare ton vote, termine-le sur l’annuaire avec ton pseudo Minecraft, puis reviens vérifier sa validation. Ouvrir le lien seul ne donne aucune clé.",
   },
   {
     question: "Peut-on voter sur plusieurs plateformes en même temps ?",
-    answer: "Oui, lorsque les votes sont supportés et bien validés. Le cooldown est appliqué selon chaque portail afin d’éviter les abus.",
+    answer: "Oui. Top-Serveurs permet un vote toutes les 2 heures, Serveur-Privé toutes les 1 h 30 et ServeursMinecraft.org toutes les 24 heures. Chaque annuaire applique aussi ses règles de connexion et de réseau.",
   },
   {
     question: "Pourquoi ma récompense n’arrive pas ?",
-    answer: "Vérifie d’abord que ton compte Minecraft est bien lié sur ton profil CobbleStar, puis rejoins ensuite le lobby de récompense défini dans le jeu.",
+    answer: "Vérifie que ton compte Minecraft est lié et que le vote est indiqué comme validé ici. La clé est ensuite livrée automatiquement en jeu. Si tu es hors ligne, elle reste en attente de ta prochaine connexion. Le serveur est actuellement en préouverture.",
   },
 ];
 

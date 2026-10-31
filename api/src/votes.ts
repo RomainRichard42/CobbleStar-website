@@ -22,12 +22,12 @@ const fallbackSites: VoteSite[] = [
 ];
 
 export function getVoteSites(): VoteSite[] {
-  try {
-    const parsed = catalogSchema.parse(JSON.parse(readFileSync(join(process.cwd(), "vote-sites.json"), "utf8")));
-    return parsed.sites;
-  } catch {
-    return fallbackSites;
+  for (const file of ["vote-sites.json", "api/vote-sites.json"]) {
+    try {
+      return catalogSchema.parse(JSON.parse(readFileSync(join(process.cwd(), file), "utf8"))).sites;
+    } catch { /* Support both packaged and repository-root deployments. */ }
   }
+  return fallbackSites;
 }
 
 export function findVoteSite(id: string) {

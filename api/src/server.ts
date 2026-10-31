@@ -1,4 +1,4 @@
-import { randomInt, randomUUID, timingSafeEqual } from "node:crypto";
+import { randomUUID, timingSafeEqual } from "node:crypto";
 import { registerVoteProgress } from "./vote-progress.js";
 import Fastify, { FastifyReply, FastifyRequest, LogController } from "fastify";
 import cookie from "@fastify/cookie";
@@ -39,6 +39,9 @@ import { registerStripePayments } from "./stripe-payments.js";
 import { stripeStore } from "./stripe-store.js";
 import { registerPurchaseAnnouncements } from "./purchase-announcements.js";
 import { registerMinecraftAvatars } from './minecraft-avatar.js';
+import { registerVoteVerification } from './vote-verification.js';
+import { voteStore } from './vote-store.js';
+import { providerReady, type VoteSettings } from './vote-providers.js';
 
 type UserRow = RowDataPacket & {
   id: string; email: string | null; discord_email: string | null; password_hash: string | null;
@@ -698,7 +701,20 @@ app.get("/api/internal/news", { config: { rateLimit: { max: 300, timeWindow: "1 
     .sort((left, right) => Number(right.featured) - Number(left.featured) || right.publishedAt.localeCompare(left.publishedAt)) } };
 });
 
-app.get("/api/votes", async (request) => {
+const voteSettings: VoteSettings = {
+  topToken: config.VOTE_TOP_SERVEURS_TOKEN, privateToken: config.VOTE_SERVEUR_PRIVE_TOKEN,
+  minecraftId: config.VOTE_SERVERSMINECRAFT_ID, minecraftEnabled: config.VOTE_SERVERSMINECRAFT_ENABLED,
+  proxyPeers: config.VOTE_PROXY_PEERS.split(',').map(v=>v.trim()).filter(Boolean), ipSecret:config.COOKIE_SECRET,
+};
+registerVoteVerification(app,{ settings:voteSettings, origin:config.SITE_ORIGIN, session:loadSession, store:voteStore });
+let voteNetworkReported = false;
+
+app.get("/api/votes", async (request, reply) => {
+  reply.header('Cache-Control','private, no-store');
+  if (config.VOTE_NETWORK_DIAGNOSTICS && !voteNetworkReported) {
+    voteNetworkReported = true;
+    app.log.info({ proxyPeer: request.raw.socket.remoteAddress, forwarded: Boolean(request.headers['x-forwarded-for']) }, 'Vote proxy diagnostic');
+  }
   const account = await loadSession(request);
   const [rankingRows] = await pool.execute<(RowDataPacket & {
     user_id: string; username: string | null; votes: number; keys_won: number;
@@ -724,7 +740,8 @@ app.get("/api/votes", async (request) => {
     const availableAt = lastVote ? new Date(lastVote.getTime() + site.intervalMinutes * 60_000) : null;
     return {
       id: site.id, name: site.name, icon: site.icon, accent: site.accent,
-      intervalMinutes: site.intervalMinutes, rewardMin: 1, rewardMax: 2,
+      intervalMinutes: site.intervalMinutes, rewardMin: 1, rewardMax: 1,
+      verificationEnabled: providerReady(site.id,voteSettings),
       enabled: site.enabled && Boolean(site.url),
       url: account?.minecraft_linked_at ? playerVoteUrl(site, account.minecraft_username) : null,
       lastVoteAt: lastVote?.toISOString() ?? null,
@@ -847,7 +864,7 @@ app.post("/api/internal/votes/record", { config: { rateLimit: { max: 180, timeWi
     : await pool.execute<UserRow[]>(`SELECT * FROM users WHERE LOWER(minecraft_username)=LOWER(?) AND minecraft_linked_at IS NOT NULL LIMIT 1`, [parsed.data.username!]);
   const user = users[0];
   if (!user) return reply.code(404).send({ error: "MINECRAFT_ACCOUNT_NOT_LINKED" });
-  const rewardKeys = randomInt(1, 3);
+  const rewardKeys = 1;
   try {
     const claim = await transaction(async (connection) => {
       await connection.execute(`SELECT id FROM users WHERE id=? FOR UPDATE`, [user.id]);
