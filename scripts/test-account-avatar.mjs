@@ -8,7 +8,7 @@ test('linked Minecraft skin takes priority with Discord fallbacks', () => {
   const appearance = accountAppearance({ minecraft: { uuid, linked: true, username: 'Test' }, discord });
   assert.equal(appearance.name, 'Test');
   assert.deepEqual(appearance.images.map(image => image.kind), ['minecraft', 'discord', 'discord']);
-  assert.equal(appearance.images[0].url, 'https://mc-heads.net/avatar/069a79f444e94726a5befca90e38aaf5/64');
+  assert.equal(appearance.images[0].url, '/api/me/avatar?uuid=069a79f444e94726a5befca90e38aaf5');
 });
 test('unlinked Minecraft identity never overrides Discord', () => {
   const appearance = accountAppearance({ minecraft: { uuid, linked: false, username: 'Unverified' }, discord });

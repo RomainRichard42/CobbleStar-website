@@ -37,6 +37,7 @@ import { collectionStore } from './player-collection-store.js';
 import { registerPublicDex } from './public-dex.js';
 import { registerStripePayments } from "./stripe-payments.js";
 import { stripeStore } from "./stripe-store.js";
+import { registerMinecraftAvatars } from './minecraft-avatar.js';
 
 type UserRow = RowDataPacket & {
   id: string; email: string | null; discord_email: string | null; password_hash: string | null;
@@ -411,6 +412,7 @@ app.get("/api/me", { preHandler: requireAccount }, async (request, reply) => {
   return { user: { ...publicUser(account), admin: canReadGame(account) || await isWikiAdmin(account), gameAdmin: canReadGame(account) } };
 });
 
+registerMinecraftAvatars(app, { session: loadSession });
 registerDiscordBridge(app, request => serverKeyMatches(serverKeyFrom(request)));
 registerGameAdmin(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerDiscordAdmin(app, { session: loadSession });
