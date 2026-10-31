@@ -27,6 +27,24 @@ La clé Minecraft peut être générée sans l'afficher dans un service tiers av
 
 Ne jamais publier le fichier `.env`, les mots de passe ou les clés dans GitHub.
 
+## Paiements de Stars avec Stripe
+
+Les nouveaux achats restent désactivés tant que `STRIPE_ENABLED=false`.
+Déployer aussi `stars.catalog.json`, la migration `023_stripe_payments.sql` et
+les dépendances API, dont Stripe. Le mode `STRIPE_MODE=test` n'est accessible
+qu'aux comptes de `GAME_ADMIN_DISCORD_IDS` et ne crédite aucun vrai solde.
+
+Les secrets `STRIPE_SECRET_KEY` et `STRIPE_WEBHOOK_SECRET` restent dans le
+`.env` Web. La destination webhook est
+`https://cobblestar-mc.fr/api/payments/stripe/webhook`, pour les événements
+`checkout.session.completed`, `checkout.session.async_payment_succeeded`,
+`checkout.session.async_payment_failed` et `checkout.session.expired`.
+L'activation réelle nécessite le compte marchand prêt et un test complet
+validé ; ne pas remplacer les clés de test par des clés réelles sans cette étape.
+Les remboursements et litiges restent à rapprocher manuellement du portefeuille.
+
+La procédure complète est dans `docs/stripe-payments.md` du dépôt.
+
 Dans le portail développeur Discord, ajouter exactement cette URL de redirection OAuth2 :
 `https://cobblestar-mc.fr/api/auth/discord/callback`. Elle est dérivée de
 `PUBLIC_API_URL`, qui doit donc correspondre au domaine réellement servi aux joueurs.
