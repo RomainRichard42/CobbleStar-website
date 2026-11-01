@@ -8,7 +8,7 @@ const compiled=ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.
 const {rememberDiscordAppIntent,takeDiscordAppIntent}=await import('data:text/javascript;base64,'+Buffer.from(compiled).toString('base64'));
 function storage(){const values=new Map();return {setItem:(k,v)=>values.set(k,v),getItem:k=>values.get(k)??null,removeItem:k=>values.delete(k)};}
 
-test('the blue button choice opens the app only after a verified successful login, once',()=>{
+test('the blue button requests app handoff only after a verified successful login, once',()=>{
  const state=storage();rememberDiscordAppIntent(state,1_000);
  assert.equal(takeDiscordAppIntent('connected',true,state,2_000),true);
  assert.equal(takeDiscordAppIntent('connected',true,state,2_001),false);

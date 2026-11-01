@@ -17,4 +17,4 @@ export const BASE_KEYWORDS = [
   "pokémon Minecraft",
 ];
 
-export const OG_IMAGE = "/media/cobblestar-logo-480.webp";
+export const OG_IMAGE = "/media/logo-cercle-5-480.webp";

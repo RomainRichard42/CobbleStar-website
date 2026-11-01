@@ -94,7 +94,7 @@ export default function AdminDashboard() {
 
   return <main className={styles.page} id="contenu">
     <header className={styles.topbar}>
-      <Link className={styles.brand} href="/"><img src="/cobblestar-logo.png" alt=""/><span><small>COBBLESTAR</small><b>CONTROL CENTER</b></span></Link>
+      <Link className={styles.brand} href="/"><img src="/media/logo-cercle-5-480.webp" alt=""/><span><small>COBBLESTAR</small><b>CONTROL CENTER</b></span></Link>
       <div className={styles.live}><i/><span><small>DONNÉES ACTUALISÉES</small><b>{new Date(data.generatedAt).toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}</b></span></div>
       <nav><Link href="/admin/discord/">Discord</Link><Link href="/admin/joueurs/">Joueurs en jeu</Link><Link href="/admin/creation/">Quêtes & PNJ</Link><Link href="/admin/arenes/">Arènes & Ligue</Link><Link href="/admin/star/">Pokémon Star</Link><Link href="/compte/">Mon compte</Link><Link href="/wiki/admin/">Studio wiki</Link><button onClick={() => void load()} disabled={loading}>{loading ? "Actualisation…" : "Actualiser ↻"}</button></nav>
     </header>
@@ -165,5 +165,5 @@ function Breakdown({ title, rows, empty }: { title: string; rows: Array<{ name: 
   return <article className={styles.breakdown}><small>CLASSEMENT</small><h2>{title}</h2>{rows.length ? <div>{rows.slice(0, 6).map((row, index) => <span key={row.name}><i>{String(index + 1).padStart(2,"0")}</i><p><b>{row.name}</b><small>{row.detail}</small></p><em><u style={{ width: `${row.value / max * 100}%` }}/></em><strong>{number.format(row.value)}</strong></span>)}</div> : <p className={styles.empty}>{empty}</p>}</article>;
 }
 function StateScreen({ label, title, error, onRetry }: { label: string; title: string; error?: boolean; onRetry?: () => void }) {
-  return <main className={styles.state}><img src="/cobblestar-logo.png" alt=""/><small>{label}</small><h1>{title}</h1>{error ? <><p>Cette page est privée et utilise la session Discord de ton compte CobbleStar.</p><div><Link href="/compte/">Ouvrir mon compte</Link>{onRetry && <button onClick={onRetry}>Réessayer</button>}</div></> : <span/>}</main>;
+  return <main className={styles.state}><img src="/media/logo-cercle-5-480.webp" alt=""/><small>{label}</small><h1>{title}</h1>{error ? <><p>Cette page est privée et utilise la session Discord de ton compte CobbleStar.</p><div><Link href="/compte/">Ouvrir mon compte</Link>{onRetry && <button onClick={onRetry}>Réessayer</button>}</div></> : <span/>}</main>;
 }

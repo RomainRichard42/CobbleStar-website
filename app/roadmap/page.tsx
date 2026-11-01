@@ -172,7 +172,7 @@ function ChapterModule({ stop }: { stop: Stop }) {
     case "closure":
       return <div className={styles.closureModule}>
         <span className={styles.closureOrbit} />
-        <img src="/cobblestar-logo.png" alt="Dracolosse, mascotte de CobbleStar" />
+        <img src="/media/logo-cercle-5-480.webp" alt="Dracolosse, mascotte de CobbleStar" />
         <div><small>CAP COMMUN</small><strong>COBBLESTAR</strong><span>LE MONDE · LES JOUEURS · LEURS HISTOIRES</span></div>
       </div>;
     default:
@@ -480,7 +480,7 @@ export default function RoadmapPokeballPage() {
 
             {stop.kind === "intro" ? <>
               <div className={styles.introCopy} data-roadmap-scroll tabIndex={0} aria-label="Présentation de la roadmap"><small>{stop.kicker}</small><h1>L’aventure<br /><em>est lancée.</em></h1><strong>{stop.accent}</strong><p>{stop.copy}</p><div className={styles.introStats}><span><b>DISPONIBLE</b> DÈS MAINTENANT</span><span><b>ASTERIA</b> & NÉBÉLIA</span><span><b>À VENIR</b> LES PROCHAINS JALONS</span></div><button type="button" onClick={() => goTo(1)}>Explorer la roadmap <b>↓</b></button></div>
-              <div className={styles.mascotOrbit}><i /><i /><img src="/cobblestar-logo.png" alt="Dracolosse, mascotte de CobbleStar" /></div>
+              <div className={styles.mascotOrbit}><i /><i /><img src="/media/logo-cercle-5-480.webp" alt="Dracolosse, mascotte de CobbleStar" /></div>
             </> : <div className={`${styles.chapterLayout} ${index % 2 === 0 ? styles.chapterReverse : ""}`} data-roadmap-scroll tabIndex={0} aria-label={`Lire le jalon ${stop.number}`}>
               <div className={styles.content}>
                 <div className={styles.meta}><span>{stop.number} / 09</span><i /><b>{stop.kicker}</b></div>
@@ -504,7 +504,7 @@ export default function RoadmapPokeballPage() {
               const [left, top] = positions[index];
               return <button key={stop.id} type="button" style={{ left: `${left}%`, top: `${top}%` }} onClick={() => goTo(index + 1)}><b>{stop.number}</b><span>{stop.kicker.split(" · ")[1] ?? stop.kicker}</span></button>;
             })}
-            <div className={styles.ballLogo}><span /><img src="/cobblestar-logo.png" alt="Dracolosse, mascotte de CobbleStar" /></div>
+            <div className={styles.ballLogo}><span /><img src="/media/logo-cercle-5-480.webp" alt="Dracolosse, mascotte de CobbleStar" /></div>
           </div>
           <div className={styles.revealCopy}><small>DÉJÀ SORTI · ET LA SUITE</small><h2>L’aventure continue avec vous.</h2><p>Le serveur est ouvert. Retrouve les jalons disponibles et les prochaines évolutions d’Asteria et de Nébélia. Les dates à venir seront annoncées une fois confirmées.</p><div><button type="button" onClick={() => goTo(0)}>Revenir au départ ↑</button><Link href="/roadmap-carte/">Autre vue de la roadmap ↗</Link></div></div>
         </section>

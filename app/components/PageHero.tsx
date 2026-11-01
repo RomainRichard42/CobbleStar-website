@@ -25,7 +25,7 @@ export default function PageHero({ eyebrow, title, accent, description, badge, i
         <div className="page-hero-visual" aria-hidden="true">
           <span className="page-hero-index">{meta.index}</span>
           <div className="page-hero-photo"><img src={image} alt="" /></div>
-          <div className="page-orb"><img src="/cobblestar-logo.png" alt="" /></div>
+          <div className="page-orb"><img src="/media/logo-cercle-5-480.webp" alt="" /></div>
           {badge && <span className="page-hero-badge">{badge}</span>}
           <small className="page-hero-legend">{meta.label}</small>
         </div>

@@ -14,7 +14,7 @@ export default function SiteFooter() {
     <footer className="site-footer">
       <div className="site-footer-inner">
         <div className="footer-brand">
-          <a className="brand" href="/"><span className="brand-mark"><img src="/media/cobblestar-logo-128.webp" alt="" width="54" height="54" loading="lazy" /></span><span>Cobble<span>Star</span></span></a>
+          <a className="brand" href="/"><span className="brand-mark"><img src="/media/logo-cercle-5-128.webp" alt="" width="54" height="54" loading="lazy" /></span><span>Cobble<span>Star</span></span></a>
           <p>Une aventure Cobblemon francophone pensée pour explorer, collectionner et progresser ensemble.</p>
           <p className="footer-server">Ouverture à venir</p>
         </div>

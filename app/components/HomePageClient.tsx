@@ -44,7 +44,7 @@ export default function HomePageClient() {
           <button className="hero-server-line" onClick={copyAddress} type="button"><span className="status-dot" /><small>ADRESSE DU SERVEUR</small><b>{copied ? "Adresse copiée" : SERVER_ADDRESS}</b><i>{copied ? "✓" : "Copier l’IP"}</i></button>
         </div>
         <div className="hero-art landing-art" aria-label="Mascotte CobbleStar">
-          <span className="hero-watermark">COBBLE<br />STAR</span><div className="hero-planet" /><div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="logo-glow" /><img src="/cobblestar-logo.png" alt="Dragonite, mascotte de CobbleStar, posé sur un nuage" />
+          <span className="hero-watermark">COBBLE<br />STAR</span><div className="hero-planet" /><div className="orbit orbit-one" /><div className="orbit orbit-two" /><div className="logo-glow" /><img src="/media/logo-cercle-5-480.webp" alt="Dragonite, mascotte de CobbleStar, posé sur un nuage" />
           <span className="scene-spark scene-spark-one">✦</span><span className="scene-spark scene-spark-two">✦</span><span className="scene-spark scene-spark-three">✦</span>
           <div className="world-ticket"><small>COBBLESTAR FR</small><b>Serveur francophone</b><span>Fabric • Cobblemon • 1.21.1</span></div>
         </div>
@@ -79,7 +79,7 @@ export default function HomePageClient() {
 
     <section className="launcher-story">
       <div className="launcher-story-copy"><span className="kicker">TÉLÉCHARGEMENT</span><h2>Un launcher.<br /><em>Zéro préparation.</em></h2><p>Le launcher CobbleStar installe Fabric, synchronise le modpack et prépare automatiquement la bonne version du jeu. Connecte-toi ensuite à l’adresse du serveur pour commencer.</p><a className="beta-inline" href={LAUNCHER_RELEASES_URL} target="_blank" rel="noreferrer">Toutes les versions sur GitHub <b>↗</b></a></div>
-      <div className="launcher-window"><div className="window-top"><i /><i /><i /><small>COBBLESTAR LAUNCHER • WINDOWS</small></div><div className="window-content"><img src="/cobblestar-logo.png" alt="" /><div><small>DERNIÈRE VERSION</small><strong>v{release?.version || FALLBACK_VERSION}</strong><span><i /></span><a className="window-cta" href={downloadUrl} download>Télécharger pour Windows</a></div></div><div className="window-foot"><span>Windows 10/11 64 bits</span><span>{release?.sizeMb || FALLBACK_SIZE_MB} Mo</span><span>Mises à jour auto</span></div></div>
+      <div className="launcher-window"><div className="window-top"><i /><i /><i /><small>COBBLESTAR LAUNCHER • WINDOWS</small></div><div className="window-content"><img src="/media/logo-cercle-5-480.webp" alt="" /><div><small>DERNIÈRE VERSION</small><strong>v{release?.version || FALLBACK_VERSION}</strong><span><i /></span><a className="window-cta" href={downloadUrl} download>Télécharger pour Windows</a></div></div><div className="window-foot"><span>Windows 10/11 64 bits</span><span>{release?.sizeMb || FALLBACK_SIZE_MB} Mo</span><span>Mises à jour auto</span></div></div>
     </section>
 
     <section className="home-cta"><div><span className="kicker">PRÊT POUR LE DÉPART ?</span><h2>Un clic.<br /><em>Le launcher s’occupe du reste.</em></h2><p>Fabric, le modpack et les mises à jour sont installés automatiquement. Tu gardes simplement ton compte Microsoft habituel.</p></div><a className="button button-primary" href={downloadUrl} download>Installer CobbleStar <span>↓</span></a></section>

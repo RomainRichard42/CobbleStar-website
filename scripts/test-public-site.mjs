@@ -30,6 +30,19 @@ test('Pokédex renders public names in Astro and stays discoverable from the wik
  const shop=await get('/boutique/');assert.match(shop.html,/id="tab-jetons"/);for(const token of ['nova','pulsar','quasar']){assert.match(shop.html,new RegExp('/shop/tokens/'+token+'\\.png'));assert.equal((await get('/shop/tokens/'+token+'.png')).response.status,200);}assert.match(shop.html,/href="\/wiki\/caisses\/#demo-machines"/);
 });
 
+test('homepage groups guide headings with their copy and keeps the FAQ separate',async()=>{
+ const {html,response}=await get('/');assert.equal(response.status,200);
+ const body=html.match(/<div class="home-server-guide-body">([\s\S]*?)<\/div>\s*<aside class="home-server-faq"/);
+ assert.ok(body,'guide and FAQ have independent containers');
+ for(const text of ['Un serveur Cobblemon français','Quel dresseur veux-tu devenir','Ce qu’il faut pour rejoindre','server-paths','/wiki/pokedex/','/installer-cobblemon/'])assert.ok(body[1].includes(text),text);
+ const faq=html.match(/<aside class="home-server-faq"[\s\S]*?<\/aside>/)?.[0]||'';
+ assert.ok(faq.includes('Avant de nous rejoindre.'));
+ assert.ok(faq.includes('<details>'));
+ assert.ok(!body[1].includes('<details>'));
+ assert.match(html,/\/media\/logo-cercle-5-128\.webp/);
+ for(const asset of ['/media/logo-cercle-5-128.webp','/media/logo-cercle-5-480.webp','/media/logo-cercle-5-96.png','/media/logo-cercle-5-180.png'])assert.equal((await get(asset)).response.status,200,asset);
+});
+
 test('compact Pokédex retains every crawlable form link beyond the first visual batch',async()=>{
  const original=dexEntries;
  try {
@@ -104,7 +117,7 @@ test('sitemap, RSS and redirects stay canonical without indexing private pages',
 test('Google site identity and social article metadata match the public document',async()=>{
   const home=await get('/');const data=[...home.html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].flatMap(m=>JSON.parse(m[1]));
   const websites=data.filter(d=>d['@type']==='WebSite');assert.equal(websites.length,1);assert.equal(websites[0].name,'CobbleStar');assert.equal(websites[0].url,'https://cobblestar-mc.fr/');
-  assert.match(home.html,/sizes="96x96" href="\/media\/favicon-96.png"/);
+  assert.match(home.html,/sizes="96x96" href="\/media\/logo-cercle-5-96.png"/);
   const article=await get('/actualites/'+news.content.articles[0].slug+'/');assert.ok(article.html.includes('property="og:type" content="article"'));assert.ok(article.html.includes('property="article:published_time" content="'+news.content.articles[0].publishedAt+'"'));
 });
 

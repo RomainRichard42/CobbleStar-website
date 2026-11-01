@@ -260,7 +260,7 @@ export default function RoadmapPage() {
         <div className={styles.machinePlate}>
           <div className={styles.machineGrid} />
           <div className={styles.machineRings}><i /><i /><i /></div>
-          <img src="/cobblestar-logo.png" alt="Dragonite, mascotte de CobbleStar" />
+          <img src="/media/logo-cercle-5-480.webp" alt="Dragonite, mascotte de CobbleStar" />
           <span className={styles.machinePing}><i />SIGNAL STABLE</span>
           <span className={styles.machineCoordinate}>48° 51′ N<br />02° 21′ E</span>
           <div className={styles.machineReadout}><small>CAP ACTUEL</small><strong>Polir le cœur<br />de l’aventure.</strong><span><b>03</b> systèmes en amélioration</span></div>
@@ -337,7 +337,7 @@ export default function RoadmapPage() {
     </section>
 
     <section className={`${styles.finalSignal} ${styles.reveal}`} data-roadmap-reveal>
-      <div className={styles.finalRings}><i /><i /><img src="/cobblestar-logo.png" alt="" /></div>
+      <div className={styles.finalRings}><i /><i /><img src="/media/logo-cercle-5-480.webp" alt="" /></div>
       <div><small>LE VOYAGE CONTINUE</small><h2>Reviens voir<br />la constellation évoluer.</h2><p>La carte change avec CobbleStar. Les actualités expliquent chaque nouvelle arrivée en détail.</p><a href="/actualites/">Lire le journal du serveur <span>↗</span></a></div>
     </section>
 

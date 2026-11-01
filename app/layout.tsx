@@ -35,7 +35,7 @@ export const metadata: Metadata = {
       "Serveur Minecraft Cobblemon francophone. Guides, boutique et communauté ; ouverture publique à venir.",
     images: [
       {
-        url: "/media/cobblestar-logo-480.webp",
+        url: "/media/logo-cercle-5-480.webp",
         width: 480,
         height: 480,
         alt: "Mascotte Dragonite de CobbleStar sur un nuage",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     title: "CobbleStar",
     description:
       "Serveur Minecraft Cobblemon 1.21.1 en français. Lance, vote, personnalise et progresse.",
-    images: ["/media/cobblestar-logo-480.webp"],
+    images: ["/media/logo-cercle-5-480.webp"],
   },
   robots: {
     index: true,
@@ -64,9 +64,9 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   icons: {
-    icon: [{ url: "/media/favicon-96.png", sizes: "96x96", type: "image/png" }],
-    shortcut: "/media/favicon-96.png",
-    apple: "/media/apple-touch-icon.png",
+    icon: [{ url: "/media/logo-cercle-5-96.png", sizes: "96x96", type: "image/png" }],
+    shortcut: "/media/logo-cercle-5-96.png",
+    apple: "/media/logo-cercle-5-180.png",
   },
 };
 

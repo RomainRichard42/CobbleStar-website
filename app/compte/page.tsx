@@ -10,7 +10,8 @@ import FaqSection from "../components/FaqSection";
 import FaqStructuredData from "../components/FaqStructuredData";
 import styles from "./account.module.css";
 import { rememberDiscordAppIntent, takeDiscordAppIntent } from '../lib/discord-account-flow';
-import { openDiscordApp } from '../lib/discord-launch';
+import { showDiscordAppChoice } from '../lib/discord-launch';
+import { DISCORD_APP_INVITE, DISCORD_INVITE } from '../lib/community-links';
 
 type Account = {
   id: string;
@@ -102,7 +103,7 @@ function AccountPortal() {
         setRelinkEnabled(link.relinkEnabled);
         if (discordResult === 'connected') setSuccess('Tu es connecté au site et tu as rejoint le Discord CobbleStar.');
         try {
-          if (takeDiscordAppIntent(discordResult, Boolean(profile.user.id), window.sessionStorage)) openDiscordApp(true);
+          if (takeDiscordAppIntent(discordResult, Boolean(profile.user.id), window.sessionStorage)) showDiscordAppChoice(true);
         } catch { /* The account stays connected if storage or app launching is blocked. */ }
       }
     }).catch(() => {
@@ -248,7 +249,7 @@ function AccountPortal() {
           <div className={styles.identityVisual}>
             {account?.discord
               ? <div className={`${styles.playerAvatar} ${styles.discordAvatar}`}><span aria-hidden="true">{accountInitial}</span>{account.discord.avatarUrl && <img src={account.discord.avatarUrl} alt={`Avatar Discord de ${discordName}`} onError={(event) => { event.currentTarget.style.display = "none"; }} />}</div>
-              : <img className={styles.brandAvatar} src="/media/cobblestar-logo-480.webp" alt="Mascotte de CobbleStar" />}
+              : <img className={styles.brandAvatar} src="/media/logo-cercle-5-480.webp" alt="Mascotte de CobbleStar" />}
             <span className={styles.identityOrbit} aria-hidden="true" />
           </div>
 
@@ -320,7 +321,8 @@ function AccountPortal() {
             </section>}
 
             <Link className={styles.adminLink} href="/collection/"><span><small>MON POKÉDEX</small><b>Ma collection et mes objectifs</b><p>Retrouve ton équipe et ton PC, tes favoris et les Pokémon que tu veux capturer.</p></span><strong>→</strong></Link>
-            <a className={styles.discordButton} href="/api/auth/discord" onClick={beginDiscordConnection}><span>Rejoindre et ouvrir Discord</span><b aria-hidden="true">→</b></a>
+            <a className={styles.discordButton} href={DISCORD_APP_INVITE} aria-label="Ouvrir le serveur CobbleStar dans l’application Discord"><span>Ouvrir l’application Discord</span><b aria-hidden="true">↗</b></a>
+            <a className={styles.discordWebFallback} href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer" data-discord-web>Continuer sur le site Discord ↗</a>
             {success && <p className={styles.linkSuccess} role="status">✓ {success}</p>}
 
             {account.admin === true && <Link className={styles.adminLink} href="/admin/"><span><small>ACCÈS ADMINISTRATEUR</small><b>Ouvrir le centre de contrôle</b></span><strong>→</strong></Link>}

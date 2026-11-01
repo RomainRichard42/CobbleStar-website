@@ -4,7 +4,7 @@
 .discord-launch-dialog p{margin:0 0 22px;color:#dfd1e9;font-size:16px;line-height:1.6}
 .discord-launch-dialog .discord-launch-close{position:absolute;right:12px;top:12px;width:44px;height:44px;padding:0;border:1px solid #735581;border-radius:10px;background:#30203d;color:#fff4dc;font:400 28px/1 sans-serif;cursor:pointer}
 .discord-launch-dialog a{display:flex;align-items:center;justify-content:center;min-height:48px;padding:10px 14px;border-radius:10px;text-align:center;font-size:16px;line-height:1.5;font-weight:650;text-decoration:none}
-.discord-launch-dialog .discord-launch-primary{background:#edbf78;color:#21162d}
+.discord-launch-dialog .discord-launch-primary{background:#5865f2;color:#fff}
 .discord-launch-dialog .discord-launch-help{margin:24px 0 8px}
 .discord-launch-dialog .discord-launch-web{border:1px solid #88649e;background:#30203d;color:#fff4dc}
 .discord-launch-dialog :focus-visible{outline:3px solid #f6d495;outline-offset:4px}

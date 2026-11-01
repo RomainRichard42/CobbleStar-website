@@ -29,3 +29,19 @@
 @media(max-width:1000px){.server-first-steps{grid-template-columns:1fr 1fr}.server-first-steps>div{grid-column:1/-1}.astral-home.astral-v6 .server-brief-heading{gap:28px}.server-brief-features article{padding-right:20px}.server-brief-features article+article{padding-left:20px}}
 @media(max-width:720px){.astral-home.astral-v6 .cinematic-stage .cinema-intro{margin-top:130px;margin-bottom:30px}.astral-home.astral-v6 .cinema-actions{align-items:stretch}.astral-home.astral-v6 .cinema-actions .btn{flex:1 1 220px;justify-content:space-between}.astral-home.astral-v6 .cinema-intro .intro-requirements{display:grid;gap:4px;margin-bottom:20px}.astral-home.astral-v6 .server-brief{padding:48px 24px}.astral-home.astral-v6 .server-brief-heading{grid-template-columns:1fr;gap:22px}.server-brief-features{grid-template-columns:1fr;margin-top:28px}.server-brief-features article,.server-brief-features article+article{padding:24px 0;border-left:0}.server-brief-features article+article{border-top:1px solid #61466b}.server-brief-features img{width:40px;height:40px;margin-bottom:14px}.server-first-steps{grid-template-columns:1fr;gap:14px}.server-first-steps>div{grid-column:auto}.astral-home.astral-v6 .server-brief p{font-size:1.0625rem}.astral-home.astral-v6 .server-brief .server-brief-status{font-size:1rem}}
 @media(forced-colors:active){.server-brief-features,.server-brief-features article,.server-first-steps a{border-color:CanvasText}}
+
+/* Each column owns its headings and text; FAQ grid rows cannot split paragraphs. */
+.astral-home.astral-v6 .home-server-guide{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);align-items:start;gap:clamp(32px,6vw,88px);padding:80px max(24px,6vw);background:#0e0a1c;color:#fff4dc}
+.home-server-guide-body,.home-server-faq{min-width:0}
+.astral-home.astral-v6 .home-server-guide h2{grid-row:auto;margin:0 0 28px;font-size:clamp(32px,3vw,44px)!important;line-height:1.15;max-width:23ch}
+.astral-home.astral-v6 .home-server-guide h3{margin:34px 0 16px;font-size:clamp(24px,2vw,29px)!important;line-height:1.25}
+.astral-home.astral-v6 .home-server-guide p,.astral-home.astral-v6 .home-server-guide li{font-size:1.0625rem!important;line-height:1.75!important;color:#e4d9ed;overflow-wrap:anywhere}
+.astral-home.astral-v6 .home-server-guide p{margin:0 0 20px;max-width:65ch}
+.home-server-guide a{color:#f1c986;text-decoration:underline;text-underline-offset:4px}
+.home-server-guide .server-paths{display:grid;gap:16px;padding-left:23px;margin:0 0 28px;max-width:65ch}
+.home-server-faq details{grid-column:auto;border-block-start:1px solid #604768;padding:0}
+.home-server-faq details:last-of-type{border-block-end:1px solid #604768}
+.astral-home.astral-v6 .home-server-faq summary{min-height:52px;cursor:pointer;padding:18px 0;font-size:1.0625rem;line-height:1.5;font-weight:650;color:#fff4dc}
+.astral-home.astral-v6 .home-server-faq details p{margin:0 0 20px}
+.home-server-faq>a{display:inline-flex;align-items:center;min-height:44px;line-height:1.5;margin-top:18px}
+@media(max-width:980px){.astral-home.astral-v6 .home-server-guide{grid-template-columns:minmax(0,1fr);padding-block:56px;gap:36px}.home-server-faq{border-top:1px solid #604768;padding-top:36px}.astral-home.astral-v6 .home-server-guide h2{max-width:25ch}}

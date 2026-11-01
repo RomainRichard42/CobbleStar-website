@@ -293,7 +293,7 @@ app.get("/api/health", async () => {
 app.get("/favicon.ico", { config: { rateLimit: false } }, async (_request, reply) => {
   return reply.header("Cache-Control", "public, max-age=86400")
     .header("Cross-Origin-Resource-Policy", "cross-origin")
-    .redirect("/cobblestar-logo.png", 302);
+    .redirect("/media/logo-cercle-5-96.png", 302);
 });
 
 app.get("/api/minecraft-profile", { config: { rateLimit: { max: 30, timeWindow: "1 minute" } } }, async (request, reply) => {

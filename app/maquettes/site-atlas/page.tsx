@@ -130,7 +130,7 @@ export function AtlasLanding({ home = false }: { home?: boolean }) {
       {home ? <SiteHeader /> : <header className={styles.header}>
         <Link href="/maquettes/site-atlas/" className={styles.brand} aria-label="CobbleStar, accueil de la proposition Atlas">
           <span className={styles.brandMark}>
-            <Image src="/cobblestar-logo.png" alt="" width={54} height={54} priority />
+            <Image src="/media/logo-cercle-5-480.webp" alt="" width={54} height={54} priority />
           </span>
           <span>
             <strong>CobbleStar</strong>
@@ -181,7 +181,7 @@ export function AtlasLanding({ home = false }: { home?: boolean }) {
               <div className={styles.heroWorld}><Image src="/cobblemon-desert.webp" alt="Paysage de Nébélia" fill priority sizes="(max-width: 900px) 92vw, 25vw" /><span>Nébélia</span></div>
             </div>
           <div className={styles.heroLogo}>
-            <Image src="/cobblestar-logo.png" alt="Dragonite, mascotte de CobbleStar" width={430} height={430} priority />
+            <Image src="/media/logo-cercle-5-480.webp" alt="Dragonite, mascotte de CobbleStar" width={430} height={430} priority />
           </div>
           <div className={styles.postcard}>
             <small>DEUX MONDES · UN MÊME RÉCIT</small>
@@ -219,7 +219,7 @@ export function AtlasLanding({ home = false }: { home?: boolean }) {
           <span className={styles.mapRoute} />
           <div className={styles.worldLabelA}><small>MONDE 01</small><strong>Asteria</strong><span>Les terres du premier départ</span></div>
           <div className={styles.worldLabelB}><small>MONDE 02</small><strong>Nébélia</strong><span>L’horizon des explorateurs</span></div>
-          <div className={styles.worldSeal}><Image src="/cobblestar-logo.png" alt="" width={94} height={94} /></div>
+          <div className={styles.worldSeal}><Image src="/media/logo-cercle-5-480.webp" alt="" width={94} height={94} /></div>
         </div>
         <div className={styles.worldCopy}>
           <small>L’ATLAS COBBLESTAR</small>
@@ -318,7 +318,7 @@ export function AtlasLanding({ home = false }: { home?: boolean }) {
       </section>
 
       <section className={styles.finalCta}>
-        <div className={styles.finalCloud}><Image src="/cobblestar-logo.png" alt="Dragonite sur son nuage" width={370} height={370} /></div>
+        <div className={styles.finalCloud}><Image src="/media/logo-cercle-5-480.webp" alt="Dragonite sur son nuage" width={370} height={370} /></div>
         <div>
           <small>LE PROCHAIN DÉPART EST LE TIEN</small>
           <h2>Prêt à écrire<br />la suite ?</h2>
@@ -328,7 +328,7 @@ export function AtlasLanding({ home = false }: { home?: boolean }) {
       </section>
 
       {home ? <SiteFooter /> : <footer className={styles.footer}>
-        <div className={styles.footerBrand}><Image src="/cobblestar-logo.png" alt="" width={48} height={48} /><strong>CobbleStar</strong></div>
+        <div className={styles.footerBrand}><Image src="/media/logo-cercle-5-480.webp" alt="" width={48} height={48} /><strong>CobbleStar</strong></div>
         <p>Serveur Minecraft Cobblemon francophone<br />indépendant et communautaire.</p>
         <div><Link href="/wiki/">Wiki</Link><Link href="/boutique/">Boutique</Link><Link href="/vote/">Vote</Link><Link href="/compte/">Compte</Link></div>
         <small>Proposition Atlas — prototype réel, isolé du site public.</small>

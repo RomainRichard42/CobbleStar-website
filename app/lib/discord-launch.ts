@@ -1,6 +1,6 @@
 import { DISCORD_APP_INVITE, DISCORD_INVITE } from './community-links';
 
-export function openDiscordApp(connected = false) {
+export function showDiscordAppChoice(connected = false) {
     let dialog = document.querySelector<HTMLDialogElement>('#discord-launch-dialog');
     // Close the mobile drawer before opening a modal outside its inert siblings.
     document.querySelectorAll<HTMLDetailsElement>('.player-menu[open]').forEach(menu => { menu.open = false; });
@@ -13,7 +13,7 @@ export function openDiscordApp(connected = false) {
       dialog.innerHTML = `<button type="button" class="discord-launch-close" aria-label="Fermer">×</button>
         <h2 id="discord-launch-title">Ouvrir Discord</h2>
         <p id="discord-launch-description">Autorise ton navigateur à ouvrir l’application Discord.</p>
-        <a class="discord-launch-primary" href="${DISCORD_APP_INVITE}">Réessayer l’application</a>
+        <a class="discord-launch-primary" href="${DISCORD_APP_INVITE}" autofocus>Ouvrir l’application Discord</a>
         <p class="discord-launch-help">L’application ne s’ouvre pas ?</p>
         <a class="discord-launch-web" href="${DISCORD_INVITE}" target="_blank" rel="noopener noreferrer" data-discord-web>Continuer sur le site Discord ↗</a>`;
       const createdDialog = dialog;
@@ -22,10 +22,14 @@ export function openDiscordApp(connected = false) {
     }
     dialog.querySelector('h2')!.textContent = connected ? 'Connexion réussie' : 'Ouvrir Discord';
     dialog.querySelector('#discord-launch-description')!.textContent = connected
-      ? 'Tu es connecté au site et tu as rejoint le Discord CobbleStar. Autorise ton navigateur à ouvrir l’application.'
+      ? 'Tu es connecté au site et tu as rejoint le Discord CobbleStar. Ouvre maintenant l’application pour retrouver le serveur.'
       : 'Autorise ton navigateur à ouvrir l’application Discord.';
     if (!dialog.open) dialog.showModal();
-    window.location.assign(DISCORD_APP_INVITE);
+}
+
+export function openDiscordApp() {
+  showDiscordAppChoice();
+  window.location.assign(DISCORD_APP_INVITE);
 }
 
 // OAuth first keeps its signed state and web callback. Invitation clicks and

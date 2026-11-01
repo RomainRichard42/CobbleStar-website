@@ -32,7 +32,7 @@ export default function SiteHeader() {
 
   const isAdmin=/^\/(admin|wiki\/admin|actualites\/admin)(\/|$)/.test(pathname);
 
-  if (!isAdmin) return <header className="astral-header site-header"><a className="astral-skip" href="#contenu">Aller au contenu</a><a className="astral-brand" href="/" aria-label="CobbleStar, accueil"><img src="/media/cobblestar-logo-128.webp" alt="" width="56" height="56"/><span>COBBLE<b>STAR</b></span></a><DesktopNavigation pathname={pathname}/><div className="astral-header-actions"><AccountLink account={account} balance={balance}/><a className="astral-shop" href="/boutique/"><img src="/astral/assets/stars-button-v3.webp" alt="" width="44" height="34"/>Boutique</a><MobileMenu account={account} balance={balance} pathname={pathname}/></div></header>;
+  if (!isAdmin) return <header className="astral-header site-header"><a className="astral-skip" href="#contenu">Aller au contenu</a><a className="astral-brand" href="/" aria-label="CobbleStar, accueil"><img src="/media/logo-cercle-5-128.webp" alt="" width="56" height="56"/><span>COBBLE<b>STAR</b></span></a><DesktopNavigation pathname={pathname}/><div className="astral-header-actions"><AccountLink account={account} balance={balance}/><a className="astral-shop" href="/boutique/"><img src="/astral/assets/stars-button-v3.webp" alt="" width="44" height="34"/>Boutique</a><MobileMenu account={account} balance={balance} pathname={pathname}/></div></header>;
   return (
     <div className="nav-frame">
       <a className="skip-link" href="#contenu">Aller au contenu</a>
@@ -43,7 +43,7 @@ export default function SiteHeader() {
         </div>
         <header className="nav-wrap">
           <a className="brand" href="/" aria-label="CobbleStar — Accueil">
-            <span className="brand-mark"><img src="/media/cobblestar-logo-128.webp" alt="" width="54" height="54" /></span>
+            <span className="brand-mark"><img src="/media/logo-cercle-5-128.webp" alt="" width="54" height="54" /></span>
             <span>Cobble<span>Star</span><small>ASTERIA × NÉBÉLIA</small></span>
           </a>
           <nav aria-label="Navigation principale">

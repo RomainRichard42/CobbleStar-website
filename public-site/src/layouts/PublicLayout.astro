@@ -12,9 +12,9 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import {DISCORD,SITE,jsonLd} from '../lib/content';
 import {pageRevisions} from '../lib/revisions';
-const {cinematic=false,title,description,image='/media/cobblestar-logo-480.webp',imageAlt='CobbleStar, serveur Cobblemon francophone',schema=[],noindex=false,wide=false,article=false,publishedAt,modifiedAt=pageRevisions[Astro.url.pathname],pageType='WebPage'}=Astro.props;
+const {cinematic=false,title,description,image='/media/logo-cercle-5-480.webp',imageAlt='CobbleStar, serveur Cobblemon francophone',schema=[],noindex=false,wide=false,article=false,publishedAt,modifiedAt=pageRevisions[Astro.url.pathname],pageType='WebPage'}=Astro.props;
 const canonical=SITE+Astro.url.pathname;
-const org={'@context':'https://schema.org','@type':'Organization','@id':SITE+'/#organisation',name:'CobbleStar',url:SITE,logo:SITE+'/cobblestar-logo.png',sameAs:[DISCORD]};
+const org={'@context':'https://schema.org','@type':'Organization','@id':SITE+'/#organisation',name:'CobbleStar',url:SITE,logo:SITE+'/media/logo-cercle-5-480.webp',sameAs:[DISCORD]};
 const website={'@context':'https://schema.org','@type':'WebSite','@id':SITE+'/#website',name:'CobbleStar',url:SITE+'/',inLanguage:'fr-FR',publisher:{'@id':SITE+'/#organisation'}};
 const page={'@context':'https://schema.org','@type':pageType,'@id':canonical+'#page',url:canonical,name:title,description,inLanguage:'fr-FR',isPartOf:{'@id':SITE+'/#website'},publisher:{'@id':SITE+'/#organisation'},...(modifiedAt?{dateModified:modifiedAt}:{})};
 ---
@@ -23,7 +23,7 @@ const page={'@context':'https://schema.org','@type':pageType,'@id':canonical+'#p
 <meta property="og:type" content={article?'article':'website'}/><meta property="og:locale" content="fr_FR"/><meta property="og:site_name" content="CobbleStar"/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta property="og:url" content={canonical}/><meta property="og:image" content={new URL(image,SITE).href}/><meta property="og:image:alt" content={imageAlt}/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:image:alt" content={imageAlt}/>{publishedAt&&<meta property="article:published_time" content={publishedAt}/>}
 <meta name="google-site-verification" content="OfFTRlGZkku9dgLFyS6_6mbJsVBy0xeK-49Sp1RROVY"/>
 <meta name="twitter:title" content={title}/><meta name="twitter:description" content={description}/><meta name="twitter:image" content={new URL(image,SITE).href}/>{modifiedAt&&article&&<meta property="article:modified_time" content={modifiedAt}/>}
-<link rel="icon" type="image/png" sizes="96x96" href="/media/favicon-96.png"/><link rel="apple-touch-icon" sizes="180x180" href="/media/apple-touch-icon.png"/><meta name="theme-color" content="#080616"/><link rel="alternate" type="application/rss+xml" title="Actualités CobbleStar" href="/actualites/rss.xml"/>
+<link rel="icon" type="image/png" sizes="96x96" href="/media/logo-cercle-5-96.png"/><link rel="apple-touch-icon" sizes="180x180" href="/media/logo-cercle-5-180.png"/><meta name="theme-color" content="#080616"/><link rel="alternate" type="application/rss+xml" title="Actualités CobbleStar" href="/actualites/rss.xml"/>
 <script type="application/ld+json" set:html={jsonLd([org,website,page,...schema])}/>
 </head><body class:list={['astro-public','astral-public',{'public-wide':wide,'astral astral-v4 astral-v5 astral-v6 astral-home':cinematic}]}><Header/><slot/><Footer cinematic={cinematic}/><span id="copy-status" class="sr-only" aria-live="polite"/>
 <script>
