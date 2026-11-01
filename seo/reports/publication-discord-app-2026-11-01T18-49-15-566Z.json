@@ -1,0 +1,50 @@
+{
+  "at": "2026-11-01T18:49:15.566Z",
+  "status": "published",
+  "commit": "f33979b",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "httpsInvitationPreserved": true,
+      "appPriorityBundle": true,
+      "oldInvitePresent": false
+    },
+    {
+      "path": "/compte/",
+      "status": 200,
+      "httpsInvitationPreserved": true,
+      "appPriorityBundle": true,
+      "oldInvitePresent": false,
+      "oauthPreserved": true,
+      "webAlternative": true,
+      "accountChecksSource": "Published client bundle; account content appears after session check"
+    }
+  ],
+  "behavior": {
+    "normalCommunityClick": "Synchronous Discord app protocol launch on user click",
+    "webFallback": "Explicit HTTPS option; no detection timer",
+    "oauth": "Unchanged browser authentication callback",
+    "seo": "HTTPS invitations and structured data preserved"
+  },
+  "validation": {
+    "fullBuild": "passed",
+    "tests": {
+      "passed": 32,
+      "failed": 0
+    },
+    "lint": {
+      "errors": 0,
+      "preExistingWarnings": 1
+    },
+    "ui": {
+      "accountAppButton": "checked",
+      "webFallbackDialog": "checked",
+      "escapeClosesAndRestoresFocus": "checked"
+    }
+  },
+  "limits": [
+    "Browser verification tool security policy rejected external application launch. Native Discord opening was not verified and was not retried by another method.",
+    "Browser or operating system can require user approval; installed app and registered protocol required."
+  ]
+}
