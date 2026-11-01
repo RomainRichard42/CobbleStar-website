@@ -1,7 +1,7 @@
 "use client";
 import StarsArt from "../components/StarsArt";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import Link from "next/link";
 import { ACCOUNT_FAQ } from "../lib/faq";
 import SiteFooter from "../components/SiteFooter";
@@ -9,7 +9,8 @@ import SiteHeader from "../components/SiteHeader";
 import FaqSection from "../components/FaqSection";
 import FaqStructuredData from "../components/FaqStructuredData";
 import styles from "./account.module.css";
-import { DISCORD_INVITE as DISCORD_INVITE_URL } from '../lib/community-links';
+import { rememberDiscordAppIntent, takeDiscordAppIntent } from '../lib/discord-account-flow';
+import { openDiscordApp } from '../lib/discord-launch';
 
 type Account = {
   id: string;
@@ -61,6 +62,7 @@ function AccountPortal() {
   const [expiresAt, setExpiresAt] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const callbackResult = useRef<string | null | undefined>(undefined);
 
   useEffect(() => {
     let cancelled = false;
@@ -87,6 +89,8 @@ function AccountPortal() {
 
   useEffect(() => {
     let cancelled = false;
+    const discordResult = callbackResult.current ?? new URLSearchParams(window.location.search).get('discord');
+    callbackResult.current = discordResult;
     void Promise.all([
       api<{ user: Account }>("/api/me"),
       api<{ balance: number }>("/api/wallet"),
@@ -96,9 +100,16 @@ function AccountPortal() {
         setAccount(profile.user);
         setBalance(wallet.balance);
         setRelinkEnabled(link.relinkEnabled);
+        if (discordResult === 'connected') setSuccess('Tu es connecté au site et tu as rejoint le Discord CobbleStar.');
+        try {
+          if (takeDiscordAppIntent(discordResult, Boolean(profile.user.id), window.sessionStorage)) openDiscordApp(true);
+        } catch { /* The account stays connected if storage or app launching is blocked. */ }
       }
     }).catch(() => {
-      if (!cancelled) setAccount(null);
+      if (!cancelled) {
+        setAccount(null);
+        try { takeDiscordAppIntent('failed', false, window.sessionStorage); } catch { /* Storage may be unavailable. */ }
+      }
     }).finally(() => {
       if (!cancelled) setLoading(false);
     });
@@ -112,7 +123,7 @@ function AccountPortal() {
       : result === "failed"
         ? "Discord n’a pas pu confirmer ta connexion. Réessaie dans quelques instants."
         : result === "guild-failed"
-          ? "Ton identité a été confirmée, mais Discord n’a pas pu t’ajouter au serveur CobbleStar. Utilise le lien manuel puis réessaie."
+          ? "Discord n’a pas pu t’ajouter au serveur CobbleStar. Réessaie avec le bouton bleu ; si le problème continue, contacte l’équipe sur Discord."
         : result === "unavailable"
           ? "La connexion Discord n’est pas encore configurée sur le serveur."
           : "";
@@ -161,6 +172,11 @@ function AccountPortal() {
     }, 2500);
     return () => { cancelled = true; window.clearInterval(timer); };
   }, [command, expiresAt, requestId]);
+
+  function beginDiscordConnection(event: MouseEvent<HTMLAnchorElement>) {
+    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    try { rememberDiscordAppIntent(window.sessionStorage); } catch { /* OAuth remains available without storage. */ }
+  }
 
   async function createCode() {
     if (!linkConsent) { setError("Confirme d’abord la liaison avec ton Discord ci-dessous."); return; }
@@ -304,7 +320,7 @@ function AccountPortal() {
             </section>}
 
             <Link className={styles.adminLink} href="/collection/"><span><small>MON POKÉDEX</small><b>Ma collection et mes objectifs</b><p>Retrouve ton équipe et ton PC, tes favoris et les Pokémon que tu veux capturer.</p></span><strong>→</strong></Link>
-            <div className={styles.communityActions}><a href={DISCORD_INVITE_URL}>Ouvrir Discord <span aria-hidden="true">↗</span></a><a href={DISCORD_INVITE_URL} target="_blank" rel="noopener noreferrer" data-discord-web>Version web</a></div>
+            <a className={styles.discordButton} href="/api/auth/discord" onClick={beginDiscordConnection}><span>Rejoindre et ouvrir Discord</span><b aria-hidden="true">→</b></a>
             {success && <p className={styles.linkSuccess} role="status">✓ {success}</p>}
 
             {account.admin === true && <Link className={styles.adminLink} href="/admin/"><span><small>ACCÈS ADMINISTRATEUR</small><b>Ouvrir le centre de contrôle</b></span><strong>→</strong></Link>}
@@ -320,12 +336,11 @@ function AccountPortal() {
             </div>
 
             {error && <p className={styles.formError} role="alert">{error}</p>}
-            <a className={styles.discordButton} href="/api/auth/discord"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 5.34A16.3 16.3 0 0 0 15.44 4l-.5 1.02a15 15 0 0 0-5.88 0L8.56 4A16.5 16.5 0 0 0 4.5 5.35C1.93 9.2 1.24 12.96 1.6 16.66a16.4 16.4 0 0 0 4.98 2.52l1.2-1.65a10.7 10.7 0 0 1-1.88-.9l.46-.35c3.63 1.68 7.57 1.68 11.16 0l.47.35c-.6.36-1.23.66-1.88.9l1.2 1.65a16.4 16.4 0 0 0 4.98-2.52c.43-4.28-.74-8-2.79-11.32ZM8.52 14.42c-1.09 0-1.98-1-1.98-2.22 0-1.23.87-2.23 1.98-2.23s2 1.01 1.98 2.23c0 1.23-.87 2.22-1.98 2.22Zm6.96 0c-1.09 0-1.98-1-1.98-2.22 0-1.23.87-2.23 1.98-2.23s2 1.01 1.98 2.23c0 1.23-.87 2.22-1.98 2.22Z" /></svg>Continuer avec Discord</span><b>→</b></a>
-            <div className={styles.communityActions}><a href={DISCORD_INVITE_URL}>Ouvrir l’application Discord <span aria-hidden="true">↗</span></a><a href={DISCORD_INVITE_URL} target="_blank" rel="noopener noreferrer" data-discord-web>Version web</a></div>
+            <a className={styles.discordButton} href="/api/auth/discord" onClick={beginDiscordConnection} aria-label="Se connecter au site et rejoindre le serveur Discord CobbleStar"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 5.34A16.3 16.3 0 0 0 15.44 4l-.5 1.02a15 15 0 0 0-5.88 0L8.56 4A16.5 16.5 0 0 0 4.5 5.35C1.93 9.2 1.24 12.96 1.6 16.66a16.4 16.4 0 0 0 4.98 2.52l1.2-1.65a10.7 10.7 0 0 1-1.88-.9l.46-.35c3.63 1.68 7.57 1.68 11.16 0l.47.35c-.6.36-1.23.66-1.88.9l1.2 1.65a16.4 16.4 0 0 0 4.98-2.52c.43-4.28-.74-8-2.79-11.32ZM8.52 14.42c-1.09 0-1.98-1-1.98-2.22 0-1.23.87-2.23 1.98-2.23s2 1.01 1.98 2.23c0 1.23-.87 2.22-1.98 2.22Zm6.96 0c-1.09 0-1.98-1-1.98-2.22 0-1.23.87-2.23 1.98-2.23s2 1.01 1.98 2.23c0 1.23-.87 2.22-1.98 2.22Z" /></svg>Se connecter et rejoindre Discord</span><b>→</b></a>
 
             <ol className={styles.discordFlow} aria-label="Étapes de connexion"><li><span>01</span><p><b>Discord rejoint</b><small>Connexion en un clic</small></p></li><li><span>02</span><p><b>/link en jeu</b><small>Ton UUID est confirmé</small></p></li><li><span>03</span><p><b>Compte prêt</b><small>Stars, boutique et votes</small></p></li></ol>
 
-            <footer className={styles.authFooter}><span>✓ Discord CobbleStar rejoint</span><span>✓ Aucun mot de passe stocké</span></footer>
+            <footer className={styles.authFooter}><span>Connexion au site + serveur Discord</span><span>✓ Aucun mot de passe stocké</span></footer>
           </div>}
         </section>
       </div>
