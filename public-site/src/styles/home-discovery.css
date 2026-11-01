@@ -1,0 +1,31 @@
+.astral-home.astral-v6 .cinema-intro .intro-requirements{display:flex;flex-wrap:wrap;gap:6px 20px;list-style:none;margin:0 0 20px;padding:0;color:#f8e6c8;font-size:1rem;line-height:1.5}
+.astral-home.astral-v6 .intro-requirements li{margin:0}
+.astral-home.astral-v6 .cinema-actions{gap:14px}
+.astral-home.astral-v6 .cinema-actions .btn{gap:14px;font-size:1rem;min-height:48px;box-shadow:none}
+.astral-home.astral-v6 .cinema-actions a.btn.gold{color:#27182d!important}
+.astral-home.astral-v6 .cinema-actions .btn:hover{transform:none;background:#ffd28d}
+.astral-home.astral-v6 .cinema-actions .btn.outline{background:#171128cc;border-color:#ac8db6;color:#fff0cf}
+.astral-home.astral-v6 .cinema-actions .btn.outline:hover{background:#382442}
+.astral-home.astral-v6 .cinema-intro .intro-skip{margin-top:14px;gap:12px;min-height:44px;font-size:1rem}
+.astral-home.astral-v6 .server-brief{padding:80px 6%;background:#181122;border-block:1px solid #5c426a;scroll-margin-top:0}
+.astral-home.astral-v6 .server-brief-heading{display:grid;grid-template-columns:1.1fr 1fr;align-items:end;gap:48px}
+.astral-home.astral-v6 .server-brief h2{font-size:clamp(32px,3.5vw,52px)!important;line-height:1.1}
+.astral-home.astral-v6 .server-brief h2 span{color:#bf9ae9}
+.astral-home.astral-v6 .server-brief p{font-size:1.125rem;line-height:1.65;margin:0;color:#e8dbed;max-width:56ch}
+.astral-home.astral-v6 .server-brief .server-brief-status{margin-top:14px;color:#f4c887;font-size:1rem}
+.server-brief-features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:40px;border-block:1px solid #61466b}
+.server-brief-features article{min-width:0;padding:28px 28px 26px 0;display:flex;flex-direction:column;align-items:flex-start}
+.server-brief-features article+article{border-left:1px solid #61466b;padding-left:28px}
+.server-brief-features img{object-fit:contain;image-rendering:pixelated;margin-bottom:20px;flex-shrink:0}
+.astral-home.astral-v6 .server-brief-features h3{font-family:Barlow,'Segoe UI',sans-serif;font-size:1.625rem!important;line-height:1.2;letter-spacing:0;margin:0 0 14px}
+.server-brief-features a,.server-first-steps a{display:inline-flex;align-items:center;justify-content:space-between;gap:18px;min-height:48px;font-size:1rem;font-weight:700;color:#f6cb88;text-decoration:underline;text-underline-offset:6px}
+.server-brief-features a{margin-top:auto;padding-top:20px}
+.server-first-steps{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:28px;align-items:center;padding-top:28px}
+.server-first-steps strong{font-size:1.125rem;color:#fff0cf}
+.astral-home.astral-v6 .server-first-steps p{font-size:1rem;margin-top:6px}
+.server-first-steps a{border:1px solid #71537e;background:#24192e;padding:14px 18px;border-radius:8px;text-decoration:none;color:#fff0cf;min-width:0}
+.server-first-steps a:hover{border-color:#c8a2e4;background:#30203e}
+@media(min-width:721px) and (max-height:800px){.story-layout .astral-home.astral-v6 .cinema-intro{bottom:3%;max-width:600px}.story-layout .astral-home.astral-v6 .cinema-intro h2{font-size:clamp(2.5rem,4vw,3.5rem)!important}.story-layout .astral-home.astral-v6 .cinema-intro p{max-width:46ch}.astral-home.astral-v6 .cinema-intro .intro-requirements{margin-bottom:14px}.astral-home.astral-v6 .cinema-intro .intro-skip{margin-top:8px}}
+@media(max-width:1000px){.server-first-steps{grid-template-columns:1fr 1fr}.server-first-steps>div{grid-column:1/-1}.astral-home.astral-v6 .server-brief-heading{gap:28px}.server-brief-features article{padding-right:20px}.server-brief-features article+article{padding-left:20px}}
+@media(max-width:720px){.astral-home.astral-v6 .cinematic-stage .cinema-intro{margin-top:130px;margin-bottom:30px}.astral-home.astral-v6 .cinema-actions{align-items:stretch}.astral-home.astral-v6 .cinema-actions .btn{flex:1 1 220px;justify-content:space-between}.astral-home.astral-v6 .cinema-intro .intro-requirements{display:grid;gap:4px;margin-bottom:20px}.astral-home.astral-v6 .server-brief{padding:48px 24px}.astral-home.astral-v6 .server-brief-heading{grid-template-columns:1fr;gap:22px}.server-brief-features{grid-template-columns:1fr;margin-top:28px}.server-brief-features article,.server-brief-features article+article{padding:24px 0;border-left:0}.server-brief-features article+article{border-top:1px solid #61466b}.server-brief-features img{width:40px;height:40px;margin-bottom:14px}.server-first-steps{grid-template-columns:1fr;gap:14px}.server-first-steps>div{grid-column:auto}.astral-home.astral-v6 .server-brief p{font-size:1.0625rem}.astral-home.astral-v6 .server-brief .server-brief-status{font-size:1rem}}
+@media(forced-colors:active){.server-brief-features,.server-brief-features article,.server-first-steps a{border-color:CanvasText}}

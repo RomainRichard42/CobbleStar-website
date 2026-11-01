@@ -93,7 +93,7 @@ test('unavailable activity stays absent even when an older CMS document advertis
  } finally { wiki=previous; }
 });
 test('sitemap, RSS and redirects stay canonical without indexing private pages',async()=>{
-  const map=await get('/sitemap.xml');assert.equal(map.response.status,200);assert.ok(map.html.includes('/wiki/'));assert.ok(!map.html.includes('/admin/'));assert.ok(!map.html.includes('<loc>https://cobblestar-mc.fr/compte/</loc>'));assert.ok(map.html.includes('/rejoindre/</loc><lastmod>2026-10-26</lastmod>'));for(const article of wiki.content.articles){if(article.modifiedAt&&article.id!=='caisses')assert.ok(map.html.includes('/wiki/'+article.id+'/</loc><lastmod>'+article.modifiedAt+'</lastmod>'));}assert.ok(map.html.includes('/actualites/'+news.content.articles[0].slug+'/'));
+  const map=await get('/sitemap.xml');assert.equal(map.response.status,200);assert.ok(map.html.includes('/wiki/'));assert.ok(!map.html.includes('/admin/'));assert.ok(!map.html.includes('<loc>https://cobblestar-mc.fr/compte/</loc>'));assert.ok(map.html.includes('/rejoindre/</loc><lastmod>2026-10-26</lastmod>'));for(const article of wiki.content.articles){if(article.modifiedAt&&article.id!=='caisses'){const changed=['welcome','capture'].includes(article.id)?'2026-11-01':article.modifiedAt;assert.ok(map.html.includes('/wiki/'+article.id+'/</loc><lastmod>'+changed+'</lastmod>'));}}assert.ok(map.html.includes('/actualites/'+news.content.articles[0].slug+'/'));
   const rss=await get('/actualites/rss.xml');assert.equal(rss.response.status,200);assert.ok(rss.html.includes('<rss version="2.0">'));
   for(const [from,to] of [['/wiki','/wiki/'],['/wiki/index.html','/wiki/'],['/rejoindre','/rejoindre/']]){const r=await get(from);assert.equal(r.response.status,308);assert.equal(r.response.headers.get('location'),to);}
   assert.ok((await get('/robots.txt')).html.includes('Sitemap: https://cobblestar-mc.fr/sitemap.xml'));
@@ -151,7 +151,7 @@ test('every published guide is indexed, linked and has valid outline and related
 });
 
 test('article dates and social previews describe the exact published page',async()=>{
- const a=wiki.content.articles.find(a=>a.modifiedAt), page=await get('/wiki/'+a.id+'/');
+ const a=wiki.content.articles.find(a=>a.modifiedAt&&!['caisses','welcome','capture'].includes(a.id)), page=await get('/wiki/'+a.id+'/');
  const schema=[...page.html.matchAll(/<script type="application\/ld\+json">(.*?)<\/script>/gs)].flatMap(m=>JSON.parse(m[1]));
  const article=schema.find(x=>x['@type']==='Article');assert.equal(article.dateModified,a.modifiedAt);assert.equal(article.author.url,'https://cobblestar-mc.fr/');assert.ok(page.html.includes('datetime="'+a.modifiedAt+'"'));assert.ok(page.html.includes('property="article:modified_time" content="'+a.modifiedAt+'"'));
  for(const path of ['/boutique/','/vote/']){const {html}=await get(path);assert.ok(html.includes('property="og:url" content="https://cobblestar-mc.fr'+path+'"'));assert.match(html,/<meta name="twitter:title" content="[^"]+/);}

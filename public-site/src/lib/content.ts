@@ -2,6 +2,7 @@ import type {DexEntry} from '../../../api/src/public-dex';
 import type { WikiEnvelope, WikiArticle } from '../../../app/wiki/wiki-types';
 import type { NewsEnvelope } from '../../../app/actualites/news-types';
 import {availableWiki} from '../../../api/src/wiki-availability';
+import {guidePathRevisions} from './wiki-navigation';
 
 export const SITE = 'https://cobblestar-mc.fr';
 export const SERVER = 'play.cobblestar-mc.fr';
@@ -11,7 +12,11 @@ export type PublicLocals = { getWiki: () => Promise<WikiEnvelope>; getNews: () =
 export function publishedWiki(envelope: WikiEnvelope) {
   envelope = {...envelope, content:availableWiki(envelope.content)};
   const branches = envelope.content.branches.filter(b => b.visible).sort((a,b) => a.order-b.order);
-  const articles = envelope.content.articles.filter(a => a.published && branches.some(b => b.id === a.branchId)).map(a=>a.id==='caisses'?{...a,hero:{asset:'/crates/nova.webp',alt:'Machine Nova de CobbleStar, pince et Balls de rareté'},modifiedAt:a.modifiedAt&&Date.parse(a.modifiedAt)>Date.parse('2026-10-31T11:15:00Z')?a.modifiedAt:'2026-10-31T11:15:00Z'}:a).sort((a,b) => a.order-b.order);
+  const articles = envelope.content.articles.filter(a => a.published && branches.some(b => b.id === a.branchId)).map(a=>{
+    if(a.id==='caisses')return {...a,hero:{asset:'/crates/nova.webp',alt:'Machine Nova de CobbleStar, pince et Balls de rareté'},modifiedAt:a.modifiedAt&&Date.parse(a.modifiedAt)>Date.parse('2026-10-31T11:15:00Z')?a.modifiedAt:'2026-10-31T11:15:00Z'};
+    const revision=guidePathRevisions[a.id];
+    return revision?{...a,readingMinutes:a.readingMinutes+1,modifiedAt:a.modifiedAt&&Date.parse(a.modifiedAt)>Date.parse(revision)?a.modifiedAt:revision}:a;
+  }).sort((a,b) => a.order-b.order);
   return { ...envelope, branches: branches.filter(b=>articles.some(a=>a.branchId===b.id)), articles };
 }
 export function publishedNews(envelope: NewsEnvelope) {

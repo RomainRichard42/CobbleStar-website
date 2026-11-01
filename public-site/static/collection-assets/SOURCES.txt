@@ -10,3 +10,5 @@ Catalogue : https://cobblestar-mc.fr/api/pokedex ; types et numéros issus des d
 Révision DA CobbleStar : Starwatch, terminal_visual, objets astrolabe (Hyper Ball, boussole, étoile du Nether, livre de connaissances) copiés sans modification depuis les ressources du mod CobbleStar. Love Ball conservée depuis les ressources de la pension.
 
 Atlas : barrière Minecraft copiée depuis les textures Minecraft du projet. Loupe et cible dessinées en SVG pour cette interface. Les modèles sont chargés depuis le catalogue public du serveur, sans copie de données de joueur.
+
+Validation du 1er novembre 2026 : les blocs de découverte et parcours pratiques réutilisent les textures Poké Ball, Hyper Ball et PC Cobblemon déjà présentes dans le dépôt, sans modification. Les anciennes illustrations StarWatch, livre, terminal et boussole ont été remplacées dans les raccourcis partagés du vote et d’Atlas. Les logos CobbleStar et Stars fournis restent inchangés.

@@ -1,0 +1,334 @@
+{
+  "at": "2026-11-01T17:01:17.515Z",
+  "status": "local_review_pending",
+  "branch": "seo/decouverte-locale-2026-11-01",
+  "baseRevision": "7deecf0c2f5d4a134f7da8fa2f87da4a24f7750e",
+  "pushed": false,
+  "deployed": false,
+  "approvalRequiredBy": "Demande explicite de Romain : tout en local avant validation du push.",
+  "pages": [
+    "/",
+    "/wiki/welcome/",
+    "/wiki/capture/"
+  ],
+  "actions": [
+    {
+      "id": "A1",
+      "state": "implemented_locally",
+      "change": "Accueil : prérequis Java/Fabric et licence visibles dans l’intro, lien direct pour préparer son arrivée, accès immédiat au résumé, lien d’évitement au clavier.",
+      "why": "Le visiteur peut vérifier la compatibilité et trouver le parcours pour rejoindre sans attendre le déroulement des animations."
+    },
+    {
+      "id": "A1",
+      "state": "implemented_locally",
+      "change": "Résumé des trois axes du serveur : mondes, collections et activités. Icônes déjà présentes dans les ressources du projet.",
+      "why": "Expliquer les particularités concrètes de CobbleStar avec des liens vers leurs règles."
+    },
+    {
+      "id": "A3",
+      "state": "first_batch_locally",
+      "change": "Parcours pratiques ajoutés aux guides Bien commencer et Capture, avec étapes et liens vers les prérequis, comptes, quêtes, mondes, Pokédex et collection.",
+      "why": "Donner un ordre de lecture et des actions utiles ; les articles du CMS restent conservés et éditables."
+    },
+    {
+      "id": "A5",
+      "state": "first_batch_locally",
+      "change": "Liens directs entre l’accueil, les premiers pas, la capture et les systèmes. Aucun nouvel URL de guide concurrent ni page de mot-clé répétitive.",
+      "why": "Faciliter le parcours d’un nouveau joueur et l’exploration du contenu."
+    },
+    {
+      "id": "A7",
+      "state": "regression_fixed_locally",
+      "change": "La mesure de mise en page ne coupe plus une animation de lecture en cours en mode linéaire après le chargement d’une image. Annulation conservée lors du changement de mode.",
+      "why": "Terminer le déplacement vers le cran choisi sur mobile."
+    },
+    {
+      "id": "A2",
+      "state": "pending_real_media",
+      "change": "Aucune nouvelle démonstration de gameplay publiée ou fabriquée.",
+      "why": "Il reste à enregistrer des séquences du vrai serveur pour illustrer ses systèmes."
+    },
+    {
+      "id": "A6",
+      "state": "not_started",
+      "change": "Aucune publication externe ni prise de contact.",
+      "why": "Ce lot reste intégralement local, conformément à la demande."
+    }
+  ],
+  "validation": {
+    "astroBuild": "passed",
+    "existingTests": {
+      "passed": 32,
+      "failed": 0
+    },
+    "http": {
+      "at": "2026-11-01T16:54:35.068Z",
+      "origin": "http://127.0.0.1:8792",
+      "publicChanges": false,
+      "pages": [
+        {
+          "path": "/",
+          "status": 200,
+          "h1": 1,
+          "title": "Serveur Cobblemon français (FR) — CobbleStar",
+          "canonical": "https://cobblestar-mc.fr/",
+          "schemaValid": true,
+          "htmlBytes": 31562
+        },
+        {
+          "path": "/wiki/welcome/",
+          "status": 200,
+          "h1": 1,
+          "title": "Bien commencer sur CobbleStar",
+          "canonical": "https://cobblestar-mc.fr/wiki/welcome/",
+          "schemaValid": true,
+          "modified": "2026-11-01",
+          "htmlBytes": 20898
+        },
+        {
+          "path": "/wiki/capture/",
+          "status": 200,
+          "h1": 1,
+          "title": "Capturer et organiser ses Pokémon — CobbleStar",
+          "canonical": "https://cobblestar-mc.fr/wiki/capture/",
+          "schemaValid": true,
+          "modified": "2026-11-01",
+          "htmlBytes": 20599
+        },
+        {
+          "path": "/rejoindre/",
+          "status": 200,
+          "h1": 1,
+          "title": "Rejoindre CobbleStar — Préparer l’ouverture du serveur",
+          "canonical": "https://cobblestar-mc.fr/rejoindre/",
+          "schemaValid": true,
+          "htmlBytes": 18881
+        },
+        {
+          "path": "/minecraft-pokemon/",
+          "status": 200,
+          "h1": 1,
+          "title": "Minecraft Pokémon : comment jouer avec Cobblemon ? | CobbleStar",
+          "canonical": "https://cobblestar-mc.fr/minecraft-pokemon/",
+          "schemaValid": true,
+          "htmlBytes": 29497
+        },
+        {
+          "path": "/installer-cobblemon/",
+          "status": 200,
+          "h1": 1,
+          "title": "Installer Cobblemon : modpack, versions et dépannage | CobbleStar",
+          "canonical": "https://cobblestar-mc.fr/installer-cobblemon/",
+          "schemaValid": true,
+          "modified": "2026-11-01",
+          "htmlBytes": 22934
+        }
+      ],
+      "links": [
+        {
+          "path": "/wiki/mondes/",
+          "status": 200
+        },
+        {
+          "path": "/rejoindre/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/pokedex/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/pokemon-star/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/raids/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/welcome/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/capture/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/gts/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/daycare/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/metiers/",
+          "status": 200
+        },
+        {
+          "path": "/collection/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/clubs/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/ranked/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/compte/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/quests/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/starters/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/deplacements/",
+          "status": 200
+        },
+        {
+          "path": "/wiki/legendaries/",
+          "status": 200
+        }
+      ],
+      "sitemapRevisions": [
+        {
+          "path": "/",
+          "inSitemap": true
+        },
+        {
+          "path": "/wiki/welcome/",
+          "inSitemap": true
+        },
+        {
+          "path": "/wiki/capture/",
+          "inSitemap": true
+        }
+      ],
+      "downloadStatus": 302,
+      "limits": [
+        "Contrôle HTTP local, pas une mesure de classement Google ni de Core Web Vitals terrain.",
+        "Aperçu sans connexion et sans API de paiement ou de modification ; contenu de démonstration issu du dépôt."
+      ]
+    },
+    "visual": {
+      "mobileHome": {
+        "documentWidth": 375,
+        "h1": 1,
+        "prepareBottom": 697.15625,
+        "skipBottom": 817.546875,
+        "viewport": {
+          "height": 844,
+          "width": 390
+        }
+      },
+      "mobileSummary": {
+        "scrollY": 2569,
+        "settled": 5,
+        "step": 5,
+        "top": 78.140625
+      },
+      "mobileNextStep": {
+        "scrollY": 2983,
+        "settled": 6,
+        "step": 6,
+        "top": -335.859375
+      },
+      "mobileWelcome": {
+        "bodyFont": "16px",
+        "brokenLoadedImages": [],
+        "documentWidth": 375,
+        "headingFont": "28px",
+        "viewport": {
+          "height": 844,
+          "width": 390
+        }
+      },
+      "mobileCapture": {
+        "documentWidth": 375,
+        "h1": 1,
+        "links": [
+          "/wiki/pokedex/",
+          "/wiki/pokemon-star/",
+          "/wiki/mondes/",
+          "/wiki/deplacements/",
+          "/collection/",
+          "/wiki/compte/"
+        ],
+        "viewport": 390
+      },
+      "desktopShort": {
+        "documentWidth": 1265,
+        "introTop": 314.734375,
+        "skipBottom": 701.59375,
+        "viewport": {
+          "height": 720,
+          "width": 1280
+        },
+        "wordBottom": 274.171875
+      },
+      "desktopSummary": {
+        "bottom": 860.84375,
+        "documentWidth": 1350,
+        "focus": "server-brief-title",
+        "settled": "4",
+        "top": 105.6875,
+        "viewport": {
+          "height": 900,
+          "width": 1365
+        }
+      }
+    },
+    "launcher": {
+      "status": 302,
+      "location": "/telecharger/",
+      "downloadEnabled": false
+    },
+    "production": {
+      "checkedAt": "2026-11-01T17:01:17.516Z",
+      "http": 200,
+      "containsNewSection": false
+    },
+    "limits": [
+      "L’aperçu local charge le contenu du dépôt, sans connexion ni API de modification ou de paiement. Il ne remplace pas un test connecté du site déployé.",
+      "Vérification visuelle dans Chromium à 390×844, 1280×720 et 1365×900 ; pas une certification exhaustive d’accessibilité.",
+      "Pas de nouvelles mesures Search Console ou de performances terrain dans ce lot.",
+      "Compilation Astro uniquement, adaptée aux fichiers publics modifiés ; les routes Next et l’API ne sont pas modifiées."
+    ]
+  },
+  "seo": {
+    "htmlContentPreserved": true,
+    "canonicalOriginsPreserved": true,
+    "changedDates": [
+      "/",
+      "/wiki/welcome/",
+      "/wiki/capture/"
+    ],
+    "newGuideUrls": [],
+    "readiness": "Les dates de ces trois pages reflètent les ajouts réels. La date plus récente d’un article CMS reste prioritaire."
+  },
+  "preserved": [
+    "Préouverture",
+    "Téléchargement fermé",
+    "Boutique principale",
+    "DA violette et dorée",
+    "Pas de PokéPark",
+    "Comptes, API, bot et administration"
+  ],
+  "preview": "http://127.0.0.1:8792/",
+  "screenshots": [
+    "accueil-pc.png",
+    "resume-pc.png",
+    "accueil-mobile.png",
+    "guide-mobile.png",
+    "capture-mobile.png"
+  ],
+  "readableReport": "C:/Users/romain/Documents/Codex/2026-10-22/cobblestar-reprise/outputs/seo-local-2026-11-01/index.html"
+}

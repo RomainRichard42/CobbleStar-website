@@ -1,5 +1,8 @@
 import type {WikiArticle} from '../../../app/wiki/wiki-types';
 
+// Dated additions rendered alongside the CMS guide; a newer CMS edit takes precedence.
+export const guidePathRevisions:Record<string,string>={welcome:'2026-11-01',capture:'2026-11-01'};
+
 export const wikiJourneys = [
   {title:'Je débute', text:'Compte → premiers pas → équipe', ids:['compte','welcome','capture']},
   {title:'Je prépare mes Pokémon', text:'Pension → talents → combats', ids:['daycare','talents','ranked']},

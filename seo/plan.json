@@ -541,6 +541,19 @@
       "A5",
       "A9"
     ],
-    "executionStatus": "planned_not_published"
+    "executionStatus": "approved_ci_pending",
+    "localReview": {
+      "report": "seo/reports/lot-local-decouverte-2026-11-01T17-00-13Z.json",
+      "branch": "seo/decouverte-locale-2026-11-01",
+      "pages": [
+        "/",
+        "/wiki/welcome/",
+        "/wiki/capture/"
+      ],
+      "pushed": false,
+      "deployed": false,
+      "approval": "approved_with_icon_changes"
+    },
+    "lastValidationReport": "seo/reports/validation-icones-decouverte-2026-11-01T18-13-48Z.json"
   }
 }
