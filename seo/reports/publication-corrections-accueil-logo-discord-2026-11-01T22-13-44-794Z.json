@@ -1,0 +1,148 @@
+{
+  "at": "2026-11-01T22:13:44.794Z",
+  "status": "published",
+  "commit": "6b90e9f",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "logoCercle5": true,
+      "faviconCercle5": true,
+      "oldHeaderLogo": false,
+      "guideGroups": true,
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/"
+    },
+    {
+      "path": "/compte/",
+      "status": 200,
+      "logoCercle5": true,
+      "faviconCercle5": true,
+      "oldHeaderLogo": false
+    },
+    {
+      "path": "/boutique/",
+      "status": 200,
+      "logoCercle5": true,
+      "faviconCercle5": true,
+      "oldHeaderLogo": false
+    },
+    {
+      "path": "/wiki/pokedex/",
+      "status": 200,
+      "logoCercle5": true,
+      "faviconCercle5": true,
+      "oldHeaderLogo": false
+    },
+    {
+      "path": "/collection/",
+      "status": 200,
+      "logoCercle5": true,
+      "faviconCercle5": true,
+      "oldHeaderLogo": false
+    },
+    {
+      "path": "/vote/",
+      "status": 200,
+      "logoCercle5": true,
+      "faviconCercle5": true,
+      "oldHeaderLogo": false
+    }
+  ],
+  "assets": [
+    {
+      "path": "/media/logo-cercle-5-128.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 8022
+    },
+    {
+      "path": "/media/logo-cercle-5-480.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 39468
+    },
+    {
+      "path": "/media/logo-cercle-5-96.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 13855
+    },
+    {
+      "path": "/media/logo-cercle-5-180.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 35675
+    }
+  ],
+  "favicon": {
+    "status": 302,
+    "location": "/media/logo-cercle-5-96.png"
+  },
+  "logo": {
+    "source": "public/astral/assets/logo-cercle-5.png",
+    "sha256": "9d17441f539679dd273cf8378fb38077bae395d3e7f402667c44b9ed78f443f9",
+    "originalUnchanged": true,
+    "artworkRedrawn": false,
+    "derivedWebAssets": true,
+    "oldAssetAliasesPreserved": true
+  },
+  "discord": {
+    "signedOut": "Existing OAuth connects the site and joins the guild; then a blue app link is offered.",
+    "signedIn": "Blue link directly targets discord://-/invite/tHugXVFrDn without restarting OAuth.",
+    "postCallback": "No automatic app navigation without a fresh gesture.",
+    "localFixture": "Simulated OAuth completion displayed confirmation and a native app anchor; real accounts were not used."
+  },
+  "layoutQa": {
+    "desktop": {
+      "viewport": 1280,
+      "guideTop": 8494.484375,
+      "faqTop": 8494.484375,
+      "overflow": false
+    },
+    "mobile": {
+      "viewport": 390,
+      "guide": {
+        "x": 24,
+        "width": 327,
+        "top": 12478.203125,
+        "height": 1729.390625
+      },
+      "faq": {
+        "x": 24,
+        "width": 327,
+        "top": 14243.59375,
+        "height": 971.296875
+      },
+      "overflow": false
+    }
+  },
+  "validation": {
+    "siteBuild": "passed",
+    "apiBuild": "passed",
+    "tests": {
+      "passed": 38,
+      "failed": 0
+    },
+    "lint": {
+      "errors": 0,
+      "preExistingWarnings": 1
+    }
+  },
+  "limits": [
+    "Browser screenshot capture timed out. Rendered DOM geometry, visible text and links were checked instead.",
+    "Native Discord launching remains unverified: the browser tool previously rejected external application launch. No alternative method was used to launch it.",
+    "A separate user click after OAuth can be required by the browser."
+  ],
+  "preserved": [
+    "Minecraft links, Stars, purchases, bot and administration workflows",
+    "Preopening, disabled launcher download, absence of PokePark",
+    "Indexable content, internal links, canonical and FAQ structured data"
+  ],
+  "liveUi": {
+    "headerLogo": "/media/logo-cercle-5-128.webp",
+    "homepageFaqTop": 401.484375,
+    "connectedBlueHref": "discord://-/invite/tHugXVFrDn",
+    "homepageGuideTop": 401.484375
+  }
+}
