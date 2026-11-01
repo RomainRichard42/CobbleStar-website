@@ -10,9 +10,9 @@ export default function DesktopNavigation({ pathname }: { pathname: string }) {
       <summary>Le serveur <span aria-hidden="true">⌄</span></summary>
       <div className="desktop-mega">
         <div className="desktop-mega-intro"><h2>Deux mondes<br/>à explorer.</h2><p>Astéria, Nébélia et une place pour ton équipe.</p><a href="/roadmap/">Découvrir le serveur →</a></div>
-        <div className="desktop-mega-links">{serverLinks.map(link => <a key={link.href} href={link.href}><strong>{link.title}</strong><small>{link.detail}</small></a>)}</div>
+        <div className="desktop-mega-links">{serverLinks.map(link => <a key={link.href} href={link.href} target={link.href.startsWith('https://')?'_blank':undefined} rel={link.href.startsWith('https://')?'noopener noreferrer':undefined}><strong>{link.title}</strong><small>{link.detail}</small></a>)}</div>
       </div>
     </details>
-    {desktopLinks.map(([href, label]) => <a key={href} href={href} aria-current={desktopLinkActive(pathname, href) ? 'page' : undefined}>{label}</a>)}
+    {desktopLinks.map(([href, label]) => <a key={href} href={href} target={href.startsWith('https://')?'_blank':undefined} rel={href.startsWith('https://')?'noopener noreferrer':undefined} aria-label={href.startsWith('https://')?'Rejoindre le Discord CobbleStar (nouvel onglet)':undefined} aria-current={desktopLinkActive(pathname, href) ? 'page' : undefined}>{label}</a>)}
   </nav>;
 }

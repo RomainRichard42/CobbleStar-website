@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import AccountLink from './AccountLink';
 import type { AvatarAccount } from '../lib/account-avatar';
 import { bindMobileMenu, mobileLinks } from '../lib/mobile-navigation';
+import { DISCORD_INVITE } from '../lib/community-links';
 
 export default function MobileMenu({ account, balance, pathname }: { account: AvatarAccount | null; balance: number | null; pathname: string }) {
   const ref = useRef<HTMLDetailsElement>(null);
@@ -16,7 +17,7 @@ export default function MobileMenu({ account, balance, pathname }: { account: Av
       <AccountLink account={account} balance={balance} mobile/>
       <a className="menu-shop-card" href="/boutique/"><img src="/astral/assets/stars-button-v3.webp" alt="" width="96" height="72"/><span><strong>Boutique</strong><small>Stars · Grades · Cosmédex</small></span><b aria-hidden="true">↗</b></a>
       <div className="menu-destinations">{mobileLinks.map(link=><a key={link.href} href={link.href} aria-current={pathname===link.href?'page':undefined}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={link.icon}/></svg><strong>{link.title}</strong><small>{link.detail}</small></a>)}</div>
-      <a className="menu-discord" href="https://discord.gg/Sd387Ky4M"><span>Rejoindre le Discord</span><b aria-hidden="true">↗</b></a>
+      <a className="menu-discord" href={DISCORD_INVITE} target="_blank" rel="noopener noreferrer" aria-label="Rejoindre le Discord CobbleStar (nouvel onglet)"><span>Rejoindre le Discord</span><b aria-hidden="true">↗</b></a>
       <p className="menu-opening"><span aria-hidden="true"/>Ouverture à venir</p>
     </nav>
   </details>;

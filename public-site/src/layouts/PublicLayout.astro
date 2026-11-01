@@ -9,11 +9,11 @@ import '../../../app/player-navigation.css';
 import '../../../app/floating-navigation.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import {SITE,jsonLd} from '../lib/content';
+import {DISCORD,SITE,jsonLd} from '../lib/content';
 import {pageRevisions} from '../lib/revisions';
 const {cinematic=false,title,description,image='/media/cobblestar-logo-480.webp',imageAlt='CobbleStar, serveur Cobblemon francophone',schema=[],noindex=false,wide=false,article=false,publishedAt,modifiedAt=pageRevisions[Astro.url.pathname],pageType='WebPage'}=Astro.props;
 const canonical=SITE+Astro.url.pathname;
-const org={'@context':'https://schema.org','@type':'Organization','@id':SITE+'/#organisation',name:'CobbleStar',url:SITE,logo:SITE+'/cobblestar-logo.png',sameAs:['https://discord.gg/Sd387Ky4M']};
+const org={'@context':'https://schema.org','@type':'Organization','@id':SITE+'/#organisation',name:'CobbleStar',url:SITE,logo:SITE+'/cobblestar-logo.png',sameAs:[DISCORD]};
 const website={'@context':'https://schema.org','@type':'WebSite','@id':SITE+'/#website',name:'CobbleStar',url:SITE+'/',inLanguage:'fr-FR',publisher:{'@id':SITE+'/#organisation'}};
 const page={'@context':'https://schema.org','@type':pageType,'@id':canonical+'#page',url:canonical,name:title,description,inLanguage:'fr-FR',isPartOf:{'@id':SITE+'/#website'},publisher:{'@id':SITE+'/#organisation'},...(modifiedAt?{dateModified:modifiedAt}:{})};
 ---

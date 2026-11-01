@@ -112,7 +112,7 @@ const fieldNotes = [
 ] as const;
 
 export function AtlasLanding({ home = false }: { home?: boolean }) {
-  const downloadUrl = "https://discord.gg/Sd387Ky4M";
+  const downloadUrl = "https://discord.gg/tHugXVFrDn";
   const [copied, setCopied] = useState(false);
   const [activeChapter, setActiveChapter] = useState<ChapterKey>("exploration");
   const chapter = chapters[activeChapter];

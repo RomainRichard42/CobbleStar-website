@@ -4,7 +4,7 @@ import Picture from '../components/Picture.astro';
 import '../styles/astral-home.css';
 import '../styles/home-pokemon.css';
 import '../styles/home-discovery.css';
-import {newsUrl,publishedNews,date,type PublicLocals} from '../lib/content';
+import {DISCORD,newsUrl,publishedNews,date,type PublicLocals} from '../lib/content';
 import {HOME_FAQ} from '../lib/faqs';
 const articles=await (Astro.locals as PublicLocals).getNews().then(n=>publishedNews(n).articles.slice(0,3)).catch(()=>[]);
 const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HOME_FAQ.map(f=>({'@type':'Question',name:f.question,acceptedAnswer:{'@type':'Answer',text:f.answer}}))};
@@ -51,7 +51,7 @@ const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HO
 <li>Licence Minecraft requise</li>
 </ul>
 <div class="cinema-actions">
-<a class="btn gold" href="/rejoindre/">Préparer mon arrivée <span aria-hidden="true">→</span></a>
+<a class="btn gold" href={DISCORD} target="_blank" rel="noopener noreferrer" aria-label="Rejoindre le Discord CobbleStar (nouvel onglet)">Rejoindre le Discord <span aria-hidden="true">↗</span></a>
 <button type="button" class="btn outline" id="start-journey">Voir l’univers <span aria-hidden="true">→</span>
 </button>
 </div>
@@ -298,7 +298,7 @@ const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HO
 <h2>Il ne manque<br>
 <span>plus que toi.</span>
 </h2>
-<a class="btn ink" href="https://discord.gg/Sd387Ky4M">Rejoindre le Discord<span aria-hidden="true">↗</span>
+<a class="btn ink" href={DISCORD} target="_blank" rel="noopener noreferrer">Rejoindre le Discord<span aria-hidden="true">↗</span>
 
 </a>
 </div>

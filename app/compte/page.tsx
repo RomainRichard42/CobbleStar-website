@@ -9,6 +9,7 @@ import SiteHeader from "../components/SiteHeader";
 import FaqSection from "../components/FaqSection";
 import FaqStructuredData from "../components/FaqStructuredData";
 import styles from "./account.module.css";
+import { DISCORD_INVITE as DISCORD_INVITE_URL } from '../lib/community-links';
 
 type Account = {
   id: string;
@@ -26,7 +27,6 @@ const messages: Record<string, string> = {
   LINK_BUSY_RETRY: "Une autre opération est en cours. Réessaie dans quelques instants.",
   AUTH_REQUIRED: "Ta session a changé ou expiré. Reconnecte-toi avec Discord.",
 };
-const DISCORD_INVITE_URL = "https://discord.gg/Sd387Ky4M";
 
 async function api<T>(path: string, init?: RequestInit): Promise<T> {
   const headers = new Headers(init?.headers);

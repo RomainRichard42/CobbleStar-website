@@ -1,9 +1,10 @@
-export const desktopLinks = [['/wiki/', 'Wiki'], ['/wiki/pokedex/', 'Pokédex'], ['/actualites/', 'Actualités'], ['/vote/', 'Voter']];
+import {DISCORD_INVITE} from './community-links';
+export const desktopLinks = [['/wiki/', 'Wiki'], ['/wiki/pokedex/', 'Pokédex'], ['/actualites/', 'Actualités'], ['/vote/', 'Voter'], [DISCORD_INVITE, 'Discord']];
 export const serverLinks = [
   { href: '/wiki/mondes/', title: 'Astéria & Nébélia', detail: 'Découvrir les deux mondes' },
   { href: '/#activites', title: 'Les activités', detail: 'GTS, raids, pension, métiers' },
   { href: '/rejoindre/', title: 'Premiers pas', detail: 'Préparer l’ouverture' },
-  { href: 'https://discord.gg/Sd387Ky4M', title: 'Le Discord ↗', detail: 'Retrouver la communauté' },
+  { href: DISCORD_INVITE, title: 'Le Discord ↗', detail: 'Retrouver la communauté' },
 ];
 export function desktopLinkActive(pathname: string, href: string) {
   return pathname.startsWith(href) && (href !== '/wiki/' || !pathname.startsWith('/wiki/pokedex/'));

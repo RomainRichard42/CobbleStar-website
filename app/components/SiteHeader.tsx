@@ -10,6 +10,7 @@ import MobileMenu from './MobileMenu';
 import DesktopNavigation from './DesktopNavigation';
 import { observePlayer, starsLabel } from '../lib/player-session';
 import type { AvatarAccount } from '../lib/account-avatar';
+import { DISCORD_INVITE } from '../lib/community-links';
 
 const accountsEnabled = true;
 type HeaderAccount = AvatarAccount;
@@ -60,10 +61,10 @@ export default function SiteHeader() {
               <a href="/#premiers-pas">Premiers pas</a>
               <a className={pathname.startsWith("/roadmap") ? "active" : undefined} aria-current={pathname.startsWith("/roadmap") ? "page" : undefined} href="/roadmap/">Roadmap</a>
               <a className={pathname.startsWith("/wiki") ? "active" : undefined} aria-current={pathname.startsWith("/wiki") ? "page" : undefined} href="/wiki/">Wiki</a>
-              <a href="https://discord.gg/Sd387Ky4M">Rejoindre Discord ↗</a>
+              <a href={DISCORD_INVITE}>Rejoindre Discord ↗</a>
             </div>
           </details>
-          <a className="nav-download" href="https://discord.gg/Sd387Ky4M" aria-label="Rejoindre le Discord CobbleStar">
+          <a className="nav-download" href={DISCORD_INVITE} aria-label="Rejoindre le Discord CobbleStar">
             <span>Discord</span><b aria-hidden="true">↗</b>
           </a>
           {accountsEnabled && account && <a className="nav-stars" href="/boutique/" aria-label={`Solde : ${starsLabel(balance)} Stars`}><span aria-hidden="true">✦</span><b>{starsLabel(balance)}</b><small>Stars</small></a>}

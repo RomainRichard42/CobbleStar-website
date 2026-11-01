@@ -6,7 +6,7 @@ import {guidePathRevisions} from './wiki-navigation';
 
 export const SITE = 'https://cobblestar-mc.fr';
 export const SERVER = 'play.cobblestar-mc.fr';
-export const DISCORD = 'https://discord.gg/Sd387Ky4M';
+export {DISCORD_INVITE as DISCORD} from '../../../app/lib/community-links';
 export const DOWNLOAD = '/telecharger/';
 export type PublicLocals = { getWiki: () => Promise<WikiEnvelope>; getNews: () => Promise<NewsEnvelope>; getDex:()=>Promise<DexEntry[]>; getDexInfo:(id:string)=>Promise<any> };
 export function publishedWiki(envelope: WikiEnvelope) {
