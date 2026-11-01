@@ -303,12 +303,12 @@
     "https://developers.google.com/crawling/docs/troubleshooting/http-status-codes"
   ],
   "deployment": {
-    "publicRevision": "a77389b2d770994f6c4dba259e08ccb90cef193f",
+    "publicRevision": "abc2e10102a6f696e6ca29f0db6e89bf3e6b617b",
     "verifiedOn": "2026-11-01",
     "build": "Webpack with one prerender worker and 1024 MiB Node heap limit on Kinetic",
-    "ci": "https://github.com/RomainRichard42/CobbleStar-website/actions/runs/41312952959",
+    "ci": "https://github.com/RomainRichard42/CobbleStar-website/actions/runs/41335554413",
     "status": "success",
-    "report": "seo/reports/publication-guide-2026-11-01T13-56-37Z.json"
+    "report": "seo/reports/publication-decouverte-2026-11-01T18-22-23Z.json"
   },
   "homepage": {
     "updatedAt": "2026-10-26",
@@ -541,7 +541,7 @@
       "A5",
       "A9"
     ],
-    "executionStatus": "approved_ci_pending",
+    "executionStatus": "first_batch_published",
     "localReview": {
       "report": "seo/reports/lot-local-decouverte-2026-11-01T17-00-13Z.json",
       "branch": "seo/decouverte-locale-2026-11-01",
@@ -550,10 +550,11 @@
         "/wiki/welcome/",
         "/wiki/capture/"
       ],
-      "pushed": false,
-      "deployed": false,
+      "pushed": true,
+      "deployed": true,
       "approval": "approved_with_icon_changes"
     },
-    "lastValidationReport": "seo/reports/validation-icones-decouverte-2026-11-01T18-13-48Z.json"
+    "lastValidationReport": "seo/reports/validation-icones-decouverte-2026-11-01T18-13-48Z.json",
+    "lastPublicationReport": "seo/reports/publication-decouverte-2026-11-01T18-22-23Z.json"
   }
 }
