@@ -20,7 +20,7 @@ const pathname=Astro.url.pathname;
         <PlayerProfile mobile/>
         <a class="menu-shop-card" href="/boutique/"><img src="/astral/assets/stars-button-v3.webp" alt="" width="96" height="72"/><span><strong>Boutique</strong><small>Stars · Grades · Cosmédex</small></span><b aria-hidden="true">↗</b></a>
         <div class="menu-destinations">{mobileLinks.map(link=><a href={link.href} aria-current={pathname===link.href?'page':undefined}><svg viewBox="0 0 24 24" aria-hidden="true"><path d={link.icon}/></svg><strong>{link.title}</strong><small>{link.detail}</small></a>)}</div>
-        <a class="menu-discord" href={DISCORD} target="_blank" rel="noopener noreferrer" aria-label="Rejoindre le Discord CobbleStar (nouvel onglet)"><span>Rejoindre le Discord</span><b aria-hidden="true">↗</b></a>
+        <a class="menu-discord" href={DISCORD} target="_blank" rel="noopener noreferrer" aria-label="Ouvrir Discord pour rejoindre CobbleStar"><span>Rejoindre le Discord</span><b aria-hidden="true">↗</b></a>
         <p class="menu-opening"><span aria-hidden="true"/>Ouverture à venir</p>
       </nav>
     </details>
@@ -31,6 +31,7 @@ import { accountAppearance, type AvatarAccount } from '../../../app/lib/account-
 import { observePlayer, starsLabel } from '../../../app/lib/player-session';
 import { bindMobileMenu } from '../../../app/lib/mobile-navigation';
 import { bindDesktopMenu } from '../../../app/lib/desktop-navigation';
+import { bindDiscordInvites } from '../../../app/lib/discord-launch';
 let displayedAccount: AvatarAccount | null | undefined;
 function showAccount(account: AvatarAccount | null, balance: number | null) {
   const { name, initial, images } = accountAppearance(account);
@@ -62,6 +63,7 @@ function showAccount(account: AvatarAccount | null, balance: number | null) {
   });
 }
 observePlayer(showAccount);
+bindDiscordInvites();
 const menu=document.querySelector<HTMLDetailsElement>('.player-menu');
 if(menu) bindMobileMenu(menu);
 const desktopMenu=document.querySelector<HTMLDetailsElement>('.desktop-discover');

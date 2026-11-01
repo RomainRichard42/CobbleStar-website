@@ -11,6 +11,7 @@ import DesktopNavigation from './DesktopNavigation';
 import { observePlayer, starsLabel } from '../lib/player-session';
 import type { AvatarAccount } from '../lib/account-avatar';
 import { DISCORD_INVITE } from '../lib/community-links';
+import { bindDiscordInvites } from '../lib/discord-launch';
 
 const accountsEnabled = true;
 type HeaderAccount = AvatarAccount;
@@ -26,6 +27,7 @@ export default function SiteHeader() {
 
 
   useEffect(() => observePlayer((user, stars) => { setAccount(user); setBalance(stars); }), []);
+  useEffect(() => bindDiscordInvites(), []);
 
 
   const isAdmin=/^\/(admin|wiki\/admin|actualites\/admin)(\/|$)/.test(pathname);

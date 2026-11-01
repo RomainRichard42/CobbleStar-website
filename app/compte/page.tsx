@@ -304,6 +304,7 @@ function AccountPortal() {
             </section>}
 
             <Link className={styles.adminLink} href="/collection/"><span><small>MON POKÉDEX</small><b>Ma collection et mes objectifs</b><p>Retrouve ton équipe et ton PC, tes favoris et les Pokémon que tu veux capturer.</p></span><strong>→</strong></Link>
+            <div className={styles.communityActions}><a href={DISCORD_INVITE_URL}>Ouvrir Discord <span aria-hidden="true">↗</span></a><a href={DISCORD_INVITE_URL} target="_blank" rel="noopener noreferrer" data-discord-web>Version web</a></div>
             {success && <p className={styles.linkSuccess} role="status">✓ {success}</p>}
 
             {account.admin === true && <Link className={styles.adminLink} href="/admin/"><span><small>ACCÈS ADMINISTRATEUR</small><b>Ouvrir le centre de contrôle</b></span><strong>→</strong></Link>}
@@ -320,7 +321,7 @@ function AccountPortal() {
 
             {error && <p className={styles.formError} role="alert">{error}</p>}
             <a className={styles.discordButton} href="/api/auth/discord"><span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.5 5.34A16.3 16.3 0 0 0 15.44 4l-.5 1.02a15 15 0 0 0-5.88 0L8.56 4A16.5 16.5 0 0 0 4.5 5.35C1.93 9.2 1.24 12.96 1.6 16.66a16.4 16.4 0 0 0 4.98 2.52l1.2-1.65a10.7 10.7 0 0 1-1.88-.9l.46-.35c3.63 1.68 7.57 1.68 11.16 0l.47.35c-.6.36-1.23.66-1.88.9l1.2 1.65a16.4 16.4 0 0 0 4.98-2.52c.43-4.28-.74-8-2.79-11.32ZM8.52 14.42c-1.09 0-1.98-1-1.98-2.22 0-1.23.87-2.23 1.98-2.23s2 1.01 1.98 2.23c0 1.23-.87 2.22-1.98 2.22Zm6.96 0c-1.09 0-1.98-1-1.98-2.22 0-1.23.87-2.23 1.98-2.23s2 1.01 1.98 2.23c0 1.23-.87 2.22-1.98 2.22Z" /></svg>Continuer avec Discord</span><b>→</b></a>
-            <a className={styles.discordCommunityLink} href={DISCORD_INVITE_URL} target="_blank" rel="noreferrer">Ouvrir le Discord CobbleStar manuellement <span>↗</span></a>
+            <div className={styles.communityActions}><a href={DISCORD_INVITE_URL}>Ouvrir l’application Discord <span aria-hidden="true">↗</span></a><a href={DISCORD_INVITE_URL} target="_blank" rel="noopener noreferrer" data-discord-web>Version web</a></div>
 
             <ol className={styles.discordFlow} aria-label="Étapes de connexion"><li><span>01</span><p><b>Discord rejoint</b><small>Connexion en un clic</small></p></li><li><span>02</span><p><b>/link en jeu</b><small>Ton UUID est confirmé</small></p></li><li><span>03</span><p><b>Compte prêt</b><small>Stars, boutique et votes</small></p></li></ol>
 

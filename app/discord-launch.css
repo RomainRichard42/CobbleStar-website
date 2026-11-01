@@ -1,0 +1,11 @@
+.discord-launch-dialog{position:fixed;inset:0;margin:auto;width:min(440px,calc(100vw - 32px));max-height:calc(100dvh - 32px);overflow:auto;padding:32px;border:1px solid #88649e;border-radius:16px;background:#21162d;color:#fff4dc;box-shadow:0 24px 100px #0009;font:400 16px/1.6 'Segoe UI',sans-serif}
+.discord-launch-dialog::backdrop{background:#080411b3;backdrop-filter:blur(5px)}
+.discord-launch-dialog h2{margin:0 36px 12px 0;font:800 34px/1.1 StarDisplay,sans-serif;color:#fff4dc;letter-spacing:0}
+.discord-launch-dialog p{margin:0 0 22px;color:#dfd1e9;font-size:16px;line-height:1.6}
+.discord-launch-dialog .discord-launch-close{position:absolute;right:12px;top:12px;width:44px;height:44px;padding:0;border:1px solid #735581;border-radius:10px;background:#30203d;color:#fff4dc;font:400 28px/1 sans-serif;cursor:pointer}
+.discord-launch-dialog a{display:flex;align-items:center;justify-content:center;min-height:48px;padding:10px 14px;border-radius:10px;text-align:center;font-size:16px;line-height:1.5;font-weight:650;text-decoration:none}
+.discord-launch-dialog .discord-launch-primary{background:#edbf78;color:#21162d}
+.discord-launch-dialog .discord-launch-help{margin:24px 0 8px}
+.discord-launch-dialog .discord-launch-web{border:1px solid #88649e;background:#30203d;color:#fff4dc}
+.discord-launch-dialog :focus-visible{outline:3px solid #f6d495;outline-offset:4px}
+@media(max-width:420px){.discord-launch-dialog{padding:24px}.discord-launch-dialog h2{font-size:30px}}

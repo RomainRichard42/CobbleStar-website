@@ -9,6 +9,7 @@ import "./astral-public.css";
 import "./player-polish.css";
 import "./player-navigation.css";
 import "./floating-navigation.css";
+import "./discord-launch.css";
 import "./votes-live.css";
 import { BASE_KEYWORDS, SITE_NAME, SITE_URL } from "@/app/lib/seo";
 import StructuredData from "@/app/components/StructuredData";

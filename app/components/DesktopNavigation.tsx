@@ -13,6 +13,6 @@ export default function DesktopNavigation({ pathname }: { pathname: string }) {
         <div className="desktop-mega-links">{serverLinks.map(link => <a key={link.href} href={link.href} target={link.href.startsWith('https://')?'_blank':undefined} rel={link.href.startsWith('https://')?'noopener noreferrer':undefined}><strong>{link.title}</strong><small>{link.detail}</small></a>)}</div>
       </div>
     </details>
-    {desktopLinks.map(([href, label]) => <a key={href} href={href} target={href.startsWith('https://')?'_blank':undefined} rel={href.startsWith('https://')?'noopener noreferrer':undefined} aria-label={href.startsWith('https://')?'Rejoindre le Discord CobbleStar (nouvel onglet)':undefined} aria-current={desktopLinkActive(pathname, href) ? 'page' : undefined}>{label}</a>)}
+    {desktopLinks.map(([href, label]) => <a key={href} href={href} target={href.startsWith('https://')?'_blank':undefined} rel={href.startsWith('https://')?'noopener noreferrer':undefined} aria-label={href.startsWith('https://')?'Ouvrir Discord pour rejoindre CobbleStar':undefined} aria-current={desktopLinkActive(pathname, href) ? 'page' : undefined}>{label}</a>)}
   </nav>;
 }
