@@ -1,0 +1,50 @@
+{
+  "at": "2026-11-01T19:05:01.204Z",
+  "status": "published",
+  "commit": "12fde52",
+  "checks": {
+    "pageStatus": 200,
+    "blueLoginLabel": true,
+    "oauthButtonPreserved": true,
+    "recentButtonIntent": true,
+    "callbackConfirmation": true,
+    "oldInvitePresent": false,
+    "authorizationStatus": 302,
+    "authorizationHost": "discord.com",
+    "clientMatches": true,
+    "scope": "identify email guilds.join",
+    "statePresent": true,
+    "signedStateCookiePresent": true,
+    "callbackUri": "https://cobblestar-mc.fr/api/auth/discord/callback"
+  },
+  "flow": [
+    "Blue button starts existing OAuth authorization and records a short-lived app preference in this tab.",
+    "Existing backend joins the server (201), or accepts an existing member (204), then creates the website session.",
+    "Client confirms the authenticated profile, displays success and attempts app handoff once.",
+    "Explicit app retry and HTTPS fallback remain if the browser cannot launch Discord."
+  ],
+  "validation": {
+    "fullBuild": "passed",
+    "tests": {
+      "passed": 37,
+      "failed": 0
+    },
+    "lint": {
+      "errors": 0,
+      "preExistingWarnings": 1
+    },
+    "blueButtonUi": "checked in local preview",
+    "liveEntryAndBundles": "checked",
+    "backendJoinAndSessionOrder": "source reviewed; unchanged"
+  },
+  "limits": [
+    "No live OAuth callback or fresh guild join was executed in this verification.",
+    "External app launch was previously rejected by the browser tool security policy and was not retried via another method.",
+    "Browser or OS can require a separate approval or click to launch Discord."
+  ],
+  "preserved": [
+    "Existing scopes, signed OAuth state, callback and secure session",
+    "Minecraft links, Stars, purchases, administration, bot and API code",
+    "Public HTTPS invitation and structured data"
+  ]
+}
