@@ -3,7 +3,7 @@
 export const pageRevisions: Record<string,string> = {
   '/':'2026-10-30',
   '/minecraft-pokemon/':'2026-10-30',
-  '/installer-cobblemon/':'2026-10-27',
+  '/installer-cobblemon/':'2026-11-01',
   '/rejoindre/':'2026-10-26',
   '/telecharger/':'2026-10-26',
   '/roadmap/':'2026-10-26',

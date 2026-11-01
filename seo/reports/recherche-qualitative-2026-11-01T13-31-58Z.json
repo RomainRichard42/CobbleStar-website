@@ -1,0 +1,44 @@
+{
+  "at": "2026-11-01T13:43:00.297Z",
+  "method": "Outil de recherche web non assimilé à une première page Google FR",
+  "queries": [
+    "serveur cobblemon français cobblemon fr",
+    "minecraft pokemon jouer cobblemon"
+  ],
+  "organicRanks": null,
+  "observedCobbleStar": [
+    {
+      "url": "https://cobblestar-mc.fr/",
+      "observation": "Accueil renvoyé par la recherche web combinée, sans attribution de rang Google."
+    }
+  ],
+  "competitorSources": [
+    {
+      "url": "https://tropimon.fr/",
+      "observation": "Présentation du serveur, accès launcher, communauté et actualités."
+    },
+    {
+      "url": "https://pokeblock.fr/",
+      "observation": "Parcours d’accès au serveur et repères pour débuter."
+    },
+    {
+      "url": "https://cobblemon.com/en/servers",
+      "observation": "Liste officielle de serveurs Cobblemon."
+    }
+  ],
+  "contentSources": [
+    {
+      "url": "https://support.modrinth.com/en/articles/8802250-modpacks-on-modrinth",
+      "supports": "Installation d’un pack depuis le catalogue Modrinth App et outils compatibles."
+    },
+    {
+      "url": "https://support.modrinth.com/en/articles/8802351-modrinth-modpack-format-mrpack",
+      "supports": "Différence entre archive .mrpack, fichiers à télécharger et réglages."
+    }
+  ],
+  "conclusion": "Poursuivre les guides pratiques pour les débutants ; aucune évolution Google ne peut être déduite de cette recherche web.",
+  "limits": [
+    "Ni volumes de recherche ni difficulté chiffrée mesurés.",
+    "Pas de comptage de rang organique Google."
+  ]
+}

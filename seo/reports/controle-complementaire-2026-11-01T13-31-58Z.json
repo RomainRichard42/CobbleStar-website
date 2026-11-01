@@ -1,0 +1,219 @@
+{
+  "at": "2026-11-01T13:40:35.506Z",
+  "site": "https://cobblestar-mc.fr",
+  "errors": [],
+  "pages": [
+    {
+      "path": "/robots.txt",
+      "status": 200,
+      "htmlBytes": 2832,
+      "elapsedMs": 155,
+      "robots": null,
+      "cacheControl": "public, max-age=14400",
+      "encoding": "br",
+      "h1": 0,
+      "canonical": null
+    },
+    {
+      "path": "/wiki/pokedex/",
+      "status": 200,
+      "htmlBytes": 439024,
+      "elapsedMs": 1217,
+      "robots": null,
+      "cacheControl": "public, max-age=60",
+      "encoding": "br",
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/wiki/pokedex/"
+    },
+    {
+      "path": "/wiki/pokedex/eevee/",
+      "status": 200,
+      "htmlBytes": 69505,
+      "elapsedMs": 1212,
+      "robots": null,
+      "cacheControl": "public, max-age=60",
+      "encoding": "br",
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/wiki/pokedex/eevee/"
+    },
+    {
+      "path": "/wiki/pokedex/riolu/",
+      "status": 200,
+      "htmlBytes": 75189,
+      "elapsedMs": 1212,
+      "robots": null,
+      "cacheControl": "public, max-age=60",
+      "encoding": "br",
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/wiki/pokedex/riolu/"
+    },
+    {
+      "path": "/wiki/pokedex/dragonite/",
+      "status": 200,
+      "htmlBytes": 122204,
+      "elapsedMs": 1212,
+      "robots": null,
+      "cacheControl": "public, max-age=60",
+      "encoding": "br",
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/wiki/pokedex/dragonite/"
+    },
+    {
+      "path": "/boutique/",
+      "status": 200,
+      "htmlBytes": 38385,
+      "elapsedMs": 116,
+      "robots": null,
+      "cacheControl": "public, max-age=0",
+      "encoding": "br",
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/boutique/"
+    },
+    {
+      "path": "/vote/",
+      "status": 200,
+      "htmlBytes": 34363,
+      "elapsedMs": 138,
+      "robots": null,
+      "cacheControl": "public, max-age=0",
+      "encoding": "br",
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/vote/"
+    },
+    {
+      "path": "/collection/",
+      "status": 200,
+      "htmlBytes": 150197,
+      "elapsedMs": 1212,
+      "robots": "noindex, nofollow",
+      "cacheControl": "no-store",
+      "encoding": "br",
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/collection/"
+    },
+    {
+      "path": "/telecharger/",
+      "status": 200,
+      "htmlBytes": 11629,
+      "elapsedMs": 111,
+      "robots": null,
+      "cacheControl": "public, max-age=60",
+      "encoding": "br",
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/telecharger/"
+    },
+    {
+      "path": "/minecraft-pokemon/",
+      "status": 200,
+      "htmlBytes": 29652,
+      "elapsedMs": 111,
+      "robots": null,
+      "cacheControl": "public, max-age=60",
+      "encoding": "br",
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/minecraft-pokemon/"
+    },
+    {
+      "path": "/installer-cobblemon/",
+      "status": 200,
+      "htmlBytes": 21596,
+      "elapsedMs": 106,
+      "robots": null,
+      "cacheControl": "public, max-age=60",
+      "encoding": "br",
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/installer-cobblemon/"
+    }
+  ],
+  "comparison": {
+    "previous": "audit-2026-10-31T11-45-54Z-production.json",
+    "sitemapPages": {
+      "previous": 1057,
+      "current": 1057
+    },
+    "linksDelta": 1,
+    "imagesDelta": 6,
+    "changedPages": [
+      {
+        "url": "https://cobblestar-mc.fr/confidentialite/",
+        "titleChanged": false,
+        "descriptionChanged": false,
+        "previousBytes": 16816,
+        "bytes": 17271
+      },
+      {
+        "url": "https://cobblestar-mc.fr/boutique/",
+        "titleChanged": false,
+        "descriptionChanged": false,
+        "previousBytes": 37045,
+        "bytes": 38385
+      },
+      {
+        "url": "https://cobblestar-mc.fr/vote/",
+        "titleChanged": false,
+        "descriptionChanged": false,
+        "previousBytes": 24505,
+        "bytes": 34363
+      }
+    ],
+    "added": [],
+    "removed": []
+  },
+  "pokedex": {
+    "catalogHttp": 200,
+    "species": 1009,
+    "appearances": 1106,
+    "collections": {
+      "Star": 22,
+      "Astéria": 30,
+      "Nébélia": 42,
+      "Éclipse": 2,
+      "Alliance": 1,
+      "Classiques": 1009
+    },
+    "missingAssetUrls": 0,
+    "internalEntries": 0,
+    "htmlLinks": 1106,
+    "initialCanvases": 0,
+    "htmlBytes": 439024,
+    "previousHtmlBytes": 439024,
+    "formSample": {
+      "url": "https://cobblestar-mc.fr/wiki/pokedex/absol/?forme=star-absol-base",
+      "status": 200,
+      "canonicalToSpecies": true
+    }
+  },
+  "store": {
+    "tokenVisuals": [
+      {
+        "id": "nova",
+        "present": true
+      },
+      {
+        "id": "pulsar",
+        "present": true
+      },
+      {
+        "id": "quasar",
+        "present": true
+      }
+    ],
+    "voteUsesJeton": true,
+    "pendingFilterPresent": false
+  },
+  "pageSpeed": {
+    "status": 429,
+    "available": false,
+    "note": "No score or field metric obtained."
+  },
+  "mobile": {
+    "status": "unavailable",
+    "reason": "No connected browser; Windows browser UI stopped by URL policy enforcement. No current rendering or overflow measurement.",
+    "previousValidReport": "mobile-2026-10-31T11-45-54Z.json"
+  },
+  "limits": [
+    "These are HTTP and HTML checks, not proof of Google indexation.",
+    "Probe elapsed times are single synthetic network requests, not field Core Web Vitals.",
+    "An asset URL does not prove every 3D model renders correctly."
+  ]
+}
