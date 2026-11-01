@@ -1,0 +1,108 @@
+{
+  "at": "2026-11-01T18:40:15.542Z",
+  "status": "published",
+  "invite": "https://discord.gg/tHugXVFrDn",
+  "websiteCommit": "eeb5851a812209aec711f6db7c14d76f8be96c97",
+  "pages": [
+    {
+      "path": "/",
+      "status": 200,
+      "newInviteCount": 7,
+      "oldInvitePresent": false,
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/"
+    },
+    {
+      "path": "/wiki/",
+      "status": 200,
+      "newInviteCount": 5,
+      "oldInvitePresent": false,
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/wiki/"
+    },
+    {
+      "path": "/wiki/pokedex/eevee/",
+      "status": 200,
+      "newInviteCount": 5,
+      "oldInvitePresent": false,
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/wiki/pokedex/eevee/"
+    },
+    {
+      "path": "/boutique/",
+      "status": 200,
+      "newInviteCount": 6,
+      "oldInvitePresent": false,
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/boutique/"
+    },
+    {
+      "path": "/compte/",
+      "status": 200,
+      "newInviteCount": 6,
+      "oldInvitePresent": false,
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/compte/"
+    },
+    {
+      "path": "/collection/",
+      "status": 200,
+      "newInviteCount": 5,
+      "oldInvitePresent": false,
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/collection/"
+    },
+    {
+      "path": "/vote/",
+      "status": 200,
+      "newInviteCount": 6,
+      "oldInvitePresent": false,
+      "h1": 1,
+      "canonical": "https://cobblestar-mc.fr/vote/"
+    }
+  ],
+  "changes": [
+    "Primary homepage invitation",
+    "Direct desktop navigation invitation",
+    "Shared invitation for public menus, account, footer and organization structured data",
+    "Static public previews updated"
+  ],
+  "validation": {
+    "fullWebsiteBuild": "passed",
+    "publicTests": {
+      "passed": 32,
+      "failed": 0
+    },
+    "lint": {
+      "errors": 0,
+      "preExistingWarnings": 1
+    },
+    "browser": {
+      "desktop": "checked",
+      "mobile390": "checked",
+      "invitation": "CobbleStar; Open application and Continue in browser options visible"
+    }
+  },
+  "game": {
+    "config": "config/cobblestar-welcome.json",
+    "saved": true,
+    "reloaded": true,
+    "command": "accueil reload",
+    "revisionUnchanged": "1",
+    "sourceCommits": {
+      "main": "ff7f88d",
+      "recovery6507": "14a3e6e"
+    }
+  },
+  "launcher": {
+    "sourceCommit": "8d174e9",
+    "configUpdated": true,
+    "installerRebuilt": false,
+    "buildLimit": "Dependencies absent in this checkout; tsc unavailable. URL and JSON checked only."
+  },
+  "limits": [
+    "App launch depends on browser and OS confirmation.",
+    "Existing installed launcher binaries are unchanged.",
+    "Historical SEO reports and personalized referral invitations preserved."
+  ]
+}
