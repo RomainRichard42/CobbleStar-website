@@ -1,0 +1,13 @@
+{
+  "at": "2026-11-01T13:44:43.026Z",
+  "http": 200,
+  "h1": 1,
+  "canonical": "https://cobblestar-mc.fr/installer-cobblemon/",
+  "importSection": true,
+  "brokenAnchors": [],
+  "publishedAt": "2026-10-27",
+  "modifiedAt": "2026-11-01",
+  "sitemapDateMatches": true,
+  "visibleMobileCheck": false,
+  "previousCheckNote": "The initial checker did not flatten JSON-LD arrays; this report corrects that parser and retains the initial file."
+}

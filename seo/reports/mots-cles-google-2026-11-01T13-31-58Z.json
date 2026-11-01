@@ -1,0 +1,1361 @@
+{
+  "date": "2026-11-01",
+  "checkedAt": "2026-11-01T13:43:00.297Z",
+  "site": "https://cobblestar-mc.fr",
+  "method": "Relevé Google FR impossible dans cette session ; aucune SERP actuelle n’est déclarée observée.",
+  "summary": {
+    "tracked": 46,
+    "verified": 0,
+    "present": null,
+    "notObserved": null,
+    "unverified": 46,
+    "brandOrganicRank": null
+  },
+  "access": {
+    "browser": {
+      "available": false,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté."
+    },
+    "directGoogleWebTool": {
+      "url": "https://www.google.com/search?q=cobblestar&hl=fr&gl=fr",
+      "status": "not_accessible",
+      "result": "URL is not accessible via this tool"
+    },
+    "captchaObserved": false
+  },
+  "limits": [
+    "Aucune des 46 expressions n’a été vérifiée dans une première page Google aujourd’hui.",
+    "Aucun rang, entrée, sortie ou changement de page ne peut être calculé.",
+    "Les résultats d’une recherche web de secours ne sont pas assimilés à une SERP Google localisée France.",
+    "Les relevés antérieurs restent historiques ; ils ne sont pas recyclés comme observations du jour."
+  ],
+  "results": [
+    {
+      "query": "cobblestar",
+      "target": "/",
+      "targets": [
+        "/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:47:25.692Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "serveur cobblemon",
+      "target": "/",
+      "targets": [
+        "/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=serveur%20cobblemon",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:47:47.160Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "serveur cobblemon français",
+      "target": "/",
+      "targets": [
+        "/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=serveur%20cobblemon%20fran%C3%A7ais",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:47:48.437Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "serveur cobblemon fr",
+      "target": "/",
+      "targets": [
+        "/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=serveur%20cobblemon%20fr",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:47:49.506Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "cobblemon fr",
+      "target": "/",
+      "targets": [
+        "/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20fr",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:47:50.543Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "minecraft pokemon",
+      "target": "/minecraft-pokemon/",
+      "targets": [
+        "/minecraft-pokemon/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=minecraft%20pokemon",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:47:51.994Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "pokemon minecraft",
+      "target": "/minecraft-pokemon/",
+      "targets": [
+        "/minecraft-pokemon/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=pokemon%20minecraft",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:47:53.539Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "mod pokemon minecraft",
+      "target": "/minecraft-pokemon/",
+      "targets": [
+        "/minecraft-pokemon/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=mod%20pokemon%20minecraft",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:47:54.695Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "cobblemon français",
+      "target": "/minecraft-pokemon/",
+      "targets": [
+        "/minecraft-pokemon/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20fran%C3%A7ais",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:47:56.159Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "jouer pokemon minecraft",
+      "target": "/minecraft-pokemon/",
+      "targets": [
+        "/minecraft-pokemon/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=jouer%20pokemon%20minecraft",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:49:39.527Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "serveur minecraft pokemon français",
+      "target": "/minecraft-pokemon/",
+      "targets": [
+        "/minecraft-pokemon/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=serveur%20minecraft%20pokemon%20fran%C3%A7ais",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:49:40.902Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "installer cobblemon",
+      "target": "/installer-cobblemon/",
+      "targets": [
+        "/installer-cobblemon/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=installer%20cobblemon",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:49:41.747Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "comment installer cobblemon",
+      "target": "/installer-cobblemon/",
+      "targets": [
+        "/installer-cobblemon/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=comment%20installer%20cobblemon",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:49:42.985Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "modpack cobblemon",
+      "target": "/installer-cobblemon/",
+      "targets": [
+        "/installer-cobblemon/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=modpack%20cobblemon",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:49:44.442Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "cobblemon java",
+      "target": "/installer-cobblemon/",
+      "targets": [
+        "/installer-cobblemon/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20java",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:49:45.363Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "cobblemon ne se lance pas",
+      "target": "/installer-cobblemon/",
+      "targets": [
+        "/installer-cobblemon/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20ne%20se%20lance%20pas",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:49:46.007Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "comment jouer à cobblemon",
+      "target": "/installer-cobblemon/",
+      "targets": [
+        "/installer-cobblemon/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=comment%20jouer%20%C3%A0%20cobblemon",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:49:47.328Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "cobblemon java ou bedrock",
+      "target": "/installer-cobblemon/",
+      "targets": [
+        "/installer-cobblemon/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20java%20ou%20bedrock",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:49:48.342Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "ip cobblestar",
+      "target": "/rejoindre/",
+      "targets": [
+        "/rejoindre/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=ip%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:14.398Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "rejoindre cobblestar",
+      "target": "/rejoindre/",
+      "targets": [
+        "/rejoindre/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=rejoindre%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:15.145Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "installer cobblemon serveur fr",
+      "target": "/rejoindre/",
+      "targets": [
+        "/rejoindre/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=installer%20cobblemon%20serveur%20fr",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:15.900Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "launcher cobblestar",
+      "target": "/telecharger/",
+      "targets": [
+        "/telecharger/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=launcher%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:16.573Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "télécharger cobblestar",
+      "target": "/telecharger/",
+      "targets": [
+        "/telecharger/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=t%C3%A9l%C3%A9charger%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:17.293Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "wiki cobblestar",
+      "target": "/wiki/",
+      "targets": [
+        "/wiki/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=wiki%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:52:28.262Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "guides cobblemon français",
+      "target": "/wiki/",
+      "targets": [
+        "/wiki/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=guides%20cobblemon%20fran%C3%A7ais",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:18.997Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "pension cobblestar",
+      "target": "/wiki/daycare/",
+      "targets": [
+        "/wiki/daycare/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=pension%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:19.877Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "reproduction cobblemon cobblestar",
+      "target": "/wiki/daycare/",
+      "targets": [
+        "/wiki/daycare/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=reproduction%20cobblemon%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:20.629Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "métiers cobblestar",
+      "target": "/wiki/metiers/",
+      "targets": [
+        "/wiki/metiers/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=m%C3%A9tiers%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:42.145Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "jobs cobblemon cobblestar",
+      "target": "/wiki/metiers/",
+      "targets": [
+        "/wiki/metiers/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=jobs%20cobblemon%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:42.853Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "talents métiers cobblestar",
+      "target": "/wiki/talents/",
+      "targets": [
+        "/wiki/talents/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=talents%20m%C3%A9tiers%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:43.583Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "gts cobblestar",
+      "target": "/wiki/gts/",
+      "targets": [
+        "/wiki/gts/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=gts%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:44.283Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "vendre pokemon cobblemon cobblestar",
+      "target": "/wiki/gts/",
+      "targets": [
+        "/wiki/gts/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=vendre%20pokemon%20cobblemon%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:45.186Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "raids cobblestar",
+      "target": "/wiki/raids/",
+      "targets": [
+        "/wiki/raids/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=raids%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-28T11-06-57-752Z.json",
+          "date": "2026-10-28",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "épreuves badges cobblestar",
+      "target": "/wiki/epreuves/",
+      "targets": [
+        "/wiki/epreuves/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=%C3%A9preuves%20badges%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:46.779Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "ligue cobblestar",
+      "target": "/wiki/ligue/",
+      "targets": [
+        "/wiki/ligue/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=ligue%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:47.462Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "ranked cobblestar",
+      "target": "/wiki/ranked/",
+      "targets": [
+        "/wiki/ranked/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=ranked%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:50:48.127Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "battle pass cobblestar",
+      "target": "/wiki/battlepass/",
+      "targets": [
+        "/wiki/battlepass/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=battle%20pass%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-28T11-06-57-752Z.json",
+          "date": "2026-10-28",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "grades gratuits cobblestar",
+      "target": "/wiki/grades/",
+      "targets": [
+        "/wiki/grades/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=grades%20gratuits%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:51:49.764Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "club claim cobblestar",
+      "target": "/wiki/clubs/",
+      "targets": [
+        "/wiki/clubs/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=club%20claim%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:51:50.546Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "cartes boosters cobblestar",
+      "target": "/wiki/album/",
+      "targets": [
+        "/wiki/album/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cartes%20boosters%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:51:51.457Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "certification sga cobblestar",
+      "target": "/wiki/galerie/",
+      "targets": [
+        "/wiki/galerie/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=certification%20sga%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:51:52.199Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "cosmedex cobblestar",
+      "target": "/wiki/cosmedex/",
+      "targets": [
+        "/wiki/cosmedex/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cosmedex%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": null,
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "pokemon star cobblestar",
+      "target": "/wiki/pokemon-star/",
+      "targets": [
+        "/wiki/pokemon-star/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=pokemon%20star%20cobblestar",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:51:53.860Z",
+          "status": "present_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "pokédex cobblemon français",
+      "target": "/wiki/pokedex/",
+      "targets": [
+        "/wiki/pokedex/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=pok%C3%A9dex%20cobblemon%20fran%C3%A7ais",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:51:54.528Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "cobblemon évolution évoli",
+      "target": "/wiki/pokedex/eevee/",
+      "targets": [
+        "/wiki/pokedex/eevee/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20%C3%A9volution%20%C3%A9voli",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:51:55.919Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    },
+    {
+      "query": "où trouver riolu cobblemon",
+      "target": "/wiki/pokedex/riolu/",
+      "targets": [
+        "/wiki/pokedex/riolu/"
+      ],
+      "recordedAt": "2026-11-01T13:43:00.297Z",
+      "checkedAt": null,
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=o%C3%B9%20trouver%20riolu%20cobblemon",
+      "status": "non_verifie_acces_indisponible",
+      "method": "Aucune observation Google actuelle",
+      "correctionCheck": "non_verifie",
+      "observedPages": null,
+      "otherObservedResults": null,
+      "observedOrganicRank": null,
+      "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+      "comparison": {
+        "status": "non_comparable",
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:51:57.287Z",
+          "status": "non_observe_premiere_page"
+        },
+        "enteredPages": null,
+        "exitedPages": null,
+        "pageChanged": null
+      }
+    }
+  ]
+}

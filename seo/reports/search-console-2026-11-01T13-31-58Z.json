@@ -1,0 +1,24 @@
+{
+  "checkedAt": "2026-11-01T13:43:00.297Z",
+  "property": "https://cobblestar-mc.fr/",
+  "status": "access_unavailable",
+  "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+  "periodStart": null,
+  "periodEnd": null,
+  "clicks": null,
+  "impressions": null,
+  "ctrPercent": null,
+  "averagePosition": null,
+  "indexing": null,
+  "inspections": [],
+  "lastSuccessfulReport": "search-console-2026-10-31T11-45-54Z.json",
+  "lastSuccessfulPeriod": {
+    "start": "2026-10-25",
+    "end": "2026-10-29"
+  },
+  "limits": [
+    "Aucune donnée Search Console actuelle consultée.",
+    "Les résultats HTTP 200 et la présence dans une recherche web ne prouvent pas l’indexation réelle.",
+    "Les inspections du 31 octobre ne constituent pas un contrôle du 1er novembre."
+  ]
+}

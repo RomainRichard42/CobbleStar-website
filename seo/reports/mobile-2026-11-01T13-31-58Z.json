@@ -1,0 +1,12 @@
+{
+  "at": "2026-11-01T13:43:00.297Z",
+  "status": "not_measured_today",
+  "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté.",
+  "viewport": null,
+  "results": [],
+  "previousValidReport": "mobile-2026-10-31T11-45-54Z.json",
+  "limits": [
+    "Les contrôles HTML et les tests de routage ne remplacent pas une vérification visuelle mobile.",
+    "Aucun nouveau résultat de débordement, taille de texte ou animation mobile n’est revendiqué."
+  ]
+}

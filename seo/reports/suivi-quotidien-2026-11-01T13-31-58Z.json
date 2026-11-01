@@ -1,0 +1,175 @@
+{
+  "date": "2026-11-01",
+  "checkedAt": "2026-11-01T13:43:00.297Z",
+  "status": "technical_checks_complete_external_measurements_unavailable",
+  "previousReport": "suivi-quotidien-2026-10-31T11-45-54Z.json",
+  "technical": {
+    "report": "audit-2026-11-01T13-31-58Z-production.json",
+    "pages": 1057,
+    "errors": [],
+    "warnings": [],
+    "metrics": {
+      "home": {
+        "htmlBytes": 29416,
+        "scriptFiles": 6,
+        "scriptBytes": 29865,
+        "inlineScriptBytes": 347,
+        "totalScriptBytes": 30212
+      },
+      "cloudflareEmailLinks": 1059,
+      "checkedLinks": 6376,
+      "checkedImages": 69,
+      "checkedDocuments": 1060,
+      "maxClickDepth": 2,
+      "crawlerHttpStatus": 200
+    },
+    "extraReport": "controle-complementaire-2026-11-01T13-31-58Z.json",
+    "comparison": {
+      "previous": "audit-2026-10-31T11-45-54Z-production.json",
+      "sitemapPages": {
+        "previous": 1057,
+        "current": 1057
+      },
+      "linksDelta": 1,
+      "imagesDelta": 6,
+      "changedPages": [
+        {
+          "url": "https://cobblestar-mc.fr/confidentialite/",
+          "titleChanged": false,
+          "descriptionChanged": false,
+          "previousBytes": 16816,
+          "bytes": 17271
+        },
+        {
+          "url": "https://cobblestar-mc.fr/boutique/",
+          "titleChanged": false,
+          "descriptionChanged": false,
+          "previousBytes": 37045,
+          "bytes": 38385
+        },
+        {
+          "url": "https://cobblestar-mc.fr/vote/",
+          "titleChanged": false,
+          "descriptionChanged": false,
+          "previousBytes": 24505,
+          "bytes": 34363
+        }
+      ],
+      "added": [],
+      "removed": []
+    }
+  },
+  "google": {
+    "report": "mots-cles-google-2026-11-01T13-31-58Z.json",
+    "tracked": 46,
+    "verified": 0,
+    "unverified": 46,
+    "changes": null,
+    "reason": "Aucun navigateur connecté. Le contrôle de Firefox a été arrêté par l’outil : application des règles d’URL non prise en charge pour ce navigateur Windows. Aucun autre pilotage du navigateur n’a été tenté."
+  },
+  "searchConsole": {
+    "report": "search-console-2026-11-01T13-31-58Z.json",
+    "status": "unavailable",
+    "newMeasurements": false,
+    "previousValidReport": "search-console-2026-10-31T11-45-54Z.json"
+  },
+  "mobile": {
+    "report": "mobile-2026-11-01T13-31-58Z.json",
+    "status": "unavailable",
+    "newVisualMeasurements": false
+  },
+  "pokedex": {
+    "catalogHttp": 200,
+    "species": 1009,
+    "appearances": 1106,
+    "collections": {
+      "Star": 22,
+      "Astéria": 30,
+      "Nébélia": 42,
+      "Éclipse": 2,
+      "Alliance": 1,
+      "Classiques": 1009
+    },
+    "missingAssetUrls": 0,
+    "internalEntries": 0,
+    "htmlLinks": 1106,
+    "initialCanvases": 0,
+    "htmlBytes": 439024,
+    "previousHtmlBytes": 439024,
+    "formSample": {
+      "url": "https://cobblestar-mc.fr/wiki/pokedex/absol/?forme=star-absol-base",
+      "status": 200,
+      "canonicalToSpecies": true
+    }
+  },
+  "pageSpeed": {
+    "status": 429,
+    "available": false,
+    "note": "No score or field metric obtained."
+  },
+  "differences": [
+    "Même nombre de pages dans le sitemap : 1 057.",
+    "Un lien et six images supplémentaires vérifiés après les changements du 31 octobre.",
+    "Métadonnées des pages existantes inchangées ; poids HTML modifié pour boutique, vote et confidentialité.",
+    "Poids HTML du Pokédex inchangé : 439 024 octets ; 1 106 apparences liées dans le HTML.",
+    "Impossible de comparer les positions Google et les mesures Search Console aujourd’hui."
+  ],
+  "improvement": {
+    "page": "/installer-cobblemon/",
+    "changes": [
+      "Explication du format .mrpack et de sa différence avec un mod .jar.",
+      "Parcours court de choix de la bonne version et d’installation via un gestionnaire compatible.",
+      "Accès direct depuis le sommaire ; date de modification liée à ce vrai ajout."
+    ],
+    "sources": [
+      "https://support.modrinth.com/en/articles/8802250-modpacks-on-modrinth",
+      "https://support.modrinth.com/en/articles/8802351-modrinth-modpack-format-mrpack"
+    ],
+    "localBuild": "passed",
+    "publicTestsPassed": 30,
+    "published": false,
+    "deployment": "Non effectué : aucun accès au panneau Kinetic par navigateur dans cette session."
+  },
+  "priorities": [
+    {
+      "priority": "P1",
+      "pages": [
+        "/",
+        "/minecraft-pokemon/",
+        "/installer-cobblemon/"
+      ],
+      "action": "Déployer le complément .mrpack après les contrôles, puis vérifier le HTML et le sitemap en production.",
+      "success": "Nouvelle section servie en HTTP 200 et date de modification cohérente."
+    },
+    {
+      "priority": "P1",
+      "pages": [
+        "/wiki/pokedex/eevee/",
+        "/wiki/pokedex/riolu/",
+        "/wiki/gts/",
+        "/wiki/pokemon-star/"
+      ],
+      "action": "Reprendre Search Console et les 46 expressions Google dans un navigateur pris en charge.",
+      "success": "Nouvelles inspections et relevés datés, avec période de mesure explicite."
+    },
+    {
+      "priority": "P2",
+      "pages": [
+        "/wiki/pokedex/",
+        "/boutique/",
+        "/vote/",
+        "/installer-cobblemon/"
+      ],
+      "action": "Reprendre la vérification visuelle mobile après restauration de l’accès au navigateur.",
+      "success": "Contrôle actuel à 390 px : texte lisible, navigation et tableaux sans débordement."
+    }
+  ],
+  "preserved": [
+    "Préouverture",
+    "Téléchargement du launcher désactivé",
+    "PokéPark absent",
+    "Créations internes absentes du Pokédex public",
+    "Comptes, API, bot et administration"
+  ],
+  "publishedThisRun": []
+}
