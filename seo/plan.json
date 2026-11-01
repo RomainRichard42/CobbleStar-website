@@ -239,8 +239,8 @@
     "method": "HTML meta tag",
     "sitemap": "https://cobblestar-mc.fr/sitemap.xml",
     "sitemapStatus": "Success",
-    "discoveredPages": 18,
-    "performanceData": "Processing — no baseline yet",
+    "discoveredPages": 1057,
+    "performanceData": "Premières mesures disponibles : période du 25 au 30 octobre 2026 ; voir le rapport courant.",
     "homeIndexing": {
       "inspectedAt": "2026-10-26",
       "status": "Page is indexed — URL is on Google",
@@ -266,12 +266,14 @@
       "requestResult": "Indexing requested — URL added to a priority crawl queue",
       "indexed": false
     },
-    "latestMeasuredReport": "seo/reports/search-console-2026-10-31T11-45-54Z.json",
+    "latestMeasuredReport": "seo/reports/search-console-2026-11-01T13-56-37Z.json",
     "latestAccessAttempt": {
-      "at": "2026-11-01T13:43:00.297Z",
-      "report": "seo/reports/search-console-2026-11-01T13-31-58Z.json",
-      "status": "unavailable"
-    }
+      "at": "2026-11-01T14:26:05.717Z",
+      "status": "available",
+      "report": "seo/reports/search-console-2026-11-01T13-56-37Z.json"
+    },
+    "sitemapLastRead": "2026-10-30",
+    "sitemapCheckedAt": "2026-11-01"
   },
   "confirmedAvailability": {
     "date": "2026-10-26",
@@ -299,12 +301,12 @@
     "https://developers.google.com/crawling/docs/troubleshooting/http-status-codes"
   ],
   "deployment": {
-    "publicRevision": "2b36874",
-    "verifiedOn": "2026-10-26",
+    "publicRevision": "a77389b2d770994f6c4dba259e08ccb90cef193f",
+    "verifiedOn": "2026-11-01",
     "build": "Webpack with one prerender worker and 1024 MiB Node heap limit on Kinetic",
-    "ci": "https://github.com/RomainRichard42/CobbleStar-website/actions/runs/40330149640",
+    "ci": "https://github.com/RomainRichard42/CobbleStar-website/actions/runs/41312952959",
     "status": "success",
-    "report": "seo/reports/home-refonte-live-2026-10-26.json"
+    "report": "seo/reports/publication-guide-2026-11-01T13-56-37Z.json"
   },
   "homepage": {
     "updatedAt": "2026-10-26",
@@ -420,9 +422,9 @@
     "daily": true,
     "monday": "Audit approfondi et 5 à 10 actions priorisées",
     "localExecution": "Ordinateur allumé et application ouverte",
-    "latestReport": "seo/reports/suivi-quotidien-2026-11-01T13-31-58Z.json",
+    "latestReport": "seo/reports/suivi-quotidien-2026-11-01T13-56-37Z.json",
     "latestTechnicalReport": "seo/reports/audit-2026-11-01T13-31-58Z-production.json",
-    "updatedAt": "2026-11-01T13:43:00.297Z"
+    "updatedAt": "2026-11-01T14:26:05.717Z"
   },
   "latestKeywordResearch": {
     "report": "seo/reports/mots-cles-google-2026-10-27.json",
@@ -510,57 +512,16 @@
   "keywordMonitoring": {
     "frequency": "daily",
     "source": "queryMap[].queries",
-    "latestReport": "seo/reports/mots-cles-google-2026-11-01T13-31-58Z.json",
+    "latestReport": "seo/reports/mots-cles-google-2026-11-01T13-56-37Z.json",
     "comparisonBaseline": "seo/reports/mots-cles-google-2026-10-31T11-45-54Z.json",
-    "method": "Google FR, première page observée ; Search Console séparée",
+    "method": "Google France dans le navigateur intégré ; hl=fr, gl=fr, pws=0. Liens titrés des résultats Web hors annonces et aperçu IA ; aucun rang numérique attribué.",
     "unverifiedQueries": [
-      "cobblestar",
-      "serveur cobblemon",
-      "serveur cobblemon français",
-      "serveur cobblemon fr",
-      "cobblemon fr",
-      "minecraft pokemon",
-      "pokemon minecraft",
-      "mod pokemon minecraft",
-      "cobblemon français",
-      "jouer pokemon minecraft",
-      "serveur minecraft pokemon français",
-      "installer cobblemon",
-      "comment installer cobblemon",
-      "modpack cobblemon",
-      "cobblemon java",
-      "cobblemon ne se lance pas",
-      "comment jouer à cobblemon",
-      "cobblemon java ou bedrock",
-      "ip cobblestar",
-      "rejoindre cobblestar",
-      "installer cobblemon serveur fr",
-      "launcher cobblestar",
-      "télécharger cobblestar",
-      "wiki cobblestar",
-      "guides cobblemon français",
-      "pension cobblestar",
-      "reproduction cobblemon cobblestar",
-      "métiers cobblestar",
-      "jobs cobblemon cobblestar",
-      "talents métiers cobblestar",
-      "gts cobblestar",
-      "vendre pokemon cobblemon cobblestar",
-      "raids cobblestar",
-      "épreuves badges cobblestar",
-      "ligue cobblestar",
-      "ranked cobblestar",
-      "battle pass cobblestar",
-      "grades gratuits cobblestar",
-      "club claim cobblestar",
-      "cartes boosters cobblestar",
-      "certification sga cobblestar",
       "cosmedex cobblestar",
       "pokemon star cobblestar",
       "pokédex cobblemon français",
       "cobblemon évolution évoli",
       "où trouver riolu cobblemon"
     ],
-    "status": "current_access_unavailable"
+    "status": "partial_captcha"
   }
 }

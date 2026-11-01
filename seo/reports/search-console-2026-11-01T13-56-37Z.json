@@ -1,0 +1,105 @@
+{
+  "checkedAt": "2026-11-01T14:26:05.717Z",
+  "property": "https://cobblestar-mc.fr/",
+  "status": "available",
+  "global": {
+    "checkedAt": "2026-11-01T13:57:27.448Z",
+    "periodStart": "2026-10-25",
+    "periodEnd": "2026-10-30",
+    "selectedRange": "3 months",
+    "searchType": "Web",
+    "country": "All countries",
+    "clicks": 1,
+    "impressions": 117,
+    "ctrPercent": 0.9,
+    "averagePosition": 6.7,
+    "lastUpdate": "11 hours ago",
+    "queryTable": "Top queries\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition\n\nmode pokemon minecraft\t0\t2\t0%\t33.0\nmordudor cobblemon\t0\t1\t0%\t5.0\nmeltan cobblemon evolution\t0\t1\t0%\t7.0\nhoundstone cobblemon\t0\t1\t0%\t9.0\nverpom cobblemon\t0\t1\t0%\t10.0\nmine craft pokemon\t0\t1\t0%\t29.0\nevolution coconfort\t0\t1\t0%\t42.0\ncobblemon minecraft\t0\t1\t0%\t47.0\nbriochien pokemon\t0\t1\t0%\t70.0"
+  },
+  "france": {
+    "checkedAt": "2026-11-01T13:58:22.461Z",
+    "periodStart": "2026-10-25",
+    "periodEnd": "2026-10-30",
+    "country": "France",
+    "searchType": "Web",
+    "clicks": 1,
+    "impressions": 110,
+    "ctrPercent": 0.9,
+    "averagePosition": 5.3,
+    "queryTable": "Top queries\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition\n\nmode pokemon minecraft\t0\t2\t0%\t33.0\nmordudor cobblemon\t0\t1\t0%\t5.0\nmeltan cobblemon evolution\t0\t1\t0%\t7.0\nhoundstone cobblemon\t0\t1\t0%\t9.0\nverpom cobblemon\t0\t1\t0%\t10.0\nmine craft pokemon\t0\t1\t0%\t29.0\nevolution coconfort\t0\t1\t0%\t42.0\ncobblemon minecraft\t0\t1\t0%\t47.0",
+    "pageTable": "Top pages\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition\n\nhttps://cobblestar-mc.fr/minecraft-pokemon/\t0\t4\t0%\t35.5\nhttps://cobblestar-mc.fr/wiki/pokedex/gimmighoul/\t0\t1\t0%\t5.0\nhttps://cobblestar-mc.fr/wiki/pokedex/meltan/\t0\t1\t0%\t7.0\nhttps://cobblestar-mc.fr/wiki/pokedex/houndstone/\t0\t1\t0%\t9.0\nhttps://cobblestar-mc.fr/wiki/pokedex/applin/\t0\t1\t0%\t10.0\nhttps://cobblestar-mc.fr/wiki/pokedex/kakuna/\t0\t1\t0%\t42.0",
+    "minecraftPage": {
+      "url": "https://cobblestar-mc.fr/minecraft-pokemon/",
+      "clicks": 0,
+      "impressions": 4,
+      "ctrPercent": 0,
+      "averagePosition": 35.5,
+      "scope": "Page, all queries combined; France, 2026-10-25 to 2026-10-30. Not the exact query rank."
+    }
+  },
+  "exactQueries": [
+    {
+      "query": "cobblemon fr",
+      "matching": "Exact query",
+      "country": "France",
+      "checkedAt": "2026-11-01T13:59:26.404Z",
+      "periodStart": "2026-10-25",
+      "periodEnd": "2026-10-30",
+      "clicks": 0,
+      "impressions": 0,
+      "ctrPercent": null,
+      "averagePosition": null,
+      "displayedAveragePosition": "0",
+      "table": "Top queries\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition",
+      "interpretation": "No data : aucune position mesurable, pas une position zéro."
+    },
+    {
+      "query": "minecraft pokemon",
+      "matching": "Exact query",
+      "country": "France",
+      "checkedAt": "2026-11-01T14:01:19.856Z",
+      "periodStart": "2026-10-25",
+      "periodEnd": "2026-10-30",
+      "clicks": 0,
+      "impressions": 0,
+      "ctrPercent": null,
+      "averagePosition": null,
+      "displayedAveragePosition": "0",
+      "table": "Top queries\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition",
+      "interpretation": "No data : aucune position mesurable, pas une position zéro."
+    }
+  ],
+  "indexing": {
+    "checkedAt": "2026-11-01T13:59:33.140Z",
+    "status": "processing",
+    "evidence": "Browser tab: 16, Title: \"Page indexing\", URL: \"https://search.google.com/search-console/index?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F\".\nThe focused UI element is 0 AXWebArea Page indexing, URL: search.google.com/search-console/index?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F"
+  },
+  "inspections": [
+    {
+      "url": "https://cobblestar-mc.fr/minecraft-pokemon/",
+      "checkedAt": "2026-11-01T14:02:45.659Z",
+      "indexed": true,
+      "evidence": "URL is on Google — Page is indexed"
+    },
+    {
+      "url": "https://cobblestar-mc.fr/installer-cobblemon/",
+      "checkedAt": "2026-11-01T14:03:29.260Z",
+      "indexed": true,
+      "evidence": "\t\t\t\t\t\t66 text URL is on Google\n\t\t\t\t\t75 button (collapsed) Page indexing Page is indexed, Secondary Actions: Expand\n\t\t\t\t\t\t77 text Page is indexed",
+      "lastCrawlDisplayed": "Oct 28, 2026, 3:47:39 PM"
+    }
+  ],
+  "reindexing": {
+    "url": "https://cobblestar-mc.fr/installer-cobblemon/",
+    "acceptedAt": "2026-11-01T14:06:47.073Z",
+    "status": "accepted_priority_crawl_queue",
+    "note": "La page était déjà indexée. Demande après ajout réel de contenu ; aucune garantie de délai ni de position."
+  },
+  "limits": [
+    "Données disponibles seulement du 25 au 30 octobre 2026 malgré la plage trois mois sélectionnée.",
+    "Le volume est faible et peut inclure les recherches de l’audit.",
+    "Les requêtes rares ou anonymisées peuvent manquer dans les tableaux et filtres.",
+    "La moyenne globale ou par page ne représente pas la position d’un mot-clé exact.",
+    "Une demande de réexploration acceptée ne prouve pas que le nouveau contenu est déjà dans l’index."
+  ]
+}

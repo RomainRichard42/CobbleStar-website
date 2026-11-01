@@ -1,0 +1,33 @@
+{
+  "commit": "a77389b2d770994f6c4dba259e08ccb90cef193f",
+  "ciRun": 41312952959,
+  "ciStatus": "success",
+  "published": true,
+  "path": "/installer-cobblemon/",
+  "checkedAt": "2026-11-01T14:26:05.717Z",
+  "http": 200,
+  "newSection": true,
+  "canonical": "https://cobblestar-mc.fr/installer-cobblemon/",
+  "sitemapModified": "2026-11-01",
+  "h1": 1,
+  "gameModChanged": false,
+  "sitemapUrls": 1057,
+  "mobile": {
+    "at": "2026-11-01T14:20:17.628Z",
+    "brokenLoadedImages": [],
+    "documentWidth": 375,
+    "h1": 1,
+    "headingTop": 109.78125,
+    "path": "/installer-cobblemon/",
+    "viewport": 390,
+    "limits": "Émulation navigateur du guide uniquement ; pas de mesure Core Web Vitals terrain."
+  },
+  "requestIndexing": {
+    "url": "https://cobblestar-mc.fr/installer-cobblemon/",
+    "acceptedAt": "2026-11-01T14:06:47.073Z",
+    "status": "accepted_priority_crawl_queue",
+    "note": "La page était déjà indexée. Demande après ajout réel de contenu ; aucune garantie de délai ni de position."
+  },
+  "screenshot": "outputs/seo-2026-11-01/guide-mrpack-en-ligne.png",
+  "scope": "Guide et dates associées publiés ; aucune modification des comptes, API, bot ou administration."
+}

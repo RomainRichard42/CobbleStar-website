@@ -1,0 +1,333 @@
+{
+  "date": "2026-11-01",
+  "checkedAt": "2026-11-01T14:26:05.717Z",
+  "status": "guide_publie_releves_repris_arret_google_sur_captcha",
+  "supersedes": "suivi-quotidien-2026-11-01T13-31-58Z.json",
+  "technicalReport": "audit-2026-11-01T13-31-58Z-production.json",
+  "publicationReport": "publication-guide-2026-11-01T13-56-37Z.json",
+  "publication": {
+    "commit": "a77389b2d770994f6c4dba259e08ccb90cef193f",
+    "ciRun": 41312952959,
+    "ciStatus": "success",
+    "published": true,
+    "path": "/installer-cobblemon/",
+    "checkedAt": "2026-11-01T14:26:05.717Z",
+    "http": 200,
+    "newSection": true,
+    "canonical": "https://cobblestar-mc.fr/installer-cobblemon/",
+    "sitemapModified": "2026-11-01",
+    "h1": 1,
+    "gameModChanged": false,
+    "sitemapUrls": 1057,
+    "mobile": {
+      "at": "2026-11-01T14:20:17.628Z",
+      "brokenLoadedImages": [],
+      "documentWidth": 375,
+      "h1": 1,
+      "headingTop": 109.78125,
+      "path": "/installer-cobblemon/",
+      "viewport": 390,
+      "limits": "Émulation navigateur du guide uniquement ; pas de mesure Core Web Vitals terrain."
+    },
+    "requestIndexing": {
+      "url": "https://cobblestar-mc.fr/installer-cobblemon/",
+      "acceptedAt": "2026-11-01T14:06:47.073Z",
+      "status": "accepted_priority_crawl_queue",
+      "note": "La page était déjà indexée. Demande après ajout réel de contenu ; aucune garantie de délai ni de position."
+    },
+    "screenshot": "outputs/seo-2026-11-01/guide-mrpack-en-ligne.png",
+    "scope": "Guide et dates associées publiés ; aucune modification des comptes, API, bot ou administration."
+  },
+  "google": {
+    "report": "mots-cles-google-2026-11-01T13-56-37Z.json",
+    "tracked": 46,
+    "verified": 41,
+    "present": 22,
+    "notObserved": 19,
+    "unverified": 5,
+    "brandOrganicRank": null,
+    "unverifiedQueries": [
+      "cosmedex cobblestar",
+      "pokemon star cobblestar",
+      "pokédex cobblemon français",
+      "cobblemon évolution évoli",
+      "où trouver riolu cobblemon"
+    ],
+    "focus": [
+      {
+        "query": "cobblemon fr",
+        "target": "/",
+        "checkedAt": "2026-11-01T13:56:37.151Z",
+        "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20fr",
+        "status": "non_observe_premiere_page",
+        "correctionCheck": "aucune_correction_observee",
+        "correctionLines": [],
+        "observedPages": [],
+        "observedOrganicRank": null,
+        "otherObservedResults": [
+          {
+            "title": "Cobblemoon: Accueil",
+            "url": "https://cobblemoon.fr/"
+          },
+          {
+            "title": "Accueil • Cobblemon Ultra FR • Serveur Minecraft Pokémon",
+            "url": "https://cobblemon-ultra.fr/"
+          },
+          {
+            "title": "Tropimon | TROPIMON • Serveur Cobblemon FR Nº1",
+            "url": "https://tropimon.fr/"
+          },
+          {
+            "title": "Cobblemon Academy: Accueil",
+            "url": "https://cobblemon-academy.fr/"
+          },
+          {
+            "title": "Serveur Cobblemon | Liste de Serveur Minecraft",
+            "url": "https://www.serveursminecraft.org/serveur/7260/"
+          },
+          {
+            "title": "Cobblemon Servers",
+            "url": "https://cobblemon.com/en/servers"
+          },
+          {
+            "title": "[ SERVEUR COBBLEMON FR ] Venez nous rejoindre !",
+            "url": "https://www.youtube.com/watch?v=CuMbSCtXD2k"
+          },
+          {
+            "title": "Serveur Cobblemon Minecraft FR - Arceus Academy",
+            "url": "https://arceusacademy.fr/"
+          },
+          {
+            "title": "Top 10 serveurs Cobblemon français 2026 : comparatif et ...",
+            "url": "https://pixelmongo.fr/news/top-10-serveurs-cobblemon-francais-2026-comparatif-guide"
+          }
+        ],
+        "comparison": {
+          "previousValidObservation": {
+            "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+            "date": "2026-10-31",
+            "status": "non_observe_premiere_page",
+            "pages": []
+          },
+          "status": "comparable_avec_limites",
+          "enteredPages": [],
+          "exitedPages": null,
+          "previousPagesNotSeenInCurrentTitleExtraction": [],
+          "limits": "Le relevé courant compte les liens titrés des résultats Web, hors annonces et aperçu IA. Un ancien sitelink absent de cette extraction ne constitue pas une sortie confirmée. Aucun changement de rang n’est déduit."
+        }
+      },
+      {
+        "query": "minecraft pokemon",
+        "target": "/minecraft-pokemon/",
+        "checkedAt": "2026-11-01T13:57:06.757Z",
+        "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=minecraft%20pokemon",
+        "status": "non_observe_premiere_page",
+        "correctionCheck": "aucune_correction_observee",
+        "correctionLines": [],
+        "observedPages": [],
+        "observedOrganicRank": null,
+        "otherObservedResults": [
+          {
+            "sponsored": false,
+            "title": "PokeIsland: Accueil",
+            "url": "https://pokeisland.fr/"
+          },
+          {
+            "sponsored": false,
+            "title": "Cobblemon - Le Mod Pokémon Ultime sur Minecraft (1.21.1)",
+            "url": "https://minecraft.fr/cobblemon-mod-pokemon-minecraft/"
+          },
+          {
+            "sponsored": false,
+            "title": "Minecraft Pixelmon",
+            "url": "https://www.youtube.com/playlist?list=PL2PKD3GfkdK8HKRUnvVZMfmUWwfZKBqL8"
+          },
+          {
+            "sponsored": false,
+            "title": "Breaking a Block = a Pokémon in Minecraft..YouTube · MinocIl y a 2 semaines",
+            "url": "https://www.youtube.com/watch?v=gpHdHlLoXLE"
+          },
+          {
+            "sponsored": false,
+            "title": "100 JOURS Avec des POKEMON sur Minecraft..YouTube · Dart10 avr. 2026",
+            "url": "https://www.youtube.com/watch?v=OMa0mJaEloY"
+          },
+          {
+            "sponsored": false,
+            "title": "I Caught Every Pokémon in Cobblemon on Minecraft..YouTube · MinocIl y a 1 mois",
+            "url": "https://www.youtube.com/watch?v=D5FoWBh9HZo"
+          },
+          {
+            "sponsored": false,
+            "title": "Pixelmon Mod for Minecraft PE - Google Play",
+            "url": "https://play.google.com/store/apps/details?id=info.pixelmonster.pokcraft.mcpe&hl=fr"
+          },
+          {
+            "sponsored": false,
+            "title": "Le Nouveau Meilleur Mod Pokemon Minecraft",
+            "url": "https://www.youtube.com/watch?v=qDOznu4Ytwk"
+          },
+          {
+            "sponsored": false,
+            "title": "Quelle est la meilleure façon de jouer à Pokémon dans ...",
+            "url": "https://www.reddit.com/r/feedthebeast/comments/1j4xwly/whats_the_best_way_to_play_pokemon_in_mc/?tl=fr"
+          },
+          {
+            "sponsored": false,
+            "title": "Quel est le Meilleur Mod Pokémon sur Minecraft en 2025 ?",
+            "url": "https://pixelmongo.fr/news/pixelmonvscobblemon"
+          }
+        ],
+        "comparison": {
+          "previousValidObservation": {
+            "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+            "date": "2026-10-31",
+            "status": "non_observe_premiere_page",
+            "pages": []
+          },
+          "status": "comparable_avec_limites",
+          "enteredPages": [],
+          "exitedPages": null,
+          "previousPagesNotSeenInCurrentTitleExtraction": [],
+          "limits": "Le relevé courant compte les liens titrés des résultats Web, hors annonces et aperçu IA. Un ancien sitelink absent de cette extraction ne constitue pas une sortie confirmée. Aucun changement de rang n’est déduit."
+        }
+      }
+    ]
+  },
+  "searchConsole": {
+    "report": "search-console-2026-11-01T13-56-37Z.json",
+    "global": {
+      "checkedAt": "2026-11-01T13:57:27.448Z",
+      "periodStart": "2026-10-25",
+      "periodEnd": "2026-10-30",
+      "selectedRange": "3 months",
+      "searchType": "Web",
+      "country": "All countries",
+      "clicks": 1,
+      "impressions": 117,
+      "ctrPercent": 0.9,
+      "averagePosition": 6.7,
+      "lastUpdate": "11 hours ago",
+      "queryTable": "Top queries\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition\n\nmode pokemon minecraft\t0\t2\t0%\t33.0\nmordudor cobblemon\t0\t1\t0%\t5.0\nmeltan cobblemon evolution\t0\t1\t0%\t7.0\nhoundstone cobblemon\t0\t1\t0%\t9.0\nverpom cobblemon\t0\t1\t0%\t10.0\nmine craft pokemon\t0\t1\t0%\t29.0\nevolution coconfort\t0\t1\t0%\t42.0\ncobblemon minecraft\t0\t1\t0%\t47.0\nbriochien pokemon\t0\t1\t0%\t70.0"
+    },
+    "france": {
+      "checkedAt": "2026-11-01T13:58:22.461Z",
+      "periodStart": "2026-10-25",
+      "periodEnd": "2026-10-30",
+      "country": "France",
+      "searchType": "Web",
+      "clicks": 1,
+      "impressions": 110,
+      "ctrPercent": 0.9,
+      "averagePosition": 5.3,
+      "queryTable": "Top queries\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition\n\nmode pokemon minecraft\t0\t2\t0%\t33.0\nmordudor cobblemon\t0\t1\t0%\t5.0\nmeltan cobblemon evolution\t0\t1\t0%\t7.0\nhoundstone cobblemon\t0\t1\t0%\t9.0\nverpom cobblemon\t0\t1\t0%\t10.0\nmine craft pokemon\t0\t1\t0%\t29.0\nevolution coconfort\t0\t1\t0%\t42.0\ncobblemon minecraft\t0\t1\t0%\t47.0",
+      "pageTable": "Top pages\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition\n\nhttps://cobblestar-mc.fr/minecraft-pokemon/\t0\t4\t0%\t35.5\nhttps://cobblestar-mc.fr/wiki/pokedex/gimmighoul/\t0\t1\t0%\t5.0\nhttps://cobblestar-mc.fr/wiki/pokedex/meltan/\t0\t1\t0%\t7.0\nhttps://cobblestar-mc.fr/wiki/pokedex/houndstone/\t0\t1\t0%\t9.0\nhttps://cobblestar-mc.fr/wiki/pokedex/applin/\t0\t1\t0%\t10.0\nhttps://cobblestar-mc.fr/wiki/pokedex/kakuna/\t0\t1\t0%\t42.0",
+      "minecraftPage": {
+        "url": "https://cobblestar-mc.fr/minecraft-pokemon/",
+        "clicks": 0,
+        "impressions": 4,
+        "ctrPercent": 0,
+        "averagePosition": 35.5,
+        "scope": "Page, all queries combined; France, 2026-10-25 to 2026-10-30. Not the exact query rank."
+      }
+    },
+    "exactQueries": [
+      {
+        "query": "cobblemon fr",
+        "matching": "Exact query",
+        "country": "France",
+        "checkedAt": "2026-11-01T13:59:26.404Z",
+        "periodStart": "2026-10-25",
+        "periodEnd": "2026-10-30",
+        "clicks": 0,
+        "impressions": 0,
+        "ctrPercent": null,
+        "averagePosition": null,
+        "displayedAveragePosition": "0",
+        "table": "Top queries\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition",
+        "interpretation": "No data : aucune position mesurable, pas une position zéro."
+      },
+      {
+        "query": "minecraft pokemon",
+        "matching": "Exact query",
+        "country": "France",
+        "checkedAt": "2026-11-01T14:01:19.856Z",
+        "periodStart": "2026-10-25",
+        "periodEnd": "2026-10-30",
+        "clicks": 0,
+        "impressions": 0,
+        "ctrPercent": null,
+        "averagePosition": null,
+        "displayedAveragePosition": "0",
+        "table": "Top queries\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition",
+        "interpretation": "No data : aucune position mesurable, pas une position zéro."
+      }
+    ],
+    "indexing": {
+      "checkedAt": "2026-11-01T13:59:33.140Z",
+      "status": "processing",
+      "evidence": "Browser tab: 16, Title: \"Page indexing\", URL: \"https://search.google.com/search-console/index?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F\".\nThe focused UI element is 0 AXWebArea Page indexing, URL: search.google.com/search-console/index?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F"
+    },
+    "inspections": [
+      {
+        "url": "https://cobblestar-mc.fr/minecraft-pokemon/",
+        "checkedAt": "2026-11-01T14:02:45.659Z",
+        "indexed": true,
+        "evidence": "URL is on Google — Page is indexed"
+      },
+      {
+        "url": "https://cobblestar-mc.fr/installer-cobblemon/",
+        "checkedAt": "2026-11-01T14:03:29.260Z",
+        "indexed": true,
+        "evidence": "\t\t\t\t\t\t66 text URL is on Google\n\t\t\t\t\t75 button (collapsed) Page indexing Page is indexed, Secondary Actions: Expand\n\t\t\t\t\t\t77 text Page is indexed",
+        "lastCrawlDisplayed": "Oct 28, 2026, 3:47:39 PM"
+      }
+    ],
+    "cumulativeComparison": {
+      "previousReport": "search-console-2026-10-31T11-45-54Z.json",
+      "previousPeriodEnd": "2026-10-29",
+      "currentPeriodEnd": "2026-10-30",
+      "previousImpressions": 59,
+      "currentImpressions": 117,
+      "addedImpressions": 58,
+      "limits": "Périodes cumulées de fins différentes : ce n’est pas une comparaison de semaines ni une tendance de positions à périmètre constant."
+    }
+  },
+  "priorities": [
+    {
+      "priority": "P1",
+      "pages": [
+        "/",
+        "/minecraft-pokemon/"
+      ],
+      "action": "Poursuivre le suivi des deux intentions généralistes : aucune présence Web de première page ni position exacte exploitable ce jour."
+    },
+    {
+      "priority": "P1",
+      "pages": [
+        "/installer-cobblemon/"
+      ],
+      "action": "Vérifier ultérieurement une nouvelle date d’exploration après la demande acceptée, sans soumettre plusieurs fois."
+    },
+    {
+      "priority": "P2",
+      "pages": [
+        "/wiki/cosmedex/",
+        "/wiki/pokemon-star/",
+        "/wiki/pokedex/",
+        "/wiki/pokedex/eevee/",
+        "/wiki/pokedex/riolu/"
+      ],
+      "action": "Reprendre les cinq expressions non vérifiées lors du prochain relevé autorisé, sans contourner le CAPTCHA."
+    }
+  ],
+  "preserved": [
+    "Préouverture",
+    "Téléchargement du launcher désactivé",
+    "PokéPark absent",
+    "Comptes, API, bot et administration"
+  ],
+  "publishedThisRun": [
+    "/installer-cobblemon/"
+  ]
+}
