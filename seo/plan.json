@@ -220,9 +220,11 @@
     "Contrôler les liens externes utiles et les informations des annuaires sans spam ni achat de liens."
   ],
   "nextPriorities": [
-    "Ajouter de vraies captures du spawn, des raids et de la pension, puis une vidéo de gameplay fournie ou capturée sur une instance accessible. Le propriétaire confirme ne pas avoir ces médias au 26 octobre 2026.",
-    "Vérifier que le statut de préouverture et le téléchargement désactivé restent cohérents avant toute modification.",
-    "Recueillir les premières données Search Console et les questions des joueurs avant de choisir les prochains guides."
+    "Suivre la stratégie d’acquisition française : seo/reports/strategie-acquisition-fr-2026-11-01T16-30-07Z.json ; distinguer recherche de serveur, découverte du mod et guides.",
+    "Rendre les prérequis, différences de jeu et état de préouverture visibles tôt sur l’accueil sans retirer la DA ni la boutique.",
+    "Préparer des preuves authentiques du gameplay propre à CobbleStar, avec publication conditionnée à la disponibilité des médias et d’une instance accessible.",
+    "Enrichir les premiers pas et les contenus existants d’après des questions et données réelles, sans dupliquer les pages pour les variantes de mots-clés.",
+    "Comparer les groupes Search Console France avec des périodes complètes et conserver les mesures Google ponctuelles séparées."
   ],
   "publicationRules": [
     "Ne pas modifier artificiellement les dates.",
@@ -523,5 +525,22 @@
       "où trouver riolu cobblemon"
     ],
     "status": "partial_captcha"
+  },
+  "acquisitionStrategy": {
+    "updatedAt": "2026-11-01T16:33:15.838Z",
+    "report": "seo/reports/strategie-acquisition-fr-2026-11-01T16-30-07Z.json",
+    "readableReport": "seo/reports/strategie-acquisition-fr-2026-11-01T16-30-07Z.html",
+    "primaryIntent": "Choisir un serveur Cobblemon francophone",
+    "primaryLandingPage": "/",
+    "volumeStatus": "not_measured",
+    "rankingGuarantee": false,
+    "firstActions": [
+      "A1",
+      "A2",
+      "A3",
+      "A5",
+      "A9"
+    ],
+    "executionStatus": "planned_not_published"
   }
 }

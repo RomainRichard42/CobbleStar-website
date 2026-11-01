@@ -1,0 +1,490 @@
+{
+  "date": "2026-11-01",
+  "createdAt": "2026-11-01T16:33:15.838Z",
+  "site": "https://cobblestar-mc.fr",
+  "objective": "Faire de CobbleStar une référence pour choisir un serveur Cobblemon francophone et viser la première place sur les recherches correspondantes ; attirer des joueurs qui pourront réellement rejoindre le serveur.",
+  "status": "Recherche réalisée et stratégie enregistrée. Actions éditoriales proposées, pas de nouvelle publication publique dans cette étape.",
+  "method": {
+    "googleBaseline": "seo/reports/mots-cles-google-2026-11-01T13-56-37Z.json",
+    "googleScope": "Relevé Google France réalisé plus tôt le même jour dans le navigateur, avec hl=fr, gl=fr et pws=0. Il reste daté de sa collecte : aucune nouvelle vérification Google n’est simulée.",
+    "documentarySearch": "Recherches web documentaires complémentaires et lecture des sites de serveurs, d’une discussion francophone et de la documentation Google. Leur ordre n’est pas un classement Google France.",
+    "exactDocumentaryQueries": [
+      "serveur cobblemon fr",
+      "meilleur serveur cobblemon français",
+      "cobblemon fr",
+      "minecraft pokemon",
+      "serveur cobblemon sans pay to win français",
+      "serveur cobblemon ip français",
+      "serveur cobblemon français survie",
+      "minecraft pokemon mod français cobblemon"
+    ],
+    "marketMonthlyVolumes": null,
+    "keywordDemandOrder": null,
+    "organicDifficultyScore": null,
+    "priorityRule": "Priorité qualitative selon la proximité avec le choix d’un serveur, l’adéquation au produit et la possibilité d’apporter une réponse vérifiée. Aucun ordre de popularité n’est revendiqué.",
+    "limits": [
+      "Aucun export Keyword Planner France ni outil de volumes accessible dans cette étude. Search Console mesure la visibilité de CobbleStar, pas toutes les recherches du marché.",
+      "Les résultats web documentaires ne remplacent pas un relevé de première page Google géolocalisé.",
+      "Le CAPTCHA rencontré au relevé précédent n’a pas été contourné ; aucune des cinq expressions bloquées n’est déclarée vérifiée ici.",
+      "Les affirmations et chiffres commerciaux des concurrents sont des déclarations de leurs sites, pas des mesures indépendantes."
+    ]
+  },
+  "baseline": {
+    "periodStart": "2026-10-25",
+    "periodEnd": "2026-10-30",
+    "global": {
+      "clicks": 1,
+      "impressions": 117
+    },
+    "france": {
+      "clicks": 1,
+      "impressions": 110
+    },
+    "exactQueries": [
+      {
+        "query": "cobblemon fr",
+        "averagePosition": null,
+        "impressions": 0
+      },
+      {
+        "query": "minecraft pokemon",
+        "averagePosition": null,
+        "impressions": 0
+      }
+    ],
+    "priorityGoogle": [
+      {
+        "query": "serveur cobblemon français",
+        "status": "non_observe_premiere_page",
+        "observedPages": []
+      },
+      {
+        "query": "serveur cobblemon fr",
+        "status": "non_observe_premiere_page",
+        "observedPages": []
+      },
+      {
+        "query": "cobblemon fr",
+        "status": "non_observe_premiere_page",
+        "observedPages": []
+      },
+      {
+        "query": "minecraft pokemon",
+        "status": "non_observe_premiere_page",
+        "observedPages": []
+      }
+    ],
+    "limits": "Six jours disponibles ; pas de comparaison hebdomadaire complète avec la semaine précédente. La moyenne de toutes les recherches ne représente pas le rang des expressions prioritaires."
+  },
+  "keywordGroups": [
+    {
+      "priority": "P1",
+      "intent": "Choisir un serveur où jouer",
+      "queries": [
+        "serveur cobblemon fr",
+        "serveur cobblemon français",
+        "serveur cobblemon",
+        "cobblemon fr",
+        "serveur minecraft pokemon français"
+      ],
+      "target": "/",
+      "evidence": "Des pages de serveurs et listes spécialisées sont présentes dans le relevé Google du jour.",
+      "work": "Garder une seule page principale pour ces variantes ; expliquer rapidement le style de jeu, les prérequis, les différences vérifiables et la préouverture."
+    },
+    {
+      "priority": "P1",
+      "intent": "Comparer avant de rejoindre",
+      "queries": [
+        "meilleur serveur cobblemon fr",
+        "meilleur serveur cobblemon français",
+        "serveur cobblemon survie",
+        "serveur cobblemon avec arènes",
+        "serveur cobblemon avec raids"
+      ],
+      "target": "/minecraft-pokemon/#choisir-serveur",
+      "evidence": "Discussions francophones de choix entre serveurs et pages comparatives observées. Les variantes de fonctionnalités sont des pistes, pas des volumes validés.",
+      "work": "Renforcer le comparatif de critères existant avec des exemples CobbleStar vérifiables ; ne pas créer un faux classement indépendant où nous nous attribuons la première place."
+    },
+    {
+      "priority": "P1",
+      "intent": "Obtenir l’accès et le bon pack",
+      "queries": [
+        "comment rejoindre un serveur cobblemon",
+        "ip serveur cobblemon fr",
+        "installer cobblemon serveur fr",
+        "launcher cobblemon fr"
+      ],
+      "target": "/rejoindre/",
+      "support": "/installer-cobblemon/",
+      "evidence": "IP, version et installation sont mises en avant sur les pages de serveurs ; la recherche de launcher est formulée dans une discussion francophone.",
+      "work": "Réserver la connexion à /rejoindre/ et l’installation générale à /installer-cobblemon/. L’accès public et le launcher restent fermés avant l’annonce officielle."
+    },
+    {
+      "priority": "P2",
+      "intent": "Découvrir Pokémon dans Minecraft",
+      "queries": [
+        "minecraft pokemon",
+        "pokemon minecraft",
+        "mod pokemon minecraft",
+        "comment jouer à pokemon sur minecraft",
+        "cobblemon ou pixelmon"
+      ],
+      "target": "/minecraft-pokemon/",
+      "evidence": "Le relevé Google présente des vidéos, articles sur les mods, discussions et plusieurs solutions concurrentes, au-delà des serveurs Cobblemon.",
+      "work": "Expliquer clairement Java, le mod, les packs, le solo et le multijoueur ; proposer ensuite le parcours vers un serveur francophone. Cette intention est plus large que le recrutement direct."
+    },
+    {
+      "priority": "P2",
+      "intent": "Débuter et progresser",
+      "queries": [
+        "débuter cobblemon",
+        "quel starter cobblemon",
+        "évolution évoli cobblemon",
+        "où trouver riolu cobblemon",
+        "élevage cobblemon"
+      ],
+      "target": "/wiki/welcome/",
+      "supports": [
+        "/wiki/capture/",
+        "/wiki/daycare/",
+        "/wiki/pokedex/eevee/",
+        "/wiki/pokedex/riolu/"
+      ],
+      "evidence": "Premières impressions mesurées sur des évolutions et plusieurs fiches ; demandes débutants et contenus correspondants observés. Cela ne prouve pas le volume de ces cinq expressions précises.",
+      "work": "Enrichir les pages existantes, relier la réponse à la fiche utile et au contexte serveur ; distinguer les mécaniques générales des réglages CobbleStar."
+    }
+  ],
+  "conditionalQueries": [
+    {
+      "query": "serveur cobblemon gratuit",
+      "condition": "Confirmer précisément les conditions d’accès au serveur ; distinguer accès, licence Minecraft et achats optionnels."
+    },
+    {
+      "query": "serveur cobblemon sans pay to win",
+      "condition": "Ne revendiquer cette promesse qu’après examen de tous les avantages et récompenses payants. Une recherche observée ne rend pas la promesse vraie."
+    },
+    {
+      "query": "serveur cobblemon sans whitelist",
+      "condition": "Uniquement si le mode d’accès est confirmé à l’ouverture."
+    }
+  ],
+  "unsuitableQueries": [
+    {
+      "queries": [
+        "serveur cobblemon cracké",
+        "cobblemon bedrock",
+        "cobblemon mobile"
+      ],
+      "reason": "L’accès présenté pour CobbleStar exige Minecraft Java avec licence. Répondre aux questions de compatibilité sans promettre une prise en charge inexistante."
+    },
+    {
+      "queries": [
+        "héberger un serveur cobblemon",
+        "créer un serveur cobblemon"
+      ],
+      "reason": "L’intention est l’administration d’un serveur, pas la recherche d’une communauté où jouer."
+    },
+    {
+      "queries": [
+        "Pokérayou",
+        "Cobblemon Academy"
+      ],
+      "reason": "Demandes de marque ou de pack spécifique : ne pas laisser croire que CobbleStar est ce projet ou que les packs sont interchangeables."
+    }
+  ],
+  "competitorReview": [
+    {
+      "name": "Tropimon",
+      "url": "https://tropimon.fr/",
+      "googleObservedFor": [
+        "serveur cobblemon fr",
+        "cobblemon fr"
+      ],
+      "observation": "Le site présente son ancienneté, son univers, des ajouts propres au serveur, ses actualités et le launcher.",
+      "lesson": "Montrer un produit identifié et son évolution. Sa formule « numéro 1 » n’est pas une preuve de rang."
+    },
+    {
+      "name": "Cobblemon Ultra",
+      "url": "https://cobblemon-ultra.fr/",
+      "googleObservedFor": [
+        "serveur cobblemon fr",
+        "cobblemon fr"
+      ],
+      "observation": "Les activités, le parcours communautaire et les mises à jour ont une place claire.",
+      "lesson": "Accompagner chaque système annoncé d’une explication utile et de nouvelles réelles."
+    },
+    {
+      "name": "Pixelax",
+      "url": "https://modrinth.com/server/pixelax-cobblemon-fr",
+      "googleObservedFor": [
+        "serveur cobblemon fr"
+      ],
+      "observation": "La fiche de serveur Modrinth associe langue, contenu requis, adresse et liens du projet.",
+      "lesson": "Préparer des fiches cohérentes sur les plateformes pertinentes, après examen de leurs conditions et lorsque le serveur est accessible."
+    },
+    {
+      "name": "Cobblemon Academy",
+      "url": "https://cobblemon-academy.fr/",
+      "googleObservedFor": [
+        "cobblemon fr"
+      ],
+      "observation": "La page articule saison en cours, installation, systèmes de jeu et accès à la communauté.",
+      "lesson": "Une visite doit déboucher sur un parcours compréhensible, avec une action compatible avec le statut du serveur."
+    },
+    {
+      "name": "PlasmaCube",
+      "url": "https://plasmacube.fr/",
+      "googleObservedFor": [],
+      "observation": "Les guides et le parcours pour rejoindre accompagnent la présentation du serveur.",
+      "lesson": "Faire circuler le lecteur d’un guide vers la découverte puis la connexion ; aucune position Google n’est attribuée ici."
+    },
+    {
+      "name": "Top-Serveurs",
+      "url": "https://top-serveurs.net/minecraft/type/cobblemon",
+      "googleObservedFor": [
+        "serveur cobblemon fr",
+        "serveur cobblemon français"
+      ],
+      "observation": "La catégorie Cobblemon propose une sélection de serveurs et des fiches d’accès.",
+      "lesson": "Canal d’acquisition distinct : le classement par votes n’est pas le classement Google. Aucun vote artificiel."
+    },
+    {
+      "name": "Cobblemoon",
+      "url": "https://cobblemoon.fr/",
+      "googleObservedFor": [
+        "serveur cobblemon fr",
+        "cobblemon fr"
+      ],
+      "observation": "URL observée dans le relevé Google du jour ; lecture documentaire bloquée par HTTP 403.",
+      "lesson": "Ne pas inventer une analyse détaillée de la page inaccessible."
+    }
+  ],
+  "diagnosis": {
+    "alreadyPresent": [
+      "HTML public rendu par Astro",
+      "Titres, descriptions, H1 et canonical sur les pages contrôlées",
+      "Sitemap et guides indexables",
+      "Guides installation et Minecraft Pokémon confirmés indexés",
+      "FAQ et tableau de critères pour choisir un serveur déjà présents",
+      "Liens entre accueil, guides, rejoindre, wiki et fiches Pokémon"
+    ],
+    "verifiedGaps": [
+      "Les requêtes généralistes prioritaires ne montraient pas CobbleStar en première page lors du relevé Google du jour.",
+      "La période Search Console est encore trop courte pour attribuer un effet aux changements récents.",
+      "Le site annonce une préouverture : il ne satisfait pas encore le besoin de jouer immédiatement.",
+      "Les illustrations Cobblemon actuelles ne constituent pas une preuve du gameplay propre à CobbleStar."
+    ],
+    "hypothesesToTest": [
+      "Les éléments pratiques du choix de serveur arrivent tard dans la page d’accueil après les séquences animées : tester leur visibilité plus tôt, sans retirer la DA ni la boutique.",
+      "Des guides et outils originaux pourraient apporter des liens et recommandations utiles ; aucune mesure de popularité ou de backlinks n’a été faite ici.",
+      "Vérifier les conditions d’accès et la présentation des avantages payants avant de cibler les recherches portant sur la gratuité ou l’équilibre."
+    ]
+  },
+  "actions": [
+    {
+      "id": "A1",
+      "priority": "P0",
+      "window": "Semaine 1",
+      "effort": "0,5 à 1 jour",
+      "pages": [
+        "/",
+        "/rejoindre/"
+      ],
+      "action": "Remonter près de la présentation les informations de décision : français, Java 1.21.1/Fabric, style de jeu, trois différences concrètes et état de préouverture. Conserver le bouton boutique principal et un accès direct aux informations sans attendre une animation.",
+      "why": "Répondre immédiatement à la recherche de serveur sans promettre un accès ouvert.",
+      "success": "Un nouveau visiteur peut identifier le type de serveur, la compatibilité et le statut dès le début du parcours ; aucun blocage clavier ou mobile."
+    },
+    {
+      "id": "A2",
+      "priority": "P1",
+      "window": "Semaine 1 à 2",
+      "effort": "1 à 2 jours, dépend de l’accès à une instance",
+      "pages": [
+        "/",
+        "/wiki/raids/",
+        "/wiki/gts/",
+        "/wiki/daycare/"
+      ],
+      "action": "Préparer trois preuves du gameplay : captures du vrai serveur et courtes démonstrations d’un système propre à CobbleStar. Légendes factuelles et lien vers la règle correspondante ; différer la publication si aucun enregistrement n’est disponible.",
+      "why": "Donner des raisons vérifiables de choisir CobbleStar au-delà d’une liste de fonctionnalités.",
+      "success": "Trois médias authentiques identifiés et contextualisés, ou dépendance explicitement conservée ; aucun média du mod présenté comme capture du serveur."
+    },
+    {
+      "id": "A3",
+      "priority": "P1",
+      "window": "Semaine 2",
+      "effort": "1 jour",
+      "pages": [
+        "/wiki/welcome/",
+        "/wiki/capture/"
+      ],
+      "action": "Enrichir les guides existants de premiers pas : étapes vérifiées, commandes réellement disponibles, objectifs de la première session et erreurs courantes. Lier chaque étape au guide système ou à la fiche utile.",
+      "why": "Offrir une réponse originale au débutant plutôt qu’une nouvelle page répétant la présentation du mod.",
+      "success": "Parcours relu avec la configuration du serveur ; toutes les étapes sont vérifiables et les liens fonctionnent. Aucun nouveau guide doublon."
+    },
+    {
+      "id": "A4",
+      "priority": "P1",
+      "window": "Semaine 2 à 3",
+      "effort": "1 jour",
+      "pages": [
+        "/minecraft-pokemon/",
+        "/installer-cobblemon/",
+        "/rejoindre/"
+      ],
+      "action": "Développer les sections existantes utiles : choix du pack et compatibilité, comparaison factuelle Cobblemon/Pixelmon, installation illustrée et diagnostic des problèmes. Garder les périmètres de page distincts.",
+      "why": "Gagner la préférence sur les recherches de découverte puis faciliter le choix d’un serveur français.",
+      "success": "Chaque section apporte une réponse démontrée ou sourcée ; aucune version non vérifiée ni pack supposé compatible."
+    },
+    {
+      "id": "A5",
+      "priority": "P1",
+      "window": "Semaine 1 puis suivi hebdomadaire",
+      "effort": "0,5 jour initial puis 1 heure/semaine",
+      "pages": [
+        "/",
+        "/minecraft-pokemon/",
+        "/installer-cobblemon/",
+        "/wiki/",
+        "/wiki/pokedex/"
+      ],
+      "action": "Consolider le maillage existant : liens contextuels qui suivent découverte → guide utile → fiche ou système → rejoindre. Contrôler les pages réellement affichées par Google avant toute correction de cannibalisation.",
+      "why": "Aider la découverte et la navigation sans transformer tous les paragraphes en ancres optimisées.",
+      "success": "Pages stratégiques accessibles en un ou deux liens depuis l’accueil et une destination principale par intention ; aucun changement d’URL sans nécessité."
+    },
+    {
+      "id": "A6",
+      "priority": "P1",
+      "window": "Semaine 3 à 6, sous réserve d’ouverture",
+      "effort": "1 à 2 jours de préparation",
+      "pages": [
+        "/",
+        "/rejoindre/",
+        "/vote/"
+      ],
+      "action": "Vérifier les trois fiches de plateformes déjà autorisées, préparer une présentation et un kit de vrais visuels. Examiner l’éligibilité Modrinth et autres listes pertinentes. Préparer des sujets de démonstration pour des créateurs francophones ; aucun contact ni publication externe automatique.",
+      "why": "Développer une présence utile hors du domaine et des visites qualifiées, sans achat de liens ni promesse de transfert de classement.",
+      "success": "Fiches exactes et accessibles ; liste de partenaires potentiels et kit prêts. Les mentions, liens et visites ne sont comptés qu’après constat réel."
+    },
+    {
+      "id": "A7",
+      "priority": "P1",
+      "window": "Semaine 1 à 2 puis contrôle après chaque changement",
+      "effort": "0,5 à 1 jour",
+      "pages": [
+        "/",
+        "/wiki/pokedex/",
+        "/wiki/pokedex/eevee/",
+        "/boutique/"
+      ],
+      "action": "Mesurer les performances sur téléphone et ordinateur en distinguant laboratoire et données terrain ; surveiller le chargement initial, les interactions et le décalage des blocs. Garder les visuels et le texte HTML ; charger la 3D et les médias lourds à la demande.",
+      "why": "Permettre au visiteur de consulter le site sans gêne ; un score seul ne démontre pas un meilleur classement.",
+      "success": "Mesures reproductibles archivées avant/après, pas de régression mobile, visuels et contenu indexable conservés. Si données terrain disponibles : viser LCP ≤ 2,5 s, INP ≤ 200 ms et CLS ≤ 0,1 au 75e percentile ; ce sont des objectifs, pas des mesures actuelles."
+    },
+    {
+      "id": "A8",
+      "priority": "P2",
+      "window": "Semaine 3 à 6",
+      "effort": "0,5 à 1 jour par guide sélectionné",
+      "pages": [
+        "/wiki/pokedex/",
+        "/wiki/pokedex/eevee/",
+        "/wiki/pokedex/riolu/",
+        "/collection/"
+      ],
+      "action": "Choisir quelques réponses à approfondir à partir des impressions et questions réelles : évolutions, apparitions, capture et préparation d’équipe. Relier les fiches à Ma collection sans exposer les données personnelles.",
+      "why": "Le Pokédex et la collection peuvent devenir des outils que les joueurs gardent et recommandent.",
+      "success": "Chaque amélioration répond à une question précise, avec données serveur vérifiées et liens utiles ; aucun nombre de pages publié comme indicateur de réussite."
+    },
+    {
+      "id": "A9",
+      "priority": "P1",
+      "window": "Dès maintenant, revue chaque lundi",
+      "effort": "30 à 60 minutes de décision hebdomadaire",
+      "pages": [
+        "Toutes les pages stratégiques"
+      ],
+      "action": "Séparer les groupes marque, choix de serveur, découverte du mod et guides ; suivre impressions, clics, requêtes et pages en France, mobile/ordinateur. Comparer 7 jours complets et 28 jours seulement quand les deux périodes existent.",
+      "why": "Piloter selon des résultats comparables plutôt que des recherches manuelles répétées ou une moyenne globale flatteuse.",
+      "success": "Rapport daté indiquant périodes, filtres, décalage des données et actions réellement publiées. Une expression sans données reste sans position mesurable."
+    },
+    {
+      "id": "A10",
+      "priority": "P2",
+      "window": "Lorsqu’un export de volumes est disponible",
+      "effort": "0,5 jour",
+      "pages": [
+        "Plan éditorial"
+      ],
+      "action": "Compléter les familles avec un export historique Keyword Planner ciblé France. Conserver dates, réseau, langue et groupes de variantes ; séparer concurrence publicitaire et difficulté organique. Ne pas activer de campagne pour cette étude.",
+      "why": "Valider le potentiel de demande au lieu d’affirmer sans preuve quel mot-clé est le plus recherché.",
+      "success": "Table de volumes sourcés ou fourchettes datées, non additionnées lorsque les variantes proches se recouvrent ; sinon volumes maintenus à null."
+    }
+  ],
+  "milestones": [
+    {
+      "horizon": "7 jours",
+      "criterion": "Plan, pages cibles et mesures de référence stabilisés ; corrections P0 et première réponse utile testées.",
+      "type": "Livrable contrôlable, sans promesse de rang."
+    },
+    {
+      "horizon": "30 jours",
+      "criterion": "Examiner les premières impressions et requêtes hors marque par groupe, les pages choisies par Google et les premiers clics. Réorienter si le trafic concerne surtout des besoins incompatibles.",
+      "type": "Point de décision ; progression non garantie."
+    },
+    {
+      "horizon": "60 à 90 jours",
+      "criterion": "Évaluer la progression vers top 10, puis top 3, puis première place sur le groupe serveur. Vérifier récurrence des observations et moyennes Search Console avant de déclarer une position acquise.",
+      "type": "Objectif de progression, pas échéance de résultat."
+    }
+  ],
+  "operatingRules": [
+    "En cas d’impressions absentes, contrôler l’indexation de la page concernée avant de réécrire son titre.",
+    "Si une page est indexée mais reste peu visible, approfondir l’utilité et la preuve du contenu ; ne pas demander son indexation chaque jour.",
+    "Si deux pages apparaissent pour la même requête, examiner leurs intentions et la stabilité du phénomène ; ce n’est pas automatiquement une cannibalisation.",
+    "N’évaluer le CTR d’un groupe qu’avec un volume interprétable et une position comparable. Un seuil interne de 100 impressions peut servir de point de départ, pas de règle Google.",
+    "Une hausse des impressions cumulées ne démontre pas une progression de rang.",
+    "Search Console ne mesure pas les clics sortants vers Discord ni l’inscription d’un joueur. Sans attribution existante, ces conversions restent non mesurées ; aucun traceur n’est ajouté.",
+    "Répéter les contrôles demandés, mais consacrer la majorité du travail à des améliorations utiles et vérifiées."
+  ],
+  "constraints": [
+    "Préouverture conservée",
+    "Launcher indisponible avant l’ouverture",
+    "Pas de PokéPark",
+    "Boutique principale conservée",
+    "Comptes, API, bot et administration préservés",
+    "Aucun contact ni campagne externe",
+    "Aucun traceur",
+    "Pas de pages quasi identiques, avis inventés, classements autoattribués ni dates rafraîchies sans modification réelle"
+  ],
+  "sources": [
+    {
+      "url": "https://www.reddit.com/r/cobblemon/comments/1sxx1rb/quel_est_le_meilleur_serveur_francophone_entre/",
+      "supports": "Exemple direct de demande francophone de comparaison de serveurs ; pas une mesure représentative du marché."
+    },
+    {
+      "url": "https://www.reddit.com/r/cobblemon/comments/1ttw4ya/french_je_recherche_un_serveur_sur_le_launcher/",
+      "supports": "Exemple de demande portant sur un serveur et un pack/launcher spécifiques."
+    },
+    {
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "supports": "Contenus utiles, expérience originale et absence de longueur ou fréquence de publication magique."
+    },
+    {
+      "url": "https://developers.google.com/search/docs/essentials/spam-policies",
+      "supports": "Éviter pages satellites, liens manipulés et production répétitive visant les classements."
+    },
+    {
+      "url": "https://developers.google.com/search/docs/appearance/page-experience",
+      "supports": "Qualité mobile et performances ; de bons scores seuls ne garantissent pas les premières places."
+    },
+    {
+      "url": "https://support.google.com/google-ads/answer/3022575?hl=fr",
+      "supports": "Interprétation des volumes, regroupements de variantes et concurrence publicitaire."
+    },
+    {
+      "url": "https://web.dev/articles/vitals?hl=fr",
+      "supports": "Seuils et méthode des objectifs de performance terrain."
+    }
+  ]
+}
