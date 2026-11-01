@@ -3,6 +3,7 @@ import Layout from '../layouts/PublicLayout.astro';
 import Picture from '../components/Picture.astro';
 import '../styles/astral-home.css';
 import '../styles/home-pokemon.css';
+import '../styles/home-discovery.css';
 import {newsUrl,publishedNews,date,type PublicLocals} from '../lib/content';
 import {HOME_FAQ} from '../lib/faqs';
 const articles=await (Astro.locals as PublicLocals).getNews().then(n=>publishedNews(n).articles.slice(0,3)).catch(()=>[]);
@@ -44,12 +45,17 @@ const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HO
 <p class="opening-status">
 <span aria-hidden="true">✦</span> Serveur Cobblemon FR · Ouverture à venir</p>
 <h2>Ton équipe.<br>Ton aventure.</h2>
-<p>Un serveur Minecraft Pokémon en préparation : capture, construction et aventure entre dresseurs sur Asteria et Nébélia.</p>
+<p>Deux mondes à explorer, des Pokémon Star à collectionner et une équipe à faire progresser avec d’autres dresseurs.</p>
+<ul class="intro-requirements" aria-label="Pour jouer sur CobbleStar">
+<li>Minecraft Java 1.21.1 · Fabric</li>
+<li>Licence Minecraft requise</li>
+</ul>
 <div class="cinema-actions">
-<button type="button" class="btn gold" id="start-journey">Découvrir le serveur <span aria-hidden="true">→</span>
+<a class="btn gold" href="/rejoindre/">Préparer mon arrivée <span aria-hidden="true">→</span></a>
+<button type="button" class="btn outline" id="start-journey">Voir l’univers <span aria-hidden="true">→</span>
 </button>
-<a class="intro-skip" href="#mondes">Passer l’intro</a>
 </div>
+<a class="intro-skip" href="#choisir-cobblestar">L’essentiel du serveur <span aria-hidden="true">↓</span></a>
 </div>
 <img class="cinema-mascot" src="/astral/assets/logo.webp" alt="" aria-hidden="true" width="480" height="480">
 </section>
@@ -94,6 +100,37 @@ const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HO
 </section>
 </div>
 </div>
+</section>
+<section class="server-brief" id="choisir-cobblestar" aria-labelledby="server-brief-title">
+<div class="server-brief-heading">
+<h2 id="server-brief-title">Ta prochaine aventure.<br><span>Pourquoi CobbleStar ?</span></h2>
+<div><p>Un serveur Cobblemon français pour explorer, construire et préparer ton équipe avec d’autres joueurs.</p><p class="server-brief-status">L’ouverture publique est à venir. Tu peux déjà découvrir les règles et préparer tes captures.</p></div>
+</div>
+<div class="server-brief-features">
+<article>
+<img src="/collection-assets/mockups/daycare/poke_ball.png" width="48" height="48" alt="" loading="lazy">
+<h3>Deux mondes à explorer</h3>
+<p>Pars sur Astéria ou Nébélia, trouve un lieu pour ta base et découvre les territoires de club.</p>
+<a href="/wiki/mondes/">Explorer les mondes <span aria-hidden="true">↗</span></a>
+</article>
+<article>
+<img src="/collection-assets/interface/ultra-ball.png" width="48" height="48" alt="" loading="lazy">
+<h3>Une collection à toi</h3>
+<p>Pokémon classiques, apparences Star et formes régionales : prépare tes objectifs dans le Pokédex et Ma collection.</p>
+<a href="/wiki/pokemon-star/">Découvrir les Pokémon Star <span aria-hidden="true">↗</span></a>
+</article>
+<article>
+<img src="/collection-assets/interface/cobblemon-pc.png" width="48" height="48" alt="" loading="lazy">
+<h3>Des activités pour ton équipe</h3>
+<p>Échange au GTS, prépare un élevage à la pension et découvre les règles des raids en groupe.</p>
+<a href="/wiki/raids/">Comprendre les raids <span aria-hidden="true">↗</span></a>
+</article>
+</div>
+<nav class="server-first-steps" aria-label="Préparer son aventure">
+<div><strong>Tu découvres Cobblemon ?</strong><p>Commence par les repères utiles, puis choisis ta première capture.</p></div>
+<a href="/wiki/welcome/">Bien commencer sur CobbleStar <span aria-hidden="true">→</span></a>
+<a href="/wiki/capture/">Préparer une sortie de capture <span aria-hidden="true">→</span></a>
+</nav>
 </section>
 <section class="world-section" id="mondes">
 <div class="section-head">
@@ -297,6 +334,6 @@ const faqSchema={'@context':'https://schema.org','@type':'FAQPage',mainEntity:HO
 </span>
 </div>
 
-<script is:inline src="/astral/motion.js?v=player-audit-2" defer></script><script is:inline src="/astral/journey.js?v=floating-header-1" defer></script><script is:inline src="/astral/player.js?v=public-1" defer></script>
+<script is:inline src="/astral/motion.js?v=player-audit-2" defer></script><script is:inline src="/astral/journey.js?v=reading-target-1" defer></script><script is:inline src="/astral/player.js?v=public-1" defer></script>
 <script>import '../scripts/home-dragonite';</script>
 </Layout>

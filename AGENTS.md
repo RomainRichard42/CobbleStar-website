@@ -8,3 +8,4 @@ Le site s'adresse aux joueurs et aux visiteurs, jamais à Romain ni à l'agent q
 - Présenter honnêtement les informations manquantes sans transformer une absence de données en certitude. Préserver les conditions d'obtention et les limites utiles au joueur.
 - Conserver l'annonce de préouverture, le téléchargement du launcher désactivé et l'absence de PokéPark tant que Romain n'a pas confirmé de changement.
 - Les entrées de la collection « Créations CobbleStar » sont internes et doivent rester hors du Pokédex public.
+- Utiliser les vrais assets Cobblemon pour illustrer les parcours : Hyper Ball pour la collection, PC Cobblemon pour les activités. Ne plus réutiliser les icônes StarWatch, livre de connaissances, boussole ou terminal comme illustrations génériques. Les logos et visuels fournis par CobbleStar restent conservés.
