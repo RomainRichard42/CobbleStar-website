@@ -242,7 +242,7 @@
     "sitemap": "https://cobblestar-mc.fr/sitemap.xml",
     "sitemapStatus": "Success",
     "discoveredPages": 1057,
-    "performanceData": "Du 25 au 31 octobre, Web France, 3 clics et 183 impressions. Sept jours de mesures disponibles.",
+    "performanceData": "Mesures Web du 25 au 31 octobre 2026 ; 3 clics / 204 impressions tous pays, 3 / 183 en France. Pas de position mesurable pour les deux requêtes exactes prioritaires.",
     "homeIndexing": {
       "inspectedAt": "2026-10-26",
       "status": "Page is indexed — URL is on Google",
@@ -260,7 +260,7 @@
     },
     "sitemapResubmittedAt": "2026-10-26T21:20:01.893Z",
     "sitemapSubmissionResult": "Sitemap submitted successfully",
-    "discoveredPagesNote": "Le sitemap lu par Google le 1er novembre compte 1 057 pages découvertes. Les données de couverture restent en traitement.",
+    "discoveredPagesNote": "Décompte Search Console réellement consulté le 2 novembre : 1 057 pages découvertes ; ce n’est pas un nombre de pages indexées.",
     "wikiIndexing": {
       "url": "https://cobblestar-mc.fr/wiki/",
       "inspectedAt": "2026-10-26T21:20:01.894Z",
@@ -270,12 +270,62 @@
     },
     "latestMeasuredReport": "seo/reports/search-console-2026-11-02T12-38-00Z.json",
     "latestAccessAttempt": {
-      "at": "2026-11-02T12:40:37.962Z",
+      "at": "2026-11-02T12:47:01.862Z",
       "status": "available",
       "report": "seo/reports/search-console-2026-11-02T12-38-00Z.json"
     },
     "sitemapLastRead": "2026-11-01",
-    "sitemapCheckedAt": "2026-11-02"
+    "sitemapCheckedAt": "2026-11-02T12:47:01.862Z",
+    "latestInspections": [
+      {
+        "checkedAt": "2026-11-02T12:32:08.983Z",
+        "url": "https://cobblestar-mc.fr/wiki/pokedex/eevee/",
+        "indexed": true,
+        "status": "URL is on Google — Page is indexed",
+        "lastCrawlDisplayed": "Oct 29, 2026, 5:21:17 PM",
+        "canonicalMatchesInspectedUrl": true
+      },
+      {
+        "checkedAt": "2026-11-02T12:32:53.006Z",
+        "url": "https://cobblestar-mc.fr/wiki/pokedex/riolu/",
+        "indexed": true,
+        "status": "URL is on Google — Page is indexed",
+        "lastCrawlDisplayed": "Oct 29, 2026, 11:12:00 AM",
+        "canonicalMatchesInspectedUrl": true
+      },
+      {
+        "checkedAt": "2026-11-02T12:33:15.860Z",
+        "url": "https://cobblestar-mc.fr/wiki/welcome/",
+        "indexed": true,
+        "status": "URL is on Google — Page is indexed",
+        "lastCrawlDisplayed": "Oct 30, 2026, 2:35:42 AM",
+        "canonicalMatchesInspectedUrl": true
+      },
+      {
+        "checkedAt": "2026-11-02T12:33:47.968Z",
+        "url": "https://cobblestar-mc.fr/wiki/capture/",
+        "indexed": true,
+        "status": "URL is on Google — Page is indexed",
+        "lastCrawlDisplayed": "Oct 30, 2026, 2:41:05 AM",
+        "canonicalMatchesInspectedUrl": true
+      },
+      {
+        "checkedAt": "2026-11-02T12:34:01.026Z",
+        "url": "https://cobblestar-mc.fr/installer-cobblemon/",
+        "indexed": true,
+        "status": "URL is on Google — Page is indexed",
+        "lastCrawlDisplayed": null,
+        "canonicalMatchesInspectedUrl": null
+      },
+      {
+        "checkedAt": "2026-11-02T12:34:40.016Z",
+        "url": "https://cobblestar-mc.fr/minecraft-pokemon/",
+        "indexed": true,
+        "status": "URL is on Google — Page is indexed",
+        "lastCrawlDisplayed": "Oct 30, 2026, 2:20:14 PM",
+        "canonicalMatchesInspectedUrl": true
+      }
+    ]
   },
   "confirmedAvailability": {
     "date": "2026-10-26",
@@ -392,36 +442,18 @@
   },
   "currentReview": {
     "date": "2026-11-02",
-    "status": "published_verified",
-    "report": "seo/reports/audit-hebdomadaire-2026-11-02T12-46-36Z.json",
+    "status": "published_verified_technical_clean",
+    "report": "seo/reports/audit-hebdomadaire-2026-11-02T12-47-01.json",
     "technicalReport": "seo/reports/audit-2026-11-02T12-43-00Z-production.json",
-    "searchConsole": "seo/reports/search-console-2026-11-02T12-38-00Z.json",
-    "previousReview": {
-      "date": "2026-10-27",
-      "status": "validated_locally_pending_deployment",
-      "baseline": {
-        "pages": 47,
-        "guides": 34,
-        "links": 307,
-        "images": 27,
-        "errors": 0,
-        "warnings": 0
-      },
-      "searchConsole": "Non consultée ce jour : contrôle du navigateur bloqué. Ne pas extrapoler les chiffres précédents.",
-      "pageSpeed": "API mobile HTTP 429 le 27 octobre ; aucun score ou Core Web Vitals obtenu.",
-      "deployment": "À confirmer après redémarrage Kinetic ; ne pas considérer le push comme une mise en ligne.",
-      "localValidation": {
-        "pages": 47,
-        "guides": 33,
-        "links": 306,
-        "images": 27,
-        "maxClickDepth": 2,
-        "errors": 0,
-        "warnings": 0,
-        "testsPassed": 18,
-        "report": "seo/reports/audit-2026-10-27-after-local.json",
-        "visualMobile": "Non vérifié dans cette session : automatisation Firefox bloquée. Mise en page existante réutilisée."
-      }
+    "publicationReport": "seo/reports/publication-guide-2026-11-02T12-47-01.json",
+    "searchConsole": "Mesures Web du 25 au 31 octobre disponibles ; historique insuffisant pour une tendance 28 jours. Six URL inspectées indexées ; couverture globale en traitement.",
+    "pageSpeed": "CrUX : données d’usage insuffisantes sur mobile et ordinateur. Aucun score terrain.",
+    "validation": {
+      "publicTestsPassed": 36,
+      "publicTestsFailed": 0,
+      "errors": 0,
+      "warnings": 0,
+      "mobile": "Source publique vérifiée localement à 390 px ; guide publié vérifié sur ordinateur, limites dans le rapport."
     }
   },
   "recurringAudit": {
@@ -431,14 +463,14 @@
     "daily": true,
     "monday": "Audit approfondi et 5 à 10 actions priorisées",
     "localExecution": "Ordinateur allumé et application ouverte",
-    "latestReport": "seo/reports/audit-hebdomadaire-2026-11-02T12-46-36Z.json",
+    "latestReport": "seo/reports/audit-hebdomadaire-2026-11-02T12-47-01.json",
     "latestTechnicalReport": "seo/reports/audit-2026-11-02T12-43-00Z-production.json",
-    "updatedAt": "2026-11-02T12:46:36.576Z"
+    "updatedAt": "2026-11-02T12:47:01.862Z"
   },
   "latestKeywordResearch": {
     "report": "seo/reports/mots-cles-google-2026-11-02T12-38-00Z.json",
     "checkedAt": "2026-11-02T12:40:37.962Z",
-    "source": "Google consulté directement dans le navigateur",
+    "source": "Google France dans le navigateur intégré ; hl=fr, gl=fr, pws=0. Chargement terminé et liens titrés #rso h3 visibles ; hors annonces et aperçu IA. Aucun rang numérique attribué.",
     "queries": [
       "cobblemon fr",
       "minecraft pokemon",
@@ -562,7 +594,7 @@
     "frequency": "daily",
     "source": "queryMap[].queries",
     "latestReport": "seo/reports/mots-cles-google-2026-11-02T12-38-00Z.json",
-    "comparisonBaseline": "seo/reports/mots-cles-google-2026-11-01T13-56-37Z.json",
+    "comparisonBaseline": "Dernière observation exacte valide par expression, détaillée dans le rapport",
     "method": "Google France dans le navigateur intégré ; hl=fr, gl=fr, pws=0. Chargement terminé et liens titrés #rso h3 visibles ; hors annonces et aperçu IA. Aucun rang numérique attribué.",
     "unverifiedQueries": [
       "wiki cobblestar",
@@ -570,7 +602,7 @@
       "battle pass cobblestar",
       "cosmedex cobblestar"
     ],
-    "status": "partial_captcha_after_autocorrections"
+    "status": "all_46_searched_42_exact_verified_captcha_followup_stopped"
   },
   "acquisitionStrategy": {
     "updatedAt": "2026-11-01T16:33:15.838Z",
@@ -607,6 +639,76 @@
       "page": "https://cobblestar-mc.fr/minecraft-pokemon/",
       "commit": "2e6261fc74aba094e39ad85c5ed468f01e8f3b69",
       "at": "2026-11-02T12:41:41.649Z"
+    },
+    "latestIncrement": {
+      "at": "2026-11-02T12:47:01.862Z",
+      "status": "published_verified",
+      "page": "/minecraft-pokemon/",
+      "report": "seo/reports/publication-guide-2026-11-02T12-47-01.json",
+      "commit": "2e6261f"
     }
-  }
+  },
+  "reviewHistory": [
+    {
+      "date": "2026-10-27",
+      "status": "validated_locally_pending_deployment",
+      "baseline": {
+        "pages": 47,
+        "guides": 34,
+        "links": 307,
+        "images": 27,
+        "errors": 0,
+        "warnings": 0
+      },
+      "searchConsole": "Non consultée ce jour : contrôle du navigateur bloqué. Ne pas extrapoler les chiffres précédents.",
+      "pageSpeed": "API mobile HTTP 429 le 27 octobre ; aucun score ou Core Web Vitals obtenu.",
+      "deployment": "À confirmer après redémarrage Kinetic ; ne pas considérer le push comme une mise en ligne.",
+      "localValidation": {
+        "pages": 47,
+        "guides": 33,
+        "links": 306,
+        "images": 27,
+        "maxClickDepth": 2,
+        "errors": 0,
+        "warnings": 0,
+        "testsPassed": 18,
+        "report": "seo/reports/audit-2026-10-27-after-local.json",
+        "visualMobile": "Non vérifié dans cette session : automatisation Firefox bloquée. Mise en page existante réutilisée."
+      }
+    },
+    {
+      "date": "2026-11-02",
+      "status": "published_verified",
+      "report": "seo/reports/audit-hebdomadaire-2026-11-02T12-46-36Z.json",
+      "technicalReport": "seo/reports/audit-2026-11-02T12-43-00Z-production.json",
+      "searchConsole": "seo/reports/search-console-2026-11-02T12-38-00Z.json",
+      "previousReview": {
+        "date": "2026-10-27",
+        "status": "validated_locally_pending_deployment",
+        "baseline": {
+          "pages": 47,
+          "guides": 34,
+          "links": 307,
+          "images": 27,
+          "errors": 0,
+          "warnings": 0
+        },
+        "searchConsole": "Non consultée ce jour : contrôle du navigateur bloqué. Ne pas extrapoler les chiffres précédents.",
+        "pageSpeed": "API mobile HTTP 429 le 27 octobre ; aucun score ou Core Web Vitals obtenu.",
+        "deployment": "À confirmer après redémarrage Kinetic ; ne pas considérer le push comme une mise en ligne.",
+        "localValidation": {
+          "pages": 47,
+          "guides": 33,
+          "links": 306,
+          "images": 27,
+          "maxClickDepth": 2,
+          "errors": 0,
+          "warnings": 0,
+          "testsPassed": 18,
+          "report": "seo/reports/audit-2026-10-27-after-local.json",
+          "visualMobile": "Non vérifié dans cette session : automatisation Firefox bloquée. Mise en page existante réutilisée."
+        }
+      }
+    }
+  ]
 }

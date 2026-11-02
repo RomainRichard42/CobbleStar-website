@@ -1,0 +1,107 @@
+{
+  "checkedAt": "2026-11-02T12:47:01.862Z",
+  "commit": "2e6261f",
+  "published": true,
+  "path": "/minecraft-pokemon/",
+  "anchor": "#cobblemon-pixelmon",
+  "http": 200,
+  "newContent": true,
+  "h1": 1,
+  "canonical": "https://cobblestar-mc.fr/minecraft-pokemon/",
+  "sitemapModified": "2026-11-02",
+  "launcher": {
+    "status": 302,
+    "location": "/telecharger/",
+    "enabled": false
+  },
+  "deployment": "Kinetic Web 71692602 : Fast-forward 6b90e9f → 2e6261f, compilation terminée, serveur à l’écoute, puis HTML public vérifié.",
+  "validation": {
+    "fullBuild": "passed",
+    "publicTests": {
+      "passed": 36,
+      "failed": 0
+    },
+    "productionAudit": "seo/reports/audit-2026-11-02T12-43-00Z-production.json",
+    "mobile": {
+      "checkedAt": "2026-11-02T12:41:34.226Z",
+      "local": {
+        "mobile": {
+          "viewport": 390,
+          "documentWidth": 375,
+          "bodyFont": "18px",
+          "cardFont": "17px",
+          "columns": 1,
+          "anchorTop": 110.296875
+        },
+        "desktop": {
+          "viewport": 1365,
+          "documentWidth": 1350,
+          "columns": 3
+        }
+      },
+      "productionDesktop": {
+        "at": "2026-11-02T12:41:41.649Z",
+        "brokenLoadedImages": [],
+        "canonical": "https://cobblestar-mc.fr/minecraft-pokemon/",
+        "cards": [
+          {
+            "font": "17px",
+            "width": 274
+          },
+          {
+            "font": "17px",
+            "width": 274
+          },
+          {
+            "font": "17px",
+            "width": 274
+          }
+        ],
+        "documentWidth": 1350,
+        "h1": 1,
+        "headingTop": 110.390625,
+        "url": "https://cobblestar-mc.fr/minecraft-pokemon/#cobblemon-pixelmon",
+        "viewport": {
+          "height": 900,
+          "width": 1365
+        }
+      },
+      "mobilePages": [
+        {
+          "path": "/",
+          "scope": "Local, source publiée et contenu public actuel",
+          "documentWidth": 375,
+          "h1": 1,
+          "width": 390
+        },
+        {
+          "path": "/wiki/",
+          "scope": "Local, source publiée et contenu public actuel",
+          "brokenLoadedImages": [],
+          "documentWidth": 375,
+          "h1": 1,
+          "width": 390
+        },
+        {
+          "path": "/rejoindre/",
+          "scope": "Local, source publiée et contenu public actuel",
+          "brokenLoadedImages": [],
+          "documentWidth": 375,
+          "h1": 1,
+          "width": 390
+        }
+      ],
+      "limits": [
+        "Contrôle mobile du guide réalisé localement à 390 × 844 ; publication vérifiée sur ordinateur.",
+        "Accueil, wiki et rejoindre contrôlés à 390 px dans une iframe locale du même code, avec contenu public publié ; les clics du menu dans cette iframe ont été bloqués par l’outil, pas validés.",
+        "La commande de taille du navigateur ne redimensionne pas fiablement les onglets de production déjà ouverts ; aucune fausse mesure mobile de production retenue.",
+        "Ce contrôle ne couvre pas tous les appareils ni une certification d’accessibilité."
+      ]
+    }
+  },
+  "scope": "Guide public et date réelle associée uniquement. Aucune modification des comptes, paiements, API, bot, administration ou serveur Minecraft.",
+  "screenshots": [
+    "C:/Users/romain/Documents/Codex/2026-10-22/cobblestar-reprise/outputs/seo-hebdo-2026-11-02/guide-en-ligne-pc.png",
+    "C:/Users/romain/Documents/Codex/2026-10-22/cobblestar-reprise/outputs/seo-hebdo-2026-11-02/guide-mobile.png"
+  ]
+}
