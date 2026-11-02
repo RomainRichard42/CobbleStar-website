@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import {inflateRawSync} from 'node:zlib';
 import {buildStarPack,png} from '../dist/star-assets.js';
 import {appendEventPokemonAssets} from '../dist/event-pokemon-assets.js';
+import {assertNativePackLayer} from './support/native-pack-layer.mjs';
 const prefix='assets/cobblestar_planets/',id='dragonite_eclipse';
 function unpack(zip){const files=new Map();let at=0;while(zip.readUInt32LE(at)===0x04034b50){const size=zip.readUInt32LE(at+18),len=zip.readUInt16LE(at+26),start=at+30+len+zip.readUInt16LE(at+28);files.set(zip.toString('utf8',at+30,at+30+len),inflateRawSync(zip.subarray(start,start+size)));at=start+size;}assert.equal(zip.readUInt32LE(at),0x02014b50);return files;}
 const files=unpack(buildStarPack([],[]));
@@ -16,7 +17,7 @@ test('Approved Eclipse resources ship in the mandatory pack without enrolling a 
   assert.deepEqual(files.get(p),readFileSync(new URL('../event-pokemon-assets/'+p,import.meta.url)),p);
  }
  assert.ok(files.has('licenses/Dragonite-Eclipse-NOTICE.txt'));
- assert.ok([...files.keys()].every(p=>!p.startsWith('data/')&&!p.startsWith('assets/cobblemon/')));
+ assert.ok([...files.keys()].every(p=>!p.startsWith('data/')));assertNativePackLayer(files);
  assert.ok(![...files.keys()].some(p=>p.includes('/resolvers/star/')));
  const r=json(`bedrock/pokemon/resolvers/events/${id}.json`),g=json(`bedrock/pokemon/models/events/${id}.geo.json`)['minecraft:geometry'][0];
  assert.equal(r.species,'cobblemon:dragonite');assert.equal(r.variations.length,4);

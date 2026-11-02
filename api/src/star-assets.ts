@@ -6,6 +6,7 @@ import {addonSource,addonTemplate,sameSource,type AddonSource} from './star-addo
 import {appendRankTags} from './rank-tags.js';
 import {appendEventPokemonAssets} from './event-pokemon-assets.js';
 import {appendMascotAssets} from './mascot-assets.js';
+import {preparedServerAsset,withServerResources} from './server-resource-pack.js';
 
 const vector = z.tuple([z.number().finite().min(-512).max(512), z.number().finite().min(-512).max(512), z.number().finite().min(-512).max(512)]);
 const name = z.string().regex(/^[a-zA-Z0-9_.-]{1,80}$/);
@@ -132,7 +133,8 @@ function crc32(bytes: Buffer){let crc=0xffffffff;for(const b of bytes){crc^=b;fo
 export function zipAssets(files: Map<string,Buffer>) {
  const local: Buffer[]=[], central: Buffer[]=[];let offset=0,total=0;
  for(const [path,data] of files){total+=data.length;if(total>64*1024*1024)throw new Error("PACK_EXCEEDS_64_MIB");
-  const file=Buffer.from(path), compressed=deflateRawSync(data), crc=crc32(data);
+  const cached=preparedServerAsset(data);
+  const file=Buffer.from(path), compressed=cached?.compressed??deflateRawSync(data), crc=cached?.crc??crc32(data);
   const head=Buffer.alloc(30);head.writeUInt32LE(0x04034b50);head.writeUInt16LE(20,4);head.writeUInt16LE(8,8);head.writeUInt16LE(33,12);head.writeUInt32LE(crc,14);head.writeUInt32LE(compressed.length,18);head.writeUInt32LE(data.length,22);head.writeUInt16LE(file.length,26);
   const entry=Buffer.alloc(46);entry.writeUInt32LE(0x02014b50);entry.writeUInt16LE(20,4);entry.writeUInt16LE(20,6);entry.writeUInt16LE(8,10);entry.writeUInt16LE(33,14);entry.writeUInt32LE(crc,16);entry.writeUInt32LE(compressed.length,20);entry.writeUInt32LE(data.length,24);entry.writeUInt16LE(file.length,28);entry.writeUInt32LE(offset,42);
   local.push(head,file,compressed);central.push(entry,file);offset+=head.length+file.length+compressed.length;
@@ -141,7 +143,7 @@ export function zipAssets(files: Map<string,Buffer>) {
  return Buffer.concat([...local,directory,end]);
 }
 export function buildStarPack(assets: StarModel[], catalog: NativeModel[], npcSkins: {hash:string;png:Buffer}[] = []) {
- const files=new Map<string,Buffer>();files.set("pack.mcmeta",Buffer.from(JSON.stringify({pack:{pack_format:34,description:"CobbleStar · Pokémon Star"}})));
+ const files=new Map<string,Buffer>();files.set("pack.mcmeta",Buffer.from(JSON.stringify({pack:{pack_format:34,description:"CobbleStar · Pack du serveur"}})));
  // Articulated quest-NPC geometry and preset motion are pack resources too.
  const npcStudio=JSON.parse(readFileSync(new URL("../npc-studio-assets/manifest.json",import.meta.url),"utf8")) as {files:string[]};
  const npcPaths=new Set(["assets/cobblestar_planets/models/entity/quest_npc_rig.json","assets/cobblestar_planets/npc_studio/presets.json"]);
@@ -359,5 +361,5 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[], npcSk
   const path=`assets/cobblestar_planets/lang/${name}`;
   files.set(path,Buffer.from(JSON.stringify({...JSON.parse(files.get(path)?.toString()??"{}"),...entries})));
  }
- return zipAssets(files);
+ return zipAssets(withServerResources(files));
 }

@@ -3,6 +3,12 @@ import assert from 'node:assert/strict';
 import { deflateSync, inflateRawSync } from 'node:zlib';
 import { readFileSync } from 'node:fs';
 import { validateStar, buildStarPack, ashStarPreview } from '../dist/star-assets.js';
+import {withServerResources} from '../dist/server-resource-pack.js';
+const bundledNative=new Map([...withServerResources(new Map())].filter(([path])=>path.startsWith('assets/cobblemon/')));
+function assertNativeAssetsUnchanged(files){
+ const actual=new Map([...files].filter(([path])=>path.startsWith('assets/cobblemon/')));
+ assert.deepEqual(actual,bundledNative,'Star publications must not alter the bundled E19/GUI assets');
+}
 function crc(bytes){let c=0xffffffff;for(const b of bytes){c^=b;for(let j=0;j<8;j++)c=(c>>>1)^((c&1)?0xedb88320:0);}return(c^0xffffffff)>>>0;}
 function chunk(type,data){const name=Buffer.from(type),out=Buffer.alloc(data.length+12);out.writeUInt32BE(data.length);name.copy(out,4);data.copy(out,8);out.writeUInt32BE(crc(Buffer.concat([name,data])),data.length+8);return out;}
 const ihdr=Buffer.alloc(13);ihdr.writeUInt32BE(1,0);ihdr.writeUInt32BE(1,4);ihdr[8]=8;ihdr[9]=6;
@@ -239,7 +245,7 @@ test('Shared pack includes both regional starter trios without changing native s
   assert.equal(model['minecraft:geometry'][0].description.texture_width,texture.readUInt32BE(16));
   assert.equal(model['minecraft:geometry'][0].description.texture_height,texture.readUInt32BE(20));
  }
- assert.ok([...files.keys()].every(path=>!path.startsWith('assets/cobblemon/')));
+ assertNativeAssetsUnchanged(files);
 });
 test('Regional pack ships 30 species with separate Asteria amphibians, legacy forms and three distinct female rigs',()=>{
  const files=unpack(buildStarPack([],[]));
@@ -272,7 +278,7 @@ test('Sachanobi is an optional Greninja form, preserves the base and native anim
  const preview=ashStarPreview(asset);assert.equal(preview.model['minecraft:geometry'][0].description.texture_width,130);assert.equal(preview.texture,blank);
  const noGlow=unpack(buildStarPack([{...base,ash:{texture:blank}}],[cat]));
  assert.equal(noGlow.get('assets/cobblestar_planets/textures/pokemon/star/star_ashgreninja_glow.png').toString('base64'),blank);
- assert.ok([...files.keys()].every(p=>!p.startsWith('data/')&&!p.startsWith('assets/cobblemon/')));
+ assert.ok([...files.keys()].every(p=>!p.startsWith('data/')));assertNativeAssetsUnchanged(files);
 });
 
 test('Chimchar Star glow replaces the orange native emissive layer only for Star',()=>{
@@ -283,7 +289,7 @@ test('Chimchar Star glow replaces the orange native emissive layer only for Star
  assert.deepEqual(r.variations[0].aspects,['cobblestar-star']);
  assert.equal(r.variations[0].layers.length,1);
  assert.deepEqual(r.variations[0].layers[0],{name:'emissive',texture:'cobblestar_planets:textures/pokemon/star/star_chimchar_glow.png',emissive:true,translucent:true});
- assert.ok([...files.keys()].every(p=>!p.startsWith('assets/cobblemon/')));
+ assertNativeAssetsUnchanged(files);
  const without={...asset};delete without.emissive;
  const plain=unpack(buildStarPack([without],[cat]));
  assert.deepEqual(JSON.parse(plain.get('assets/cobblestar_planets/bedrock/pokemon/resolvers/star/star_chimchar.json')).variations[0].layers,[]);
@@ -301,7 +307,7 @@ test('Charmander Star replaces native flame by four blue animated frames without
  const frames=flame[0].texture.frames.map(path=>files.get('assets/'+path.replace(':','/')));
  assert.ok(frames.every(f=>f&&f.readUInt32BE(16)===64&&f.readUInt32BE(20)===64));
  assert.equal(new Set(frames.map(f=>f.toString('base64'))).size,4);
- assert.ok([...files.keys()].every(path=>!path.startsWith('assets/cobblemon/')));
+ assertNativeAssetsUnchanged(files);
  assert.ok(r.variations[0].layers.some(l=>l.name==='star_glow'));
 });
 
@@ -338,7 +344,7 @@ test('Kingambit recolor isolates its official geometry, poser AND global animati
  assert.equal(r.variations[0].texture,'cobblestar_planets:textures/pokemon/star/star_kingambit.png');
  assert.equal(r.variations[0].layers[0].emissive,true);
  assert.ok(files.has('assets/cobblestar_planets/bedrock/pokemon/models/star/star_kingambit.geo.json'));
- assert.ok(![...files.keys()].some(p=>p.startsWith('assets/cobblemon/')));
+ assertNativeAssetsUnchanged(files);
 });
 test('Isolated Kingambit retains the exact original poses and animation keyframes',()=>{
  const {asset,native}=nativeKingambit(),files=unpack(buildStarPack([asset],[native]));

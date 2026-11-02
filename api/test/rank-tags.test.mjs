@@ -26,7 +26,9 @@ test('All 17 supplied badges retain their bytes and PDF glyphs, including missin
   assert.equal(provider.height/tag.height,0.5,'all original 22px badges render at half size, not 8/22');
   assert.ok(files.has('assets/'+provider.file.replace(':','/textures/')));
  }
- assert.deepEqual(JSON.parse(files.get(defaultPath)),{providers:[{type:'reference',id:'cobblestar_planets:ranks'}]});
+ const providers=JSON.parse(files.get(defaultPath)).providers;
+ assert.deepEqual(providers[0],{type:'reference',id:'cobblestar_planets:ranks'},'current supplied tags take priority over legacy glyphs');
+ assert.equal(providers.length,3,'the two legacy fallback glyphs are retained');
  assert.match(files.get('licenses/RankTags-NOTICE.txt').toString(),/LarkAvery/);
  assert.ok(![...files.keys()].some(p=>/permission|luckperms/.test(p)),'no permission or rank assignment');
 });

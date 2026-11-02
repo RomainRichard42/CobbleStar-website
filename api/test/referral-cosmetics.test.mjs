@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {inflateRawSync} from 'node:zlib';
 import {buildStarPack,png} from '../dist/star-assets.js';
+import {assertNativePackLayer} from './support/native-pack-layer.mjs';
 
 function unpack(zip){const files=new Map();let at=0;while(zip.readUInt32LE(at)===0x04034b50){const size=zip.readUInt32LE(at+18),len=zip.readUInt16LE(at+26),start=at+30+len+zip.readUInt16LE(at+28);files.set(zip.toString('utf8',at+30,at+30+len),inflateRawSync(zip.subarray(start,start+size)));at=start+size;}return files;}
 const root='assets/cobblestar_planets/';
@@ -29,7 +30,7 @@ test('Alliance is opt-in and uses the native rig, never changes ordinary spawns 
  assert.equal(variant.layers[0].emissive,true);
  for(const path of [variant.texture,...variant.layers.map(l=>l.texture)])assert.ok(files.has('assets/'+path.replace(':','/')));
  const names=[...files.keys()];
- assert.ok(names.every(n=>!n.startsWith('assets/cobblemon/')),'Do not override any native resource');
+ assertNativePackLayer(files);
  assert.ok(names.every(n=>!n.includes('/resolvers/star/')),'Cosmetic must not enroll Dragonite in Star catalogue');
  assert.ok(names.every(n=>!n.includes('/models/referral/')&&!n.includes('/animations/referral/')&&!n.includes('/posers/referral/')),'Use native runtime rig without pose overrides');
 });

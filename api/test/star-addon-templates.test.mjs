@@ -4,6 +4,7 @@ import {inflateRawSync} from 'node:zlib';
 import {addonIndex,addonTemplate,sameSource} from '../dist/star-addon-templates.js';
 import {buildStarPack,validateStar} from '../dist/star-assets.js';
 import {starTemplates,nativeStarKit,sameSkeleton,editableStarKit} from '../dist/star-library.js';
+import {assertNativePackLayer} from './support/native-pack-layer.mjs';
 
 function unpack(zip){let at=0;const files=new Map();while(zip.readUInt32LE(at)===0x04034b50){const size=zip.readUInt32LE(at+18),length=zip.readUInt16LE(at+26),start=at+30+length+zip.readUInt16LE(at+28);files.set(zip.toString('utf8',at+30,at+30+length),inflateRawSync(zip.subarray(start,start+size)));at=start+size;}return files;}
 function fixture(species='ironvaliant'){
@@ -33,7 +34,7 @@ test('Published Iron Valiant contains private model, poser, all animations and r
  assert.deepEqual(resolver.aspects,['cobblestar-star']);assert.equal(resolver.model,'cobblestar_planets:star_ironvaliant.geo');assert.equal(resolver.poser,template.poser);
  assert.equal(resolver.layers.filter(l=>l.name==='emissive').length,1);
  assert.equal(resolver.layers.find(l=>l.name==='emissive').texture,'cobblestar_planets:textures/pokemon/star/star_ironvaliant_glow.png');
- assert.ok([...files.keys()].every(p=>!p.startsWith('assets/cobblemon/')));
+ assertNativePackLayer(files);
  const poser=JSON.parse(files.get('assets/cobblestar_planets/bedrock/pokemon/posers/star/cobblestar_star_ironvaliant_poser.json'));
  assert.ok(asset.model['minecraft:geometry'][0].bones.some(b=>b.name===poser.rootBone));
  const text=JSON.stringify(poser);assert.ok(!text.includes("'ironvaliant'"));
@@ -44,7 +45,7 @@ test('Published Iron Valiant contains private model, poser, all animations and r
 test('Every installed addon kit builds deterministically without replacing official resources',()=>{
  for(const row of addonIndex().species){
   const {asset,native}=fixture(row.species),a=buildStarPack([asset],[native]),b=buildStarPack([asset],[native]);
-  assert.deepEqual(a,b,row.species);assert.ok([...unpack(a).keys()].every(p=>!p.startsWith('assets/cobblemon/')),row.species);
+  assert.deepEqual(a,b,row.species);assertNativePackLayer(unpack(a));
  }
 });
 test('Saved addon variant keeps source and reference files in downloadable kit',async()=>{

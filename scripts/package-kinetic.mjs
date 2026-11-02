@@ -32,6 +32,8 @@ const required = [
   "api/allodus-assets/manifest.json",
   "api/patapouf-assets/manifest.json",
   "api/mascot-assets/manifest.json",
+  "api/server-resource-pack/manifest.json",
+  "api/server-resource-pack/base.zip",
 ];
 
 for (const relativePath of required) {
@@ -72,6 +74,7 @@ await cp(join(projectDir, "api", "arcade-assets"), join(deployDir, "arcade-asset
 await cp(join(projectDir, "api", "allodus-assets"), join(deployDir, "allodus-assets"), { recursive: true });
 await cp(join(projectDir, "api", "patapouf-assets"), join(deployDir, "patapouf-assets"), { recursive: true });
 await cp(join(projectDir, "api", "mascot-assets"), join(deployDir, "mascot-assets"), { recursive: true });
+await cp(join(projectDir, "api", "server-resource-pack"), join(deployDir, "server-resource-pack"), { recursive: true });
 await mkdir(join(deployDir,"star-addon-templates"),{recursive:true});
 const addonDir=join(projectDir,"api","star-addon-templates");
 const addonIndex=JSON.parse(await readFile(join(addonDir,"index.json"),"utf8"));
