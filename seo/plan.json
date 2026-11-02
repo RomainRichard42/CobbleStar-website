@@ -242,7 +242,7 @@
     "sitemap": "https://cobblestar-mc.fr/sitemap.xml",
     "sitemapStatus": "Success",
     "discoveredPages": 1057,
-    "performanceData": "Premières mesures disponibles : période du 25 au 30 octobre 2026 ; voir le rapport courant.",
+    "performanceData": "Du 25 au 31 octobre, Web France, 3 clics et 183 impressions. Sept jours de mesures disponibles.",
     "homeIndexing": {
       "inspectedAt": "2026-10-26",
       "status": "Page is indexed — URL is on Google",
@@ -260,7 +260,7 @@
     },
     "sitemapResubmittedAt": "2026-10-26T21:20:01.893Z",
     "sitemapSubmissionResult": "Sitemap submitted successfully",
-    "discoveredPagesNote": "Ancien décompte encore affiché après soumission ; le sitemap servi contient 47 URL.",
+    "discoveredPagesNote": "Le sitemap lu par Google le 1er novembre compte 1 057 pages découvertes. Les données de couverture restent en traitement.",
     "wikiIndexing": {
       "url": "https://cobblestar-mc.fr/wiki/",
       "inspectedAt": "2026-10-26T21:20:01.894Z",
@@ -268,14 +268,14 @@
       "requestResult": "Indexing requested — URL added to a priority crawl queue",
       "indexed": false
     },
-    "latestMeasuredReport": "seo/reports/search-console-2026-11-01T13-56-37Z.json",
+    "latestMeasuredReport": "seo/reports/search-console-2026-11-02T12-38-00Z.json",
     "latestAccessAttempt": {
-      "at": "2026-11-01T14:26:05.717Z",
+      "at": "2026-11-02T12:40:37.962Z",
       "status": "available",
-      "report": "seo/reports/search-console-2026-11-01T13-56-37Z.json"
+      "report": "seo/reports/search-console-2026-11-02T12-38-00Z.json"
     },
-    "sitemapLastRead": "2026-10-30",
-    "sitemapCheckedAt": "2026-11-01"
+    "sitemapLastRead": "2026-11-01",
+    "sitemapCheckedAt": "2026-11-02"
   },
   "confirmedAvailability": {
     "date": "2026-10-26",
@@ -391,30 +391,37 @@
     "measurement": "Search Console : France, recherche Web, 28 jours comparés à 28 jours, requêtes de marque et hors marque séparées ; segmenter mobile et ordinateur."
   },
   "currentReview": {
-    "date": "2026-10-27",
-    "status": "validated_locally_pending_deployment",
-    "baseline": {
-      "pages": 47,
-      "guides": 34,
-      "links": 307,
-      "images": 27,
-      "errors": 0,
-      "warnings": 0
-    },
-    "searchConsole": "Non consultée ce jour : contrôle du navigateur bloqué. Ne pas extrapoler les chiffres précédents.",
-    "pageSpeed": "API mobile HTTP 429 le 27 octobre ; aucun score ou Core Web Vitals obtenu.",
-    "deployment": "À confirmer après redémarrage Kinetic ; ne pas considérer le push comme une mise en ligne.",
-    "localValidation": {
-      "pages": 47,
-      "guides": 33,
-      "links": 306,
-      "images": 27,
-      "maxClickDepth": 2,
-      "errors": 0,
-      "warnings": 0,
-      "testsPassed": 18,
-      "report": "seo/reports/audit-2026-10-27-after-local.json",
-      "visualMobile": "Non vérifié dans cette session : automatisation Firefox bloquée. Mise en page existante réutilisée."
+    "date": "2026-11-02",
+    "status": "published_verified",
+    "report": "seo/reports/audit-hebdomadaire-2026-11-02T12-46-36Z.json",
+    "technicalReport": "seo/reports/audit-2026-11-02T12-43-00Z-production.json",
+    "searchConsole": "seo/reports/search-console-2026-11-02T12-38-00Z.json",
+    "previousReview": {
+      "date": "2026-10-27",
+      "status": "validated_locally_pending_deployment",
+      "baseline": {
+        "pages": 47,
+        "guides": 34,
+        "links": 307,
+        "images": 27,
+        "errors": 0,
+        "warnings": 0
+      },
+      "searchConsole": "Non consultée ce jour : contrôle du navigateur bloqué. Ne pas extrapoler les chiffres précédents.",
+      "pageSpeed": "API mobile HTTP 429 le 27 octobre ; aucun score ou Core Web Vitals obtenu.",
+      "deployment": "À confirmer après redémarrage Kinetic ; ne pas considérer le push comme une mise en ligne.",
+      "localValidation": {
+        "pages": 47,
+        "guides": 33,
+        "links": 306,
+        "images": 27,
+        "maxClickDepth": 2,
+        "errors": 0,
+        "warnings": 0,
+        "testsPassed": 18,
+        "report": "seo/reports/audit-2026-10-27-after-local.json",
+        "visualMobile": "Non vérifié dans cette session : automatisation Firefox bloquée. Mise en page existante réutilisée."
+      }
     }
   },
   "recurringAudit": {
@@ -424,21 +431,61 @@
     "daily": true,
     "monday": "Audit approfondi et 5 à 10 actions priorisées",
     "localExecution": "Ordinateur allumé et application ouverte",
-    "latestReport": "seo/reports/suivi-quotidien-2026-11-01T13-56-37Z.json",
-    "latestTechnicalReport": "seo/reports/audit-2026-11-01T13-31-58Z-production.json",
-    "updatedAt": "2026-11-01T14:26:05.717Z"
+    "latestReport": "seo/reports/audit-hebdomadaire-2026-11-02T12-46-36Z.json",
+    "latestTechnicalReport": "seo/reports/audit-2026-11-02T12-43-00Z-production.json",
+    "updatedAt": "2026-11-02T12:46:36.576Z"
   },
   "latestKeywordResearch": {
-    "report": "seo/reports/mots-cles-google-2026-10-27.json",
-    "checkedAt": "2026-10-27T14:37:41.158Z",
+    "report": "seo/reports/mots-cles-google-2026-11-02T12-38-00Z.json",
+    "checkedAt": "2026-11-02T12:40:37.962Z",
     "source": "Google consulté directement dans le navigateur",
     "queries": [
-      "cobblestar",
       "cobblemon fr",
-      "serveur cobblemon français",
       "minecraft pokemon",
+      "cobblestar",
+      "serveur cobblemon",
+      "serveur cobblemon français",
+      "serveur cobblemon fr",
+      "pokemon minecraft",
+      "mod pokemon minecraft",
+      "cobblemon français",
+      "jouer pokemon minecraft",
+      "serveur minecraft pokemon français",
       "installer cobblemon",
-      "pokédex cobblemon français"
+      "comment installer cobblemon",
+      "modpack cobblemon",
+      "cobblemon java",
+      "cobblemon ne se lance pas",
+      "comment jouer à cobblemon",
+      "cobblemon java ou bedrock",
+      "ip cobblestar",
+      "rejoindre cobblestar",
+      "installer cobblemon serveur fr",
+      "launcher cobblestar",
+      "télécharger cobblestar",
+      "wiki cobblestar",
+      "guides cobblemon français",
+      "pension cobblestar",
+      "reproduction cobblemon cobblestar",
+      "métiers cobblestar",
+      "jobs cobblemon cobblestar",
+      "talents métiers cobblestar",
+      "gts cobblestar",
+      "vendre pokemon cobblemon cobblestar",
+      "raids cobblestar",
+      "épreuves badges cobblestar",
+      "ligue cobblestar",
+      "ranked cobblestar",
+      "battle pass cobblestar",
+      "grades gratuits cobblestar",
+      "club claim cobblestar",
+      "cartes boosters cobblestar",
+      "certification sga cobblestar",
+      "cosmedex cobblestar",
+      "pokemon star cobblestar",
+      "pokédex cobblemon français",
+      "cobblemon évolution évoli",
+      "où trouver riolu cobblemon"
     ]
   },
   "latestPublishedSeo": {
@@ -514,17 +561,16 @@
   "keywordMonitoring": {
     "frequency": "daily",
     "source": "queryMap[].queries",
-    "latestReport": "seo/reports/mots-cles-google-2026-11-01T13-56-37Z.json",
-    "comparisonBaseline": "seo/reports/mots-cles-google-2026-10-31T11-45-54Z.json",
-    "method": "Google France dans le navigateur intégré ; hl=fr, gl=fr, pws=0. Liens titrés des résultats Web hors annonces et aperçu IA ; aucun rang numérique attribué.",
+    "latestReport": "seo/reports/mots-cles-google-2026-11-02T12-38-00Z.json",
+    "comparisonBaseline": "seo/reports/mots-cles-google-2026-11-01T13-56-37Z.json",
+    "method": "Google France dans le navigateur intégré ; hl=fr, gl=fr, pws=0. Chargement terminé et liens titrés #rso h3 visibles ; hors annonces et aperçu IA. Aucun rang numérique attribué.",
     "unverifiedQueries": [
-      "cosmedex cobblestar",
-      "pokemon star cobblestar",
-      "pokédex cobblemon français",
-      "cobblemon évolution évoli",
-      "où trouver riolu cobblemon"
+      "wiki cobblestar",
+      "raids cobblestar",
+      "battle pass cobblestar",
+      "cosmedex cobblestar"
     ],
-    "status": "partial_captcha"
+    "status": "partial_captcha_after_autocorrections"
   },
   "acquisitionStrategy": {
     "updatedAt": "2026-11-01T16:33:15.838Z",
@@ -555,6 +601,12 @@
       "approval": "approved_with_icon_changes"
     },
     "lastValidationReport": "seo/reports/validation-icones-decouverte-2026-11-01T18-13-48Z.json",
-    "lastPublicationReport": "seo/reports/publication-decouverte-2026-11-01T18-22-23Z.json"
+    "lastPublicationReport": "seo/reports/publication-decouverte-2026-11-01T18-22-23Z.json",
+    "latestWeeklyReview": "seo/reports/audit-hebdomadaire-2026-11-02T12-46-36Z.json",
+    "latestGuidePublication": {
+      "page": "https://cobblestar-mc.fr/minecraft-pokemon/",
+      "commit": "2e6261fc74aba094e39ad85c5ed468f01e8f3b69",
+      "at": "2026-11-02T12:41:41.649Z"
+    }
   }
 }

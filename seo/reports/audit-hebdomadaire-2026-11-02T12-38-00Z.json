@@ -1,0 +1,876 @@
+{
+  "date": "2026-11-02",
+  "checkedAt": "2026-11-02T12:40:37.962Z",
+  "type": "weekly_monday",
+  "reviewPeriod": [
+    "2026-10-27",
+    "2026-11-02"
+  ],
+  "technicalReport": "seo/reports/audit-2026-11-02T12-15-54Z.json",
+  "keywordReport": "seo/reports/mots-cles-google-2026-11-02T12-38-00Z.json",
+  "searchConsoleReport": "seo/reports/search-console-2026-11-02T12-38-00Z.json",
+  "status": "technical_clean_content_tested_publication_pending",
+  "technicalHistory": [
+    {
+      "report": "audit-navigation-production-2026-10-27.json",
+      "at": "2026-10-27T15:33:07.611Z",
+      "pages": 1062,
+      "errors": 0,
+      "warnings": 0,
+      "dexHtmlBytes": 1033439,
+      "home": {
+        "htmlBytes": 24375,
+        "scriptFiles": 5,
+        "scriptBytes": 23934,
+        "inlineScriptBytes": 700,
+        "totalScriptBytes": 24634
+      },
+      "metrics": {
+        "home": {
+          "htmlBytes": 24375,
+          "scriptFiles": 5,
+          "scriptBytes": 23934,
+          "inlineScriptBytes": 700,
+          "totalScriptBytes": 24634
+        },
+        "cloudflareEmailLinks": 1064,
+        "checkedLinks": 6393,
+        "checkedImages": 30,
+        "checkedDocuments": 1064,
+        "maxClickDepth": 2,
+        "crawlerHttpStatus": 200
+      }
+    },
+    {
+      "report": "audit-2026-10-28.json",
+      "at": "2026-10-28T10:24:24.646Z",
+      "pages": 1062,
+      "errors": 0,
+      "warnings": 0,
+      "dexHtmlBytes": 1033442,
+      "home": {
+        "htmlBytes": 24381,
+        "scriptFiles": 5,
+        "scriptBytes": 23934,
+        "inlineScriptBytes": 700,
+        "totalScriptBytes": 24634
+      },
+      "metrics": {
+        "home": {
+          "htmlBytes": 24381,
+          "scriptFiles": 5,
+          "scriptBytes": 23934,
+          "inlineScriptBytes": 700,
+          "totalScriptBytes": 24634
+        },
+        "cloudflareEmailLinks": 1064,
+        "checkedLinks": 6393,
+        "checkedImages": 30,
+        "checkedDocuments": 1064,
+        "maxClickDepth": 2,
+        "crawlerHttpStatus": 200
+      }
+    },
+    {
+      "report": "audit-2026-10-29T10-30-42Z.json",
+      "at": "2026-10-29T10:31:09.859Z",
+      "pages": 1057,
+      "errors": 0,
+      "warnings": 0,
+      "dexHtmlBytes": 1034522,
+      "home": {
+        "htmlBytes": 27773,
+        "scriptFiles": 6,
+        "scriptBytes": 29697,
+        "inlineScriptBytes": 347,
+        "totalScriptBytes": 30044
+      },
+      "metrics": {
+        "home": {
+          "htmlBytes": 27773,
+          "scriptFiles": 6,
+          "scriptBytes": 29697,
+          "inlineScriptBytes": 347,
+          "totalScriptBytes": 30044
+        },
+        "cloudflareEmailLinks": 1059,
+        "checkedLinks": 6366,
+        "checkedImages": 30,
+        "checkedDocuments": 1059,
+        "maxClickDepth": 2,
+        "crawlerHttpStatus": 200
+      }
+    },
+    {
+      "report": "audit-2026-10-30T11-57-00Z-post-optimisation.json",
+      "at": "2026-10-30T11:57:04.181Z",
+      "pages": 1057,
+      "errors": 0,
+      "warnings": 0,
+      "dexHtmlBytes": 439024,
+      "home": {
+        "htmlBytes": 29416,
+        "scriptFiles": 6,
+        "scriptBytes": 29696,
+        "inlineScriptBytes": 347,
+        "totalScriptBytes": 30043
+      },
+      "metrics": {
+        "home": {
+          "htmlBytes": 29416,
+          "scriptFiles": 6,
+          "scriptBytes": 29696,
+          "inlineScriptBytes": 347,
+          "totalScriptBytes": 30043
+        },
+        "cloudflareEmailLinks": 1059,
+        "checkedLinks": 6374,
+        "checkedImages": 30,
+        "checkedDocuments": 1060,
+        "maxClickDepth": 2,
+        "crawlerHttpStatus": 200
+      }
+    },
+    {
+      "report": "audit-2026-10-31T11-45-54Z-production.json",
+      "at": "2026-10-31T11:49:06.970Z",
+      "pages": 1057,
+      "errors": 0,
+      "warnings": 0,
+      "dexHtmlBytes": 439024,
+      "home": {
+        "htmlBytes": 29416,
+        "scriptFiles": 6,
+        "scriptBytes": 29862,
+        "inlineScriptBytes": 347,
+        "totalScriptBytes": 30209
+      },
+      "metrics": {
+        "home": {
+          "htmlBytes": 29416,
+          "scriptFiles": 6,
+          "scriptBytes": 29862,
+          "inlineScriptBytes": 347,
+          "totalScriptBytes": 30209
+        },
+        "cloudflareEmailLinks": 1059,
+        "checkedLinks": 6375,
+        "checkedImages": 63,
+        "checkedDocuments": 1060,
+        "maxClickDepth": 2,
+        "crawlerHttpStatus": 200
+      }
+    },
+    {
+      "report": "audit-2026-11-01T13-31-58Z-production.json",
+      "at": "2026-11-01T13:32:48.179Z",
+      "pages": 1057,
+      "errors": 0,
+      "warnings": 0,
+      "dexHtmlBytes": 439024,
+      "home": {
+        "htmlBytes": 29416,
+        "scriptFiles": 6,
+        "scriptBytes": 29865,
+        "inlineScriptBytes": 347,
+        "totalScriptBytes": 30212
+      },
+      "metrics": {
+        "home": {
+          "htmlBytes": 29416,
+          "scriptFiles": 6,
+          "scriptBytes": 29865,
+          "inlineScriptBytes": 347,
+          "totalScriptBytes": 30212
+        },
+        "cloudflareEmailLinks": 1059,
+        "checkedLinks": 6376,
+        "checkedImages": 69,
+        "checkedDocuments": 1060,
+        "maxClickDepth": 2,
+        "crawlerHttpStatus": 200
+      }
+    },
+    {
+      "report": "audit-2026-11-02T12-15-54Z.json",
+      "at": "2026-11-02T12:15:54.180Z",
+      "pages": 1057,
+      "errors": 0,
+      "warnings": 0,
+      "dexHtmlBytes": 439321,
+      "home": {
+        "htmlBytes": 32413,
+        "scriptFiles": 6,
+        "scriptBytes": 32050,
+        "inlineScriptBytes": 347,
+        "totalScriptBytes": 32397
+      },
+      "metrics": {
+        "home": {
+          "htmlBytes": 32413,
+          "scriptFiles": 6,
+          "scriptBytes": 32050,
+          "inlineScriptBytes": 347,
+          "totalScriptBytes": 32397
+        },
+        "cloudflareEmailLinks": 1059,
+        "checkedLinks": 6379,
+        "checkedImages": 70,
+        "checkedDocuments": 1060,
+        "maxClickDepth": 2,
+        "crawlerHttpStatus": 200
+      }
+    }
+  ],
+  "weeklyChanges": [
+    "Création puis maintien des fiches d’espèces indexables : 1 009 espèces publiques actuellement, jusqu’à deux clics depuis l’accueil.",
+    "Retrait des cinq espèces internes de Créations CobbleStar du catalogue public ; pas une perte accidentelle d’URL à rétablir.",
+    "Pokédex : HTML passé de 1 034 522 à 439 321 octets entre le 29 octobre et le 2 novembre (environ −57,5 %). Les visuels et liens restent présents.",
+    "Guides installation (.mrpack et dépannage), premiers pas et capture enrichis et publiés le 1er novembre.",
+    "Accueil : résumé du serveur et FAQ séparés, logo Cercle 5 harmonisé, parcours Discord corrigé dans le lot publié le 1er novembre.",
+    "Démonstration des machines et visuels de récompenses intégrés, boutique contrôlée sans modifier les achats."
+  ],
+  "sincePrevious": {
+    "technicalBaseline": "seo/reports/audit-2026-11-01T13-31-58Z-production.json",
+    "errors": "0 → 0",
+    "warnings": "0 → 0",
+    "sitemap": "1 057 → 1 057",
+    "homeHtmlBytes": "29 416 → 32 413",
+    "homeScriptBytes": "30 212 → 32 397",
+    "interpretation": "Hausse liée aux ajouts publics approuvés du 1er novembre ; pas une mesure de vitesse ou de Core Web Vitals.",
+    "searchConsole": "La période disponible s’étend du 30 au 31 octobre : +2 clics / +87 impressions tous pays, +2 / +73 en France. Périodes différentes : pas une progression à période identique ni une preuve causale."
+  },
+  "googleSummary": {
+    "tracked": 46,
+    "searched": 46,
+    "verified": 42,
+    "present": 21,
+    "notObserved": 21,
+    "unverified": 4
+  },
+  "unverifiedQueries": [
+    "wiki cobblestar",
+    "raids cobblestar",
+    "battle pass cobblestar",
+    "cosmedex cobblestar"
+  ],
+  "focus": [
+    {
+      "query": "cobblemon fr",
+      "target": "/",
+      "checkedAt": "2026-11-02T12:18:58.539Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblemon%20fr",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "aucune_correction_observee",
+      "correctionLines": [],
+      "observedPages": [],
+      "pagesInCorrectedResults": [],
+      "observedOrganicRank": null,
+      "otherObservedResults": [
+        {
+          "title": "Cobblemoon: Accueil",
+          "url": "https://cobblemoon.fr/"
+        },
+        {
+          "title": "Accueil • Cobblemon Ultra FR • Serveur Minecraft Pokémon",
+          "url": "https://cobblemon-ultra.fr/"
+        },
+        {
+          "title": "Tropimon | TROPIMON • Serveur Cobblemon FR Nº1",
+          "url": "https://tropimon.fr/"
+        },
+        {
+          "title": "Cobblemon Academy: Accueil",
+          "url": "https://cobblemon-academy.fr/"
+        },
+        {
+          "title": "Serveur Cobblemon | Liste de Serveur Minecraft",
+          "url": "https://www.serveursminecraft.org/serveur/7260/"
+        },
+        {
+          "title": "Cobblemon Servers",
+          "url": "https://cobblemon.com/en/servers"
+        },
+        {
+          "title": "[ SERVEUR COBBLEMON FR ] Venez nous rejoindre ! ...",
+          "url": "https://www.youtube.com/watch?v=CuMbSCtXD2k"
+        },
+        {
+          "title": "Serveur Cobblemon Minecraft FR - Arceus Academy",
+          "url": "https://arceusacademy.fr/"
+        },
+        {
+          "title": "Top 10 serveurs Cobblemon français 2026 : comparatif et ...",
+          "url": "https://pixelmongo.fr/news/top-10-serveurs-cobblemon-francais-2026-comparatif-guide"
+        }
+      ],
+      "comparison": {
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-11-01T13-56-37Z.json",
+          "date": "2026-11-01",
+          "checkedAt": "2026-11-01T13:56:37.151Z",
+          "status": "non_observe_premiere_page",
+          "pages": []
+        },
+        "status": "comparable_avec_limites",
+        "enteredPages": [],
+        "previousPagesNotSeenInCurrentTitleExtraction": [],
+        "exitedPages": null,
+        "note": "Liens titrés de résultats Web visibles. Un sitelink absent ne prouve pas une sortie ; aucun rang ni déplacement de rang déduit."
+      }
+    },
+    {
+      "query": "minecraft pokemon",
+      "target": "/minecraft-pokemon/",
+      "checkedAt": "2026-11-02T12:18:59.599Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=minecraft%20pokemon",
+      "status": "non_observe_premiere_page",
+      "correctionCheck": "aucune_correction_observee",
+      "correctionLines": [],
+      "observedPages": [],
+      "pagesInCorrectedResults": [],
+      "observedOrganicRank": null,
+      "otherObservedResults": [
+        {
+          "title": "PokeIsland: Accueil",
+          "url": "https://pokeisland.fr/"
+        },
+        {
+          "title": "Cobblemon - Le Mod Pokémon Ultime sur Minecraft (1.21.1)",
+          "url": "https://minecraft.fr/cobblemon-mod-pokemon-minecraft/"
+        },
+        {
+          "title": "Minecraft Pixelmon",
+          "url": "https://www.youtube.com/playlist?list=PL2PKD3GfkdK8HKRUnvVZMfmUWwfZKBqL8"
+        },
+        {
+          "title": "Quel est le Meilleur Mod Pokémon sur Minecraft en 2025 ?",
+          "url": "https://pixelmongo.fr/news/pixelmonvscobblemon"
+        },
+        {
+          "title": "Quelle est la meilleure façon de jouer à Pokémon dans ...",
+          "url": "https://www.reddit.com/r/feedthebeast/comments/1j4xwly/whats_the_best_way_to_play_pokemon_in_mc/?tl=fr"
+        },
+        {
+          "title": "Pixelmon Mod for Minecraft PE - Google Play",
+          "url": "https://play.google.com/store/apps/details?id=info.pixelmonster.pokcraft.mcpe&hl=fr"
+        },
+        {
+          "title": "Le Nouveau Meilleur Mod Pokemon Minecraft",
+          "url": "https://www.youtube.com/watch?v=qDOznu4Ytwk"
+        }
+      ],
+      "comparison": {
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-11-01T13-56-37Z.json",
+          "date": "2026-11-01",
+          "checkedAt": "2026-11-01T13:57:06.757Z",
+          "status": "non_observe_premiere_page",
+          "pages": []
+        },
+        "status": "comparable_avec_limites",
+        "enteredPages": [],
+        "previousPagesNotSeenInCurrentTitleExtraction": [],
+        "exitedPages": null,
+        "note": "Liens titrés de résultats Web visibles. Un sitelink absent ne prouve pas une sortie ; aucun rang ni déplacement de rang déduit."
+      }
+    },
+    {
+      "query": "cobblestar",
+      "target": "/",
+      "checkedAt": "2026-11-02T12:19:00.172Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=cobblestar",
+      "status": "present_premiere_page",
+      "correctionCheck": "aucune_correction_observee",
+      "correctionLines": [],
+      "observedPages": [
+        "https://cobblestar-mc.fr/",
+        "https://cobblestar-mc.fr/wiki/welcome/"
+      ],
+      "pagesInCorrectedResults": [],
+      "observedOrganicRank": null,
+      "otherObservedResults": [
+        {
+          "title": "Cobblestar Studios [Cobblemon] - Minecraft Data Pack",
+          "url": "https://modrinth.com/project/390OOH2p"
+        },
+        {
+          "title": "Cobblestar - Minecraft Semi Vanilla Server IP",
+          "url": "https://minecraft-server-list.com/server/515371/"
+        },
+        {
+          "title": "Serveur Minecraft CobbleStar - Cobblemon FR",
+          "url": "https://www.serveursminecraft.org/serveur/7799/"
+        },
+        {
+          "title": "Cobblemon Academy: Accueil",
+          "url": "https://cobblemon-academy.fr/"
+        },
+        {
+          "title": "Cobblemon - Star Academy (Legacy) - Minecraft Modpacks",
+          "url": "https://www.curseforge.com/minecraft/modpacks/cobblemon-star-academy"
+        },
+        {
+          "title": "[TUTO] COMMENT INSTALLER COBBLEMON Star Academy & ...",
+          "url": "https://www.youtube.com/watch?v=bw8FOXNJITE"
+        },
+        {
+          "title": "COBBLESTAR LTD overview - Companies House - GOV.UK",
+          "url": "https://find-and-update.company-information.service.gov.uk/company/08131673"
+        }
+      ],
+      "comparison": {
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-11-01T13-56-37Z.json",
+          "date": "2026-11-01",
+          "checkedAt": "2026-11-01T14:11:24.266Z",
+          "status": "present_premiere_page",
+          "pages": [
+            "https://cobblestar-mc.fr/",
+            "https://cobblestar-mc.fr/wiki/welcome/"
+          ]
+        },
+        "status": "comparable_avec_limites",
+        "enteredPages": [],
+        "previousPagesNotSeenInCurrentTitleExtraction": [],
+        "exitedPages": null,
+        "note": "Liens titrés de résultats Web visibles. Un sitelink absent ne prouve pas une sortie ; aucun rang ni déplacement de rang déduit."
+      }
+    },
+    {
+      "query": "pokédex cobblemon français",
+      "target": "/wiki/pokedex/",
+      "checkedAt": "2026-11-02T12:26:01.033Z",
+      "searchUrl": "https://www.google.com/search?hl=fr&gl=fr&pws=0&q=pok%C3%A9dex%20cobblemon%20fran%C3%A7ais",
+      "status": "present_premiere_page",
+      "correctionCheck": "aucune_correction_observee",
+      "correctionLines": [],
+      "observedPages": [
+        "https://cobblestar-mc.fr/wiki/pokedex/"
+      ],
+      "pagesInCorrectedResults": [],
+      "observedOrganicRank": null,
+      "otherObservedResults": [
+        {
+          "title": "Pokédex Cobblemon : Liste Complète et ... - PixelmonGo",
+          "url": "https://pixelmongo.fr/wiki/mecaniques-cobblemon/cobblemon-pokedex-guide"
+        },
+        {
+          "title": "Catégories de Pokémon | Pokédex Cobblemon",
+          "url": "https://www.cobbledex.info/fr/categories"
+        },
+        {
+          "title": "Cobblemon Pokédex : Guide Complet Pokéfinder et Liste ...",
+          "url": "https://pixelmongo.fr/news/cobblemon-pokedex-guide-pokefinder-liste-pokemon-2026"
+        },
+        {
+          "title": "Pokédex",
+          "url": "https://wiki.cobblemoon.fr/cobblemon/pokedex"
+        },
+        {
+          "title": "Pokédex Cobblemon Star Academy : liste et localisation ...",
+          "url": "https://www.breakflip.com/guides/11095.html"
+        },
+        {
+          "title": "All Pokémon Directory | Cobblemon Pokédex",
+          "url": "https://www.cobbledex.info/fr/all-mons"
+        },
+        {
+          "title": "Le Pokédex",
+          "url": "https://wiki.cobblemon-ultra.fr/wiki/utilitaires/le-pokedex"
+        },
+        {
+          "title": "Pokédex Cobblemon : Compléter sa Collection",
+          "url": "https://pixelmongo.fr/wiki/mecaniques-cobblemon/pokedex-cobblemon-completer-sa-collection"
+        }
+      ],
+      "comparison": {
+        "previousValidObservation": {
+          "report": "mots-cles-google-2026-10-31T11-45-54Z.json",
+          "date": "2026-10-31",
+          "checkedAt": "2026-10-31T11:51:54.528Z",
+          "status": "non_observe_premiere_page",
+          "pages": []
+        },
+        "status": "comparable_avec_limites",
+        "enteredPages": [
+          "https://cobblestar-mc.fr/wiki/pokedex/"
+        ],
+        "previousPagesNotSeenInCurrentTitleExtraction": [],
+        "exitedPages": null,
+        "note": "Liens titrés de résultats Web visibles. Un sitelink absent ne prouve pas une sortie ; aucun rang ni déplacement de rang déduit."
+      }
+    }
+  ],
+  "searchConsole": {
+    "global": {
+      "checkedAt": "2026-11-02T12:19:21.081Z",
+      "periodStart": "2026-10-25",
+      "periodEnd": "2026-10-31",
+      "clicks": 3,
+      "impressions": 204,
+      "ctrPercent": 1.5,
+      "averagePosition": 8.6,
+      "country": "All countries"
+    },
+    "france": {
+      "checkedAt": "2026-11-02T12:22:17.657Z",
+      "periodStart": "2026-10-25",
+      "periodEnd": "2026-10-31",
+      "clicks": 3,
+      "impressions": 183,
+      "ctrPercent": 1.6,
+      "averagePosition": 7,
+      "sourceUrl": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra",
+      "comparison": {
+        "periodStart": "2026-10-18",
+        "periodEnd": "2026-10-24",
+        "displayedClicks": 0,
+        "displayedImpressions": 0,
+        "averagePosition": null,
+        "interpretation": "L’interface affiche zéro avant le début de l’historique disponible ; pas une base historique comparable."
+      },
+      "country": "France"
+    },
+    "weekComparison": {
+      "current": [
+        "2026-10-25",
+        "2026-10-31"
+      ],
+      "previous": [
+        "2026-10-18",
+        "2026-10-24"
+      ],
+      "status": "insufficient_prior_history",
+      "explanation": "Sept premiers jours de mesures disponibles. Le compteur de la période précédente est zéro dans l’interface ; aucune croissance en pourcentage calculable sur un historique antérieur non disponible."
+    },
+    "trend28Days": {
+      "status": "insufficient_history",
+      "currentRequested": [
+        "2026-10-04",
+        "2026-10-31"
+      ],
+      "previousRequested": [
+        "2026-09-06",
+        "2026-10-03"
+      ],
+      "available": [
+        "2026-10-25",
+        "2026-10-31"
+      ],
+      "metrics": null
+    },
+    "brandSegmentation": {
+      "country": "France",
+      "regex": "cobblestar|cobble star",
+      "brand": {
+        "checkedAt": "2026-11-02T12:33:07.008Z",
+        "periodStart": "2026-10-25",
+        "periodEnd": "2026-10-31",
+        "clicks": 0,
+        "impressions": 0,
+        "ctrPercent": null,
+        "averagePosition": null,
+        "sourceUrl": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra&breakdown=page&query=~cobblestar%7Ccobble%20star",
+        "comparison": {
+          "periodStart": "2026-10-18",
+          "periodEnd": "2026-10-24",
+          "displayedClicks": 0,
+          "displayedImpressions": 0,
+          "averagePosition": null,
+          "interpretation": "L’interface affiche zéro avant le début de l’historique disponible ; pas une base historique comparable."
+        }
+      },
+      "nonBrand": {
+        "checkedAt": "2026-11-02T12:33:46.627Z",
+        "periodStart": "2026-10-25",
+        "periodEnd": "2026-10-31",
+        "clicks": 0,
+        "impressions": 17,
+        "ctrPercent": 0,
+        "averagePosition": 36.8,
+        "sourceUrl": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra&breakdown=page&query=_cobblestar%7Ccobble%20star",
+        "comparison": {
+          "periodStart": "2026-10-18",
+          "periodEnd": "2026-10-24",
+          "displayedClicks": 0,
+          "displayedImpressions": 0,
+          "averagePosition": null,
+          "interpretation": "L’interface affiche zéro avant le début de l’historique disponible ; pas une base historique comparable."
+        }
+      },
+      "limits": "Les requêtes rares ou anonymisées ne sont pas toutes exposées avec un filtre. Marque (0 impression) et hors marque (17 impressions) ne reconstituent pas les 183 impressions ni les 3 clics globaux France. Les clics restants ne sont attribués à aucun segment par déduction."
+    },
+    "devices": [
+      {
+        "device": "desktop",
+        "clicks": 3,
+        "impressions": 149,
+        "ctrPercent": 2,
+        "averagePosition": 7.4
+      },
+      {
+        "device": "mobile",
+        "clicks": 0,
+        "impressions": 29,
+        "ctrPercent": 0,
+        "averagePosition": 5.6
+      },
+      {
+        "device": "tablet",
+        "clicks": 0,
+        "impressions": 5,
+        "ctrPercent": 0,
+        "averagePosition": 4.6
+      }
+    ],
+    "indexedSamples": [
+      {
+        "checkedAt": "2026-11-02T12:32:08.983Z",
+        "url": "https://cobblestar-mc.fr/wiki/pokedex/eevee/",
+        "indexed": true,
+        "status": "URL is on Google — Page is indexed",
+        "lastCrawlDisplayed": "Oct 29, 2026, 5:21:17 PM",
+        "canonicalMatchesInspectedUrl": true
+      },
+      {
+        "checkedAt": "2026-11-02T12:32:53.006Z",
+        "url": "https://cobblestar-mc.fr/wiki/pokedex/riolu/",
+        "indexed": true,
+        "status": "URL is on Google — Page is indexed",
+        "lastCrawlDisplayed": "Oct 29, 2026, 11:12:00 AM",
+        "canonicalMatchesInspectedUrl": true
+      },
+      {
+        "checkedAt": "2026-11-02T12:33:15.860Z",
+        "url": "https://cobblestar-mc.fr/wiki/welcome/",
+        "indexed": true,
+        "status": "URL is on Google — Page is indexed",
+        "lastCrawlDisplayed": "Oct 30, 2026, 2:35:42 AM",
+        "canonicalMatchesInspectedUrl": true
+      },
+      {
+        "checkedAt": "2026-11-02T12:33:47.968Z",
+        "url": "https://cobblestar-mc.fr/wiki/capture/",
+        "indexed": true,
+        "status": "URL is on Google — Page is indexed",
+        "lastCrawlDisplayed": "Oct 30, 2026, 2:41:05 AM",
+        "canonicalMatchesInspectedUrl": true
+      },
+      {
+        "checkedAt": "2026-11-02T12:34:01.026Z",
+        "url": "https://cobblestar-mc.fr/installer-cobblemon/",
+        "indexed": true,
+        "status": "URL is on Google — Page is indexed",
+        "lastCrawlDisplayed": null,
+        "canonicalMatchesInspectedUrl": null
+      },
+      {
+        "checkedAt": "2026-11-02T12:34:40.016Z",
+        "url": "https://cobblestar-mc.fr/minecraft-pokemon/",
+        "indexed": true,
+        "status": "URL is on Google — Page is indexed",
+        "lastCrawlDisplayed": "Oct 30, 2026, 2:20:14 PM",
+        "canonicalMatchesInspectedUrl": true
+      }
+    ],
+    "coverage": {
+      "status": "processing",
+      "counts": null
+    },
+    "sitemap": {
+      "status": "Success",
+      "lastRead": "2026-11-01",
+      "submittedDisplayed": "2026-10-28",
+      "discoveredPages": 1057,
+      "discoveredVideos": 0
+    },
+    "coreWebVitals": {
+      "source": "Chrome UX report via Search Console",
+      "updatedDisplayed": "11/1/26",
+      "mobile": "Not enough usage data in the last 90 days for this device type.",
+      "desktop": "Not enough usage data in the last 90 days for this device type.",
+      "scores": null
+    }
+  },
+  "competitors": [
+    {
+      "url": "https://cobblemon-ultra.fr/",
+      "method": "Lecture du HTML public le 2 novembre, plus observation SERP",
+      "observations": "Parcours rejoindre/shop/wiki/Discord, présentation des activités et publications récentes sur mises à jour et tournois.",
+      "implication": "Montrer concrètement les activités et les étapes pour rejoindre. Les chiffres et superlatifs commerciaux ne sont pas repris comme faits indépendants."
+    },
+    {
+      "url": "https://tropimon.fr/",
+      "method": "Lecture du HTML public le 2 novembre, plus observation SERP",
+      "observations": "Launcher et Discord, notes de version, outils de combat et présentation des constructions communautaires.",
+      "implication": "Appuyer les différences CobbleStar sur des usages et des preuves réelles. L’affirmation numéro 1 du concurrent n’est pas validée par cet audit."
+    },
+    {
+      "url": "https://cobblemoon.fr/",
+      "method": "Présent dans les résultats Google ; lecture Web du site refusée HTTP 403",
+      "observations": "Présence observée sur la recherche cobblemon fr ; pas de revue détaillée du site.",
+      "implication": "Le refus du lecteur ne prouve pas que le site est indisponible aux joueurs."
+    }
+  ],
+  "cannibalisation": {
+    "status": "not_proven",
+    "observations": [
+      "Marque : plusieurs pages pertinentes visibles, ce qui ne constitue pas automatiquement une cannibalisation.",
+      "ligue cobblestar montre le hub wiki et l’accueil ; la fiche ciblée ne figure pas dans l’extraction titrée actuelle.",
+      "Pension : actualité et guide visibles avec des intentions différentes."
+    ],
+    "nextStep": "Comparer les pages d’entrée pour une même requête et un même pays sur une période suffisante avant d’envisager fusion ou redirection. Aucune fusion décidée sur un relevé ponctuel."
+  },
+  "contentImprovement": {
+    "page": "/minecraft-pokemon/",
+    "anchor": "#cobblemon-pixelmon",
+    "change": "Choix Cobblemon / Pixelmon / pack serveur en trois blocs, liens vers les consignes officielles et les parcours installation/rejoindre. Date modifiée uniquement pour cette page effectivement enrichie.",
+    "sourceCommit": "2e6261f",
+    "newUrls": 0,
+    "addedScripts": 0,
+    "validation": {
+      "fullBuild": "passed",
+      "publicTests": {
+        "passed": 36,
+        "failed": 0
+      },
+      "mobile": "390 × 844 : texte 17–18 px, trois blocs en une colonne, largeur document 375 px pour viewport 390, ancre dégagée sous le menu.",
+      "desktop": "1365 × 900 : trois blocs côte à côte.",
+      "publication": "pending_live_check"
+    },
+    "officialSources": [
+      "https://cobblemon.com/",
+      "https://github.com/Cobblemon-Global/Cobblemon/blob/main/README.md",
+      "https://pixelmonmod.com/wiki/Installation"
+    ]
+  },
+  "weeklyActions": [
+    {
+      "id": "S1",
+      "priority": "P0",
+      "action": "Vérifier les exclusions réelles dès la disponibilité du rapport d’indexation, puis traiter chaque motif constaté.",
+      "why": "Six URL prioritaires sont indexées, mais le bilan de couverture des 1 057 URL reste inconnu.",
+      "effort": "30–60 min à la disponibilité des données",
+      "pages": [
+        "/sitemap.xml",
+        "/wiki/pokedex/",
+        "/wiki/welcome/",
+        "/wiki/capture/"
+      ],
+      "success": "Exporter les motifs Google, identifier les URL touchées et vérifier canonical/robots/contenu avant toute correction. Aucune demande d’indexation répétée sans changement."
+    },
+    {
+      "id": "S2",
+      "priority": "P1",
+      "action": "Compléter le guide Minecraft Pokémon avec un choix clair Cobblemon / Pixelmon et le bon pack.",
+      "why": "Les SERP mélangent les deux mods ; le guide commence à recevoir des impressions sur des variantes, sans visibilité mesurée sur la requête exacte.",
+      "effort": "Réalisé aujourd’hui ; suivi 15 min/semaine",
+      "pages": [
+        "/minecraft-pokemon/#cobblemon-pixelmon",
+        "/installer-cobblemon/",
+        "/rejoindre/"
+      ],
+      "success": "Trois choix lisibles sur mobile, sources officielles, texte dans le HTML, 1 H1/canonical conservés. Suivre ensuite impressions et pages d’entrée sans garantie.",
+      "status": "tested_source_pushed_deployment_verification_pending"
+    },
+    {
+      "id": "S3",
+      "priority": "P1",
+      "action": "Ajouter des preuves du vrai serveur à l’accueil : une séquence courte de capture et deux captures des systèmes.",
+      "why": "Les concurrents montrent leur activité et des mises à jour ; CobbleStar doit expliquer sa différence avec des preuves propres au serveur.",
+      "effort": "2–4 h après enregistrement disponible",
+      "pages": [
+        "/#choisir-cobblestar",
+        "/wiki/caisses/",
+        "/wiki/welcome/"
+      ],
+      "success": "Médias réellement enregistrés sur CobbleStar, légendes utiles, images responsives et vidéo muette à chargement différé ; préouverture explicite.",
+      "dependency": "Médias du vrai serveur indisponibles ; aucune image inventée ni copie des concurrents."
+    },
+    {
+      "id": "S4",
+      "priority": "P1",
+      "action": "Revoir les parcours Ligue et raids à partir des liens existants, puis suivre les couples requête/page dans Search Console.",
+      "why": "Sur ligue cobblestar, le hub wiki et l’accueil sont visibles, pas la fiche cible. Sur raids, la correction automatique empêche une conclusion actuelle.",
+      "effort": "1–2 h",
+      "pages": [
+        "/wiki/",
+        "/wiki/ligue/",
+        "/wiki/epreuves/",
+        "/wiki/raids/"
+      ],
+      "success": "Liens descriptifs vers la fiche précise et prérequis complets ; aucune URL doublon. Ne déclarer une cannibalisation qu’avec des données requête/page cohérentes."
+    },
+    {
+      "id": "S5",
+      "priority": "P1",
+      "action": "Poursuivre l’allègement du catalogue Pokédex après profilage du HTML et des ressources.",
+      "why": "439 321 octets de HTML restent importants malgré la baisse d’environ 57,5 % depuis le 29 octobre.",
+      "effort": "3–5 h",
+      "pages": [
+        "/wiki/pokedex/"
+      ],
+      "success": "Réduction mesurée sans supprimer les 1 009 liens d’espèces, formes publiques, filtres, visuels ni contenu des fiches ; aucun WebGL animé par défaut."
+    },
+    {
+      "id": "S6",
+      "priority": "P1",
+      "action": "Contrôler les parcours mobile après chaque publication publique et mesurer les performances quand une mesure fiable est disponible.",
+      "why": "29 impressions mobile seulement ; aucune donnée CrUX utilisable. La taille du HTML ne donne pas un LCP/INP réel.",
+      "effort": "45 min par lot ; suivi terrain dès données",
+      "pages": [
+        "/",
+        "/minecraft-pokemon/",
+        "/boutique/",
+        "/wiki/pokedex/eevee/"
+      ],
+      "success": "Pas de débordement horizontal du document, texte lisible, navigation clavier/tactile utilisable. Rapporter LCP/INP/CLS avec leur source et période, sans score inventé."
+    },
+    {
+      "id": "S7",
+      "priority": "P2",
+      "action": "Consolider l’identité officielle CobbleStar sur les fiches externes déjà autorisées.",
+      "why": "La recherche de marque mélange CobbleStar avec Cobblestar Studios et d’autres serveurs homonymes.",
+      "effort": "1 h de revue ; modification uniquement dans les comptes autorisés",
+      "pages": [
+        "/",
+        "/rejoindre/"
+      ],
+      "success": "Nom, domaine, logo Cercle 5 et statut de préouverture cohérents ; aucun backlink acheté ni message envoyé à un tiers."
+    },
+    {
+      "id": "S8",
+      "priority": "P2",
+      "action": "Comparer chaque semaine les groupes serveur, installation et Pokédex en France, puis 28 jours contre 28 quand l’historique existe.",
+      "why": "Sept jours ne suffisent pas à conclure sur l’efficacité ; les requêtes filtrées anonymisées ne reconstituent pas le total.",
+      "effort": "45 min/semaine",
+      "pages": [
+        "/",
+        "/minecraft-pokemon/",
+        "/installer-cobblemon/",
+        "/wiki/pokedex/"
+      ],
+      "success": "Périodes complètes et filtres identiques, marque/hors marque et appareils séparés, aucun pourcentage sur une base indisponible."
+    }
+  ],
+  "preserved": [
+    "Préouverture",
+    "Téléchargement launcher désactivé",
+    "Absence de PokéPark",
+    "Créations internes exclues",
+    "Comptes, paiements, API, bot, administration"
+  ],
+  "limits": [
+    "Les 46 recherches ont chargé leurs résultats. Quatre corrections automatiques nécessitaient de vérifier l’orthographe originale ; le CAPTCHA rencontré lors de cette vérification a entraîné l’arrêt immédiat, sans contournement.",
+    "Une absence de première page ne prouve ni désindexation ni position au-delà de cette page.",
+    "La langue, le pays et pws=0 limitent certains biais mais ne garantissent ni une localisation physique en France ni des résultats identiques pour tous.",
+    "La méthode extrait les liens titrés Web : pas tous les sitelinks ou fonctionnalités de la SERP. Les corrections appliquées restent séparées des simples suggestions.",
+    "Aucune position moyenne Search Console, volume de recherche ou position numérique n’est inféré de ces observations.",
+    "Les inspections portent sur six URL, pas sur les 1 009 espèces. Aucune demande répétée d’indexation envoyée aujourd’hui.",
+    "HTTP 200 et présence dans le sitemap ne prouvent pas l’indexation. Les inspections ci-dessus sont le signal Google pour chaque URL.",
+    "Petit volume et historique récent : aucun résultat causal des modifications, aucune promesse de position. Les propres recherches de contrôle peuvent contribuer aux impressions.",
+    "Pas de volumes de marché, de classement géolocalisé exhaustif ou de score de performance terrain disponible.",
+    "Le contrôle technique automatisé ne remplace pas un audit exhaustif d’accessibilité ou une mesure de performance terrain."
+  ]
+}

@@ -1,0 +1,361 @@
+{
+  "checkedAt": "2026-11-02T12:40:37.962Z",
+  "property": "https://cobblestar-mc.fr/",
+  "status": "available",
+  "source": "Interface Search Console authentifiée, recherche Web",
+  "lastUpdateDisplayed": "3.5 à 4 hours ago",
+  "dataLag": "Dernier jour disponible : 31 octobre ; consultation le 2 novembre. Dates issues de l’interface Search Console, distinctes de l’heure locale du rapport.",
+  "global": {
+    "checkedAt": "2026-11-02T12:19:21.081Z",
+    "periodStart": "2026-10-25",
+    "periodEnd": "2026-10-31",
+    "clicks": 3,
+    "impressions": 204,
+    "ctrPercent": 1.5,
+    "averagePosition": 8.6,
+    "country": "All countries"
+  },
+  "france": {
+    "checkedAt": "2026-11-02T12:22:17.657Z",
+    "periodStart": "2026-10-25",
+    "periodEnd": "2026-10-31",
+    "clicks": 3,
+    "impressions": 183,
+    "ctrPercent": 1.6,
+    "averagePosition": 7,
+    "sourceUrl": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra",
+    "comparison": {
+      "periodStart": "2026-10-18",
+      "periodEnd": "2026-10-24",
+      "displayedClicks": 0,
+      "displayedImpressions": 0,
+      "averagePosition": null,
+      "interpretation": "L’interface affiche zéro avant le début de l’historique disponible ; pas une base historique comparable."
+    },
+    "country": "France"
+  },
+  "weekComparison": {
+    "current": [
+      "2026-10-25",
+      "2026-10-31"
+    ],
+    "previous": [
+      "2026-10-18",
+      "2026-10-24"
+    ],
+    "status": "insufficient_prior_history",
+    "explanation": "Sept premiers jours de mesures disponibles. Le compteur de la période précédente est zéro dans l’interface ; aucune croissance en pourcentage calculable sur un historique antérieur non disponible."
+  },
+  "trend28Days": {
+    "status": "insufficient_history",
+    "currentRequested": [
+      "2026-10-04",
+      "2026-10-31"
+    ],
+    "previousRequested": [
+      "2026-09-06",
+      "2026-10-03"
+    ],
+    "available": [
+      "2026-10-25",
+      "2026-10-31"
+    ],
+    "metrics": null
+  },
+  "exactQueries": [
+    {
+      "query": "cobblemon fr",
+      "checkedAt": "2026-11-02T12:31:17.424Z",
+      "periodStart": "2026-10-25",
+      "periodEnd": "2026-10-31",
+      "clicks": 0,
+      "impressions": 0,
+      "ctrPercent": null,
+      "averagePosition": null,
+      "sourceUrl": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra&breakdown=page&query=!cobblemon%20fr",
+      "comparison": {
+        "periodStart": "2026-10-18",
+        "periodEnd": "2026-10-24",
+        "displayedClicks": 0,
+        "displayedImpressions": 0,
+        "averagePosition": null,
+        "interpretation": "L’interface affiche zéro avant le début de l’historique disponible ; pas une base historique comparable."
+      },
+      "matching": "Exact query",
+      "country": "France",
+      "interpretation": "Aucune impression mesurée pour cette requête exacte : aucune position moyenne exploitable. Le 0 affiché n’est pas un rang."
+    },
+    {
+      "query": "minecraft pokemon",
+      "checkedAt": "2026-11-02T12:32:01.388Z",
+      "periodStart": "2026-10-25",
+      "periodEnd": "2026-10-31",
+      "clicks": 0,
+      "impressions": 0,
+      "ctrPercent": null,
+      "averagePosition": null,
+      "sourceUrl": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra&breakdown=page&query=!minecraft%20pokemon",
+      "comparison": {
+        "periodStart": "2026-10-18",
+        "periodEnd": "2026-10-24",
+        "displayedClicks": 0,
+        "displayedImpressions": 0,
+        "averagePosition": null,
+        "interpretation": "L’interface affiche zéro avant le début de l’historique disponible ; pas une base historique comparable."
+      },
+      "matching": "Exact query",
+      "country": "France",
+      "interpretation": "Aucune impression mesurée pour cette requête exacte : aucune position moyenne exploitable. Le 0 affiché n’est pas un rang."
+    }
+  ],
+  "brandSegmentation": {
+    "country": "France",
+    "regex": "cobblestar|cobble star",
+    "brand": {
+      "checkedAt": "2026-11-02T12:33:07.008Z",
+      "periodStart": "2026-10-25",
+      "periodEnd": "2026-10-31",
+      "clicks": 0,
+      "impressions": 0,
+      "ctrPercent": null,
+      "averagePosition": null,
+      "sourceUrl": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra&breakdown=page&query=~cobblestar%7Ccobble%20star",
+      "comparison": {
+        "periodStart": "2026-10-18",
+        "periodEnd": "2026-10-24",
+        "displayedClicks": 0,
+        "displayedImpressions": 0,
+        "averagePosition": null,
+        "interpretation": "L’interface affiche zéro avant le début de l’historique disponible ; pas une base historique comparable."
+      }
+    },
+    "nonBrand": {
+      "checkedAt": "2026-11-02T12:33:46.627Z",
+      "periodStart": "2026-10-25",
+      "periodEnd": "2026-10-31",
+      "clicks": 0,
+      "impressions": 17,
+      "ctrPercent": 0,
+      "averagePosition": 36.8,
+      "sourceUrl": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra&breakdown=page&query=_cobblestar%7Ccobble%20star",
+      "comparison": {
+        "periodStart": "2026-10-18",
+        "periodEnd": "2026-10-24",
+        "displayedClicks": 0,
+        "displayedImpressions": 0,
+        "averagePosition": null,
+        "interpretation": "L’interface affiche zéro avant le début de l’historique disponible ; pas une base historique comparable."
+      }
+    },
+    "limits": "Les requêtes rares ou anonymisées ne sont pas toutes exposées avec un filtre. Marque (0 impression) et hors marque (17 impressions) ne reconstituent pas les 183 impressions ni les 3 clics globaux France. Les clics restants ne sont attribués à aucun segment par déduction."
+  },
+  "devices": [
+    {
+      "device": "desktop",
+      "clicks": 3,
+      "impressions": 149,
+      "ctrPercent": 2,
+      "averagePosition": 7.4
+    },
+    {
+      "device": "mobile",
+      "clicks": 0,
+      "impressions": 29,
+      "ctrPercent": 0,
+      "averagePosition": 5.6
+    },
+    {
+      "device": "tablet",
+      "clicks": 0,
+      "impressions": 5,
+      "ctrPercent": 0,
+      "averagePosition": 4.6
+    }
+  ],
+  "deviceScope": "France, Web, 25–31 octobre ; précédent 18–24 octobre affiché zéro, historique insuffisant.",
+  "pageObservation": {
+    "url": "https://cobblestar-mc.fr/minecraft-pokemon/",
+    "clicks": 0,
+    "impressions": 5,
+    "ctrPercent": 0,
+    "averagePosition": 40.8,
+    "scope": "France, 25–31 octobre, toutes requêtes de cette page confondues. Ce n’est PAS le rang de minecraft pokemon."
+  },
+  "coverage": {
+    "status": "processing",
+    "counts": null
+  },
+  "sitemap": {
+    "status": "Success",
+    "lastRead": "2026-11-01",
+    "submittedDisplayed": "2026-10-28",
+    "discoveredPages": 1057,
+    "discoveredVideos": 0
+  },
+  "coreWebVitals": {
+    "source": "Chrome UX report via Search Console",
+    "updatedDisplayed": "11/1/26",
+    "mobile": "Not enough usage data in the last 90 days for this device type.",
+    "desktop": "Not enough usage data in the last 90 days for this device type.",
+    "scores": null
+  },
+  "inspections": [
+    {
+      "checkedAt": "2026-11-02T12:32:08.983Z",
+      "url": "https://cobblestar-mc.fr/wiki/pokedex/eevee/",
+      "indexed": true,
+      "status": "URL is on Google — Page is indexed",
+      "lastCrawlDisplayed": "Oct 29, 2026, 5:21:17 PM",
+      "canonicalMatchesInspectedUrl": true,
+      "evidence": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nhttps://cobblestar-mc.fr/wiki/pokedex/eevee/\nURL Inspection\nTEST LIVE URL\ncheck_circle\nURL is on Google\nIt can appear in Google Search results (if not subject to a manual action or removal request) with all relevant enhancements. Learn more\nVIEW CRAWLED PAGE\nPage changed?\nREQUEST INDEXING\ncheck_circle\nPage indexing\nPage is indexed\n\nDiscovery\nSitemaps\nNo referring sitemaps detected\nReferring page\nNone detected\nURL might be known from other sources that are currently not reported\nCrawl\nLast crawl\nOct 29, 2026, 5:21:17 PM\nCrawled as\nGooglebot smartphone\nCrawl allowed?\nYes\nPage fetch\nSuccessful\nIndexing allowed?\nYes\nIndexing\nUser-declared canonical\nhttps://cobblestar-mc.fr/wiki/pokedex/eevee/\nGoogle-selected canonical\n\nInspected URL\nLEARN MORE\nOPEN REPORT\nEnhancements & Experience\ncheck_circle\nHTTPS\nPage is served over HTTPS\n\ncheck_circle\nBreadcrumbs\n1 valid item detected\n\n\nURL inspection\nLearn how the Google Index sees your page. Use this to troubleshoot if your page isn't appearing, or isn't appearing properly, in Google Search results.\nLearn more\nGot it"
+    },
+    {
+      "checkedAt": "2026-11-02T12:32:53.006Z",
+      "url": "https://cobblestar-mc.fr/wiki/pokedex/riolu/",
+      "indexed": true,
+      "status": "URL is on Google — Page is indexed",
+      "lastCrawlDisplayed": "Oct 29, 2026, 11:12:00 AM",
+      "canonicalMatchesInspectedUrl": true,
+      "evidence": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nhttps://cobblestar-mc.fr/wiki/pokedex/riolu/\nURL Inspection\nTEST LIVE URL\ncheck_circle\nURL is on Google\nIt can appear in Google Search results (if not subject to a manual action or removal request) with all relevant enhancements. Learn more\nVIEW CRAWLED PAGE\nPage changed?\nREQUEST INDEXING\ncheck_circle\nPage indexing\nPage is indexed\n\nDiscovery\nSitemaps\nTemporary processing error\nReferring page\nhttps://cobblestar-mc.fr/minecraft-pokemon/\nCrawl\nLast crawl\nOct 29, 2026, 11:12:00 AM\nCrawled as\nGooglebot smartphone\nCrawl allowed?\nYes\nPage fetch\nSuccessful\nIndexing allowed?\nYes\nIndexing\nUser-declared canonical\nhttps://cobblestar-mc.fr/wiki/pokedex/riolu/\nGoogle-selected canonical\n\nInspected URL\nLEARN MORE\nOPEN REPORT\nEnhancements & Experience\ncheck_circle\nHTTPS\nPage is served over HTTPS\n\ncheck_circle\nBreadcrumbs\n1 valid item detected\n\n\nURL inspection\nLearn how the Google Index sees your page. Use this to troubleshoot if your page isn't appearing, or isn't appearing properly, in Google Search results.\nLearn more\nGot it"
+    },
+    {
+      "checkedAt": "2026-11-02T12:33:15.860Z",
+      "url": "https://cobblestar-mc.fr/wiki/welcome/",
+      "indexed": true,
+      "status": "URL is on Google — Page is indexed",
+      "lastCrawlDisplayed": "Oct 30, 2026, 2:35:42 AM",
+      "canonicalMatchesInspectedUrl": true,
+      "evidence": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nhttps://cobblestar-mc.fr/wiki/welcome/\nURL Inspection\nTEST LIVE URL\ncheck_circle\nURL is on Google\nIt can appear in Google Search results (if not subject to a manual action or removal request) with all relevant enhancements. Learn more\nVIEW CRAWLED PAGE\nPage changed?\nREQUEST INDEXING\ncheck_circle\nPage indexing\nPage is indexed\n\nDiscovery\nSitemaps\nhttps://cobblestar-mc.fr/sitemap.xml\nReferring page\nhttps://cobblestar-mc.fr/rejoindre/\nCrawl\nLast crawl\nOct 30, 2026, 2:35:42 AM\nCrawled as\nGooglebot smartphone\nCrawl allowed?\nYes\nPage fetch\nSuccessful\nIndexing allowed?\nYes\nIndexing\nUser-declared canonical\nhttps://cobblestar-mc.fr/wiki/welcome/\nGoogle-selected canonical\n\nInspected URL\nLEARN MORE\nOPEN REPORT\nEnhancements & Experience\ncheck_circle\nHTTPS\nPage is served over HTTPS\n\ncheck_circle\nBreadcrumbs\n1 valid item detected\n\n\nURL inspection\nLearn how the Google Index sees your page. Use this to troubleshoot if your page isn't appearing, or isn't appearing properly, in Google Search results.\nLearn more\nGot it\nURL Inspection"
+    },
+    {
+      "checkedAt": "2026-11-02T12:33:47.968Z",
+      "url": "https://cobblestar-mc.fr/wiki/capture/",
+      "indexed": true,
+      "status": "URL is on Google — Page is indexed",
+      "lastCrawlDisplayed": "Oct 30, 2026, 2:41:05 AM",
+      "canonicalMatchesInspectedUrl": true,
+      "evidence": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nhttps://cobblestar-mc.fr/wiki/capture/\nURL Inspection\nTEST LIVE URL\ncheck_circle\nURL is on Google\nIt can appear in Google Search results (if not subject to a manual action or removal request) with all relevant enhancements. Learn more\nVIEW CRAWLED PAGE\nPage changed?\nREQUEST INDEXING\ncheck_circle\nPage indexing\nPage is indexed\n\nDiscovery\nSitemaps\nhttps://cobblestar-mc.fr/sitemap.xml\nReferring page\nhttps://cobblestar-mc.fr/rejoindre/\nCrawl\nLast crawl\nOct 30, 2026, 2:41:05 AM\nCrawled as\nGooglebot smartphone\nCrawl allowed?\nYes\nPage fetch\nSuccessful\nIndexing allowed?\nYes\nIndexing\nUser-declared canonical\nhttps://cobblestar-mc.fr/wiki/capture/\nGoogle-selected canonical\n\nInspected URL\nLEARN MORE\nOPEN REPORT\nEnhancements & Experience\ncheck_circle\nHTTPS\nPage is served over HTTPS\n\ncheck_circle\nBreadcrumbs\n1 valid item detected\n\n\nURL inspection\nLearn how the Google Index sees your page. Use this to troubleshoot if your page isn't appearing, or isn't appearing properly, in Google Search results.\nLearn more\nGot it"
+    },
+    {
+      "checkedAt": "2026-11-02T12:34:01.026Z",
+      "url": "https://cobblestar-mc.fr/installer-cobblemon/",
+      "indexed": true,
+      "status": "URL is on Google — Page is indexed",
+      "lastCrawlDisplayed": null,
+      "canonicalMatchesInspectedUrl": null,
+      "evidence": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nhttps://cobblestar-mc.fr/installer-cobblemon/\nURL Inspection\nTEST LIVE URL\ncheck_circle\nURL is on Google\nIt can appear in Google Search results (if not subject to a manual action or removal request) with all relevant enhancements. Learn more\nVIEW CRAWLED PAGE\nPage changed?\nREQUEST INDEXING\ncheck_circle\nPage indexing\nPage is indexed\n\nEnhancements & Experience\ncheck_circle\nHTTPS\nPage is served over HTTPS\n\ncheck_circle\nBreadcrumbs\n1 valid item detected\n\n\nURL inspection\nLearn how the Google Index sees your page. Use this to troubleshoot if your page isn't appearing, or isn't appearing properly, in Google Search results.\nLearn more\nGot it\nURL Inspection"
+    },
+    {
+      "checkedAt": "2026-11-02T12:34:40.016Z",
+      "url": "https://cobblestar-mc.fr/minecraft-pokemon/",
+      "indexed": true,
+      "status": "URL is on Google — Page is indexed",
+      "lastCrawlDisplayed": "Oct 30, 2026, 2:20:14 PM",
+      "canonicalMatchesInspectedUrl": true,
+      "evidence": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nhttps://cobblestar-mc.fr/minecraft-pokemon/\nURL Inspection\nTEST LIVE URL\ncheck_circle\nURL is on Google\nIt can appear in Google Search results (if not subject to a manual action or removal request) with all relevant enhancements. Learn more\nVIEW CRAWLED PAGE\nPage changed?\nREQUEST INDEXING\ncheck_circle\nPage indexing\nPage is indexed\n\nDiscovery\nSitemaps\nhttps://cobblestar-mc.fr/sitemap.xml\nReferring page\nNone detected\nCrawl\nLast crawl\nOct 30, 2026, 2:20:14 PM\nCrawled as\nGooglebot smartphone\nCrawl allowed?\nYes\nPage fetch\nSuccessful\nIndexing allowed?\nYes\nIndexing\nUser-declared canonical\nhttps://cobblestar-mc.fr/minecraft-pokemon/\nGoogle-selected canonical\n\nInspected URL\nLEARN MORE\nOPEN REPORT\nEnhancements & Experience\ncheck_circle\nHTTPS\nPage is served over HTTPS\n\ncheck_circle\nBreadcrumbs\n1 valid item detected\n\n\nURL inspection\nLearn how the Google Index sees your page. Use this to troubleshoot if your page isn't appearing, or isn't appearing properly, in Google Search results.\nLearn more\nGot it"
+    }
+  ],
+  "limits": [
+    "Les inspections portent sur six URL, pas sur les 1 009 espèces. Aucune demande répétée d’indexation envoyée aujourd’hui.",
+    "HTTP 200 et présence dans le sitemap ne prouvent pas l’indexation. Les inspections ci-dessus sont le signal Google pour chaque URL.",
+    "Petit volume et historique récent : aucun résultat causal des modifications, aucune promesse de position. Les propres recherches de contrôle peuvent contribuer aux impressions.",
+    "Pas de volumes de marché, de classement géolocalisé exhaustif ou de score de performance terrain disponible."
+  ],
+  "evidence": {
+    "globalOverview": {
+      "at": "2026-11-02T12:19:21.081Z",
+      "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nPerformance\n\nEXPORT\n24 hours\n7 days\n28 days\n3 months\nMore\narrow_drop_down\nSearch type: Web\narrow_drop_down\nSearch type: Web\nadd\nAdd filter\nAdd filter\nfilter_list_spark\nCustomize your Performance report using AI\nLast update: 3.5 hours ago\n\nTotal clicks\n3\n\n\nTotal impressions\n204\n\n\nAverage CTR\n1.5%\n\n\nAverage position\n8.6\n\nDaily\n10/25/26\n10/26/26\n10/27/26\n10/28/26\n10/29/26\n10/30/26\n10/31/26\n3\n2\n1\n0\n90\n60\n30\n0\nChart, containing counts of Total clicks, Total impressions, Average CTR, and Average position from October 25, 2026 to October 31, 2026\ninfo\nGet more details on your site’s performance in generative AI features on Google Search\nOpen report\nchevron_forward\nQUERIES\nPAGES\nCOUNTRIES\nDEVICES\nSEARCH APPEARANCE\nDAYS\n\nTop queries\n\t\nClicks\n\t\nImpressions\n\t\nCTR\n\t\nPosition\n\nmode pokemon minecraft\t0\t2\t0%\t33.0\nmordudor cobblemon\t0\t1\t0%\t5.0\nmeltan cobblemon evolution\t0\t1\t0%\t7.0\nevolution metamorph\t0\t1\t0%\t8.0\nhoundstone cobblemon\t0\t1\t0%\t9.0\nverpom cobblemon\t0\t1\t0%\t10.0\nmine craft pokemon\t0\t1\t0%\t29.0\nevolution rongourmand\t0\t1\t0%\t31.0\nevolution coconfort\t0\t1\t0%\t42.0\ncobblemon minecraft\t0\t1\t0%\t47.0\nRows per page:\n5\n10\n25\n50\n100\n250\n500\n1-10 of 20\nPrevious page\nNext page"
+    },
+    "globalWeekCompare": {
+      "at": "2026-11-02T12:20:19.846Z",
+      "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nPerformance\n\nEXPORT\n24 hours\n7 days\n28 days\n3 months\nCompare\narrow_drop_down\nSearch type: Web\narrow_drop_down\nSearch type: Web\nadd\nAdd filter\nAdd filter\nfilter_list_spark\nCustomize your Performance report using AI\nReset filters\nReset filters\nLast update: 3.5 hours ago\n\nTotal clicks\n3\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nTotal impressions\n204\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nAverage CTR\n1.5%\n10/25/26 - 10/31/26\n0%\n10/18/26 - 10/24/26\n\n\nAverage position\n8.6\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\nDaily\n1\n2\n3\n4\n5\n6\n7\nChart, containing counts of 10/25/26 - 10/31/26 Clicks, 10/18/26 - 10/24/26 Clicks, 10/25/26 - 10/31/26 Impressions, 10/18/26 - 10/24/26 Impressions, 10/25/26 - 10/31/26 CTR, 10/18/26 - 10/24/26 CTR, 10/25/26 - 10/31/26 Position, and 10/18/26 - 10/24/26 Position from Invalid Date to January 1, 1970\ninfo\nGet more details on your site’s performance in generative AI features on Google Search\nOpen report\nchevron_forward\nQUERIES\nPAGES\nCOUNTRIES\nDEVICES\nSEARCH APPEARANCE\nDAYS\n\nTop queries\n\t\nClicks\n10/25/26 - 10/31/26\n\t\nClicks\n10/18/26 - 10/24/26\n\t\nClicks\nDifference\n\t\nImpressions\n10/25/26 - 10/31/26\n\t\nImpressions\n10/18/26 - 10/24/26\n\t\nImpressions\nDifference\n\t\nCTR\n10/25/26 - 10/31/26\n\t\nCTR\n10/18/26 - 10/24/26\n\t\nCTR\nDifference\n\t\nPosition\n10/25/26 - 10/31/26\n\t\nPosition\n10/18/26 - 10/24/26\n\t\nPosition\nDifference\n\nmode pokemon minecraft\t0\t0\t0\t2\t0\t2\t0%\t0%\t0%\t33\t0\t33\nmordudor cobblemon\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t5\t0\t5\nmeltan cobblemon evolution\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t7\t0\t7\nevolution metamorph\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t8\t0\t8\nhoundstone cobblemon\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t9\t0\t9\nverpom cobblemon\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t10\t0\t10\nmine craft pokemon\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t29\t0\t29\nevolution rongourmand\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t31\t0\t31\nevolution coconfort\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t42\t0\t42\ncobblemon minecraft\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t47\t0\t47\nRows per page:\n5\n10\n25\n50\n100\n250\n500\n1-10 of 20\nPrevious page\nNext page\nPerformance on Search results",
+      "url": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024"
+    },
+    "coverage": {
+      "at": "2026-11-02T12:20:19.860Z",
+      "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nPage indexing\n\nProcessing data, please check again in a day or so\ninfo_filled\nWhy pages aren’t indexed\nPages that aren’t indexed can’t be served on Google\n\nReason\n\tSource\n\n\tValidation\n\tTrend\t\nPages\n\nProcessing data, please check again in a day or so"
+    },
+    "franceWeekCompare": {
+      "at": "2026-11-02T12:22:17.657Z",
+      "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nPerformance\n\nEXPORT\n24 hours\n7 days\n28 days\n3 months\nCompare\narrow_drop_down\nSearch type: Web\narrow_drop_down\nSearch type: Web\nCountry: France\nCountry: France\nclose\nadd\nAdd filter\nAdd filter\nfilter_list_spark\nCustomize your Performance report using AI\nReset filters\nReset filters\nLast update: 3.5 hours ago\n\nTotal clicks\n3\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nTotal impressions\n183\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nAverage CTR\n1.6%\n10/25/26 - 10/31/26\n0%\n10/18/26 - 10/24/26\n\n\nAverage position\n7\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\nDaily\n1\n2\n3\n4\n5\n6\n7\nChart, containing counts of 10/25/26 - 10/31/26 Clicks, 10/18/26 - 10/24/26 Clicks, 10/25/26 - 10/31/26 Impressions, 10/18/26 - 10/24/26 Impressions, 10/25/26 - 10/31/26 CTR, 10/18/26 - 10/24/26 CTR, 10/25/26 - 10/31/26 Position, and 10/18/26 - 10/24/26 Position from Invalid Date to January 1, 1970\ninfo\nGet more details on your site’s performance in generative AI features on Google Search\nOpen report\nchevron_forward\nQUERIES\nPAGES\nCOUNTRIES\nDEVICES\nSEARCH APPEARANCE\nDAYS\n\nTop queries\n\t\nClicks\n10/25/26 - 10/31/26\n\t\nClicks\n10/18/26 - 10/24/26\n\t\nClicks\nDifference\n\t\nImpressions\n10/25/26 - 10/31/26\n\t\nImpressions\n10/18/26 - 10/24/26\n\t\nImpressions\nDifference\n\t\nCTR\n10/25/26 - 10/31/26\n\t\nCTR\n10/18/26 - 10/24/26\n\t\nCTR\nDifference\n\t\nPosition\n10/25/26 - 10/31/26\n\t\nPosition\n10/18/26 - 10/24/26\n\t\nPosition\nDifference\n\nmode pokemon minecraft\t0\t0\t0\t2\t0\t2\t0%\t0%\t0%\t33\t0\t33\nmordudor cobblemon\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t5\t0\t5\nmeltan cobblemon evolution\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t7\t0\t7\nevolution metamorph\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t8\t0\t8\nhoundstone cobblemon\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t9\t0\t9\nverpom cobblemon\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t10\t0\t10\nmine craft pokemon\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t29\t0\t29\nevolution rongourmand\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t31\t0\t31\nevolution coconfort\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t42\t0\t42\ncobblemon minecraft\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t47\t0\t47\nRows per page:\n5\n10\n25\n50\n100\n250\n500\n1-10 of 16\nPrevious page\nNext page",
+      "url": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra"
+    },
+    "franceDevices": {
+      "at": "2026-11-02T12:23:56.821Z",
+      "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nPerformance\n\nEXPORT\n24 hours\n7 days\n28 days\n3 months\nCompare\narrow_drop_down\nSearch type: Web\narrow_drop_down\nSearch type: Web\nCountry: France\nCountry: France\nclose\nadd\nAdd filter\nAdd filter\nfilter_list_spark\nCustomize your Performance report using AI\nReset filters\nReset filters\nLast update: 3.5 hours ago\n\nTotal clicks\n3\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nTotal impressions\n183\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nAverage CTR\n1.6%\n10/25/26 - 10/31/26\n0%\n10/18/26 - 10/24/26\n\n\nAverage position\n7\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\nDaily\n1\n2\n3\n4\n5\n6\n7\nChart, containing counts of 10/25/26 - 10/31/26 Clicks, 10/18/26 - 10/24/26 Clicks, 10/25/26 - 10/31/26 Impressions, 10/18/26 - 10/24/26 Impressions, 10/25/26 - 10/31/26 CTR, 10/18/26 - 10/24/26 CTR, 10/25/26 - 10/31/26 Position, and 10/18/26 - 10/24/26 Position from Invalid Date to January 1, 1970\ninfo\nGet more details on your site’s performance in generative AI features on Google Search\nOpen report\nchevron_forward\nQUERIES\nPAGES\nCOUNTRIES\nDEVICES\nSEARCH APPEARANCE\nDAYS\n\nDevice\n\t\nClicks\n10/25/26 - 10/31/26\n\t\nClicks\n10/18/26 - 10/24/26\n\t\nClicks\nDifference\n\t\nImpressions\n10/25/26 - 10/31/26\n\t\nImpressions\n10/18/26 - 10/24/26\n\t\nImpressions\nDifference\n\t\nCTR\n10/25/26 - 10/31/26\n\t\nCTR\n10/18/26 - 10/24/26\n\t\nCTR\nDifference\n\t\nPosition\n10/25/26 - 10/31/26\n\t\nPosition\n10/18/26 - 10/24/26\n\t\nPosition\nDifference\n\nDesktop\t3\t0\t3\t149\t0\t149\t2%\t0%\t2%\t7.4\t0\t7.4\nMobile\t0\t0\t0\t29\t0\t29\t0%\t0%\t0%\t5.6\t0\t5.6\nTablet\t0\t0\t0\t5\t0\t5\t0%\t0%\t0%\t4.6\t0\t4.6\nRows per page:\n5\n10\n25\n50\n100\n250\n500\n1-3 of 3\nPrevious page\nNext page",
+      "url": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra&breakdown=device"
+    },
+    "francePages": {
+      "at": "2026-11-02T12:25:44.875Z",
+      "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nPerformance\n\nEXPORT\n24 hours\n7 days\n28 days\n3 months\nCompare\narrow_drop_down\nSearch type: Web\narrow_drop_down\nSearch type: Web\nCountry: France\nCountry: France\nclose\nadd\nAdd filter\nAdd filter\nfilter_list_spark\nCustomize your Performance report using AI\nReset filters\nReset filters\nLast update: 3.5 hours ago\n\nTotal clicks\n3\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nTotal impressions\n183\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nAverage CTR\n1.6%\n10/25/26 - 10/31/26\n0%\n10/18/26 - 10/24/26\n\n\nAverage position\n7\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\nDaily\n1\n2\n3\n4\n5\n6\n7\nChart, containing counts of 10/25/26 - 10/31/26 Clicks, 10/18/26 - 10/24/26 Clicks, 10/25/26 - 10/31/26 Impressions, 10/18/26 - 10/24/26 Impressions, 10/25/26 - 10/31/26 CTR, 10/18/26 - 10/24/26 CTR, 10/25/26 - 10/31/26 Position, and 10/18/26 - 10/24/26 Position from Invalid Date to January 1, 1970\ninfo\nGet more details on your site’s performance in generative AI features on Google Search\nOpen report\nchevron_forward\nQUERIES\nPAGES\nCOUNTRIES\nDEVICES\nSEARCH APPEARANCE\nDAYS\n\nTop pages\n\t\nClicks\n10/25/26 - 10/31/26\n\t\nClicks\n10/18/26 - 10/24/26\n\t\nClicks\nDifference\n\t\nImpressions\n10/25/26 - 10/31/26\n\t\nImpressions\n10/18/26 - 10/24/26\n\t\nImpressions\nDifference\n\t\nCTR\n10/25/26 - 10/31/26\n\t\nCTR\n10/18/26 - 10/24/26\n\t\nCTR\nDifference\n\t\nPosition\n10/25/26 - 10/31/26\n\t\nPosition\n10/18/26 - 10/24/26\n\t\nPosition\nDifference\n\nhttps://cobblestar-mc.fr/minecraft-pokemon/\t0\t0\t0\t5\t0\t5\t0%\t0%\t0%\t40.8\t0\t40.8\nhttps://cobblestar-mc.fr/wiki/pokedex/gimmighoul/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t5\t0\t5\nhttps://cobblestar-mc.fr/wiki/pokedex/meltan/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t7\t0\t7\nhttps://cobblestar-mc.fr/wiki/pokedex/ditto/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t8\t0\t8\nhttps://cobblestar-mc.fr/wiki/pokedex/houndstone/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t9\t0\t9\nhttps://cobblestar-mc.fr/wiki/pokedex/applin/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t10\t0\t10\nhttps://cobblestar-mc.fr/wiki/pokedex/skwovet/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t31\t0\t31\nhttps://cobblestar-mc.fr/wiki/pokedex/kakuna/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t42\t0\t42\nhttps://cobblestar-mc.fr/wiki/pokedex/karrablast/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t50\t0\t50\nhttps://cobblestar-mc.fr/wiki/pokedex/eevee/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t55\t0\t55\nRows per page:\n5\n10\n25\n50\n100\n250\n500\n1-10 of 13\nPrevious page\nNext page",
+      "url": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra&breakdown=page"
+    },
+    "exactCobblemonFr": {
+      "at": "2026-11-02T12:31:17.424Z",
+      "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\nPerformance\n\nEXPORT\n24 hours\n7 days\n28 days\n3 months\nCompare\narrow_drop_down\nSearch type: Web\narrow_drop_down\nSearch type: Web\nQuery: cobblemon fr\nQuery: cobblemon fr\nclose\nCountry: France\nCountry: France\nclose\nadd\nAdd filter\nAdd filter\nfilter_list_spark\nCustomize your Performance report using AI\nReset filters\nReset filters\nLast update: 4 hours ago\n\nTotal clicks\n0\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nTotal impressions\n0\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nAverage CTR\n0%\n10/25/26 - 10/31/26\n0%\n10/18/26 - 10/24/26\n\n\nAverage position\n0\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\nDaily\n1\n2\n3\n4\n5\n6\n7\nChart, containing counts of 10/25/26 - 10/31/26 Clicks, 10/18/26 - 10/24/26 Clicks, 10/25/26 - 10/31/26 Impressions, 10/18/26 - 10/24/26 Impressions, 10/25/26 - 10/31/26 CTR, 10/18/26 - 10/24/26 CTR, 10/25/26 - 10/31/26 Position, and 10/18/26 - 10/24/26 Position from Invalid Date to January 1, 1970\ninfo\nGet more details on your site’s performance in generative AI features on Google Search\nOpen report\nchevron_forward\nQUERIES\nPAGES\nCOUNTRIES\nDEVICES\nSEARCH APPEARANCE\nDAYS\n\nTop pages\n\t\nClicks\n10/25/26 - 10/31/26\n\t\nClicks\n10/18/26 - 10/24/26\n\t\nClicks\nDifference\n\t\nImpressions\n10/25/26 - 10/31/26\n\t\nImpressions\n10/18/26 - 10/24/26\n\t\nImpressions\nDifference\n\t\nCTR\n10/25/26 - 10/31/26\n\t\nCTR\n10/18/26 - 10/24/26\n\t\nCTR\nDifference\n\t\nPosition\n10/25/26 - 10/31/26\n\t\nPosition\n10/18/26 - 10/24/26\n\t\nPosition\nDifference\nNo data\nPerformance on Search results",
+      "url": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra&breakdown=page&query=!cobblemon%20fr"
+    },
+    "exactMinecraftPokemon": {
+      "at": "2026-11-02T12:32:01.388Z",
+      "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\nPerformance\n\nEXPORT\n24 hours\n7 days\n28 days\n3 months\nCompare\narrow_drop_down\nSearch type: Web\narrow_drop_down\nSearch type: Web\nQuery: minecraft pokemon\nQuery: minecraft pokemon\nclose\nCountry: France\nCountry: France\nclose\nadd\nAdd filter\nAdd filter\nfilter_list_spark\nCustomize your Performance report using AI\nReset filters\nReset filters\nLast update: 4 hours ago\n\nTotal clicks\n0\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nTotal impressions\n0\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nAverage CTR\n0%\n10/25/26 - 10/31/26\n0%\n10/18/26 - 10/24/26\n\n\nAverage position\n0\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\nDaily\n1\n2\n3\n4\n5\n6\n7\nChart, containing counts of 10/25/26 - 10/31/26 Clicks, 10/18/26 - 10/24/26 Clicks, 10/25/26 - 10/31/26 Impressions, 10/18/26 - 10/24/26 Impressions, 10/25/26 - 10/31/26 CTR, 10/18/26 - 10/24/26 CTR, 10/25/26 - 10/31/26 Position, and 10/18/26 - 10/24/26 Position from Invalid Date to January 1, 1970\ninfo\nGet more details on your site’s performance in generative AI features on Google Search\nOpen report\nchevron_forward\nQUERIES\nPAGES\nCOUNTRIES\nDEVICES\nSEARCH APPEARANCE\nDAYS\n\nTop pages\n\t\nClicks\n10/25/26 - 10/31/26\n\t\nClicks\n10/18/26 - 10/24/26\n\t\nClicks\nDifference\n\t\nImpressions\n10/25/26 - 10/31/26\n\t\nImpressions\n10/18/26 - 10/24/26\n\t\nImpressions\nDifference\n\t\nCTR\n10/25/26 - 10/31/26\n\t\nCTR\n10/18/26 - 10/24/26\n\t\nCTR\nDifference\n\t\nPosition\n10/25/26 - 10/31/26\n\t\nPosition\n10/18/26 - 10/24/26\n\t\nPosition\nDifference\nNo data",
+      "url": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra&breakdown=page&query=!minecraft%20pokemon"
+    },
+    "inspections": [
+      {
+        "at": "2026-11-02T12:32:08.983Z",
+        "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nhttps://cobblestar-mc.fr/wiki/pokedex/eevee/\nURL Inspection\nTEST LIVE URL\ncheck_circle\nURL is on Google\nIt can appear in Google Search results (if not subject to a manual action or removal request) with all relevant enhancements. Learn more\nVIEW CRAWLED PAGE\nPage changed?\nREQUEST INDEXING\ncheck_circle\nPage indexing\nPage is indexed\n\nDiscovery\nSitemaps\nNo referring sitemaps detected\nReferring page\nNone detected\nURL might be known from other sources that are currently not reported\nCrawl\nLast crawl\nOct 29, 2026, 5:21:17 PM\nCrawled as\nGooglebot smartphone\nCrawl allowed?\nYes\nPage fetch\nSuccessful\nIndexing allowed?\nYes\nIndexing\nUser-declared canonical\nhttps://cobblestar-mc.fr/wiki/pokedex/eevee/\nGoogle-selected canonical\n\nInspected URL\nLEARN MORE\nOPEN REPORT\nEnhancements & Experience\ncheck_circle\nHTTPS\nPage is served over HTTPS\n\ncheck_circle\nBreadcrumbs\n1 valid item detected\n\n\nURL inspection\nLearn how the Google Index sees your page. Use this to troubleshoot if your page isn't appearing, or isn't appearing properly, in Google Search results.\nLearn more\nGot it",
+        "url": "https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&id=DwipZIv84iajbOeTmgpjRw"
+      },
+      {
+        "at": "2026-11-02T12:32:53.006Z",
+        "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nhttps://cobblestar-mc.fr/wiki/pokedex/riolu/\nURL Inspection\nTEST LIVE URL\ncheck_circle\nURL is on Google\nIt can appear in Google Search results (if not subject to a manual action or removal request) with all relevant enhancements. Learn more\nVIEW CRAWLED PAGE\nPage changed?\nREQUEST INDEXING\ncheck_circle\nPage indexing\nPage is indexed\n\nDiscovery\nSitemaps\nTemporary processing error\nReferring page\nhttps://cobblestar-mc.fr/minecraft-pokemon/\nCrawl\nLast crawl\nOct 29, 2026, 11:12:00 AM\nCrawled as\nGooglebot smartphone\nCrawl allowed?\nYes\nPage fetch\nSuccessful\nIndexing allowed?\nYes\nIndexing\nUser-declared canonical\nhttps://cobblestar-mc.fr/wiki/pokedex/riolu/\nGoogle-selected canonical\n\nInspected URL\nLEARN MORE\nOPEN REPORT\nEnhancements & Experience\ncheck_circle\nHTTPS\nPage is served over HTTPS\n\ncheck_circle\nBreadcrumbs\n1 valid item detected\n\n\nURL inspection\nLearn how the Google Index sees your page. Use this to troubleshoot if your page isn't appearing, or isn't appearing properly, in Google Search results.\nLearn more\nGot it",
+        "url": "https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&id=3KI230SuGKUQLUpaAs_RDg"
+      },
+      {
+        "at": "2026-11-02T12:33:15.860Z",
+        "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nhttps://cobblestar-mc.fr/wiki/welcome/\nURL Inspection\nTEST LIVE URL\ncheck_circle\nURL is on Google\nIt can appear in Google Search results (if not subject to a manual action or removal request) with all relevant enhancements. Learn more\nVIEW CRAWLED PAGE\nPage changed?\nREQUEST INDEXING\ncheck_circle\nPage indexing\nPage is indexed\n\nDiscovery\nSitemaps\nhttps://cobblestar-mc.fr/sitemap.xml\nReferring page\nhttps://cobblestar-mc.fr/rejoindre/\nCrawl\nLast crawl\nOct 30, 2026, 2:35:42 AM\nCrawled as\nGooglebot smartphone\nCrawl allowed?\nYes\nPage fetch\nSuccessful\nIndexing allowed?\nYes\nIndexing\nUser-declared canonical\nhttps://cobblestar-mc.fr/wiki/welcome/\nGoogle-selected canonical\n\nInspected URL\nLEARN MORE\nOPEN REPORT\nEnhancements & Experience\ncheck_circle\nHTTPS\nPage is served over HTTPS\n\ncheck_circle\nBreadcrumbs\n1 valid item detected\n\n\nURL inspection\nLearn how the Google Index sees your page. Use this to troubleshoot if your page isn't appearing, or isn't appearing properly, in Google Search results.\nLearn more\nGot it\nURL Inspection",
+        "url": "https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&id=qwuRXaOuFOjIzLFSqDR96A"
+      },
+      {
+        "at": "2026-11-02T12:33:47.968Z",
+        "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nhttps://cobblestar-mc.fr/wiki/capture/\nURL Inspection\nTEST LIVE URL\ncheck_circle\nURL is on Google\nIt can appear in Google Search results (if not subject to a manual action or removal request) with all relevant enhancements. Learn more\nVIEW CRAWLED PAGE\nPage changed?\nREQUEST INDEXING\ncheck_circle\nPage indexing\nPage is indexed\n\nDiscovery\nSitemaps\nhttps://cobblestar-mc.fr/sitemap.xml\nReferring page\nhttps://cobblestar-mc.fr/rejoindre/\nCrawl\nLast crawl\nOct 30, 2026, 2:41:05 AM\nCrawled as\nGooglebot smartphone\nCrawl allowed?\nYes\nPage fetch\nSuccessful\nIndexing allowed?\nYes\nIndexing\nUser-declared canonical\nhttps://cobblestar-mc.fr/wiki/capture/\nGoogle-selected canonical\n\nInspected URL\nLEARN MORE\nOPEN REPORT\nEnhancements & Experience\ncheck_circle\nHTTPS\nPage is served over HTTPS\n\ncheck_circle\nBreadcrumbs\n1 valid item detected\n\n\nURL inspection\nLearn how the Google Index sees your page. Use this to troubleshoot if your page isn't appearing, or isn't appearing properly, in Google Search results.\nLearn more\nGot it",
+        "url": "https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&id=vqV7nSKa7bJrO_eXEf4NBg"
+      },
+      {
+        "at": "2026-11-02T12:34:01.026Z",
+        "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nhttps://cobblestar-mc.fr/installer-cobblemon/\nURL Inspection\nTEST LIVE URL\ncheck_circle\nURL is on Google\nIt can appear in Google Search results (if not subject to a manual action or removal request) with all relevant enhancements. Learn more\nVIEW CRAWLED PAGE\nPage changed?\nREQUEST INDEXING\ncheck_circle\nPage indexing\nPage is indexed\n\nEnhancements & Experience\ncheck_circle\nHTTPS\nPage is served over HTTPS\n\ncheck_circle\nBreadcrumbs\n1 valid item detected\n\n\nURL inspection\nLearn how the Google Index sees your page. Use this to troubleshoot if your page isn't appearing, or isn't appearing properly, in Google Search results.\nLearn more\nGot it\nURL Inspection",
+        "url": "https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&id=ZDQqk8nEn_fS_aYBCHinCA"
+      },
+      {
+        "at": "2026-11-02T12:34:40.016Z",
+        "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nhttps://cobblestar-mc.fr/minecraft-pokemon/\nURL Inspection\nTEST LIVE URL\ncheck_circle\nURL is on Google\nIt can appear in Google Search results (if not subject to a manual action or removal request) with all relevant enhancements. Learn more\nVIEW CRAWLED PAGE\nPage changed?\nREQUEST INDEXING\ncheck_circle\nPage indexing\nPage is indexed\n\nDiscovery\nSitemaps\nhttps://cobblestar-mc.fr/sitemap.xml\nReferring page\nNone detected\nCrawl\nLast crawl\nOct 30, 2026, 2:20:14 PM\nCrawled as\nGooglebot smartphone\nCrawl allowed?\nYes\nPage fetch\nSuccessful\nIndexing allowed?\nYes\nIndexing\nUser-declared canonical\nhttps://cobblestar-mc.fr/minecraft-pokemon/\nGoogle-selected canonical\n\nInspected URL\nLEARN MORE\nOPEN REPORT\nEnhancements & Experience\ncheck_circle\nHTTPS\nPage is served over HTTPS\n\ncheck_circle\nBreadcrumbs\n1 valid item detected\n\n\nURL inspection\nLearn how the Google Index sees your page. Use this to troubleshoot if your page isn't appearing, or isn't appearing properly, in Google Search results.\nLearn more\nGot it",
+        "url": "https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&id=td96ISLo1Uh9yK697PoqDQ"
+      }
+    ],
+    "franceBrand": {
+      "at": "2026-11-02T12:33:07.008Z",
+      "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\nPerformance\n\nEXPORT\n24 hours\n7 days\n28 days\n3 months\nCompare\narrow_drop_down\nSearch type: Web\narrow_drop_down\nSearch type: Web\nQuery: Custom (regex)\nQuery: Custom (regex)\nclose\nCountry: France\nCountry: France\nclose\nadd\nAdd filter\nAdd filter\nfilter_list_spark\nCustomize your Performance report using AI\nReset filters\nReset filters\nLast update: 4 hours ago\n\nTotal clicks\n0\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nTotal impressions\n0\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nAverage CTR\n0%\n10/25/26 - 10/31/26\n0%\n10/18/26 - 10/24/26\n\n\nAverage position\n0\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\nDaily\n\nChart totals and table results might be partial when filters are applied. Learn more\n1\n2\n3\n4\n5\n6\n7\nChart, containing counts of 10/25/26 - 10/31/26 Clicks, 10/18/26 - 10/24/26 Clicks, 10/25/26 - 10/31/26 Impressions, 10/18/26 - 10/24/26 Impressions, 10/25/26 - 10/31/26 CTR, 10/18/26 - 10/24/26 CTR, 10/25/26 - 10/31/26 Position, and 10/18/26 - 10/24/26 Position from Invalid Date to January 1, 1970\ninfo\nGet more details on your site’s performance in generative AI features on Google Search\nOpen report\nchevron_forward\nQUERIES\nPAGES\nCOUNTRIES\nDEVICES\nSEARCH APPEARANCE\nDAYS\n\nTop pages\n\t\nClicks\n10/25/26 - 10/31/26\n\t\nClicks\n10/18/26 - 10/24/26\n\t\nClicks\nDifference\n\t\nImpressions\n10/25/26 - 10/31/26\n\t\nImpressions\n10/18/26 - 10/24/26\n\t\nImpressions\nDifference\n\t\nCTR\n10/25/26 - 10/31/26\n\t\nCTR\n10/18/26 - 10/24/26\n\t\nCTR\nDifference\n\t\nPosition\n10/25/26 - 10/31/26\n\t\nPosition\n10/18/26 - 10/24/26\n\t\nPosition\nDifference\nNo data\nPerformance on Search results",
+      "url": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra&breakdown=page&query=~cobblestar%7Ccobble%20star"
+    },
+    "franceNonBrand": {
+      "at": "2026-11-02T12:33:46.627Z",
+      "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\nPerformance\n\nEXPORT\n24 hours\n7 days\n28 days\n3 months\nCompare\narrow_drop_down\nSearch type: Web\narrow_drop_down\nSearch type: Web\nQuery: Custom (regex)\nQuery: Custom (regex)\nclose\nCountry: France\nCountry: France\nclose\nadd\nAdd filter\nAdd filter\nfilter_list_spark\nCustomize your Performance report using AI\nReset filters\nReset filters\nLast update: 4 hours ago\n\nTotal clicks\n0\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nTotal impressions\n17\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nAverage CTR\n0%\n10/25/26 - 10/31/26\n0%\n10/18/26 - 10/24/26\n\n\nAverage position\n36.8\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\nDaily\n\nChart totals and table results might be partial when filters are applied. Learn more\n1\n2\n3\n4\n5\n6\n7\nChart, containing counts of 10/25/26 - 10/31/26 Clicks, 10/18/26 - 10/24/26 Clicks, 10/25/26 - 10/31/26 Impressions, 10/18/26 - 10/24/26 Impressions, 10/25/26 - 10/31/26 CTR, 10/18/26 - 10/24/26 CTR, 10/25/26 - 10/31/26 Position, and 10/18/26 - 10/24/26 Position from Invalid Date to January 1, 1970\ninfo\nGet more details on your site’s performance in generative AI features on Google Search\nOpen report\nchevron_forward\nQUERIES\nPAGES\nCOUNTRIES\nDEVICES\nSEARCH APPEARANCE\nDAYS\n\nTop pages\n\t\nClicks\n10/25/26 - 10/31/26\n\t\nClicks\n10/18/26 - 10/24/26\n\t\nClicks\nDifference\n\t\nImpressions\n10/25/26 - 10/31/26\n\t\nImpressions\n10/18/26 - 10/24/26\n\t\nImpressions\nDifference\n\t\nCTR\n10/25/26 - 10/31/26\n\t\nCTR\n10/18/26 - 10/24/26\n\t\nCTR\nDifference\n\t\nPosition\n10/25/26 - 10/31/26\n\t\nPosition\n10/18/26 - 10/24/26\n\t\nPosition\nDifference\n\nhttps://cobblestar-mc.fr/minecraft-pokemon/\t0\t0\t0\t5\t0\t5\t0%\t0%\t0%\t40.8\t0\t40.8\nhttps://cobblestar-mc.fr/wiki/pokedex/gimmighoul/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t5\t0\t5\nhttps://cobblestar-mc.fr/wiki/pokedex/meltan/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t7\t0\t7\nhttps://cobblestar-mc.fr/wiki/pokedex/ditto/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t8\t0\t8\nhttps://cobblestar-mc.fr/wiki/pokedex/houndstone/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t9\t0\t9\nhttps://cobblestar-mc.fr/wiki/pokedex/applin/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t10\t0\t10\nhttps://cobblestar-mc.fr/wiki/pokedex/skwovet/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t31\t0\t31\nhttps://cobblestar-mc.fr/wiki/pokedex/kakuna/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t42\t0\t42\nhttps://cobblestar-mc.fr/wiki/pokedex/karrablast/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t50\t0\t50\nhttps://cobblestar-mc.fr/wiki/pokedex/eevee/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t55\t0\t55\nRows per page:\n5\n10\n25\n50\n100\n250\n500\n1-10 of 13\nPrevious page\nNext page\nPerformance on Search results",
+      "url": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra&breakdown=page&query=_cobblestar%7Ccobble%20star"
+    },
+    "coreWebVitals": {
+      "at": "2026-11-02T12:35:00.595Z",
+      "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nCore Web Vitals\nSource: Chrome UX report\n\nLast updated: 11/1/26\nMobile\nOPEN REPORT\n\nNot enough usage data in the last 90 days for this device type.\nLearn more\nTry PageSpeed Insights\nDesktop\nOPEN REPORT\n\nNot enough usage data in the last 90 days for this device type.\nLearn more\nTry PageSpeed Insights\n\nCore Web Vitals Report\nSee your site's performance based on real-world usage data.\nLearn more\nGot it\nCore Web Vitals",
+      "url": "https://search.google.com/search-console/core-web-vitals?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F"
+    },
+    "franceAllPages": {
+      "at": "2026-11-02T12:35:09.716Z",
+      "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\nPerformance\n\nEXPORT\n24 hours\n7 days\n28 days\n3 months\nCompare\narrow_drop_down\nSearch type: Web\narrow_drop_down\nSearch type: Web\nCountry: France\nCountry: France\nclose\nadd\nAdd filter\nAdd filter\nfilter_list_spark\nCustomize your Performance report using AI\nReset filters\nReset filters\nLast update: 4 hours ago\n\nTotal clicks\n3\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nTotal impressions\n183\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\n\nAverage CTR\n1.6%\n10/25/26 - 10/31/26\n0%\n10/18/26 - 10/24/26\n\n\nAverage position\n7\n10/25/26 - 10/31/26\n0\n10/18/26 - 10/24/26\n\nDaily\n1\n2\n3\n4\n5\n6\n7\nChart, containing counts of 10/25/26 - 10/31/26 Clicks, 10/18/26 - 10/24/26 Clicks, 10/25/26 - 10/31/26 Impressions, 10/18/26 - 10/24/26 Impressions, 10/25/26 - 10/31/26 CTR, 10/18/26 - 10/24/26 CTR, 10/25/26 - 10/31/26 Position, and 10/18/26 - 10/24/26 Position from Invalid Date to January 1, 1970\ninfo\nGet more details on your site’s performance in generative AI features on Google Search\nOpen report\nchevron_forward\nQUERIES\nPAGES\nCOUNTRIES\nDEVICES\nSEARCH APPEARANCE\nDAYS\n\nTop pages\n\t\nClicks\n10/25/26 - 10/31/26\n\t\nClicks\n10/18/26 - 10/24/26\n\t\nClicks\nDifference\n\t\nImpressions\n10/25/26 - 10/31/26\n\t\nImpressions\n10/18/26 - 10/24/26\n\t\nImpressions\nDifference\n\t\nCTR\n10/25/26 - 10/31/26\n\t\nCTR\n10/18/26 - 10/24/26\n\t\nCTR\nDifference\n\t\nPosition\n10/25/26 - 10/31/26\n\t\nPosition\n10/18/26 - 10/24/26\n\t\nPosition\nDifference\n\nhttps://cobblestar-mc.fr/minecraft-pokemon/\t0\t0\t0\t5\t0\t5\t0%\t0%\t0%\t40.8\t0\t40.8\nhttps://cobblestar-mc.fr/wiki/pokedex/gimmighoul/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t5\t0\t5\nhttps://cobblestar-mc.fr/wiki/pokedex/meltan/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t7\t0\t7\nhttps://cobblestar-mc.fr/wiki/pokedex/ditto/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t8\t0\t8\nhttps://cobblestar-mc.fr/wiki/pokedex/houndstone/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t9\t0\t9\nhttps://cobblestar-mc.fr/wiki/pokedex/applin/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t10\t0\t10\nhttps://cobblestar-mc.fr/wiki/pokedex/skwovet/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t31\t0\t31\nhttps://cobblestar-mc.fr/wiki/pokedex/kakuna/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t42\t0\t42\nhttps://cobblestar-mc.fr/wiki/pokedex/karrablast/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t50\t0\t50\nhttps://cobblestar-mc.fr/wiki/pokedex/eevee/\nCopy URL to clipboard\nOpen in new tab\nInspect URL\n\t0\n\t0\n\t0\n\t1\n\t0\n\t1\n\t0%\n\t0%\n\t0%\n\t55\n\t0\n\t55\n\nhttps://cobblestar-mc.fr/wiki/capture/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t59\t0\t59\nhttps://cobblestar-mc.fr/wiki/pokedex/mareep/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t69\t0\t69\nhttps://cobblestar-mc.fr/wiki/pokedex/dachsbun/\t0\t0\t0\t1\t0\t1\t0%\t0%\t0%\t77\t0\t77\nRows per page:\n5\n10\n25\n50\n100\n250\n500\n1-13 of 13\nPrevious page\nNext page",
+      "url": "https://search.google.com/search-console/performance/search-analytics?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F&metrics=CLICKS%2CIMPRESSIONS%2CCTR%2CPOSITION&start_date=20261025&end_date=20261031&compare_start_date=20261018&compare_end_date=20261024&country=fra&breakdown=page"
+    },
+    "sitemap": {
+      "at": "2026-11-02T12:35:28.362Z",
+      "text": "help_outline\nHelp\nmanage_accounts\nUser settings\n\t\nnotifications\nMessages\n\nhome\nOverview\nlightbulb_2\nInsights\ntrending_up\nPerformance\nkeyboard_arrow_down\nsearch\nURL inspection\nIndexing\nkeyboard_arrow_up\nfile_copy\nPages\nvideo_library\nVideos\naccount_tree\nSitemaps\nvisibility_off\nRemovals\nExperience\nkeyboard_arrow_up\nspeed\nCore Web Vitals\nlock\nHTTPS\nEnhancements\nkeyboard_arrow_up\nlayers\nBreadcrumbs\nSecurity & Manual Actions\nkeyboard_arrow_down\nlink_2\nLinks\ntrophy\nAchievements\nsettings\nSettings\nfeedback\nSubmit feedback\ninfo\nAbout Search Console\nPrivacyTerms\nSitemaps\nAdd a new sitemap\nhttps://cobblestar-mc.fr/\nEnter sitemap URL\nSUBMIT\nSubmitted sitemaps\n\nSitemap\n\tType\n\tSubmitted\n\tLast read\n\tStatus\n\t\nDiscovered pages\t\nDiscovered videos\t\n/sitemap.xml\tSitemap\tOct 28, 2026\tNov 1, 2026\tSuccess\t1,057\t0\t\nRows per page:\n5\n10\n25\n50\n100\n250\n500\n1-1 of 1\n",
+      "url": "https://search.google.com/search-console/sitemaps?resource_id=https%3A%2F%2Fcobblestar-mc.fr%2F"
+    }
+  }
+}
