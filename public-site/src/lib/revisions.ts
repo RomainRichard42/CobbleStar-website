@@ -2,7 +2,7 @@
 // CMS article dates are supplied separately from their own published content.
 export const pageRevisions: Record<string,string> = {
   '/':'2026-11-01',
-  '/minecraft-pokemon/':'2026-10-30',
+  '/minecraft-pokemon/':'2026-11-02',
   '/installer-cobblemon/':'2026-11-01',
   '/rejoindre/':'2026-10-26',
   '/telecharger/':'2026-10-26',
