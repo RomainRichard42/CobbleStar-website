@@ -19,6 +19,8 @@ const required = [
   "news.default.json",
   "api/package.json",
   "api/package-lock.json",
+  "api/discord-welcome.json",
+  "api/discord-welcome-assets/background.png",
   "api/star-templates/index.json",
   "api/dex.catalog.json",
   "api/star-effects/manifest.json",
@@ -55,6 +57,8 @@ await Promise.all([
 await cp(join(projectDir, "out"), join(deployDir, "site"), { recursive: true });
 await cp(join(projectDir, "public-astro"), join(deployDir, "public-astro"), { recursive: true });
 await cp(join(projectDir, "api", "dist"), join(deployDir, "dist"), { recursive: true });
+await cp(join(projectDir, "api", "discord-welcome-assets"), join(deployDir, "discord-welcome-assets"), { recursive: true });
+await cp(join(projectDir, "api", "discord-welcome.json"), join(deployDir, "discord-welcome.json"));
 await cp(join(projectDir, "api", "migrations"), join(deployDir, "migrations"), { recursive: true });
 await cp(join(projectDir, "api", "licenses"), join(deployDir, "licenses"), { recursive: true });
 await cp(join(projectDir, "api", "star-templates"), join(deployDir, "star-templates"), { recursive: true });

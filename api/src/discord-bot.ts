@@ -1,6 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { exposeDiscordClient, releaseDiscordClient } from "./discord-runtime.js";
 import { gtsMessage } from "./discord-gts-message.js";
+import { DiscordWelcome } from "./discord-welcome.js";
 import {
   ActionRowBuilder, AttachmentBuilder, ButtonBuilder, ButtonStyle, ChannelType, Client,
   Events, GatewayIntentBits, MessageFlags, ModalBuilder, Partials, PermissionFlagsBits as P, Routes,
@@ -102,6 +103,8 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
   client.on(Events.Error, () => log.warn("Erreur de connexion Discord."));
 
   async function guild() { return client.guilds.fetch(config.DISCORD_GUILD_ID); }
+  const welcome=new DiscordWelcome(guild,pool);
+  client.on(Events.GuildMemberAdd,m=>{if(m.guild.id===config.DISCORD_GUILD_ID&&!m.user.bot)safe(()=>welcome.enqueue(m));});
   const gameSync=new DiscordGameSync(guild,log);
   const communityEvents=new DiscordCommunityEvents(guild,()=>client.user!.id,log);
   const referrals=new ReferralStore();
@@ -505,6 +508,11 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
       const [events]=await pool.query<RowDataPacket[]>("SELECT * FROM discord_event_outbox WHERE delivered_at IS NULL AND available_at<=NOW() ORDER BY created_at LIMIT 10");
       for(const e of events) {
         try {
+          if(e.kind==="welcome"){
+            await welcome.deliver(e.body);
+            await pool.execute("UPDATE discord_event_outbox SET delivered_at=NOW(),body=? WHERE id=?",[JSON.stringify({text:"Bienvenue transmise"}),e.id]);
+            continue;
+          }
           const kind=e.kind as EventKind;
           if(kind==="private"&&!s.privateEnabled) { await pool.execute("DELETE FROM discord_event_outbox WHERE id=?",[e.id]); continue; }
           const c=await destination(s,kind), body=json<{text:string}>(e.body);
@@ -545,6 +553,7 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
     await snapshotInvites(g);
     timer=setInterval(()=>safe(tick),5000);
     exposeDiscordClient(client);
+    safe(async()=>{log.info({welcome:await welcome.check()},"Discord welcome: channel permissions and banner rendering verified.");});
     log.info("Bot CobbleStar connecté ; commandes /ticket, /csconfig et /evenement disponibles.");
     return stop;
   } catch(error) { await stop(); throw error; }
