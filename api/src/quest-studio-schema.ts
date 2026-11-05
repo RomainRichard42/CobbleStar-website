@@ -38,7 +38,7 @@ const graph = z.object({ start: id, nodes: z.array(z.object({ id, title: text(10
 }).strict()).min(1).max(80) }).strict();
 export const npcTemplateSchema = z.object({
   id, name: z.string().trim().min(1).max(64).refine(v => !v.toLowerCase().startsWith("local:") && !/[\r\n§]/.test(v), "Nom réservé ou formatage non autorisé"), enabled: z.boolean(),
-  role: z.enum(["DIALOGUE_ONLY", "DIALOGUE_QUEST", "TURN_IN", "DAYCARE", "RANKED", "SHOP"]),
+  role: z.enum(["DIALOGUE_ONLY", "DIALOGUE_QUEST", "TURN_IN", "DAYCARE", "RANKED", "SHOP", "POKEBUILDER"]),
   dialogue: text(4000), dialogueGraph: graph, questIds: z.array(id).max(40), permission: z.number().int().min(0).max(4),
   repeatableDialogue: z.boolean(), skin, nameColor: z.enum(["NONE", "ROLE", "CYAN", "PINK", "GOLD", "GREEN", "VIOLET"]),
   visualRole: z.enum(["STORY", "SIDE", "MERCHANT", "EVENT"]), shopOffers,

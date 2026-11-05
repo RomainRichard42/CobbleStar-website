@@ -1,3 +1,4 @@
+import {normalizeNpcSkin} from "./npc-skin-image.js";
 import type { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import type { RowDataPacket } from "mysql2/promise";
 import { createHash } from "node:crypto";
@@ -114,12 +115,12 @@ export function registerStarStudio(app:FastifyInstance,auth:Auth){
    await db.execute("UPDATE star_publication SET sha1=? WHERE id=1",[sha1]);return {ok:true,hash:sha1};
   });}catch(e){return reply.code(400).send({error:e instanceof Error?e.message:"PUBLICATION_FAILED"});}
  });
- app.post('/api/admin/npc-skins',{bodyLimit:100_000,config:{rateLimit:{max:10,timeWindow:'1 minute'}}},async(r,reply)=>{
+ app.post('/api/admin/npc-skins',{bodyLimit:800_000,config:{rateLimit:{max:10,timeWindow:'1 minute'}}},async(r,reply)=>{
   if(!await authorize(r,reply,true))return;
-  const input=z.object({texture:z.string().max(90_000)}).safeParse(r.body);
+  const input=z.object({texture:z.string().max(700_000),model:z.enum(["auto","wide","slim"]).default("auto")}).safeParse(r.body);
   if(!input.success)return reply.code(400).send({error:'PNG_64X64_REQUIRED'});
-  let bytes:Buffer;
-  try{bytes=png(input.data.texture,64,64);}catch{return reply.code(400).send({error:'PNG_64X64_RGB_RGBA_REQUIRED'});}
+  let bytes:Buffer,model:string;
+  try{const decoded=await normalizeNpcSkin(input.data.texture,input.data.model);bytes=decoded.png;model=decoded.model;}catch{return reply.code(400).send({error:'PNG_64X64_REQUIRED'});}
   const hash=createHash('sha256').update(bytes).digest('hex'),native=await catalog();
   return transaction(async db=>{
    await db.query('SELECT id FROM star_publication WHERE id=1 FOR UPDATE');
@@ -135,7 +136,7 @@ export function registerStarStudio(app:FastifyInstance,auth:Auth){
    const sha1=createHash('sha1').update(pack).digest('hex');
    await db.execute('INSERT IGNORE INTO star_packs(sha1,pack,species_json) VALUES(?,?,?)',[sha1,pack,JSON.stringify(assets.map(a=>a.species).sort())]);
    await db.execute('UPDATE star_publication SET sha1=? WHERE id=1',[sha1]);
-   return {skin:`cobblestar_planets:textures/entity/quest_npc/upload/${hash}.png`,hash:sha1};
+   return {skin:`cobblestar_planets:textures/entity/quest_npc/upload/${model==="slim"?"slim/":""}${hash}.png`,model,hash:sha1};
   });
  });
  const serverAuth=async(r:FastifyRequest,reply:FastifyReply)=>{if(!auth.server(r))return reply.code(401).send({error:"INVALID_SERVER_KEY"});};

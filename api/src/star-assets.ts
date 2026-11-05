@@ -157,6 +157,7 @@ export function buildStarPack(assets: StarModel[], catalog: NativeModel[], npcSk
  for(const skin of [...npcSkins].sort((a,b)=>a.hash.localeCompare(b.hash))){
   if(!/^[a-f0-9]{64}$/.test(skin.hash))throw new Error('INVALID_NPC_SKIN_HASH');
   files.set(`assets/cobblestar_planets/textures/entity/quest_npc/upload/${skin.hash}.png`,png(skin.png.toString('base64'),64,64));
+  files.set(`assets/cobblestar_planets/textures/entity/quest_npc/upload/slim/${skin.hash}.png`,png(skin.png.toString('base64'),64,64));
  }
  // Shared cosmetics are shipped even when no species has been published yet.
  // Original admin-only Allodus cosmetics, never server definitions or scripts.

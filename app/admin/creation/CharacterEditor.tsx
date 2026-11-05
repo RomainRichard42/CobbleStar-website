@@ -6,7 +6,7 @@ import type { StoryCatalog } from '../../../api/src/quest-events';
 import { ResourcePicker } from './StoryEditor';
 import s from './studio.module.css';
 
-const roles = [['DIALOGUE_QUEST','Proposer des aventures'],['DIALOGUE_ONLY','Raconter et discuter'],['TURN_IN','Accueillir les retours de mission'],['SHOP','Tenir une boutique'],['DAYCARE','Ouvrir la pension'],['RANKED','Ouvrir les combats classés']];
+const roles = [['DIALOGUE_QUEST','Proposer des aventures'],['DIALOGUE_ONLY','Raconter et discuter'],['TURN_IN','Accueillir les retours de mission'],['SHOP','Tenir une boutique'],['DAYCARE','Ouvrir la pension'],['RANKED','Ouvrir les combats classés'],['POKEBUILDER','Ouvrir le Pokébuilder']];
 const skins = [{id:'',label:'Steve · apparence par défaut'},{id:'minecraft:textures/entity/player/slim/alex.png',label:'Alex'}];
 export function CharacterEditor({npc,content,catalog,onChange,onDuplicate}:{npc:StudioNpc;content:StudioContent;catalog:StoryCatalog|null;onChange:(n:StudioNpc)=>void;onDuplicate:()=>void}) {
  const [tab,setTab]=useState('dialogue'),[index,setIndex]=useState(0),[preview,setPreview]=useState(''),[ended,setEnded]=useState(false);

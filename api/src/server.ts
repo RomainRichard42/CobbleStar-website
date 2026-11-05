@@ -1,3 +1,4 @@
+import {registerPlayerServices} from "./player-services.js";
 import { randomUUID, timingSafeEqual } from "node:crypto";
 import { registerVoteProgress } from "./vote-progress.js";
 import Fastify, { FastifyReply, FastifyRequest, LogController } from "fastify";
@@ -426,6 +427,7 @@ registerMinecraftAvatars(app, { session: loadSession, publicVoter: async uuid =>
 registerDiscordBridge(app, request => serverKeyMatches(serverKeyFrom(request)));
 registerGameAdmin(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerDaily(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
+registerPlayerServices(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerPurchaseAnnouncements(app, { server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerDiscordAdmin(app, { session: loadSession });
 registerQuestStudio(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
