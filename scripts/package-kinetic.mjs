@@ -23,6 +23,7 @@ const required = [
   "api/discord-welcome-assets/background.png",
   "api/star-templates/index.json",
   "api/dex.catalog.json",
+  "api/pokecalc/catalog.json",
   "api/star-effects/manifest.json",
   "api/rank-tags/manifest.json",
   "api/regional-starters/manifest.json",
@@ -65,6 +66,7 @@ await cp(join(projectDir, "api", "star-templates"), join(deployDir, "star-templa
 await cp(join(projectDir, "api", "dex-native"), join(deployDir, "dex-native"), { recursive: true });
 await cp(join(projectDir, "api", "dex-runtime"), join(deployDir, "dex-runtime"), { recursive: true });
 await cp(join(projectDir, "api", "dex-info"), join(deployDir, "dex-info"), { recursive: true });
+await cp(join(projectDir, "api", "pokecalc"), join(deployDir, "pokecalc"), { recursive: true });
 await cp(join(projectDir, "api", "dex.catalog.json"), join(deployDir, "dex.catalog.json"));
 await cp(join(projectDir, "api", "star-layers"), join(deployDir, "star-layers"), { recursive: true });
 await cp(join(projectDir, "api", "star-effects"), join(deployDir, "star-effects"), { recursive: true });

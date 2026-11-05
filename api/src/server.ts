@@ -1,3 +1,5 @@
+import {registerPokecalc} from './pokecalc.js';
+import {registerBattleUsage} from './battle-usage.js';
 import {registerPlayerServices} from "./player-services.js";
 import { randomUUID, timingSafeEqual } from "node:crypto";
 import { registerVoteProgress } from "./vote-progress.js";
@@ -428,6 +430,8 @@ registerDiscordBridge(app, request => serverKeyMatches(serverKeyFrom(request)));
 registerGameAdmin(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerDaily(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerPlayerServices(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
+registerBattleUsage(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
+registerPokecalc(app);
 registerPurchaseAnnouncements(app, { server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerDiscordAdmin(app, { session: loadSession });
 registerQuestStudio(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
