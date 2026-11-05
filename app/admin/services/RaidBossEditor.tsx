@@ -1,0 +1,22 @@
+"use client";
+import {useId,useState} from "react";
+import styles from "./services.module.css";
+export type Boss={species:string;heldItem:string|null};
+export type RaidCatalog={pokemon:Array<{id:string;name:string}>;items:Array<{id:string;name:string}>;legendaryOneIn:{facile:number;difficile:number}};
+export type RaidFields={raidBossPools?:{facile:Boss[];difficile:Boss[]};raidLegendaryItems?:Record<string,string|null>;raidLegendaryPool:string[]};
+export function ItemPicker({value,onChange,items,disabled}:{value:string|null;onChange:(value:string|null)=>void;items:RaidCatalog['items'];disabled:boolean}){
+ const id=useId(),[search,setSearch]=useState("");
+ const selected=items.find(i=>i.id===value),specific=value!==null&&value!=="";
+ return <div className={styles.itemPicker}><select aria-label="Règle de l’objet tenu" disabled={disabled} value={value===null?'random':value===''?'none':'item'} onChange={e=>{onChange(e.target.value==='random'?null:e.target.value==='none'?'':items[0]?.id??'');setSearch('');}}><option value="random">Tirage actuel</option><option value="none">Aucun objet</option><option value="item">Objet précis</option></select>{specific&&<><input aria-label="Rechercher l’objet tenu" disabled={disabled} list={id} value={search||value} onChange={e=>{setSearch(e.target.value);if(items.some(i=>i.id===e.target.value)){onChange(e.target.value);setSearch('');}}} onBlur={()=>setSearch('')} placeholder="Nom ou identifiant de l’objet"/><datalist id={id}>{items.filter(i=>(i.id+' '+i.name).toLowerCase().includes(search.toLowerCase())).slice(0,50).map(i=><option key={i.id} value={i.id}>{i.name}</option>)}</datalist><small>{selected?.name??value}</small></>}</div>;
+}
+export default function RaidBossEditor({form,catalog,onChange,disabled}:{form:RaidFields;catalog?:RaidCatalog;onChange:(patch:Partial<RaidFields>)=>void;disabled:boolean}){
+ const [difficulty,setDifficulty]=useState<'facile'|'difficile'>('facile'),[search,setSearch]=useState('');const id=useId();
+ if(!catalog||!form.raidBossPools)return <section><h2>Boss faciles et difficiles</h2><p>Les listes apparaîtront après la première synchronisation de la nouvelle version du mod.</p></section>;
+ const rows=form.raidBossPools[difficulty],chance=catalog.legendaryOneIn[difficulty],candidate=catalog.pokemon.find(p=>p.id===search);
+ const update=(next:Boss[])=>onChange({raidBossPools:{...form.raidBossPools!,[difficulty]:next}});
+ return <section><div className={styles.sectionHead}><div><h2>Boss de fin de raid</h2><p>Ajoute ou retire les boss ordinaires et choisis leurs objets tenus.</p></div><div className={styles.difficulty}>{(['facile','difficile'] as const).map(key=><button key={key} type="button" aria-pressed={difficulty===key} onClick={()=>setDifficulty(key)}>{key==='facile'?'Raid facile':'Raid difficile'}</button>)}</div></div>
+ <p className={styles.notice}>{chance>0?`Chance actuelle d’un boss légendaire : 1 sur ${chance}.`:'Aucun tirage de boss légendaire dans cette difficulté.'} Ce taux reste inchangé quand tu modifies les listes.</p>
+ <div className={styles.toolbar}><label>Ajouter un boss<input aria-label="Ajouter un boss" list={id} value={search} disabled={disabled} onChange={e=>setSearch(e.target.value)} placeholder="Rechercher un Pokémon"/><datalist id={id}>{catalog.pokemon.filter(p=>(p.name+' '+p.id).toLowerCase().includes(search.toLowerCase())&&!rows.some(r=>r.species===p.id)).slice(0,60).map(p=><option key={p.id} value={p.id}>{p.name}</option>)}</datalist></label><button disabled={disabled||!candidate||rows.some(r=>r.species===candidate.id)||rows.length>=100} onClick={()=>{if(candidate){update([...rows,{species:candidate.id,heldItem:null}]);setSearch('');}}}>Ajouter à la rotation</button></div>
+ <div className={styles.bossList}>{rows.map((boss,index)=><div key={boss.species} className={styles.bossRow}><div><strong>{catalog.pokemon.find(p=>p.id===boss.species)?.name??boss.species}</strong><small>{boss.species}</small></div><ItemPicker value={boss.heldItem} items={catalog.items} disabled={disabled} onChange={heldItem=>update(rows.map((r,i)=>i===index?{...r,heldItem}:r))}/><button disabled={disabled||rows.length<=1} onClick={()=>update(rows.filter((_,i)=>i!==index))} aria-label={`Retirer ${boss.species}`}>Retirer</button></div>)}</div>
+ <p className={styles.hint}>Garde au moins un boss ordinaire par difficulté. Les réglages enregistrés s’appliquent aux prochains raids ; un combat déjà commencé conserve son boss.</p></section>;
+}

@@ -6,21 +6,17 @@ import { useEffect, useRef } from "react";
 export default function MotionDirector() {
   const pathname = usePathname();
   const layerRef = useRef<HTMLDivElement>(null);
-  const cursorRef = useRef<HTMLSpanElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     if (!/^\/(admin|wiki\/admin|actualites\/admin)(\/|$)/.test(pathname)) return;
     const root = document.documentElement;
     const body = document.body;
-    const layer = layerRef.current, cursor = cursorRef.current, progress = progressRef.current;
-    if (!layer || !cursor || !progress) return;
-    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const layer = layerRef.current, progress = progressRef.current;
+    if (!layer || !progress) return;
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let scrollFrame = 0, pointerFrame = 0, clickFrame = 0;
-    let pointerX = 0, pointerY = 0;
+    let scrollFrame = 0;
     let scrollable = 1, scrolled = false;
-    let cursorClickTimer = 0;
 
     const updateScroll = () => {
       if (scrollFrame || document.hidden) return;
@@ -35,43 +31,7 @@ export default function MotionDirector() {
     const resizeObserver = new ResizeObserver(measureScroll);
     resizeObserver.observe(body);
 
-    const updatePointer = (event: PointerEvent) => {
-      if (!finePointer.matches || document.hidden) return;
-      pointerX = event.clientX; pointerY = event.clientY;
-      if (pointerFrame) return;
-      pointerFrame = window.requestAnimationFrame(() => {
-        pointerFrame = 0;
-        cursor.style.transform = `translate3d(${pointerX - 3}px,${pointerY - 3}px,0)`;
-        layer.classList.add("cs-pointer-visible");
-      });
-    };
-
-    const updatePointerTarget = (event: PointerEvent) => {
-      if (!finePointer.matches) return;
-      const target = event.target instanceof Element ? event.target : null;
-      const interactive = target?.closest<HTMLElement>("a, button, input, select, textarea, label, summary, [role='button'], [data-cursor-interactive]");
-      layer.classList.toggle("cs-pointer-interactive", Boolean(interactive && !interactive.matches(":disabled, [aria-disabled='true']")));
-    };
-
-    const pressPointer = (event: PointerEvent) => {
-      if (finePointer.matches && event.button === 0) layer.classList.add("cs-pointer-pressed");
-    };
-
-    const releasePointer = () => {
-      layer.classList.remove("cs-pointer-pressed", "cs-pointer-clicked");
-      window.cancelAnimationFrame(clickFrame);
-      if (!finePointer.matches || reducedMotion.matches) return;
-      clickFrame = window.requestAnimationFrame(() => layer.classList.add("cs-pointer-clicked"));
-      window.clearTimeout(cursorClickTimer);
-      cursorClickTimer = window.setTimeout(() => layer.classList.remove("cs-pointer-clicked"), 420);
-    };
-
-    const hidePointer = () => {
-      window.cancelAnimationFrame(pointerFrame); pointerFrame = 0;
-      layer.classList.remove("cs-pointer-visible", "cs-pointer-interactive", "cs-pointer-pressed", "cs-pointer-clicked");
-    };
-    const pointerCapability = () => { root.classList.toggle("cs-brand-cursor", finePointer.matches); hidePointer(); };
-    const visibility = () => { if (document.hidden) { hidePointer(); window.cancelAnimationFrame(scrollFrame); scrollFrame = 0; } else measureScroll(); };
+    const visibility = () => { if (document.hidden) { window.cancelAnimationFrame(scrollFrame); scrollFrame = 0; } else measureScroll(); };
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -93,40 +53,22 @@ export default function MotionDirector() {
     }
 
     root.classList.add("cs-motion-ready");
-    root.classList.toggle("cs-brand-cursor", finePointer.matches);
-    finePointer.addEventListener("change", pointerCapability);
     window.addEventListener("resize", measureScroll, { passive: true });
-    window.addEventListener("blur", hidePointer);
     document.addEventListener("visibilitychange", visibility);
     window.addEventListener("scroll", updateScroll, { passive: true });
-    window.addEventListener("pointermove", updatePointer, { passive: true });
-    document.addEventListener("pointerover", updatePointerTarget, { passive: true });
-    document.addEventListener("pointerdown", pressPointer, { passive: true });
-    document.addEventListener("pointerup", releasePointer, { passive: true });
-    document.addEventListener("pointercancel", releasePointer, { passive: true });
-    document.addEventListener("pointerleave", hidePointer, { passive: true });
     measureScroll();
 
     return () => {
       observer.disconnect();
       resizeObserver.disconnect();
-      window.cancelAnimationFrame(pointerFrame); window.cancelAnimationFrame(scrollFrame); window.cancelAnimationFrame(clickFrame);
-      finePointer.removeEventListener("change", pointerCapability);
+      window.cancelAnimationFrame(scrollFrame);
       window.removeEventListener("resize", measureScroll);
-      window.removeEventListener("blur", hidePointer);
       document.removeEventListener("visibilitychange", visibility);
       window.removeEventListener("scroll", updateScroll);
-      window.removeEventListener("pointermove", updatePointer);
-      document.removeEventListener("pointerover", updatePointerTarget);
-      document.removeEventListener("pointerdown", pressPointer);
-      document.removeEventListener("pointerup", releasePointer);
-      document.removeEventListener("pointercancel", releasePointer);
-      document.removeEventListener("pointerleave", hidePointer);
-      window.clearTimeout(cursorClickTimer);
       body.classList.remove("cs-page-scrolled");
       root.classList.remove("cs-brand-cursor", "cs-pointer-visible", "cs-pointer-interactive", "cs-pointer-pressed", "cs-pointer-clicked");
     };
   }, [pathname]);
 
-  return <div ref={layerRef} className="site-motion-layer" aria-hidden="true"><span ref={cursorRef} className="site-brand-cursor"><img src="/media/logo-cercle-5-128.webp" alt="" width={42} height={42} decoding="async" /></span><span ref={progressRef} className="site-scroll-progress" /></div>;
+  return <div ref={layerRef} className="site-motion-layer" aria-hidden="true"><span ref={progressRef} className="site-scroll-progress" /></div>;
 }
