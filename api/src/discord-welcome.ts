@@ -66,9 +66,9 @@ export class DiscordWelcome {
     return channel;
   }
   async check(){
-    const cfg=await this.readSettings();if(!cfg.enabled)return {enabled:false};
-    await this.destination(await this.guild(),cfg.channelId);
-    const preview=await renderWelcomeCard("Dresseur");
+    const cfg=await this.readSettings().catch(error=>{throw new Error(`Welcome configuration invalid (${String(error?.code??"JSON")})`);});if(!cfg.enabled)return {enabled:false};
+    await this.destination(await this.guild(),cfg.channelId).catch(error=>{throw new Error(String(error?.message??"").startsWith("Welcome ")?error.message:`Welcome channel check failed (${String(error?.code??"Discord")})`);});
+    const preview=await renderWelcomeCard("Dresseur").catch(error=>{throw new Error(`Welcome renderer unavailable: ${String(error?.message??"Image error").slice(0,160)}`);});
     return {enabled:true,channelId:cfg.channelId,cardBytes:preview.length};
   }
   async enqueue(member:GuildMember){

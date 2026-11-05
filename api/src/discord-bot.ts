@@ -553,7 +553,8 @@ export async function startDiscordBot(log: FastifyBaseLogger, clientFactory: (op
     await snapshotInvites(g);
     timer=setInterval(()=>safe(tick),5000);
     exposeDiscordClient(client);
-    safe(async()=>{log.info({welcome:await welcome.check()},"Discord welcome: channel permissions and banner rendering verified.");});
+    void welcome.check().then(welcome=>log.info({welcome},"Discord welcome: channel permissions and banner rendering verified."))
+      .catch(error=>log.warn({reason:error instanceof Error&&error.message.startsWith("Welcome ")?error.message:"Verification unavailable"},"Discord welcome unavailable."));
     log.info("Bot CobbleStar connecté ; commandes /ticket, /csconfig et /evenement disponibles.");
     return stop;
   } catch(error) { await stop(); throw error; }
