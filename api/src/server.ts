@@ -21,6 +21,7 @@ import { getEconomyPolicy } from "./economy-policy.js";
 import { activateSubscription, canPurchaseTier, lockedSubscription, paidTiers, type PaidTier } from "./paid-subscriptions.js";
 import { findVoteSite, getVoteSites, playerVoteUrl } from "./votes.js";
 import { canReadGame, registerGameAdmin } from "./game-admin.js";
+import { registerDaily } from "./daily.js";
 import { registerDiscordAdmin } from "./discord-admin.js";
 import { registerQuestStudio } from "./quest-studio.js";
 import { registerArenaStudio } from "./arena-studio.js";
@@ -424,6 +425,7 @@ registerMinecraftAvatars(app, { session: loadSession, publicVoter: async uuid =>
 } });
 registerDiscordBridge(app, request => serverKeyMatches(serverKeyFrom(request)));
 registerGameAdmin(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
+registerDaily(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerPurchaseAnnouncements(app, { server: (request) => serverKeyMatches(serverKeyFrom(request)) });
 registerDiscordAdmin(app, { session: loadSession });
 registerQuestStudio(app, { session: loadSession, server: (request) => serverKeyMatches(serverKeyFrom(request)) });
