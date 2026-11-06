@@ -24,6 +24,7 @@ test('usage counts teams without duplicate species inflation, separates forms an
  const fled={...battle,outcome:'fled',teams:[{slot:0,won:null,pokemon:[pokemon]}]};assert.equal(summarizeBattleUsage([fled]).entries[0].winRate,null);
 });
 test('telemetry rejects player identities, duplicate sides, future timestamps and malformed samples',()=>{
+ const native=structuredClone(battle);native.teams[0].pokemon[0].types=['Fire','Electric'];assert.deepEqual(battleSchema.parse(native).teams[0].pokemon[0].types,['fire','electric']);native.teams[0].pokemon[0].types=['invented'];assert.equal(battleSchema.safeParse(native).success,false);
  assert.equal(battleSchema.safeParse(battle).success,true);const punctuation=structuredClone(battle);punctuation.teams[0].pokemon[0].appearance='cobblemon:unown#?,shiny';assert.equal(battleSchema.safeParse(punctuation).success,true);assert.equal(battleSchema.safeParse({...battle,username:'secret'}).success,false);
  assert.equal(battleSchema.safeParse({...battle,teams:[...battle.teams,...battle.teams]}).success,false);assert.equal(battleSchema.safeParse({...battle,endedAt:'2099-01-01T00:00:00.000Z'}).success,false);
 });
