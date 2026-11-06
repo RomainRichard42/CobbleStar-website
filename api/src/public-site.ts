@@ -4,7 +4,7 @@ import type { FastifyInstance } from 'fastify';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 
 export function isPublicPage(path: string) {
-  if (['/','/collection','/wiki','/actualites','/rejoindre','/minecraft-pokemon','/installer-cobblemon','/telecharger','/telecharger/windows','/roadmap','/confidentialite','/robots.txt','/sitemap.xml','/actualites/rss.xml'].includes(path.replace(/\/$/,'') || '/')) return true;
+  if (['/','/collection','/pokecalc','/wiki','/actualites','/rejoindre','/minecraft-pokemon','/installer-cobblemon','/telecharger','/telecharger/windows','/roadmap','/confidentialite','/robots.txt','/sitemap.xml','/actualites/rss.xml'].includes(path.replace(/\/$/,'') || '/')) return true;
   if (/^\/wiki\/pokedex\/[a-z0-9_-]+\/?$/.test(path)) return true;
   return /^\/(wiki|actualites)\/(?!admin(?:\/|$))[a-z0-9_-]+\/?$/.test(path);
 }

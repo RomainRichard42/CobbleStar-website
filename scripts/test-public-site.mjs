@@ -18,6 +18,12 @@ await app.register(staticFiles,{root:resolve('out')});
 const base=await app.listen({host:'127.0.0.1',port:0});
 test.after(()=>app.close());
 const get=async path=>{const response=await fetch(base+path,{redirect:'manual'});return {response,html:await response.text()};};
+
+test('Pokécalc is served by the production Astro router and remains indexable',async()=>{
+ const page=await get('/pokecalc/');assert.equal(page.response.status,200);assert.equal(page.response.headers.get('x-cobblestar-renderer'),'Astro');
+ assert.match(page.html,/id="calc-form"/);assert.match(page.html,/rel="canonical" href="https:\/\/cobblestar-mc.fr\/pokecalc\/"/);assert.equal((page.html.match(/<h1(?:\s|>)/g)||[]).length,1);assert.ok(!(page.response.headers.get('x-robots-tag')||'').includes('noindex'));
+ assert.equal((await get('/pokecalc')).response.status,308);assert.match((await get('/sitemap.xml')).html,/<loc>https:\/\/cobblestar-mc.fr\/pokecalc\/<\/loc>/);
+});
 test('public routing preserves account, shop, admin and API routes',async()=>{
   for(const p of ['/compte/','/boutique/','/vote/','/api/test','/wiki/admin/','/wiki/admin/access/','/actualites/admin/','/admin/discord/','/_next/static/chunk.js'])assert.equal(isPublicPage(p),false,p);
   const {response,html}=await get('/api/test');assert.equal(response.status,200);assert.deepEqual(JSON.parse(html),{api:true});
